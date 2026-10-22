@@ -43,7 +43,8 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
-1. Init git repo + first commit (user rule: review with **openqodex** skill before any push).
+1. Git: repo initialised on `main`, first commit `196495a` ("Initial commit: Nyaya…"). Repo-local identity
+   Gowtham <gowtham.s@bigtapp.ai>. No remote yet. User rule: review with the **openqodex** skill before any push.
 2. Dark-mode visual pass on simulator (theme exists, not yet eyeballed).
 3. Note: a debug build launched via `simctl launch` without `flutter run` can show a blank screen —
    use `flutter run -d <device>` (or a release/profile build) when testing.
