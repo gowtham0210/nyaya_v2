@@ -1,0 +1,1758 @@
+{
+  "chapters": {
+    "constitution": {
+      "title": "Constitution Basics",
+      "subtitle": "Preamble, Parliament, courts, amendments"
+    },
+    "rights": {
+      "title": "Rights & Duties",
+      "subtitle": "Fundamental Rights, DPSP and writs"
+    },
+    "criminal": {
+      "title": "Criminal Law (BNS)",
+      "subtitle": "Offences under the new Sanhita"
+    },
+    "procedure": {
+      "title": "Procedure & Evidence",
+      "subtitle": "BNSS, BSA, FIR, arrest, bail"
+    },
+    "civil": {
+      "title": "Contracts & Consumers",
+      "subtitle": "Contracts, consumer rights, remedies"
+    },
+    "everyday": {
+      "title": "Everyday Law",
+      "subtitle": "Law for daily life"
+    }
+  },
+  "questions": [
+    {
+      "id": "con_1_01",
+      "chapter": "constitution",
+      "level": 1,
+      "difficulty": 1,
+      "question": "When did the Constitution of India come into force?",
+      "options": [
+        "26 January 1950",
+        "15 August 1947",
+        "26 November 1949",
+        "26 January 1952"
+      ],
+      "answer": 0,
+      "explanation": "The Constitution was adopted on 26 November 1949 and came fully into force on 26 January 1950, which we celebrate as Republic Day.",
+      "reference": "Article 394, Constitution of India"
+    },
+    {
+      "id": "con_1_02",
+      "chapter": "constitution",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Who was the Chairman of the Drafting Committee of the Constituent Assembly?",
+      "options": [
+        "Dr Rajendra Prasad",
+        "Dr B.R. Ambedkar",
+        "Jawaharlal Nehru",
+        "Sardar Vallabhbhai Patel"
+      ],
+      "answer": 1,
+      "explanation": "Dr B.R. Ambedkar chaired the Drafting Committee. Dr Rajendra Prasad was the President of the Constituent Assembly.",
+      "reference": "Constituent Assembly of India, Drafting Committee (constituted 29 August 1947)"
+    },
+    {
+      "id": "con_1_03",
+      "chapter": "constitution",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Which Article says \"India, that is Bharat, shall be a Union of States\"?",
+      "options": [
+        "Article 1",
+        "Article 3",
+        "Article 12",
+        "Article 368"
+      ],
+      "answer": 0,
+      "explanation": "Article 1 gives the name of the country and describes it as a Union of States. Article 3 deals with forming new States.",
+      "reference": "Article 1(1), Constitution of India"
+    },
+    {
+      "id": "con_1_04",
+      "chapter": "constitution",
+      "level": 1,
+      "difficulty": 1,
+      "question": "What is the minimum age to be elected President of India?",
+      "options": [
+        "25 years",
+        "30 years",
+        "40 years",
+        "35 years"
+      ],
+      "answer": 3,
+      "explanation": "A candidate for President must be a citizen of India, at least 35 years old, and qualified to be elected to the Lok Sabha.",
+      "reference": "Article 58(1)(b), Constitution of India"
+    },
+    {
+      "id": "con_1_05",
+      "chapter": "constitution",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Which words were added to the Preamble by the 42nd Amendment, 1976?",
+      "options": [
+        "Sovereign and Democratic",
+        "Justice and Liberty",
+        "Socialist, Secular and Integrity",
+        "Fraternity and Dignity"
+      ],
+      "answer": 2,
+      "explanation": "The 42nd Amendment added 'Socialist' and 'Secular', and changed 'unity of the Nation' to 'unity and integrity of the Nation'.",
+      "reference": "Section 2, Constitution (Forty-second Amendment) Act, 1976"
+    },
+    {
+      "id": "con_1_06",
+      "chapter": "constitution",
+      "level": 1,
+      "difficulty": 1,
+      "question": "What is the normal term of the Lok Sabha?",
+      "options": [
+        "4 years",
+        "5 years",
+        "6 years",
+        "7 years"
+      ],
+      "answer": 1,
+      "explanation": "The Lok Sabha lasts five years from its first meeting unless dissolved earlier. Only during an Emergency can Parliament extend it, one year at a time.",
+      "reference": "Article 83(2), Constitution of India"
+    },
+    {
+      "id": "con_2_01",
+      "chapter": "constitution",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Which Article gives the President the power to grant pardons, including in death sentence cases?",
+      "options": [
+        "Article 61",
+        "Article 123",
+        "Article 72",
+        "Article 161"
+      ],
+      "answer": 2,
+      "explanation": "Article 72 lets the President pardon, remit or commute sentences, including death sentences. Article 161 gives Governors a similar power.",
+      "reference": "Article 72, Constitution of India"
+    },
+    {
+      "id": "con_2_02",
+      "chapter": "constitution",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Whose decision is final on whether a Bill is a Money Bill?",
+      "options": [
+        "Speaker of the Lok Sabha",
+        "President of India",
+        "Chairman of the Rajya Sabha",
+        "Chief Justice of India"
+      ],
+      "answer": 0,
+      "explanation": "Article 110(3) makes the Speaker's decision on whether a Bill is a Money Bill final.",
+      "reference": "Article 110(3), Constitution of India"
+    },
+    {
+      "id": "con_2_03",
+      "chapter": "constitution",
+      "level": 2,
+      "difficulty": 2,
+      "question": "If the Rajya Sabha does not return a Money Bill within how many days is it deemed passed?",
+      "options": [
+        "7 days",
+        "30 days",
+        "6 months",
+        "14 days"
+      ],
+      "answer": 3,
+      "explanation": "The Rajya Sabha can only recommend changes to a Money Bill. If it does not return the Bill within 14 days, it is deemed passed by both Houses.",
+      "reference": "Article 109(5), Constitution of India"
+    },
+    {
+      "id": "con_2_04",
+      "chapter": "constitution",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Which Amendment replaced \"internal disturbance\" with \"armed rebellion\" as a ground for National Emergency?",
+      "options": [
+        "42nd Amendment, 1976",
+        "24th Amendment, 1971",
+        "44th Amendment, 1978",
+        "52nd Amendment, 1985"
+      ],
+      "answer": 2,
+      "explanation": "After the 1975 Emergency, the 44th Amendment narrowed Article 352 so that only war, external aggression or armed rebellion can justify it.",
+      "reference": "Article 352(1), as amended by the Constitution (Forty-fourth Amendment) Act, 1978"
+    },
+    {
+      "id": "con_2_05",
+      "chapter": "constitution",
+      "level": 2,
+      "difficulty": 2,
+      "question": "At what age does a Supreme Court judge retire?",
+      "options": [
+        "65 years",
+        "60 years",
+        "62 years",
+        "70 years"
+      ],
+      "answer": 0,
+      "explanation": "Supreme Court judges hold office until 65. High Court judges retire at 62 under Article 217(1).",
+      "reference": "Article 124(2), Constitution of India"
+    },
+    {
+      "id": "con_2_06",
+      "chapter": "constitution",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Which Article provides for a joint sitting of both Houses of Parliament?",
+      "options": [
+        "Article 110",
+        "Article 118",
+        "Article 108",
+        "Article 123"
+      ],
+      "answer": 2,
+      "explanation": "The President may call a joint sitting to resolve a deadlock on an ordinary Bill. It is not available for Money Bills or Constitution amendments.",
+      "reference": "Article 108, Constitution of India"
+    },
+    {
+      "id": "con_3_01",
+      "chapter": "constitution",
+      "level": 3,
+      "difficulty": 3,
+      "question": "What was the bench strength and majority in Kesavananda Bharati v. State of Kerala (1973)?",
+      "options": [
+        "11 judges, 6:5 majority",
+        "9 judges, 5:4 majority",
+        "7 judges, 4:3 majority",
+        "13 judges, 7:6 majority"
+      ],
+      "answer": 3,
+      "explanation": "A 13-judge bench held by 7:6 that Parliament can amend any part of the Constitution but cannot destroy its basic structure.",
+      "reference": "Kesavananda Bharati v. State of Kerala, (1973) 4 SCC 225"
+    },
+    {
+      "id": "con_3_02",
+      "chapter": "constitution",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Which case struck down clauses (4) and (5) of Article 368 inserted by the 42nd Amendment?",
+      "options": [
+        "Golaknath v. State of Punjab (1967)",
+        "Minerva Mills v. Union of India (1980)",
+        "Indira Gandhi v. Raj Narain (1975)",
+        "Waman Rao v. Union of India (1981)"
+      ],
+      "answer": 1,
+      "explanation": "Minerva Mills held that limited amending power and judicial review are part of the basic structure, so Parliament cannot give itself unlimited power.",
+      "reference": "Minerva Mills Ltd. v. Union of India, (1980) 3 SCC 625"
+    },
+    {
+      "id": "con_3_03",
+      "chapter": "constitution",
+      "level": 3,
+      "difficulty": 3,
+      "question": "In I.R. Coelho (2007), laws added to the Ninth Schedule after which date can be tested against the basic structure?",
+      "options": [
+        "26 January 1950",
+        "24 April 1973",
+        "18 June 1951",
+        "25 June 1975"
+      ],
+      "answer": 1,
+      "explanation": "24 April 1973 is the date of the Kesavananda Bharati judgment. Ninth Schedule laws added after it are open to basic structure review.",
+      "reference": "I.R. Coelho v. State of Tamil Nadu, (2007) 2 SCC 1"
+    },
+    {
+      "id": "con_3_04",
+      "chapter": "constitution",
+      "level": 3,
+      "difficulty": 3,
+      "question": "In which case did the Supreme Court strike down the 99th Amendment creating the NJAC?",
+      "options": [
+        "SC Advocates-on-Record Assn. v. Union of India (2015)",
+        "S.P. Gupta v. Union of India (1981)",
+        "S.R. Bommai v. Union of India (1994)",
+        "L. Chandra Kumar v. Union of India (1997)"
+      ],
+      "answer": 0,
+      "explanation": "The Fourth Judges Case (2015) held the NJAC unconstitutional as it hurt judicial independence, a basic feature, and restored the collegium system.",
+      "reference": "Supreme Court Advocates-on-Record Assn. v. Union of India, (2016) 5 SCC 1"
+    },
+    {
+      "id": "con_3_05",
+      "chapter": "constitution",
+      "level": 3,
+      "difficulty": 3,
+      "question": "An amendment changing the representation of States in Parliament needs, besides a special majority:",
+      "options": [
+        "Ratification by two-thirds of the States",
+        "An advisory opinion of the Supreme Court",
+        "A national referendum",
+        "Ratification by at least half the State Legislatures"
+      ],
+      "answer": 3,
+      "explanation": "Under the proviso to Article 368(2), amendments to federal features, such as representation of States in Parliament, need ratification by half the States.",
+      "reference": "Article 368(2), proviso, Constitution of India"
+    },
+    {
+      "id": "con_3_06",
+      "chapter": "constitution",
+      "level": 3,
+      "difficulty": 3,
+      "question": "In S.R. Bommai v. Union of India (1994), where must a government's majority be tested?",
+      "options": [
+        "At Raj Bhavan before the Governor",
+        "On the floor of the House",
+        "Before the President",
+        "Before the Election Commission"
+      ],
+      "answer": 1,
+      "explanation": "Bommai held that majority is proved by a floor test, not the Governor's opinion, and that President's Rule under Article 356 is open to judicial review.",
+      "reference": "S.R. Bommai v. Union of India, (1994) 3 SCC 1"
+    },
+    {
+      "id": "rig_1_01",
+      "chapter": "rights",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Which Article abolishes \"untouchability\"?",
+      "options": [
+        "Article 14",
+        "Article 15",
+        "Article 23",
+        "Article 17"
+      ],
+      "answer": 3,
+      "explanation": "Article 17 abolishes untouchability and forbids its practice in any form. Enforcing any disability arising from it is an offence.",
+      "reference": "Article 17, Constitution of India"
+    },
+    {
+      "id": "rig_1_02",
+      "chapter": "rights",
+      "level": 1,
+      "difficulty": 1,
+      "question": "The right to free and compulsory education covers children of which age group?",
+      "options": [
+        "3 to 10 years",
+        "5 to 15 years",
+        "6 to 14 years",
+        "6 to 18 years"
+      ],
+      "answer": 2,
+      "explanation": "Article 21A, added by the 86th Amendment in 2002, makes free and compulsory education for children aged 6 to 14 a Fundamental Right.",
+      "reference": "Article 21A, Constitution of India"
+    },
+    {
+      "id": "rig_1_03",
+      "chapter": "rights",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Which Article protects the right to life and personal liberty?",
+      "options": [
+        "Article 19",
+        "Article 22",
+        "Article 32",
+        "Article 21"
+      ],
+      "answer": 3,
+      "explanation": "Article 21 says no person shall be deprived of life or personal liberty except according to procedure established by law. It applies to everyone, not just citizens.",
+      "reference": "Article 21, Constitution of India"
+    },
+    {
+      "id": "rig_1_04",
+      "chapter": "rights",
+      "level": 1,
+      "difficulty": 1,
+      "question": "In which Article are the Fundamental Duties of citizens listed?",
+      "options": [
+        "Article 32",
+        "Article 44",
+        "Article 21A",
+        "Article 51A"
+      ],
+      "answer": 3,
+      "explanation": "Fundamental Duties were added in Part IVA (Article 51A) by the 42nd Amendment, 1976. There are now 11 duties.",
+      "reference": "Article 51A, Constitution of India"
+    },
+    {
+      "id": "rig_1_05",
+      "chapter": "rights",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Which right did Dr B.R. Ambedkar call the \"heart and soul\" of the Constitution?",
+      "options": [
+        "Right to equality",
+        "Right to constitutional remedies",
+        "Right to freedom of religion",
+        "Right to property"
+      ],
+      "answer": 1,
+      "explanation": "Article 32 lets a person go directly to the Supreme Court to enforce Fundamental Rights. Ambedkar called it the very soul and heart of the Constitution.",
+      "reference": "Article 32, Constitution of India; Constituent Assembly Debates, 9 December 1948"
+    },
+    {
+      "id": "rig_1_06",
+      "chapter": "rights",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Which Article guarantees equality before the law and equal protection of the laws?",
+      "options": [
+        "Article 14",
+        "Article 16",
+        "Article 19",
+        "Article 21"
+      ],
+      "answer": 0,
+      "explanation": "Article 14 bars the State from denying any person equality before the law or equal protection of the laws within India.",
+      "reference": "Article 14, Constitution of India"
+    },
+    {
+      "id": "rig_2_01",
+      "chapter": "rights",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Which writ is issued to free a person who is unlawfully detained?",
+      "options": [
+        "Habeas corpus",
+        "Mandamus",
+        "Certiorari",
+        "Quo warranto"
+      ],
+      "answer": 0,
+      "explanation": "Habeas corpus means 'you may have the body'. The court orders the detainer to produce the person and justify the detention; it can issue even against private persons.",
+      "reference": "Articles 32(2) and 226, Constitution of India"
+    },
+    {
+      "id": "rig_2_02",
+      "chapter": "rights",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Which writ questions a person's legal right to hold a public office?",
+      "options": [
+        "Prohibition",
+        "Mandamus",
+        "Habeas corpus",
+        "Quo warranto"
+      ],
+      "answer": 3,
+      "explanation": "Quo warranto ('by what authority') asks the holder of a public office to show their legal right to it and can remove a usurper.",
+      "reference": "Articles 32(2) and 226, Constitution of India"
+    },
+    {
+      "id": "rig_2_03",
+      "chapter": "rights",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Maneka Gandhi v. Union of India (1978) held that procedure under Article 21 must be:",
+      "options": [
+        "Merely enacted by Parliament",
+        "Approved by the President",
+        "Just, fair and reasonable",
+        "Written only in criminal statutes"
+      ],
+      "answer": 2,
+      "explanation": "The Court held that any law depriving liberty must be just, fair and reasonable, and read Articles 14, 19 and 21 together.",
+      "reference": "Maneka Gandhi v. Union of India, (1978) 1 SCC 248"
+    },
+    {
+      "id": "rig_2_04",
+      "chapter": "rights",
+      "level": 2,
+      "difficulty": 2,
+      "question": "In K.S. Puttaswamy v. Union of India (2017), the nine-judge bench held that privacy is:",
+      "options": [
+        "Only a common law right",
+        "A Fundamental Right under Article 21 and Part III",
+        "Only a statutory right under the IT Act",
+        "Not protected by the Constitution"
+      ],
+      "answer": 1,
+      "explanation": "The Court unanimously held that privacy is intrinsic to life and liberty under Article 21 and to the freedoms in Part III.",
+      "reference": "Justice K.S. Puttaswamy (Retd.) v. Union of India, (2017) 10 SCC 1"
+    },
+    {
+      "id": "rig_2_05",
+      "chapter": "rights",
+      "level": 2,
+      "difficulty": 2,
+      "question": "How is the writ power of High Courts under Article 226 wider than Article 32?",
+      "options": [
+        "It applies only to Fundamental Rights",
+        "It covers any other purpose, not just Fundamental Rights",
+        "It applies only against private bodies",
+        "It applies only in criminal matters"
+      ],
+      "answer": 1,
+      "explanation": "Article 226 lets High Courts issue writs for Fundamental Rights and 'for any other purpose', such as enforcing legal rights.",
+      "reference": "Article 226(1), Constitution of India"
+    },
+    {
+      "id": "rig_2_06",
+      "chapter": "rights",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Which Directive Principle asks the State to provide free legal aid?",
+      "options": [
+        "Article 41",
+        "Article 44",
+        "Article 50",
+        "Article 39A"
+      ],
+      "answer": 3,
+      "explanation": "Article 39A, added by the 42nd Amendment, directs equal justice and free legal aid. The Legal Services Authorities Act, 1987 gives effect to it.",
+      "reference": "Article 39A, Constitution of India"
+    },
+    {
+      "id": "rig_3_01",
+      "chapter": "rights",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Puttaswamy (2017) overruled which earlier rulings to the extent they denied a right to privacy?",
+      "options": [
+        "M.P. Sharma (1954) and Kharak Singh (1962)",
+        "A.K. Gopalan (1950) and ADM Jabalpur (1976)",
+        "Golaknath (1967) and Sajjan Singh (1965)",
+        "Maneka Gandhi (1978) and Olga Tellis (1985)"
+      ],
+      "answer": 0,
+      "explanation": "The nine-judge bench overruled M.P. Sharma and Kharak Singh insofar as they held there is no constitutional right to privacy.",
+      "reference": "Justice K.S. Puttaswamy (Retd.) v. Union of India, (2017) 10 SCC 1"
+    },
+    {
+      "id": "rig_3_02",
+      "chapter": "rights",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Selvi v. State of Karnataka (2010) held that involuntary narco-analysis violates:",
+      "options": [
+        "Article 14 only",
+        "Article 19(1)(a) only",
+        "Articles 20(3) and 21",
+        "Article 22(1) only"
+      ],
+      "answer": 2,
+      "explanation": "Forcing narco-analysis, polygraph or brain-mapping tests breaches the right against self-incrimination and personal liberty.",
+      "reference": "Selvi v. State of Karnataka, (2010) 7 SCC 263"
+    },
+    {
+      "id": "rig_3_03",
+      "chapter": "rights",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Indra Sawhney v. Union of India (1992) generally capped total reservations at:",
+      "options": [
+        "50 per cent",
+        "33 per cent",
+        "60 per cent",
+        "69 per cent"
+      ],
+      "answer": 0,
+      "explanation": "The nine-judge bench set a 50% ceiling save in extraordinary situations and required exclusion of the 'creamy layer' among backward classes.",
+      "reference": "Indra Sawhney v. Union of India, 1992 Supp (3) SCC 217"
+    },
+    {
+      "id": "rig_3_04",
+      "chapter": "rights",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Under Article 22(4), preventive detention beyond how long needs an Advisory Board's opinion?",
+      "options": [
+        "1 month",
+        "6 months",
+        "3 months",
+        "12 months"
+      ],
+      "answer": 2,
+      "explanation": "No preventive detention law can authorise detention beyond three months unless an Advisory Board reports sufficient cause.",
+      "reference": "Article 22(4)(a), Constitution of India"
+    },
+    {
+      "id": "rig_3_05",
+      "chapter": "rights",
+      "level": 3,
+      "difficulty": 3,
+      "question": "During an Emergency, enforcement of which Articles cannot be suspended under Article 359?",
+      "options": [
+        "Articles 14 and 19",
+        "Articles 19 and 21",
+        "Articles 20 and 21",
+        "Articles 21 and 32"
+      ],
+      "answer": 2,
+      "explanation": "The 44th Amendment, 1978 barred suspension of Articles 20 and 21, undoing the effect of ADM Jabalpur (1976).",
+      "reference": "Article 359(1), as amended by the Constitution (Forty-fourth Amendment) Act, 1978"
+    },
+    {
+      "id": "rig_3_06",
+      "chapter": "rights",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Anuradha Bhasin v. Union of India (2020) held that speech and trade through the internet are protected by:",
+      "options": [
+        "Article 21A",
+        "Articles 19(1)(a) and 19(1)(g)",
+        "Articles 14 and 15",
+        "Article 25"
+      ],
+      "answer": 1,
+      "explanation": "The Court held these freedoms extend to the internet, so internet shutdown orders must be necessary, proportionate and open to judicial review.",
+      "reference": "Anuradha Bhasin v. Union of India, (2020) 3 SCC 637"
+    },
+    {
+      "id": "cri_1_01",
+      "chapter": "criminal",
+      "level": 1,
+      "difficulty": 1,
+      "question": "From which date did the Bharatiya Nyaya Sanhita (BNS) replace the Indian Penal Code?",
+      "options": [
+        "1 January 2024",
+        "26 January 2024",
+        "1 July 2024",
+        "15 August 2023"
+      ],
+      "answer": 2,
+      "explanation": "The BNS, 2023 came into force on 1 July 2024 and replaced the Indian Penal Code, 1860, along with the new BNSS and BSA.",
+      "reference": "Section 1(2), Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "cri_1_02",
+      "chapter": "criminal",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Which BNS section punishes theft?",
+      "options": [
+        "Section 302",
+        "Section 318",
+        "Section 379",
+        "Section 303"
+      ],
+      "answer": 3,
+      "explanation": "Theft is defined and punished in BNS Section 303 (old IPC 379). BNS 302 deals with wounding religious feelings, and 318 is cheating.",
+      "reference": "Section 303, Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "cri_1_03",
+      "chapter": "criminal",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Which new type of punishment did the BNS introduce?",
+      "options": [
+        "Transportation for life",
+        "Community service",
+        "Public flogging",
+        "Exile from the State"
+      ],
+      "answer": 1,
+      "explanation": "Section 4(f) adds community service as a punishment for some minor offences, such as small first-time theft and defamation.",
+      "reference": "Section 4(f), Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "cri_1_04",
+      "chapter": "criminal",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Under the BNS, a \"child\" means a person below what age?",
+      "options": [
+        "12 years",
+        "14 years",
+        "16 years",
+        "18 years"
+      ],
+      "answer": 3,
+      "explanation": "The BNS defines a child as any person below eighteen years of age.",
+      "reference": "Section 2(3), Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "cri_1_05",
+      "chapter": "criminal",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Which BNS section prescribes the punishment for murder?",
+      "options": [
+        "Section 103",
+        "Section 101",
+        "Section 109",
+        "Section 302"
+      ],
+      "answer": 0,
+      "explanation": "Section 103 punishes murder with death or life imprisonment and fine (old IPC 302). Section 101 only defines murder.",
+      "reference": "Section 103(1), Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "cri_1_06",
+      "chapter": "criminal",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Nothing done by a child below what age is an offence under the BNS?",
+      "options": [
+        "7 years",
+        "10 years",
+        "12 years",
+        "14 years"
+      ],
+      "answer": 0,
+      "explanation": "The law presumes a child under seven cannot form criminal intent, so their acts are not offences (old IPC 82).",
+      "reference": "Section 20, Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "cri_2_01",
+      "chapter": "criminal",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Suddenly grabbing a chain or phone from someone is now a separate offence called:",
+      "options": [
+        "Snatching",
+        "Extortion",
+        "Criminal breach of trust",
+        "Dacoity"
+      ],
+      "answer": 0,
+      "explanation": "BNS Section 304 makes snatching a distinct form of theft: suddenly, quickly or forcibly seizing movable property from a person.",
+      "reference": "Section 304, Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "cri_2_02",
+      "chapter": "criminal",
+      "level": 2,
+      "difficulty": 2,
+      "question": "For a \"dowry death\" under BNS Section 80, the woman must die within how many years of marriage?",
+      "options": [
+        "3 years",
+        "5 years",
+        "7 years",
+        "10 years"
+      ],
+      "answer": 2,
+      "explanation": "Dowry death needs an unnatural death within seven years of marriage after dowry-related cruelty. Punishment is 7 years to life (old IPC 304B).",
+      "reference": "Section 80, Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "cri_2_03",
+      "chapter": "criminal",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Which BNS section punishes cruelty to a woman by her husband or his relatives (old IPC 498A)?",
+      "options": [
+        "Section 80",
+        "Section 85",
+        "Section 69",
+        "Section 74"
+      ],
+      "answer": 1,
+      "explanation": "Section 85 punishes such cruelty with up to three years and fine. Section 86 explains what 'cruelty' means.",
+      "reference": "Section 85, Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "cri_2_04",
+      "chapter": "criminal",
+      "level": 2,
+      "difficulty": 2,
+      "question": "BNS Section 103(2) covers murder by a group on grounds like race or caste. How big must the group be?",
+      "options": [
+        "Two or more persons",
+        "Five or more persons",
+        "Three or more persons",
+        "Ten or more persons"
+      ],
+      "answer": 1,
+      "explanation": "This new provision targets mob lynching: each member of a group of five or more is punished with death or life imprisonment and fine.",
+      "reference": "Section 103(2), Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "cri_2_05",
+      "chapter": "criminal",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Sedition (IPC 124A) was dropped. Which BNS section punishes acts endangering India's sovereignty, unity and integrity?",
+      "options": [
+        "Section 113",
+        "Section 147",
+        "Section 152",
+        "Section 196"
+      ],
+      "answer": 2,
+      "explanation": "Section 152 punishes acts endangering sovereignty, unity and integrity of India. Section 147 is waging war; 113 is terrorist act.",
+      "reference": "Section 152, Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "cri_2_06",
+      "chapter": "criminal",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Sexual intercourse on a false promise of marriage, not amounting to rape, is punished under:",
+      "options": [
+        "BNS Section 63",
+        "BNS Section 75",
+        "BNS Section 79",
+        "BNS Section 69"
+      ],
+      "answer": 3,
+      "explanation": "Section 69 is a new offence covering intercourse by deceitful means, such as a false promise of marriage or job; up to 10 years and fine.",
+      "reference": "Section 69, Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "cri_3_01",
+      "chapter": "criminal",
+      "level": 3,
+      "difficulty": 3,
+      "question": "When can theft be punished with community service under BNS Section 303(2)?",
+      "options": [
+        "First conviction, value under ₹5,000, property restored",
+        "Value under ₹10,000, for any offender",
+        "Theft from a dwelling house",
+        "Offender aged below 21 years"
+      ],
+      "answer": 0,
+      "explanation": "The proviso allows community service only for a first-time offender where the stolen property is worth under ₹5,000 and is returned or its value paid.",
+      "reference": "Section 303(2), proviso, Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "cri_3_02",
+      "chapter": "criminal",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Which BNS section defines and punishes \"organised crime\" by a crime syndicate?",
+      "options": [
+        "Section 61",
+        "Section 112",
+        "Section 111",
+        "Section 113"
+      ],
+      "answer": 2,
+      "explanation": "Section 111 covers continuing unlawful activity by a syndicate for material benefit. Section 112 is petty organised crime; 113 is terrorist act.",
+      "reference": "Section 111, Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "cri_3_03",
+      "chapter": "criminal",
+      "level": 3,
+      "difficulty": 3,
+      "question": "In which BNS section are the cases where private defence of the body extends to causing death listed?",
+      "options": [
+        "Section 34",
+        "Section 41",
+        "Section 38",
+        "Section 44"
+      ],
+      "answer": 2,
+      "explanation": "Section 38 (old IPC 100) lists grave threats like fear of death, rape or kidnapping. Section 41 is the equivalent rule for defence of property.",
+      "reference": "Section 38, Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "cri_3_04",
+      "chapter": "criminal",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Which IPC offence, struck down in Joseph Shine (2018), has no counterpart in the BNS?",
+      "options": [
+        "Bigamy (IPC 494)",
+        "Cruelty by husband (IPC 498A)",
+        "Enticing a married woman (IPC 498)",
+        "Adultery (IPC 497)"
+      ],
+      "answer": 3,
+      "explanation": "Joseph Shine held IPC 497 unconstitutional and the BNS did not re-enact it. Bigamy (BNS 82) and cruelty (BNS 85) remain offences.",
+      "reference": "Joseph Shine v. Union of India, (2019) 3 SCC 39; Chapter V, Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "cri_3_05",
+      "chapter": "criminal",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Culpable homicide not amounting to murder (old IPC 304) is punished under which BNS section?",
+      "options": [
+        "Section 100",
+        "Section 105",
+        "Section 106",
+        "Section 110"
+      ],
+      "answer": 1,
+      "explanation": "Section 105 punishes it. Section 100 defines culpable homicide, 106 covers death by negligence and 110 is attempt to commit culpable homicide.",
+      "reference": "Section 105, Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "cri_3_06",
+      "chapter": "criminal",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Under BNS Section 106(1), the maximum sentence for a registered doctor causing death by negligence during a procedure is:",
+      "options": [
+        "2 years and fine",
+        "5 years and fine",
+        "7 years and fine",
+        "10 years and fine"
+      ],
+      "answer": 0,
+      "explanation": "Death by negligence generally carries up to 5 years, but for a registered medical practitioner during a medical procedure the maximum is 2 years.",
+      "reference": "Section 106(1), Bharatiya Nyaya Sanhita, 2023"
+    },
+    {
+      "id": "pro_1_01",
+      "chapter": "procedure",
+      "level": 1,
+      "difficulty": 1,
+      "question": "A \"Zero FIR\" means the police must register an FIR for a cognizable offence:",
+      "options": [
+        "Only if it happened in their area",
+        "Wherever the offence took place",
+        "Only after a court order",
+        "Only for offences against women"
+      ],
+      "answer": 1,
+      "explanation": "Police must record information of a cognizable offence irrespective of where it happened, and then transfer it to the police station with jurisdiction.",
+      "reference": "Section 173(1), Bharatiya Nagarik Suraksha Sanhita, 2023"
+    },
+    {
+      "id": "pro_1_02",
+      "chapter": "procedure",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Within how many days must you sign a complaint sent electronically (e-FIR) for it to be recorded?",
+      "options": [
+        "1 day",
+        "3 days",
+        "7 days",
+        "15 days"
+      ],
+      "answer": 1,
+      "explanation": "Information can be given electronically, but it is taken on record once the informant signs it within three days.",
+      "reference": "Section 173(1)(ii), Bharatiya Nagarik Suraksha Sanhita, 2023"
+    },
+    {
+      "id": "pro_1_03",
+      "chapter": "procedure",
+      "level": 1,
+      "difficulty": 1,
+      "question": "How does the informant or victim get a copy of the FIR?",
+      "options": [
+        "After paying a fee of ₹10",
+        "Only after the charge-sheet",
+        "Immediately and free of cost",
+        "Only on a court order"
+      ],
+      "answer": 2,
+      "explanation": "A copy of the recorded information must be given to the informant or victim forthwith, free of cost.",
+      "reference": "Section 173(2), Bharatiya Nagarik Suraksha Sanhita, 2023"
+    },
+    {
+      "id": "pro_1_04",
+      "chapter": "procedure",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Whom must the police inform when they arrest a person?",
+      "options": [
+        "The arrested person's employer",
+        "The local MLA",
+        "A relative, friend or person nominated by the arrested",
+        "The State Bar Council"
+      ],
+      "answer": 2,
+      "explanation": "The police must inform a relative, friend or nominated person about the arrest and where the person is held, and also the designated police officer.",
+      "reference": "Section 48(1), Bharatiya Nagarik Suraksha Sanhita, 2023"
+    },
+    {
+      "id": "pro_1_05",
+      "chapter": "procedure",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Can a woman normally be arrested after sunset and before sunrise?",
+      "options": [
+        "No, save in exceptional cases with Magistrate's permission",
+        "Yes, at any time",
+        "Yes, but only by a male officer",
+        "Only with her husband's consent"
+      ],
+      "answer": 0,
+      "explanation": "In exceptional cases a woman police officer must make a written report and get prior permission from a Judicial Magistrate of the first class.",
+      "reference": "Section 43(5), Bharatiya Nagarik Suraksha Sanhita, 2023"
+    },
+    {
+      "id": "pro_1_06",
+      "chapter": "procedure",
+      "level": 1,
+      "difficulty": 1,
+      "question": "The Bharatiya Nagarik Suraksha Sanhita, 2023 (BNSS) replaced which law?",
+      "options": [
+        "Indian Penal Code, 1860",
+        "Indian Evidence Act, 1872",
+        "Police Act, 1861",
+        "Code of Criminal Procedure, 1973"
+      ],
+      "answer": 3,
+      "explanation": "The BNSS replaced the CrPC from 1 July 2024. The BNS replaced the IPC and the Bharatiya Sakshya Adhiniyam replaced the Evidence Act.",
+      "reference": "Section 531, Bharatiya Nagarik Suraksha Sanhita, 2023"
+    },
+    {
+      "id": "pro_2_01",
+      "chapter": "procedure",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Under BNSS Section 173(3), a preliminary enquiry before investigation is allowed for offences punishable with:",
+      "options": [
+        "Less than 3 years",
+        "7 years or more",
+        "3 years or more but less than 7 years",
+        "Death or life imprisonment only"
+      ],
+      "answer": 2,
+      "explanation": "With a DSP's prior permission, police may hold a preliminary enquiry within 14 days to see if a prima facie case exists.",
+      "reference": "Section 173(3), Bharatiya Nagarik Suraksha Sanhita, 2023"
+    },
+    {
+      "id": "pro_2_02",
+      "chapter": "procedure",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Anticipatory bail (old CrPC 438) is now provided under which BNSS section?",
+      "options": [
+        "Section 438",
+        "Section 482",
+        "Section 480",
+        "Section 528"
+      ],
+      "answer": 1,
+      "explanation": "BNSS 482 deals with bail to a person apprehending arrest. Note: BNSS 528 is the High Court's inherent power (old CrPC 482).",
+      "reference": "Section 482, Bharatiya Nagarik Suraksha Sanhita, 2023"
+    },
+    {
+      "id": "pro_2_03",
+      "chapter": "procedure",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Under the Bharatiya Sakshya Adhiniyam, a confession made to a police officer:",
+      "options": [
+        "Cannot be proved against the accused",
+        "Is admissible if voluntary",
+        "Is admissible if signed",
+        "Is admissible if video-recorded"
+      ],
+      "answer": 0,
+      "explanation": "No confession made to a police officer can be proved against an accused (old Evidence Act s.25), to guard against forced confessions.",
+      "reference": "Section 23(1), Bharatiya Sakshya Adhiniyam, 2023"
+    },
+    {
+      "id": "pro_2_04",
+      "chapter": "procedure",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Which BSA section governs admissibility of electronic records and the required certificate (old s.65B)?",
+      "options": [
+        "Section 57",
+        "Section 61",
+        "Section 63",
+        "Section 65B"
+      ],
+      "answer": 2,
+      "explanation": "Section 63 sets the conditions for admitting electronic records. The certificate in the Schedule has Part A for the party and Part B for an expert.",
+      "reference": "Section 63(4) and Schedule, Bharatiya Sakshya Adhiniyam, 2023"
+    },
+    {
+      "id": "pro_2_05",
+      "chapter": "procedure",
+      "level": 2,
+      "difficulty": 2,
+      "question": "An undertrial first-time offender must be released on bond after detention for what part of the maximum sentence?",
+      "options": [
+        "One-third",
+        "One-fourth",
+        "One-half",
+        "Two-thirds"
+      ],
+      "answer": 0,
+      "explanation": "Other undertrials qualify at one-half; first-time offenders at one-third. It does not apply to offences punishable with death or life imprisonment.",
+      "reference": "Section 479(1), proviso, Bharatiya Nagarik Suraksha Sanhita, 2023"
+    },
+    {
+      "id": "pro_2_06",
+      "chapter": "procedure",
+      "level": 2,
+      "difficulty": 2,
+      "question": "For an offence punishable with under 3 years, DSP-level permission is needed to arrest a person who is:",
+      "options": [
+        "Infirm or above 60 years of age",
+        "A woman of any age",
+        "A government servant",
+        "A first-time offender"
+      ],
+      "answer": 0,
+      "explanation": "BNSS Section 35(7) protects infirm persons and those above 60 from arrest for minor offences without prior permission of a DSP-rank officer.",
+      "reference": "Section 35(7), Bharatiya Nagarik Suraksha Sanhita, 2023"
+    },
+    {
+      "id": "pro_3_01",
+      "chapter": "procedure",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Under BNSS Section 187(3), maximum detention during investigation for offences punishable with 10 years or more is:",
+      "options": [
+        "60 days",
+        "90 days",
+        "120 days",
+        "180 days"
+      ],
+      "answer": 1,
+      "explanation": "The cap is 90 days for offences punishable with death, life or 10+ years, and 60 days for others; after that the accused gets default bail.",
+      "reference": "Section 187(3), Bharatiya Nagarik Suraksha Sanhita, 2023"
+    },
+    {
+      "id": "pro_3_02",
+      "chapter": "procedure",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Under BNSS Section 187(2), police custody of up to 15 days may be authorised:",
+      "options": [
+        "Only in the first 15 days after arrest",
+        "Only within the first 24 hours",
+        "At any stage until the trial ends",
+        "In whole or parts within the first 40 or 60 days"
+      ],
+      "answer": 3,
+      "explanation": "The 15 days of police custody may be taken whole or in parts at any time during the initial 40 or 60 days of the 60/90-day detention period.",
+      "reference": "Section 187(2), Bharatiya Nagarik Suraksha Sanhita, 2023"
+    },
+    {
+      "id": "pro_3_03",
+      "chapter": "procedure",
+      "level": 3,
+      "difficulty": 3,
+      "question": "A forensic expert must visit the crime scene for offences punishable with at least:",
+      "options": [
+        "3 years",
+        "7 years",
+        "10 years",
+        "Death or life imprisonment"
+      ],
+      "answer": 1,
+      "explanation": "BNSS Section 176(3) mandates a forensic team visit and videography of evidence collection for offences punishable with seven years or more.",
+      "reference": "Section 176(3), Bharatiya Nagarik Suraksha Sanhita, 2023"
+    },
+    {
+      "id": "pro_3_04",
+      "chapter": "procedure",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Where is the \"discovery of fact\" rule of old Evidence Act Section 27 now found?",
+      "options": [
+        "Section 27 of the BSA",
+        "Section 22 of the BSA",
+        "Section 183 of the BNSS",
+        "Proviso to Section 23(2) of the BSA"
+      ],
+      "answer": 3,
+      "explanation": "Information from an accused in police custody that leads to discovery of a fact may be proved to that extent, even if it is confessional.",
+      "reference": "Section 23(2), proviso, Bharatiya Sakshya Adhiniyam, 2023"
+    },
+    {
+      "id": "pro_3_05",
+      "chapter": "procedure",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Which BSA section says no particular number of witnesses is required to prove any fact?",
+      "options": [
+        "Section 124",
+        "Section 138",
+        "Section 146",
+        "Section 139"
+      ],
+      "answer": 3,
+      "explanation": "Evidence is weighed, not counted: a single reliable witness can be enough to prove a fact (old Evidence Act s.134).",
+      "reference": "Section 139, Bharatiya Sakshya Adhiniyam, 2023"
+    },
+    {
+      "id": "pro_3_06",
+      "chapter": "procedure",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Which BNSS section allows the trial in absentia of a proclaimed offender?",
+      "options": [
+        "Section 398",
+        "Section 472",
+        "Section 530",
+        "Section 356"
+      ],
+      "answer": 3,
+      "explanation": "Section 356 lets courts try and decide the case of a proclaimed offender who absconds to evade trial. Sections 398 and 472 deal with witness protection and mercy petitions.",
+      "reference": "Section 356, Bharatiya Nagarik Suraksha Sanhita, 2023"
+    },
+    {
+      "id": "civ_1_01",
+      "chapter": "civil",
+      "level": 1,
+      "difficulty": 1,
+      "question": "A consumer complaint where goods or services cost up to ₹50 lakh is filed before the:",
+      "options": [
+        "State Commission",
+        "National Commission",
+        "Civil Court",
+        "District Commission"
+      ],
+      "answer": 3,
+      "explanation": "Under the 2021 Rules, District Commissions hear complaints where the consideration paid is up to ₹50 lakh.",
+      "reference": "Section 34(1), Consumer Protection Act, 2019 read with Consumer Protection (Jurisdiction) Rules, 2021"
+    },
+    {
+      "id": "civ_1_02",
+      "chapter": "civil",
+      "level": 1,
+      "difficulty": 1,
+      "question": "An agreement made with a minor is:",
+      "options": [
+        "Void from the beginning",
+        "Voidable at the minor's option",
+        "Fully valid",
+        "Valid if parents agree"
+      ],
+      "answer": 0,
+      "explanation": "A minor is not competent to contract, so the agreement is void ab initio, as held in Mohori Bibee v. Dharmodas Ghose (1903).",
+      "reference": "Sections 10 and 11, Indian Contract Act, 1872; Mohori Bibee v. Dharmodas Ghose (1903) 30 IA 114"
+    },
+    {
+      "id": "civ_1_03",
+      "chapter": "civil",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Can a consumer file a complaint online?",
+      "options": [
+        "No, never",
+        "Only by registered post",
+        "Only through a lawyer",
+        "Yes, electronically (e.g. on e-Daakhil)"
+      ],
+      "answer": 3,
+      "explanation": "The 2019 Act allows complaints to be filed electronically, and consumers can file without a lawyer.",
+      "reference": "Section 35, Consumer Protection Act, 2019"
+    },
+    {
+      "id": "civ_1_04",
+      "chapter": "civil",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Under the Indian Contract Act, an agreement enforceable by law is called a:",
+      "options": [
+        "Proposal",
+        "Promise",
+        "Void agreement",
+        "Contract"
+      ],
+      "answer": 3,
+      "explanation": "Section 2(h) defines a contract as an agreement enforceable by law. Every contract is an agreement, but not every agreement is a contract.",
+      "reference": "Section 2(h), Indian Contract Act, 1872"
+    },
+    {
+      "id": "civ_1_05",
+      "chapter": "civil",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Within what time must a consumer complaint normally be filed?",
+      "options": [
+        "6 months",
+        "2 years from the cause of action",
+        "1 year",
+        "3 years"
+      ],
+      "answer": 1,
+      "explanation": "A Consumer Commission will not admit a complaint filed after two years unless the delay is explained with sufficient cause.",
+      "reference": "Section 69(1), Consumer Protection Act, 2019"
+    },
+    {
+      "id": "civ_1_06",
+      "chapter": "civil",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Under the Indian Contract Act, an agreement by way of wager (bet) is:",
+      "options": [
+        "Void",
+        "Valid",
+        "Voidable",
+        "Valid if in writing"
+      ],
+      "answer": 0,
+      "explanation": "Agreements by way of wager are void, and no suit can be brought to recover anything won on a bet.",
+      "reference": "Section 30, Indian Contract Act, 1872"
+    },
+    {
+      "id": "civ_2_01",
+      "chapter": "civil",
+      "level": 2,
+      "difficulty": 2,
+      "question": "A consumer paid ₹1.5 crore for a flat. Which Commission hears the complaint?",
+      "options": [
+        "District Commission",
+        "State Commission",
+        "National Commission",
+        "Supreme Court"
+      ],
+      "answer": 1,
+      "explanation": "State Commissions hear complaints where consideration paid is above ₹50 lakh and up to ₹2 crore; above ₹2 crore goes to the National Commission.",
+      "reference": "Section 47(1)(a)(i), Consumer Protection Act, 2019 read with Consumer Protection (Jurisdiction) Rules, 2021"
+    },
+    {
+      "id": "civ_2_02",
+      "chapter": "civil",
+      "level": 2,
+      "difficulty": 2,
+      "question": "A consumer complaint may be filed in the District Commission where the complainant:",
+      "options": [
+        "Was born",
+        "Holds a bank account",
+        "Resides or personally works for gain",
+        "Has a registered vehicle"
+      ],
+      "answer": 2,
+      "explanation": "The 2019 Act lets consumers sue from home: they can file where they reside or work, not only where the seller is.",
+      "reference": "Section 34(2)(d), Consumer Protection Act, 2019"
+    },
+    {
+      "id": "civ_2_03",
+      "chapter": "civil",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Which is an exception under Section 25 where an agreement without consideration is valid?",
+      "options": [
+        "Oral promise to give a gift to a friend",
+        "Promise made under coercion",
+        "Written, signed promise to pay a time-barred debt",
+        "Oral promise to pay a debt not yet due"
+      ],
+      "answer": 2,
+      "explanation": "Section 25(3) makes a written, signed promise to pay a debt barred by limitation enforceable even without fresh consideration.",
+      "reference": "Section 25(3), Indian Contract Act, 1872"
+    },
+    {
+      "id": "civ_2_04",
+      "chapter": "civil",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Which section of the Indian Contract Act deals with frustration (impossibility of performance)?",
+      "options": [
+        "Section 56",
+        "Section 23",
+        "Section 73",
+        "Section 74"
+      ],
+      "answer": 0,
+      "explanation": "A contract becomes void when performance becomes impossible or unlawful after it is made, as explained in Satyabrata Ghose v. Mugneeram Bangur (1954).",
+      "reference": "Section 56, Indian Contract Act, 1872"
+    },
+    {
+      "id": "civ_2_05",
+      "chapter": "civil",
+      "level": 2,
+      "difficulty": 2,
+      "question": "A person dispossessed of immovable property without due process must sue under Specific Relief Act Section 6 within:",
+      "options": [
+        "3 months",
+        "6 months",
+        "1 year",
+        "12 years"
+      ],
+      "answer": 1,
+      "explanation": "Section 6 gives a quick remedy to recover possession without proving title, but the suit must be filed within six months of dispossession.",
+      "reference": "Section 6(2)(a), Specific Relief Act, 1963"
+    },
+    {
+      "id": "civ_2_06",
+      "chapter": "civil",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Section 5 of the Limitation Act (condonation of delay for sufficient cause) applies to:",
+      "options": [
+        "Appeals and applications, not suits",
+        "Suits only",
+        "Suits, appeals and applications",
+        "Criminal complaints only"
+      ],
+      "answer": 0,
+      "explanation": "Delay in filing a suit cannot be condoned under Section 5; it covers appeals and applications (except under Order XXI CPC).",
+      "reference": "Section 5, Limitation Act, 1963"
+    },
+    {
+      "id": "civ_3_01",
+      "chapter": "civil",
+      "level": 3,
+      "difficulty": 3,
+      "question": "After the 2018 amendment to the Specific Relief Act, specific performance of a contract is:",
+      "options": [
+        "Purely discretionary",
+        "Granted only where damages are inadequate",
+        "Enforced as a rule, subject to Sections 11(2), 14 and 16",
+        "Barred for immovable property"
+      ],
+      "answer": 2,
+      "explanation": "The 2018 amendment removed judicial discretion: courts must enforce specific performance except in the cases the Act excludes.",
+      "reference": "Section 10, Specific Relief Act, 1963 (as substituted by Act 18 of 2018)"
+    },
+    {
+      "id": "civ_3_02",
+      "chapter": "civil",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Under Section 73 of the Contract Act (Hadley v. Baxendale principle), compensation is NOT given for:",
+      "options": [
+        "Loss arising naturally from the breach",
+        "Loss both parties knew was likely",
+        "Loss proved by documents",
+        "Remote and indirect loss"
+      ],
+      "answer": 3,
+      "explanation": "Damages cover loss that naturally arose from the breach or that the parties knew was likely when contracting, not remote or indirect loss.",
+      "reference": "Section 73, Indian Contract Act, 1872"
+    },
+    {
+      "id": "civ_3_03",
+      "chapter": "civil",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Where a contract names a sum payable on breach, the aggrieved party under Section 74 gets:",
+      "options": [
+        "Reasonable compensation up to the sum named",
+        "Always the full sum named",
+        "Double the sum named",
+        "Actual loss without any cap"
+      ],
+      "answer": 0,
+      "explanation": "Courts award reasonable compensation not exceeding the named sum, whether it is called a penalty or liquidated damages (Kailash Nath v. DDA, 2015).",
+      "reference": "Section 74, Indian Contract Act, 1872; Kailash Nath Associates v. DDA, (2015) 4 SCC 136"
+    },
+    {
+      "id": "civ_3_04",
+      "chapter": "civil",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Limitation for a suit for possession of immovable property based on title (Article 65) runs from adverse possession for:",
+      "options": [
+        "3 years",
+        "6 years",
+        "12 years",
+        "30 years"
+      ],
+      "answer": 2,
+      "explanation": "The owner must sue within 12 years from when the defendant's possession becomes adverse; after that the owner's right is extinguished (Section 27).",
+      "reference": "Article 65, Schedule, Limitation Act, 1963; Ravinder Kaur Grewal v. Manjit Kaur, (2019) 8 SCC 729"
+    },
+    {
+      "id": "civ_3_05",
+      "chapter": "civil",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Within how many days can an appeal be filed against a District Commission order before the State Commission?",
+      "options": [
+        "30 days",
+        "60 days",
+        "90 days",
+        "45 days"
+      ],
+      "answer": 3,
+      "explanation": "An appeal lies to the State Commission within 45 days, which it may extend for sufficient cause.",
+      "reference": "Section 41, Consumer Protection Act, 2019"
+    },
+    {
+      "id": "civ_3_06",
+      "chapter": "civil",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Where both parties are mistaken about a fact essential to the agreement, the agreement is:",
+      "options": [
+        "Voidable by either party",
+        "Void",
+        "Valid",
+        "Enforceable with damages"
+      ],
+      "answer": 1,
+      "explanation": "A bilateral mistake of an essential fact makes the agreement void. A mistake by only one party does not, under Section 22.",
+      "reference": "Section 20, Indian Contract Act, 1872"
+    },
+    {
+      "id": "eve_1_01",
+      "chapter": "everyday",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Under the RTI Act, a Public Information Officer must normally reply within:",
+      "options": [
+        "7 days",
+        "30 days",
+        "15 days",
+        "60 days"
+      ],
+      "answer": 1,
+      "explanation": "The PIO must provide the information or reject the request with reasons within 30 days of receiving the application.",
+      "reference": "Section 7(1), Right to Information Act, 2005"
+    },
+    {
+      "id": "eve_1_02",
+      "chapter": "everyday",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Which national helpline number should you call to report online financial fraud?",
+      "options": [
+        "100",
+        "112",
+        "1098",
+        "1930"
+      ],
+      "answer": 3,
+      "explanation": "Call 1930 quickly to help freeze the money trail, and also report on cybercrime.gov.in. 1098 is the child helpline; 112 is general emergency.",
+      "reference": "National Cyber Crime Reporting Portal (cybercrime.gov.in), Ministry of Home Affairs"
+    },
+    {
+      "id": "eve_1_03",
+      "chapter": "everyday",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Under the Hindu Marriage Act, what are the minimum ages for marriage?",
+      "options": [
+        "Bride 16, groom 18",
+        "Bride 18, groom 18",
+        "Bride 18, groom 21",
+        "Bride 21, groom 21"
+      ],
+      "answer": 2,
+      "explanation": "The bridegroom must be 21 and the bride 18. Marrying below these ages is a child marriage under the 2006 Act.",
+      "reference": "Section 5(iii), Hindu Marriage Act, 1955"
+    },
+    {
+      "id": "eve_1_04",
+      "chapter": "everyday",
+      "level": 1,
+      "difficulty": 1,
+      "question": "Which women are entitled to free legal services under the Legal Services Authorities Act?",
+      "options": [
+        "Only widows",
+        "Every woman, whatever her income",
+        "Only working women",
+        "Only women below the poverty line"
+      ],
+      "answer": 1,
+      "explanation": "Section 12(c) makes every woman and child eligible for free legal aid, without an income test.",
+      "reference": "Section 12(c), Legal Services Authorities Act, 1987"
+    },
+    {
+      "id": "eve_1_05",
+      "chapter": "everyday",
+      "level": 1,
+      "difficulty": 1,
+      "question": "A workplace with how many employees must form an Internal Complaints Committee under the POSH Act?",
+      "options": [
+        "5 or more",
+        "20 or more",
+        "10 or more",
+        "50 or more"
+      ],
+      "answer": 2,
+      "explanation": "Every employer with 10 or more workers must form an Internal Complaints Committee; smaller workplaces are covered by the district Local Committee.",
+      "reference": "Section 4(1), Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013"
+    },
+    {
+      "id": "eve_1_06",
+      "chapter": "everyday",
+      "level": 1,
+      "difficulty": 1,
+      "question": "What is the minimum age to get a licence to drive a private car?",
+      "options": [
+        "16 years",
+        "20 years",
+        "21 years",
+        "18 years"
+      ],
+      "answer": 3,
+      "explanation": "No one under 18 may drive a motor vehicle in a public place. At 16 one may only drive a motorcycle up to 50cc.",
+      "reference": "Section 4(1), Motor Vehicles Act, 1988"
+    },
+    {
+      "id": "eve_2_01",
+      "chapter": "everyday",
+      "level": 2,
+      "difficulty": 2,
+      "question": "If an RTI request concerns a person's life or liberty, the reply must come within:",
+      "options": [
+        "48 hours",
+        "24 hours",
+        "7 days",
+        "15 days"
+      ],
+      "answer": 0,
+      "explanation": "Information concerning the life or liberty of a person must be given within 48 hours of receiving the request.",
+      "reference": "Section 7(1), proviso, Right to Information Act, 2005"
+    },
+    {
+      "id": "eve_2_02",
+      "chapter": "everyday",
+      "level": 2,
+      "difficulty": 2,
+      "question": "What is the status of an award passed by a Lok Adalat?",
+      "options": [
+        "Appealable to the District Court",
+        "Appealable to the High Court",
+        "Only advisory",
+        "Final and binding; no appeal lies"
+      ],
+      "answer": 3,
+      "explanation": "A Lok Adalat award is deemed a civil court decree, is final on all parties, and cannot be appealed. Court fee paid is refunded.",
+      "reference": "Section 21, Legal Services Authorities Act, 1987"
+    },
+    {
+      "id": "eve_2_03",
+      "chapter": "everyday",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Under the DPDP Act, 2023, processing a child's personal data requires:",
+      "options": [
+        "Consent of the child alone",
+        "Police verification",
+        "Verifiable consent of the parent or lawful guardian",
+        "Prior approval of the Data Protection Board"
+      ],
+      "answer": 2,
+      "explanation": "A child is anyone under 18. Data fiduciaries must get verifiable parental consent and must not track or target ads at children.",
+      "reference": "Section 9, Digital Personal Data Protection Act, 2023"
+    },
+    {
+      "id": "eve_2_04",
+      "chapter": "everyday",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Under the POSH Act, a complaint of sexual harassment should be made within:",
+      "options": [
+        "3 months of the incident",
+        "30 days",
+        "6 weeks",
+        "1 year"
+      ],
+      "answer": 0,
+      "explanation": "The complaint must be filed within three months of the incident (or the last one in a series); the committee may extend this by another three months.",
+      "reference": "Section 9(1), Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013"
+    },
+    {
+      "id": "eve_2_05",
+      "chapter": "everyday",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Under the Domestic Violence Act, 2005, \"domestic violence\" includes:",
+      "options": [
+        "Only physical injury",
+        "Physical, sexual, verbal, emotional and economic abuse",
+        "Only dowry demands",
+        "Only physical and sexual abuse"
+      ],
+      "answer": 1,
+      "explanation": "The Act takes a wide view: depriving a woman of money or resources she is entitled to is economic abuse and counts as domestic violence.",
+      "reference": "Section 3, Protection of Women from Domestic Violence Act, 2005"
+    },
+    {
+      "id": "eve_2_06",
+      "chapter": "everyday",
+      "level": 2,
+      "difficulty": 2,
+      "question": "Under the Motor Vehicles Act, a Good Samaritan who helps an accident victim in good faith:",
+      "options": [
+        "Is not liable to any civil or criminal action",
+        "Must pay the first hospital bill",
+        "Must give personal details to police",
+        "Must stay at the hospital till family arrives"
+      ],
+      "answer": 0,
+      "explanation": "Section 134A protects good-faith helpers from liability for injury or death from emergency care, encouraging people to help victims.",
+      "reference": "Section 134A, Motor Vehicles Act, 1988"
+    },
+    {
+      "id": "eve_3_01",
+      "chapter": "everyday",
+      "level": 3,
+      "difficulty": 3,
+      "question": "What penalty can an Information Commission impose on a PIO for unjustified delay under the RTI Act?",
+      "options": [
+        "₹100 per day, up to ₹10,000",
+        "₹500 per day, up to ₹50,000",
+        "₹250 per day, up to ₹25,000",
+        "A flat fine of ₹1,000"
+      ],
+      "answer": 2,
+      "explanation": "The Commission can fine a PIO ₹250 per day of delay or obstruction, capped at ₹25,000, after giving a hearing.",
+      "reference": "Section 20(1), Right to Information Act, 2005"
+    },
+    {
+      "id": "eve_3_02",
+      "chapter": "everyday",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Per Vineeta Sharma (2020), a daughter's coparcenary right under amended Section 6 of the Hindu Succession Act arises:",
+      "options": [
+        "Only if father was alive on 9 Sept 2005",
+        "By birth, whether or not father was alive in 2005",
+        "Only for daughters born after 2005",
+        "Only for unmarried daughters"
+      ],
+      "answer": 1,
+      "explanation": "A three-judge bench held daughters are coparceners by birth like sons; the father need not have been alive on 9 September 2005.",
+      "reference": "Vineeta Sharma v. Rakesh Sharma, (2020) 9 SCC 1; Section 6, Hindu Succession Act, 1956"
+    },
+    {
+      "id": "eve_3_03",
+      "chapter": "everyday",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Per Satish Chander Ahuja (2020), a \"shared household\" under the DV Act can include:",
+      "options": [
+        "Only a house owned by the husband",
+        "Only a house in the wife's name",
+        "In-laws' house where she lived, though owned by them",
+        "Only a rented house"
+      ],
+      "answer": 2,
+      "explanation": "The Court held a woman's right of residence extends to the household where she lived in a domestic relationship, even if owned by her in-laws.",
+      "reference": "Satish Chander Ahuja v. Sneha Ahuja, (2021) 1 SCC 414; Section 2(s), Protection of Women from Domestic Violence Act, 2005"
+    },
+    {
+      "id": "eve_3_04",
+      "chapter": "everyday",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Maximum DPDP Act penalty for failing to take reasonable security safeguards to prevent a personal data breach?",
+      "options": [
+        "₹50 crore",
+        "₹250 crore",
+        "₹200 crore",
+        "₹500 crore"
+      ],
+      "answer": 1,
+      "explanation": "The Schedule sets up to ₹250 crore for security failures; failing to notify a breach or breaching child-data duties can draw up to ₹200 crore.",
+      "reference": "Schedule, Item 1, Digital Personal Data Protection Act, 2023"
+    },
+    {
+      "id": "eve_3_05",
+      "chapter": "everyday",
+      "level": 3,
+      "difficulty": 3,
+      "question": "Which IT Act provision was struck down in Shreya Singhal v. Union of India (2015)?",
+      "options": [
+        "Section 66A",
+        "Section 67",
+        "Section 69A",
+        "Section 79"
+      ],
+      "answer": 0,
+      "explanation": "Section 66A (offensive online messages) was held vague and violative of Article 19(1)(a). Section 69A blocking was upheld and Section 79 read down.",
+      "reference": "Shreya Singhal v. Union of India, (2015) 5 SCC 1"
+    },
+    {
+      "id": "eve_3_06",
+      "chapter": "everyday",
+      "level": 3,
+      "difficulty": 3,
+      "question": "If a juvenile commits a driving offence under the MV Act, until what age is the juvenile barred from getting a licence?",
+      "options": [
+        "18 years",
+        "21 years",
+        "30 years",
+        "25 years"
+      ],
+      "answer": 3,
+      "explanation": "Section 199A also holds the guardian or owner guilty (up to 3 years and ₹25,000 fine) and cancels the vehicle's registration.",
+      "reference": "Section 199A, Motor Vehicles Act, 1988"
+    }
+  ]
+}

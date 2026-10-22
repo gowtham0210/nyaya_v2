@@ -1,0 +1,625 @@
+{
+  "@@locale": "en",
+  "appName": "Nyaya",
+  "appTagline": "Learn Indian law, one case a day",
+  "navHome": "Home",
+  "navJourney": "Journey",
+  "navAskAi": "Ask AI",
+  "navUpdates": "Updates",
+  "commonContinue": "Continue",
+  "commonBack": "Back",
+  "commonNext": "Next",
+  "commonSkip": "Skip",
+  "commonCancel": "Cancel",
+  "commonClose": "Close",
+  "commonStart": "Start",
+  "commonRetry": "Try again",
+  "commonDone": "Done",
+  "commonSeeAll": "See all",
+  "commonLater": "Maybe later",
+  "commonOk": "OK",
+  "commonComingSoon": "Coming soon",
+  "commonSomethingWrong": "Something went wrong. Please try again.",
+  "onbChooseLanguage": "Choose your language",
+  "onbChooseLanguageSub": "You can change this anytime in Settings.",
+  "onbSlide1Title": "Law, made simple",
+  "onbSlide1Body": "Bite-sized quizzes on the Constitution, BNS, BNSS and the laws you meet every day.",
+  "onbSlide2Title": "Play the Case Path",
+  "onbSlide2Body": "Climb level by level, earn stars, open chests and unlock new chapters.",
+  "onbSlide3Title": "Build a daily habit",
+  "onbSlide3Body": "Keep your streak alive, climb weekly court leagues and ask our AI anything legal.",
+  "onbWhoAreYou": "Who are you learning as?",
+  "onbWhoAreYouSub": "We'll tune difficulty and suggestions for you.",
+  "personaAdvocate": "Advocate",
+  "personaAdvocateDesc": "Practising lawyer sharpening recall",
+  "personaAspirant": "Law aspirant",
+  "personaAspirantDesc": "CLAT, AIBE or judiciary prep",
+  "personaCitizen": "Citizen",
+  "personaCitizenDesc": "Know your rights and everyday law",
+  "onbDailyGoal": "Pick a daily goal",
+  "onbDailyGoalSub": "Learners who set a goal are far more likely to stick with it.",
+  "goalCasual": "Casual",
+  "goalRegular": "Regular",
+  "goalSerious": "Serious",
+  "goalQuizzesPerDay": "{count, plural, =1{1 quiz a day} other{{count} quizzes a day}}",
+  "@goalQuizzesPerDay": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "onbYourName": "What should we call you?",
+  "onbYourNameSub": "Shown on the leaderboard.",
+  "onbNameHint": "Your name",
+  "onbCommit": "Commit to my goal",
+  "onbReadyTitle": "You're all set, {name}!",
+  "@onbReadyTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "onbReadyBody": "Your first case is waiting on the Case Path.",
+  "greetingMorning": "Good morning",
+  "greetingAfternoon": "Good afternoon",
+  "greetingEvening": "Good evening",
+  "homeContinueJourney": "Continue your Case Path",
+  "homeChapterLevel": "Chapter {chapter} · Level {level}",
+  "@homeChapterLevel": {
+    "placeholders": {
+      "chapter": {
+        "type": "int"
+      },
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "homeChestReady": "A chest is waiting for you!",
+  "homeAllDone": "You've completed every chapter. New chapters are coming soon!",
+  "homePlay": "Play",
+  "homeDailyGoal": "Daily goal",
+  "homeGoalProgress": "{done} of {goal} quizzes",
+  "@homeGoalProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      }
+    }
+  },
+  "homeGoalDone": "Goal complete — great work!",
+  "homeStreakDays": "{count, plural, =0{Start a streak today} =1{1 day streak} other{{count} day streak}}",
+  "@homeStreakDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeStreakAtRisk": "Play one quiz today to keep your streak!",
+  "homeStreakSafe": "Streak secured for today",
+  "homeModesTitle": "Quiz modes",
+  "homeLeagueTitle": "This week's league",
+  "homeLeagueRank": "You're #{rank} in {tier}",
+  "@homeLeagueRank": {
+    "placeholders": {
+      "rank": {
+        "type": "int"
+      },
+      "tier": {
+        "type": "String"
+      }
+    }
+  },
+  "homeLeagueEnds": "Ends in {time}",
+  "@homeLeagueEnds": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "homeFactTitle": "Legal fact of the day",
+  "homeUpdatesTitle": "Latest legal updates",
+  "homeGoPremium": "Unlock unlimited energy",
+  "homeGoPremiumSub": "Nyaya Premium · 7-day free trial",
+  "modeCasePath": "Case Path",
+  "modeCasePathDesc": "Level-by-level journey",
+  "modeDailyDocket": "Daily Docket",
+  "modeDailyDocketDesc": "5 questions · same for everyone",
+  "modeDuel": "Moot Court Duel",
+  "modeDuelDesc": "1v1 · 7 questions · beat the clock",
+  "modeExam": "Exam Chamber",
+  "modeExamDesc": "20 questions · 20 min · negative marking",
+  "modeExamDescCitizen": "20 questions · 20 min · know your rights",
+  "modeFree": "Free",
+  "modeEnergyCost": "{count} ⚡",
+  "@modeEnergyCost": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "docketDoneToday": "Done for today",
+  "docketNextIn": "Next docket in {time}",
+  "@docketNextIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "energyTitle": "Energy",
+  "energyLeft": "{count, plural, =0{No energy left} =1{1 energy left} other{{count} energy left}}",
+  "@energyLeft": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "energyUnlimited": "Unlimited",
+  "energyOutTitle": "You're out of energy",
+  "energyOutBody": "Energy refills at midnight — in {time}.",
+  "@energyOutBody": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "energyRefillCoins": "Refill 1 ⚡ for {coins} coins",
+  "@energyRefillCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "energyGoUnlimited": "Get unlimited energy",
+  "energyFreeOptions": "Free things you can still do",
+  "energyPlayDocket": "Play today's Daily Docket (free)",
+  "energyAskAi": "Ask the AI a legal question",
+  "energyReadUpdates": "Read legal updates",
+  "energyNotEnoughCoins": "Not enough coins yet — earn them from stars and chests.",
+  "energyRefilled": "+1 energy!",
+  "journeyTitle": "Case Path",
+  "journeyStars": "{count} ★",
+  "@journeyStars": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyChapter": "Chapter {number}",
+  "@journeyChapter": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyLevel": "Level {number}",
+  "@journeyLevel": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyLandmark": "Landmark level",
+  "journeyLocked": "Locked",
+  "journeyLockedBody": "Clear the previous level to unlock this one.",
+  "journeyQuestions": "{count} questions",
+  "@journeyQuestions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyBestStars": "Your best",
+  "journeyReplay": "Replay",
+  "journeyChest": "Chapter chest",
+  "journeyChestBody": "You finished the chapter! Open the chest for bonus coins.",
+  "journeyOpenChest": "Open chest",
+  "journeyChestOpened": "+{coins} coins!",
+  "@journeyChestOpened": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyChestLocked": "Finish every level in this chapter to open the chest.",
+  "journeyJumpToCurrent": "Jump to current level",
+  "journeyYou": "You",
+  "journeyPassHint": "Score 50% to pass · 80% for 2 stars · 100% for 3 stars",
+  "quizQuestionOf": "Question {current} of {total}",
+  "@quizQuestionOf": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quizCorrect": "Correct!",
+  "quizWrong": "Not quite",
+  "quizTimeUp": "Time's up",
+  "quizAnswerWas": "Answer: {answer}",
+  "@quizAnswerWas": {
+    "placeholders": {
+      "answer": {
+        "type": "String"
+      }
+    }
+  },
+  "quizWhy": "Why",
+  "quizReference": "Reference",
+  "quizCombo": "{count}× combo!",
+  "@quizCombo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizFinish": "Finish",
+  "quizSubmit": "Submit exam",
+  "quizSkipQuestion": "Skip",
+  "quizSelectAnswer": "Select an answer",
+  "quizQuitTitle": "Leave this quiz?",
+  "quizQuitBody": "Your progress in this quiz will be lost.",
+  "quizQuitBodyRefund": "You haven't answered yet, so your energy will be refunded.",
+  "quizQuitStay": "Keep playing",
+  "quizQuitLeave": "Leave",
+  "quizLoading": "Preparing your case…",
+  "quizEmpty": "No questions available here yet.",
+  "quizOpponent": "Opponent",
+  "quizOpponentAnswered": "{name} answered in {seconds}s",
+  "@quizOpponentAnswered": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "quizVs": "VS",
+  "quizFindingOpponent": "Finding an opponent…",
+  "quizMarkedAnswers": "{answered} of {total} answered",
+  "@quizMarkedAnswers": {
+    "placeholders": {
+      "answered": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "resultPerfect": "Perfect case!",
+  "resultGreat": "Excellent work!",
+  "resultGood": "Level cleared!",
+  "resultTryAgain": "Almost there",
+  "resultTryAgainBody": "Score at least 50% to clear this level. Review the explanations and try again.",
+  "resultScore": "{correct}/{total} correct",
+  "@resultScore": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "resultAccuracy": "Accuracy",
+  "resultXp": "XP",
+  "resultCoins": "Coins",
+  "resultTime": "Time",
+  "resultStreakExtended": "{count, plural, =1{Your streak has started — day 1!} other{Streak extended to {count} days!}}",
+  "@resultStreakExtended": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "resultMilestone": "{count}-day streak milestone!",
+  "@resultMilestone": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "resultGoalReached": "Daily goal reached!",
+  "resultEnergyBonus": "3-star bonus: +{count} ⚡",
+  "@resultEnergyBonus": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "resultLeagueUp": "You climbed to #{rank} in your league",
+  "@resultLeagueUp": {
+    "placeholders": {
+      "rank": {
+        "type": "int"
+      }
+    }
+  },
+  "resultReview": "Review answers",
+  "resultNextLevel": "Next level",
+  "resultBackToMap": "Back to map",
+  "resultBackHome": "Back home",
+  "resultPlayAgain": "Play again",
+  "resultExamScore": "Score: {score} / {max}",
+  "@resultExamScore": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "resultExamBreakdown": "{correct} correct · {wrong} wrong · {skipped} skipped",
+  "@resultExamBreakdown": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "wrong": {
+        "type": "int"
+      },
+      "skipped": {
+        "type": "int"
+      }
+    }
+  },
+  "resultDuelWon": "You won the duel!",
+  "resultDuelLost": "Close fight!",
+  "resultDuelDraw": "It's a draw!",
+  "resultDuelPoints": "{you} vs {them}",
+  "@resultDuelPoints": {
+    "placeholders": {
+      "you": {
+        "type": "int"
+      },
+      "them": {
+        "type": "int"
+      }
+    }
+  },
+  "resultDocketShare": "Share result",
+  "resultYourAnswer": "Your answer",
+  "resultCorrectAnswer": "Correct answer",
+  "resultSkipped": "Skipped",
+  "leaderboardTitle": "Leaderboard",
+  "leaderboardWeekly": "Weekly league",
+  "leaderboardAllTime": "All time",
+  "leaderboardPromotionZone": "Promotion zone",
+  "leaderboardDemotionZone": "Demotion zone",
+  "leaderboardEndsIn": "Week ends in {time}",
+  "@leaderboardEndsIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "leaderboardTopPromote": "Top {count} move up to {tier}",
+  "@leaderboardTopPromote": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "tier": {
+        "type": "String"
+      }
+    }
+  },
+  "leaderboardNoDemotion": "No demotion in this league — just keep learning!",
+  "leaderboardEarnToJoin": "Finish a quiz this week to join a league.",
+  "leaderboardXp": "{xp} XP",
+  "@leaderboardXp": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "leaderboardYou": "You",
+  "leaderboardTiers": "League tiers",
+  "leagueOutcomePromoted": "Promoted to {tier}!",
+  "@leagueOutcomePromoted": {
+    "placeholders": {
+      "tier": {
+        "type": "String"
+      }
+    }
+  },
+  "leagueOutcomeDemoted": "Moved to {tier}",
+  "@leagueOutcomeDemoted": {
+    "placeholders": {
+      "tier": {
+        "type": "String"
+      }
+    }
+  },
+  "leagueOutcomeStayed": "You stayed in {tier}",
+  "@leagueOutcomeStayed": {
+    "placeholders": {
+      "tier": {
+        "type": "String"
+      }
+    }
+  },
+  "leagueOutcomeRank": "You finished #{rank} last week.",
+  "@leagueOutcomeRank": {
+    "placeholders": {
+      "rank": {
+        "type": "int"
+      }
+    }
+  },
+  "tier_nyayaPanchayat": "Nyaya Panchayat",
+  "tier_gramNyayalaya": "Gram Nyayalaya",
+  "tier_munsiffCourt": "Munsiff Court",
+  "tier_magistrateCourt": "Magistrate Court",
+  "tier_districtCourt": "District Court",
+  "tier_sessionsCourt": "Sessions Court",
+  "tier_highCourt": "High Court",
+  "tier_supremeCourt": "Supreme Court",
+  "chatTitle": "Nyaya AI",
+  "chatSubtitle": "Your legal information assistant",
+  "chatDisclaimer": "General legal information, not legal advice. For your specific case, consult an advocate or call NALSA's helpline 15100.",
+  "chatHint": "Ask about any Indian law…",
+  "chatWelcome": "Namaste! I can explain Indian laws, your rights, legal procedures and the new criminal laws (BNS, BNSS, BSA). What would you like to know?",
+  "chatSuggest1": "What is a Zero FIR?",
+  "chatSuggest2": "My rights if I am arrested",
+  "chatSuggest3": "How do I file an RTI?",
+  "chatSuggest4": "How to file a consumer complaint?",
+  "chatThinking": "Researching the law…",
+  "chatLimitLeft": "{count, plural, =1{1 free question left today} other{{count} free questions left today}}",
+  "@chatLimitLeft": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatLimitReached": "You've used today's free questions. Come back tomorrow or go Premium for unlimited AI.",
+  "chatError": "I couldn't reach the AI right now. Please check your connection and try again.",
+  "chatOfflineNote": "Offline mode — connect an AI key for full answers.",
+  "chatClear": "Clear chat",
+  "chatCopy": "Copied",
+  "updatesTitle": "Legal Updates",
+  "updatesSubtitle": "Judgments, new laws and explainers",
+  "updatesAll": "All",
+  "updatesSupremeCourt": "Supreme Court",
+  "updatesHighCourts": "High Courts",
+  "updatesLegislation": "Legislation",
+  "updatesExplainer": "Explainers",
+  "updatesReadTime": "{minutes} min read",
+  "@updatesReadTime": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "updatesKeyPoints": "Key points",
+  "updatesWhyItMatters": "Why it matters",
+  "updatesSource": "Source",
+  "updatesAskAi": "Ask AI about this",
+  "updatesEmpty": "No updates in this category yet.",
+  "updatesInEnglish": "Shown in English",
+  "settingsTitle": "Settings",
+  "settingsProfile": "Profile",
+  "settingsEditName": "Edit name",
+  "settingsLearningAs": "Learning as",
+  "settingsLanguage": "Language",
+  "settingsDailyGoal": "Daily goal",
+  "settingsAppearance": "Appearance",
+  "settingsThemeSystem": "System",
+  "settingsThemeLight": "Light",
+  "settingsThemeDark": "Dark",
+  "settingsSound": "Sound effects",
+  "settingsHaptics": "Haptic feedback",
+  "settingsReminders": "Daily reminder",
+  "settingsRemindersSub": "A nudge to keep your streak alive",
+  "settingsStore": "Store",
+  "settingsStreakFreeze": "Streak freeze",
+  "settingsStreakFreezeSub": "Protects your streak if you miss a day · {owned}/{max} equipped",
+  "@settingsStreakFreezeSub": {
+    "placeholders": {
+      "owned": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsBuyFor": "{coins} coins",
+  "@settingsBuyFor": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsFreezeBought": "Streak freeze equipped!",
+  "settingsFreezeFull": "You already have the maximum freezes equipped.",
+  "settingsPremium": "Nyaya Premium",
+  "settingsPremiumActive": "Premium active",
+  "settingsPremiumUpgrade": "Upgrade to Premium",
+  "settingsStats": "Your stats",
+  "settingsTotalXp": "Total XP",
+  "settingsLongestStreak": "Longest streak",
+  "settingsQuizzes": "Quizzes",
+  "settingsAccuracy": "Accuracy",
+  "settingsDuelRecord": "Duels won",
+  "settingsAbout": "About",
+  "settingsDisclaimer": "Legal disclaimer",
+  "settingsDisclaimerBody": "Nyaya is an educational app. Questions, explanations, updates and AI answers are general information and are not legal advice. Laws change — always verify with the official Gazette or consult an advocate.",
+  "settingsPrivacy": "Privacy",
+  "settingsPrivacyBody": "Your progress is stored on this device. AI questions are sent to our AI provider only to generate answers.",
+  "settingsVersion": "Version {version}",
+  "@settingsVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsReset": "Reset progress",
+  "settingsResetConfirm": "This erases all XP, stars, streaks and coins on this device. This cannot be undone.",
+  "settingsResetAction": "Erase everything",
+  "premiumTitle": "Nyaya Premium",
+  "premiumHeadline": "Learn without limits",
+  "premiumBenefitEnergy": "Unlimited energy",
+  "premiumBenefitEnergySub": "Play as many quizzes as you like",
+  "premiumBenefitAi": "Unlimited Nyaya AI",
+  "premiumBenefitAiSub": "Ask every legal question you have",
+  "premiumBenefitFreeze": "Streak freezes included",
+  "premiumBenefitFreezeSub": "Never lose your streak to a busy day",
+  "premiumBenefitExam": "Full mock exams",
+  "premiumBenefitExamSub": "CLAT, AIBE & judiciary-style practice",
+  "premiumFair": "Fair play: Premium never boosts league XP.",
+  "premiumYearly": "Yearly",
+  "premiumMonthly": "Monthly",
+  "premiumYearlyPrice": "₹999 / year",
+  "premiumMonthlyPrice": "₹149 / month",
+  "premiumPerMonth": "Just ₹83 / month",
+  "premiumSave": "Save 44%",
+  "premiumBestValue": "Best value",
+  "premiumStartTrial": "Start 7-day free trial",
+  "premiumTrialNote": "Cancel anytime before the trial ends and you won't be charged.",
+  "premiumRestore": "Restore purchases",
+  "premiumActivated": "Welcome to Nyaya Premium!",
+  "premiumAlready": "You're a Premium member",
+  "premiumNothingToRestore": "No previous purchase found.",
+  "statXp": "XP",
+  "statStreak": "Streak",
+  "statCoins": "Coins",
+  "statEnergy": "Energy",
+  "statStars": "Stars"
+}
