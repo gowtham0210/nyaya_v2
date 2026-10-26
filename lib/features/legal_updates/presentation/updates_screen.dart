@@ -6,7 +6,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../../app/router.dart';
 import '../../../core/l10n/l10n.dart';
-import '../../../core/theme/app_colors.dart' show NyayaThemeX;
+import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/common.dart';
 import '../data/legal_updates_repository.dart';
@@ -27,10 +27,10 @@ extension UpdateCategoryX on UpdateCategory {
       };
 
   Color get color => switch (this) {
-        UpdateCategory.supremeCourt => const Color(0xFF3B4BB0),
-        UpdateCategory.highCourts => const Color(0xFF0369A1),
-        UpdateCategory.legislation => const Color(0xFF0E9F6E),
-        UpdateCategory.explainer => const Color(0xFFC2410C),
+        UpdateCategory.supremeCourt => AppPalette.terracotta,
+        UpdateCategory.highCourts => AppPalette.slate,
+        UpdateCategory.legislation => AppPalette.moss,
+        UpdateCategory.explainer => AppPalette.burntClay,
       };
 }
 

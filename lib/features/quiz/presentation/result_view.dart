@@ -158,7 +158,7 @@ class _ResultViewState extends ConsumerState<ResultView> {
                                 ? '$minutes:${seconds.toString().padLeft(2, '0')}'
                                 : '+${rewards?.coins ?? 0}',
                             icon: mode == QuizMode.exam ? Icons.timer_rounded : Icons.monetization_on_rounded,
-                            color: AppPalette.amberText,
+                            color: AppPalette.ochreText,
                             delay: 550,
                           ),
                         ],
@@ -222,7 +222,7 @@ class _ResultViewState extends ConsumerState<ResultView> {
                         ChunkyButton(
                           label: l.resultDocketShare,
                           icon: Icons.ios_share_rounded,
-                          color: AppPalette.saffron,
+                          color: AppPalette.burntClay,
                           onPressed: _shareDocket,
                         )
                       else
@@ -247,10 +247,10 @@ class _ResultViewState extends ConsumerState<ResultView> {
             numberOfParticles: 36,
             maxBlastForce: 30,
             colors: const [
-              AppPalette.gold,
-              AppPalette.saffron,
-              AppPalette.greenBright,
-              AppPalette.indigoSoft,
+              AppPalette.ochre,
+              AppPalette.burntClay,
+              AppPalette.mossLight,
+              AppPalette.burntClay,
               Colors.white,
             ],
           ),
@@ -282,7 +282,7 @@ class _Hero extends StatelessWidget {
                     Icon(
                           Icons.star_rounded,
                           size: i == 1 ? 96 : 72,
-                          color: i < result.stars ? AppPalette.gold : context.nyaya.locked,
+                          color: i < result.stars ? AppPalette.ochre : context.nyaya.locked,
                         )
                         .animate()
                         .scale(
@@ -300,7 +300,7 @@ class _Hero extends StatelessWidget {
         return Icon(
           won ? Icons.emoji_events_rounded : Icons.sports_kabaddi_rounded,
           size: 110,
-          color: won ? AppPalette.gold : context.colors.primary,
+          color: won ? AppPalette.ochre : context.colors.primary,
         ).animate().scale(begin: const Offset(0.3, 0.3), curve: Curves.elasticOut, duration: 900.ms);
       case QuizMode.exam:
         final max = result.total;
@@ -309,7 +309,7 @@ class _Hero extends StatelessWidget {
             value: ((result.examScore ?? 0) / max).clamp(0, 1),
             size: 150,
             stroke: 14,
-            color: AppPalette.gold,
+            color: AppPalette.ochre,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -325,7 +325,7 @@ class _Hero extends StatelessWidget {
             const Icon(
               Icons.today_rounded,
               size: 84,
-              color: AppPalette.saffron,
+              color: AppPalette.burntClay,
             ).animate().scale(begin: const Offset(0.4, 0.4), curve: Curves.elasticOut, duration: 800.ms),
             const SizedBox(height: 8),
             Text(

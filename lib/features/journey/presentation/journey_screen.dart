@@ -89,14 +89,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                           height: band.bottom - band.top,
                           child: DecoratedBox(
                             decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  JourneyCatalog.chapters[c].color.withValues(alpha: context.isDark ? 0.10 : 0.07),
-                                  JourneyCatalog.chapters[c].color.withValues(alpha: context.isDark ? 0.22 : 0.16),
-                                ],
-                              ),
+                              color: JourneyCatalog.chapters[c].color.withValues(alpha: context.isDark ? 0.14 : 0.08),
                             ),
                           ),
                         ),
@@ -112,9 +105,9 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                           painter: RoadPainter(
                             centers: layout.centers,
                             completedUpTo: completedUpTo,
-                            roadColor: context.isDark ? const Color(0xFF2B3566) : const Color(0xFFE6DFCD),
-                            edgeColor: context.isDark ? const Color(0xFF1C2448) : const Color(0xFFD3CAB3),
-                            doneColor: AppPalette.gold,
+                            roadColor: context.isDark ? const Color(0xFF3A3029) : AppPalette.sandLight,
+                            edgeColor: context.isDark ? const Color(0xFF2A221C) : AppPalette.sand,
+                            doneColor: AppPalette.ochre,
                           ),
                         ),
                       ),
@@ -200,7 +193,7 @@ class _MapHeader extends ConsumerWidget {
             child: Row(
               children: [
                 Expanded(child: Text(l.journeyTitle, style: context.text.headlineMedium)),
-                StatPill(icon: Icons.star_rounded, value: '$totalStars', color: AppPalette.gold),
+                StatPill(icon: Icons.star_rounded, value: '$totalStars', color: AppPalette.ochre),
                 const SizedBox(width: 8),
                 StatPill(
                   icon: Icons.bolt_rounded,
@@ -267,7 +260,7 @@ class ChapterBanner extends StatelessWidget {
                   Text(
                     '${l.journeyChapter(number).toUpperCase()} · $done/${chapter.levels}',
                     style: context.text.labelSmall?.copyWith(
-                      color: AppPalette.goldSoft,
+                      color: AppPalette.ochreSoft,
                       fontWeight: FontWeight.w800,
                       letterSpacing: 1,
                     ),

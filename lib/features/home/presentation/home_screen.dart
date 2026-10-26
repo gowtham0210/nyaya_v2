@@ -62,7 +62,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     return Scaffold(
       body: RefreshIndicator(
-        color: AppPalette.indigo,
+        color: context.colors.primary,
         onRefresh: () async => ref.read(profileProvider.notifier).refreshDay(),
         child: CustomScrollView(
           slivers: [

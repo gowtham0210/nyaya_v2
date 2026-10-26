@@ -149,7 +149,7 @@ class _TierStrip extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: t.level <= current ? context.colors.secondaryContainer : context.colors.surfaceContainerLow,
                   border: Border.all(
-                    color: t.level == current ? AppPalette.gold : context.nyaya.cardBorder,
+                    color: t.level == current ? AppPalette.ochre : context.nyaya.cardBorder,
                     width: t.level == current ? 3 : 1,
                   ),
                 ),
@@ -319,11 +319,11 @@ class _Podium extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          column(top[1], 2, 80, const Color(0xFF94A3B8)),
+          column(top[1], 2, 80, AppPalette.slate),
           const SizedBox(width: 8),
-          column(top[0], 1, 110, AppPalette.gold),
+          column(top[0], 1, 110, AppPalette.ochre),
           const SizedBox(width: 8),
-          column(top[2], 3, 60, const Color(0xFFCD7F32)),
+          column(top[2], 3, 60, AppPalette.burntClay),
         ],
       ),
     );

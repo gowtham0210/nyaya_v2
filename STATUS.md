@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-22 22:45 (end of session 1, Claude Opus 5.5)
+> Last updated: 2026-10-26 (session 2: Terracotta × Sand palette applied, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -40,12 +40,15 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       `Size.fromHeight` → infinite-width buttons in ListTile/dialogs; now `Size(64, h)`), settings groups now
       use `Material` so ListTiles render. Quiz header counter right-aligned.
 - [x] Tamil verified on simulator (home, quiz, quit dialog) — no layout exceptions.
+- [x] 2026-10-26: Re-themed to the Terracotta × Sand palette (global tokens, ColorScheme, all hardcoded
+      colours and gradients removed; avatars/map nodes/progress bars flat). Analyze clean, 34 tests pass,
+      Home + Journey eyeballed on simulator (light). Dark mode not yet eyeballed. Not committed yet.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Git: repo initialised on `main`, first commit `196495a` ("Initial commit: Nyaya…"). Repo-local identity
    Gowtham <gowtham.s@bigtapp.ai>. No remote yet. User rule: review with the **openqodex** skill before any push.
-2. Dark-mode visual pass on simulator (theme exists, not yet eyeballed).
+2. Dark-mode visual pass on simulator (Terracotta dark theme exists, not yet eyeballed).
 3. Note: a debug build launched via `simctl launch` without `flutter run` can show a blank screen —
    use `flutter run -d <device>` (or a release/profile build) when testing.
 4. Nice-to-have later: real backend (Firebase) for leaderboard/profile sync, real IAP (RevenueCat /
@@ -114,9 +117,11 @@ test/  gamification_test.dart content_test.dart app_flow_test.dart
   Cohort is simulated deterministically (`LeagueSimulator`) until a backend exists.
 - **Streak:** 1 quiz/day; up to 2 freezes (100 coins, or free at 7/30/100-day milestones; premium gets 2).
   Milestones 3/7/14/30/50/100/365 give coins.
-- **Palette:** Indigo #1E2A78 primary, Saffron Gold #F2A900 (fills only, never text on light),
-  Saffron #FF7A1A streak, Green #15803D success, Red #C62828 error, Parchment #FAF7F0 bg,
-  Ink #14182B text; dark bg #0B1026. Fonts: Plus Jakarta Sans (UI) + DM Serif Display (display).
+- **Palette (2026-10-26, user-finalised): "Terracotta × Sand"** — Terracotta #873F2B primary, Burnt Clay
+  #B96243 accents/streak, Sand #D9B994 borders/surfaces, Warm Cream #F5EBDD background, Deep Earth #302923 text.
+  Mix 60/20/15/5. No purple, neon, metallic or decorative gradients (all fills flat). Ochre #C28A2C for
+  XP/stars (fills only), Moss/Brick for success/error. Full table in docs/DESIGN.md §3; tokens in
+  `core/theme/app_colors.dart`. Native launch screens use Warm Cream. Fonts: Plus Jakarta Sans + DM Serif Display.
 - **AI:** Claude Messages API via HTTP, model `claude-opus-5-5`, effort medium, `fallbacks: "default"`
   (beta header `server-side-fallback-2026-07-01`), handles `stop_reason: refusal`, re-sends raw assistant
   content blocks (append-only history). Config via `--dart-define=NYAYA_AI_KEY=... NYAYA_AI_BASE_URL=...`.

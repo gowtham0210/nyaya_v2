@@ -38,7 +38,7 @@ class HomeHeader extends ConsumerWidget {
               children: [
                 GestureDetector(
                   onTap: () => context.push(Routes.settings),
-                  child: InitialsAvatar(name: p.name, size: 46, ring: AppPalette.gold),
+                  child: InitialsAvatar(name: p.name, size: 46, ring: AppPalette.ochre),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -104,7 +104,7 @@ class HomeHeader extends ConsumerWidget {
                   StatPill(
                     icon: Icons.monetization_on_rounded,
                     value: '${p.coins}',
-                    color: AppPalette.gold,
+                    color: AppPalette.ochre,
                     semanticLabel: '${p.coins} ${l.statCoins}',
                     onTap: () => context.push(Routes.settings),
                   ),

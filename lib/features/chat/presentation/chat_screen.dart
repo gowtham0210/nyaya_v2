@@ -94,9 +94,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                     height: 44,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      gradient: LinearGradient(colors: context.nyaya.heroGradient),
+                      color: context.nyaya.hero,
                     ),
-                    child: const Icon(Icons.balance_rounded, color: AppPalette.gold),
+                    child: const Icon(Icons.balance_rounded, color: AppPalette.ochre),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -130,7 +130,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.info_outline_rounded, size: 18, color: AppPalette.amberText),
+                    const Icon(Icons.info_outline_rounded, size: 18, color: AppPalette.ochreText),
                     const SizedBox(width: 8),
                     Expanded(child: Text(l.chatDisclaimer, style: context.text.bodySmall)),
                     IconButton(
@@ -260,10 +260,10 @@ class _Welcome extends StatelessWidget {
             height: 84,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              gradient: LinearGradient(colors: context.nyaya.heroGradient),
-              boxShadow: [BoxShadow(color: AppPalette.indigo.withValues(alpha: 0.3), blurRadius: 24)],
+              color: context.nyaya.hero,
+              boxShadow: [BoxShadow(color: AppPalette.terracotta.withValues(alpha: 0.25), blurRadius: 24)],
             ),
-            child: const Icon(Icons.auto_awesome, color: AppPalette.gold, size: 40),
+            child: const Icon(Icons.auto_awesome, color: AppPalette.ochre, size: 40),
           ).animate().scale(curve: Curves.elasticOut, duration: 800.ms),
         ),
         const SizedBox(height: AppSpacing.md),
@@ -428,16 +428,16 @@ class _LimitBanner extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppRadius.md),
-        gradient: const LinearGradient(colors: [Color(0xFFFFE08A), AppPalette.gold]),
+        color: AppPalette.sand,
       ),
       child: Row(
         children: [
-          const Icon(Icons.workspace_premium_rounded, color: AppPalette.ink),
+          const Icon(Icons.workspace_premium_rounded, color: AppPalette.deepEarth),
           const SizedBox(width: 10),
-          Expanded(child: Text(l.chatLimitReached, style: context.text.bodySmall?.copyWith(color: AppPalette.ink))),
+          Expanded(child: Text(l.chatLimitReached, style: context.text.bodySmall?.copyWith(color: AppPalette.deepEarth))),
           TextButton(
             onPressed: onUpgrade,
-            style: TextButton.styleFrom(foregroundColor: AppPalette.ink),
+            style: TextButton.styleFrom(foregroundColor: AppPalette.deepEarth),
             child: Text(l.settingsPremiumUpgrade),
           ),
         ],

@@ -115,7 +115,6 @@ class _LevelBubble extends StatelessWidget {
     final locked = status == NodeStatus.locked;
     final base = locked ? context.nyaya.locked : node.chapter.color;
     final dark = Color.lerp(base, Colors.black, 0.3)!;
-    final light = Color.lerp(base, Colors.white, 0.25)!;
     final landmark = node.isLandmark;
 
     return Container(
@@ -142,32 +141,15 @@ class _LevelBubble extends StatelessWidget {
             height: size,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              gradient: RadialGradient(
-                center: const Alignment(-0.3, -0.4),
-                radius: 0.9,
-                colors: [light, base],
-              ),
+              color: base,
               border: Border.all(
-                color: landmark && !locked ? AppPalette.gold : Colors.white.withValues(alpha: locked ? 0.4 : 0.9),
+                color: landmark && !locked ? AppPalette.ochre : Colors.white.withValues(alpha: locked ? 0.4 : 0.9),
                 width: landmark ? 4 : 3,
               ),
             ),
             child: Stack(
               alignment: Alignment.center,
               children: [
-                // Gloss highlight.
-                Positioned(
-                  top: size * 0.12,
-                  left: size * 0.2,
-                  child: Container(
-                    width: size * 0.38,
-                    height: size * 0.18,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.35),
-                      borderRadius: BorderRadius.circular(size),
-                    ),
-                  ),
-                ),
                 if (locked)
                   Icon(Icons.lock_rounded, color: Colors.white.withValues(alpha: 0.9), size: size * 0.4)
                 else if (landmark)
@@ -201,21 +183,17 @@ class _Chest extends StatelessWidget {
   Widget build(BuildContext context) {
     final opened = status == NodeStatus.completed;
     final current = status == NodeStatus.current;
-    final color = status == NodeStatus.locked ? context.nyaya.locked : AppPalette.gold;
+    final color = status == NodeStatus.locked ? context.nyaya.locked : AppPalette.ochre;
     final chest = Container(
       width: size,
       height: size,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Color.lerp(color, Colors.white, 0.3)!, color],
-        ),
+        color: color,
         border: Border.all(color: Colors.white, width: 3),
         boxShadow: [
           BoxShadow(color: Color.lerp(color, Colors.black, 0.35)!, offset: const Offset(0, 6)),
-          if (current) BoxShadow(color: AppPalette.gold.withValues(alpha: 0.6), blurRadius: 24),
+          if (current) BoxShadow(color: AppPalette.ochre.withValues(alpha: 0.6), blurRadius: 24),
         ],
       ),
       child: Icon(

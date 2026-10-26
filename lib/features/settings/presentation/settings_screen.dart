@@ -31,10 +31,11 @@ class SettingsScreen extends ConsumerWidget {
         children: [
           // ── Profile card ──────────────────────────────────────────────────
           NyayaCard(
-            gradient: LinearGradient(colors: context.nyaya.heroGradient),
+            color: context.nyaya.hero,
+            bordered: false,
             child: Row(
               children: [
-                InitialsAvatar(name: p.name, size: 60, ring: AppPalette.gold),
+                InitialsAvatar(name: p.name, size: 60, ring: AppPalette.ochre),
                 const SizedBox(width: 14),
                 Expanded(
                   child: Column(
@@ -47,10 +48,10 @@ class SettingsScreen extends ConsumerWidget {
                           padding: const EdgeInsets.only(top: 4),
                           child: Row(
                             children: [
-                              const Icon(Icons.workspace_premium_rounded, size: 16, color: AppPalette.gold),
+                              const Icon(Icons.workspace_premium_rounded, size: 16, color: AppPalette.ochre),
                               const SizedBox(width: 4),
                               Text(l.settingsPremiumActive,
-                                  style: context.text.labelMedium?.copyWith(color: AppPalette.goldSoft)),
+                                  style: context.text.labelMedium?.copyWith(color: AppPalette.ochreSoft)),
                             ],
                           ),
                         ),
@@ -79,10 +80,10 @@ class SettingsScreen extends ConsumerWidget {
             children: [
               _Stat(Icons.diamond_rounded, '${p.totalXp}', l.settingsTotalXp, context.colors.primary),
               _Stat(Icons.local_fire_department_rounded, '${p.longestStreak}', l.settingsLongestStreak, context.nyaya.streak),
-              _Stat(Icons.star_rounded, '$stars', l.statStars, AppPalette.gold),
+              _Stat(Icons.star_rounded, '$stars', l.statStars, AppPalette.ochre),
               _Stat(Icons.task_alt_rounded, '${p.quizzesCompleted}', l.settingsQuizzes, context.nyaya.success),
-              _Stat(Icons.track_changes_rounded, '${(p.accuracy * 100).round()}%', l.settingsAccuracy, const Color(0xFF0369A1)),
-              _Stat(Icons.sports_kabaddi_rounded, '${p.duelsWon}/${p.duelsPlayed}', l.settingsDuelRecord, const Color(0xFF7C3AED)),
+              _Stat(Icons.track_changes_rounded, '${(p.accuracy * 100).round()}%', l.settingsAccuracy, AppPalette.slate),
+              _Stat(Icons.sports_kabaddi_rounded, '${p.duelsWon}/${p.duelsPlayed}', l.settingsDuelRecord, AppPalette.umber),
             ],
           ),
 
@@ -90,14 +91,14 @@ class SettingsScreen extends ConsumerWidget {
           _Header(l.settingsStore),
           _Group(children: [
             ListTile(
-              leading: const Icon(Icons.workspace_premium_rounded, color: AppPalette.amberText),
+              leading: const Icon(Icons.workspace_premium_rounded, color: AppPalette.ochreText),
               title: Text(l.settingsPremium),
               subtitle: Text(p.isPremium ? l.settingsPremiumActive : l.settingsPremiumUpgrade),
               trailing: const Icon(Icons.chevron_right_rounded),
               onTap: () => context.push(Routes.premium),
             ),
             ListTile(
-              leading: const Icon(Icons.ac_unit_rounded, color: Color(0xFF0EA5E9)),
+              leading: const Icon(Icons.ac_unit_rounded, color: AppPalette.frost),
               title: Text(l.settingsStreakFreeze),
               subtitle: Text(l.settingsStreakFreezeSub(p.streakFreezes, GameRules.maxStreakFreezes)),
               trailing: FilledButton.tonal(
@@ -111,7 +112,7 @@ class SettingsScreen extends ConsumerWidget {
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.monetization_on_rounded, size: 16, color: AppPalette.amberText),
+                    Icon(Icons.monetization_on_rounded, size: 16, color: AppPalette.ochreText),
                     SizedBox(width: 4),
                     Text('${GameRules.streakFreezeCoinCost}'),
                   ],

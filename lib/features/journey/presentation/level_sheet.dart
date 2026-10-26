@@ -56,7 +56,7 @@ class _LevelSheet extends ConsumerWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: locked ? context.nyaya.locked : node.chapter.color,
-                  border: node.isLandmark ? Border.all(color: AppPalette.gold, width: 4) : null,
+                  border: node.isLandmark ? Border.all(color: AppPalette.ochre, width: 4) : null,
                 ),
                 child: Icon(
                   locked ? Icons.lock_rounded : (node.isLandmark ? Icons.gavel_rounded : node.chapter.icon),
@@ -79,7 +79,7 @@ class _LevelSheet extends ConsumerWidget {
                 child: Text(
                   '👑 ${l.journeyLandmark}',
                   textAlign: TextAlign.center,
-                  style: context.text.labelLarge?.copyWith(color: AppPalette.amberText),
+                  style: context.text.labelLarge?.copyWith(color: AppPalette.ochreText),
                 ),
               ),
             const SizedBox(height: AppSpacing.md),
@@ -206,7 +206,7 @@ class _ChestSheetState extends ConsumerState<_ChestSheet> {
                 Icon(
                   opened ? Icons.inventory_2_outlined : Icons.redeem_rounded,
                   size: 96,
-                  color: status == NodeStatus.locked ? context.nyaya.locked : AppPalette.gold,
+                  color: status == NodeStatus.locked ? context.nyaya.locked : AppPalette.ochre,
                 ).animate(target: _won != null ? 1 : 0).scale(end: const Offset(1.2, 1.2), curve: Curves.elasticOut),
                 const SizedBox(height: 12),
                 Text(l.journeyChest, textAlign: TextAlign.center, style: context.text.headlineSmall),
@@ -217,15 +217,15 @@ class _ChestSheetState extends ConsumerState<_ChestSheet> {
                       : (status == NodeStatus.locked ? l.journeyChestLocked : l.journeyChestBody),
                   textAlign: TextAlign.center,
                   style: (_won != null ? context.text.titleLarge : context.text.bodyLarge)
-                      ?.copyWith(color: _won != null ? AppPalette.amberText : context.nyaya.textSecondary),
+                      ?.copyWith(color: _won != null ? AppPalette.ochreText : context.nyaya.textSecondary),
                 ),
                 const SizedBox(height: AppSpacing.lg),
                 if (canOpen)
                   ChunkyButton(
                     label: l.journeyOpenChest,
                     icon: Icons.lock_open_rounded,
-                    color: AppPalette.gold,
-                    foreground: AppPalette.ink,
+                    color: AppPalette.ochre,
+                    foreground: AppPalette.deepEarth,
                     onPressed: _open,
                   )
                 else
@@ -237,7 +237,7 @@ class _ChestSheetState extends ConsumerState<_ChestSheet> {
             confettiController: _confetti,
             blastDirectionality: BlastDirectionality.explosive,
             numberOfParticles: 24,
-            colors: const [AppPalette.gold, AppPalette.saffron, AppPalette.greenBright, AppPalette.indigoSoft],
+            colors: const [AppPalette.ochre, AppPalette.burntClay, AppPalette.mossLight, AppPalette.burntClay],
           ),
         ],
       ),

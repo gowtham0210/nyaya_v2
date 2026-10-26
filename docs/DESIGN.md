@@ -25,23 +25,27 @@ CLAT prep apps (mocks, daily current-affairs quizzes, percentile reports).
 Lightning/Survival rounds are better as limited-time events than as a 5th mode.
 
 ## 3. Visual design
-**Palette: "Nyaya Indigo + Saffron Gold".** Navy is the dominant trust/authority colour. Gold used
-sparingly raises perceived value. Saffron and green echo the tricolour.
+**Palette: "Terracotta × Sand"** (finalised 2026-10-26). Warm, editorial, premium and trustworthy —
+no purple, neon, metallic effects or decorative gradients; every fill is flat. Usage mix: ~60% Warm Cream,
+~20% Sand / lighter neutral surfaces, ~15% Terracotta, ~5% Burnt Clay accents. Deep Earth is the text colour.
+Tokens live in `lib/core/theme/app_colors.dart` (`AppPalette`, `NyayaColors`) and are wired into the
+`ColorScheme` in `app_theme.dart`.
 
-| Token | Hex | Contrast |
-|---|---|---|
-| Primary (Indigo) | `#1E2A78` | white text 12.67:1 |
-| Accent (Saffron Gold), **fills only** | `#F2A900` | ink text 8.74:1; gold text on light fails (3.04:1), so it is never used for text |
-| Streak/energy (Saffron) | `#FF7A1A` / `#F59E0B` | |
-| Success | `#15803D` | white 5.02:1 |
-| Error | `#C62828` | white 5.62:1 |
-| Background (Parchment) | `#FAF7F0` | ink 16.42:1 |
-| Text secondary | `#5A6178` | 5.75:1 |
-| Dark bg / surface | `#0B1026` / `#151C3B` | dark text 16.5:1 |
+| Token | Hex | Role | Contrast |
+|---|---|---|---|
+| Terracotta | `#873F2B` | primary brand, buttons, active nav, hero cards | white 7.56:1, on cream 6.42:1 |
+| Burnt Clay | `#B96243` | secondary accents, streak flame, combos | white 4.29:1 (icons/large text only) |
+| Sand | `#D9B994` | borders, subtle surfaces, premium banner | Deep Earth on sand 7.71:1 |
+| Warm Cream | `#F5EBDD` | scaffold background (cards use `#FBF6EF`) | |
+| Deep Earth | `#302923` | headings, body text | on cream 12.14:1 |
+| Text secondary | `#6B5B4E` | captions | on cream 5.51:1 |
+| Ochre, **fills only** | `#C28A2C` | XP, stars, crowns, premium | Deep Earth on ochre 4.75:1; text uses `#8A5A12` (5.01:1) |
+| Success (Moss) / Error (Brick) | `#4D6B35` / `#B42318` | answer feedback, always with an icon | white 6.05:1 / 6.57:1 |
+| Dark bg / surface | `#1C1713` / `#26201B` | dark theme derived from Deep Earth | cream text 15.08:1 |
 
 - Typography: Plus Jakarta Sans (UI) + DM Serif Display (headlines). The serif gives a "legal" feel.
   Indic scripts fall back to system fonts.
-- Game feel: 3D "chunky" buttons, press-scale, glossy progress bars, elastic star pops, confetti only
+- Game feel: 3D "chunky" buttons, press-scale, flat progress bars, elastic star pops, confetti only
   for 3 stars, wins and milestones (rare celebrations stay meaningful), haptics on every answer.
 - Wrong answers: brief red, shake, then always the explanation and citation. Mistakes teach; they
   don't punish.

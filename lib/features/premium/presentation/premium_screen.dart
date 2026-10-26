@@ -59,22 +59,16 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
     final l = context.l10n;
     final isPremium = ref.watch(profileProvider.select((p) => p.isPremium));
     final benefits = [
-      (Icons.bolt_rounded, l.premiumBenefitEnergy, l.premiumBenefitEnergySub, AppPalette.amber),
-      (Icons.auto_awesome, l.premiumBenefitAi, l.premiumBenefitAiSub, AppPalette.darkPrimary),
-      (Icons.ac_unit_rounded, l.premiumBenefitFreeze, l.premiumBenefitFreezeSub, const Color(0xFF7DD3FC)),
-      (Icons.assignment_rounded, l.premiumBenefitExam, l.premiumBenefitExamSub, AppPalette.greenBright),
+      (Icons.bolt_rounded, l.premiumBenefitEnergy, l.premiumBenefitEnergySub, AppPalette.ochre),
+      (Icons.auto_awesome, l.premiumBenefitAi, l.premiumBenefitAiSub, AppPalette.sand),
+      (Icons.ac_unit_rounded, l.premiumBenefitFreeze, l.premiumBenefitFreezeSub, AppPalette.frost),
+      (Icons.assignment_rounded, l.premiumBenefitExam, l.premiumBenefitExamSub, AppPalette.mossLight),
     ];
 
     return Scaffold(
       backgroundColor: AppPalette.darkBg,
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color(0xFF1E2A78), AppPalette.darkBg],
-          ),
-        ),
+        color: AppPalette.deepEarth,
         child: SafeArea(
           child: Column(
             children: [
@@ -90,14 +84,14 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: AppSpacing.page),
                   children: [
-                    const Icon(Icons.workspace_premium_rounded, size: 84, color: AppPalette.gold)
+                    const Icon(Icons.workspace_premium_rounded, size: 84, color: AppPalette.ochre)
                         .animate(onPlay: (c) => c.repeat(reverse: true))
                         .scale(begin: const Offset(1, 1), end: const Offset(1.06, 1.06), duration: 1200.ms),
                     const SizedBox(height: 8),
                     Text(
                       l.premiumTitle.toUpperCase(),
                       textAlign: TextAlign.center,
-                      style: context.text.labelLarge?.copyWith(color: AppPalette.gold, letterSpacing: 2),
+                      style: context.text.labelLarge?.copyWith(color: AppPalette.ochre, letterSpacing: 2),
                     ),
                     const SizedBox(height: 6),
                     Text(
@@ -165,16 +159,16 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                     ? ChunkyButton(
                         label: l.premiumAlready,
                         icon: Icons.verified_rounded,
-                        color: AppPalette.gold,
-                        foreground: AppPalette.ink,
+                        color: AppPalette.ochre,
+                        foreground: AppPalette.deepEarth,
                         onPressed: _close,
                       )
                     : Column(
                         children: [
                           ChunkyButton(
                             label: _busy ? '…' : l.premiumStartTrial,
-                            color: AppPalette.gold,
-                            foreground: AppPalette.ink,
+                            color: AppPalette.ochre,
+                            foreground: AppPalette.deepEarth,
                             onPressed: _busy ? null : _buy,
                           ),
                           const SizedBox(height: 8),
@@ -237,15 +231,15 @@ class _PlanCard extends StatelessWidget {
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: selected ? AppPalette.gold.withValues(alpha: 0.12) : Colors.white.withValues(alpha: 0.05),
+            color: selected ? AppPalette.ochre.withValues(alpha: 0.12) : Colors.white.withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(AppRadius.md),
-            border: Border.all(color: selected ? AppPalette.gold : Colors.white24, width: 2),
+            border: Border.all(color: selected ? AppPalette.ochre : Colors.white24, width: 2),
           ),
           child: Row(
             children: [
               Icon(
                 selected ? Icons.radio_button_checked_rounded : Icons.radio_button_off_rounded,
-                color: selected ? AppPalette.gold : Colors.white54,
+                color: selected ? AppPalette.ochre : Colors.white54,
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -266,12 +260,12 @@ class _PlanCard extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                             decoration: BoxDecoration(
-                              color: AppPalette.gold,
+                              color: AppPalette.ochre,
                               borderRadius: BorderRadius.circular(AppRadius.xl),
                             ),
                             child: Text(
                               badge!,
-                              style: context.text.labelSmall?.copyWith(color: AppPalette.ink, fontWeight: FontWeight.w800),
+                              style: context.text.labelSmall?.copyWith(color: AppPalette.deepEarth, fontWeight: FontWeight.w800),
                             ),
                           ),
                         ],

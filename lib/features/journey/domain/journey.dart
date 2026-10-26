@@ -1,5 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
+import '../../../core/theme/app_colors.dart';
+
 enum NodeKind { level, chest }
 
 /// Static description of one chapter on the map.
@@ -52,12 +54,12 @@ abstract final class JourneyCatalog {
   static const levelsPerChapter = 3;
 
   static const chapters = <ChapterMeta>[
-    ChapterMeta(id: 'constitution', icon: Icons.account_balance_rounded, color: Color(0xFF3B4BB0), levels: levelsPerChapter),
-    ChapterMeta(id: 'rights', icon: Icons.front_hand_rounded, color: Color(0xFF0E9F6E), levels: levelsPerChapter),
-    ChapterMeta(id: 'criminal', icon: Icons.gavel_rounded, color: Color(0xFFC2410C), levels: levelsPerChapter),
-    ChapterMeta(id: 'procedure', icon: Icons.policy_rounded, color: Color(0xFF7C3AED), levels: levelsPerChapter),
-    ChapterMeta(id: 'civil', icon: Icons.handshake_rounded, color: Color(0xFF0369A1), levels: levelsPerChapter),
-    ChapterMeta(id: 'everyday', icon: Icons.diversity_3_rounded, color: Color(0xFFBE185D), levels: levelsPerChapter),
+    ChapterMeta(id: 'constitution', icon: Icons.account_balance_rounded, color: AppPalette.terracotta, levels: levelsPerChapter),
+    ChapterMeta(id: 'rights', icon: Icons.front_hand_rounded, color: AppPalette.moss, levels: levelsPerChapter),
+    ChapterMeta(id: 'criminal', icon: Icons.gavel_rounded, color: AppPalette.burntClay, levels: levelsPerChapter),
+    ChapterMeta(id: 'procedure', icon: Icons.policy_rounded, color: AppPalette.umber, levels: levelsPerChapter),
+    ChapterMeta(id: 'civil', icon: Icons.handshake_rounded, color: AppPalette.slate, levels: levelsPerChapter),
+    ChapterMeta(id: 'everyday', icon: Icons.diversity_3_rounded, color: AppPalette.ochreDeep, levels: levelsPerChapter),
   ];
 
   static final List<JourneyNode> nodes = _build();

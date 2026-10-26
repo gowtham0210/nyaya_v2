@@ -99,21 +99,21 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   _LanguageStep(onPicked: () => _go(1)),
                   _SlideStep(
                     icon: Icons.balance_rounded,
-                    accent: AppPalette.gold,
+                    accent: AppPalette.ochre,
                     title: l.onbSlide1Title,
                     body: l.onbSlide1Body,
                     orbit: const [Icons.menu_book_rounded, Icons.gavel_rounded, Icons.account_balance_rounded],
                   ),
                   _SlideStep(
                     icon: Icons.route_rounded,
-                    accent: AppPalette.greenBright,
+                    accent: AppPalette.mossLight,
                     title: l.onbSlide2Title,
                     body: l.onbSlide2Body,
                     orbit: const [Icons.star_rounded, Icons.lock_open_rounded, Icons.redeem_rounded],
                   ),
                   _SlideStep(
                     icon: Icons.local_fire_department_rounded,
-                    accent: AppPalette.saffron,
+                    accent: AppPalette.burntClay,
                     title: l.onbSlide3Title,
                     body: l.onbSlide3Body,
                     orbit: const [Icons.emoji_events_rounded, Icons.auto_awesome, Icons.bolt_rounded],
@@ -255,7 +255,7 @@ class _SlideStep extends StatelessWidget {
                   height: 220,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    gradient: RadialGradient(colors: [accent.withValues(alpha: 0.28), accent.withValues(alpha: 0.0)]),
+                    color: accent.withValues(alpha: 0.14),
                   ),
                 ),
                 Container(
@@ -263,11 +263,7 @@ class _SlideStep extends StatelessWidget {
                   height: 140,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: context.nyaya.heroGradient,
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
+                    color: context.nyaya.hero,
                     boxShadow: [BoxShadow(color: accent.withValues(alpha: 0.35), blurRadius: 30, offset: const Offset(0, 12))],
                   ),
                   child: Icon(icon, size: 72, color: accent),

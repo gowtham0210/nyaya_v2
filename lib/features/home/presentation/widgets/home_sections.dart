@@ -54,13 +54,9 @@ class ContinueJourneyCard extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppRadius.lg),
-        gradient: LinearGradient(
-          colors: context.nyaya.heroGradient,
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        color: context.nyaya.hero,
         boxShadow: [
-          BoxShadow(color: AppPalette.indigo.withValues(alpha: 0.35), blurRadius: 24, offset: const Offset(0, 12)),
+          BoxShadow(color: AppPalette.terracotta.withValues(alpha: 0.25), blurRadius: 24, offset: const Offset(0, 12)),
         ],
       ),
       child: Stack(
@@ -78,7 +74,7 @@ class ContinueJourneyCard extends ConsumerWidget {
                 Text(
                   l.homeContinueJourney.toUpperCase(),
                   style: context.text.labelMedium?.copyWith(
-                    color: AppPalette.goldSoft,
+                    color: AppPalette.ochreSoft,
                     letterSpacing: 1.2,
                     fontWeight: FontWeight.w800,
                   ),
@@ -96,7 +92,7 @@ class ContinueJourneyCard extends ConsumerWidget {
                     Expanded(
                       child: GlossyProgressBar(
                         value: done / chapter.levels,
-                        color: AppPalette.gold,
+                        color: AppPalette.ochre,
                         track: Colors.white.withValues(alpha: 0.18),
                         height: 10,
                       ),
@@ -112,8 +108,8 @@ class ContinueJourneyCard extends ConsumerWidget {
                 ChunkyButton(
                   label: l.homePlay,
                   icon: Icons.play_arrow_rounded,
-                  color: AppPalette.gold,
-                  foreground: AppPalette.ink,
+                  color: AppPalette.ochre,
+                  foreground: AppPalette.deepEarth,
                   onPressed: onPlay,
                 ),
               ],
@@ -215,7 +211,7 @@ class DailyGoalStreakCard extends ConsumerWidget {
                           color: active
                               ? context.nyaya.streak
                               : frozen
-                                  ? const Color(0xFF7DD3FC)
+                                  ? AppPalette.frost
                                   : context.colors.surfaceContainerLow,
                           border: isToday && !active
                               ? Border.all(color: context.nyaya.streak, width: 2)
@@ -258,7 +254,7 @@ class DailyDocketCard extends ConsumerWidget {
             height: 56,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppRadius.md),
-              gradient: const LinearGradient(colors: [AppPalette.saffron, AppPalette.gold]),
+              color: AppPalette.burntClay,
             ),
             child: Icon(done ? Icons.check_rounded : Icons.today_rounded, color: Colors.white, size: 30),
           ),
@@ -330,28 +326,28 @@ class QuizModesGrid extends ConsumerWidget {
         l.modeCasePath,
         l.modeCasePathDesc,
         Icons.route_rounded,
-        const Color(0xFF3B4BB0),
+        AppPalette.terracotta,
       ),
       (
         QuizMode.dailyDocket,
         l.modeDailyDocket,
         l.modeDailyDocketDesc,
         Icons.today_rounded,
-        AppPalette.saffron,
+        AppPalette.burntClay,
       ),
       (
         QuizMode.duel,
         l.modeDuel,
         l.modeDuelDesc,
         Icons.sports_kabaddi_rounded,
-        const Color(0xFF0E9F6E),
+        AppPalette.moss,
       ),
       (
         QuizMode.exam,
         l.modeExam,
         persona == Persona.citizen ? l.modeExamDescCitizen : l.modeExamDesc,
         Icons.assignment_rounded,
-        const Color(0xFF7C3AED),
+        AppPalette.umber,
       ),
     ];
 
@@ -389,7 +385,7 @@ class QuizModesGrid extends ConsumerWidget {
                         const Spacer(),
                         _Badge(
                           text: mode.energyCost == 0 ? l.modeFree : l.modeEnergyCost(mode.energyCost),
-                          color: mode.energyCost == 0 ? context.nyaya.success : AppPalette.amberText,
+                          color: mode.energyCost == 0 ? context.nyaya.success : AppPalette.ochreText,
                         ),
                       ],
                     ),
@@ -442,7 +438,7 @@ class LeagueCard extends ConsumerWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: context.colors.secondaryContainer,
-              border: Border.all(color: AppPalette.gold, width: 2),
+              border: Border.all(color: AppPalette.ochre, width: 2),
             ),
             child: Text(tier.emblem, style: const TextStyle(fontSize: 26)),
           ),
@@ -486,26 +482,22 @@ class PremiumBanner extends StatelessWidget {
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppRadius.lg),
-          gradient: const LinearGradient(
-            colors: [Color(0xFFFFE08A), AppPalette.gold],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          color: AppPalette.sand,
         ),
         child: Row(
           children: [
-            const Icon(Icons.workspace_premium_rounded, size: 36, color: AppPalette.ink),
+            const Icon(Icons.workspace_premium_rounded, size: 36, color: AppPalette.deepEarth),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(l.homeGoPremium, style: context.text.titleMedium?.copyWith(color: AppPalette.ink)),
-                  Text(l.homeGoPremiumSub, style: context.text.bodySmall?.copyWith(color: AppPalette.ink)),
+                  Text(l.homeGoPremium, style: context.text.titleMedium?.copyWith(color: AppPalette.deepEarth)),
+                  Text(l.homeGoPremiumSub, style: context.text.bodySmall?.copyWith(color: AppPalette.deepEarth)),
                 ],
               ),
             ),
-            const Icon(Icons.arrow_forward_rounded, color: AppPalette.ink),
+            const Icon(Icons.arrow_forward_rounded, color: AppPalette.deepEarth),
           ],
         ),
       ),
@@ -534,7 +526,7 @@ class FactOfTheDayCard extends ConsumerWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.lightbulb_rounded, color: AppPalette.gold),
+              const Icon(Icons.lightbulb_rounded, color: AppPalette.ochre),
               const SizedBox(width: 8),
               Text(l.homeFactTitle, style: context.text.titleSmall),
             ],

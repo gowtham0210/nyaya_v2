@@ -96,7 +96,7 @@ class UpdateDetailScreen extends ConsumerWidget {
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.lightbulb_rounded, color: AppPalette.amberText),
+                    const Icon(Icons.lightbulb_rounded, color: AppPalette.ochreText),
                     const SizedBox(width: 8),
                     Text(l.updatesWhyItMatters, style: context.text.titleMedium),
                   ],

@@ -44,7 +44,7 @@ class StatPill extends StatelessWidget {
               Text(
                 value,
                 style: context.text.labelLarge?.copyWith(
-                  color: context.isDark ? Colors.white : AppPalette.ink,
+                  color: context.isDark ? Colors.white : AppPalette.deepEarth,
                   fontSize: 14,
                 ),
               ),
@@ -56,7 +56,7 @@ class StatPill extends StatelessWidget {
   }
 }
 
-/// Gradient initials avatar — deterministic colors from [seed].
+/// Solid initials avatar — deterministic color from [seed].
 class InitialsAvatar extends StatelessWidget {
   const InitialsAvatar({super.key, required this.name, this.seed = 0, this.size = 40, this.ring});
 
@@ -65,14 +65,13 @@ class InitialsAvatar extends StatelessWidget {
   final double size;
   final Color? ring;
 
-  static const _gradients = [
-    [Color(0xFF3B4BB0), Color(0xFF6C7CF0)],
-    [Color(0xFF0E9F6E), Color(0xFF34D399)],
-    [Color(0xFFC2410C), Color(0xFFFB923C)],
-    [Color(0xFF7C3AED), Color(0xFFA78BFA)],
-    [Color(0xFF0369A1), Color(0xFF38BDF8)],
-    [Color(0xFFBE185D), Color(0xFFF472B6)],
-    [Color(0xFF92400E), Color(0xFFF2A900)],
+  static const _fills = [
+    AppPalette.terracotta,
+    AppPalette.moss,
+    AppPalette.burntClay,
+    AppPalette.umber,
+    AppPalette.slate,
+    AppPalette.ochreDeep,
   ];
 
   @override
@@ -82,7 +81,7 @@ class InitialsAvatar extends StatelessWidget {
         ? '?'
         : (parts.first.characters.first + (parts.length > 1 ? parts.last.characters.first : ''))
             .toUpperCase();
-    final g = _gradients[(seed == 0 ? name.hashCode : seed).abs() % _gradients.length];
+    final fill = _fills[(seed == 0 ? name.hashCode : seed).abs() % _fills.length];
     return Container(
       width: size,
       height: size,
@@ -90,10 +89,7 @@ class InitialsAvatar extends StatelessWidget {
       decoration: BoxDecoration(shape: BoxShape.circle, color: ring),
       child: Container(
         alignment: Alignment.center,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          gradient: LinearGradient(colors: g, begin: Alignment.topLeft, end: Alignment.bottomRight),
-        ),
+        decoration: BoxDecoration(shape: BoxShape.circle, color: fill),
         child: Text(
           initials,
           style: TextStyle(
@@ -107,7 +103,7 @@ class InitialsAvatar extends StatelessWidget {
   }
 }
 
-/// Rounded animated progress bar with a glossy highlight.
+/// Rounded animated progress bar with a flat fill.
 class GlossyProgressBar extends StatelessWidget {
   const GlossyProgressBar({super.key, required this.value, this.color, this.height = 14, this.track});
 
@@ -135,19 +131,6 @@ class GlossyProgressBar extends StatelessWidget {
               curve: Curves.easeOutCubic,
               width: box.maxWidth * value.clamp(0.0, 1.0),
               decoration: BoxDecoration(color: c, borderRadius: BorderRadius.circular(height)),
-              child: value <= 0.04
-                  ? null
-                  : Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        margin: EdgeInsets.fromLTRB(height * 0.5, height * 0.22, height * 0.5, 0),
-                        height: height * 0.22,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.35),
-                          borderRadius: BorderRadius.circular(height),
-                        ),
-                      ),
-                    ),
             ),
           ),
         ),
@@ -218,25 +201,25 @@ class SectionHeader extends StatelessWidget {
   }
 }
 
-/// Bordered surface card with optional tap.
+/// Bordered surface card with optional tap. Pass [bordered] false for solid
+/// brand fills (e.g. [NyayaColors.hero]).
 class NyayaCard extends StatelessWidget {
-  const NyayaCard({super.key, required this.child, this.onTap, this.padding, this.color, this.gradient});
+  const NyayaCard({super.key, required this.child, this.onTap, this.padding, this.color, this.bordered = true});
 
   final Widget child;
   final VoidCallback? onTap;
   final EdgeInsetsGeometry? padding;
   final Color? color;
-  final Gradient? gradient;
+  final bool bordered;
 
   @override
   Widget build(BuildContext context) {
     final card = Container(
       padding: padding ?? const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: gradient == null ? (color ?? context.colors.surface) : null,
-        gradient: gradient,
+        color: color ?? context.colors.surface,
         borderRadius: BorderRadius.circular(AppRadius.lg),
-        border: gradient == null ? Border.all(color: context.nyaya.cardBorder) : null,
+        border: bordered ? Border.all(color: context.nyaya.cardBorder) : null,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: context.isDark ? 0.25 : 0.04),

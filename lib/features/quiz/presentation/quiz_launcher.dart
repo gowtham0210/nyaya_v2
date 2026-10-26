@@ -98,8 +98,8 @@ class OutOfEnergySheet extends ConsumerWidget {
             ChunkyButton(
               label: l.energyGoUnlimited,
               icon: Icons.workspace_premium_rounded,
-              color: AppPalette.gold,
-              foreground: AppPalette.ink,
+              color: AppPalette.ochre,
+              foreground: AppPalette.deepEarth,
               onPressed: () {
                 close();
                 context.push(Routes.premium);

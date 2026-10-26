@@ -305,7 +305,7 @@ class _Explanation extends StatelessWidget {
           ],
           Row(
             children: [
-              const Icon(Icons.menu_book_rounded, size: 18, color: AppPalette.amberText),
+              const Icon(Icons.menu_book_rounded, size: 18, color: AppPalette.ochreText),
               const SizedBox(width: 6),
               Text(l.quizWhy, style: context.text.titleSmall),
             ],
@@ -429,7 +429,7 @@ class _QuestionTimer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final urgent = seconds <= 5 && !paused;
-    final color = urgent ? context.nyaya.error : AppPalette.amber;
+    final color = urgent ? context.nyaya.error : AppPalette.ochre;
     return Row(
       children: [
         Icon(Icons.timer_rounded, size: 18, color: color),
@@ -489,7 +489,7 @@ class _ComboBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(colors: [AppPalette.saffron, AppPalette.gold]),
+        color: AppPalette.burntClay,
         borderRadius: BorderRadius.circular(AppRadius.xl),
       ),
       child: Text(
@@ -538,7 +538,7 @@ class _DuelHeader extends ConsumerWidget {
           side(name.isEmpty ? l.leaderboardYou : name, 0, state.playerPoints, false),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Text(l.quizVs, style: context.text.titleSmall?.copyWith(color: AppPalette.saffron)),
+            child: Text(l.quizVs, style: context.text.titleSmall?.copyWith(color: AppPalette.burntClay)),
           ),
           side(o.name, o.avatarSeed, state.opponentPoints, true),
         ],

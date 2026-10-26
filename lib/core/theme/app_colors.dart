@@ -1,34 +1,58 @@
 import 'package:material_ui/material_ui.dart';
 
-/// "Nyaya Indigo + Saffron Gold" palette. Contrast ratios are documented in
-/// docs/DESIGN.md. Rules:
-/// - Gold is reserved for XP, stars, crowns and premium — never as text on light.
-/// - Saffron/orange is for energy and the streak flame.
-/// - Error red is brief and always paired with an explanation.
+/// "Terracotta × Sand" palette — warm, editorial, premium, trustworthy.
+/// Contrast ratios are documented in docs/DESIGN.md. Rules:
+/// - Usage mix: ~60% Warm Cream, ~20% Sand / light neutral surfaces,
+///   ~15% Terracotta, ~5% Burnt Clay accents.
+/// - Deep Earth is the text colour everywhere on light surfaces.
+/// - No purple, neon, metallic effects or decorative gradients: fills are flat.
+/// - Ochre is reserved for XP, stars, crowns and premium fills — use [ochreText]
+///   when it has to be text on a light surface.
+/// - Success/error are muted earth tones, always paired with an icon or label.
 abstract final class AppPalette {
-  static const indigo = Color(0xFF1E2A78);
-  static const indigoDeep = Color(0xFF141C55);
-  static const indigoSoft = Color(0xFF3B4BB0);
-  static const gold = Color(0xFFF2A900);
-  static const goldSoft = Color(0xFFFFD66B);
-  static const saffron = Color(0xFFFF7A1A);
-  static const green = Color(0xFF15803D);
-  static const greenBright = Color(0xFF22C55E);
-  static const red = Color(0xFFC62828);
-  static const amberText = Color(0xFFB45309);
-  static const amber = Color(0xFFF59E0B);
-  static const parchment = Color(0xFFFAF7F0);
-  static const ink = Color(0xFF14182B);
-  static const inkSecondary = Color(0xFF5A6178);
+  // ── Brand ─────────────────────────────────────────────────────────────────
+  /// Primary brand, buttons, active navigation.
+  static const terracotta = Color(0xFF873F2B);
+  static const terracottaDeep = Color(0xFF5E2A1C);
 
-  static const darkBg = Color(0xFF0B1026);
-  static const darkSurface = Color(0xFF151C3B);
-  static const darkSurfaceHigh = Color(0xFF1E2750);
-  static const darkText = Color(0xFFEEF0F7);
-  static const darkTextSecondary = Color(0xFFA7AEC6);
-  static const darkPrimary = Color(0xFF8C9EFF);
-  static const darkSuccess = Color(0xFF4ADE80);
-  static const darkError = Color(0xFFF87171);
+  /// Secondary accents and highlights (streak flame, combos).
+  static const burntClay = Color(0xFFB96243);
+
+  /// Borders, subtle surfaces, supporting elements.
+  static const sand = Color(0xFFD9B994);
+  static const sandLight = Color(0xFFEADBC6);
+
+  /// Main background and light surfaces.
+  static const cream = Color(0xFFF5EBDD);
+  static const creamLight = Color(0xFFFBF6EF);
+
+  /// Headings, body text, primary typography.
+  static const deepEarth = Color(0xFF302923);
+  static const earthSecondary = Color(0xFF6B5B4E);
+
+  // ── Functional (earth-toned) ──────────────────────────────────────────────
+  static const ochre = Color(0xFFC28A2C);
+  static const ochreSoft = Color(0xFFE8C98A);
+  static const ochreText = Color(0xFF8A5A12);
+  static const moss = Color(0xFF4D6B35);
+  static const mossLight = Color(0xFF7A9A5A);
+  static const brick = Color(0xFFB42318);
+  static const frost = Color(0xFF7F9C9A);
+
+  /// Flat category colours (chapters, modes, avatars). All carry white text.
+  static const umber = Color(0xFF5C4433);
+  static const ochreDeep = Color(0xFF946A1E);
+  static const slate = Color(0xFF4F5D5A);
+
+  // ── Dark theme (derived from Deep Earth) ──────────────────────────────────
+  static const darkBg = Color(0xFF1C1713);
+  static const darkSurface = Color(0xFF26201B);
+  static const darkSurfaceHigh = Color(0xFF322A23);
+  static const darkText = cream;
+  static const darkTextSecondary = Color(0xFFC4B3A0);
+  static const darkPrimary = Color(0xFFD98B6A);
+  static const darkSuccess = Color(0xFF9DBB7A);
+  static const darkError = Color(0xFFF08A7E);
 }
 
 /// Semantic colors not covered by [ColorScheme], exposed as a theme extension
@@ -46,9 +70,10 @@ class NyayaColors extends ThemeExtension<NyayaColors> {
     required this.textSecondary,
     required this.cardBorder,
     required this.locked,
-    required this.heroGradient,
+    required this.hero,
   });
 
+  /// Reward fill (XP, stars, crowns, premium).
   final Color gold;
   final Color streak;
   final Color energy;
@@ -59,34 +84,36 @@ class NyayaColors extends ThemeExtension<NyayaColors> {
   final Color textSecondary;
   final Color cardBorder;
   final Color locked;
-  final List<Color> heroGradient;
+
+  /// Solid fill for hero cards and brand badges.
+  final Color hero;
 
   static const light = NyayaColors(
-    gold: AppPalette.gold,
-    streak: AppPalette.saffron,
-    energy: AppPalette.amber,
-    success: AppPalette.green,
-    successContainer: Color(0xFFDCFCE7),
-    error: AppPalette.red,
-    errorContainer: Color(0xFFFEE2E2),
-    textSecondary: AppPalette.inkSecondary,
-    cardBorder: Color(0xFFE9E4D8),
-    locked: Color(0xFFC9CCD6),
-    heroGradient: [AppPalette.indigo, AppPalette.indigoSoft],
+    gold: AppPalette.ochre,
+    streak: AppPalette.burntClay,
+    energy: AppPalette.ochre,
+    success: AppPalette.moss,
+    successContainer: Color(0xFFE3EAD3),
+    error: AppPalette.brick,
+    errorContainer: Color(0xFFF6DCD5),
+    textSecondary: AppPalette.earthSecondary,
+    cardBorder: AppPalette.sandLight,
+    locked: Color(0xFFCDBFAE),
+    hero: AppPalette.terracotta,
   );
 
   static const dark = NyayaColors(
-    gold: AppPalette.gold,
-    streak: AppPalette.saffron,
-    energy: AppPalette.amber,
+    gold: AppPalette.ochre,
+    streak: AppPalette.burntClay,
+    energy: AppPalette.ochre,
     success: AppPalette.darkSuccess,
-    successContainer: Color(0xFF12351F),
+    successContainer: Color(0xFF2A3320),
     error: AppPalette.darkError,
-    errorContainer: Color(0xFF3B1518),
+    errorContainer: Color(0xFF3F1F1A),
     textSecondary: AppPalette.darkTextSecondary,
-    cardBorder: Color(0xFF26305C),
-    locked: Color(0xFF3A4266),
-    heroGradient: [Color(0xFF26338F), Color(0xFF1A2160)],
+    cardBorder: Color(0xFF3A3029),
+    locked: Color(0xFF4A3F36),
+    hero: Color(0xFF6E3323),
   );
 
   @override
@@ -107,10 +134,7 @@ class NyayaColors extends ThemeExtension<NyayaColors> {
       textSecondary: l(textSecondary, other.textSecondary),
       cardBorder: l(cardBorder, other.cardBorder),
       locked: l(locked, other.locked),
-      heroGradient: [
-        l(heroGradient[0], other.heroGradient[0]),
-        l(heroGradient[1], other.heroGradient[1]),
-      ],
+      hero: l(hero, other.hero),
     );
   }
 }
