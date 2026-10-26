@@ -5,14 +5,12 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../../app/router.dart';
 import '../../../core/l10n/l10n.dart';
-import '../../../core/storage/local_store.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../gamification/domain/league.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../profile/domain/user_profile.dart';
-import 'widgets/home_header.dart';
-import 'widgets/home_sections.dart';
+import 'widgets/explore_sections.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -39,44 +37,33 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isPremium = ref.watch(profileProvider.select((p) => p.isPremium));
-    final now = ref.watch(clockProvider)();
-    const gap = SizedBox(height: AppSpacing.md);
-
-    final sections = <Widget>[
-      const ContinueJourneyCard(),
-      gap,
-      const DailyGoalStreakCard(),
-      gap,
-      DailyDocketCard(now: now),
-      const SizedBox(height: AppSpacing.lg),
-      const QuizModesGrid(),
-      const SizedBox(height: AppSpacing.lg),
-      LeagueCard(now: now),
-      gap,
-      if (!isPremium) ...[const PremiumBanner(), gap],
-      const FactOfTheDayCard(),
-      const SizedBox(height: AppSpacing.lg),
-      const LatestUpdatesSection(),
+    const sections = <Widget>[
+      FeaturedLawsCarousel(),
+      SizedBox(height: AppSpacing.xl),
+      CoreLawsSection(),
     ];
 
     return Scaffold(
-      body: RefreshIndicator(
-        color: context.colors.primary,
-        onRefresh: () async => ref.read(profileProvider.notifier).refreshDay(),
-        child: CustomScrollView(
-          slivers: [
-            const SliverToBoxAdapter(child: HomeHeader()),
-            SliverPadding(
-              padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.sm, AppSpacing.page, AppSpacing.xl),
-              sliver: SliverList.list(
-                children: [
-                  for (final (i, s) in sections.indexed)
-                    s is SizedBox ? s : s.animate().fadeIn(delay: (40 * i).ms, duration: 350.ms).slideY(begin: 0.06),
-                ],
+      // Keeps scrolled content out from under the status bar.
+      body: SafeArea(
+        bottom: false,
+        child: RefreshIndicator(
+          color: context.colors.primary,
+          onRefresh: () async => ref.read(profileProvider.notifier).refreshDay(),
+          child: CustomScrollView(
+            slivers: [
+              const SliverToBoxAdapter(child: ExploreHeader()),
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.sm, AppSpacing.page, AppSpacing.xl),
+                sliver: SliverList.list(
+                  children: [
+                    for (final (i, s) in sections.indexed)
+                      s is SizedBox ? s : s.animate().fadeIn(delay: (40 * i).ms, duration: 350.ms).slideY(begin: 0.06),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

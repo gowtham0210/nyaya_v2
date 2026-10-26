@@ -1839,6 +1839,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Stars'**
   String get statStars;
+
+  /// No description provided for @exploreTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Law'**
+  String get exploreTitle;
+
+  /// No description provided for @exploreSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Build your understanding of Indian law'**
+  String get exploreSubtitle;
+
+  /// No description provided for @exploreStartHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Start here'**
+  String get exploreStartHere;
+
+  /// No description provided for @exploreFeatured.
+  ///
+  /// In en, this message translates to:
+  /// **'Featured'**
+  String get exploreFeatured;
+
+  /// No description provided for @exploreButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore'**
+  String get exploreButton;
+
+  /// No description provided for @exploreCoreLaws.
+  ///
+  /// In en, this message translates to:
+  /// **'Core Laws'**
+  String get exploreCoreLaws;
+
+  /// No description provided for @exploreViewAll.
+  ///
+  /// In en, this message translates to:
+  /// **'View All'**
+  String get exploreViewAll;
+
+  /// No description provided for @exploreLegacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Legacy'**
+  String get exploreLegacy;
+
+  /// No description provided for @exploreAskAi.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask AI'**
+  String get exploreAskAi;
+
+  /// No description provided for @exploreAskPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Explain the {law} in simple terms: what it covers and the key provisions I should know.'**
+  String exploreAskPrompt(String law);
+
+  /// No description provided for @lawConstitutionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Constitution of India'**
+  String get lawConstitutionTitle;
+
+  /// No description provided for @lawConstitutionDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Fundamental rights, directive principles, duties and more.'**
+  String get lawConstitutionDesc;
+
+  /// No description provided for @lawBnsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Bharatiya Nyaya Sanhita (BNS)'**
+  String get lawBnsTitle;
+
+  /// No description provided for @lawBnsShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Bharatiya Nyaya Sanhita'**
+  String get lawBnsShort;
+
+  /// No description provided for @lawBnsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Substantive criminal law'**
+  String get lawBnsDesc;
+
+  /// No description provided for @lawBnsFeatured.
+  ///
+  /// In en, this message translates to:
+  /// **'Offences and punishments under India\'s new criminal code.'**
+  String get lawBnsFeatured;
+
+  /// No description provided for @lawBnssTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Bharatiya Nagarik Suraksha Sanhita (BNSS)'**
+  String get lawBnssTitle;
+
+  /// No description provided for @lawBnssDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Criminal procedure law'**
+  String get lawBnssDesc;
+
+  /// No description provided for @lawBsaTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Bharatiya Sakshya Adhiniyam (BSA)'**
+  String get lawBsaTitle;
+
+  /// No description provided for @lawBsaDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Law of evidence'**
+  String get lawBsaDesc;
+
+  /// No description provided for @lawEverydayTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Everyday Law'**
+  String get lawEverydayTitle;
+
+  /// No description provided for @lawEverydayDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Know your rights in daily life'**
+  String get lawEverydayDesc;
+
+  /// No description provided for @lawEverydayFeatured.
+  ///
+  /// In en, this message translates to:
+  /// **'Consumer, tenancy, workplace and family rights, explained simply.'**
+  String get lawEverydayFeatured;
+
+  /// No description provided for @lawLegacyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'IPC & CrPC (Legacy)'**
+  String get lawLegacyTitle;
+
+  /// No description provided for @lawLegacyDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Older laws for reference'**
+  String get lawLegacyDesc;
 }
 
 class _AppLocalizationsDelegate

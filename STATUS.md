@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-26 (session 2: Terracotta × Sand palette applied, Claude Opus 5.5)
+> Last updated: 2026-10-26 (session 2: palette + Explore Law home, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -42,7 +42,15 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
 - [x] Tamil verified on simulator (home, quiz, quit dialog) — no layout exceptions.
 - [x] 2026-10-26: Re-themed to the Terracotta × Sand palette (global tokens, ColorScheme, all hardcoded
       colours and gradients removed; avatars/map nodes/progress bars flat). Analyze clean, 34 tests pass,
-      Home + Journey eyeballed on simulator (light). Dark mode not yet eyeballed. Not committed yet.
+      Home + Journey eyeballed on simulator (light). Dark mode not yet eyeballed. Committed b8c6824.
+- [x] 2026-10-26: Home redesigned as "Explore Law" (user reference, "Screen 1" layout, design only):
+      serif header + search (→ Ask AI) + settings; "Start here" carousel (Constitution / BNS / Everyday Law)
+      with flat painted illustrations (`home/presentation/widgets/law_illustration.dart`) and dash indicator;
+      "Core Laws" list (BNS, BNSS, BSA, Everyday Law) + IPC & CrPC legacy row. Explore → next Case Path level
+      if it is in that chapter, else Journey tab; law rows → Ask AI with a prefilled question; View All → Journey.
+      Game sections (stats, continue, daily goal, docket, modes, league, premium, fact, updates) are no longer
+      on Home; their widgets remain unused in `home_sections.dart` / `home_header.dart` in case they return.
+      New strings are English-only (other locales fall back). Tests updated (tap 'Explore' instead of 'PLAY').
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
@@ -82,7 +90,8 @@ lib/
                                  # GlossyProgressBar, StarRow, InitialsAvatar, TickingBuilder
   features/
     onboarding/   language → 3 slides → persona → daily goal → name → soft paywall → home
-    home/         header (stats + leaderboard + settings icons), hero "continue", goal+streak week strip,
+    home/         Explore Law home (explore_sections.dart, law_illustration.dart); older game widgets kept unused:
+                  header (stats + leaderboard + settings icons), hero "continue", goal+streak week strip,
                   Daily Docket card, 4 modes grid, league card, premium banner, fact of the day, updates
     journey/      domain (catalog: 6 chapters × 3 levels + chest), controller (stars/chests),
                   presentation (layout math, road painter, map nodes, level/chest sheets)

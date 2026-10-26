@@ -1023,4 +1023,84 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get statStars => 'స్టార్లు';
+
+  @override
+  String get exploreTitle => 'Explore Law';
+
+  @override
+  String get exploreSubtitle => 'Build your understanding of Indian law';
+
+  @override
+  String get exploreStartHere => 'Start here';
+
+  @override
+  String get exploreFeatured => 'Featured';
+
+  @override
+  String get exploreButton => 'Explore';
+
+  @override
+  String get exploreCoreLaws => 'Core Laws';
+
+  @override
+  String get exploreViewAll => 'View All';
+
+  @override
+  String get exploreLegacy => 'Legacy';
+
+  @override
+  String get exploreAskAi => 'Ask AI';
+
+  @override
+  String exploreAskPrompt(String law) {
+    return 'Explain the $law in simple terms: what it covers and the key provisions I should know.';
+  }
+
+  @override
+  String get lawConstitutionTitle => 'Constitution of India';
+
+  @override
+  String get lawConstitutionDesc =>
+      'Fundamental rights, directive principles, duties and more.';
+
+  @override
+  String get lawBnsTitle => 'Bharatiya Nyaya Sanhita (BNS)';
+
+  @override
+  String get lawBnsShort => 'Bharatiya Nyaya Sanhita';
+
+  @override
+  String get lawBnsDesc => 'Substantive criminal law';
+
+  @override
+  String get lawBnsFeatured =>
+      'Offences and punishments under India\'s new criminal code.';
+
+  @override
+  String get lawBnssTitle => 'Bharatiya Nagarik Suraksha Sanhita (BNSS)';
+
+  @override
+  String get lawBnssDesc => 'Criminal procedure law';
+
+  @override
+  String get lawBsaTitle => 'Bharatiya Sakshya Adhiniyam (BSA)';
+
+  @override
+  String get lawBsaDesc => 'Law of evidence';
+
+  @override
+  String get lawEverydayTitle => 'Everyday Law';
+
+  @override
+  String get lawEverydayDesc => 'Know your rights in daily life';
+
+  @override
+  String get lawEverydayFeatured =>
+      'Consumer, tenancy, workplace and family rights, explained simply.';
+
+  @override
+  String get lawLegacyTitle => 'IPC & CrPC (Legacy)';
+
+  @override
+  String get lawLegacyDesc => 'Older laws for reference';
 }

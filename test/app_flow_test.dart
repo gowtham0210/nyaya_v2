@@ -73,7 +73,7 @@ void main() {
     expect(find.text('Maybe later'), findsOneWidget);
     await tester.tap(find.text('Maybe later'));
     await settle(tester);
-    expect(find.text('Asha'), findsWidgets);
+    expect(find.text('Explore Law'), findsOneWidget);
   });
 
   testWidgets('playing a Case Path level end to end awards stars and XP', (tester) async {
@@ -81,7 +81,7 @@ void main() {
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
     await settle(tester);
 
-    await tester.tap(find.text('PLAY'));
+    await tester.tap(find.text('Explore').first); // Constitution "Start here" card
     await settle(tester);
     expect(c.read(profileProvider).energy, 4, reason: 'energy is charged at start');
 
@@ -113,7 +113,7 @@ void main() {
     await pumpApp(tester, prefs: {'profile_v1': profile});
     await settle(tester);
 
-    await tester.tap(find.text('PLAY'));
+    await tester.tap(find.text('Explore').first); // Constitution "Start here" card
     await settle(tester);
     expect(find.text("You're out of energy"), findsOneWidget);
     expect(find.text("Play today's Daily Docket (free)"), findsOneWidget);
