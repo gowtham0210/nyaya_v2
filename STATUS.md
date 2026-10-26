@@ -123,6 +123,17 @@ test/  gamification_test.dart content_test.dart app_flow_test.dart
   **Production must use a backend proxy** — never ship a raw key. No key → offline canned answers.
   Free users: 5 AI answers/day; premium unlimited.
 
+## 6a. Running on the user's physical iPhone
+- Device: Gowtham's iPhone 15 Plus, iOS 26.6.2, Flutter id `00008120-000A511821E0A01E`.
+- Signing: team `2DLQ9MAY76` (in project.pbxproj), cert "Apple Development: yazhinimarimuthu@gmail.com".
+- Use **release** builds on device (`flutter run --release -d 00008120-000A511821E0A01E`); debug builds
+  won't relaunch without the Flutter tool attached.
+- First install requires the user to trust the developer profile on the phone:
+  Settings → General → VPN & Device Management → Developer App → Trust. (Done 2026-10-26; app launched OK.)
+- Manual install/launch: `xcrun devicectl device install app --device <id> build/ios/iphoneos/Runner.app`
+  then `xcrun devicectl device process launch --device <id> ai.bigtapp.nyaya`.
+- Web support was requested then cancelled by the user — no web platform added.
+
 ## 6. How to run
 ```bash
 flutter pub get && flutter gen-l10n
