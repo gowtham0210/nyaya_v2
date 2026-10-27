@@ -44,6 +44,9 @@ abstract final class AppPalette {
   static const ochreDeep = Color(0xFF946A1E);
   static const slate = Color(0xFF4F5D5A);
 
+  /// Muted indigo, used only for Supreme Court tags on Legal Updates.
+  static const ink = Color(0xFF3F4C86);
+
   // ── Dark theme (derived from Deep Earth) ──────────────────────────────────
   static const darkBg = Color(0xFF1C1713);
   static const darkSurface = Color(0xFF26201B);

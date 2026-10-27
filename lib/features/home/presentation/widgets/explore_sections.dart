@@ -1,13 +1,18 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../../app/router.dart';
 import '../../../../core/l10n/l10n.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/widgets/common.dart';
 import '../../../journey/application/journey_controller.dart';
 import '../../../journey/domain/journey.dart';
+import '../../../legal_updates/data/legal_updates_repository.dart';
+import '../../../legal_updates/presentation/updates_screen.dart';
+import '../../../quiz/data/question_repository.dart';
 import '../../../quiz/domain/quiz_models.dart';
 import '../../../quiz/presentation/quiz_launcher.dart';
 import 'law_illustration.dart';
@@ -15,7 +20,10 @@ import 'law_illustration.dart';
 /// Editorial serif used for Explore Law headings (DM Serif Display for large
 /// titles, DM Serif Text for list rows).
 TextStyle _serif(BuildContext context, double size, {bool display = true}) {
-  return AppTheme.serif(TextStyle(fontSize: size, height: 1.15, color: context.colors.onSurface), display: display);
+  return AppTheme.serif(
+    TextStyle(fontSize: size, height: 1.15, color: context.colors.onSurface),
+    display: display,
+  );
 }
 
 /// Opens the AI chat with a ready-made question about [law].
@@ -64,12 +72,146 @@ class ExploreHeader extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 2),
-            Text(
-              l.exploreSubtitle,
-              style: context.text.bodyLarge?.copyWith(color: context.nyaya.textSecondary),
-            ),
+            Text(l.exploreSubtitle, style: context.text.bodyLarge?.copyWith(color: context.nyaya.textSecondary)),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// "Continue where you left off", below the "Start here" carousel: the next
+/// Case Path level, with its chapter's painting. Hidden until the first level is finished, since the
+/// "Start here" carousel covers new users.
+class ContinueLearningCard extends ConsumerWidget {
+  const ContinueLearningCard({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final journey = ref.watch(journeyProvider);
+    if (journey.stars.isEmpty) return const SizedBox.shrink();
+
+    final l = context.l10n;
+    final bank = ref.watch(questionBankProvider).value;
+    final node = journey.current;
+    final chapter = node?.chapter ?? JourneyCatalog.chapters.last;
+    final done = journey.completedLevelsIn(chapter.id);
+    final subtitle = switch (node) {
+      null => l.homeAllDone,
+      JourneyNode(kind: NodeKind.chest) => l.homeChestReady,
+      _ => l.homeChapterLevel(node.chapterIndex + 1, node.level),
+    };
+    void onContinue() => node != null && node.kind == NodeKind.level
+        ? QuizLauncher.start(context, ref, QuizRequest(QuizMode.casePath, levelId: node.id))
+        : context.go(Routes.journey);
+
+    return Container(
+      margin: const EdgeInsets.only(top: AppSpacing.lg),
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        color: context.colors.surface,
+        borderRadius: BorderRadius.circular(AppRadius.lg),
+        border: Border.all(color: context.nyaya.cardBorder),
+      ),
+      child: Stack(
+        children: [
+          Positioned(
+            top: 0,
+            right: -10,
+            bottom: 0,
+            width: 170,
+            child: IgnorePointer(
+              child: Opacity(
+                opacity: context.isDark ? 0.35 : 1,
+                child: ShaderMask(
+                  blendMode: BlendMode.dstIn,
+                  shaderCallback: (bounds) => const LinearGradient(
+                    colors: [Colors.transparent, Colors.black],
+                    stops: [0, 0.5],
+                  ).createShader(bounds),
+                  child: Image.asset(
+                    'assets/images/journey_${chapter.id}_landmark.webp',
+                    fit: BoxFit.contain,
+                    alignment: Alignment.bottomRight,
+                    excludeFromSemantics: true,
+                    errorBuilder: (_, _, _) => Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: AppSpacing.lg),
+                        child: Icon(chapter.icon, size: 72, color: context.colors.primary.withValues(alpha: 0.25)),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // The label sits above the painting, so it may span the card.
+                Text(
+                  l.homeContinueLeftOff.toUpperCase(),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: context.text.labelMedium?.copyWith(
+                    color: context.colors.primary,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.6,
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.sm),
+                FractionallySizedBox(
+                  widthFactor: 0.66,
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(bank?.chapters[chapter.id]?.title ?? '', style: _serif(context, 24)),
+                      const SizedBox(height: 4),
+                      Text(subtitle, style: context.text.bodyMedium?.copyWith(color: context.nyaya.textSecondary)),
+                      const SizedBox(height: AppSpacing.md),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: GlossyProgressBar(
+                              value: done / chapter.levels,
+                              color: context.colors.primary,
+                              track: context.colors.surfaceContainerHigh,
+                              height: 6,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Text('$done/${chapter.levels}', style: context.text.labelMedium),
+                        ],
+                      ),
+                      const SizedBox(height: AppSpacing.md),
+                      FilledButton(
+                        onPressed: onContinue,
+                        style: FilledButton.styleFrom(
+                          minimumSize: const Size(0, 44),
+                          padding: const EdgeInsets.symmetric(horizontal: 22),
+                          shape: const StadiumBorder(),
+                          textStyle: context.text.labelLarge?.copyWith(fontWeight: FontWeight.w600, fontSize: 15),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(l.commonContinue),
+                            const SizedBox(width: AppSpacing.sm),
+                            const Icon(Icons.arrow_forward_rounded, size: 18),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -98,8 +240,8 @@ class _FeaturedLawsCarouselState extends ConsumerState<FeaturedLawsCarousel> {
     final l = context.l10n;
     final slides = [
       (l.lawConstitutionTitle, l.lawConstitutionDesc, LawArt.court, 'constitution', _FeaturedImage.constitution),
-      (l.lawBnsShort, l.lawBnsFeatured, LawArt.scales, 'criminal', null),
-      (l.lawEverydayTitle, l.lawEverydayFeatured, LawArt.people, 'everyday', null),
+      (l.lawBnsShort, l.lawBnsFeatured, LawArt.scales, 'criminal', _FeaturedImage.bns),
+      (l.lawEverydayTitle, l.lawEverydayFeatured, LawArt.people, 'everyday', _FeaturedImage.everyday),
     ];
 
     return Column(
@@ -146,7 +288,9 @@ class _FeaturedLawsCarouselState extends ConsumerState<FeaturedLawsCarousel> {
 /// A painted illustration and the flat colour its left edge fades into, so
 /// the card background continues the picture without a seam.
 enum _FeaturedImage {
-  constitution('assets/images/explore_constitution.webp', Color(0xFFF0D5C5));
+  constitution('assets/images/explore_constitution.webp', Color(0xFFF0D5C5)),
+  bns('assets/images/explore_bns.webp', Color(0xFFF1D0BB)),
+  everyday('assets/images/explore_everyday.webp', Color(0xFFF0CFBA));
 
   const _FeaturedImage(this.asset, this.background);
 
@@ -175,7 +319,10 @@ class _FeaturedCard extends StatelessWidget {
     // Painted images have a light background, so their card keeps light-theme
     // text colours in dark mode too.
     if (image != null && context.isDark) {
-      return Theme(data: AppTheme.light(), child: Builder(builder: _build));
+      return Theme(
+        data: AppTheme.light(),
+        child: Builder(builder: _build),
+      );
     }
     return _build(context);
   }
@@ -187,7 +334,8 @@ class _FeaturedCard extends StatelessWidget {
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: image?.background ??
+        color:
+            image?.background ??
             (context.isDark ? context.colors.surfaceContainerHigh : context.colors.primaryContainer),
         borderRadius: BorderRadius.circular(AppRadius.lg),
       ),
@@ -263,6 +411,163 @@ class _FeaturedCard extends StatelessWidget {
   }
 }
 
+/// Serif section heading with a "View All" link.
+class _SectionTitle extends StatelessWidget {
+  const _SectionTitle({required this.title, required this.onViewAll});
+
+  final String title;
+  final VoidCallback onViewAll;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(child: Text(title, style: _serif(context, 26))),
+        TextButton(
+          onPressed: onViewAll,
+          style: TextButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            minimumSize: const Size(0, 36),
+            textStyle: context.text.labelLarge?.copyWith(fontWeight: FontWeight.w600),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(context.l10n.exploreViewAll),
+              const SizedBox(width: 4),
+              const Icon(Icons.arrow_forward_rounded, size: 16),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// "Latest legal updates": the newest updates as a horizontal strip of cards
+/// that runs edge to edge, so it pads its own heading. Hidden while the feed
+/// loads or when it is empty.
+class LatestUpdatesSection extends ConsumerWidget {
+  const LatestUpdatesSection({super.key});
+
+  static const _count = 5;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final updates = ref.watch(legalUpdatesProvider).value ?? const [];
+    if (updates.isEmpty) return const SizedBox.shrink();
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppSpacing.md),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.page),
+            child: _SectionTitle(title: context.l10n.homeUpdatesTitle, onViewAll: () => context.go(Routes.updates)),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          SizedBox(
+            height: 292,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              // Room for the card shadow.
+              padding: const EdgeInsets.fromLTRB(AppSpacing.page, 0, AppSpacing.page, AppSpacing.md),
+              itemCount: updates.length.clamp(0, _count),
+              separatorBuilder: (_, _) => const SizedBox(width: 14),
+              itemBuilder: (context, i) => _UpdateCard(update: updates[i]),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Painting on top, then category, serif headline and date.
+class _UpdateCard extends StatelessWidget {
+  const _UpdateCard({required this.update});
+
+  final LegalUpdate update;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final c = update.category;
+    final tint = c.tint(context);
+    final muted = context.nyaya.textSecondary;
+    final date = DateFormat.yMMMd(Localizations.localeOf(context).languageCode).format(update.date);
+    return SizedBox(
+      width: 248,
+      child: NyayaCard(
+        onTap: () => context.push(Routes.update(update.id)),
+        padding: EdgeInsets.zero,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(AppRadius.lg),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 124,
+                width: double.infinity,
+                child: Image.asset(
+                  update.image,
+                  fit: BoxFit.cover,
+                  excludeFromSemantics: true,
+                  errorBuilder: (_, _, _) => UpdateFallbackArt(category: c),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(AppSpacing.md, 12, AppSpacing.md, 14),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(c.icon, size: 16, color: tint),
+                          const SizedBox(width: 6),
+                          Flexible(
+                            child: Text(
+                              c.label(l).toUpperCase(),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: context.text.labelSmall?.copyWith(
+                                color: tint,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 1.4,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 6),
+                      Expanded(
+                        child: Text(
+                          update.title,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: _serif(context, 17, display: false).copyWith(height: 1.25),
+                        ),
+                      ),
+                      Text(
+                        '$date · ${l.updatesReadTime(update.readMinutes)}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: context.text.bodySmall?.copyWith(color: muted),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 /// "Core Laws" header, the list of current codes and the legacy row.
 class CoreLawsSection extends StatelessWidget {
   const CoreLawsSection({super.key});
@@ -280,27 +585,7 @@ class CoreLawsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Row(
-          children: [
-            Expanded(child: Text(l.exploreCoreLaws, style: _serif(context, 26))),
-            TextButton(
-              onPressed: () => context.go(Routes.journey),
-              style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                minimumSize: const Size(0, 36),
-                textStyle: context.text.labelLarge?.copyWith(fontWeight: FontWeight.w600),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(l.exploreViewAll),
-                  const SizedBox(width: 4),
-                  const Icon(Icons.arrow_forward_rounded, size: 16),
-                ],
-              ),
-            ),
-          ],
-        ),
+        _SectionTitle(title: l.exploreCoreLaws, onViewAll: () => context.go(Routes.journey)),
         const SizedBox(height: AppSpacing.sm),
         Container(
           clipBehavior: Clip.antiAlias,

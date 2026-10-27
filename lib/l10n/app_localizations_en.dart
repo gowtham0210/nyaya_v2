@@ -97,6 +97,86 @@ class AppLocalizationsEn extends AppLocalizations {
       'Keep your streak alive, climb weekly court leagues and ask our AI anything legal.';
 
   @override
+  String get onbSkip => 'Skip';
+
+  @override
+  String get onbGetStarted => 'Get Started';
+
+  @override
+  String get onbBrandTagline => 'Learn Law. Live It.';
+
+  @override
+  String get onbIntro1Title => 'Your Guide to Indian Law';
+
+  @override
+  String get onbIntro1Body =>
+      'Learn with clarity, practise with purpose, and understand the law that shapes your everyday life.';
+
+  @override
+  String get onbIntro2Label => 'Structured learning';
+
+  @override
+  String get onbIntro2Title => 'Learn at Your Own Pace';
+
+  @override
+  String get onbIntro2Body =>
+      'Explore the Constitution, BNS, BNSS, BSA and more with structured lessons, notes and real-world examples.';
+
+  @override
+  String get onbIntro3Label => 'Practice & apply';
+
+  @override
+  String get onbIntro3Title => 'Build Real Understanding';
+
+  @override
+  String get onbIntro3Body =>
+      'Test your knowledge with quizzes, read the latest legal updates, and see how law applies in real life.';
+
+  @override
+  String get onbDemoChapter => 'Fundamental Rights';
+
+  @override
+  String get onbDemoChapterSub => 'Constitution of India · Chapter 3';
+
+  @override
+  String get onbDemoProgress => '5 of 8 lessons completed';
+
+  @override
+  String get onbDemoContinue => 'Continue Learning';
+
+  @override
+  String get onbDemoLesson1 => 'Introduction';
+
+  @override
+  String get onbDemoLesson2 => 'Right to Equality';
+
+  @override
+  String get onbDemoLesson3 => 'Right to Freedom';
+
+  @override
+  String get onbDemoLesson4 => 'Right against Exploitation';
+
+  @override
+  String get onbDemoQuiz => 'Daily Quiz';
+
+  @override
+  String get onbDemoQuizSub => '3 of 5 activities';
+
+  @override
+  String get onbDemoUpdates => 'Legal Updates';
+
+  @override
+  String get onbDemoUpdatesSub =>
+      'Stay informed with important judgments and developments.';
+
+  @override
+  String get onbDemoScenarios => 'Real Life Scenarios';
+
+  @override
+  String get onbDemoScenariosSub =>
+      'Understand how law works in everyday life.';
+
+  @override
   String get onbWhoAreYou => 'Who are you learning as?';
 
   @override
@@ -179,6 +259,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeContinueJourney => 'Continue your Case Path';
+
+  @override
+  String get homeContinueLeftOff => 'Continue where you left off';
 
   @override
   String homeChapterLevel(int chapter, int level) {
@@ -807,6 +890,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get updatesEmpty => 'No updates in this category yet.';
+
+  @override
+  String get updatesSave => 'Save update';
+
+  @override
+  String get updatesUnsave => 'Remove from saved';
 
   @override
   String get updatesInEnglish => 'Shown in English';

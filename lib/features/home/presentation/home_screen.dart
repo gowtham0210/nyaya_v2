@@ -37,10 +37,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    const page = EdgeInsets.symmetric(horizontal: AppSpacing.page);
     const sections = <Widget>[
-      FeaturedLawsCarousel(),
+      Padding(padding: page, child: FeaturedLawsCarousel()),
+      Padding(padding: page, child: ContinueLearningCard()),
       SizedBox(height: AppSpacing.xl),
-      CoreLawsSection(),
+      // Scrolls edge to edge, so it pads itself.
+      LatestUpdatesSection(),
+      Padding(padding: page, child: CoreLawsSection()),
     ];
 
     return Scaffold(
@@ -54,7 +58,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             slivers: [
               const SliverToBoxAdapter(child: ExploreHeader()),
               SliverPadding(
-                padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.sm, AppSpacing.page, AppSpacing.xl),
+                padding: const EdgeInsets.only(top: AppSpacing.sm, bottom: AppSpacing.xl),
                 sliver: SliverList.list(
                   children: [
                     for (final (i, s) in sections.indexed)

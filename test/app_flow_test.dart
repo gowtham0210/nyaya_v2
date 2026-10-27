@@ -8,6 +8,7 @@ import 'package:nyaya/app/app.dart';
 import 'package:nyaya/core/storage/local_store.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
 import 'package:nyaya/features/journey/application/journey_controller.dart';
+import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
 import 'package:nyaya/features/profile/application/profile_controller.dart';
 import 'package:nyaya/features/quiz/application/quiz_controller.dart';
 import 'package:nyaya/features/quiz/data/question_repository.dart';
@@ -48,10 +49,13 @@ void main() {
 
     await tester.tap(find.text('English').first);
     await settle(tester);
-    for (var i = 0; i < 3; i++) {
-      await tester.tap(find.text('CONTINUE'));
+    // Intro slides: two "next" arrows, then Get Started.
+    for (var i = 0; i < 2; i++) {
+      await tester.tap(find.byTooltip('Continue'));
       await settle(tester);
     }
+    await tester.tap(find.text('Get Started'));
+    await settle(tester);
     await tester.tap(find.text('Law aspirant'));
     await settle(tester);
     await tester.tap(find.text('CONTINUE'));
@@ -74,6 +78,7 @@ void main() {
     await tester.tap(find.text('Maybe later'));
     await settle(tester);
     expect(find.text('Explore Law'), findsOneWidget);
+    expect(find.text('CONTINUE WHERE YOU LEFT OFF'), findsNothing);
   });
 
   testWidgets('playing a Case Path level end to end awards stars and XP', (tester) async {
@@ -123,6 +128,66 @@ void main() {
     await settle(tester);
     expect(find.text('Level 1'), findsOneWidget);
     expect(find.text('START'), findsOneWidget);
+  });
+
+  testWidgets('Home continue card resumes the next Case Path level', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final journey = jsonEncode({
+      'stars': {'constitution_1': 3},
+      'chests': <String>[],
+    });
+    await pumpApp(tester, prefs: {'profile_v1': onboarded, 'journey_v1': journey});
+    await settle(tester);
+
+    expect(find.text('CONTINUE WHERE YOU LEFT OFF'), findsOneWidget);
+    expect(find.text('Chapter 1 · Level 2'), findsOneWidget);
+    expect(find.text('1/3'), findsOneWidget);
+
+    await tester.tap(find.text('Continue'));
+    await settle(tester);
+    expect(find.textContaining('Question 1 of'), findsOneWidget);
+  });
+
+  testWidgets('Home shows latest updates and opens one', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+
+    final updates = find.text('Latest legal updates');
+    await tester.scrollUntilVisible(updates, 200, scrollable: find.byType(Scrollable).first);
+    await settle(tester);
+    expect(tester.takeException(), isNull, reason: 'missing thumbnails fall back quietly');
+
+    final title = find.text('Supreme Court sets timelines for Governors on State Bills');
+    expect(title, findsOneWidget);
+    await tester.tap(title);
+    await settle(tester);
+    expect(find.text('Key points'), findsOneWidget);
+  });
+
+  testWidgets('Updates tab filters and saves updates', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+
+    await tester.tap(find.text('Updates').last);
+    await settle(tester);
+    expect(find.text('Legal Updates'), findsOneWidget);
+    expect(find.text('Supreme Court sets timelines for Governors on State Bills'), findsOneWidget);
+    expect(tester.takeException(), isNull, reason: 'missing thumbnails fall back quietly');
+
+    await tester.tap(find.text('Supreme Court'));
+    await settle(tester);
+    expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsNothing);
+    expect(find.text('Supreme Court sets timelines for Governors on State Bills'), findsOneWidget);
+
+    await tester.tap(find.bySemanticsLabel('Save update').first);
+    await settle(tester);
+    expect(c.read(savedUpdatesProvider), {'tn-governor-assent'});
+
+    await tester.tap(find.text('All'));
+    await settle(tester);
+    expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsOneWidget);
   });
 
   testWidgets('out of energy shows free alternatives instead of a dead end', (tester) async {

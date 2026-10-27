@@ -13,8 +13,9 @@ import '../../../core/widgets/common.dart';
 import '../../../core/widgets/pressable.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../profile/domain/user_profile.dart';
+import 'intro_slides.dart';
 
-/// Language → 3 value slides → persona → daily goal → name.
+/// Language → 3 intro slides → persona → daily goal → name.
 /// Target: under 60 seconds to the first quiz.
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});
@@ -24,12 +25,17 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 }
 
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
-  static const _steps = 7;
+  static const _steps = 5;
+  static const _introStep = 1;
   final _page = PageController();
   final _name = TextEditingController();
   int _step = 0;
   Persona? _persona;
   int _goal = 3;
+
+  /// The intro slides are designed on Warm Cream with painted artwork, so they
+  /// always render in the light theme.
+  late final _light = AppTheme.light();
 
   @override
   void dispose() {
@@ -46,8 +52,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   }
 
   bool get _canContinue => switch (_step) {
-        4 => _persona != null,
-        6 => _name.text.trim().isNotEmpty,
+        2 => _persona != null,
+        4 => _name.text.trim().isNotEmpty,
         _ => true,
       };
 
@@ -73,51 +79,36 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
-    return Scaffold(
+    final intro = _step == _introStep;
+    final scaffold = Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 8, AppSpacing.page, 0),
-              child: Row(
-                children: [
-                  IconButton(
-                    tooltip: l.commonBack,
-                    onPressed: _step == 0 ? null : () => _go(_step - 1),
-                    icon: Icon(Icons.arrow_back_rounded,
-                        color: _step == 0 ? Colors.transparent : context.colors.onSurface),
-                  ),
-                  Expanded(child: GlossyProgressBar(value: (_step + 1) / _steps, color: context.colors.primary)),
-                ],
+            if (!intro)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 8, AppSpacing.page, 0),
+                child: Row(
+                  children: [
+                    IconButton(
+                      tooltip: l.commonBack,
+                      onPressed: _step == 0 ? null : () => _go(_step - 1),
+                      icon: Icon(Icons.arrow_back_rounded,
+                          color: _step == 0 ? Colors.transparent : context.colors.onSurface),
+                    ),
+                    Expanded(child: GlossyProgressBar(value: (_step + 1) / _steps, color: context.colors.primary)),
+                  ],
+                ),
               ),
-            ),
             Expanded(
+              // Keyed: the top bar comes and goes around the intro, and without a
+              // key the pager would be rebuilt and jump back to the first step.
+              key: const ValueKey('onboarding-pager'),
               child: PageView(
                 controller: _page,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  _LanguageStep(onPicked: () => _go(1)),
-                  _SlideStep(
-                    icon: Icons.balance_rounded,
-                    accent: AppPalette.ochre,
-                    title: l.onbSlide1Title,
-                    body: l.onbSlide1Body,
-                    orbit: const [Icons.menu_book_rounded, Icons.gavel_rounded, Icons.account_balance_rounded],
-                  ),
-                  _SlideStep(
-                    icon: Icons.route_rounded,
-                    accent: AppPalette.mossLight,
-                    title: l.onbSlide2Title,
-                    body: l.onbSlide2Body,
-                    orbit: const [Icons.star_rounded, Icons.lock_open_rounded, Icons.redeem_rounded],
-                  ),
-                  _SlideStep(
-                    icon: Icons.local_fire_department_rounded,
-                    accent: AppPalette.burntClay,
-                    title: l.onbSlide3Title,
-                    body: l.onbSlide3Body,
-                    orbit: const [Icons.emoji_events_rounded, Icons.auto_awesome, Icons.bolt_rounded],
-                  ),
+                  _LanguageStep(onPicked: () => _go(_introStep)),
+                  IntroSlides(onDone: () => _go(_introStep + 1)),
                   _PersonaStep(
                     selected: _persona,
                     onSelect: (p) {
@@ -136,7 +127,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 ],
               ),
             ),
-            if (_step > 0)
+            if (_step > 0 && !intro)
               Padding(
                 padding: const EdgeInsets.fromLTRB(AppSpacing.page, 8, AppSpacing.page, AppSpacing.md),
                 child: ChunkyButton(
@@ -148,6 +139,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         ),
       ),
     );
+    return Theme(data: intro ? _light : Theme.of(context), child: scaffold);
   }
 }
 
@@ -216,84 +208,6 @@ class _LanguageStep extends ConsumerWidget {
                 },
               ).animate().fadeIn(delay: (40 * i).ms).slideX(begin: 0.08),
             ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SlideStep extends StatelessWidget {
-  const _SlideStep({
-    required this.icon,
-    required this.accent,
-    required this.title,
-    required this.body,
-    required this.orbit,
-  });
-
-  final IconData icon;
-  final Color accent;
-  final String title;
-  final String body;
-  final List<IconData> orbit;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.page),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 260,
-            width: 260,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  width: 220,
-                  height: 220,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: accent.withValues(alpha: 0.14),
-                  ),
-                ),
-                Container(
-                  width: 140,
-                  height: 140,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: context.nyaya.hero,
-                    boxShadow: [BoxShadow(color: accent.withValues(alpha: 0.35), blurRadius: 30, offset: const Offset(0, 12))],
-                  ),
-                  child: Icon(icon, size: 72, color: accent),
-                ).animate().scale(begin: const Offset(0.7, 0.7), curve: Curves.elasticOut, duration: 900.ms),
-                for (final (i, o) in orbit.indexed)
-                  Align(
-                    alignment: [const Alignment(-0.95, -0.55), const Alignment(0.95, -0.35), const Alignment(0.1, 1)][i],
-                    child: Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: context.colors.surface,
-                        shape: BoxShape.circle,
-                        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.08), blurRadius: 16)],
-                      ),
-                      child: Icon(o, color: accent, size: 26),
-                    )
-                        .animate(onPlay: (c) => c.repeat(reverse: true))
-                        .moveY(begin: -4, end: 4, duration: (1400 + i * 300).ms, curve: Curves.easeInOut),
-                  ),
-              ],
-            ),
-          ),
-          const SizedBox(height: AppSpacing.xl),
-          Text(title, textAlign: TextAlign.center, style: context.text.headlineLarge).animate().fadeIn(delay: 150.ms),
-          const SizedBox(height: 12),
-          Text(
-            body,
-            textAlign: TextAlign.center,
-            style: context.text.bodyLarge?.copyWith(color: context.nyaya.textSecondary, height: 1.5),
-          ).animate().fadeIn(delay: 250.ms),
         ],
       ),
     );

@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-27 (Journey restyle, Claude Opus 5.5)
+> Last updated: 2026-10-27 (Home updates widget, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -54,8 +54,17 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
 - [x] 2026-10-26: Constitution "Start here" card uses a ChatGPT-generated painting
       (`assets/images/explore_constitution.webp`, 1254² webp, bg #F0D5C5 = card colour so there is no seam).
       Image cards keep light-theme text in dark mode (dark path not yet eyeballed). BNS and Everyday Law cards
-      still use the painted-in-code art until matching images are generated (prompt style: warm painterly
+      now have paintings too (`explore_bns.webp`, `explore_everyday.webp`, prompts in `docs/HOME_ART.md`;
+      each card's flat colour matches its painting's left edge). Earlier note: they used painted-in-code art until matching images were generated (prompt style: warm painterly
       editorial, palette colours, subject in right two-thirds, left third fading to flat peach, square, no text).
+- [x] 2026-10-27: Onboarding intro redesigned from the user's 3-screen reference (`onboarding/presentation/
+      intro_slides.dart`): Skip, swipeable slides, dot indicator, round next button, "Get Started".
+      Slide 1 brand "Nyaya / Learn Law. Live It." + hero art; slide 2 "Structured learning" with a tilted
+      demo lesson card; slide 3 "Practice & apply" with three staggered demo feature cards. Flow is now
+      language → intro → persona → goal → name (5 steps); intro always renders in the light theme.
+      Artwork: `assets/images/onboarding_{hero,lessons,practice}.webp` (ChatGPT-generated, added 2026-10-27);
+      edges fade into Warm Cream to hide small colour differences; drawn-in-code stand-ins remain as fallbacks. New strings English-only. Old onbSlide* ARB keys
+      are now unused. Copy mentions "lessons, notes" and "Real Life Scenarios", which the app doesn't have yet.
 - [x] 2026-10-27: Journey (Case Path) restyled from the user's mock: serif "Case Path" header + subtitle,
       wide sand road with dashed centre, raised nodes (terracotta current/completed with serif numeral,
       sand locked discs, cream chest), "You" pill, chapter cards (current chapter = cream card, others =
@@ -65,6 +74,29 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       840 px wide webp, ~2.3 MB total); the scales sit at 50 % opacity; prompts in `docs/JOURNEY_ART.md`.
       The mock's margin quotes were dropped on purpose (user's call: the paintings fill that space).
       Chapter colours are no longer used on the map. New strings English-only. Checked on simulator (light).
+- [x] 2026-10-27: Legal Updates restyled from the user's mock: serif "Legal Updates" header over the
+      Supreme Court painting (reuses `journey_constitution_landmark.webp`), serif pill filters with icons, news cards (tinted category tag, serif
+      headline, calendar + read time, thumbnail with a notched save button). Saved ids persist in
+      `savedUpdatesProvider` (`saved_updates_v1`); there is no "Saved" list yet. Supreme Court tags use the new
+      muted indigo `AppPalette.ink`. Thumbnails load `assets/images/update_<id>.webp` (none exist yet; cards
+      show the category's Journey painting instead); prompts in `docs/UPDATES_ART.md`. New strings English-only. Checked on simulator (light).
+      The mock's search button was dropped at the user's request.
+
+- [x] 2026-10-27: Home "Continue where you left off" card below the "Start here" carousel
+      (`ContinueLearningCard` in `explore_sections.dart`): chapter title, "Chapter N · Level M", progress bar,
+      Continue button that starts the next level (or opens the Journey map for a chest / when all done), and
+      the chapter's Journey landmark painting faded in on the right. Hidden until the first level has stars,
+      so new users only see "Start here". Old unused `ContinueJourneyCard` in `home_sections.dart` left as is.
+      Checked on simulator (light); widget test covers resume.
+- [x] 2026-10-27: Home "Latest legal updates" widget between "Continue" and "Core Laws"
+      (`LatestUpdatesSection` in `explore_sections.dart`): serif heading + View All (→ Updates tab), then a
+      horizontal edge-to-edge strip of the 5 newest updates (painting on top, tinted category, serif headline,
+      date · read time); tap opens the update. Hidden while loading / when empty. Home sections now pad
+      themselves (the strip needs full width). Shared `_SectionTitle` used by Core Laws too; the private
+      `_FallbackArt` in `updates_screen.dart` is now public `UpdateFallbackArt`; the old unused
+      `LatestUpdatesSection` in `home_sections.dart` was removed. No new strings (`homeUpdatesTitle` is
+      translated). All 38 tests pass, incl. new "Home shows latest updates and opens one";
+      checked on simulator (light). Dark mode not eyeballed.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

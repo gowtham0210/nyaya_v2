@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:material_ui/material_ui.dart';
 
-
 enum LawArt { court, scales, people }
 
 /// Flat, gradient-free illustrations for the Explore Law cards, painted in
@@ -14,13 +13,13 @@ class LawIllustration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CustomPaint(
-        painter: switch (art) {
-          LawArt.court => _CourtPainter(),
-          LawArt.scales => _ScalesPainter(),
-          LawArt.people => _PeoplePainter(),
-        },
-        size: Size.infinite,
-      );
+    painter: switch (art) {
+      LawArt.court => _CourtPainter(),
+      LawArt.scales => _ScalesPainter(),
+      LawArt.people => _PeoplePainter(),
+    },
+    size: Size.infinite,
+  );
 }
 
 const _stone = Color(0xFFF3E4D0);
@@ -96,7 +95,10 @@ class _CourtPainter extends CustomPainter {
     for (var i = 0; i < 5; i++) {
       final x = cx - drumW / 2 + drumW * (0.1 + i * 0.18);
       canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(x, drumTop + h * 0.025, drumW * 0.08, h * 0.06), const Radius.circular(2)),
+        RRect.fromRectAndRadius(
+          Rect.fromLTWH(x, drumTop + h * 0.025, drumW * 0.08, h * 0.06),
+          const Radius.circular(2),
+        ),
         _fill(_wallDark),
       );
     }
@@ -110,12 +112,19 @@ class _CourtPainter extends CustomPainter {
       ..strokeWidth = 1.4
       ..style = PaintingStyle.stroke;
     for (final t in [-0.55, 0.0, 0.55]) {
-      canvas.drawLine(Offset(cx + t * domeR, drumTop - math.sqrt(1 - t * t) * domeR * 0.98), Offset(cx + t * domeR * 1.1, drumTop), rib);
+      canvas.drawLine(
+        Offset(cx + t * domeR, drumTop - math.sqrt(1 - t * t) * domeR * 0.98),
+        Offset(cx + t * domeR * 1.1, drumTop),
+        rib,
+      );
     }
     canvas.drawRect(Rect.fromLTWH(cx - domeR * 1.05, drumTop - h * 0.012, domeR * 2.1, h * 0.02), _fill(_stoneShade));
 
     // Lantern and finial.
-    canvas.drawRect(Rect.fromCenter(center: Offset(cx, drumTop - domeR - h * 0.02), width: w * 0.05, height: h * 0.05), _fill(_stone));
+    canvas.drawRect(
+      Rect.fromCenter(center: Offset(cx, drumTop - domeR - h * 0.02), width: w * 0.05, height: h * 0.05),
+      _fill(_stone),
+    );
     canvas.drawCircle(Offset(cx, drumTop - domeR - h * 0.055), w * 0.018, _fill(_wallDark));
 
     // Trees framing the building.
@@ -142,8 +151,14 @@ class _ScalesPainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
     // Books stacked as the plinth.
-    canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromLTRB(w * 0.18, h * 0.82, w * 0.92, h * 0.94), const Radius.circular(4)), _fill(_wall));
-    canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromLTRB(w * 0.24, h * 0.72, w * 0.86, h * 0.82), const Radius.circular(4)), _fill(_stoneShade));
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(Rect.fromLTRB(w * 0.18, h * 0.82, w * 0.92, h * 0.94), const Radius.circular(4)),
+      _fill(_wall),
+    );
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(Rect.fromLTRB(w * 0.24, h * 0.72, w * 0.86, h * 0.82), const Radius.circular(4)),
+      _fill(_stoneShade),
+    );
     canvas.drawRect(Rect.fromLTRB(w * 0.24, h * 0.765, w * 0.86, h * 0.775), _fill(_wallDark));
 
     // Pillar and beam.
@@ -161,7 +176,13 @@ class _ScalesPainter extends CustomPainter {
       final panY = top + drop;
       canvas.drawLine(Offset(x, top), Offset(x - w * 0.1, panY), cord);
       canvas.drawLine(Offset(x, top), Offset(x + w * 0.1, panY), cord);
-      canvas.drawArc(Rect.fromCenter(center: Offset(x, panY), width: w * 0.24, height: h * 0.12), 0, math.pi, true, _fill(_wall));
+      canvas.drawArc(
+        Rect.fromCenter(center: Offset(x, panY), width: w * 0.24, height: h * 0.12),
+        0,
+        math.pi,
+        true,
+        _fill(_wall),
+      );
     }
   }
 
@@ -186,7 +207,10 @@ class _PeoplePainter extends CustomPainter {
       canvas.drawRect(Rect.fromLTRB(w * l, h * t, w * r, ground), _fill(c));
       for (var y = h * t + h * 0.06; y < ground - h * 0.12; y += h * 0.12) {
         for (var x = w * l + w * 0.04; x < w * r - w * 0.05; x += w * 0.08) {
-          canvas.drawRect(Rect.fromLTWH(x, y, w * 0.035, h * 0.06), _fill(c == _wall ? _stone : _wallDark.withValues(alpha: 0.5)));
+          canvas.drawRect(
+            Rect.fromLTWH(x, y, w * 0.035, h * 0.06),
+            _fill(c == _wall ? _stone : _wallDark.withValues(alpha: 0.5)),
+          );
         }
       }
     }
@@ -195,7 +219,10 @@ class _PeoplePainter extends CustomPainter {
     void person(double x, double s, Color c) {
       canvas.drawCircle(Offset(x, ground - s * 1.05), s * 0.16, _fill(c));
       canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromCenter(center: Offset(x, ground - s * 0.55), width: s * 0.38, height: s * 0.62), Radius.circular(s * 0.12)),
+        RRect.fromRectAndRadius(
+          Rect.fromCenter(center: Offset(x, ground - s * 0.55), width: s * 0.38, height: s * 0.62),
+          Radius.circular(s * 0.12),
+        ),
         _fill(c),
       );
       canvas.drawRect(Rect.fromLTWH(x - s * 0.15, ground - s * 0.28, s * 0.1, s * 0.28), _fill(c));

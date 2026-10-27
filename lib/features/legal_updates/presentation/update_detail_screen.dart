@@ -26,9 +26,7 @@ class UpdateDetailScreen extends ConsumerWidget {
     if (update == null) {
       return Scaffold(
         appBar: AppBar(),
-        body: Center(
-          child: all == null ? const CircularProgressIndicator() : Text(l.updatesEmpty),
-        ),
+        body: Center(child: all == null ? const CircularProgressIndicator() : Text(l.updatesEmpty)),
       );
     }
 
@@ -43,11 +41,15 @@ class UpdateDetailScreen extends ConsumerWidget {
         children: [
           Row(
             children: [
-              Icon(c.icon, size: 18, color: c.color),
+              Icon(c.icon, size: 18, color: c.tint(context)),
               const SizedBox(width: 6),
               Text(
                 c.label(l).toUpperCase(),
-                style: context.text.labelMedium?.copyWith(color: c.color, fontWeight: FontWeight.w800, letterSpacing: 0.8),
+                style: context.text.labelMedium?.copyWith(
+                  color: c.tint(context),
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 0.8,
+                ),
               ),
               const Spacer(),
               if (!isEnglishUi)
@@ -107,8 +109,10 @@ class UpdateDetailScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.md),
-          Text('${l.updatesSource}: ${update.source}',
-              style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary)),
+          Text(
+            '${l.updatesSource}: ${update.source}',
+            style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary),
+          ),
           const SizedBox(height: AppSpacing.lg),
           ChunkyButton(
             label: l.updatesAskAi,

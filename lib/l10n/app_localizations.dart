@@ -274,6 +274,156 @@ abstract class AppLocalizations {
   /// **'Keep your streak alive, climb weekly court leagues and ask our AI anything legal.'**
   String get onbSlide3Body;
 
+  /// No description provided for @onbSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get onbSkip;
+
+  /// No description provided for @onbGetStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get onbGetStarted;
+
+  /// No description provided for @onbBrandTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn Law. Live It.'**
+  String get onbBrandTagline;
+
+  /// No description provided for @onbIntro1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Guide to Indian Law'**
+  String get onbIntro1Title;
+
+  /// No description provided for @onbIntro1Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn with clarity, practise with purpose, and understand the law that shapes your everyday life.'**
+  String get onbIntro1Body;
+
+  /// No description provided for @onbIntro2Label.
+  ///
+  /// In en, this message translates to:
+  /// **'Structured learning'**
+  String get onbIntro2Label;
+
+  /// No description provided for @onbIntro2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn at Your Own Pace'**
+  String get onbIntro2Title;
+
+  /// No description provided for @onbIntro2Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore the Constitution, BNS, BNSS, BSA and more with structured lessons, notes and real-world examples.'**
+  String get onbIntro2Body;
+
+  /// No description provided for @onbIntro3Label.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice & apply'**
+  String get onbIntro3Label;
+
+  /// No description provided for @onbIntro3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Build Real Understanding'**
+  String get onbIntro3Title;
+
+  /// No description provided for @onbIntro3Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Test your knowledge with quizzes, read the latest legal updates, and see how law applies in real life.'**
+  String get onbIntro3Body;
+
+  /// No description provided for @onbDemoChapter.
+  ///
+  /// In en, this message translates to:
+  /// **'Fundamental Rights'**
+  String get onbDemoChapter;
+
+  /// No description provided for @onbDemoChapterSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Constitution of India · Chapter 3'**
+  String get onbDemoChapterSub;
+
+  /// No description provided for @onbDemoProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'5 of 8 lessons completed'**
+  String get onbDemoProgress;
+
+  /// No description provided for @onbDemoContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue Learning'**
+  String get onbDemoContinue;
+
+  /// No description provided for @onbDemoLesson1.
+  ///
+  /// In en, this message translates to:
+  /// **'Introduction'**
+  String get onbDemoLesson1;
+
+  /// No description provided for @onbDemoLesson2.
+  ///
+  /// In en, this message translates to:
+  /// **'Right to Equality'**
+  String get onbDemoLesson2;
+
+  /// No description provided for @onbDemoLesson3.
+  ///
+  /// In en, this message translates to:
+  /// **'Right to Freedom'**
+  String get onbDemoLesson3;
+
+  /// No description provided for @onbDemoLesson4.
+  ///
+  /// In en, this message translates to:
+  /// **'Right against Exploitation'**
+  String get onbDemoLesson4;
+
+  /// No description provided for @onbDemoQuiz.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Quiz'**
+  String get onbDemoQuiz;
+
+  /// No description provided for @onbDemoQuizSub.
+  ///
+  /// In en, this message translates to:
+  /// **'3 of 5 activities'**
+  String get onbDemoQuizSub;
+
+  /// No description provided for @onbDemoUpdates.
+  ///
+  /// In en, this message translates to:
+  /// **'Legal Updates'**
+  String get onbDemoUpdates;
+
+  /// No description provided for @onbDemoUpdatesSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay informed with important judgments and developments.'**
+  String get onbDemoUpdatesSub;
+
+  /// No description provided for @onbDemoScenarios.
+  ///
+  /// In en, this message translates to:
+  /// **'Real Life Scenarios'**
+  String get onbDemoScenarios;
+
+  /// No description provided for @onbDemoScenariosSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Understand how law works in everyday life.'**
+  String get onbDemoScenariosSub;
+
   /// No description provided for @onbWhoAreYou.
   ///
   /// In en, this message translates to:
@@ -417,6 +567,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Continue your Case Path'**
   String get homeContinueJourney;
+
+  /// No description provided for @homeContinueLeftOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue where you left off'**
+  String get homeContinueLeftOff;
 
   /// No description provided for @homeChapterLevel.
   ///
@@ -1443,6 +1599,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No updates in this category yet.'**
   String get updatesEmpty;
+
+  /// No description provided for @updatesSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save update'**
+  String get updatesSave;
+
+  /// No description provided for @updatesUnsave.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove from saved'**
+  String get updatesUnsave;
 
   /// No description provided for @updatesInEnglish.
   ///

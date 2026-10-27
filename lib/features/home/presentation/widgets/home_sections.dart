@@ -16,8 +16,6 @@ import '../../../../core/widgets/ticking_builder.dart';
 import '../../../gamification/domain/league.dart';
 import '../../../journey/application/journey_controller.dart';
 import '../../../journey/domain/journey.dart';
-import '../../../legal_updates/data/legal_updates_repository.dart';
-import '../../../legal_updates/presentation/updates_screen.dart';
 import '../../../profile/application/profile_controller.dart';
 import '../../../profile/domain/user_profile.dart';
 import '../../../quiz/data/question_repository.dart';
@@ -80,10 +78,7 @@ class ContinueJourneyCard extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                Text(
-                  chapterTitle,
-                  style: context.text.headlineSmall?.copyWith(color: Colors.white),
-                ),
+                Text(chapterTitle, style: context.text.headlineSmall?.copyWith(color: Colors.white)),
                 const SizedBox(height: 4),
                 Text(subtitle, style: context.text.bodyMedium?.copyWith(color: Colors.white70)),
                 const SizedBox(height: AppSpacing.md),
@@ -98,10 +93,7 @@ class ContinueJourneyCard extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    Text(
-                      '$done/${chapter.levels}',
-                      style: context.text.labelLarge?.copyWith(color: Colors.white),
-                    ),
+                    Text('$done/${chapter.levels}', style: context.text.labelLarge?.copyWith(color: Colors.white)),
                   ],
                 ),
                 const SizedBox(height: AppSpacing.md),
@@ -145,10 +137,7 @@ class DailyGoalStreakCard extends ConsumerWidget {
               ProgressRing(
                 value: doneToday / p.dailyGoal,
                 size: 68,
-                child: Text(
-                  '$doneToday/${p.dailyGoal}',
-                  style: context.text.titleSmall,
-                ),
+                child: Text('$doneToday/${p.dailyGoal}', style: context.text.titleSmall),
               ),
               const SizedBox(width: AppSpacing.md),
               Expanded(
@@ -211,11 +200,9 @@ class DailyGoalStreakCard extends ConsumerWidget {
                           color: active
                               ? context.nyaya.streak
                               : frozen
-                                  ? AppPalette.frost
-                                  : context.colors.surfaceContainerLow,
-                          border: isToday && !active
-                              ? Border.all(color: context.nyaya.streak, width: 2)
-                              : null,
+                              ? AppPalette.frost
+                              : context.colors.surfaceContainerLow,
+                          border: isToday && !active ? Border.all(color: context.nyaya.streak, width: 2) : null,
                         ),
                         child: Icon(
                           frozen ? Icons.ac_unit_rounded : Icons.local_fire_department_rounded,
@@ -252,10 +239,7 @@ class DailyDocketCard extends ConsumerWidget {
           Container(
             width: 56,
             height: 56,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppRadius.md),
-              color: AppPalette.burntClay,
-            ),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(AppRadius.md), color: AppPalette.burntClay),
             child: Icon(done ? Icons.check_rounded : Icons.today_rounded, color: Colors.white, size: 30),
           ),
           const SizedBox(width: AppSpacing.md),
@@ -307,7 +291,10 @@ class _Badge extends StatelessWidget {
         color: color.withValues(alpha: 0.14),
         borderRadius: BorderRadius.circular(AppRadius.xl),
       ),
-      child: Text(text, style: context.text.labelSmall?.copyWith(color: color, fontWeight: FontWeight.w800)),
+      child: Text(
+        text,
+        style: context.text.labelSmall?.copyWith(color: color, fontWeight: FontWeight.w800),
+      ),
     );
   }
 }
@@ -321,27 +308,9 @@ class QuizModesGrid extends ConsumerWidget {
     final l = context.l10n;
     final persona = ref.watch(profileProvider.select((p) => p.persona));
     final modes = [
-      (
-        QuizMode.casePath,
-        l.modeCasePath,
-        l.modeCasePathDesc,
-        Icons.route_rounded,
-        AppPalette.terracotta,
-      ),
-      (
-        QuizMode.dailyDocket,
-        l.modeDailyDocket,
-        l.modeDailyDocketDesc,
-        Icons.today_rounded,
-        AppPalette.burntClay,
-      ),
-      (
-        QuizMode.duel,
-        l.modeDuel,
-        l.modeDuelDesc,
-        Icons.sports_kabaddi_rounded,
-        AppPalette.moss,
-      ),
+      (QuizMode.casePath, l.modeCasePath, l.modeCasePathDesc, Icons.route_rounded, AppPalette.terracotta),
+      (QuizMode.dailyDocket, l.modeDailyDocket, l.modeDailyDocketDesc, Icons.today_rounded, AppPalette.burntClay),
+      (QuizMode.duel, l.modeDuel, l.modeDuelDesc, Icons.sports_kabaddi_rounded, AppPalette.moss),
       (
         QuizMode.exam,
         l.modeExam,
@@ -455,9 +424,7 @@ class LeagueCard extends ConsumerWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  p.weeklyXp == 0
-                      ? l.leaderboardEarnToJoin
-                      : l.homeLeagueEnds(formatCountdown(Day.untilWeekEnd(now))),
+                  p.weeklyXp == 0 ? l.leaderboardEarnToJoin : l.homeLeagueEnds(formatCountdown(Day.untilWeekEnd(now))),
                   style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary),
                 ),
               ],
@@ -480,10 +447,7 @@ class PremiumBanner extends StatelessWidget {
       onTap: () => context.push(Routes.premium),
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppRadius.lg),
-          color: AppPalette.sand,
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(AppRadius.lg), color: AppPalette.sand),
         child: Row(
           children: [
             const Icon(Icons.workspace_premium_rounded, size: 36, color: AppPalette.deepEarth),
@@ -544,32 +508,6 @@ class FactOfTheDayCard extends ConsumerWidget {
           ],
         ],
       ),
-    );
-  }
-}
-
-class LatestUpdatesSection extends ConsumerWidget {
-  const LatestUpdatesSection({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l = context.l10n;
-    final updates = ref.watch(legalUpdatesProvider).value ?? const [];
-    if (updates.isEmpty) return const SizedBox.shrink();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SectionHeader(
-          title: l.homeUpdatesTitle,
-          action: l.commonSeeAll,
-          onAction: () => context.go(Routes.updates),
-        ),
-        for (final u in updates.take(2))
-          Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: UpdateTile(update: u),
-          ),
-      ],
     );
   }
 }
