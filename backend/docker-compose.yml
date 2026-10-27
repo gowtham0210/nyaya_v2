@@ -1,0 +1,14 @@
+# Optional: a real Postgres for local development (set DATABASE_URL in .env to use it).
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: nyaya
+      POSTGRES_PASSWORD: nyaya
+      POSTGRES_DB: nyaya
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:

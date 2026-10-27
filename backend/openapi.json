@@ -1,0 +1,1377 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/auth/session": {
+      "post": {
+        "operationId": "AuthController_signIn",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignInDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/refresh": {
+      "post": {
+        "operationId": "AuthController_refresh",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/sign-out": {
+      "post": {
+        "operationId": "AuthController_signOut",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/me": {
+      "get": {
+        "operationId": "MeController_me",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MeDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/taxonomy": {
+      "get": {
+        "operationId": "TaxonomyController_get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaxonomyDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "taxonomy"
+        ]
+      }
+    },
+    "/v1/editor/questions": {
+      "get": {
+        "operationId": "QuestionsController_list",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Status of each question's latest version",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "in_review",
+                "changes_requested",
+                "approved",
+                "published",
+                "superseded",
+                "retired"
+              ]
+            }
+          },
+          {
+            "name": "topic_id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "description": "Searches question text",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionPageDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "editor"
+        ]
+      },
+      "post": {
+        "operationId": "QuestionsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateQuestionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a question as a draft (version 1)",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/questions/{id}": {
+      "get": {
+        "operationId": "QuestionsController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "editor"
+        ]
+      },
+      "patch": {
+        "operationId": "QuestionsController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateQuestionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Edit the latest version while it is a draft or has changes requested",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/questions/{id}/submit": {
+      "post": {
+        "operationId": "QuestionsController_submit",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Send the latest version for legal review",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/questions/{id}/request-changes": {
+      "post": {
+        "operationId": "QuestionsController_requestChanges",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReasonDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/questions/{id}/approve": {
+      "post": {
+        "operationId": "QuestionsController_approve",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApproveDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Approve the version under review (not your own)",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/questions/{id}/publish": {
+      "post": {
+        "operationId": "QuestionsController_publish",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Publish the approved version; the previous live version is superseded",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/questions/{id}/revise": {
+      "post": {
+        "operationId": "QuestionsController_revise",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Start a new draft version from the published (or retired) one",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/questions/{id}/retire": {
+      "post": {
+        "operationId": "QuestionsController_retire",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReasonDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Take the live version down",
+        "tags": [
+          "editor"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Nyaya API",
+    "description": "Single write path for the Flutter app and the Content Management Portal. Errors use { code, message, details, request_id }. Timestamps are ISO-8601 UTC.",
+    "version": "0.1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "SignInDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "editor@example.com"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "MeDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "email": {
+            "type": "string"
+          },
+          "display_name": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "learner",
+                "admin",
+                "content_editor",
+                "legal_reviewer",
+                "publisher",
+                "analyst"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "display_name",
+          "roles"
+        ]
+      },
+      "SessionDto": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string"
+          },
+          "expires_in": {
+            "type": "number",
+            "description": "Seconds until the access token expires"
+          },
+          "refresh_token": {
+            "type": "string",
+            "description": "Single use: each refresh returns a new one"
+          },
+          "user": {
+            "$ref": "#/components/schemas/MeDto"
+          }
+        },
+        "required": [
+          "access_token",
+          "expires_in",
+          "refresh_token",
+          "user"
+        ]
+      },
+      "RefreshDto": {
+        "type": "object",
+        "properties": {
+          "refresh_token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "refresh_token"
+        ]
+      },
+      "TopicDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "act_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "slug",
+          "name"
+        ]
+      },
+      "SubjectDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "topics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TopicDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "slug",
+          "name",
+          "topics"
+        ]
+      },
+      "ActDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "short_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "year": {
+            "type": "number",
+            "nullable": true
+          },
+          "jurisdiction": {
+            "type": "string",
+            "example": "IN"
+          }
+        },
+        "required": [
+          "id",
+          "slug",
+          "name",
+          "jurisdiction"
+        ]
+      },
+      "TaxonomyDto": {
+        "type": "object",
+        "properties": {
+          "subjects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubjectDto"
+            }
+          },
+          "acts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActDto"
+            }
+          }
+        },
+        "required": [
+          "subjects",
+          "acts"
+        ]
+      },
+      "VersionSummaryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version_no": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "in_review",
+              "changes_requested",
+              "approved",
+              "published",
+              "superseded",
+              "retired"
+            ]
+          },
+          "change_note": {
+            "type": "string",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "version_no",
+          "status",
+          "change_note",
+          "created_at"
+        ]
+      },
+      "QuestionListItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "external_ref": {
+            "type": "string",
+            "nullable": true
+          },
+          "live_version_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "retired_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "latest": {
+            "$ref": "#/components/schemas/VersionSummaryDto"
+          }
+        },
+        "required": [
+          "id",
+          "external_ref",
+          "live_version_id",
+          "retired_at",
+          "latest"
+        ]
+      },
+      "QuestionPageDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionListItemDto"
+            }
+          },
+          "next_cursor": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ]
+      },
+      "OptionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "a",
+            "description": "Stable within the question"
+          },
+          "text": {
+            "type": "string",
+            "example": "26 January 1950"
+          }
+        },
+        "required": [
+          "id",
+          "text"
+        ]
+      },
+      "VersionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version_no": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "in_review",
+              "changes_requested",
+              "approved",
+              "published",
+              "superseded",
+              "retired"
+            ]
+          },
+          "topic_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "jurisdiction": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "question_type": {
+            "type": "string",
+            "enum": [
+              "single_select"
+            ]
+          },
+          "difficulty": {
+            "type": "number"
+          },
+          "stem": {
+            "type": "string"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OptionDto"
+            }
+          },
+          "correct_option_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "source_title": {
+            "type": "string",
+            "nullable": true
+          },
+          "source_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "citation": {
+            "type": "string",
+            "nullable": true
+          },
+          "provision_reference": {
+            "type": "string",
+            "nullable": true
+          },
+          "valid_from": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "valid_to": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "verified_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "reviewer_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "change_note": {
+            "type": "string",
+            "nullable": true
+          },
+          "created_by": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "updated_by": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "submitted_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "approved_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "published_by": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "ended_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "version_no",
+          "status",
+          "topic_id",
+          "jurisdiction",
+          "language",
+          "question_type",
+          "difficulty",
+          "stem",
+          "options",
+          "correct_option_ids",
+          "explanation",
+          "source_title",
+          "source_url",
+          "citation",
+          "provision_reference",
+          "valid_from",
+          "valid_to",
+          "verified_at",
+          "reviewer_id",
+          "change_note",
+          "created_by",
+          "updated_by",
+          "submitted_at",
+          "approved_at",
+          "published_at",
+          "published_by",
+          "ended_at",
+          "created_at",
+          "updated_at"
+        ]
+      },
+      "ReviewDecisionDto": {
+        "type": "object",
+        "properties": {
+          "version_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "reviewer_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "approved",
+              "changes_requested"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "version_id",
+          "reviewer_id",
+          "decision",
+          "reason",
+          "created_at"
+        ]
+      },
+      "QuestionDetailDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "external_ref": {
+            "type": "string",
+            "nullable": true
+          },
+          "live_version_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "retired_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "latest": {
+            "description": "The newest version, which is the one actions apply to",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VersionDto"
+              }
+            ]
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionSummaryDto"
+            }
+          },
+          "reviews": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReviewDecisionDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "external_ref",
+          "live_version_id",
+          "retired_at",
+          "created_at",
+          "latest",
+          "versions",
+          "reviews"
+        ]
+      },
+      "CreateQuestionDto": {
+        "type": "object",
+        "properties": {
+          "topic_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "question_type": {
+            "type": "string",
+            "enum": [
+              "single_select"
+            ],
+            "default": "single_select"
+          },
+          "difficulty": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 3,
+            "default": 1
+          },
+          "jurisdiction": {
+            "type": "string",
+            "default": "IN"
+          },
+          "language": {
+            "type": "string",
+            "default": "en"
+          },
+          "stem": {
+            "type": "string"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OptionDto"
+            }
+          },
+          "correct_option_ids": {
+            "description": "Never sent to learners before they answer",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "source_title": {
+            "type": "string",
+            "nullable": true
+          },
+          "source_url": {
+            "type": "string",
+            "nullable": true,
+            "example": "https://www.indiacode.nic.in/"
+          },
+          "citation": {
+            "type": "string",
+            "nullable": true
+          },
+          "provision_reference": {
+            "type": "string",
+            "nullable": true,
+            "example": "Article 394, Constitution of India"
+          },
+          "valid_from": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "valid_to": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          }
+        },
+        "required": [
+          "topic_id"
+        ]
+      },
+      "UpdateQuestionDto": {
+        "type": "object",
+        "properties": {
+          "topic_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "question_type": {
+            "type": "string",
+            "enum": [
+              "single_select"
+            ],
+            "default": "single_select"
+          },
+          "difficulty": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 3,
+            "default": 1
+          },
+          "jurisdiction": {
+            "type": "string",
+            "default": "IN"
+          },
+          "language": {
+            "type": "string",
+            "default": "en"
+          },
+          "stem": {
+            "type": "string"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OptionDto"
+            }
+          },
+          "correct_option_ids": {
+            "description": "Never sent to learners before they answer",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "source_title": {
+            "type": "string",
+            "nullable": true
+          },
+          "source_url": {
+            "type": "string",
+            "nullable": true,
+            "example": "https://www.indiacode.nic.in/"
+          },
+          "citation": {
+            "type": "string",
+            "nullable": true
+          },
+          "provision_reference": {
+            "type": "string",
+            "nullable": true,
+            "example": "Article 394, Constitution of India"
+          },
+          "valid_from": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "valid_to": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          }
+        }
+      },
+      "ReasonDto": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "minLength": 3
+          }
+        },
+        "required": [
+          "reason"
+        ]
+      },
+      "ApproveDto": {
+        "type": "object",
+        "properties": {
+          "note": {
+            "type": "string"
+          }
+        }
+      },
+      "ReviseDto": {
+        "type": "object",
+        "properties": {
+          "change_note": {
+            "type": "string",
+            "description": "Why the published question is changing",
+            "minLength": 3
+          }
+        },
+        "required": [
+          "change_note"
+        ]
+      }
+    }
+  }
+}

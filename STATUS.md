@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-27 (Home updates widget, Claude Opus 5.5)
+> Last updated: 2026-10-27 (backend foundation, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -97,6 +97,26 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       `LatestUpdatesSection` in `home_sections.dart` was removed. No new strings (`homeUpdatesTitle` is
       translated). All 38 tests pass, incl. new "Home shows latest updates and opens one";
       checked on simulator (light). Dark mode not eyeballed.
+
+- [x] 2026-10-27: Overall plan received (product name in the plan: "LawLearn"): `docs/planning/`
+      01_Product_Roadmap.docx (phases P0–P7, MVP scope), 02_Module_Plans.docx (modules M01–M15),
+      03_Integration_Content_Contract.xlsx (API contract, content schema, workflow, events, QA gates).
+      Copies there are marked with build status (originals in ~/Downloads untouched). Key gap: the app is
+      offline — the plan needs a backend as the only write path, server-side scoring (no answer keys in the
+      app), a content lifecycle with review/publishing and source metadata, and a Next.js CMS.
+      Empty `backend/` and `cms/` folders created (READMEs only); backend framework not chosen yet.
+
+- [x] 2026-10-27: Backend foundation in `backend/` (user chose Node → **NestJS 12**, ESM, Drizzle ORM,
+      Postgres; embedded PGlite in `.data/pglite` when `DATABASE_URL` is unset, in-memory for tests).
+      Built plan modules M01–M04: staff email/password auth (JWT 15 min + rotating refresh tokens with
+      reuse detection, roles from DB per request, sign-in rate limit), `GET /v1/taxonomy`, and the full
+      question lifecycle under `/v1/editor/questions` (draft → in_review → changes_requested/approved →
+      published → superseded/retired, immutable published versions, reviewer ≠ author, audit log).
+      Seed (`npm run seed`) imports the app's 108 English questions as drafts (`external_ref app:<id>`),
+      6 subjects/topics from the chapters, 6 acts, and dev staff accounts using `SEED_PASSWORD` from
+      `backend/.env`. Contract in `backend/openapi.json`. 4 unit + 18 API tests pass; lint clean.
+      Learner sign-in method still undecided; questions still lack source URL/validity dates, so none can
+      be submitted for review until content ops fill them in.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
