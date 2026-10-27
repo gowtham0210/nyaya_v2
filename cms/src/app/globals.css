@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/* Terracotta × Sand, the learner app's palette. */
+:root {
+  --bg: #fbf6ef;
+  --surface: #ffffff;
+  --surface-2: #f5ebdd;
+  --border: #eadbc6;
+  --text: #302923;
+  --muted: #6b5b4e;
+  --primary: #873f2b;
+  --primary-hover: #5e2a1c;
+  --on-primary: #ffffff;
+  --danger: #b42318;
+  --danger-bg: #f6dcd5;
+  --success: #4d6b35;
+  --success-bg: #e3ead3;
+  --focus: #c28a2c;
+
+  --st-draft-bg: #efe4d4;   --st-draft-fg: #5c4433;
+  --st-review-bg: #dfe3f3;  --st-review-fg: #3f4c86;
+  --st-changes-bg: #f6e6c4; --st-changes-fg: #8a5a12;
+  --st-approved-bg: #e3ead3; --st-approved-fg: #4d6b35;
+  --st-live-bg: #4d6b35;    --st-live-fg: #ffffff;
+  --st-ended-bg: #ece7e1;   --st-ended-fg: #6b5b4e;
+  --st-retired-bg: #f6dcd5; --st-retired-fg: #b42318;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1713;
+    --surface: #26201b;
+    --surface-2: #322a23;
+    --border: #3e352d;
+    --text: #f5ebdd;
+    --muted: #c4b3a0;
+    --primary: #d98b6a;
+    --primary-hover: #e8a487;
+    --on-primary: #1c1713;
+    --danger: #f08a7e;
+    --danger-bg: #3d2420;
+    --success: #9dbb7a;
+    --success-bg: #26301d;
+    --focus: #e8c98a;
+
+    --st-draft-bg: #3a3029;   --st-draft-fg: #e0cdb6;
+    --st-review-bg: #2a3150;  --st-review-fg: #c3cbf0;
+    --st-changes-bg: #45361a; --st-changes-fg: #e8c98a;
+    --st-approved-bg: #2b3a22; --st-approved-fg: #b7d394;
+    --st-live-bg: #9dbb7a;    --st-live-fg: #1c1713;
+    --st-ended-bg: #2e2924;   --st-ended-fg: #c4b3a0;
+    --st-retired-bg: #3d2420; --st-retired-fg: #f08a7e;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-serif);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}

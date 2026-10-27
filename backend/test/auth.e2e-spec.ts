@@ -1,5 +1,8 @@
 import { eq } from 'drizzle-orm';
-import { auditLog, users } from '../src/db/schema.js';
+import { createHash } from 'node:crypto';
+import { auditLog, refreshTokens, users } from '../src/db/schema.js';
+
+const sha256 = (v: string) => createHash('sha256').update(v).digest('hex');
 import { startApp, type TestApp } from './helpers.js';
 
 describe('auth', () => {
@@ -68,25 +71,28 @@ describe('auth', () => {
 
   it('rotates refresh tokens and revokes every session when an old one is reused', async () => {
     const s = await t.signInAs('learner');
-    const first = await t
-      .http()
-      .post('/v1/auth/refresh')
-      .send({ refresh_token: s.refresh })
-      .expect(200);
+    const refresh = (token: string) =>
+      t.http().post('/v1/auth/refresh').send({ refresh_token: token });
+    const first = await refresh(s.refresh).expect(200);
     expect(first.body.refresh_token).not.toBe(s.refresh);
 
-    const reuse = await t
-      .http()
-      .post('/v1/auth/refresh')
-      .send({ refresh_token: s.refresh })
-      .expect(401);
-    expect(reuse.body.code).toBe('invalid_refresh_token');
-    // The token issued by the legitimate refresh is now revoked too.
-    await t
-      .http()
-      .post('/v1/auth/refresh')
-      .send({ refresh_token: first.body.refresh_token })
-      .expect(401);
+    // Moments later (parallel page loads) a reuse is only rejected.
+    expect((await refresh(s.refresh).expect(401)).body.code).toBe(
+      'invalid_refresh_token',
+    );
+    const second = await refresh(first.body.refresh_token).expect(200);
+
+    // Well after rotation it is treated as theft: every session ends.
+    await t.db
+      .update(refreshTokens)
+      .set({ revokedAt: new Date(Date.now() - 60_000) })
+      .where(eq(refreshTokens.userId, s.id));
+    await t.db
+      .update(refreshTokens)
+      .set({ revokedAt: null })
+      .where(eq(refreshTokens.tokenHash, sha256(second.body.refresh_token)));
+    await refresh(s.refresh).expect(401);
+    await refresh(second.body.refresh_token).expect(401);
   });
 
   it('signs out by revoking the refresh token', async () => {

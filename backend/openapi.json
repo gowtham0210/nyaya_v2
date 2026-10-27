@@ -805,7 +805,7 @@
           "acts"
         ]
       },
-      "VersionSummaryDto": {
+      "ListLatestDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -834,6 +834,13 @@
           "created_at": {
             "type": "string",
             "format": "date-time"
+          },
+          "stem": {
+            "type": "string"
+          },
+          "topic_id": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "required": [
@@ -841,7 +848,9 @@
           "version_no",
           "status",
           "change_note",
-          "created_at"
+          "created_at",
+          "stem",
+          "topic_id"
         ]
       },
       "QuestionListItemDto": {
@@ -866,7 +875,7 @@
             "nullable": true
           },
           "latest": {
-            "$ref": "#/components/schemas/VersionSummaryDto"
+            "$ref": "#/components/schemas/ListLatestDto"
           }
         },
         "required": [
@@ -1088,6 +1097,45 @@
           "ended_at",
           "created_at",
           "updated_at"
+        ]
+      },
+      "VersionSummaryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version_no": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "in_review",
+              "changes_requested",
+              "approved",
+              "published",
+              "superseded",
+              "retired"
+            ]
+          },
+          "change_note": {
+            "type": "string",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "version_no",
+          "status",
+          "change_note",
+          "created_at"
         ]
       },
       "ReviewDecisionDto": {

@@ -13,6 +13,8 @@ import { DUMMY_HASH, verifyPassword } from './passwords.js';
 
 type UserRow = typeof users.$inferSelect;
 
+const REUSE_GRACE_MS = 30_000;
+
 const sha256 = (s: string) => createHash('sha256').update(s).digest('hex');
 const invalidRefresh = () =>
   new ApiError(
@@ -77,6 +79,14 @@ export class AuthService {
           .for('update')
           .limit(1);
         if (!row) throw invalidRefresh();
+        // Two requests refreshing at once (e.g. parallel page loads) is a
+        // race, not theft: reject the loser without ending every session.
+        if (
+          row.revokedAt &&
+          Date.now() - row.revokedAt.getTime() < REUSE_GRACE_MS
+        ) {
+          throw invalidRefresh();
+        }
         if (row.revokedAt) {
           await tx
             .update(refreshTokens)

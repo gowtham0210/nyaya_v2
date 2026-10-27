@@ -32,7 +32,7 @@ Seeded dev accounts (password = `SEED_PASSWORD`): `admin@`, `editor@`, `reviewer
 ## What exists (plan modules)
 
 - **M01 Identity & access** — email + password sign-in for staff, 15-minute access tokens, single-use
-  refresh tokens (reuse revokes every session), sign-out, `GET /v1/me`, roles checked from the
+  refresh tokens (a reuse more than 30 s after rotation is treated as theft and revokes every session), sign-out, `GET /v1/me`, roles checked from the
   database on every request, sign-in rate limit. Learner sign-in method (OTP?) is still open.
 - **M02 Taxonomy** — `GET /v1/taxonomy`: active subjects, topics and acts (read-only; editing comes with
   the admin views).
@@ -45,6 +45,8 @@ Seeded dev accounts (password = `SEED_PASSWORD`): `admin@`, `editor@`, `reviewer
   reviewer on every version; required before review and publishing.
 
 All errors are `{ code, message, details, request_id }`. Lists are `{ items, next_cursor }`.
+
+The Content Management Portal in [`../cms`](../cms) is the first client.
 
 ## Not yet
 

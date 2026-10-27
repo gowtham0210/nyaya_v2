@@ -264,6 +264,11 @@ export class ReviewDecisionDto {
   @ApiProperty({ format: 'date-time' }) created_at: string;
 }
 
+export class ListLatestDto extends VersionSummaryDto {
+  @ApiProperty() stem: string;
+  @ApiProperty({ format: 'uuid' }) topic_id: string;
+}
+
 export class QuestionListItemDto {
   @ApiProperty({ format: 'uuid' }) id: string;
   @ApiProperty({ type: String, nullable: true }) external_ref: string | null;
@@ -271,10 +276,7 @@ export class QuestionListItemDto {
   live_version_id: string | null;
   @ApiProperty({ type: String, format: 'date-time', nullable: true })
   retired_at: string | null;
-  @ApiProperty({ type: VersionSummaryDto }) latest: VersionSummaryDto & {
-    stem: string;
-    topic_id: string;
-  };
+  @ApiProperty({ type: () => ListLatestDto }) latest: ListLatestDto;
 }
 
 export class QuestionPageDto {

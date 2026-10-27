@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-27 (backend foundation, Claude Opus 5.5)
+> Last updated: 2026-10-27 (CMS portal, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -117,6 +117,20 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       `backend/.env`. Contract in `backend/openapi.json`. 4 unit + 18 API tests pass; lint clean.
       Learner sign-in method still undecided; questions still lack source URL/validity dates, so none can
       be submitted for review until content ops fill them in.
+
+- [x] 2026-10-27: Content Management Portal in `cms/` (Next.js 16.4, App Router, Cache Components on,
+      Tailwind 4 with the app's Terracotta × Sand tokens, light + dark). Screens: sign-in, question list
+      (search, status/topic filters, cursor paging; "Review queue" = in_review, "Ready to publish" = approved),
+      new question, question detail (editable form for draft/changes requested, read-only otherwise, role-based
+      actions: submit, request changes, approve, publish, revise, retire; version + review history).
+      Tokens live in httpOnly cookies; `src/proxy.ts` (Next 16's renamed middleware) refreshes them and shares
+      one refresh across parallel requests. Typed client generated from `backend/openapi.json`
+      (`npm run gen:api`). Backend: refresh-token reuse within 30 s of rotation is now just rejected (race),
+      not treated as theft; list items' `latest` now documents `stem`/`topic_id`.
+      Verified in the browser: editor fills an imported draft's source → submit; reviewer approves; publisher
+      publishes; editor creates a new draft; proxy refresh and sign-in redirects checked with curl.
+      Dev servers: `.claude/launch.json` (api :3000, cms :3001). Local dev data now has 1 published + 1 extra draft.
+      Next: learner-facing published-content API + quiz sessions with server scoring, then wire the Flutter app.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
