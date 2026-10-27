@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-27 (learner quiz API, Claude Opus 5.5)
+> Last updated: 2026-10-27 (Flutter app on the backend, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -139,8 +139,28 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       modelled yet). Tables `quiz_sessions`, `quiz_session_questions` (migration 0001). Seed adds
       `learner@nyaya.local`. 10 unit + 28 API tests pass; smoke-tested against the dev DB.
       Gotcha: PGlite is single-process — stop the API before `npm run seed`.
-      Next: wire the Flutter app to these endpoints (replacing on-device scoring/answer keys); learner
-      sign-in method still undecided; most of the 108 questions still need sources + review to be publishable.
+
+- [x] 2026-10-27: **Flutter app now runs every quiz through the backend.** No answer keys on the phone:
+      `assets/questions/` moved to `backend/seed/questions/` (backend tests now validate the bank). `Question`
+      has no key; the server's `Reveal` (correct option, explanation, reference) arrives after an answer is final
+      (practice) or on submit (Exam Chamber, `feedback_mode=end`). `QuizController` is async (starting → active →
+      submitting → finished/failed), retries sends, re-sends exam answers before submit, and takes scores from the
+      server; XP/stars/streak/leagues still computed on the device from server-verified correctness (Exam Chamber's
+      −0.25 marking too — not yet a server scoring policy). `QuizBuilder.plan` maps modes to session requests
+      (Case Path = chapter + difficulty=level; Docket = `daily`, persona range; Duel = reached chapters; Exam = all,
+      persona range). Chapter names moved into the ARB files (all 6 languages); quiz content is English-only until
+      translations are imported server-side.
+      Auth: email + password learner sign-up/sign-in (user's choice; `POST /v1/auth/register`), tokens in the
+      Keychain (`flutter_secure_storage`), `ApiClient` refreshes once on expiry (offline ≠ signed out). Quizzes need
+      an account: `QuizLauncher` opens `/sign-in` first (no energy spent before). Settings has an Account section.
+      API URL: `--dart-define=NYAYA_API_URL=...` (default http://localhost:3000; ATS local-networking + Android
+      debug cleartext allowed for dev). Backend additions: register, multi-topic/difficulty-range/daily sessions,
+      `subject_slug` in the catalog, `topic_id` per session question, migration 0002, dev seed flag
+      `SEED_PUBLISH_IMPORTED=true`. Tests: Flutter 35 (fake backend in `test/support/fake_backend.dart`), backend
+      17 unit + 31 API. Verified on the iPhone 17 Pro Max simulator against the real local API: sign-up gate,
+      practice answers with server verdicts, wrong-answer reveal, submit → attempt stored, sign-out/sign-in.
+      Notes: iOS shows a system "Save Password?" alert after sign-up (blocks touches until answered — normal);
+      local game progress (XP, stars) is still per device, not per account; Keychain sessions survive app reinstall.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

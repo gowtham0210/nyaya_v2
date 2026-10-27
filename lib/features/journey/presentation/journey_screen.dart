@@ -8,7 +8,6 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/common.dart';
 import '../../../core/widgets/pressable.dart';
 import '../../profile/application/profile_controller.dart';
-import '../../quiz/data/question_repository.dart';
 import '../application/journey_controller.dart';
 import '../domain/journey.dart';
 import 'journey_layout.dart';
@@ -56,7 +55,6 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
     final l = context.l10n;
     final progress = ref.watch(journeyProvider);
     final profile = ref.watch(profileProvider);
-    final bank = ref.watch(questionBankProvider).value;
     final nodes = JourneyCatalog.nodes;
     final current = progress.current;
     final completedUpTo = current?.globalIndex ?? nodes.length;
@@ -107,8 +105,8 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                           top: layout.bannerTop(c) + 30,
                           child: ChapterBanner(
                             number: c + 1,
-                            title: bank?.chapters[chapter.id]?.title ?? '',
-                            subtitle: bank?.chapters[chapter.id]?.subtitle ?? '',
+                            title: l.chapterTitle(chapter.id),
+                            subtitle: l.chapterSubtitle(chapter.id),
                             chapter: chapter,
                             done: progress.completedLevelsIn(chapter.id),
                             active: (current?.chapterIndex ?? -1) == c,

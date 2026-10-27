@@ -68,6 +68,8 @@ class AnswerRecord {
     required this.question,
     required this.selectedIndex,
     required this.elapsedMs,
+    required this.correct,
+    this.reveal,
   });
 
   final Question question;
@@ -76,8 +78,22 @@ class AnswerRecord {
   final int? selectedIndex;
   final int elapsedMs;
 
-  bool get isCorrect => selectedIndex == question.answerIndex;
+  /// As judged by the server.
+  final bool correct;
+
+  /// Correct option and explanation, once the server has disclosed them.
+  final Reveal? reveal;
+
+  bool get isCorrect => correct;
   bool get isSkipped => selectedIndex == null;
+
+  AnswerRecord withServerVerdict({required bool correct, required Reveal reveal}) => AnswerRecord(
+        question: question,
+        selectedIndex: selectedIndex,
+        elapsedMs: elapsedMs,
+        correct: correct,
+        reveal: reveal,
+      );
 }
 
 @immutable

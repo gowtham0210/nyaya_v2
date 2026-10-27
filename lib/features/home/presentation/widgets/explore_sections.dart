@@ -12,7 +12,6 @@ import '../../../journey/application/journey_controller.dart';
 import '../../../journey/domain/journey.dart';
 import '../../../legal_updates/data/legal_updates_repository.dart';
 import '../../../legal_updates/presentation/updates_screen.dart';
-import '../../../quiz/data/question_repository.dart';
 import '../../../quiz/domain/quiz_models.dart';
 import '../../../quiz/presentation/quiz_launcher.dart';
 import 'law_illustration.dart';
@@ -92,7 +91,6 @@ class ContinueLearningCard extends ConsumerWidget {
     if (journey.stars.isEmpty) return const SizedBox.shrink();
 
     final l = context.l10n;
-    final bank = ref.watch(questionBankProvider).value;
     final node = journey.current;
     final chapter = node?.chapter ?? JourneyCatalog.chapters.last;
     final done = journey.completedLevelsIn(chapter.id);
@@ -169,7 +167,7 @@ class ContinueLearningCard extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(bank?.chapters[chapter.id]?.title ?? '', style: _serif(context, 24)),
+                      Text(l.chapterTitle(chapter.id), style: _serif(context, 24)),
                       const SizedBox(height: 4),
                       Text(subtitle, style: context.text.bodyMedium?.copyWith(color: context.nyaya.textSecondary)),
                       const SizedBox(height: AppSpacing.md),

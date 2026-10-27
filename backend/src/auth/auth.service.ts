@@ -9,11 +9,17 @@ import { ApiError } from '../core/errors.js';
 import { newId } from '../core/ids.js';
 import { refreshTokens, users } from '../db/schema.js';
 import type { MeDto, SessionDto } from './auth.dto.js';
-import { DUMMY_HASH, verifyPassword } from './passwords.js';
+import { DUMMY_HASH, hashPassword, verifyPassword } from './passwords.js';
 
 type UserRow = typeof users.$inferSelect;
 
 const REUSE_GRACE_MS = 30_000;
+
+/** Postgres unique_violation, possibly wrapped by the query builder. */
+const isUniqueViolation = (e: unknown): boolean => {
+  for (let x: any = e; x; x = x.cause) if (x.code === '23505') return true;
+  return false;
+};
 
 const sha256 = (s: string) => createHash('sha256').update(s).digest('hex');
 const invalidRefresh = () =>
@@ -66,6 +72,46 @@ export class AuthService {
       );
       return this.issue(tx, user);
     });
+  }
+
+  /** Creates a learner account and signs it in. */
+  async register(
+    email: string,
+    password: string,
+    displayName: string,
+    requestId: string,
+  ): Promise<SessionDto> {
+    const passwordHash = await hashPassword(password);
+    const normalized = email.trim().toLowerCase();
+    try {
+      return await this.db.transaction(async (tx) => {
+        const [user] = await tx
+          .insert(users)
+          .values({
+            id: newId(),
+            email: normalized,
+            displayName: displayName.trim(),
+            passwordHash,
+            roles: ['learner'],
+          })
+          .returning();
+        await this.audit.record(
+          tx,
+          { id: user.id, requestId },
+          { action: 'auth.registered', entityType: 'user', entityId: user.id },
+        );
+        return this.issue(tx, user);
+      });
+    } catch (e) {
+      if (isUniqueViolation(e)) {
+        throw new ApiError(
+          HttpStatus.CONFLICT,
+          'email_taken',
+          'An account with this email already exists',
+        );
+      }
+      throw e;
+    }
   }
 
   /** Rotates the refresh token. Presenting a used token revokes all of that user's sessions. */

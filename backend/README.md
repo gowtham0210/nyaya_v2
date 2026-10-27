@@ -9,7 +9,7 @@ The single write path for every client (Flutter app, Content Management Portal),
 ```bash
 npm install
 cp .env.example .env     # then set SEED_PASSWORD to a password of your choice
-npm run seed             # taxonomy + the app's 108 questions as drafts + dev staff accounts
+npm run seed             # taxonomy + the 108 starter questions as drafts + dev accounts
 npm run start:dev        # http://localhost:3000/v1
 ```
 
@@ -17,6 +17,11 @@ Without `DATABASE_URL` the server uses an embedded Postgres (PGlite) stored in `
 install is needed. For a real Postgres: `docker compose up -d`, then set
 `DATABASE_URL=postgres://nyaya:nyaya@localhost:5432/nyaya` in `.env`. Migrations run on start.
 The embedded database allows one process at a time, so stop the server before `npm run seed`.
+
+The starter questions live in `seed/questions/` (English plus 5 translations; the app no longer bundles
+them). To give the app content locally before anything is reviewed, run
+`SEED_PUBLISH_IMPORTED=true npm run seed`: it publishes the untouched imported drafts marked as
+UNREVIEWED dev data (refused in production; never copy that database anywhere real).
 
 Seeded dev accounts (password = `SEED_PASSWORD`): `admin@`, `editor@`, `reviewer@`, `publisher@`, `learner@nyaya.local`.
 
@@ -32,7 +37,8 @@ Seeded dev accounts (password = `SEED_PASSWORD`): `admin@`, `editor@`, `reviewer
 
 ## What exists (plan modules)
 
-- **M01 Identity & access** — email + password sign-in for staff, 15-minute access tokens, single-use
+- **M01 Identity & access** — learner sign-up (`POST /v1/auth/register`, always role `learner`) and
+  email + password sign-in for everyone, 15-minute access tokens, single-use
   refresh tokens (a reuse more than 30 s after rotation is treated as theft and revokes every session), sign-out, `GET /v1/me`, roles checked from the
   database on every request, sign-in rate limit. Learner sign-in method (OTP?) is still open.
 - **M02 Taxonomy** — `GET /v1/taxonomy`: active subjects, topics and acts (read-only; editing comes with
@@ -46,8 +52,9 @@ Seeded dev accounts (password = `SEED_PASSWORD`): `admin@`, `editor@`, `reviewer
   reviewer on every version; required before review and publishing.
 
 - **M05–M07 Learner quizzes** — `GET /v1/quizzes` (public): topics with published questions in force
-  today (India date), per difficulty. `POST /v1/quiz-sessions` starts a quiz: the server picks eligible
-  published versions at random and shuffles options; no answer key or explanation is sent. Two modes:
+  today (India date), per difficulty. `POST /v1/quiz-sessions` starts a quiz: one topic, several topics or all,
+  a difficulty or a range, optionally `daily` (the same set for everyone that India date); the server picks
+  eligible published versions and shuffles options; no answer key or explanation is sent. Two modes:
   `immediate` (practice: each answer is final and comes back explained; re-sending the same answer is a
   safe retry) and `end` (exam: answers can change, nothing is revealed until submit). Answers close at
   `expires_at` (2 min per question, at least 10 min); submitting is always allowed and is idempotent.
@@ -61,5 +68,5 @@ The Content Management Portal in [`../cms`](../cms) is the first client.
 
 ## Not yet
 
-Learner sign-up (sign-in method still open), bookmarks and mistake review, content reports, CSV import,
+OTP or social sign-in (if wanted), bookmarks and mistake review, content reports, CSV import,
 admin user/taxonomy management, content reports, translations of questions, analytics, CI/CD.

@@ -18,7 +18,6 @@ import '../../../journey/application/journey_controller.dart';
 import '../../../journey/domain/journey.dart';
 import '../../../profile/application/profile_controller.dart';
 import '../../../profile/domain/user_profile.dart';
-import '../../../quiz/data/question_repository.dart';
 import '../../../quiz/domain/quiz_models.dart';
 import '../../../quiz/presentation/quiz_launcher.dart';
 
@@ -30,10 +29,9 @@ class ContinueJourneyCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
     final journey = ref.watch(journeyProvider);
-    final bank = ref.watch(questionBankProvider).value;
     final node = journey.current;
     final chapter = node?.chapter ?? JourneyCatalog.chapters.last;
-    final chapterTitle = bank?.chapters[chapter.id]?.title ?? '';
+    final chapterTitle = l.chapterTitle(chapter.id);
     final done = journey.completedLevelsIn(chapter.id);
 
     final String subtitle;
@@ -464,49 +462,6 @@ class PremiumBanner extends StatelessWidget {
             const Icon(Icons.arrow_forward_rounded, color: AppPalette.deepEarth),
           ],
         ),
-      ),
-    );
-  }
-}
-
-/// Picks a question per day from the (localized) bank and presents its
-/// answer as a bite-sized fact — free learning even with zero energy.
-class FactOfTheDayCard extends ConsumerWidget {
-  const FactOfTheDayCard({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l = context.l10n;
-    final bank = ref.watch(questionBankProvider).value;
-    if (bank == null || bank.questions.isEmpty) return const SizedBox.shrink();
-    final now = ref.watch(clockProvider)();
-    final dayIndex = DateTime.utc(now.year, now.month, now.day).millisecondsSinceEpoch ~/ 86400000;
-    final q = bank.questions[(dayIndex * 7) % bank.questions.length];
-
-    return NyayaCard(
-      onTap: () => context.go('${Routes.chat}?q=${Uri.encodeQueryComponent(q.text)}'),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const Icon(Icons.lightbulb_rounded, color: AppPalette.ochre),
-              const SizedBox(width: 8),
-              Text(l.homeFactTitle, style: context.text.titleSmall),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Text(q.options[q.answerIndex], style: context.text.titleMedium),
-          const SizedBox(height: 6),
-          Text(
-            q.explanation,
-            style: context.text.bodyMedium?.copyWith(color: context.nyaya.textSecondary, height: 1.45),
-          ),
-          if (q.reference.isNotEmpty) ...[
-            const SizedBox(height: 8),
-            Text(q.reference, style: context.text.labelSmall?.copyWith(color: context.colors.primary)),
-          ],
-        ],
       ),
     );
   }

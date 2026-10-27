@@ -4,15 +4,15 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/api/api_client.dart';
 import '../../../core/config/game_rules.dart';
 import '../../../core/storage/local_store.dart';
-import '../../../core/utils/day.dart';
 import '../../gamification/domain/reward_summary.dart';
 import '../../gamification/domain/xp_calculator.dart';
 import '../../journey/application/journey_controller.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../profile/domain/user_profile.dart';
-import '../data/question_repository.dart';
+import '../data/quiz_api.dart';
 import '../domain/question.dart';
 import '../domain/quiz_builder.dart';
 import '../domain/quiz_models.dart';
@@ -25,13 +25,37 @@ class OpponentAnswer {
   final int elapsedMs;
 }
 
+enum QuizPhase {
+  /// Asking the server for questions.
+  starting,
+  active,
+
+  /// Waiting for the server to score the quiz.
+  submitting,
+  finished,
+
+  /// The quiz could not start; see [QuizState.failure].
+  failed,
+}
+
+enum QuizFailure {
+  /// No published questions match (yet).
+  empty,
+  network,
+  signedOut,
+  other,
+}
+
 @immutable
 class QuizState {
   const QuizState({
     required this.request,
-    required this.questions,
+    this.phase = QuizPhase.starting,
+    this.failure,
+    this.questions = const [],
     this.index = 0,
     this.selected,
+    this.sending = false,
     this.revealed = false,
     this.answers = const [],
     this.combo = 0,
@@ -40,14 +64,21 @@ class QuizState {
     this.opponentAnswers = const [],
     this.playerPoints = 0,
     this.opponentPoints = 0,
+    this.problem = 0,
+    this.submitFailed = false,
     this.result,
     this.rewards,
   });
 
   final QuizRequest request;
+  final QuizPhase phase;
+  final QuizFailure? failure;
   final List<Question> questions;
   final int index;
   final int? selected;
+
+  /// An answer is on its way to the server.
+  final bool sending;
 
   /// True once the current question's answer is locked and feedback shown.
   final bool revealed;
@@ -62,6 +93,12 @@ class QuizState {
   final int playerPoints;
   final int opponentPoints;
 
+  /// Bumped each time an answer could not be sent, so the view can say so.
+  final int problem;
+
+  /// Scoring failed (e.g. offline); the quiz can be submitted again.
+  final bool submitFailed;
+
   final QuizResult? result;
   final RewardSummary? rewards;
 
@@ -73,34 +110,48 @@ class QuizState {
   bool get hasStarted => answers.isNotEmpty || selected != null;
 
   /// Whether the Next button is enabled.
-  bool get canAdvance => request.mode.instantFeedback ? revealed : true;
+  bool get canAdvance =>
+      phase == QuizPhase.active && !sending && (request.mode.instantFeedback ? revealed : true);
 
   QuizState copyWith({
+    QuizPhase? phase,
+    QuizFailure? failure,
+    List<Question>? questions,
     int? index,
     int? selected,
     bool clearSelected = false,
+    bool? sending,
     bool? revealed,
     List<AnswerRecord>? answers,
     int? combo,
     int? secondsLeft,
+    DuelOpponent? opponent,
+    List<OpponentAnswer>? opponentAnswers,
     int? playerPoints,
     int? opponentPoints,
+    int? problem,
+    bool? submitFailed,
     QuizResult? result,
     RewardSummary? rewards,
   }) {
     return QuizState(
       request: request,
-      questions: questions,
+      phase: phase ?? this.phase,
+      failure: failure ?? this.failure,
+      questions: questions ?? this.questions,
       index: index ?? this.index,
       selected: clearSelected ? null : (selected ?? this.selected),
+      sending: sending ?? this.sending,
       revealed: revealed ?? this.revealed,
       answers: answers ?? this.answers,
       combo: combo ?? this.combo,
       secondsLeft: secondsLeft ?? this.secondsLeft,
-      opponent: opponent,
-      opponentAnswers: opponentAnswers,
+      opponent: opponent ?? this.opponent,
+      opponentAnswers: opponentAnswers ?? this.opponentAnswers,
       playerPoints: playerPoints ?? this.playerPoints,
       opponentPoints: opponentPoints ?? this.opponentPoints,
+      problem: problem ?? this.problem,
+      submitFailed: submitFailed ?? this.submitFailed,
       result: result ?? this.result,
       rewards: rewards ?? this.rewards,
     );
@@ -110,64 +161,83 @@ class QuizState {
 final quizControllerProvider =
     NotifierProvider.autoDispose.family<QuizController, QuizState, QuizRequest>(QuizController.new);
 
-/// Drives one quiz session. Requires [questionBankProvider] to be loaded
-/// before first read (the quiz screen guarantees this).
+/// Drives one quiz through a server session: the server picks the questions,
+/// judges each answer and scores the whole quiz. This class only keeps time,
+/// shows what the server returns and hands the verified result to the
+/// rewards (XP, stars, streak), which stay on the device.
 class QuizController extends Notifier<QuizState> {
   QuizController(this.request);
 
   final QuizRequest request;
   Timer? _timer;
-  late DateTime _questionStart;
-  late DateTime _quizStart;
+  DateTime _questionStart = DateTime.now();
+  DateTime _quizStart = DateTime.now();
+  String? _sessionId;
 
   @override
   QuizState build() {
     ref.onDispose(() => _timer?.cancel());
-    final bank = ref.read(questionBankProvider).requireValue;
-    final profile = ref.read(profileProvider);
-    final journey = ref.read(journeyProvider);
-    final now = ref.read(clockProvider)();
-    final rng = Random();
-
-    final questions = QuizBuilder.build(
-      request: request,
-      bank: bank,
-      reachedChapters: journey.reachedChapters,
-      persona: profile.persona,
-      dayKey: Day.key(now),
-      random: rng,
-    );
-
-    DuelOpponent? opponent;
-    var opponentAnswers = const <OpponentAnswer>[];
-    if (request.mode == QuizMode.duel) {
-      opponent = QuizBuilder.opponent(profile.duelRating, rng);
-      opponentAnswers = [
-        for (final q in questions)
-          () {
-            final (c, ms) = QuizBuilder.opponentAnswer(opponent!, q, rng);
-            return OpponentAnswer(correct: c, elapsedMs: ms);
-          }(),
-      ];
-    }
-
-    _quizStart = now;
-    _questionStart = now;
-    final seconds = request.mode == QuizMode.exam
-        ? GameRules.examSeconds
-        : request.mode.secondsPerQuestion;
-    if (seconds != null && questions.isNotEmpty) _startTimer();
-
-    return QuizState(
-      request: request,
-      questions: questions,
-      secondsLeft: seconds,
-      opponent: opponent,
-      opponentAnswers: opponentAnswers,
-    );
+    Future.microtask(_start);
+    return QuizState(request: request);
   }
 
+  QuizApi get _api => ref.read(quizApiProvider);
   DateTime _now() => ref.read(clockProvider)();
+
+  Future<void> _start() async {
+    try {
+      final catalog = await ref.read(quizCatalogProvider.future);
+      final profile = ref.read(profileProvider);
+      final plan = QuizBuilder.plan(
+        request: request,
+        reachedChapters: ref.read(journeyProvider).reachedChapters,
+        persona: profile.persona,
+      );
+      final topicIds = catalog.topicIdsFor(plan.chapterIds);
+      if (plan.chapterIds.isNotEmpty && topicIds.isEmpty) {
+        throw const ApiException(422, 'no_questions_available', 'Nothing published here yet');
+      }
+      final started = await _api.start(plan, topicIds: topicIds, catalog: catalog);
+      if (!ref.mounted) return;
+      _sessionId = started.sessionId;
+      final questions = started.questions;
+
+      DuelOpponent? opponent;
+      var opponentAnswers = const <OpponentAnswer>[];
+      if (request.mode == QuizMode.duel) {
+        final rng = Random();
+        opponent = QuizBuilder.opponent(profile.duelRating, rng);
+        opponentAnswers = [
+          for (final q in questions)
+            () {
+              final (c, ms) = QuizBuilder.opponentAnswer(opponent!, q, rng);
+              return OpponentAnswer(correct: c, elapsedMs: ms);
+            }(),
+        ];
+      }
+
+      _quizStart = _now();
+      _questionStart = _quizStart;
+      final seconds = request.mode == QuizMode.exam ? GameRules.examSeconds : request.mode.secondsPerQuestion;
+      state = state.copyWith(
+        phase: QuizPhase.active,
+        questions: questions,
+        secondsLeft: seconds,
+        opponent: opponent,
+        opponentAnswers: opponentAnswers,
+      );
+      if (seconds != null) _startTimer();
+    } on ApiException catch (e) {
+      if (!ref.mounted) return;
+      final failure = switch (e) {
+        ApiException(code: 'no_questions_available') => QuizFailure.empty,
+        ApiException(isNetwork: true) => QuizFailure.network,
+        ApiException(status: 401) => QuizFailure.signedOut,
+        _ => QuizFailure.other,
+      };
+      state = state.copyWith(phase: QuizPhase.failed, failure: failure);
+    }
+  }
 
   void _startTimer() {
     _timer?.cancel();
@@ -176,7 +246,7 @@ class QuizController extends Notifier<QuizState> {
 
   void _tick() {
     final s = state;
-    if (s.isFinished || s.secondsLeft == null) return;
+    if (s.phase != QuizPhase.active || s.secondsLeft == null || s.sending) return;
     if (s.request.mode != QuizMode.exam && s.revealed) return; // paused on feedback
     final left = s.secondsLeft! - 1;
     if (left > 0) {
@@ -187,26 +257,42 @@ class QuizController extends Notifier<QuizState> {
     if (s.request.mode == QuizMode.exam) {
       _finishExam();
     } else {
-      _lockAnswer(null);
+      // Time ran out: nothing is sent, so the answer stays secret until the result.
+      _lockAnswer(null, verdict: null, elapsedMs: _elapsedMs);
     }
   }
 
   int get _elapsedMs => _now().difference(_questionStart).inMilliseconds;
 
   /// User taps an option.
-  void select(int option) {
+  Future<void> select(int option) async {
     final s = state;
-    if (s.isFinished || s.revealed) return;
-    if (s.request.mode.instantFeedback) {
-      _lockAnswer(option);
-    } else {
+    if (s.phase != QuizPhase.active || s.revealed || s.sending) return;
+    if (!s.request.mode.instantFeedback) {
       state = s.copyWith(selected: option);
+      return;
+    }
+    final elapsed = _elapsedMs;
+    state = s.copyWith(selected: option, sending: true);
+    try {
+      final verdict = await _api.answer(_sessionId!, position: s.index + 1, question: s.current, option: option);
+      if (!ref.mounted) return;
+      _lockAnswer(option, verdict: verdict, elapsedMs: elapsed);
+    } on ApiException {
+      if (!ref.mounted) return;
+      state = state.copyWith(sending: false, clearSelected: true, problem: state.problem + 1);
     }
   }
 
-  void _lockAnswer(int? option) {
+  void _lockAnswer(int? option, {required Verdict? verdict, required int elapsedMs}) {
     final s = state;
-    final record = AnswerRecord(question: s.current, selectedIndex: option, elapsedMs: _elapsedMs);
+    final record = AnswerRecord(
+      question: s.current,
+      selectedIndex: option,
+      elapsedMs: elapsedMs,
+      correct: verdict?.correct ?? false,
+      reveal: verdict?.reveal,
+    );
     var player = s.playerPoints;
     var opp = s.opponentPoints;
     if (s.request.mode == QuizMode.duel) {
@@ -216,15 +302,12 @@ class QuizController extends Notifier<QuizState> {
         limitSeconds: GameRules.duelSeconds,
       );
       final o = s.opponentAnswers[s.index];
-      opp += XpCalculator.duelPoints(
-        correct: o.correct,
-        elapsedMs: o.elapsedMs,
-        limitSeconds: GameRules.duelSeconds,
-      );
+      opp += XpCalculator.duelPoints(correct: o.correct, elapsedMs: o.elapsedMs, limitSeconds: GameRules.duelSeconds);
     }
     state = s.copyWith(
       selected: option,
       clearSelected: option == null,
+      sending: false,
       revealed: true,
       answers: [...s.answers, record],
       combo: record.isCorrect ? s.combo + 1 : 0,
@@ -233,12 +316,21 @@ class QuizController extends Notifier<QuizState> {
     );
   }
 
+  // Exam answers are saved as the learner moves on; submit waits for them.
+  // Each save resolves to whether it reached the server.
+  final _saves = <int, Future<bool>>{};
+
+  Future<bool> _saveExamAnswer(int index, int option) => _saves[index] = _api
+      .answer(_sessionId!, position: index + 1, question: state.questions[index], option: option)
+      .then((_) => true, onError: (Object _) => false);
+
   /// Next button.
   void next() {
     final s = state;
-    if (s.isFinished) return;
+    if (!s.canAdvance) return;
     if (s.request.mode == QuizMode.exam) {
-      final record = AnswerRecord(question: s.current, selectedIndex: s.selected, elapsedMs: _elapsedMs);
+      final record = AnswerRecord(question: s.current, selectedIndex: s.selected, elapsedMs: _elapsedMs, correct: false);
+      if (s.selected != null) _saveExamAnswer(s.index, s.selected!);
       final answers = [...s.answers, record];
       if (s.isLast) {
         state = s.copyWith(answers: answers);
@@ -249,7 +341,6 @@ class QuizController extends Notifier<QuizState> {
       }
       return;
     }
-    if (!s.revealed) return;
     if (s.isLast) {
       _finish();
       return;
@@ -269,28 +360,55 @@ class QuizController extends Notifier<QuizState> {
     final answers = [
       ...s.answers,
       for (var i = s.answers.length; i < s.questions.length; i++)
-        AnswerRecord(question: s.questions[i], selectedIndex: null, elapsedMs: 0),
+        AnswerRecord(question: s.questions[i], selectedIndex: null, elapsedMs: 0, correct: false),
     ];
     state = s.copyWith(answers: answers);
     _finish();
   }
 
-  void _finish() {
+  /// Submits again after a failed attempt (e.g. back online).
+  Future<void> retrySubmit() async {
+    if (state.submitFailed) await _finish();
+  }
+
+  Future<void> _finish() async {
     _timer?.cancel();
+    state = state.copyWith(phase: QuizPhase.submitting, submitFailed: false);
+    final SubmittedQuiz submitted;
+    try {
+      // Re-send any exam answer that did not reach the server (answers can change until submit).
+      for (final MapEntry(key: i, value: save) in [..._saves.entries]) {
+        if (await save) continue;
+        final option = state.answers[i].selectedIndex;
+        if (option != null && !await _saveExamAnswer(i, option)) {
+          throw const ApiException(0, 'network', 'Could not save an answer');
+        }
+      }
+      submitted = await _api.submit(_sessionId!, state.questions);
+    } on ApiException {
+      if (!ref.mounted) return;
+      state = state.copyWith(phase: QuizPhase.active, submitFailed: true);
+      return;
+    }
+    if (!ref.mounted) return;
+
+    // The server's verdicts are canonical; local records only add timing.
     final s = state;
+    final answers = [
+      for (final (i, a) in s.answers.indexed)
+        a.withServerVerdict(correct: submitted.verdicts[i].correct, reveal: submitted.verdicts[i].reveal),
+    ];
     double? examScore;
     if (s.request.mode == QuizMode.exam) {
-      final negative = ref.read(profileProvider).persona == Persona.citizen
-          ? 0.0
-          : GameRules.examNegativeMarks;
-      examScore = s.answers.fold<double>(0, (sum, a) {
+      final negative = ref.read(profileProvider).persona == Persona.citizen ? 0.0 : GameRules.examNegativeMarks;
+      examScore = answers.fold<double>(0, (sum, a) {
         if (a.isSkipped) return sum;
         return sum + (a.isCorrect ? GameRules.examCorrectMarks : -negative);
       });
     }
     final result = QuizResult(
       request: s.request,
-      answers: s.answers,
+      answers: answers,
       durationMs: _now().difference(_quizStart).inMilliseconds,
       examScore: examScore,
       duelPlayerPoints: s.request.mode == QuizMode.duel ? s.playerPoints : null,
@@ -298,6 +416,6 @@ class QuizController extends Notifier<QuizState> {
       opponent: s.opponent,
     );
     final rewards = QuizCompletionService(ref).complete(result);
-    state = s.copyWith(result: result, rewards: rewards);
+    state = s.copyWith(phase: QuizPhase.finished, answers: answers, result: result, rewards: rewards);
   }
 }

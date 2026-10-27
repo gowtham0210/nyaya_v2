@@ -15,6 +15,26 @@ export class SignInDto {
   password: string;
 }
 
+/** Learner self sign-up. Staff accounts are created by admins, never here. */
+export class RegisterDto {
+  @ApiProperty({ example: 'asha@example.com' })
+  @IsEmail()
+  @MaxLength(254)
+  email: string;
+
+  @ApiProperty({ format: 'password', minLength: 8 })
+  @IsString()
+  @MinLength(8)
+  @MaxLength(200)
+  password: string;
+
+  @ApiProperty({ example: 'Asha' })
+  @IsString()
+  @MinLength(1)
+  @MaxLength(80)
+  display_name: string;
+}
+
 export class RefreshDto {
   @ApiProperty()
   @IsString()

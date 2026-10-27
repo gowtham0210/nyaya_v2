@@ -1,66 +1,81 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
+
 import '../../../core/config/game_rules.dart';
 import '../../profile/domain/user_profile.dart';
 import 'question.dart';
 import 'quiz_models.dart';
 
-/// Picks the questions for a quiz request. Pure and seedable for tests.
+/// What to ask the server for. Empty [chapterIds] means every chapter.
+@immutable
+class SessionPlan {
+  const SessionPlan({
+    required this.count,
+    this.chapterIds = const [],
+    this.difficulty,
+    this.minDifficulty,
+    this.maxDifficulty,
+    this.daily = false,
+    this.revealAtEnd = false,
+  });
+
+  final int count;
+  final List<String> chapterIds;
+  final int? difficulty;
+  final int? minDifficulty;
+  final int? maxDifficulty;
+
+  /// Today's shared set (same questions for everyone with these filters).
+  final bool daily;
+
+  /// Exam style: answers can change and nothing is revealed until submit.
+  final bool revealAtEnd;
+}
+
+/// Turns a quiz request into a [SessionPlan]; the server picks the questions.
+/// Pure, so the rules are easy to test.
 abstract final class QuizBuilder {
-  static List<Question> build({
+  static SessionPlan plan({
     required QuizRequest request,
-    required QuestionBank bank,
     required Set<String> reachedChapters,
     required Persona persona,
-    required String dayKey,
-    Random? random,
   }) {
-    final rng = random ?? Random();
+    final (minD, maxD) = _personaRange(persona);
     switch (request.mode) {
       case QuizMode.casePath:
         final parts = request.levelId!.split('_');
-        final qs = [...bank.forLevel(parts[0], int.parse(parts[1]))]..shuffle(rng);
-        return qs;
-
+        return SessionPlan(
+          count: GameRules.casePathQuestions,
+          chapterIds: [parts[0]],
+          difficulty: int.parse(parts[1]),
+        );
       case QuizMode.dailyDocket:
         // Same set for everyone with the same persona today → shareable.
-        final seeded = Random(_stableHash(dayKey) ^ persona.index);
-        final pool = _personaPool(bank.questions, persona)..sort((a, b) => a.id.compareTo(b.id));
-        pool.shuffle(seeded);
-        return pool.take(GameRules.dailyDocketQuestions).toList();
-
+        return SessionPlan(
+          count: GameRules.dailyDocketQuestions,
+          minDifficulty: minD,
+          maxDifficulty: maxD,
+          daily: true,
+        );
       case QuizMode.duel:
-        final pool = bank.forChapters(reachedChapters)..shuffle(rng);
-        return pool.take(GameRules.duelQuestions).toList();
-
+        return SessionPlan(count: GameRules.duelQuestions, chapterIds: [...reachedChapters]..sort());
       case QuizMode.exam:
-        final pool = _personaPool(bank.questions, persona)..shuffle(rng);
-        final picked = pool.take(GameRules.examQuestions).toList();
-        if (picked.length < GameRules.examQuestions) {
-          final rest = bank.questions.where((q) => !picked.contains(q)).toList()..shuffle(rng);
-          picked.addAll(rest.take(GameRules.examQuestions - picked.length));
-        }
-        return picked;
+        return SessionPlan(
+          count: GameRules.examQuestions,
+          minDifficulty: minD,
+          maxDifficulty: maxD,
+          revealAtEnd: true,
+        );
     }
   }
 
-  /// FNV-1a — unlike String.hashCode, stable across devices and releases.
-  static int _stableHash(String s) {
-    var h = 0x811c9dc5;
-    for (final c in s.codeUnits) {
-      h = ((h ^ c) * 0x01000193) & 0xffffffff;
-    }
-    return h;
-  }
-
-  static List<Question> _personaPool(List<Question> all, Persona persona) {
-    final filtered = switch (persona) {
-      Persona.citizen => all.where((q) => q.difficulty <= 2),
-      Persona.aspirant => all,
-      Persona.advocate => all.where((q) => q.difficulty >= 2),
-    };
-    return filtered.toList();
-  }
+  /// Citizens skip the hardest questions; advocates skip the easiest.
+  static (int?, int?) _personaRange(Persona persona) => switch (persona) {
+        Persona.citizen => (null, 2),
+        Persona.aspirant => (null, null),
+        Persona.advocate => (2, null),
+      };
 
   /// Duel opponent near the player's hidden rating.
   static DuelOpponent opponent(int rating, Random rng) {

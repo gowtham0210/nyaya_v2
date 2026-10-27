@@ -13,7 +13,6 @@ import '../../../core/widgets/pressable.dart';
 import '../../journey/domain/journey.dart';
 import '../../profile/application/profile_controller.dart';
 import '../application/quiz_controller.dart';
-import '../data/question_repository.dart';
 import '../domain/quiz_models.dart';
 
 /// The question screen: progress + timer, question, four options, feedback
@@ -32,15 +31,21 @@ class QuizView extends ConsumerWidget {
     final ctl = ref.read(provider.notifier);
     final q = s.current;
     final mode = request.mode;
-    final bank = ref.watch(questionBankProvider).value;
     final chapter = JourneyCatalog.chapter(q.chapterId);
-    final chapterTitle = bank?.chapters[q.chapterId]?.title ?? '';
+    final chapterTitle = l.chapterTitle(chapter.id);
 
     // Haptics + combo toast on answer reveal.
     ref.listen(provider.select((st) => st.answers.length), (prev, next) {
       if (prev == null || next <= prev || !mode.instantFeedback) return;
       final last = ref.read(provider).answers.last;
       ref.read(feedbackProvider).play(last.isCorrect ? Haptic.success : Haptic.error);
+    });
+
+    // An answer that could not reach the server.
+    ref.listen(provider.select((st) => st.problem), (prev, next) {
+      if (prev != null && next > prev) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l.quizSendFailed)));
+      }
     });
 
     final last = s.revealed ? s.lastAnswer : null;
@@ -147,7 +152,7 @@ class QuizView extends ConsumerWidget {
                                 .fadeIn(delay: (60 * i).ms, duration: 250.ms)
                                 .slideY(begin: 0.15),
                       ),
-                    if (last != null) ...[
+                    if (last != null && (last.reveal != null || mode == QuizMode.duel)) ...[
                       const SizedBox(height: 4),
                       _Explanation(answer: last, opponent: mode == QuizMode.duel ? s : null),
                     ],
@@ -164,6 +169,7 @@ class QuizView extends ConsumerWidget {
                 ref.read(feedbackProvider).play(Haptic.tap);
                 ctl.next();
               },
+              onRetry: ctl.retrySubmit,
             ),
           ],
         ),
@@ -172,11 +178,13 @@ class QuizView extends ConsumerWidget {
   }
 
   OptionState _optionState(QuizState s, int i) {
-    if (!s.request.mode.instantFeedback) {
+    if (!s.request.mode.instantFeedback || s.sending) {
       return s.selected == i ? OptionState.selected : OptionState.idle;
     }
     if (!s.revealed) return OptionState.idle;
-    if (i == s.current.answerIndex) return OptionState.correct;
+    // The correct option is only known once the server has revealed it.
+    final correct = s.lastAnswer?.reveal?.correctIndex;
+    if (i == correct) return OptionState.correct;
     if (i == s.selected) return OptionState.wrong;
     return OptionState.dimmed;
   }
@@ -273,7 +281,7 @@ class _Explanation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
-    final q = answer.question;
+    final reveal = answer.reveal;
     final duel = opponent;
     return NyayaCard(
       color: context.colors.surfaceContainerLow,
@@ -303,21 +311,23 @@ class _Explanation extends StatelessWidget {
             ),
             const Divider(height: 20),
           ],
-          Row(
-            children: [
-              const Icon(Icons.menu_book_rounded, size: 18, color: AppPalette.ochreText),
-              const SizedBox(width: 6),
-              Text(l.quizWhy, style: context.text.titleSmall),
-            ],
-          ),
-          const SizedBox(height: 6),
-          Text(q.explanation, style: context.text.bodyMedium?.copyWith(height: 1.5)),
-          if (q.reference.isNotEmpty) ...[
-            const SizedBox(height: 8),
-            Text(
-              '${l.quizReference}: ${q.reference}',
-              style: context.text.labelSmall?.copyWith(color: context.colors.primary, fontWeight: FontWeight.w700),
+          if (reveal != null) ...[
+            Row(
+              children: [
+                const Icon(Icons.menu_book_rounded, size: 18, color: AppPalette.ochreText),
+                const SizedBox(width: 6),
+                Text(l.quizWhy, style: context.text.titleSmall),
+              ],
             ),
+            const SizedBox(height: 6),
+            Text(reveal.explanation, style: context.text.bodyMedium?.copyWith(height: 1.5)),
+            if (reveal.reference.isNotEmpty) ...[
+              const SizedBox(height: 8),
+              Text(
+                '${l.quizReference}: ${reveal.reference}',
+                style: context.text.labelSmall?.copyWith(color: context.colors.primary, fontWeight: FontWeight.w700),
+              ),
+            ],
           ],
         ],
       ),
@@ -326,11 +336,12 @@ class _Explanation extends StatelessWidget {
 }
 
 class _BottomBar extends StatelessWidget {
-  const _BottomBar({required this.state, required this.answered, required this.onNext});
+  const _BottomBar({required this.state, required this.answered, required this.onNext, required this.onRetry});
 
   final QuizState state;
   final int answered;
   final VoidCallback onNext;
+  final VoidCallback onRetry;
 
   @override
   Widget build(BuildContext context) {
@@ -353,6 +364,30 @@ class _BottomBar extends StatelessWidget {
       tint = n.error;
       title = last.isSkipped ? l.quizTimeUp : l.quizWrong;
       icon = last.isSkipped ? Icons.timer_off_rounded : Icons.cancel_rounded;
+    }
+
+    if (state.phase == QuizPhase.submitting || state.submitFailed) {
+      final failed = state.submitFailed;
+      return Container(
+        padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.md, AppSpacing.page, AppSpacing.md),
+        decoration: BoxDecoration(
+          color: context.colors.surface,
+          border: Border(top: BorderSide(color: n.cardBorder)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              failed ? l.quizSubmitFailed : l.quizScoring,
+              textAlign: TextAlign.center,
+              style: context.text.labelMedium?.copyWith(color: failed ? n.error : n.textSecondary),
+            ),
+            const SizedBox(height: 8),
+            ChunkyButton(label: l.quizRetry, color: context.colors.primary, onPressed: failed ? onRetry : null),
+          ],
+        ),
+      );
     }
 
     final String label;
@@ -385,10 +420,10 @@ class _BottomBar extends StatelessWidget {
                 ),
               ],
             ).animate().fadeIn(duration: 200.ms).slideY(begin: 0.3),
-            if (!last!.isCorrect) ...[
+            if (!last!.isCorrect && last.reveal?.correctIndex != null) ...[
               const SizedBox(height: 4),
               Text(
-                l.quizAnswerWas(last.question.options[last.question.answerIndex]),
+                l.quizAnswerWas(last.question.options[last.reveal!.correctIndex!]),
                 style: context.text.bodyMedium?.copyWith(color: tint, fontWeight: FontWeight.w600),
               ),
             ],

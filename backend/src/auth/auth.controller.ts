@@ -9,13 +9,21 @@ import {
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
+  ApiCreatedResponse,
   ApiNoContentResponse,
   ApiOkResponse,
+  ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
 import { ThrottlerGuard } from '@nestjs/throttler';
 import type { Request } from 'express';
-import { MeDto, RefreshDto, SessionDto, SignInDto } from './auth.dto.js';
+import {
+  MeDto,
+  RefreshDto,
+  RegisterDto,
+  SessionDto,
+  SignInDto,
+} from './auth.dto.js';
 import type { AuthUser } from './auth-user.js';
 import { AuthService } from './auth.service.js';
 import { CurrentUser, Public } from './decorators.js';
@@ -32,6 +40,20 @@ export class AuthController {
   @ApiOkResponse({ type: SessionDto })
   signIn(@Body() body: SignInDto, @Req() req: Request) {
     return this.auth.signIn(body.email, body.password, req.id);
+  }
+
+  @Public()
+  @Post('register')
+  @HttpCode(201)
+  @ApiOperation({ summary: 'Create a learner account and sign in' })
+  @ApiCreatedResponse({ type: SessionDto })
+  register(@Body() body: RegisterDto, @Req() req: Request) {
+    return this.auth.register(
+      body.email,
+      body.password,
+      body.display_name,
+      req.id,
+    );
   }
 
   @Public()

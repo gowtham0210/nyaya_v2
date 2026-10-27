@@ -1,5 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
-import { eq } from 'drizzle-orm';
+import { and, eq, isNull, like, sql } from 'drizzle-orm';
 import { hashPassword } from '../auth/passwords.js';
 import { loadConfig } from '../core/config.js';
 import { openDb, type Db } from '../core/db.js';
@@ -17,10 +17,13 @@ import {
 
 /**
  * Dev seed, safe to re-run (everything is upserted by slug, email or external ref):
- * - taxonomy built from the Flutter app's six chapters, plus the core acts;
- * - the app's bundled question bank as DRAFTS (imports never publish; each
- *   needs a source, validity date and legal review first);
- * - one account per role when SEED_PASSWORD is set (never in production).
+ * - taxonomy built from the app's six chapters, plus the core acts;
+ * - the starter question bank (seed/questions/en.json) as DRAFTS (imports
+ *   never publish; each needs a source, validity date and legal review first);
+ * - one account per role when SEED_PASSWORD is set (never in production);
+ * - with SEED_PUBLISH_IMPORTED=true (never in production), the imported drafts
+ *   are published so the app has content locally. They are marked as
+ *   unreviewed dev data and must not be copied to a real database.
  */
 
 const ACTS = [
@@ -133,7 +136,7 @@ async function seed() {
   if (!process.env.DATABASE_URL) process.env.PGLITE_DIR ??= '.data/pglite';
   const config = loadConfig();
   const { db, close } = await openDb(config);
-  const bankPath = process.env.QUESTION_BANK ?? '../assets/questions/en.json';
+  const bankPath = process.env.QUESTION_BANK ?? 'seed/questions/en.json';
   const bank = JSON.parse(readFileSync(bankPath, 'utf8')) as Bank;
 
   const actIds: Record<string, string> = {};
@@ -198,6 +201,13 @@ async function seed() {
     imported++;
   }
 
+  let devPublished = 0;
+  if (process.env.SEED_PUBLISH_IMPORTED === 'true') {
+    if (config.isProduction)
+      throw new Error('SEED_PUBLISH_IMPORTED is for development only');
+    devPublished = await publishImportedForDev(db);
+  }
+
   const password = process.env.SEED_PASSWORD;
   if (password && !config.isProduction) {
     const hash = await hashPassword(password);
@@ -228,9 +238,57 @@ async function seed() {
       `${imported} new draft questions (${bank.questions.length - imported} already present)` +
       (password && !config.isProduction
         ? `, ${STAFF.length} dev accounts.`
-        : '. Set SEED_PASSWORD to create dev accounts.'),
+        : '. Set SEED_PASSWORD to create dev accounts.') +
+      (devPublished
+        ? ` Published ${devPublished} imported drafts as UNREVIEWED dev data.`
+        : ''),
   );
   await close();
+}
+
+/** Dev only: publishes untouched imported drafts, skipping review. */
+async function publishImportedForDev(db: Db): Promise<number> {
+  const drafts = await db
+    .select({ questionId: questions.id, versionId: questionVersions.id })
+    .from(questions)
+    .innerJoin(questionVersions, eq(questionVersions.questionId, questions.id))
+    .where(
+      and(
+        like(questions.externalRef, 'app:%'),
+        isNull(questions.liveVersionId),
+        eq(questionVersions.versionNo, 1),
+        eq(questionVersions.status, 'draft'),
+      ),
+    );
+  const now = new Date();
+  for (const d of drafts) {
+    await db.transaction(async (tx) => {
+      await tx
+        .update(questionVersions)
+        .set({
+          status: 'published',
+          sourceTitle: sql`coalesce(${questionVersions.sourceTitle}, 'Nyaya starter bank (UNREVIEWED dev data)')`,
+          validFrom: sql`coalesce(${questionVersions.validFrom}, '2000-01-01')`,
+          changeNote:
+            'Imported from the app question bank · published by the dev seed without legal review',
+          publishedAt: now,
+          updatedAt: now,
+        })
+        .where(eq(questionVersions.id, d.versionId));
+      await tx
+        .update(questions)
+        .set({ liveVersionId: d.versionId, updatedAt: now })
+        .where(eq(questions.id, d.questionId));
+      await tx.insert(auditLog).values({
+        id: newId(),
+        action: 'question.dev_published',
+        entityType: 'question',
+        entityId: d.questionId,
+        data: { version_id: d.versionId },
+      });
+    });
+  }
+  return drafts.length;
 }
 
 await seed();

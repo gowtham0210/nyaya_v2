@@ -1,35 +1,47 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:nyaya/app/app.dart';
+import 'package:nyaya/core/api/token_store.dart';
 import 'package:nyaya/core/storage/local_store.dart';
+import 'package:nyaya/features/auth/data/auth_api.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
 import 'package:nyaya/features/journey/application/journey_controller.dart';
 import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
 import 'package:nyaya/features/profile/application/profile_controller.dart';
 import 'package:nyaya/features/quiz/application/quiz_controller.dart';
-import 'package:nyaya/features/quiz/data/question_repository.dart';
+import 'package:nyaya/features/quiz/data/quiz_api.dart';
+import 'package:nyaya/features/quiz/domain/question.dart';
 import 'package:nyaya/features/quiz/domain/quiz_models.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'support/fake_backend.dart';
 
 /// End-to-end user flows on the real widget tree (no network).
 void main() {
   setUpAll(() => AppTheme.useGoogleFonts = false);
 
-  Future<ProviderContainer> pumpApp(WidgetTester tester, {Map<String, Object> prefs = const {}}) async {
+  late FakeQuizApi api;
+
+  Future<ProviderContainer> pumpApp(
+    WidgetTester tester, {
+    Map<String, Object> prefs = const {},
+    bool signedIn = true,
+  }) async {
     tester.view.physicalSize = const Size(1170, 2532);
     tester.view.devicePixelRatio = 3;
     addTearDown(tester.view.reset);
     SharedPreferences.setMockInitialValues(prefs);
     final sp = await SharedPreferences.getInstance();
+    final tokens = signedIn ? signedInTokens() : MemoryTokenStore();
+    api = FakeQuizApi();
     final container = ProviderContainer(overrides: [
       sharedPreferencesProvider.overrideWithValue(sp),
-      questionRepositoryProvider.overrideWithValue(
-        AssetQuestionRepository(load: (path) async => File(path).readAsStringSync()),
-      ),
+      tokenStoreProvider.overrideWithValue(tokens),
+      quizApiProvider.overrideWithValue(api),
+      authApiProvider.overrideWithValue(FakeAuthApi(tokens)),
     ]);
     addTearDown(container.dispose);
     await tester.pumpWidget(UncontrolledProviderScope(container: container, child: const NyayaApp()));
@@ -90,11 +102,11 @@ void main() {
     await settle(tester);
     expect(c.read(profileProvider).energy, 4, reason: 'energy is charged at start');
 
-    // Answer every question correctly by reading the answer key from state.
+    // Answer every question correctly; only the (fake) server knows which is right.
     for (var i = 0; i < 6; i++) {
       final bankQuestion = find.textContaining('Question ${i + 1} of');
       expect(bankQuestion, findsOneWidget);
-      final correct = _currentCorrectOption(c);
+      final correct = api.correctTextFor(_current(c).id);
       await tester.tap(find.text(correct).first);
       await settle(tester);
       expect(find.text('Correct!'), findsOneWidget);
@@ -109,6 +121,49 @@ void main() {
     expect(p.streak, 1);
     expect(p.energy, 5, reason: '3-star bonus refunds 1 energy');
     expect(find.text('NEXT LEVEL'), findsOneWidget);
+  });
+
+  testWidgets('a wrong answer shows the right one from the server, and a failed send can be retried', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    await tester.tap(find.text('Explore').first);
+    await settle(tester);
+
+    final q = _current(c);
+    api.failNextAnswer = true;
+    await tester.tap(find.text(api.wrongTextFor(q.id)).first);
+    await settle(tester);
+    expect(find.text("Couldn't send your answer. Check your connection and tap again."), findsOneWidget);
+    expect(find.text('Correct!'), findsNothing);
+
+    await tester.tap(find.text(api.wrongTextFor(q.id)).first);
+    await settle(tester);
+    expect(find.text('Answer: ${api.correctTextFor(q.id)}'), findsOneWidget);
+    expect(find.text('Because ${q.id}'), findsOneWidget, reason: 'explanation comes from the server');
+  });
+
+  testWidgets('a signed-out learner creates an account before the first quiz', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Asha', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, signedIn: false);
+    await settle(tester);
+
+    await tester.tap(find.text('Explore').first);
+    await settle(tester);
+    expect(find.text('Create your free account'), findsOneWidget);
+    expect(c.read(profileProvider).energy, 5, reason: 'no energy spent before signing in');
+
+    await tester.enterText(find.widgetWithText(TextField, 'Email'), 'asha@test.local');
+    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'short');
+    await tester.tap(find.text('CREATE ACCOUNT'));
+    await settle(tester);
+    expect(find.text('Enter a valid email and a password of at least 8 characters.'), findsOneWidget);
+
+    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'long enough');
+    await tester.tap(find.text('CREATE ACCOUNT'));
+    await settle(tester);
+    expect(find.textContaining('Question 1 of'), findsOneWidget);
+    expect(c.read(profileProvider).energy, 4);
   });
 
   testWidgets('Journey tab shows the Case Path map and opens a level from its chapter card', (tester) async {
@@ -205,7 +260,5 @@ void main() {
   });
 }
 
-String _currentCorrectOption(ProviderContainer c) {
-  final q = c.read(quizControllerProvider(const QuizRequest(QuizMode.casePath, levelId: 'constitution_1'))).current;
-  return q.options[q.answerIndex];
-}
+Question _current(ProviderContainer c) =>
+    c.read(quizControllerProvider(const QuizRequest(QuizMode.casePath, levelId: 'constitution_1'))).current;

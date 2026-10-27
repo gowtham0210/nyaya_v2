@@ -32,6 +32,38 @@
         ]
       }
     },
+    "/v1/auth/register": {
+      "post": {
+        "operationId": "AuthController_register",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a learner account and sign in",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
     "/v1/auth/refresh": {
       "post": {
         "operationId": "AuthController_refresh",
@@ -974,9 +1006,17 @@
             "type": "string",
             "format": "uuid"
           },
-          "topic_id": {
+          "topic_ids": {
+            "description": "Empty means every topic",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "daily": {
             "type": "string",
-            "format": "uuid"
+            "format": "date",
+            "nullable": true
           },
           "language": {
             "type": "string"
@@ -1028,7 +1068,8 @@
         },
         "required": [
           "id",
-          "topic_id",
+          "topic_ids",
+          "daily",
           "language",
           "difficulty",
           "feedback_mode",
@@ -1039,6 +1080,29 @@
           "expires_at",
           "submitted_at",
           "questions"
+        ]
+      },
+      "RegisterDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "asha@example.com"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "minLength": 8
+          },
+          "display_name": {
+            "type": "string",
+            "example": "Asha"
+          }
+        },
+        "required": [
+          "email",
+          "password",
+          "display_name"
         ]
       },
       "RefreshDto": {
@@ -1788,14 +1852,20 @@
             "type": "string",
             "format": "uuid"
           },
+          "topic_slug": {
+            "type": "string"
+          },
+          "topic_name": {
+            "type": "string"
+          },
           "subject_id": {
             "type": "string",
             "format": "uuid"
           },
-          "subject_name": {
+          "subject_slug": {
             "type": "string"
           },
-          "topic_name": {
+          "subject_name": {
             "type": "string"
           },
           "available": {
@@ -1814,9 +1884,11 @@
         },
         "required": [
           "topic_id",
-          "subject_id",
-          "subject_name",
+          "topic_slug",
           "topic_name",
+          "subject_id",
+          "subject_slug",
+          "subject_name",
           "available",
           "by_difficulty"
         ]
@@ -1848,7 +1920,16 @@
         "properties": {
           "topic_id": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "description": "A single topic"
+          },
+          "topic_ids": {
+            "description": "Several topics",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
           },
           "question_count": {
             "type": "number",
@@ -1861,6 +1942,20 @@
             "minimum": 1,
             "maximum": 3,
             "description": "Only this difficulty; any when omitted"
+          },
+          "min_difficulty": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 3
+          },
+          "max_difficulty": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 3
+          },
+          "daily": {
+            "type": "boolean",
+            "description": "Today's set: the same questions for everyone with the same filters (India date)"
           },
           "language": {
             "type": "string",
@@ -1883,10 +1978,7 @@
             "default": "immediate",
             "description": "immediate: each answer is final and explained at once. end: answers can change; nothing is revealed until submit."
           }
-        },
-        "required": [
-          "topic_id"
-        ]
+        }
       },
       "FeedbackDto": {
         "type": "object",
@@ -1935,6 +2027,10 @@
             "type": "string",
             "format": "uuid"
           },
+          "topic_id": {
+            "type": "string",
+            "format": "uuid"
+          },
           "difficulty": {
             "type": "number"
           },
@@ -1974,6 +2070,7 @@
         "required": [
           "position",
           "question_version_id",
+          "topic_id",
           "difficulty",
           "stem",
           "options",
@@ -2045,9 +2142,11 @@
             "type": "string",
             "format": "uuid"
           },
-          "topic_id": {
-            "type": "string",
-            "format": "uuid"
+          "topic_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "scoring_version": {
             "type": "string"
@@ -2084,7 +2183,7 @@
         },
         "required": [
           "session_id",
-          "topic_id",
+          "topic_ids",
           "scoring_version",
           "score",
           "total",
@@ -2103,9 +2202,11 @@
             "type": "string",
             "format": "uuid"
           },
-          "topic_id": {
-            "type": "string",
-            "format": "uuid"
+          "topic_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "score": {
             "type": "number"
@@ -2130,7 +2231,7 @@
         },
         "required": [
           "session_id",
-          "topic_id",
+          "topic_ids",
           "score",
           "total",
           "scoring_version",

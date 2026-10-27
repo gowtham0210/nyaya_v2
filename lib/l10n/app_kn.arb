@@ -288,5 +288,17 @@
   "statStreak": "ಸ್ಟ್ರೀಕ್",
   "statCoins": "ನಾಣ್ಯಗಳು",
   "statEnergy": "ಶಕ್ತಿ",
-  "statStars": "ನಕ್ಷತ್ರಗಳು"
+  "statStars": "ನಕ್ಷತ್ರಗಳು",
+  "chapterConstitutionTitle": "ಸಂವಿಧಾನದ ಮೂಲಾಂಶಗಳು",
+  "chapterConstitutionSubtitle": "ಪ್ರಸ್ತಾವನೆ, ಸಂಸತ್ತು, ನ್ಯಾಯಾಲಯಗಳು, ತಿದ್ದುಪಡಿಗಳು",
+  "chapterRightsTitle": "ಹಕ್ಕುಗಳು ಮತ್ತು ಕರ್ತವ್ಯಗಳು",
+  "chapterRightsSubtitle": "ಮೂಲಭೂತ ಹಕ್ಕುಗಳು, ನಿರ್ದೇಶಕ ತತ್ವಗಳು ಮತ್ತು ರಿಟ್‌ಗಳು",
+  "chapterCriminalTitle": "ಕ್ರಿಮಿನಲ್ ಕಾನೂನು (BNS)",
+  "chapterCriminalSubtitle": "ಹೊಸ ಸಂಹಿತೆಯಡಿ ಅಪರಾಧಗಳು",
+  "chapterProcedureTitle": "ಪ್ರಕ್ರಿಯೆ ಮತ್ತು ಸಾಕ್ಷ್ಯ",
+  "chapterProcedureSubtitle": "BNSS, BSA, FIR, ಬಂಧನ, ಜಾಮೀನು",
+  "chapterCivilTitle": "ಒಪ್ಪಂದಗಳು ಮತ್ತು ಗ್ರಾಹಕರು",
+  "chapterCivilSubtitle": "ಒಪ್ಪಂದಗಳು, ಗ್ರಾಹಕ ಹಕ್ಕುಗಳು, ಪರಿಹಾರಗಳು",
+  "chapterEverydayTitle": "ದೈನಂದಿನ ಕಾನೂನು",
+  "chapterEverydaySubtitle": "ದಿನನಿತ್ಯದ ಜೀವನಕ್ಕೆ ಕಾನೂನು"
 }

@@ -419,13 +419,14 @@ class _ReviewItem extends StatelessWidget {
                 '${l.resultYourAnswer}: ${answer.isSkipped ? l.resultSkipped : q.options[answer.selectedIndex!]}',
                 style: context.text.bodySmall?.copyWith(color: context.nyaya.error),
               ),
-            Text(
-              '${l.resultCorrectAnswer}: ${q.options[q.answerIndex]}',
-              style: context.text.bodySmall?.copyWith(color: context.nyaya.success, fontWeight: FontWeight.w700),
-            ),
+            if (answer.reveal?.correctIndex case final correct?)
+              Text(
+                '${l.resultCorrectAnswer}: ${q.options[correct]}',
+                style: context.text.bodySmall?.copyWith(color: context.nyaya.success, fontWeight: FontWeight.w700),
+              ),
             const SizedBox(height: 6),
             Text(
-              q.explanation,
+              answer.reveal?.explanation ?? '',
               style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary, height: 1.4),
             ),
           ],

@@ -20,6 +20,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/auth/register": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create a learner account and sign in */
+        post: operations["AuthController_register"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/auth/refresh": {
         parameters: {
             query?: never;
@@ -375,8 +392,10 @@ export interface components {
         SessionDto: {
             /** Format: uuid */
             id: string;
-            /** Format: uuid */
-            topic_id: string;
+            /** @description Empty means every topic */
+            topic_ids: string[];
+            /** Format: date */
+            daily: string | null;
             language: string;
             difficulty: number | null;
             /** @enum {string} */
@@ -395,6 +414,14 @@ export interface components {
             /** Format: date-time */
             submitted_at: string | null;
             questions: components["schemas"]["SessionQuestionDto"][];
+        };
+        RegisterDto: {
+            /** @example asha@example.com */
+            email: string;
+            /** Format: password */
+            password: string;
+            /** @example Asha */
+            display_name: string;
         };
         RefreshDto: {
             refresh_token: string;
@@ -624,10 +651,12 @@ export interface components {
         TopicQuizDto: {
             /** Format: uuid */
             topic_id: string;
+            topic_slug: string;
+            topic_name: string;
             /** Format: uuid */
             subject_id: string;
+            subject_slug: string;
             subject_name: string;
-            topic_name: string;
             /** @description Published questions currently in force */
             available: number;
             /**
@@ -646,12 +675,21 @@ export interface components {
             max_questions: number;
         };
         StartSessionDto: {
-            /** Format: uuid */
-            topic_id: string;
+            /**
+             * Format: uuid
+             * @description A single topic
+             */
+            topic_id?: string;
+            /** @description Several topics */
+            topic_ids?: string[];
             /** @default 10 */
             question_count?: number;
             /** @description Only this difficulty; any when omitted */
             difficulty?: number;
+            min_difficulty?: number;
+            max_difficulty?: number;
+            /** @description Today's set: the same questions for everyone with the same filters (India date) */
+            daily?: boolean;
             /**
              * @default en
              * @enum {string}
@@ -676,6 +714,8 @@ export interface components {
             position: number;
             /** Format: uuid */
             question_version_id: string;
+            /** Format: uuid */
+            topic_id: string;
             difficulty: number;
             stem: string;
             /** @description In the order to show them */
@@ -706,8 +746,7 @@ export interface components {
         ResultDto: {
             /** Format: uuid */
             session_id: string;
-            /** Format: uuid */
-            topic_id: string;
+            topic_ids: string[];
             scoring_version: string;
             score: number;
             total: number;
@@ -723,8 +762,7 @@ export interface components {
         AttemptDto: {
             /** Format: uuid */
             session_id: string;
-            /** Format: uuid */
-            topic_id: string;
+            topic_ids: string[];
             score: number;
             total: number;
             scoring_version: string;
@@ -779,6 +817,29 @@ export interface operations {
         };
         responses: {
             200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SessionDto"];
+                };
+            };
+        };
+    };
+    AuthController_register: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RegisterDto"];
+            };
+        };
+        responses: {
+            201: {
                 headers: {
                     [name: string]: unknown;
                 };

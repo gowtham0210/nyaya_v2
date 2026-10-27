@@ -8,23 +8,20 @@ import 'package:nyaya/features/profile/domain/user_profile.dart';
 import 'package:nyaya/features/quiz/domain/question.dart';
 import 'package:nyaya/features/quiz/domain/quiz_models.dart';
 
-Question _q(int difficulty, {int answer = 0}) => Question(
+Question _q(int difficulty) => Question(
       id: 'q$difficulty',
       chapterId: 'constitution',
-      level: difficulty,
       difficulty: difficulty,
       text: 'Q',
       options: const ['a', 'b', 'c', 'd'],
-      answerIndex: answer,
-      explanation: '',
-      reference: '',
+      optionIds: const ['a', 'b', 'c', 'd'],
     );
 
 QuizResult _result(List<bool> correct, {QuizMode mode = QuizMode.casePath, int ms = 30000}) => QuizResult(
       request: QuizRequest(mode, levelId: 'constitution_1'),
       durationMs: 0,
       answers: [
-        for (final c in correct) AnswerRecord(question: _q(1), selectedIndex: c ? 0 : 1, elapsedMs: ms),
+        for (final c in correct) AnswerRecord(question: _q(1), selectedIndex: c ? 0 : 1, elapsedMs: ms, correct: c),
       ],
     );
 

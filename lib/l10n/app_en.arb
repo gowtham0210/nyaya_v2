@@ -662,7 +662,13 @@
   "exploreLegacy": "Legacy",
   "exploreAskAi": "Ask AI",
   "exploreAskPrompt": "Explain the {law} in simple terms: what it covers and the key provisions I should know.",
-  "@exploreAskPrompt": {"placeholders": {"law": {"type": "String"}}},
+  "@exploreAskPrompt": {
+    "placeholders": {
+      "law": {
+        "type": "String"
+      }
+    }
+  },
   "lawConstitutionTitle": "Constitution of India",
   "lawConstitutionDesc": "Fundamental rights, directive principles, duties and more.",
   "lawBnsTitle": "Bharatiya Nyaya Sanhita (BNS)",
@@ -677,5 +683,52 @@
   "lawEverydayDesc": "Know your rights in daily life",
   "lawEverydayFeatured": "Consumer, tenancy, workplace and family rights, explained simply.",
   "lawLegacyTitle": "IPC & CrPC (Legacy)",
-  "lawLegacyDesc": "Older laws for reference"
+  "lawLegacyDesc": "Older laws for reference",
+  "chapterConstitutionTitle": "Constitution Basics",
+  "chapterConstitutionSubtitle": "Preamble, Parliament, courts, amendments",
+  "chapterRightsTitle": "Rights & Duties",
+  "chapterRightsSubtitle": "Fundamental Rights, DPSP and writs",
+  "chapterCriminalTitle": "Criminal Law (BNS)",
+  "chapterCriminalSubtitle": "Offences under the new Sanhita",
+  "chapterProcedureTitle": "Procedure & Evidence",
+  "chapterProcedureSubtitle": "BNSS, BSA, FIR, arrest, bail",
+  "chapterCivilTitle": "Contracts & Consumers",
+  "chapterCivilSubtitle": "Contracts, consumer rights, remedies",
+  "chapterEverydayTitle": "Everyday Law",
+  "chapterEverydaySubtitle": "Law for daily life",
+  "authCreateTitle": "Create your free account",
+  "authCreateSubtitle": "Questions come from Nyaya's reviewed library, and your results are saved to your account.",
+  "authSignInTitle": "Welcome back",
+  "authSignInSubtitle": "Sign in to keep practising.",
+  "authName": "Your name",
+  "authEmail": "Email",
+  "authPassword": "Password",
+  "authPasswordHint": "At least 8 characters",
+  "authCreate": "CREATE ACCOUNT",
+  "authSignIn": "SIGN IN",
+  "authHaveAccount": "I already have an account",
+  "authNeedAccount": "New here? Create an account",
+  "authErrorCredentials": "Email or password is incorrect.",
+  "authErrorEmailTaken": "An account with this email already exists. Sign in instead.",
+  "authErrorNetwork": "Can't reach Nyaya right now. Check your connection and try again.",
+  "authErrorRateLimited": "Too many attempts. Wait a minute and try again.",
+  "authErrorInvalid": "Enter a valid email and a password of at least 8 characters.",
+  "authErrorName": "Enter your name.",
+  "settingsAccount": "Account",
+  "settingsSignedInAs": "Signed in as {email}",
+  "@settingsSignedInAs": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsSignIn": "Sign in or create an account",
+  "settingsSignOut": "Sign out",
+  "quizSendFailed": "Couldn't send your answer. Check your connection and tap again.",
+  "quizSubmitFailed": "Couldn't get your result. Check your connection.",
+  "quizRetry": "TRY AGAIN",
+  "quizScoring": "Scoring your case…",
+  "quizOffline": "Can't reach Nyaya. Check your connection and try again.",
+  "quizSignedOut": "Your session ended. Sign in again to play."
 }

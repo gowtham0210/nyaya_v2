@@ -1200,4 +1200,136 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get lawLegacyDesc => 'Older laws for reference';
+
+  @override
+  String get chapterConstitutionTitle => 'ഭരണഘടനയുടെ അടിസ്ഥാനങ്ങൾ';
+
+  @override
+  String get chapterConstitutionSubtitle =>
+      'ആമുഖം, പാർലമെന്റ്, കോടതികൾ, ഭേദഗതികൾ';
+
+  @override
+  String get chapterRightsTitle => 'അവകാശങ്ങളും കടമകളും';
+
+  @override
+  String get chapterRightsSubtitle =>
+      'മൗലികാവകാശങ്ങൾ, നിർദ്ദേശക തത്വങ്ങൾ, റിട്ടുകൾ';
+
+  @override
+  String get chapterCriminalTitle => 'ക്രിമിനൽ നിയമം (BNS)';
+
+  @override
+  String get chapterCriminalSubtitle => 'പുതിയ സംഹിതയിലെ കുറ്റകൃത്യങ്ങൾ';
+
+  @override
+  String get chapterProcedureTitle => 'നടപടിക്രമവും തെളിവും';
+
+  @override
+  String get chapterProcedureSubtitle => 'BNSS, BSA, FIR, അറസ്റ്റ്, ജാമ്യം';
+
+  @override
+  String get chapterCivilTitle => 'കരാറുകളും ഉപഭോക്താക്കളും';
+
+  @override
+  String get chapterCivilSubtitle => 'കരാറുകൾ, ഉപഭോക്തൃ അവകാശങ്ങൾ, പരിഹാരങ്ങൾ';
+
+  @override
+  String get chapterEverydayTitle => 'ദൈനംദിന നിയമം';
+
+  @override
+  String get chapterEverydaySubtitle => 'നിത്യജീവിതത്തിലെ നിയമം';
+
+  @override
+  String get authCreateTitle => 'Create your free account';
+
+  @override
+  String get authCreateSubtitle =>
+      'Questions come from Nyaya\'s reviewed library, and your results are saved to your account.';
+
+  @override
+  String get authSignInTitle => 'Welcome back';
+
+  @override
+  String get authSignInSubtitle => 'Sign in to keep practising.';
+
+  @override
+  String get authName => 'Your name';
+
+  @override
+  String get authEmail => 'Email';
+
+  @override
+  String get authPassword => 'Password';
+
+  @override
+  String get authPasswordHint => 'At least 8 characters';
+
+  @override
+  String get authCreate => 'CREATE ACCOUNT';
+
+  @override
+  String get authSignIn => 'SIGN IN';
+
+  @override
+  String get authHaveAccount => 'I already have an account';
+
+  @override
+  String get authNeedAccount => 'New here? Create an account';
+
+  @override
+  String get authErrorCredentials => 'Email or password is incorrect.';
+
+  @override
+  String get authErrorEmailTaken =>
+      'An account with this email already exists. Sign in instead.';
+
+  @override
+  String get authErrorNetwork =>
+      'Can\'t reach Nyaya right now. Check your connection and try again.';
+
+  @override
+  String get authErrorRateLimited =>
+      'Too many attempts. Wait a minute and try again.';
+
+  @override
+  String get authErrorInvalid =>
+      'Enter a valid email and a password of at least 8 characters.';
+
+  @override
+  String get authErrorName => 'Enter your name.';
+
+  @override
+  String get settingsAccount => 'Account';
+
+  @override
+  String settingsSignedInAs(String email) {
+    return 'Signed in as $email';
+  }
+
+  @override
+  String get settingsSignIn => 'Sign in or create an account';
+
+  @override
+  String get settingsSignOut => 'Sign out';
+
+  @override
+  String get quizSendFailed =>
+      'Couldn\'t send your answer. Check your connection and tap again.';
+
+  @override
+  String get quizSubmitFailed =>
+      'Couldn\'t get your result. Check your connection.';
+
+  @override
+  String get quizRetry => 'TRY AGAIN';
+
+  @override
+  String get quizScoring => 'Scoring your case…';
+
+  @override
+  String get quizOffline =>
+      'Can\'t reach Nyaya. Check your connection and try again.';
+
+  @override
+  String get quizSignedOut => 'Your session ended. Sign in again to play.';
 }

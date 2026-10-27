@@ -15,6 +15,13 @@
       "when": 1793118114669,
       "tag": "0001_learner_sessions",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793118833597,
+      "tag": "0002_session_filters",
+      "breakpoints": true
     }
   ]
 }

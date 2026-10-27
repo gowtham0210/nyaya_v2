@@ -4,6 +4,7 @@ import {
   ArrayMaxSize,
   ArrayMinSize,
   IsArray,
+  IsBoolean,
   IsIn,
   IsInt,
   IsOptional,
@@ -32,9 +33,11 @@ export class CatalogQuery {
 
 export class TopicQuizDto {
   @ApiProperty({ format: 'uuid' }) topic_id: string;
-  @ApiProperty({ format: 'uuid' }) subject_id: string;
-  @ApiProperty() subject_name: string;
+  @ApiProperty() topic_slug: string;
   @ApiProperty() topic_name: string;
+  @ApiProperty({ format: 'uuid' }) subject_id: string;
+  @ApiProperty() subject_slug: string;
+  @ApiProperty() subject_name: string;
   @ApiProperty({ description: 'Published questions currently in force' })
   available: number;
   @ApiProperty({
@@ -50,10 +53,23 @@ export class CatalogDto {
   @ApiProperty() max_questions: number;
 }
 
+/** Which questions to draw. With no topic given, every topic is used. */
 export class StartSessionDto {
-  @ApiProperty({ format: 'uuid' })
+  @ApiPropertyOptional({ format: 'uuid', description: 'A single topic' })
+  @IsOptional()
   @IsUUID()
-  topic_id: string;
+  topic_id?: string;
+
+  @ApiPropertyOptional({
+    type: [String],
+    format: 'uuid',
+    description: 'Several topics',
+  })
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(50)
+  @IsUUID('all', { each: true })
+  topic_ids?: string[];
 
   @ApiPropertyOptional({ minimum: 1, maximum: MAX_QUESTIONS, default: 10 })
   @IsOptional()
@@ -72,6 +88,28 @@ export class StartSessionDto {
   @Min(1)
   @Max(3)
   difficulty?: number;
+
+  @ApiPropertyOptional({ minimum: 1, maximum: 3 })
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  @Max(3)
+  min_difficulty?: number;
+
+  @ApiPropertyOptional({ minimum: 1, maximum: 3 })
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  @Max(3)
+  max_difficulty?: number;
+
+  @ApiPropertyOptional({
+    description:
+      "Today's set: the same questions for everyone with the same filters (India date)",
+  })
+  @IsOptional()
+  @IsBoolean()
+  daily?: boolean;
 
   @ApiPropertyOptional({ enum: SUPPORTED_LANGUAGES, default: 'en' })
   @IsOptional()
@@ -118,6 +156,7 @@ export class FeedbackDto {
 export class SessionQuestionDto {
   @ApiProperty() position: number;
   @ApiProperty({ format: 'uuid' }) question_version_id: string;
+  @ApiProperty({ format: 'uuid' }) topic_id: string;
   @ApiProperty() difficulty: number;
   @ApiProperty() stem: string;
   @ApiProperty({ type: [OptionDto], description: 'In the order to show them' })
@@ -137,7 +176,10 @@ export class SessionQuestionDto {
 
 export class SessionDto {
   @ApiProperty({ format: 'uuid' }) id: string;
-  @ApiProperty({ format: 'uuid' }) topic_id: string;
+  @ApiProperty({ type: [String], description: 'Empty means every topic' })
+  topic_ids: string[];
+  @ApiProperty({ type: String, format: 'date', nullable: true }) daily:
+    string | null;
   @ApiProperty() language: string;
   @ApiProperty({ type: Number, nullable: true }) difficulty: number | null;
   @ApiProperty({ enum: FEEDBACK_MODES }) feedback_mode: FeedbackMode;
@@ -169,7 +211,7 @@ export class AnswerResultDto {
 
 export class ResultDto {
   @ApiProperty({ format: 'uuid' }) session_id: string;
-  @ApiProperty({ format: 'uuid' }) topic_id: string;
+  @ApiProperty({ type: [String] }) topic_ids: string[];
   @ApiProperty() scoring_version: string;
   @ApiProperty() score: number;
   @ApiProperty() total: number;
@@ -199,7 +241,7 @@ export class AttemptsQuery {
 
 export class AttemptDto {
   @ApiProperty({ format: 'uuid' }) session_id: string;
-  @ApiProperty({ format: 'uuid' }) topic_id: string;
+  @ApiProperty({ type: [String] }) topic_ids: string[];
   @ApiProperty() score: number;
   @ApiProperty() total: number;
   @ApiProperty() scoring_version: string;

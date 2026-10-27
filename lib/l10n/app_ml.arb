@@ -288,5 +288,17 @@
   "statStreak": "സ്ട്രീക്ക്",
   "statCoins": "നാണയങ്ങൾ",
   "statEnergy": "എനർജി",
-  "statStars": "നക്ഷത്രങ്ങൾ"
+  "statStars": "നക്ഷത്രങ്ങൾ",
+  "chapterConstitutionTitle": "ഭരണഘടനയുടെ അടിസ്ഥാനങ്ങൾ",
+  "chapterConstitutionSubtitle": "ആമുഖം, പാർലമെന്റ്, കോടതികൾ, ഭേദഗതികൾ",
+  "chapterRightsTitle": "അവകാശങ്ങളും കടമകളും",
+  "chapterRightsSubtitle": "മൗലികാവകാശങ്ങൾ, നിർദ്ദേശക തത്വങ്ങൾ, റിട്ടുകൾ",
+  "chapterCriminalTitle": "ക്രിമിനൽ നിയമം (BNS)",
+  "chapterCriminalSubtitle": "പുതിയ സംഹിതയിലെ കുറ്റകൃത്യങ്ങൾ",
+  "chapterProcedureTitle": "നടപടിക്രമവും തെളിവും",
+  "chapterProcedureSubtitle": "BNSS, BSA, FIR, അറസ്റ്റ്, ജാമ്യം",
+  "chapterCivilTitle": "കരാറുകളും ഉപഭോക്താക്കളും",
+  "chapterCivilSubtitle": "കരാറുകൾ, ഉപഭോക്തൃ അവകാശങ്ങൾ, പരിഹാരങ്ങൾ",
+  "chapterEverydayTitle": "ദൈനംദിന നിയമം",
+  "chapterEverydaySubtitle": "നിത്യജീവിതത്തിലെ നിയമം"
 }

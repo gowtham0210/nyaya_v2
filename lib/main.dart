@@ -4,15 +4,20 @@ import 'package:material_ui/material_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/app.dart';
+import 'core/api/token_store.dart';
 import 'core/storage/local_store.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   final prefs = await SharedPreferences.getInstance();
+  final tokens = await SecureTokenStore.load();
   runApp(
     ProviderScope(
-      overrides: [sharedPreferencesProvider.overrideWithValue(prefs)],
+      overrides: [
+        sharedPreferencesProvider.overrideWithValue(prefs),
+        tokenStoreProvider.overrideWithValue(tokens),
+      ],
       child: const NyayaApp(),
     ),
   );

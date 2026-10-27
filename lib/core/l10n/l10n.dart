@@ -34,3 +34,26 @@ extension AppLocalizationsX on AppLocalizations {
         Persona.citizen => personaCitizenDesc,
       };
 }
+
+/// Chapter names live in the app's translations; the server only knows the chapter id.
+extension ChapterNamesX on AppLocalizations {
+  String chapterTitle(String id) => switch (id) {
+        'constitution' => chapterConstitutionTitle,
+        'rights' => chapterRightsTitle,
+        'criminal' => chapterCriminalTitle,
+        'procedure' => chapterProcedureTitle,
+        'civil' => chapterCivilTitle,
+        'everyday' => chapterEverydayTitle,
+        _ => '',
+      };
+
+  String chapterSubtitle(String id) => switch (id) {
+        'constitution' => chapterConstitutionSubtitle,
+        'rights' => chapterRightsSubtitle,
+        'criminal' => chapterCriminalSubtitle,
+        'procedure' => chapterProcedureSubtitle,
+        'civil' => chapterCivilSubtitle,
+        'everyday' => chapterEverydaySubtitle,
+        _ => '',
+      };
+}

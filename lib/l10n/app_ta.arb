@@ -288,5 +288,17 @@
   "statStreak": "தொடர்",
   "statCoins": "நாணயங்கள்",
   "statEnergy": "ஆற்றல்",
-  "statStars": "நட்சத்திரங்கள்"
+  "statStars": "நட்சத்திரங்கள்",
+  "chapterConstitutionTitle": "அரசியலமைப்பு அடிப்படைகள்",
+  "chapterConstitutionSubtitle": "முகவுரை, நாடாளுமன்றம், நீதிமன்றங்கள், திருத்தங்கள்",
+  "chapterRightsTitle": "உரிமைகளும் கடமைகளும்",
+  "chapterRightsSubtitle": "அடிப்படை உரிமைகள், வழிகாட்டு நெறிமுறைகள், நீதிப்பேராணைகள்",
+  "chapterCriminalTitle": "குற்றவியல் சட்டம் (BNS)",
+  "chapterCriminalSubtitle": "புதிய சன்ஹிதாவின் கீழான குற்றங்கள்",
+  "chapterProcedureTitle": "நடைமுறையும் சான்றும்",
+  "chapterProcedureSubtitle": "BNSS, BSA, FIR, கைது, ஜாமீன்",
+  "chapterCivilTitle": "ஒப்பந்தங்களும் நுகர்வோரும்",
+  "chapterCivilSubtitle": "ஒப்பந்தங்கள், நுகர்வோர் உரிமைகள், தீர்வுகள்",
+  "chapterEverydayTitle": "அன்றாடச் சட்டம்",
+  "chapterEverydaySubtitle": "அன்றாட வாழ்க்கைக்கான சட்டம்"
 }

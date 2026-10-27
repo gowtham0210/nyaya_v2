@@ -6,6 +6,8 @@ import {
   desc,
   eq,
   gt,
+  gte,
+  inArray,
   isNull,
   lt,
   lte,
@@ -55,6 +57,7 @@ type SessionRow = typeof quizSessions.$inferSelect;
 interface Row {
   position: number;
   questionVersionId: string;
+  topicId: string;
   optionOrder: string[];
   selectedOptionIds: string[] | null;
   answeredAt: Date | null;
@@ -110,8 +113,10 @@ export class LearnService {
   async catalog(language = 'en'): Promise<CatalogDto> {
     const rows = await this.liveVersions(this.db, {
       topicId: topics.id,
+      topicSlug: topics.slug,
       topicName: topics.name,
       subjectId: subjects.id,
+      subjectSlug: subjects.slug,
       subjectName: subjects.name,
       difficulty: questionVersions.difficulty,
       n: count(),
@@ -119,9 +124,11 @@ export class LearnService {
       .where(this.eligible(language, new Date()))
       .groupBy(
         topics.id,
+        topics.slug,
         topics.name,
         topics.sortOrder,
         subjects.id,
+        subjects.slug,
         subjects.name,
         subjects.sortOrder,
         questionVersions.difficulty,
@@ -131,8 +138,10 @@ export class LearnService {
     const byTopic = new Map<string, CatalogDto['topics'][number]>();
     for (const r of rows as unknown as {
       topicId: string;
+      topicSlug: string;
       topicName: string;
       subjectId: string;
+      subjectSlug: string;
       subjectName: string;
       difficulty: number;
       n: number;
@@ -142,9 +151,11 @@ export class LearnService {
         byTopic
           .set(r.topicId, {
             topic_id: r.topicId,
-            subject_id: r.subjectId,
-            subject_name: r.subjectName,
+            topic_slug: r.topicSlug,
             topic_name: r.topicName,
+            subject_id: r.subjectId,
+            subject_slug: r.subjectSlug,
+            subject_name: r.subjectName,
             available: 0,
             by_difficulty: { '1': 0, '2': 0, '3': 0 },
           })
@@ -162,34 +173,50 @@ export class LearnService {
   async start(userId: string, dto: StartSessionDto): Promise<SessionDto> {
     const language = dto.language ?? 'en';
     const wanted = dto.question_count ?? 10;
+    const topicIds = [
+      ...new Set([
+        ...(dto.topic_ids ?? []),
+        ...(dto.topic_id ? [dto.topic_id] : []),
+      ]),
+    ];
     const now = new Date();
+    const daily = dto.daily ? indiaToday(now) : null;
     return this.db.transaction(async (tx) => {
-      const [topic] = await tx
-        .select({ id: topics.id })
-        .from(topics)
-        .innerJoin(subjects, eq(subjects.id, topics.subjectId))
-        .where(
-          and(
-            eq(topics.id, dto.topic_id),
-            eq(topics.isActive, true),
-            eq(subjects.isActive, true),
-          ),
-        )
-        .limit(1);
-      if (!topic) throw ApiError.notFound('Topic');
+      if (topicIds.length) {
+        const found = await tx
+          .select({ id: topics.id })
+          .from(topics)
+          .innerJoin(subjects, eq(subjects.id, topics.subjectId))
+          .where(
+            and(
+              inArray(topics.id, topicIds),
+              eq(topics.isActive, true),
+              eq(subjects.isActive, true),
+            ),
+          );
+        if (found.length !== topicIds.length) throw ApiError.notFound('Topic');
+      }
 
-      const where = [
-        this.eligible(language, now),
-        eq(questionVersions.topicId, dto.topic_id),
-      ];
+      const where = [this.eligible(language, now)];
+      if (topicIds.length)
+        where.push(inArray(questionVersions.topicId, topicIds));
       if (dto.difficulty)
         where.push(eq(questionVersions.difficulty, dto.difficulty));
+      if (dto.min_difficulty)
+        where.push(gte(questionVersions.difficulty, dto.min_difficulty));
+      if (dto.max_difficulty)
+        where.push(lte(questionVersions.difficulty, dto.max_difficulty));
       const picked = (await this.liveVersions(tx, {
         id: questionVersions.id,
         options: questionVersions.options,
       })
         .where(and(...where))
-        .orderBy(sql`random()`)
+        // A daily set is ordered by a hash of the date, so everyone gets the same questions.
+        .orderBy(
+          daily
+            ? sql`md5(${questionVersions.id}::text || ${daily})`
+            : sql`random()`,
+        )
         .limit(wanted)) as unknown as {
         id: string;
         options: QuestionOption[];
@@ -206,9 +233,13 @@ export class LearnService {
       await tx.insert(quizSessions).values({
         id: sessionId,
         userId,
-        topicId: dto.topic_id,
+        topicId: topicIds.length === 1 ? topicIds[0] : null,
+        topicIds,
         language,
         difficulty: dto.difficulty ?? null,
+        minDifficulty: dto.min_difficulty ?? null,
+        maxDifficulty: dto.max_difficulty ?? null,
+        daily,
         feedbackMode: dto.feedback_mode ?? 'immediate',
         scoringVersion: SCORING_VERSION,
         questionCount: picked.length,
@@ -366,7 +397,7 @@ export class LearnService {
       .limit(limit + 1);
     return toPage(rows, limit, (s) => ({
       session_id: s.id,
-      topic_id: s.topicId,
+      topic_ids: s.topicIds,
       score: s.score!,
       total: s.questionCount,
       scoring_version: s.scoringVersion,
@@ -375,33 +406,65 @@ export class LearnService {
     }));
   }
 
-  /** Totals per topic over submitted sessions. Accuracy counts unanswered questions as wrong. */
+  /**
+   * Totals per topic over submitted sessions, counted from the questions
+   * actually shown (a session can span topics). Accuracy counts unanswered
+   * questions as wrong; best is the highest share correct in one session.
+   */
   async progress(userId: string): Promise<ProgressDto> {
-    const rows = await this.db
+    const perSession = this.db
       .select({
-        topicId: quizSessions.topicId,
-        attempts: count(),
-        shown: sql<number>`sum(${quizSessions.questionCount})`.mapWith(Number),
-        answered: sql<number>`sum(${quizSessions.answeredCount})`.mapWith(
-          Number,
+        sessionId: quizSessions.id,
+        topicId: questionVersions.topicId,
+        submittedAt: quizSessions.submittedAt,
+        shown: count().as('shown'),
+        answered: sql<number>`count(${quizSessionQuestions.answeredAt})`.as(
+          'answered',
         ),
-        correct: sql<number>`sum(${quizSessions.correctCount})`.mapWith(Number),
-        best: sql<number>`max(${quizSessions.score}::float / ${quizSessions.questionCount})`.mapWith(
-          Number,
-        ),
-        last: sql<Date>`max(${quizSessions.submittedAt})`.mapWith(
-          (v: string | Date) => new Date(v),
-        ),
+        correct:
+          sql<number>`count(*) filter (where ${quizSessionQuestions.isCorrect})`.as(
+            'correct',
+          ),
       })
-      .from(quizSessions)
+      .from(quizSessionQuestions)
+      .innerJoin(
+        quizSessions,
+        eq(quizSessions.id, quizSessionQuestions.sessionId),
+      )
+      .innerJoin(
+        questionVersions,
+        eq(questionVersions.id, quizSessionQuestions.questionVersionId),
+      )
       .where(
         and(
           eq(quizSessions.userId, userId),
           eq(quizSessions.status, 'submitted'),
         ),
       )
-      .groupBy(quizSessions.topicId)
-      .orderBy(desc(sql`max(${quizSessions.submittedAt})`));
+      .groupBy(
+        quizSessions.id,
+        questionVersions.topicId,
+        quizSessions.submittedAt,
+      )
+      .as('per_session');
+
+    const rows = await this.db
+      .select({
+        topicId: perSession.topicId,
+        attempts: count(),
+        shown: sql<number>`sum(${perSession.shown})`.mapWith(Number),
+        answered: sql<number>`sum(${perSession.answered})`.mapWith(Number),
+        correct: sql<number>`sum(${perSession.correct})`.mapWith(Number),
+        best: sql<number>`max(${perSession.correct}::float / ${perSession.shown})`.mapWith(
+          Number,
+        ),
+        last: sql<Date>`max(${perSession.submittedAt})`.mapWith(
+          (v: string | Date) => new Date(v),
+        ),
+      })
+      .from(perSession)
+      .groupBy(perSession.topicId)
+      .orderBy(desc(sql`max(${perSession.submittedAt})`));
 
     const topicsOut = rows.map((r) => ({
       topic_id: r.topicId,
@@ -412,13 +475,29 @@ export class LearnService {
       best: r.best,
       last_attempt_at: r.last.toISOString(),
     }));
+    const [totals] = await this.db
+      .select({
+        attempts: count(),
+        answered:
+          sql<number>`coalesce(sum(${quizSessions.answeredCount}), 0)`.mapWith(
+            Number,
+          ),
+        correct:
+          sql<number>`coalesce(sum(${quizSessions.correctCount}), 0)`.mapWith(
+            Number,
+          ),
+      })
+      .from(quizSessions)
+      .where(
+        and(
+          eq(quizSessions.userId, userId),
+          eq(quizSessions.status, 'submitted'),
+        ),
+      );
     return {
-      attempts: topicsOut.reduce((n, t) => n + t.attempts, 0),
-      questions_answered: topicsOut.reduce(
-        (n, t) => n + t.questions_answered,
-        0,
-      ),
-      correct: topicsOut.reduce((n, t) => n + t.correct, 0),
+      attempts: Number(totals.attempts),
+      questions_answered: totals.answered,
+      correct: totals.correct,
       topics: topicsOut,
     };
   }
@@ -446,6 +525,7 @@ export class LearnService {
       .select({
         position: quizSessionQuestions.position,
         questionVersionId: quizSessionQuestions.questionVersionId,
+        topicId: questionVersions.topicId,
         optionOrder: quizSessionQuestions.optionOrder,
         selectedOptionIds: quizSessionQuestions.selectedOptionIds,
         answeredAt: quizSessionQuestions.answeredAt,
@@ -490,6 +570,7 @@ export class LearnService {
     return {
       position: q.position,
       question_version_id: q.questionVersionId,
+      topic_id: q.topicId,
       difficulty: q.difficulty,
       stem: q.stem,
       options: q.optionOrder.map((id) => ({
@@ -515,7 +596,8 @@ export class LearnService {
     const rows = await this.rows(tx, s.id);
     return {
       id: s.id,
-      topic_id: s.topicId,
+      topic_ids: s.topicIds,
+      daily: s.daily,
       language: s.language,
       difficulty: s.difficulty,
       feedback_mode: s.feedbackMode,
@@ -533,7 +615,7 @@ export class LearnService {
     const rows = await this.rows(tx, s.id);
     return {
       session_id: s.id,
-      topic_id: s.topicId,
+      topic_ids: s.topicIds,
       scoring_version: s.scoringVersion,
       score: s.score!,
       total: s.questionCount,

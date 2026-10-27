@@ -379,6 +379,92 @@ describe('learner quizzes', () => {
     expect(fresh.questions[0].stem).toBe('New wording');
   });
 
+  it('draws from several topics, a difficulty range, or the same daily set for everyone', async () => {
+    const subjectId = newId();
+    const otherTopic = newId();
+    await t.db
+      .insert(subjects)
+      .values({ id: subjectId, slug: `multi-${subjectId}`, name: 'Multi' });
+    await t.db.insert(topics).values({
+      id: otherTopic,
+      subjectId,
+      slug: `multi-t-${otherTopic}`,
+      name: 'Multi',
+    });
+    const extra = await addQuestion({ topicId: otherTopic, difficulty: 3 });
+
+    const both = (
+      await start(learner, {
+        topic_id: undefined,
+        topic_ids: [t.topicId, otherTopic],
+        question_count: 20,
+      }).expect(201)
+    ).body;
+    expect(both.topic_ids.sort()).toEqual([t.topicId, otherTopic].sort());
+    expect(
+      both.questions.map(
+        (q: { question_version_id: string }) => q.question_version_id,
+      ),
+    ).toContain(extra.versionId);
+
+    const hard = (
+      await start(learner, {
+        topic_id: undefined,
+        min_difficulty: 2,
+        question_count: 20,
+      }).expect(201)
+    ).body;
+    expect(hard.topic_ids).toEqual([]);
+    expect(
+      hard.questions.every((q: { difficulty: number }) => q.difficulty >= 2),
+    ).toBe(true);
+    const easy = (
+      await start(learner, {
+        topic_id: undefined,
+        max_difficulty: 1,
+        question_count: 20,
+      }).expect(201)
+    ).body;
+    expect(
+      easy.questions.every((q: { difficulty: number }) => q.difficulty === 1),
+    ).toBe(true);
+
+    const ids = (b: { questions: { question_version_id: string }[] }) =>
+      b.questions.map((q) => q.question_version_id);
+    const mine = (
+      await start(learner, {
+        topic_id: undefined,
+        daily: true,
+        question_count: 3,
+      }).expect(201)
+    ).body;
+    const theirs = (
+      await start(other, {
+        topic_id: undefined,
+        daily: true,
+        question_count: 3,
+      }).expect(201)
+    ).body;
+    expect(mine.daily).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(ids(theirs)).toEqual(ids(mine));
+
+    await start(learner, {
+      topic_id: undefined,
+      topic_ids: [t.topicId, '00000000-0000-7000-8000-000000000000'],
+    }).expect(404);
+  });
+
+  it('names topics and subjects by slug in the catalog', async () => {
+    const res = await t.http().get('/v1/quizzes').expect(200);
+    const topic = res.body.topics.find(
+      (x: { topic_id: string }) => x.topic_id === t.topicId,
+    );
+    expect(topic).toMatchObject({
+      subject_slug: 'constitution',
+      topic_slug: 'constitution-basics',
+    });
+  });
+
   it('lists attempts newest first and sums progress per topic', async () => {
     const fresh = await t.signInAs('learner');
     for (const answer of ['a', 'b']) {

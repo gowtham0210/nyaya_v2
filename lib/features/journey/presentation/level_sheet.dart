@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:confetti/confetti.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../../../core/config/game_rules.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/services/feedback.dart';
 import '../../../core/theme/app_colors.dart';
@@ -10,7 +13,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/chunky_button.dart';
 import '../../../core/widgets/common.dart';
 import '../../quiz/application/quiz_completion.dart';
-import '../../quiz/data/question_repository.dart';
+import '../../quiz/data/quiz_api.dart';
 import '../../quiz/domain/quiz_models.dart';
 import '../../quiz/presentation/quiz_launcher.dart';
 import '../application/journey_controller.dart';
@@ -37,9 +40,12 @@ class _LevelSheet extends ConsumerWidget {
     final progress = ref.watch(journeyProvider);
     final status = progress.status(node);
     final stars = progress.stars[node.id] ?? 0;
-    final bank = ref.watch(questionBankProvider).value;
-    final chapterTitle = bank?.chapters[node.chapter.id]?.title ?? '';
-    final count = bank?.forLevel(node.chapter.id, node.level).length ?? 0;
+    final chapterTitle = l.chapterTitle(node.chapter.id);
+    // Published questions at this level; until the catalog loads, assume a full level.
+    final catalog = ref.watch(quizCatalogProvider).value;
+    final count = catalog == null
+        ? GameRules.casePathQuestions
+        : min(catalog.available(node.chapter.id, difficulty: node.level), GameRules.casePathQuestions);
     final locked = status == NodeStatus.locked;
 
     return SafeArea(

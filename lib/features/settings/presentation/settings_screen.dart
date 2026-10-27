@@ -10,6 +10,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/common.dart';
 import '../../chat/application/chat_controller.dart';
+import '../../auth/application/auth_controller.dart';
 import '../../journey/application/journey_controller.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../profile/domain/user_profile.dart';
@@ -23,6 +24,7 @@ class SettingsScreen extends ConsumerWidget {
     final p = ref.watch(profileProvider);
     final ctl = ref.read(profileProvider.notifier);
     final stars = ref.watch(journeyProvider).totalStars;
+    final account = ref.watch(authProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text(l.settingsTitle)),
@@ -86,6 +88,30 @@ class SettingsScreen extends ConsumerWidget {
               _Stat(Icons.sports_kabaddi_rounded, '${p.duelsWon}/${p.duelsPlayed}', l.settingsDuelRecord, AppPalette.umber),
             ],
           ),
+
+          // ── Account ───────────────────────────────────────────────────────
+          _Header(l.settingsAccount),
+          _Group(children: [
+            if (account == null)
+              ListTile(
+                leading: const Icon(Icons.login_rounded),
+                title: Text(l.settingsSignIn),
+                trailing: const Icon(Icons.chevron_right_rounded),
+                onTap: () => context.push(Routes.signIn),
+              )
+            else ...[
+              ListTile(
+                leading: const Icon(Icons.account_circle_rounded),
+                title: Text(account.displayName),
+                subtitle: Text(l.settingsSignedInAs(account.email)),
+              ),
+              ListTile(
+                leading: const Icon(Icons.logout_rounded),
+                title: Text(l.settingsSignOut),
+                onTap: () => ref.read(authProvider.notifier).signOut(),
+              ),
+            ],
+          ]),
 
           // ── Premium & store ───────────────────────────────────────────────
           _Header(l.settingsStore),

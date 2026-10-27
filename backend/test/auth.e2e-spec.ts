@@ -95,6 +95,53 @@ describe('auth', () => {
     await refresh(second.body.refresh_token).expect(401);
   });
 
+  it('lets a learner sign up, and only as a learner', async () => {
+    const email = `new-${Date.now()}@test.local`;
+    const res = await t
+      .http()
+      .post('/v1/auth/register')
+      .send({
+        email: email.toUpperCase(),
+        password: 'long enough pw',
+        display_name: ' Asha ',
+      })
+      .expect(201);
+    expect(res.body.user).toMatchObject({
+      email,
+      display_name: 'Asha',
+      roles: ['learner'],
+    });
+    await t
+      .http()
+      .get('/v1/me')
+      .auth(res.body.access_token, { type: 'bearer' })
+      .expect(200);
+
+    // Roles cannot be requested; unknown fields are rejected.
+    await t
+      .http()
+      .post('/v1/auth/register')
+      .send({
+        email: `x${email}`,
+        password: 'long enough pw',
+        display_name: 'X',
+        roles: ['admin'],
+      })
+      .expect(400);
+    const dup = await t
+      .http()
+      .post('/v1/auth/register')
+      .send({ email, password: 'another password', display_name: 'B' })
+      .expect(409);
+    expect(dup.body.code).toBe('email_taken');
+    const short = await t
+      .http()
+      .post('/v1/auth/register')
+      .send({ email: `s${email}`, password: 'short', display_name: 'S' })
+      .expect(400);
+    expect(short.body.details[0].field).toBe('password');
+  });
+
   it('signs out by revoking the refresh token', async () => {
     const s = await t.signInAs('learner');
     await t

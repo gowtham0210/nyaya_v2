@@ -2169,6 +2169,246 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Older laws for reference'**
   String get lawLegacyDesc;
+
+  /// No description provided for @chapterConstitutionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Constitution Basics'**
+  String get chapterConstitutionTitle;
+
+  /// No description provided for @chapterConstitutionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Preamble, Parliament, courts, amendments'**
+  String get chapterConstitutionSubtitle;
+
+  /// No description provided for @chapterRightsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rights & Duties'**
+  String get chapterRightsTitle;
+
+  /// No description provided for @chapterRightsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Fundamental Rights, DPSP and writs'**
+  String get chapterRightsSubtitle;
+
+  /// No description provided for @chapterCriminalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Criminal Law (BNS)'**
+  String get chapterCriminalTitle;
+
+  /// No description provided for @chapterCriminalSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Offences under the new Sanhita'**
+  String get chapterCriminalSubtitle;
+
+  /// No description provided for @chapterProcedureTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Procedure & Evidence'**
+  String get chapterProcedureTitle;
+
+  /// No description provided for @chapterProcedureSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'BNSS, BSA, FIR, arrest, bail'**
+  String get chapterProcedureSubtitle;
+
+  /// No description provided for @chapterCivilTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Contracts & Consumers'**
+  String get chapterCivilTitle;
+
+  /// No description provided for @chapterCivilSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Contracts, consumer rights, remedies'**
+  String get chapterCivilSubtitle;
+
+  /// No description provided for @chapterEverydayTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Everyday Law'**
+  String get chapterEverydayTitle;
+
+  /// No description provided for @chapterEverydaySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Law for daily life'**
+  String get chapterEverydaySubtitle;
+
+  /// No description provided for @authCreateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your free account'**
+  String get authCreateTitle;
+
+  /// No description provided for @authCreateSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Questions come from Nyaya\'s reviewed library, and your results are saved to your account.'**
+  String get authCreateSubtitle;
+
+  /// No description provided for @authSignInTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back'**
+  String get authSignInTitle;
+
+  /// No description provided for @authSignInSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to keep practising.'**
+  String get authSignInSubtitle;
+
+  /// No description provided for @authName.
+  ///
+  /// In en, this message translates to:
+  /// **'Your name'**
+  String get authName;
+
+  /// No description provided for @authEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get authEmail;
+
+  /// No description provided for @authPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get authPassword;
+
+  /// No description provided for @authPasswordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'At least 8 characters'**
+  String get authPasswordHint;
+
+  /// No description provided for @authCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'CREATE ACCOUNT'**
+  String get authCreate;
+
+  /// No description provided for @authSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'SIGN IN'**
+  String get authSignIn;
+
+  /// No description provided for @authHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'I already have an account'**
+  String get authHaveAccount;
+
+  /// No description provided for @authNeedAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'New here? Create an account'**
+  String get authNeedAccount;
+
+  /// No description provided for @authErrorCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Email or password is incorrect.'**
+  String get authErrorCredentials;
+
+  /// No description provided for @authErrorEmailTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'An account with this email already exists. Sign in instead.'**
+  String get authErrorEmailTaken;
+
+  /// No description provided for @authErrorNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'Can\'t reach Nyaya right now. Check your connection and try again.'**
+  String get authErrorNetwork;
+
+  /// No description provided for @authErrorRateLimited.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many attempts. Wait a minute and try again.'**
+  String get authErrorRateLimited;
+
+  /// No description provided for @authErrorInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email and a password of at least 8 characters.'**
+  String get authErrorInvalid;
+
+  /// No description provided for @authErrorName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your name.'**
+  String get authErrorName;
+
+  /// No description provided for @settingsAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get settingsAccount;
+
+  /// No description provided for @settingsSignedInAs.
+  ///
+  /// In en, this message translates to:
+  /// **'Signed in as {email}'**
+  String settingsSignedInAs(String email);
+
+  /// No description provided for @settingsSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in or create an account'**
+  String get settingsSignIn;
+
+  /// No description provided for @settingsSignOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get settingsSignOut;
+
+  /// No description provided for @quizSendFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t send your answer. Check your connection and tap again.'**
+  String get quizSendFailed;
+
+  /// No description provided for @quizSubmitFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t get your result. Check your connection.'**
+  String get quizSubmitFailed;
+
+  /// No description provided for @quizRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'TRY AGAIN'**
+  String get quizRetry;
+
+  /// No description provided for @quizScoring.
+  ///
+  /// In en, this message translates to:
+  /// **'Scoring your case…'**
+  String get quizScoring;
+
+  /// No description provided for @quizOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Can\'t reach Nyaya. Check your connection and try again.'**
+  String get quizOffline;
+
+  /// No description provided for @quizSignedOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Your session ended. Sign in again to play.'**
+  String get quizSignedOut;
 }
 
 class _AppLocalizationsDelegate

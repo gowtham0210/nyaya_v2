@@ -6,7 +6,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../profile/application/profile_controller.dart';
 import '../application/quiz_controller.dart';
-import '../data/question_repository.dart';
+import '../data/quiz_api.dart';
 import '../domain/quiz_models.dart';
 import 'quiz_view.dart';
 import 'result_view.dart';
@@ -21,23 +21,23 @@ class QuizScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
-    final bank = ref.watch(questionBankProvider);
-    return bank.when(
-      loading: () => Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const CircularProgressIndicator(),
-              const SizedBox(height: AppSpacing.md),
-              Text(l.quizLoading, style: context.text.bodyLarge),
-            ],
+    final phase = ref.watch(quizControllerProvider(request).select((s) => s.phase));
+    return switch (phase) {
+      QuizPhase.starting => Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const CircularProgressIndicator(),
+                const SizedBox(height: AppSpacing.md),
+                Text(l.quizLoading, style: context.text.bodyLarge),
+              ],
+            ),
           ),
         ),
-      ),
-      error: (e, _) => _QuizError(request: request),
-      data: (_) => _QuizSession(request: request),
-    );
+      QuizPhase.failed => _QuizError(request: request),
+      _ => _QuizSession(request: request),
+    };
   }
 }
 
@@ -70,7 +70,6 @@ class _QuizSession extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(quizControllerProvider(request));
-    if (state.questions.isEmpty) return _QuizError(request: request, empty: true);
     final finished = state.isFinished;
 
     return PopScope(
@@ -96,14 +95,21 @@ class _QuizSession extends ConsumerWidget {
 }
 
 class _QuizError extends ConsumerWidget {
-  const _QuizError({required this.request, this.empty = false});
+  const _QuizError({required this.request});
 
   final QuizRequest request;
-  final bool empty;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
+    final failure = ref.watch(quizControllerProvider(request).select((s) => s.failure));
+    final empty = failure == QuizFailure.empty;
+    final message = switch (failure) {
+      QuizFailure.empty => l.quizEmpty,
+      QuizFailure.network => l.quizOffline,
+      QuizFailure.signedOut => l.quizSignedOut,
+      _ => l.commonSomethingWrong,
+    };
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -121,12 +127,18 @@ class _QuizError extends ConsumerWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.cloud_off_rounded, size: 56, color: context.nyaya.locked),
+              Icon(empty ? Icons.inbox_rounded : Icons.cloud_off_rounded, size: 56, color: context.nyaya.locked),
               const SizedBox(height: AppSpacing.md),
-              Text(empty ? l.quizEmpty : l.commonSomethingWrong, textAlign: TextAlign.center),
-              if (!empty) ...[
+              Text(message, textAlign: TextAlign.center),
+              if (failure == QuizFailure.network || failure == QuizFailure.other) ...[
                 const SizedBox(height: AppSpacing.md),
-                FilledButton(onPressed: () => ref.invalidate(questionBankProvider), child: Text(l.commonRetry)),
+                FilledButton(
+                  onPressed: () {
+                    ref.invalidate(quizCatalogProvider);
+                    ref.invalidate(quizControllerProvider(request));
+                  },
+                  child: Text(l.commonRetry),
+                ),
               ],
             ],
           ),

@@ -288,5 +288,17 @@
   "statStreak": "స్ట్రీక్",
   "statCoins": "కాయిన్‌లు",
   "statEnergy": "ఎనర్జీ",
-  "statStars": "స్టార్లు"
+  "statStars": "స్టార్లు",
+  "chapterConstitutionTitle": "రాజ్యాంగ ప్రాథమికాంశాలు",
+  "chapterConstitutionSubtitle": "ప్రవేశిక, పార్లమెంటు, న్యాయస్థానాలు, సవరణలు",
+  "chapterRightsTitle": "హక్కులు & విధులు",
+  "chapterRightsSubtitle": "ప్రాథమిక హక్కులు, ఆదేశిక సూత్రాలు, రిట్‌లు",
+  "chapterCriminalTitle": "నేర చట్టం (BNS)",
+  "chapterCriminalSubtitle": "కొత్త సంహిత కింద నేరాలు",
+  "chapterProcedureTitle": "విధానం & సాక్ష్యం",
+  "chapterProcedureSubtitle": "BNSS, BSA, FIR, అరెస్టు, బెయిల్",
+  "chapterCivilTitle": "ఒప్పందాలు & వినియోగదారులు",
+  "chapterCivilSubtitle": "ఒప్పందాలు, వినియోగదారుల హక్కులు, పరిష్కారాలు",
+  "chapterEverydayTitle": "నిత్యజీవిత చట్టం",
+  "chapterEverydaySubtitle": "రోజువారీ జీవితానికి చట్టం"
 }

@@ -11,17 +11,24 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/day.dart';
 import '../../../core/widgets/chunky_button.dart';
+import '../../auth/application/auth_controller.dart';
 import '../../profile/application/profile_controller.dart';
 import '../domain/quiz_models.dart';
 
-/// The single entry point for starting any quiz. Guards energy and the
-/// once-a-day docket so no screen can start a quiz the user can't finish.
+/// The single entry point for starting any quiz. Guards sign-in (the server
+/// runs every quiz), energy and the once-a-day docket so no screen can start
+/// a quiz the user can't finish.
 abstract final class QuizLauncher {
   /// With [replace], swaps the current quiz route (used by "Next level" and
   /// "Play again" on the results screen).
   static Future<void> start(BuildContext context, WidgetRef ref, QuizRequest request, {bool replace = false}) async {
     final profile = ref.read(profileProvider.notifier);
     ref.read(feedbackProvider).play(Haptic.tap);
+
+    if (!ref.read(authProvider.notifier).isSignedIn) {
+      final signedIn = await context.push<bool>(Routes.signIn);
+      if (signedIn != true || !context.mounted) return;
+    }
 
     if (request.mode == QuizMode.dailyDocket && profile.docketDoneToday) {
       final now = ref.read(clockProvider)();

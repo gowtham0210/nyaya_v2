@@ -288,5 +288,17 @@
   "statStreak": "स्ट्रीक",
   "statCoins": "सिक्के",
   "statEnergy": "ऊर्जा",
-  "statStars": "स्टार"
+  "statStars": "स्टार",
+  "chapterConstitutionTitle": "संविधान की मूल बातें",
+  "chapterConstitutionSubtitle": "प्रस्तावना, संसद, न्यायालय, संशोधन",
+  "chapterRightsTitle": "अधिकार और कर्तव्य",
+  "chapterRightsSubtitle": "मौलिक अधिकार, नीति निदेशक तत्व और रिट",
+  "chapterCriminalTitle": "आपराधिक कानून (BNS)",
+  "chapterCriminalSubtitle": "नई संहिता के अंतर्गत अपराध",
+  "chapterProcedureTitle": "प्रक्रिया और साक्ष्य",
+  "chapterProcedureSubtitle": "BNSS, BSA, FIR, गिरफ़्तारी, ज़मानत",
+  "chapterCivilTitle": "संविदा और उपभोक्ता",
+  "chapterCivilSubtitle": "संविदा, उपभोक्ता अधिकार, उपचार",
+  "chapterEverydayTitle": "रोज़मर्रा का कानून",
+  "chapterEverydaySubtitle": "दैनिक जीवन के लिए कानून"
 }

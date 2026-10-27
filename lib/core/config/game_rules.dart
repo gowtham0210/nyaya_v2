@@ -62,6 +62,7 @@ abstract final class GameRules {
 
   // ── Modes ─────────────────────────────────────────────────────────────────
   static const int casePathSoftSeconds = 60;
+  static const int casePathQuestions = 6;
   static const int dailyDocketQuestions = 5;
   static const int dailyDocketSeconds = 30;
   static const int duelQuestions = 7;

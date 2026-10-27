@@ -265,11 +265,19 @@ export const quizSessions = pgTable(
     userId: uuid('user_id')
       .notNull()
       .references(() => users.id),
-    topicId: uuid('topic_id')
+    /** Set when the quiz is one topic; superseded by topicIds. */
+    topicId: uuid('topic_id').references(() => topics.id),
+    /** Topics the questions were drawn from; empty means every topic. */
+    topicIds: uuid('topic_ids')
+      .array()
       .notNull()
-      .references(() => topics.id),
+      .default(sql`'{}'::uuid[]`),
     language: text('language').notNull(),
     difficulty: smallint('difficulty'),
+    minDifficulty: smallint('min_difficulty'),
+    maxDifficulty: smallint('max_difficulty'),
+    /** The same questions for everyone with these filters on this India date. */
+    daily: date('daily'),
     feedbackMode: feedbackMode('feedback_mode').notNull(),
     status: sessionStatus('status').notNull().default('in_progress'),
     scoringVersion: text('scoring_version').notNull(),
