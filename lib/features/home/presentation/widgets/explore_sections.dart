@@ -100,9 +100,9 @@ class _FeaturedLawsCarouselState extends ConsumerState<FeaturedLawsCarousel> {
   Widget build(BuildContext context) {
     final l = context.l10n;
     final slides = [
-      (l.lawConstitutionTitle, l.lawConstitutionDesc, LawArt.court, 'constitution'),
-      (l.lawBnsShort, l.lawBnsFeatured, LawArt.scales, 'criminal'),
-      (l.lawEverydayTitle, l.lawEverydayFeatured, LawArt.people, 'everyday'),
+      (l.lawConstitutionTitle, l.lawConstitutionDesc, LawArt.court, 'constitution', _FeaturedImage.constitution),
+      (l.lawBnsShort, l.lawBnsFeatured, LawArt.scales, 'criminal', null),
+      (l.lawEverydayTitle, l.lawEverydayFeatured, LawArt.people, 'everyday', null),
     ];
 
     return Column(
@@ -113,11 +113,12 @@ class _FeaturedLawsCarouselState extends ConsumerState<FeaturedLawsCarousel> {
             controller: _controller,
             onPageChanged: (i) => setState(() => _page = i),
             children: [
-              for (final (title, desc, art, chapter) in slides)
+              for (final (title, desc, art, chapter, image) in slides)
                 _FeaturedCard(
                   title: title,
                   desc: desc,
                   art: art,
+                  image: image,
                   onExplore: () => _exploreChapter(context, ref, chapter),
                 ),
             ],
@@ -145,32 +146,73 @@ class _FeaturedLawsCarouselState extends ConsumerState<FeaturedLawsCarousel> {
   }
 }
 
+/// A painted illustration and the flat colour its left edge fades into, so
+/// the card background continues the picture without a seam.
+enum _FeaturedImage {
+  constitution('assets/images/explore_constitution.webp', Color(0xFFF0D5C5));
+
+  const _FeaturedImage(this.asset, this.background);
+
+  final String asset;
+  final Color background;
+}
+
 class _FeaturedCard extends StatelessWidget {
-  const _FeaturedCard({required this.title, required this.desc, required this.art, required this.onExplore});
+  const _FeaturedCard({
+    required this.title,
+    required this.desc,
+    required this.art,
+    required this.onExplore,
+    this.image,
+  });
 
   final String title;
   final String desc;
   final LawArt art;
+  final _FeaturedImage? image;
   final VoidCallback onExplore;
 
   @override
   Widget build(BuildContext context) {
+    final image = this.image;
+    // Painted images have a light background, so their card keeps light-theme
+    // text colours in dark mode too.
+    if (image != null && context.isDark) {
+      return Theme(data: AppTheme.light(), child: Builder(builder: _build));
+    }
+    return _build(context);
+  }
+
+  Widget _build(BuildContext context) {
     final l = context.l10n;
+    final image = this.image;
+    final fallback = ExcludeSemantics(child: LawIllustration(art: art));
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: context.isDark ? context.colors.surfaceContainerHigh : context.colors.primaryContainer,
+        color: image?.background ??
+            (context.isDark ? context.colors.surfaceContainerHigh : context.colors.primaryContainer),
         borderRadius: BorderRadius.circular(AppRadius.lg),
       ),
       child: Stack(
         children: [
-          Positioned(
-            right: 0,
-            bottom: 0,
-            width: 200,
-            height: 220,
-            child: ExcludeSemantics(child: LawIllustration(art: art)),
-          ),
+          if (image != null)
+            Positioned(
+              top: 0,
+              right: 0,
+              bottom: 0,
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: Image.asset(
+                  image.asset,
+                  fit: BoxFit.cover,
+                  excludeFromSemantics: true,
+                  errorBuilder: (context, error, stack) => fallback,
+                ),
+              ),
+            )
+          else
+            Positioned(right: 0, bottom: 0, width: 200, height: 220, child: fallback),
           Padding(
             padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.page, 0, AppSpacing.page),
             child: FractionallySizedBox(

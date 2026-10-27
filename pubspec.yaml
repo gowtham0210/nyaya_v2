@@ -31,3 +31,4 @@ flutter:
   generate: true
   assets:
     - assets/questions/
+    - assets/images/

@@ -51,6 +51,11 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       Game sections (stats, continue, daily goal, docket, modes, league, premium, fact, updates) are no longer
       on Home; their widgets remain unused in `home_sections.dart` / `home_header.dart` in case they return.
       New strings are English-only (other locales fall back). Tests updated (tap 'Explore' instead of 'PLAY').
+- [x] 2026-10-26: Constitution "Start here" card uses a ChatGPT-generated painting
+      (`assets/images/explore_constitution.webp`, 1254² webp, bg #F0D5C5 = card colour so there is no seam).
+      Image cards keep light-theme text in dark mode (dark path not yet eyeballed). BNS and Everyday Law cards
+      still use the painted-in-code art until matching images are generated (prompt style: warm painterly
+      editorial, palette colours, subject in right two-thirds, left third fading to flat peach, square, no text).
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
