@@ -16,8 +16,9 @@ npm run start:dev        # http://localhost:3000/v1
 Without `DATABASE_URL` the server uses an embedded Postgres (PGlite) stored in `.data/pglite`, so no
 install is needed. For a real Postgres: `docker compose up -d`, then set
 `DATABASE_URL=postgres://nyaya:nyaya@localhost:5432/nyaya` in `.env`. Migrations run on start.
+The embedded database allows one process at a time, so stop the server before `npm run seed`.
 
-Seeded dev accounts (password = `SEED_PASSWORD`): `admin@`, `editor@`, `reviewer@`, `publisher@nyaya.local`.
+Seeded dev accounts (password = `SEED_PASSWORD`): `admin@`, `editor@`, `reviewer@`, `publisher@`, `learner@nyaya.local`.
 
 ## Scripts
 
@@ -44,11 +45,21 @@ Seeded dev accounts (password = `SEED_PASSWORD`): `admin@`, `editor@`, `reviewer
 - **M04 Sources** — source title/URL/citation, provision reference, valid-from/to, verified-at and
   reviewer on every version; required before review and publishing.
 
+- **M05–M07 Learner quizzes** — `GET /v1/quizzes` (public): topics with published questions in force
+  today (India date), per difficulty. `POST /v1/quiz-sessions` starts a quiz: the server picks eligible
+  published versions at random and shuffles options; no answer key or explanation is sent. Two modes:
+  `immediate` (practice: each answer is final and comes back explained; re-sending the same answer is a
+  safe retry) and `end` (exam: answers can change, nothing is revealed until submit). Answers close at
+  `expires_at` (2 min per question, at least 10 min); submitting is always allowed and is idempotent.
+  Scoring policy `standard-v1` (+1 correct, 0 otherwise) is stored on each session. Sessions keep the exact
+  question versions they showed, so results survive later revisions. `GET /v1/me/attempts` and
+  `GET /v1/me/progress` (per-topic attempts, accuracy, best). Other learners' sessions return 404.
+
 All errors are `{ code, message, details, request_id }`. Lists are `{ items, next_cursor }`.
 
 The Content Management Portal in [`../cms`](../cms) is the first client.
 
 ## Not yet
 
-Learner APIs (published content, quiz sessions, server scoring, progress, bookmarks), CSV import,
+Learner sign-up (sign-in method still open), bookmarks and mistake review, content reports, CSV import,
 admin user/taxonomy management, content reports, translations of questions, analytics, CI/CD.

@@ -476,15 +476,13 @@ export class QuestionsService {
     decision: 'approved' | 'changes_requested',
     reason: string | null,
   ) {
-    await tx
-      .insert(reviewDecisions)
-      .values({
-        id: newId(),
-        versionId: v.id,
-        reviewerId: actor.id,
-        decision,
-        reason,
-      });
+    await tx.insert(reviewDecisions).values({
+      id: newId(),
+      versionId: v.id,
+      reviewerId: actor.id,
+      decision,
+      reason,
+    });
   }
 
   private async requireTopic(tx: Tx, topicId: string) {

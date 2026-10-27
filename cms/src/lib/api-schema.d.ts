@@ -219,6 +219,142 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/quizzes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Topics with published questions in force today, and how many */
+        get: operations["LearnController_catalog"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/quiz-sessions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start a quiz. The server picks the questions; no answer keys are returned. */
+        post: operations["LearnController_start"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/quiz-sessions/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Current state of a session, for resuming */
+        get: operations["LearnController_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/quiz-sessions/{id}/answers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Save an answer
+         * @description Immediate mode: final, and the explanation comes back. Re-sending the same answer is a safe retry.
+         */
+        post: operations["LearnController_answer"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/quiz-sessions/{id}/submit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Finish and score the quiz. Idempotent: submitting again returns the same result. */
+        post: operations["LearnController_submit"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/quiz-sessions/{id}/result": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["LearnController_result"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/attempts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["LearnController_attempts"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/progress": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["LearnController_progress"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -237,12 +373,28 @@ export interface components {
             roles: ("learner" | "admin" | "content_editor" | "legal_reviewer" | "publisher" | "analyst")[];
         };
         SessionDto: {
-            access_token: string;
-            /** @description Seconds until the access token expires */
-            expires_in: number;
-            /** @description Single use: each refresh returns a new one */
-            refresh_token: string;
-            user: components["schemas"]["MeDto"];
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            topic_id: string;
+            language: string;
+            difficulty: number | null;
+            /** @enum {string} */
+            feedback_mode: "immediate" | "end";
+            /** @enum {string} */
+            status: "in_progress" | "submitted";
+            scoring_version: string;
+            question_count: number;
+            /** Format: date-time */
+            started_at: string;
+            /**
+             * Format: date-time
+             * @description Answers are refused after this; submitting is still allowed
+             */
+            expires_at: string;
+            /** Format: date-time */
+            submitted_at: string | null;
+            questions: components["schemas"]["SessionQuestionDto"][];
         };
         RefreshDto: {
             refresh_token: string;
@@ -468,6 +620,141 @@ export interface components {
         ReviseDto: {
             /** @description Why the published question is changing */
             change_note: string;
+        };
+        TopicQuizDto: {
+            /** Format: uuid */
+            topic_id: string;
+            /** Format: uuid */
+            subject_id: string;
+            subject_name: string;
+            topic_name: string;
+            /** @description Published questions currently in force */
+            available: number;
+            /**
+             * @description Available questions per difficulty (1–3)
+             * @example {
+             *       "1": 4,
+             *       "2": 2,
+             *       "3": 0
+             *     }
+             */
+            by_difficulty: Record<string, never>;
+        };
+        CatalogDto: {
+            language: string;
+            topics: components["schemas"]["TopicQuizDto"][];
+            max_questions: number;
+        };
+        StartSessionDto: {
+            /** Format: uuid */
+            topic_id: string;
+            /** @default 10 */
+            question_count?: number;
+            /** @description Only this difficulty; any when omitted */
+            difficulty?: number;
+            /**
+             * @default en
+             * @enum {string}
+             */
+            language?: "en" | "hi" | "ta" | "te" | "kn" | "ml";
+            /**
+             * @description immediate: each answer is final and explained at once. end: answers can change; nothing is revealed until submit.
+             * @default immediate
+             * @enum {string}
+             */
+            feedback_mode?: "immediate" | "end";
+        };
+        FeedbackDto: {
+            correct: boolean;
+            correct_option_ids: string[];
+            explanation: string;
+            source_title: string | null;
+            source_url: string | null;
+            provision_reference: string | null;
+        };
+        SessionQuestionDto: {
+            position: number;
+            /** Format: uuid */
+            question_version_id: string;
+            difficulty: number;
+            stem: string;
+            /** @description In the order to show them */
+            options: components["schemas"]["OptionDto"][];
+            selected_option_ids: string[] | null;
+            /** Format: date-time */
+            answered_at: string | null;
+            /** @description Only after this question is answered (immediate mode) or the session is submitted */
+            feedback: components["schemas"]["FeedbackDto"] | null;
+        };
+        AnswerDto: {
+            position: number;
+            /**
+             * @example [
+             *       "a"
+             *     ]
+             */
+            selected_option_ids: string[];
+        };
+        AnswerResultDto: {
+            position: number;
+            selected_option_ids: string[];
+            /** Format: date-time */
+            answered_at: string;
+            /** @description Immediate mode only */
+            feedback: components["schemas"]["FeedbackDto"] | null;
+        };
+        ResultDto: {
+            /** Format: uuid */
+            session_id: string;
+            /** Format: uuid */
+            topic_id: string;
+            scoring_version: string;
+            score: number;
+            total: number;
+            correct_count: number;
+            answered_count: number;
+            /** Format: date-time */
+            started_at: string;
+            /** Format: date-time */
+            submitted_at: string;
+            duration_seconds: number;
+            questions: components["schemas"]["SessionQuestionDto"][];
+        };
+        AttemptDto: {
+            /** Format: uuid */
+            session_id: string;
+            /** Format: uuid */
+            topic_id: string;
+            score: number;
+            total: number;
+            scoring_version: string;
+            /** @enum {string} */
+            feedback_mode: "immediate" | "end";
+            /** Format: date-time */
+            submitted_at: string;
+        };
+        AttemptPageDto: {
+            items: components["schemas"]["AttemptDto"][];
+            next_cursor: string | null;
+        };
+        TopicProgressDto: {
+            /** Format: uuid */
+            topic_id: string;
+            attempts: number;
+            questions_answered: number;
+            correct: number;
+            /** @description correct / questions shown, 0–1 */
+            accuracy: number;
+            /** @description Best score as a fraction of the session total, 0–1 */
+            best: number;
+            /** Format: date-time */
+            last_attempt_at: string;
+        };
+        ProgressDto: {
+            attempts: number;
+            questions_answered: number;
+            correct: number;
+            topics: components["schemas"]["TopicProgressDto"][];
         };
     };
     responses: never;
@@ -817,6 +1104,182 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["QuestionDetailDto"];
+                };
+            };
+        };
+    };
+    LearnController_catalog: {
+        parameters: {
+            query?: {
+                language?: "en" | "hi" | "ta" | "te" | "kn" | "ml";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogDto"];
+                };
+            };
+        };
+    };
+    LearnController_start: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["StartSessionDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SessionDto"];
+                };
+            };
+        };
+    };
+    LearnController_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SessionDto"];
+                };
+            };
+        };
+    };
+    LearnController_answer: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AnswerDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AnswerResultDto"];
+                };
+            };
+        };
+    };
+    LearnController_submit: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description Accepted; submit is idempotent per session anyway */
+                "Idempotency-Key"?: string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResultDto"];
+                };
+            };
+        };
+    };
+    LearnController_result: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResultDto"];
+                };
+            };
+        };
+    };
+    LearnController_attempts: {
+        parameters: {
+            query?: {
+                cursor?: string;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AttemptPageDto"];
+                };
+            };
+        };
+    };
+    LearnController_progress: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProgressDto"];
                 };
             };
         };

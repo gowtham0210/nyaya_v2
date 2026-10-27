@@ -20,7 +20,7 @@ import {
  * - taxonomy built from the Flutter app's six chapters, plus the core acts;
  * - the app's bundled question bank as DRAFTS (imports never publish; each
  *   needs a source, validity date and legal review first);
- * - one account per staff role when SEED_PASSWORD is set (never in production).
+ * - one account per role when SEED_PASSWORD is set (never in production).
  */
 
 const ACTS = [
@@ -81,6 +81,7 @@ const STAFF: { email: string; name: string; roles: Role[] }[] = [
     name: 'Dev Reviewer',
     roles: ['legal_reviewer'],
   },
+  { email: 'learner@nyaya.local', name: 'Dev Learner', roles: ['learner'] },
   {
     email: 'publisher@nyaya.local',
     name: 'Dev Publisher',
@@ -212,15 +213,13 @@ async function seed() {
           .set({ passwordHash: hash, roles: s.roles, updatedAt: new Date() })
           .where(eq(users.id, u.id));
       else
-        await db
-          .insert(users)
-          .values({
-            id: newId(),
-            email: s.email,
-            displayName: s.name,
-            passwordHash: hash,
-            roles: s.roles,
-          });
+        await db.insert(users).values({
+          id: newId(),
+          email: s.email,
+          displayName: s.name,
+          passwordHash: hash,
+          roles: s.roles,
+        });
     }
   }
 
@@ -228,8 +227,8 @@ async function seed() {
     `Seeded ${ACTS.length} acts, ${Object.keys(topicIds).length} subjects/topics, ` +
       `${imported} new draft questions (${bank.questions.length - imported} already present)` +
       (password && !config.isProduction
-        ? `, ${STAFF.length} staff accounts.`
-        : '. Set SEED_PASSWORD to create staff accounts.'),
+        ? `, ${STAFF.length} dev accounts.`
+        : '. Set SEED_PASSWORD to create dev accounts.'),
   );
   await close();
 }

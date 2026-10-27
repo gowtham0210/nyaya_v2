@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-27 (CMS portal, Claude Opus 5.5)
+> Last updated: 2026-10-27 (learner quiz API, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -130,7 +130,17 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       Verified in the browser: editor fills an imported draft's source → submit; reviewer approves; publisher
       publishes; editor creates a new draft; proxy refresh and sign-in redirects checked with curl.
       Dev servers: `.claude/launch.json` (api :3000, cms :3001). Local dev data now has 1 published + 1 extra draft.
-      Next: learner-facing published-content API + quiz sessions with server scoring, then wire the Flutter app.
+
+- [x] 2026-10-27: Learner quiz API in `backend/src/learn/` (plan M05–M07): `GET /v1/quizzes` (public catalog
+      of topics with published, in-force questions; validity uses the India date), `POST /v1/quiz-sessions`
+      (server picks + shuffles; no keys/explanations), answers, submit (idempotent), result, `GET /v1/me/attempts`,
+      `GET /v1/me/progress`. Modes: `immediate` (answer final, explained at once — matches the app's Case Path)
+      and `end` (exam — matches Exam Chamber). Scoring `standard-v1` (+1/0; the app's Exam Chamber −0.25 is not
+      modelled yet). Tables `quiz_sessions`, `quiz_session_questions` (migration 0001). Seed adds
+      `learner@nyaya.local`. 10 unit + 28 API tests pass; smoke-tested against the dev DB.
+      Gotcha: PGlite is single-process — stop the API before `npm run seed`.
+      Next: wire the Flutter app to these endpoints (replacing on-device scoring/answer keys); learner
+      sign-in method still undecided; most of the 108 questions still need sources + review to be publishable.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

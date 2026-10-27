@@ -584,6 +584,318 @@
           "editor"
         ]
       }
+    },
+    "/v1/quizzes": {
+      "get": {
+        "operationId": "LearnController_catalog",
+        "parameters": [
+          {
+            "name": "language",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "en",
+              "type": "string",
+              "enum": [
+                "en",
+                "hi",
+                "ta",
+                "te",
+                "kn",
+                "ml"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Topics with published questions in force today, and how many",
+        "tags": [
+          "learn"
+        ]
+      }
+    },
+    "/v1/quiz-sessions": {
+      "post": {
+        "operationId": "LearnController_start",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartSessionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Start a quiz. The server picks the questions; no answer keys are returned.",
+        "tags": [
+          "learn"
+        ]
+      }
+    },
+    "/v1/quiz-sessions/{id}": {
+      "get": {
+        "operationId": "LearnController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Current state of a session, for resuming",
+        "tags": [
+          "learn"
+        ]
+      }
+    },
+    "/v1/quiz-sessions/{id}/answers": {
+      "post": {
+        "description": "Immediate mode: final, and the explanation comes back. Re-sending the same answer is a safe retry.",
+        "operationId": "LearnController_answer",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnswerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnswerResultDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Save an answer",
+        "tags": [
+          "learn"
+        ]
+      }
+    },
+    "/v1/quiz-sessions/{id}/submit": {
+      "post": {
+        "operationId": "LearnController_submit",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Accepted; submit is idempotent per session anyway",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Finish and score the quiz. Idempotent: submitting again returns the same result.",
+        "tags": [
+          "learn"
+        ]
+      }
+    },
+    "/v1/quiz-sessions/{id}/result": {
+      "get": {
+        "operationId": "LearnController_result",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "learn"
+        ]
+      }
+    },
+    "/v1/me/attempts": {
+      "get": {
+        "operationId": "LearnController_attempts",
+        "parameters": [
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttemptPageDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "learn"
+        ]
+      }
+    },
+    "/v1/me/progress": {
+      "get": {
+        "operationId": "LearnController_progress",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "learn"
+        ]
+      }
     }
   },
   "info": {
@@ -658,26 +970,75 @@
       "SessionDto": {
         "type": "object",
         "properties": {
-          "access_token": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "topic_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "language": {
             "type": "string"
           },
-          "expires_in": {
+          "difficulty": {
             "type": "number",
-            "description": "Seconds until the access token expires"
+            "nullable": true
           },
-          "refresh_token": {
+          "feedback_mode": {
             "type": "string",
-            "description": "Single use: each refresh returns a new one"
+            "enum": [
+              "immediate",
+              "end"
+            ]
           },
-          "user": {
-            "$ref": "#/components/schemas/MeDto"
+          "status": {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "submitted"
+            ]
+          },
+          "scoring_version": {
+            "type": "string"
+          },
+          "question_count": {
+            "type": "number"
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Answers are refused after this; submitting is still allowed"
+          },
+          "submitted_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionQuestionDto"
+            }
           }
         },
         "required": [
-          "access_token",
-          "expires_in",
-          "refresh_token",
-          "user"
+          "id",
+          "topic_id",
+          "language",
+          "difficulty",
+          "feedback_mode",
+          "status",
+          "scoring_version",
+          "question_count",
+          "started_at",
+          "expires_at",
+          "submitted_at",
+          "questions"
         ]
       },
       "RefreshDto": {
@@ -1418,6 +1779,447 @@
         },
         "required": [
           "change_note"
+        ]
+      },
+      "TopicQuizDto": {
+        "type": "object",
+        "properties": {
+          "topic_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "subject_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "subject_name": {
+            "type": "string"
+          },
+          "topic_name": {
+            "type": "string"
+          },
+          "available": {
+            "type": "number",
+            "description": "Published questions currently in force"
+          },
+          "by_difficulty": {
+            "type": "object",
+            "description": "Available questions per difficulty (1–3)",
+            "example": {
+              "1": 4,
+              "2": 2,
+              "3": 0
+            }
+          }
+        },
+        "required": [
+          "topic_id",
+          "subject_id",
+          "subject_name",
+          "topic_name",
+          "available",
+          "by_difficulty"
+        ]
+      },
+      "CatalogDto": {
+        "type": "object",
+        "properties": {
+          "language": {
+            "type": "string"
+          },
+          "topics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TopicQuizDto"
+            }
+          },
+          "max_questions": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "language",
+          "topics",
+          "max_questions"
+        ]
+      },
+      "StartSessionDto": {
+        "type": "object",
+        "properties": {
+          "topic_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "question_count": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 20,
+            "default": 10
+          },
+          "difficulty": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 3,
+            "description": "Only this difficulty; any when omitted"
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "en",
+              "hi",
+              "ta",
+              "te",
+              "kn",
+              "ml"
+            ],
+            "default": "en"
+          },
+          "feedback_mode": {
+            "type": "string",
+            "enum": [
+              "immediate",
+              "end"
+            ],
+            "default": "immediate",
+            "description": "immediate: each answer is final and explained at once. end: answers can change; nothing is revealed until submit."
+          }
+        },
+        "required": [
+          "topic_id"
+        ]
+      },
+      "FeedbackDto": {
+        "type": "object",
+        "properties": {
+          "correct": {
+            "type": "boolean"
+          },
+          "correct_option_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "source_title": {
+            "type": "string",
+            "nullable": true
+          },
+          "source_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "provision_reference": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "correct",
+          "correct_option_ids",
+          "explanation",
+          "source_title",
+          "source_url",
+          "provision_reference"
+        ]
+      },
+      "SessionQuestionDto": {
+        "type": "object",
+        "properties": {
+          "position": {
+            "type": "number"
+          },
+          "question_version_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "difficulty": {
+            "type": "number"
+          },
+          "stem": {
+            "type": "string"
+          },
+          "options": {
+            "description": "In the order to show them",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OptionDto"
+            }
+          },
+          "selected_option_ids": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "answered_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "feedback": {
+            "nullable": true,
+            "description": "Only after this question is answered (immediate mode) or the session is submitted",
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FeedbackDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "position",
+          "question_version_id",
+          "difficulty",
+          "stem",
+          "options",
+          "selected_option_ids",
+          "answered_at",
+          "feedback"
+        ]
+      },
+      "AnswerDto": {
+        "type": "object",
+        "properties": {
+          "position": {
+            "type": "number",
+            "minimum": 1
+          },
+          "selected_option_ids": {
+            "example": [
+              "a"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "position",
+          "selected_option_ids"
+        ]
+      },
+      "AnswerResultDto": {
+        "type": "object",
+        "properties": {
+          "position": {
+            "type": "number"
+          },
+          "selected_option_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "answered_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "feedback": {
+            "nullable": true,
+            "description": "Immediate mode only",
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FeedbackDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "position",
+          "selected_option_ids",
+          "answered_at",
+          "feedback"
+        ]
+      },
+      "ResultDto": {
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "topic_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "scoring_version": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          },
+          "correct_count": {
+            "type": "number"
+          },
+          "answered_count": {
+            "type": "number"
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "submitted_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "duration_seconds": {
+            "type": "number"
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionQuestionDto"
+            }
+          }
+        },
+        "required": [
+          "session_id",
+          "topic_id",
+          "scoring_version",
+          "score",
+          "total",
+          "correct_count",
+          "answered_count",
+          "started_at",
+          "submitted_at",
+          "duration_seconds",
+          "questions"
+        ]
+      },
+      "AttemptDto": {
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "topic_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "score": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          },
+          "scoring_version": {
+            "type": "string"
+          },
+          "feedback_mode": {
+            "type": "string",
+            "enum": [
+              "immediate",
+              "end"
+            ]
+          },
+          "submitted_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "session_id",
+          "topic_id",
+          "score",
+          "total",
+          "scoring_version",
+          "feedback_mode",
+          "submitted_at"
+        ]
+      },
+      "AttemptPageDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttemptDto"
+            }
+          },
+          "next_cursor": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ]
+      },
+      "TopicProgressDto": {
+        "type": "object",
+        "properties": {
+          "topic_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "attempts": {
+            "type": "number"
+          },
+          "questions_answered": {
+            "type": "number"
+          },
+          "correct": {
+            "type": "number"
+          },
+          "accuracy": {
+            "type": "number",
+            "description": "correct / questions shown, 0–1"
+          },
+          "best": {
+            "type": "number",
+            "description": "Best score as a fraction of the session total, 0–1"
+          },
+          "last_attempt_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "topic_id",
+          "attempts",
+          "questions_answered",
+          "correct",
+          "accuracy",
+          "best",
+          "last_attempt_at"
+        ]
+      },
+      "ProgressDto": {
+        "type": "object",
+        "properties": {
+          "attempts": {
+            "type": "number"
+          },
+          "questions_answered": {
+            "type": "number"
+          },
+          "correct": {
+            "type": "number"
+          },
+          "topics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TopicProgressDto"
+            }
+          }
+        },
+        "required": [
+          "attempts",
+          "questions_answered",
+          "correct",
+          "topics"
         ]
       }
     }

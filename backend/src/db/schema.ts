@@ -8,6 +8,7 @@ import {
   jsonb,
   pgEnum,
   pgTable,
+  primaryKey,
   smallint,
   text,
   timestamp,
@@ -239,4 +240,75 @@ export const auditLog = pgTable(
     createdAt: createdAt(),
   },
   (t) => [index('audit_log_entity_idx').on(t.entityType, t.entityId)],
+);
+
+// ---------------------------------------------------------------- learning
+
+export const SESSION_STATUSES = ['in_progress', 'submitted'] as const;
+export type SessionStatus = (typeof SESSION_STATUSES)[number];
+export const sessionStatus = pgEnum('quiz_session_status', SESSION_STATUSES);
+
+/**
+ * immediate: each answer is final and its explanation is returned at once
+ * (practice). end: answers can change until submit and nothing is revealed
+ * before it (exam).
+ */
+export const FEEDBACK_MODES = ['immediate', 'end'] as const;
+export type FeedbackMode = (typeof FEEDBACK_MODES)[number];
+export const feedbackMode = pgEnum('quiz_feedback_mode', FEEDBACK_MODES);
+
+/** One attempt at a quiz. The server picks the questions and owns the score. */
+export const quizSessions = pgTable(
+  'quiz_sessions',
+  {
+    id: uuid('id').primaryKey(),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id),
+    topicId: uuid('topic_id')
+      .notNull()
+      .references(() => topics.id),
+    language: text('language').notNull(),
+    difficulty: smallint('difficulty'),
+    feedbackMode: feedbackMode('feedback_mode').notNull(),
+    status: sessionStatus('status').notNull().default('in_progress'),
+    scoringVersion: text('scoring_version').notNull(),
+    questionCount: integer('question_count').notNull(),
+    startedAt: timestamp('started_at', { withTimezone: true }).notNull(),
+    expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+    submittedAt: timestamp('submitted_at', { withTimezone: true }),
+    score: integer('score'),
+    correctCount: integer('correct_count'),
+    answeredCount: integer('answered_count'),
+  },
+  (t) => [index('quiz_sessions_user_idx').on(t.userId, t.id)],
+);
+
+/**
+ * The exact question versions a session showed, in order. Versions are
+ * immutable, so results stay reproducible after a question is revised.
+ */
+export const quizSessionQuestions = pgTable(
+  'quiz_session_questions',
+  {
+    sessionId: uuid('session_id')
+      .notNull()
+      .references(() => quizSessions.id, { onDelete: 'cascade' }),
+    position: smallint('position').notNull(),
+    questionVersionId: uuid('question_version_id')
+      .notNull()
+      .references(() => questionVersions.id),
+    /** Option ids in the order this learner sees them. */
+    optionOrder: text('option_order').array().notNull(),
+    selectedOptionIds: text('selected_option_ids').array(),
+    answeredAt: timestamp('answered_at', { withTimezone: true }),
+    isCorrect: boolean('is_correct'),
+  },
+  (t) => [
+    primaryKey({ columns: [t.sessionId, t.position] }),
+    uniqueIndex('quiz_session_questions_version_idx').on(
+      t.sessionId,
+      t.questionVersionId,
+    ),
+  ],
 );

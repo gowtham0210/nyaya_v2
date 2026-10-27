@@ -14,9 +14,7 @@ export interface TestApp {
   http: () => ReturnType<typeof request>;
   topicId: string;
   /** Creates a user with these roles and returns a signed-in session. */
-  signInAs: (
-    ...roles: Role[]
-  ) => Promise<{
+  signInAs: (...roles: Role[]) => Promise<{
     id: string;
     token: string;
     refresh: string;
@@ -42,35 +40,29 @@ export async function startApp(
 
   const subjectId = newId();
   const topicId = newId();
-  await db
-    .insert(subjects)
-    .values({
-      id: subjectId,
-      slug: 'constitution',
-      name: 'Constitution Basics',
-    });
-  await db
-    .insert(topics)
-    .values({
-      id: topicId,
-      subjectId,
-      slug: 'constitution-basics',
-      name: 'Preamble and Parliament',
-    });
+  await db.insert(subjects).values({
+    id: subjectId,
+    slug: 'constitution',
+    name: 'Constitution Basics',
+  });
+  await db.insert(topics).values({
+    id: topicId,
+    subjectId,
+    slug: 'constitution-basics',
+    name: 'Preamble and Parliament',
+  });
 
   const signInAs = async (...roles: Role[]) => {
     const email = `${roles.join('-') || 'user'}-${randomBytes(4).toString('hex')}@test.local`;
     const password = randomBytes(12).toString('base64url');
     const id = newId();
-    await db
-      .insert(users)
-      .values({
-        id,
-        email,
-        displayName: 'Test',
-        passwordHash: await hashPassword(password),
-        roles,
-      });
+    await db.insert(users).values({
+      id,
+      email,
+      displayName: 'Test',
+      passwordHash: await hashPassword(password),
+      roles,
+    });
     const res = await http()
       .post('/v1/auth/session')
       .send({ email, password })
