@@ -6,12 +6,14 @@ import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/common.dart';
+import '../../../core/widgets/pressable.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../quiz/data/question_repository.dart';
 import '../application/journey_controller.dart';
 import '../domain/journey.dart';
 import 'journey_layout.dart';
 import 'journey_painter.dart';
+import 'journey_scenery.dart';
 import 'level_sheet.dart';
 import 'map_node.dart';
 
@@ -64,7 +66,9 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
         children: [
           LayoutBuilder(
             builder: (context, box) {
-              final layout = _layout?.width == box.maxWidth ? _layout! : JourneyLayout(width: box.maxWidth, nodes: nodes);
+              final layout = _layout?.width == box.maxWidth
+                  ? _layout!
+                  : JourneyLayout(width: box.maxWidth, nodes: nodes);
               _layout = layout;
               _viewport = box.maxHeight;
               if (!_didInitialScroll) {
@@ -80,48 +84,35 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                   child: Stack(
                     clipBehavior: Clip.none,
                     children: [
-                      // Chapter-tinted background bands.
-                      for (final (c, band) in layout.chapterBands.indexed)
-                        Positioned(
-                          left: 0,
-                          right: 0,
-                          top: band.top,
-                          height: band.bottom - band.top,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: JourneyCatalog.chapters[c].color.withValues(alpha: context.isDark ? 0.14 : 0.08),
-                            ),
-                          ),
-                        ),
-                      Positioned.fill(
-                        child: MapDecorations(
-                          width: box.maxWidth,
-                          height: layout.height,
-                          color: context.colors.onSurface.withValues(alpha: 0.05),
-                        ),
-                      ),
+                      ...sceneryLayer(context, layout),
                       Positioned.fill(
                         child: CustomPaint(
                           painter: RoadPainter(
-                            centers: layout.centers,
+                            layout: layout,
                             completedUpTo: completedUpTo,
                             roadColor: context.isDark ? const Color(0xFF3A3029) : AppPalette.sandLight,
-                            edgeColor: context.isDark ? const Color(0xFF2A221C) : AppPalette.sand,
-                            doneColor: AppPalette.ochre,
+                            edgeColor: (context.isDark ? const Color(0xFF2A221C) : AppPalette.sand).withValues(
+                              alpha: 0.45,
+                            ),
+                            doneColor: context.isDark ? const Color(0xFF4A3B30) : AppPalette.ochreSoft,
+                            dashColor: Colors.white.withValues(alpha: context.isDark ? 0.25 : 0.85),
                           ),
                         ),
                       ),
+                      ...marginNotes(context, layout, current),
                       for (final (c, chapter) in JourneyCatalog.chapters.indexed)
                         Positioned(
-                          left: 24,
-                          right: 24,
-                          top: layout.bannerTop(c) + 22,
+                          left: AppSpacing.page,
+                          right: AppSpacing.page,
+                          top: layout.bannerTop(c) + 30,
                           child: ChapterBanner(
                             number: c + 1,
                             title: bank?.chapters[chapter.id]?.title ?? '',
                             subtitle: bank?.chapters[chapter.id]?.subtitle ?? '',
                             chapter: chapter,
                             done: progress.completedLevelsIn(chapter.id),
+                            active: (current?.chapterIndex ?? -1) == c,
+                            onTap: () => showNodeSheet(context, ref, _chapterFocus(progress, c)),
                           ),
                         ),
                       for (final node in nodes)
@@ -140,27 +131,32 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
             },
           ),
           // Floating header.
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: _MapHeader(totalStars: progress.totalStars),
-          ),
+          Positioned(top: 0, left: 0, right: 0, child: _MapHeader(totalStars: progress.totalStars)),
           Positioned(
             right: AppSpacing.page,
             bottom: AppSpacing.md,
-            child: FloatingActionButton.small(
+            child: FloatingActionButton(
               heroTag: 'jump',
               tooltip: l.journeyJumpToCurrent,
+              shape: const CircleBorder(),
+              elevation: 3,
               backgroundColor: context.colors.surface,
               foregroundColor: context.colors.primary,
               onPressed: _scrollToCurrent,
-              child: const Icon(Icons.my_location_rounded),
+              child: const Icon(Icons.my_location_rounded, size: 28),
             ),
           ),
         ],
       ),
     );
+  }
+
+  /// The stop a chapter card opens: the current one if it is in this
+  /// chapter, otherwise the chapter's first level.
+  JourneyNode _chapterFocus(JourneyProgress progress, int chapter) {
+    final current = progress.current;
+    if (current != null && current.chapterIndex == chapter) return current;
+    return JourneyCatalog.nodes.firstWhere((n) => n.chapterIndex == chapter);
   }
 }
 
@@ -173,35 +169,55 @@ class _MapHeader extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
     final p = ref.watch(profileProvider);
-    return ClipRect(
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Theme.of(context).scaffoldBackgroundColor,
-              Theme.of(context).scaffoldBackgroundColor.withValues(alpha: 0.0),
-            ],
-            stops: const [0.7, 1],
-          ),
+    final bg = Theme.of(context).scaffoldBackgroundColor;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [bg, bg.withValues(alpha: 0.0)],
+          stops: const [0.72, 1],
         ),
-        child: SafeArea(
-          bottom: false,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.sm, AppSpacing.page, AppSpacing.lg),
-            child: Row(
-              children: [
-                Expanded(child: Text(l.journeyTitle, style: context.text.headlineMedium)),
-                StatPill(icon: Icons.star_rounded, value: '$totalStars', color: AppPalette.ochre),
-                const SizedBox(width: 8),
-                StatPill(
-                  icon: Icons.bolt_rounded,
-                  value: p.isPremium ? '∞' : '${p.energy}',
-                  color: context.nyaya.energy,
+      ),
+      child: SafeArea(
+        bottom: false,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.md, AppSpacing.page, AppSpacing.lg),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l.journeyTitle,
+                      style: AppTheme.serif(TextStyle(fontSize: 38, height: 1.1, color: context.colors.primary)),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      l.journeySubtitle,
+                      style: context.text.bodyLarge?.copyWith(color: context.nyaya.textSecondary),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(width: 8),
+              Padding(
+                padding: const EdgeInsets.only(top: 6),
+                child: Row(
+                  children: [
+                    StatPill(icon: Icons.star_rounded, value: '$totalStars', color: AppPalette.ochre),
+                    const SizedBox(width: 8),
+                    StatPill(
+                      icon: Icons.bolt_rounded,
+                      value: p.isPremium ? '∞' : '${p.energy}',
+                      color: context.nyaya.energy,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -209,6 +225,8 @@ class _MapHeader extends ConsumerWidget {
   }
 }
 
+/// Chapter signpost on the road. The chapter you are in reads as a calm
+/// cream card; the others are solid clay so they stand out as milestones.
 class ChapterBanner extends StatelessWidget {
   const ChapterBanner({
     super.key,
@@ -217,6 +235,8 @@ class ChapterBanner extends StatelessWidget {
     required this.subtitle,
     required this.chapter,
     required this.done,
+    required this.active,
+    required this.onTap,
   });
 
   final int number;
@@ -224,66 +244,86 @@ class ChapterBanner extends StatelessWidget {
   final String subtitle;
   final ChapterMeta chapter;
   final int done;
+  final bool active;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
+    final fill = active ? context.colors.surface : (context.isDark ? AppPalette.terracotta : AppPalette.burntClay);
+    final ink = active ? context.colors.onSurface : Colors.white;
+    final soft = active ? context.nyaya.textSecondary : Colors.white.withValues(alpha: 0.85);
+    final accent = active ? context.colors.primary : Colors.white.withValues(alpha: 0.9);
+
     return Center(
-      child: Container(
-        constraints: const BoxConstraints(maxWidth: 340),
-        padding: const EdgeInsets.fromLTRB(14, 10, 16, 10),
-        decoration: BoxDecoration(
-          color: chapter.color,
-          borderRadius: BorderRadius.circular(AppRadius.md),
-          boxShadow: [
-            BoxShadow(color: Color.lerp(chapter.color, Colors.black, 0.35)!, offset: const Offset(0, 4)),
-            BoxShadow(color: chapter.color.withValues(alpha: 0.3), blurRadius: 16, offset: const Offset(0, 8)),
-          ],
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.18),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(chapter.icon, color: Colors.white, size: 22),
+      child: Semantics(
+        button: true,
+        child: Pressable(
+          onTap: onTap,
+          scale: 0.97,
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 380),
+            padding: const EdgeInsets.fromLTRB(14, 14, 12, 14),
+            decoration: BoxDecoration(
+              color: fill,
+              borderRadius: BorderRadius.circular(AppRadius.lg),
+              border: active ? Border.all(color: context.nyaya.cardBorder) : null,
+              boxShadow: [
+                BoxShadow(
+                  color: (active ? Colors.black : AppPalette.terracottaDeep).withValues(alpha: active ? 0.08 : 0.28),
+                  blurRadius: 18,
+                  offset: const Offset(0, 8),
+                ),
+              ],
             ),
-            const SizedBox(width: 12),
-            Flexible(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    '${l.journeyChapter(number).toUpperCase()} · $done/${chapter.levels}',
-                    style: context.text.labelSmall?.copyWith(
-                      color: AppPalette.ochreSoft,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: 1,
-                    ),
+            child: Row(
+              children: [
+                Container(
+                  width: 52,
+                  height: 52,
+                  decoration: BoxDecoration(
+                    color: active ? context.colors.primaryContainer : Colors.white.withValues(alpha: 0.16),
+                    shape: BoxShape.circle,
                   ),
-                  Text(
-                    title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: context.text.titleMedium?.copyWith(color: Colors.white),
+                  child: Icon(chapter.icon, color: active ? context.colors.primary : Colors.white, size: 26),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        '${l.journeyChapter(number).toUpperCase()} · $done/${chapter.levels}',
+                        style: context.text.labelSmall?.copyWith(
+                          color: accent,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1.4,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTheme.serif(TextStyle(fontSize: 22, height: 1.2, color: ink), display: false),
+                      ),
+                      if (subtitle.isNotEmpty)
+                        Text(
+                          subtitle,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: context.text.bodySmall?.copyWith(color: soft),
+                        ),
+                    ],
                   ),
-                  if (subtitle.isNotEmpty)
-                    Text(
-                      subtitle,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: context.text.bodySmall?.copyWith(color: Colors.white70),
-                    ),
-                ],
-              ),
+                ),
+                Icon(Icons.chevron_right_rounded, color: soft),
+              ],
             ),
-          ],
+          ),
         ),
-      ).animate().fadeIn(duration: 400.ms),
-    );
+      ),
+    ).animate().fadeIn(duration: 400.ms);
   }
 }

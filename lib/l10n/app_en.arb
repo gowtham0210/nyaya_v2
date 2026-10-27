@@ -190,6 +190,8 @@
   "energyNotEnoughCoins": "Not enough coins yet — earn them from stars and chests.",
   "energyRefilled": "+1 energy!",
   "journeyTitle": "Case Path",
+  "journeySubtitle": "Your journey through Indian law",
+  "journeyKeepGoing": "Keep going!",
   "journeyStars": "{count} ★",
   "@journeyStars": {
     "placeholders": {

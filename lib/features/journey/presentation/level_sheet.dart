@@ -216,8 +216,9 @@ class _ChestSheetState extends ConsumerState<_ChestSheet> {
                       ? l.journeyChestOpened(_won!)
                       : (status == NodeStatus.locked ? l.journeyChestLocked : l.journeyChestBody),
                   textAlign: TextAlign.center,
-                  style: (_won != null ? context.text.titleLarge : context.text.bodyLarge)
-                      ?.copyWith(color: _won != null ? AppPalette.ochreText : context.nyaya.textSecondary),
+                  style: (_won != null ? context.text.titleLarge : context.text.bodyLarge)?.copyWith(
+                    color: _won != null ? AppPalette.ochreText : context.nyaya.textSecondary,
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.lg),
                 if (canOpen)

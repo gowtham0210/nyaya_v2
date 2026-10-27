@@ -24,65 +24,75 @@ abstract final class AppTheme {
   /// Tests turn this off to avoid network font fetching.
   static bool useGoogleFonts = true;
 
+  /// Editorial serif for headings: DM Serif Display for large titles, DM Serif
+  /// Text for smaller ones.
+  static TextStyle serif(TextStyle base, {bool display = true}) {
+    if (!useGoogleFonts) return base;
+    return display ? GoogleFonts.dmSerifDisplay(textStyle: base) : GoogleFonts.dmSerifText(textStyle: base);
+  }
+
+  /// Handwritten accent for margin notes ("Keep going!").
+  static TextStyle handwriting(TextStyle base) => useGoogleFonts ? GoogleFonts.caveat(textStyle: base) : base;
+
   static ThemeData light() => _build(
-        brightness: Brightness.light,
-        scheme: const ColorScheme(
-          brightness: Brightness.light,
-          primary: AppPalette.terracotta,
-          onPrimary: Colors.white,
-          primaryContainer: Color(0xFFF1DDD2),
-          onPrimaryContainer: AppPalette.terracottaDeep,
-          secondary: AppPalette.burntClay,
-          onSecondary: Colors.white,
-          secondaryContainer: AppPalette.sandLight,
-          onSecondaryContainer: AppPalette.deepEarth,
-          tertiary: AppPalette.sand,
-          onTertiary: AppPalette.deepEarth,
-          error: AppPalette.brick,
-          onError: Colors.white,
-          surface: AppPalette.creamLight,
-          onSurface: AppPalette.deepEarth,
-          surfaceContainerLowest: AppPalette.cream,
-          surfaceContainerLow: Color(0xFFF0E3D1),
-          surfaceContainer: Color(0xFFEBDCC7),
-          surfaceContainerHigh: AppPalette.sandLight,
-          onSurfaceVariant: AppPalette.earthSecondary,
-          outline: AppPalette.sand,
-          outlineVariant: AppPalette.sandLight,
-        ),
-        extension: NyayaColors.light,
-        scaffold: AppPalette.cream,
-      );
+    brightness: Brightness.light,
+    scheme: const ColorScheme(
+      brightness: Brightness.light,
+      primary: AppPalette.terracotta,
+      onPrimary: Colors.white,
+      primaryContainer: Color(0xFFF1DDD2),
+      onPrimaryContainer: AppPalette.terracottaDeep,
+      secondary: AppPalette.burntClay,
+      onSecondary: Colors.white,
+      secondaryContainer: AppPalette.sandLight,
+      onSecondaryContainer: AppPalette.deepEarth,
+      tertiary: AppPalette.sand,
+      onTertiary: AppPalette.deepEarth,
+      error: AppPalette.brick,
+      onError: Colors.white,
+      surface: AppPalette.creamLight,
+      onSurface: AppPalette.deepEarth,
+      surfaceContainerLowest: AppPalette.cream,
+      surfaceContainerLow: Color(0xFFF0E3D1),
+      surfaceContainer: Color(0xFFEBDCC7),
+      surfaceContainerHigh: AppPalette.sandLight,
+      onSurfaceVariant: AppPalette.earthSecondary,
+      outline: AppPalette.sand,
+      outlineVariant: AppPalette.sandLight,
+    ),
+    extension: NyayaColors.light,
+    scaffold: AppPalette.cream,
+  );
 
   static ThemeData dark() => _build(
-        brightness: Brightness.dark,
-        scheme: const ColorScheme(
-          brightness: Brightness.dark,
-          primary: AppPalette.darkPrimary,
-          onPrimary: AppPalette.deepEarth,
-          primaryContainer: Color(0xFF5A2A1D),
-          onPrimaryContainer: Color(0xFFF1DDD2),
-          secondary: AppPalette.burntClay,
-          onSecondary: Colors.white,
-          secondaryContainer: Color(0xFF4A3A2C),
-          onSecondaryContainer: AppPalette.sandLight,
-          tertiary: AppPalette.sand,
-          onTertiary: AppPalette.deepEarth,
-          error: AppPalette.darkError,
-          onError: AppPalette.deepEarth,
-          surface: AppPalette.darkSurface,
-          onSurface: AppPalette.darkText,
-          surfaceContainerLowest: AppPalette.darkBg,
-          surfaceContainerLow: Color(0xFF221C17),
-          surfaceContainer: AppPalette.darkSurface,
-          surfaceContainerHigh: AppPalette.darkSurfaceHigh,
-          onSurfaceVariant: AppPalette.darkTextSecondary,
-          outline: Color(0xFF574A3E),
-          outlineVariant: Color(0xFF3A3029),
-        ),
-        extension: NyayaColors.dark,
-        scaffold: AppPalette.darkBg,
-      );
+    brightness: Brightness.dark,
+    scheme: const ColorScheme(
+      brightness: Brightness.dark,
+      primary: AppPalette.darkPrimary,
+      onPrimary: AppPalette.deepEarth,
+      primaryContainer: Color(0xFF5A2A1D),
+      onPrimaryContainer: Color(0xFFF1DDD2),
+      secondary: AppPalette.burntClay,
+      onSecondary: Colors.white,
+      secondaryContainer: Color(0xFF4A3A2C),
+      onSecondaryContainer: AppPalette.sandLight,
+      tertiary: AppPalette.sand,
+      onTertiary: AppPalette.deepEarth,
+      error: AppPalette.darkError,
+      onError: AppPalette.deepEarth,
+      surface: AppPalette.darkSurface,
+      onSurface: AppPalette.darkText,
+      surfaceContainerLowest: AppPalette.darkBg,
+      surfaceContainerLow: Color(0xFF221C17),
+      surfaceContainer: AppPalette.darkSurface,
+      surfaceContainerHigh: AppPalette.darkSurfaceHigh,
+      onSurfaceVariant: AppPalette.darkTextSecondary,
+      outline: Color(0xFF574A3E),
+      outlineVariant: Color(0xFF3A3029),
+    ),
+    extension: NyayaColors.dark,
+    scaffold: AppPalette.darkBg,
+  );
 
   static ThemeData _build({
     required Brightness brightness,
@@ -120,9 +130,7 @@ abstract final class AppTheme {
         centerTitle: false,
         foregroundColor: scheme.onSurface,
         titleTextStyle: textTheme.titleLarge,
-        systemOverlayStyle: brightness == Brightness.dark
-            ? SystemUiOverlayStyle.light
-            : SystemUiOverlayStyle.dark,
+        systemOverlayStyle: brightness == Brightness.dark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
       ),
       cardTheme: CardThemeData(
         color: scheme.surface,
@@ -148,9 +156,7 @@ abstract final class AppTheme {
           textStyle: textTheme.labelLarge,
         ),
       ),
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(textStyle: textTheme.labelLarge),
-      ),
+      textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(textStyle: textTheme.labelLarge)),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: scheme.surface,
@@ -186,18 +192,14 @@ abstract final class AppTheme {
           ),
         ),
         iconTheme: WidgetStateProperty.resolveWith(
-          (s) => IconThemeData(
-            color: s.contains(WidgetState.selected) ? scheme.primary : scheme.onSurfaceVariant,
-          ),
+          (s) => IconThemeData(color: s.contains(WidgetState.selected) ? scheme.primary : scheme.onSurfaceVariant),
         ),
       ),
       bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: scheme.surface,
         surfaceTintColor: Colors.transparent,
         showDragHandle: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.xl)),
-        ),
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.xl))),
       ),
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,

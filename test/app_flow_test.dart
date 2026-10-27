@@ -106,6 +106,25 @@ void main() {
     expect(find.text('NEXT LEVEL'), findsOneWidget);
   });
 
+  testWidgets('Journey tab shows the Case Path map and opens a level from its chapter card', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+
+    await tester.tap(find.text('Journey'));
+    await settle(tester);
+    expect(find.text('Case Path'), findsOneWidget);
+    expect(find.text('Your journey through Indian law'), findsOneWidget);
+    expect(find.text('CHAPTER 1 · 0/3'), findsOneWidget);
+    expect(find.text('You'), findsOneWidget);
+    expect(tester.takeException(), isNull, reason: 'missing paintings fall back quietly');
+
+    await tester.tap(find.text('CHAPTER 1 · 0/3'));
+    await settle(tester);
+    expect(find.text('Level 1'), findsOneWidget);
+    expect(find.text('START'), findsOneWidget);
+  });
+
   testWidgets('out of energy shows free alternatives instead of a dead end', (tester) async {
     final today = DateTime.now();
     final key = '${today.year.toString().padLeft(4, '0')}-${today.month.toString().padLeft(2, '0')}-${today.day.toString().padLeft(2, '0')}';

@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../../app/router.dart';
@@ -16,9 +15,7 @@ import 'law_illustration.dart';
 /// Editorial serif used for Explore Law headings (DM Serif Display for large
 /// titles, DM Serif Text for list rows).
 TextStyle _serif(BuildContext context, double size, {bool display = true}) {
-  final base = TextStyle(fontSize: size, height: 1.15, color: context.colors.onSurface);
-  if (!AppTheme.useGoogleFonts) return base;
-  return display ? GoogleFonts.dmSerifDisplay(textStyle: base) : GoogleFonts.dmSerifText(textStyle: base);
+  return AppTheme.serif(TextStyle(fontSize: size, height: 1.15, color: context.colors.onSurface), display: display);
 }
 
 /// Opens the AI chat with a ready-made question about [law].

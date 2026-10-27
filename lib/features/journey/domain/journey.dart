@@ -7,12 +7,7 @@ enum NodeKind { level, chest }
 /// Static description of one chapter on the map.
 @immutable
 class ChapterMeta {
-  const ChapterMeta({
-    required this.id,
-    required this.icon,
-    required this.color,
-    required this.levels,
-  });
+  const ChapterMeta({required this.id, required this.icon, required this.color, required this.levels});
 
   final String id;
   final IconData icon;
@@ -54,7 +49,12 @@ abstract final class JourneyCatalog {
   static const levelsPerChapter = 3;
 
   static const chapters = <ChapterMeta>[
-    ChapterMeta(id: 'constitution', icon: Icons.account_balance_rounded, color: AppPalette.terracotta, levels: levelsPerChapter),
+    ChapterMeta(
+      id: 'constitution',
+      icon: Icons.account_balance_rounded,
+      color: AppPalette.terracotta,
+      levels: levelsPerChapter,
+    ),
     ChapterMeta(id: 'rights', icon: Icons.front_hand_rounded, color: AppPalette.moss, levels: levelsPerChapter),
     ChapterMeta(id: 'criminal', icon: Icons.gavel_rounded, color: AppPalette.burntClay, levels: levelsPerChapter),
     ChapterMeta(id: 'procedure', icon: Icons.policy_rounded, color: AppPalette.umber, levels: levelsPerChapter),
@@ -69,23 +69,27 @@ abstract final class JourneyCatalog {
     for (var c = 0; c < chapters.length; c++) {
       final ch = chapters[c];
       for (var l = 1; l <= ch.levels; l++) {
-        out.add(JourneyNode(
-          id: '${ch.id}_$l',
-          kind: NodeKind.level,
+        out.add(
+          JourneyNode(
+            id: '${ch.id}_$l',
+            kind: NodeKind.level,
+            chapter: ch,
+            chapterIndex: c,
+            level: l,
+            globalIndex: out.length,
+          ),
+        );
+      }
+      out.add(
+        JourneyNode(
+          id: '${ch.id}_chest',
+          kind: NodeKind.chest,
           chapter: ch,
           chapterIndex: c,
-          level: l,
+          level: 0,
           globalIndex: out.length,
-        ));
-      }
-      out.add(JourneyNode(
-        id: '${ch.id}_chest',
-        kind: NodeKind.chest,
-        chapter: ch,
-        chapterIndex: c,
-        level: 0,
-        globalIndex: out.length,
-      ));
+        ),
+      );
     }
     return out;
   }
@@ -97,6 +101,5 @@ abstract final class JourneyCatalog {
     return null;
   }
 
-  static ChapterMeta chapter(String id) =>
-      chapters.firstWhere((c) => c.id == id, orElse: () => chapters.first);
+  static ChapterMeta chapter(String id) => chapters.firstWhere((c) => c.id == id, orElse: () => chapters.first);
 }

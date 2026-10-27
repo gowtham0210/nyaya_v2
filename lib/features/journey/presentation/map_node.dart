@@ -3,11 +3,13 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/common.dart';
 import '../../../core/widgets/pressable.dart';
 import '../domain/journey.dart';
 
-/// A glossy level bubble (or chest) on the map.
+/// A raised level bubble (or chest) on the map: terracotta once reached,
+/// cream with a lock while ahead.
 class MapNode extends StatelessWidget {
   const MapNode({
     super.key,
@@ -24,7 +26,7 @@ class MapNode extends StatelessWidget {
   final String userName;
   final VoidCallback onTap;
 
-  static const box = 130.0;
+  static const box = 140.0;
 
   static Widget positioned({
     required Offset center,
@@ -36,16 +38,10 @@ class MapNode extends StatelessWidget {
   }) {
     return Positioned(
       left: center.dx - box / 2,
-      top: center.dy - box / 2 - 14,
+      top: center.dy - box / 2 - 4,
       width: box,
       height: box,
-      child: MapNode(
-        node: node,
-        status: status,
-        stars: stars,
-        userName: userName,
-        onTap: onTap,
-      ),
+      child: MapNode(node: node, status: status, stars: stars, userName: userName, onTap: onTap),
     );
   }
 
@@ -53,7 +49,7 @@ class MapNode extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = context.l10n;
     final isCurrent = status == NodeStatus.current;
-    final size = isCurrent ? 78.0 : 66.0;
+    final size = isCurrent && node.kind == NodeKind.level ? 84.0 : 64.0;
     final label = node.kind == NodeKind.chest
         ? l.journeyChest
         : '${l.journeyLevel(node.level)}${status == NodeStatus.locked ? ', ${l.journeyLocked}' : ''}';
@@ -69,34 +65,101 @@ class MapNode extends StatelessWidget {
         alignment: Alignment.center,
         clipBehavior: Clip.none,
         children: [
-          if (isCurrent)
+          if (isCurrent) ...[
+            // Soft disc the current stop sits on, plus a slow pulse.
             Container(
-              width: size + 26,
-              height: size + 26,
+              width: size + 44,
+              height: size + 44,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: node.chapter.color.withValues(alpha: 0.25),
+                color: context.colors.primary.withValues(alpha: context.isDark ? 0.12 : 0.07),
               ),
-            )
+            ),
+            Container(
+                  width: size + 18,
+                  height: size + 18,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: context.colors.primary.withValues(alpha: 0.22),
+                  ),
+                )
                 .animate(onPlay: (c) => c.repeat())
-                .scale(begin: const Offset(0.8, 0.8), end: const Offset(1.25, 1.25), duration: 1400.ms)
-                .fadeOut(duration: 1400.ms),
+                .scale(begin: const Offset(0.85, 0.85), end: const Offset(1.3, 1.3), duration: 1600.ms)
+                .fadeOut(duration: 1600.ms),
+          ],
           Pressable(
             onTap: onTap,
             scale: 0.9,
             child: isCurrent
                 ? bubble
-                    .animate(onPlay: (c) => c.repeat(reverse: true))
-                    .moveY(begin: 0, end: -6, duration: 900.ms, curve: Curves.easeInOut)
+                      .animate(onPlay: (c) => c.repeat(reverse: true))
+                      .moveY(begin: 0, end: -4, duration: 1100.ms, curve: Curves.easeInOut)
                 : bubble,
           ),
           if (node.kind == NodeKind.level && status == NodeStatus.completed)
-            Positioned(top: 4, child: StarRow(stars: stars, size: 20, spacing: 0, arc: true)),
+            Positioned(top: 18, child: StarRow(stars: stars, size: 20, spacing: 0, arc: true)),
           if (isCurrent)
             Positioned(
-              top: -16,
-              child: _YouMarker(name: userName, color: node.chapter.color),
+              top: node.kind == NodeKind.level ? -8 : 6,
+              child: _YouMarker(name: userName),
             ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Circle on a darker "lip" so it reads as a raised button.
+class _RaisedDisc extends StatelessWidget {
+  const _RaisedDisc({
+    required this.size,
+    required this.fill,
+    required this.lip,
+    required this.border,
+    required this.child,
+    this.glow,
+  });
+
+  final double size;
+  final Color fill;
+  final Color lip;
+  final Color border;
+  final Widget child;
+  final Color? glow;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: size,
+      height: size + 6,
+      child: Stack(
+        children: [
+          Positioned(
+            top: 6,
+            child: Container(
+              width: size,
+              height: size,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: lip,
+                boxShadow: [
+                  BoxShadow(color: Colors.black.withValues(alpha: 0.14), blurRadius: 12, offset: const Offset(0, 6)),
+                  if (glow != null) BoxShadow(color: glow!, blurRadius: 22),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            width: size,
+            height: size,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: fill,
+              border: Border.all(color: border, width: size > 70 ? 5 : 4),
+            ),
+            child: child,
+          ),
         ],
       ),
     );
@@ -112,63 +175,57 @@ class _LevelBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final locked = status == NodeStatus.locked;
-    final base = locked ? context.nyaya.locked : node.chapter.color;
-    final dark = Color.lerp(base, Colors.black, 0.3)!;
-    final landmark = node.isLandmark;
+    if (status == NodeStatus.locked) return _LockedDisc(size: size);
 
-    return Container(
-      width: size,
-      height: size + 6,
-      alignment: Alignment.topCenter,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.18), blurRadius: 10, offset: const Offset(0, 6))],
-      ),
+    final landmark = node.isLandmark;
+    return _RaisedDisc(
+      size: size,
+      fill: context.colors.primary,
+      lip: AppPalette.terracottaDeep,
+      border: landmark ? AppPalette.ochre : AppPalette.creamLight,
       child: Stack(
+        fit: StackFit.expand,
+        alignment: Alignment.center,
         children: [
-          // 3D lip.
+          // Soft highlight near the top edge (relative to the inner circle).
           Positioned(
-            top: 6,
+            top: size * 0.05,
             child: Container(
-              width: size,
-              height: size,
-              decoration: BoxDecoration(shape: BoxShape.circle, color: dark),
-            ),
-          ),
-          Container(
-            width: size,
-            height: size,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: base,
-              border: Border.all(
-                color: landmark && !locked ? AppPalette.ochre : Colors.white.withValues(alpha: locked ? 0.4 : 0.9),
-                width: landmark ? 4 : 3,
+              width: size * 0.36,
+              height: size * 0.1,
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(size),
               ),
             ),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                if (locked)
-                  Icon(Icons.lock_rounded, color: Colors.white.withValues(alpha: 0.9), size: size * 0.4)
-                else if (landmark)
-                  Icon(Icons.gavel_rounded, color: Colors.white, size: size * 0.42)
-                else
-                  Text(
+          ),
+          Center(
+            child: landmark
+                ? Icon(Icons.gavel_rounded, color: Colors.white, size: size * 0.42)
+                : Text(
                     '${node.level}',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w900,
-                      fontSize: size * 0.4,
-                      shadows: [Shadow(color: dark, offset: const Offset(0, 2))],
-                    ),
+                    style: AppTheme.serif(TextStyle(color: Colors.white, fontSize: size * 0.5, height: 1.1)),
                   ),
-              ],
-            ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class _LockedDisc extends StatelessWidget {
+  const _LockedDisc({required this.size});
+
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return _RaisedDisc(
+      size: size,
+      fill: context.isDark ? AppPalette.darkSurfaceHigh : AppPalette.sandLight,
+      lip: context.isDark ? AppPalette.darkSurface : AppPalette.sand,
+      border: context.isDark ? AppPalette.darkSurface : AppPalette.creamLight,
+      child: Icon(Icons.lock_rounded, color: context.nyaya.textSecondary.withValues(alpha: 0.85), size: size * 0.36),
     );
   }
 }
@@ -183,23 +240,16 @@ class _Chest extends StatelessWidget {
   Widget build(BuildContext context) {
     final opened = status == NodeStatus.completed;
     final current = status == NodeStatus.current;
-    final color = status == NodeStatus.locked ? context.nyaya.locked : AppPalette.ochre;
-    final chest = Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: color,
-        border: Border.all(color: Colors.white, width: 3),
-        boxShadow: [
-          BoxShadow(color: Color.lerp(color, Colors.black, 0.35)!, offset: const Offset(0, 6)),
-          if (current) BoxShadow(color: AppPalette.ochre.withValues(alpha: 0.6), blurRadius: 24),
-        ],
-      ),
+    final chest = _RaisedDisc(
+      size: size,
+      fill: context.colors.surface,
+      lip: current ? AppPalette.burntClay : (context.isDark ? AppPalette.darkSurface : AppPalette.sand),
+      border: context.isDark ? AppPalette.darkSurfaceHigh : Colors.white,
+      glow: current ? AppPalette.ochre.withValues(alpha: 0.5) : null,
       child: Icon(
         opened ? Icons.inventory_2_outlined : Icons.redeem_rounded,
-        size: size * 0.5,
-        color: Colors.white,
+        size: size * 0.46,
+        color: context.colors.primary,
       ),
     );
     return current
@@ -209,28 +259,28 @@ class _Chest extends StatelessWidget {
 }
 
 class _YouMarker extends StatelessWidget {
-  const _YouMarker({required this.name, required this.color});
+  const _YouMarker({required this.name});
 
   final String name;
-  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(3, 3, 10, 3),
+      padding: const EdgeInsets.fromLTRB(4, 4, 12, 4),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.colors.surface,
         borderRadius: BorderRadius.circular(30),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.18), blurRadius: 8, offset: const Offset(0, 3))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.14), blurRadius: 10, offset: const Offset(0, 3))],
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          InitialsAvatar(name: name, size: 22),
-          const SizedBox(width: 5),
+          // Seed 6 picks the terracotta fill so the marker matches the road.
+          InitialsAvatar(name: name, seed: 6, size: 24),
+          const SizedBox(width: 6),
           Text(
             context.l10n.journeyYou,
-            style: TextStyle(color: color, fontWeight: FontWeight.w800, fontSize: 12),
+            style: context.text.labelLarge?.copyWith(color: context.colors.onSurface, fontWeight: FontWeight.w600),
           ),
         ],
       ),

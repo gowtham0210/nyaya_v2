@@ -353,6 +353,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get journeyTitle => 'केस पथ';
 
   @override
+  String get journeySubtitle => 'Your journey through Indian law';
+
+  @override
+  String get journeyKeepGoing => 'Keep going!';
+
+  @override
   String journeyStars(int count) {
     return '$count ★';
   }

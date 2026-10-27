@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-26 (session 2: palette + Explore Law home, Claude Opus 5.5)
+> Last updated: 2026-10-27 (Journey restyle, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -56,6 +56,15 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       Image cards keep light-theme text in dark mode (dark path not yet eyeballed). BNS and Everyday Law cards
       still use the painted-in-code art until matching images are generated (prompt style: warm painterly
       editorial, palette colours, subject in right two-thirds, left third fading to flat peach, square, no text).
+- [x] 2026-10-27: Journey (Case Path) restyled from the user's mock: serif "Case Path" header + subtitle,
+      wide sand road with dashed centre, raised nodes (terracotta current/completed with serif numeral,
+      sand locked discs, cream chest), "You" pill, chapter cards (current chapter = cream card, others =
+      burnt clay, both tappable → that chapter's current/first level sheet), a
+      handwritten "Keep going!" (Caveat) placed only where `JourneyLayout.freeWidth` finds room beside the
+      road, painted edge scenery per chapter (`journey_scenery.dart`). Artwork: all 12 `journey_*.webp` paintings added 2026-10-27 (ChatGPT, transparent PNG → trimmed,
+      840 px wide webp, ~2.3 MB total); the scales sit at 50 % opacity; prompts in `docs/JOURNEY_ART.md`.
+      The mock's margin quotes were dropped on purpose (user's call: the paintings fill that space).
+      Chapter colours are no longer used on the map. New strings English-only. Checked on simulator (light).
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

@@ -360,6 +360,12 @@ class AppLocalizationsMl extends AppLocalizations {
   String get journeyTitle => 'കേസ് പാത';
 
   @override
+  String get journeySubtitle => 'Your journey through Indian law';
+
+  @override
+  String get journeyKeepGoing => 'Keep going!';
+
+  @override
   String journeyStars(int count) {
     return '$count ★';
   }

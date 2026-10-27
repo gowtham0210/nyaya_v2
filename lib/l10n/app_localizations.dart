@@ -688,6 +688,18 @@ abstract class AppLocalizations {
   /// **'Case Path'**
   String get journeyTitle;
 
+  /// No description provided for @journeySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your journey through Indian law'**
+  String get journeySubtitle;
+
+  /// No description provided for @journeyKeepGoing.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep going!'**
+  String get journeyKeepGoing;
+
   /// No description provided for @journeyStars.
   ///
   /// In en, this message translates to:

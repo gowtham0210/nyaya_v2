@@ -11,8 +11,7 @@ class JourneyProgress {
   final Map<String, int> stars;
   final Set<String> openedChests;
 
-  bool isDone(JourneyNode n) =>
-      n.kind == NodeKind.chest ? openedChests.contains(n.id) : (stars[n.id] ?? 0) > 0;
+  bool isDone(JourneyNode n) => n.kind == NodeKind.chest ? openedChests.contains(n.id) : (stars[n.id] ?? 0) > 0;
 
   /// The first node not yet completed; null when the whole road is done.
   JourneyNode? get current {
@@ -29,9 +28,8 @@ class JourneyProgress {
 
   int get totalStars => stars.values.fold(0, (a, b) => a + b);
 
-  int completedLevelsIn(String chapterId) => JourneyCatalog.nodes
-      .where((n) => n.chapter.id == chapterId && n.kind == NodeKind.level && isDone(n))
-      .length;
+  int completedLevelsIn(String chapterId) =>
+      JourneyCatalog.nodes.where((n) => n.chapter.id == chapterId && n.kind == NodeKind.level && isDone(n)).length;
 
   /// Chapters the learner has reached — used to pick Daily Docket / Exam
   /// questions they have context for (always includes the first chapter).
@@ -47,9 +45,9 @@ class JourneyProgress {
   Map<String, dynamic> toJson() => {'stars': stars, 'chests': openedChests.toList()};
 
   factory JourneyProgress.fromJson(Map<String, dynamic> j) => JourneyProgress(
-        stars: (j['stars'] as Map<String, dynamic>? ?? {}).map((k, v) => MapEntry(k, v as int)),
-        openedChests: (j['chests'] as List<dynamic>? ?? []).cast<String>().toSet(),
-      );
+    stars: (j['stars'] as Map<String, dynamic>? ?? {}).map((k, v) => MapEntry(k, v as int)),
+    openedChests: (j['chests'] as List<dynamic>? ?? []).cast<String>().toSet(),
+  );
 }
 
 final journeyProvider = NotifierProvider<JourneyController, JourneyProgress>(JourneyController.new);

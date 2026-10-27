@@ -360,6 +360,12 @@ class AppLocalizationsTa extends AppLocalizations {
   String get journeyTitle => 'வழக்குப் பாதை';
 
   @override
+  String get journeySubtitle => 'Your journey through Indian law';
+
+  @override
+  String get journeyKeepGoing => 'Keep going!';
+
+  @override
   String journeyStars(int count) {
     return '$count ★';
   }
