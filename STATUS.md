@@ -162,17 +162,28 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       Notes: iOS shows a system "Save Password?" alert after sign-up (blocks touches until answered — normal);
       local game progress (XP, stars) is still per device, not per account; Keychain sessions survive app reinstall.
 
+- [x] 2026-10-28: **Pushed to GitHub** — `origin` = https://github.com/gowtham0210/nyaya_v2 (PUBLIC repo),
+      `main` tracks `origin/main`. Before the push: history scanned for secrets (none; the AI key is a
+      `--dart-define`, never in source), then an OpenQodex whole-repo review (run in agent mode: the CLI reviewer
+      can't start because `claude` isn't logged in on the command line). Its 3 findings were fixed in `578df0e`:
+      approval now refuses anyone who ever edited the version (audit-log lookup, `hasEdited`); CMS 401s go to
+      `/login?ended=1`, where the proxy clears the session cookies (no more /login ↔ /questions loop); unused
+      `@nestjs/mau` removed (it pinned a vulnerable undici; backend runtime deps audit clean). Re-review passed
+      with no findings. `.openqodex/config.yaml` + `custom-instructions.md` are committed (reports ignored).
+      Backend tests now 17 unit + 32 API. OpenQodex 0.15.0 is available (`openqodex update`), not installed.
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
-1. Git: repo initialised on `main`, first commit `196495a` ("Initial commit: Nyaya…"). Repo-local identity
-   Gowtham <gowtham.s@bigtapp.ai>. No remote yet. User rule: review with the **openqodex** skill before any push.
+1. Platform (P1) still to do: CI on push (backend tests + CMS build + Flutter tests), a staging deploy
+   (managed Postgres, API, CMS, real secrets incl. `JWT_SECRET`), and route AI chat through the backend.
+   Then P3: M08 bookmarks/mistake review, M12 report-a-question, server-side progress and exam marking.
 2. Dark-mode visual pass on simulator (Terracotta dark theme exists, not yet eyeballed).
 3. Note: a debug build launched via `simctl launch` without `flutter run` can show a blank screen —
    use `flutter run -d <device>` (or a release/profile build) when testing.
 4. Nice-to-have later: real backend (Firebase) for leaderboard/profile sync, real IAP (RevenueCat /
    `in_app_purchase`), push reminders (`flutter_local_notifications`), live legal-news CMS,
    more chapters/questions, sound effects (setting exists, no audio yet).
-5. Before any `git push`: user's global rule = review with the **openqodex** skill. (Repo not yet a git repo.)
+5. Before any `git push`: user's global rule = review with the **openqodex** skill.
 
 ## 4. Architecture & file map (feature-first, Riverpod 3, go_router 18)
 **Important tech notes**

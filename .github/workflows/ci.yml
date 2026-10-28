@@ -1,0 +1,108 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: Backend API
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Formatting
+        run: npx prettier --check "src/**/*.ts" "test/**/*.ts"
+      - name: Unit tests
+        run: npm test
+      - name: API tests
+        run: npm run test:e2e
+      - name: Build
+        run: npm run build
+      - name: OpenAPI contract is up to date
+        run: |
+          npm run openapi
+          git diff --exit-code openapi.json || {
+            echo "::error file=backend/openapi.json::openapi.json is out of date. Run 'npm run openapi' in backend/ and commit it."
+            exit 1
+          }
+
+  cms:
+    name: Content portal
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: cms
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: cms/package-lock.json
+      - run: npm ci
+      - name: API types match the backend contract
+        run: |
+          npm run gen:api
+          git diff --exit-code src/lib/api-schema.d.ts || {
+            echo "::error file=cms/src/lib/api-schema.d.ts::API types are out of date. Run 'npm run gen:api' in cms/ and commit it."
+            exit 1
+          }
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: |
+          npx next typegen
+          npm run typecheck
+      - name: Build
+        run: npm run build
+
+  app:
+    name: Flutter app
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
+        with:
+          channel: stable
+          flutter-version: 3.47.5
+          cache: true
+      - run: flutter pub get
+      - name: Translations are up to date
+        run: |
+          flutter gen-l10n
+          git diff --exit-code lib/l10n || {
+            echo "::error file=lib/l10n/app_en.arb::Generated translations are out of date. Run 'flutter gen-l10n' and commit them."
+            exit 1
+          }
+      - name: Analyze
+        run: flutter analyze
+      - name: Tests
+        run: flutter test
