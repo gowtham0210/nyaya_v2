@@ -3,15 +3,18 @@
 import { useActionState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Alert, Button, Field, inputClass } from '@/components/ui';
+import { SESSION_ENDED_PARAM } from '@/lib/session-cookies';
 import { signIn, type SignInState } from './actions';
 
 export function LoginForm() {
-  const next = useSearchParams().get('next') ?? '';
+  const params = useSearchParams();
+  const next = params.get('next') ?? '';
+  const ended = params.has(SESSION_ENDED_PARAM);
   const [state, action, pending] = useActionState<SignInState, FormData>(signIn, {});
   return (
     <form action={action} className="flex flex-col gap-4">
       <input type="hidden" name="next" value={next} />
-      {state.error && <Alert>{state.error}</Alert>}
+      {state.error ? <Alert>{state.error}</Alert> : ended && <Alert>Your session ended. Sign in again.</Alert>}
       <Field label="Email" htmlFor="email">
         <input
           id="email"

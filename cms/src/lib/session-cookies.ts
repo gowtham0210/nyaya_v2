@@ -7,6 +7,14 @@
 export const ACCESS_COOKIE = 'nyaya_at';
 export const REFRESH_COOKIE = 'nyaya_rt';
 
+/**
+ * Where to send someone whose access cookie the API rejected (a restarted dev
+ * API, a disabled account). The proxy clears the session on this URL instead
+ * of bouncing a still-present access cookie back into the app.
+ */
+export const SESSION_ENDED_PARAM = 'ended';
+export const SESSION_ENDED_URL = `/login?${SESSION_ENDED_PARAM}=1`;
+
 const REFRESH_MAX_AGE = 30 * 24 * 60 * 60;
 /** Drop the access cookie a little early so the proxy refreshes before the API rejects it. */
 const EXPIRY_MARGIN_SEC = 30;

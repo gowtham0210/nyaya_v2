@@ -8,6 +8,7 @@ import {
   inArray,
   lt,
   max,
+  sql,
   type SQL,
 } from 'drizzle-orm';
 import { AuditService, type Actor } from '../core/audit.service.js';
@@ -16,6 +17,7 @@ import { ApiError } from '../core/errors.js';
 import { newId } from '../core/ids.js';
 import { decodeCursor, toPage, type Page } from '../core/pagination.js';
 import {
+  auditLog,
   questions,
   questionVersions,
   reviewDecisions,
@@ -299,7 +301,11 @@ export class QuestionsService {
 
   approve(actor: Actor, id: string, note?: string) {
     return this.act(actor, id, 'approve', async (tx, _q, v) => {
-      if (v.createdBy === actor.id || v.updatedBy === actor.id) {
+      if (
+        v.createdBy === actor.id ||
+        v.updatedBy === actor.id ||
+        (await this.hasEdited(tx, actor, id, v.id))
+      ) {
         throw ApiError.forbidden(
           'A reviewer cannot approve a version they wrote or edited',
         );
@@ -443,6 +449,29 @@ export class QuestionsService {
       });
       return this.get(id, tx);
     });
+  }
+
+  /** Whether [actor] ever edited [versionId], not only as its last editor. */
+  private async hasEdited(
+    tx: Tx,
+    actor: Actor,
+    questionId: string,
+    versionId: string,
+  ): Promise<boolean> {
+    const [edit] = await tx
+      .select({ id: auditLog.id })
+      .from(auditLog)
+      .where(
+        and(
+          eq(auditLog.entityType, 'question'),
+          eq(auditLog.entityId, questionId),
+          eq(auditLog.actorId, actor.id),
+          eq(auditLog.action, AUDIT_ACTIONS.edit),
+          sql`${auditLog.data}->>'version_id' = ${versionId}`,
+        ),
+      )
+      .limit(1);
+    return edit !== undefined;
   }
 
   private async lockQuestion(tx: Tx, id: string): Promise<QuestionRow> {

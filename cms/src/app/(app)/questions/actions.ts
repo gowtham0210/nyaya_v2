@@ -3,6 +3,7 @@
 import { refresh } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { api, asApiError, type ApiError } from '@/lib/api';
+import { SESSION_ENDED_URL } from '@/lib/session-cookies';
 import type { WorkflowAction } from '@/lib/workflow';
 import type { ActionState, QuestionInput } from './form-state';
 
@@ -31,7 +32,7 @@ function toBody(v: QuestionInput) {
 }
 
 function toState(err: ApiError, status: number): ActionState {
-  if (status === 401) redirect('/login');
+  if (status === 401) redirect(SESSION_ENDED_URL);
   const fieldErrors: Record<string, string[]> = {};
   const otherErrors: string[] = [];
   for (const d of err.details ?? []) {

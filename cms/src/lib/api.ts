@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 import { API_URL } from './config';
 import type { components, paths } from './api-schema';
-import { ACCESS_COOKIE } from './session-cookies';
+import { ACCESS_COOKIE, SESSION_ENDED_URL } from './session-cookies';
 
 export type Schemas = components['schemas'];
 export type Me = Schemas['MeDto'];
@@ -37,7 +37,7 @@ export async function api() {
 export function must<T>(res: { data?: T; error?: unknown; response: Response }): T {
   if (res.data !== undefined) return res.data;
   const status = res.response.status;
-  if (status === 401) redirect('/login');
+  if (status === 401) redirect(SESSION_ENDED_URL);
   if (status === 404) notFound();
   const err = res.error as ApiError | undefined;
   throw new Error(err?.message ?? `The API returned ${status}`);

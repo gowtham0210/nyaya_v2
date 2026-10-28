@@ -217,6 +217,21 @@ describe('question lifecycle', () => {
     expect(res.body.message).toMatch(/cannot approve/);
   });
 
+  it('does not let a reviewer approve a version they edited earlier', async () => {
+    const both = await t.signInAs('content_editor', 'legal_reviewer');
+    const d = await createDraft(completeContent);
+    await as(both)
+      .patch(q(d.id), { explanation: 'Edited by the reviewer.' })
+      .expect(200);
+    await as(editor)
+      .patch(q(d.id), { explanation: completeContent.explanation })
+      .expect(200);
+    await as(editor).post(q(d.id, 'submit')).expect(200);
+    const res = await as(both).post(q(d.id, 'approve')).expect(403);
+    expect(res.body.message).toMatch(/cannot approve/);
+    await as(reviewer).post(q(d.id, 'approve')).expect(200);
+  });
+
   it('will not publish into an inactive topic', async () => {
     const d = await createDraft(completeContent);
     await as(editor).post(q(d.id, 'submit')).expect(200);

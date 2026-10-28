@@ -3,6 +3,7 @@ import { API_URL } from './lib/config';
 import {
   ACCESS_COOKIE,
   REFRESH_COOKIE,
+  SESSION_ENDED_PARAM,
   clearSessionCookies,
   setSessionCookies,
   type SessionTokens,
@@ -40,6 +41,12 @@ export async function proxy(req: NextRequest) {
   const onLogin = pathname === '/login';
   const access = req.cookies.get(ACCESS_COOKIE)?.value;
   const refresh = req.cookies.get(REFRESH_COOKIE)?.value;
+
+  if (onLogin && req.nextUrl.searchParams.has(SESSION_ENDED_PARAM)) {
+    const res = NextResponse.next();
+    clearSessionCookies(res.cookies);
+    return res;
+  }
 
   if (access) return onLogin ? NextResponse.redirect(new URL('/questions', req.url)) : NextResponse.next();
 
