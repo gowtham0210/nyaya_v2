@@ -50,6 +50,9 @@ async function QuestionList({ searchParams }: { searchParams: PageProps<'/questi
     const s = p.toString();
     return s ? `/questions?${s}` : '/questions';
   };
+  // The export follows the status and topic filters (not search or paging).
+  const exportQuery = (format: 'csv' | 'xlsx') =>
+    new URLSearchParams(Object.entries({ format, status, topic }).filter((e): e is [string, string] => !!e[1])).toString();
   const title = status === 'in_review' ? 'Review queue' : status === 'approved' ? 'Ready to publish' : 'Questions';
 
   return (
@@ -61,11 +64,20 @@ async function QuestionList({ searchParams }: { searchParams: PageProps<'/questi
             {status ? `Questions whose latest version is ${STATUS_LABEL[status].toLowerCase()}.` : 'Every question and its latest version.'}
           </p>
         </div>
-        {hasRole(me, 'content_editor') && (
-          <Link href="/questions/new" className={buttonClass()}>
-            New question
-          </Link>
-        )}
+        <div className="flex flex-wrap gap-2">
+          {/* Plain links: these are file downloads, not pages. */}
+          <a href={`/questions/export?${exportQuery('csv')}`} download className={buttonClass('secondary')}>
+            Export CSV
+          </a>
+          <a href={`/questions/export?${exportQuery('xlsx')}`} download className={buttonClass('secondary')}>
+            Export Excel
+          </a>
+          {hasRole(me, 'content_editor') && (
+            <Link href="/questions/new" className={buttonClass()}>
+              New question
+            </Link>
+          )}
+        </div>
       </div>
 
       <form method="get" action="/questions" className="grid gap-3 sm:grid-cols-[1fr_12rem_14rem_7rem_auto]" role="search">

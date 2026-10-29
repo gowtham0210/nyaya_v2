@@ -37,3 +37,9 @@ export class ApiError extends HttpException {
     );
   }
 }
+
+/** Postgres unique_violation, possibly wrapped by the query builder. */
+export const isUniqueViolation = (e: unknown): boolean => {
+  for (let x: any = e; x; x = x.cause) if (x.code === '23505') return true;
+  return false;
+};

@@ -101,6 +101,56 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/import-jobs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["ImportsController_list"];
+        put?: never;
+        /** Check a .csv or .xlsx file of questions and, unless dry_run, import the valid new rows as drafts */
+        post: operations["ImportsController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/import-jobs/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["ImportsController_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/question-export": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Each question's latest version in the import columns (answer keys included: staff only) */
+        get: operations["ImportsController_export"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/editor/questions": {
         parameters: {
             query?: never;
@@ -717,6 +767,66 @@ export interface components {
         TaxonomyDto: {
             subjects: components["schemas"]["SubjectDto"][];
             acts: components["schemas"]["ActDto"][];
+        };
+        ImportTotalsDto: {
+            created: number;
+            skipped: number;
+            failed: number;
+            /** @description Created rows that still need something before review */
+            with_warnings: number;
+        };
+        ImportProblemDto: {
+            /** @enum {string} */
+            level: "error" | "warning";
+            /** @description Column name */
+            field: string | null;
+            reason: string;
+        };
+        ImportRowDto: {
+            /** @description Row number in the file; the header is row 1 */
+            row: number;
+            external_ref: string | null;
+            /**
+             * @description created: a new draft (or would be, in a test run); skipped: already in the bank; failed: has errors
+             * @enum {string}
+             */
+            outcome: "created" | "skipped" | "failed";
+            /**
+             * Format: uuid
+             * @description The new draft, or the existing question it duplicates
+             */
+            question_id: string | null;
+            problems: components["schemas"]["ImportProblemDto"][];
+        };
+        ImportReportDto: {
+            /**
+             * Format: uuid
+             * @description Null for a test run, which is not saved
+             */
+            id: string | null;
+            dry_run: boolean;
+            file_name: string;
+            /** @enum {string} */
+            format: "csv" | "xlsx";
+            /** Format: date-time */
+            created_at: string | null;
+            totals: components["schemas"]["ImportTotalsDto"];
+            rows: components["schemas"]["ImportRowDto"][];
+        };
+        ImportJobSummaryDto: {
+            /** Format: uuid */
+            id: string;
+            file_name: string;
+            /** @enum {string} */
+            format: "csv" | "xlsx";
+            /** Format: date-time */
+            created_at: string;
+            created_by_name: string;
+            totals: components["schemas"]["ImportTotalsDto"];
+        };
+        ImportJobListDto: {
+            /** @description Newest first, at most 50 */
+            items: components["schemas"]["ImportJobSummaryDto"][];
         };
         ListLatestDto: {
             /** Format: uuid */
@@ -1499,6 +1609,105 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TaxonomyDto"];
+                };
+            };
+        };
+    };
+    ImportsController_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ImportJobListDto"];
+                };
+            };
+        };
+    };
+    ImportsController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    /**
+                     * Format: binary
+                     * @description .csv (UTF-8) or .xlsx, at most 2 MB and 500 questions
+                     */
+                    file: string;
+                    /**
+                     * @description Check the file and report what would happen, without saving anything
+                     * @default true
+                     */
+                    dry_run?: boolean;
+                };
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ImportReportDto"];
+                };
+            };
+        };
+    };
+    ImportsController_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ImportReportDto"];
+                };
+            };
+        };
+    };
+    ImportsController_export: {
+        parameters: {
+            query?: {
+                format?: "csv" | "xlsx";
+                /** @description Status of each question's latest version */
+                status?: "draft" | "in_review" | "changes_requested" | "approved" | "published" | "superseded" | "retired";
+                topic_id?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/csv": string;
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": string;
                 };
             };
         };

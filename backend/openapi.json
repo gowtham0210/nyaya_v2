@@ -166,6 +166,192 @@
         ]
       }
     },
+    "/v1/admin/import-jobs": {
+      "post": {
+        "operationId": "ImportsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": ".csv (UTF-8) or .xlsx, at most 2 MB and 500 questions"
+                  },
+                  "dry_run": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Check the file and report what would happen, without saving anything"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportReportDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Check a .csv or .xlsx file of questions and, unless dry_run, import the valid new rows as drafts",
+        "tags": [
+          "admin"
+        ]
+      },
+      "get": {
+        "operationId": "ImportsController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportJobListDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/import-jobs/{id}": {
+      "get": {
+        "operationId": "ImportsController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportReportDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/question-export": {
+      "get": {
+        "operationId": "ImportsController_export",
+        "parameters": [
+          {
+            "name": "format",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "csv",
+              "type": "string",
+              "enum": [
+                "csv",
+                "xlsx"
+              ]
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Status of each question's latest version",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "in_review",
+                "changes_requested",
+                "approved",
+                "published",
+                "superseded",
+                "retired"
+              ]
+            }
+          },
+          {
+            "name": "topic_id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Each question's latest version in the import columns (answer keys included: staff only)",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
     "/v1/editor/questions": {
       "get": {
         "operationId": "QuestionsController_list",
@@ -1837,6 +2023,195 @@
         "required": [
           "subjects",
           "acts"
+        ]
+      },
+      "ImportTotalsDto": {
+        "type": "object",
+        "properties": {
+          "created": {
+            "type": "number"
+          },
+          "skipped": {
+            "type": "number"
+          },
+          "failed": {
+            "type": "number"
+          },
+          "with_warnings": {
+            "type": "number",
+            "description": "Created rows that still need something before review"
+          }
+        },
+        "required": [
+          "created",
+          "skipped",
+          "failed",
+          "with_warnings"
+        ]
+      },
+      "ImportProblemDto": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "type": "string",
+            "enum": [
+              "error",
+              "warning"
+            ]
+          },
+          "field": {
+            "type": "string",
+            "nullable": true,
+            "description": "Column name"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "level",
+          "field",
+          "reason"
+        ]
+      },
+      "ImportRowDto": {
+        "type": "object",
+        "properties": {
+          "row": {
+            "type": "number",
+            "description": "Row number in the file; the header is row 1"
+          },
+          "external_ref": {
+            "type": "string",
+            "nullable": true
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "created",
+              "skipped",
+              "failed"
+            ],
+            "description": "created: a new draft (or would be, in a test run); skipped: already in the bank; failed: has errors"
+          },
+          "question_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true,
+            "description": "The new draft, or the existing question it duplicates"
+          },
+          "problems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportProblemDto"
+            }
+          }
+        },
+        "required": [
+          "row",
+          "external_ref",
+          "outcome",
+          "question_id",
+          "problems"
+        ]
+      },
+      "ImportReportDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true,
+            "description": "Null for a test run, which is not saved"
+          },
+          "dry_run": {
+            "type": "boolean"
+          },
+          "file_name": {
+            "type": "string"
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "csv",
+              "xlsx"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "totals": {
+            "$ref": "#/components/schemas/ImportTotalsDto"
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportRowDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "dry_run",
+          "file_name",
+          "format",
+          "created_at",
+          "totals",
+          "rows"
+        ]
+      },
+      "ImportJobSummaryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "file_name": {
+            "type": "string"
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "csv",
+              "xlsx"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "created_by_name": {
+            "type": "string"
+          },
+          "totals": {
+            "$ref": "#/components/schemas/ImportTotalsDto"
+          }
+        },
+        "required": [
+          "id",
+          "file_name",
+          "format",
+          "created_at",
+          "created_by_name",
+          "totals"
+        ]
+      },
+      "ImportJobListDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "description": "Newest first, at most 50",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportJobSummaryDto"
+            }
+          }
+        },
+        "required": [
+          "items"
         ]
       },
       "ListLatestDto": {

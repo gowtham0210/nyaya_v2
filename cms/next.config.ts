@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
   output: 'standalone',
   cacheComponents: true,
   partialPrefetching: true,
+  experimental: {
+    // Question files go to the API as uploads of up to 2 MB, plus form overhead.
+    serverActions: { bodySizeLimit: '3mb' },
+  },
   turbopack: {
     rules: {
       '*.css': {

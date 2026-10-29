@@ -606,3 +606,75 @@ export const contentReports = pgTable(
     ),
   ],
 );
+
+// ---------------------------------------------------------------- imports
+
+export const IMPORT_FORMATS = ['csv', 'xlsx'] as const;
+export const importFormat = pgEnum('import_format', IMPORT_FORMATS);
+
+/** What happened to one row: a new draft, an existing question, or nothing. */
+export const IMPORT_OUTCOMES = ['created', 'skipped', 'failed'] as const;
+export type ImportOutcome = (typeof IMPORT_OUTCOMES)[number];
+export const importOutcome = pgEnum('import_outcome', IMPORT_OUTCOMES);
+
+export const PROBLEM_LEVELS = ['error', 'warning'] as const;
+export type ProblemLevel = (typeof PROBLEM_LEVELS)[number];
+export const problemLevel = pgEnum('problem_level', PROBLEM_LEVELS);
+
+/**
+ * A file of questions imported as drafts. Test runs are not stored. The same
+ * file (by content) can be imported only once. Counts follow from the rows.
+ */
+export const importJobs = pgTable('import_jobs', {
+  id: uuid('id').primaryKey(),
+  createdBy: uuid('created_by')
+    .notNull()
+    .references(() => users.id),
+  fileName: text('file_name').notNull(),
+  fileSha256: text('file_sha256').notNull().unique(),
+  format: importFormat('format').notNull(),
+  createdAt: createdAt(),
+});
+
+/** One data row of an imported file, by its line in the file (header = 1). */
+export const importJobRows = pgTable(
+  'import_job_rows',
+  {
+    jobId: uuid('job_id')
+      .notNull()
+      .references(() => importJobs.id, { onDelete: 'cascade' }),
+    line: integer('line').notNull(),
+    externalRef: text('external_ref'),
+    outcome: importOutcome('outcome').notNull(),
+    /** The draft it created, or the existing question it duplicates. */
+    questionId: uuid('question_id').references(() => questions.id),
+  },
+  (t) => [
+    primaryKey({ columns: [t.jobId, t.line] }),
+    index('import_job_rows_question_idx').on(t.questionId),
+    check(
+      'import_job_rows_question_check',
+      sql`(${t.outcome} <> 'created' or ${t.questionId} is not null) and (${t.outcome} <> 'failed' or ${t.questionId} is null)`,
+    ),
+  ],
+);
+
+/** Errors (row not imported) and warnings (imported, but not ready for review). */
+export const importRowProblems = pgTable(
+  'import_row_problems',
+  {
+    jobId: uuid('job_id').notNull(),
+    line: integer('line').notNull(),
+    position: smallint('position').notNull(),
+    level: problemLevel('level').notNull(),
+    field: text('field'),
+    reason: text('reason').notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.jobId, t.line, t.position] }),
+    foreignKey({
+      columns: [t.jobId, t.line],
+      foreignColumns: [importJobRows.jobId, importJobRows.line],
+    }).onDelete('cascade'),
+  ],
+);

@@ -357,12 +357,37 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       reviewed in about 6 batches: All questions → status Draft, 100 a page → select all → Submit; then the
       reviewer approves from Review queue, then the publisher publishes from Ready to publish.
 
+- [x] 2026-10-29: **Question import / export (P2 step 2, M09).** Portal → **Imports** (editors and admins): choose a
+      .csv (UTF-8) or .xlsx file → *Check file* (test run, nothing saved: every row's outcome and problems) →
+      *Import N questions as drafts* → saved report at `/imports/<id>`; past imports listed. Column guide on the page,
+      template at `cms/public/question-import-template.csv`. Rules (`backend/src/imports/format.ts`): one question per
+      row; columns external_ref, topic (slug), difficulty, question_type, stem, option_a–f, correct (letter),
+      explanation, source_title, source_url, citation, provision_reference, valid_from, valid_to, jurisdiction,
+      language; unknown or doubled column names refuse the file; ≤ 500 rows, ≤ 2 MB. **Errors** (unknown/inactive
+      topic, bad difficulty/date, non-https link, options out of order, answer not an option, too long…) keep a row
+      out; **warnings** (no explanation / source / valid_from yet) still import it as a draft. Duplicates: same
+      external_ref or same text in the same topic (any version) → skipped with a link; repeated inside the file →
+      failed; the exact same file (SHA-256) can't be imported twice (409 `already_imported`). Imports only ever create
+      drafts (created_by = importer, audit `question.imported` + `import.completed`). API: `POST /v1/admin/import-jobs`
+      (multipart `file`, `dry_run` default true), `GET /v1/admin/import-jobs[/:id]`, `GET /v1/admin/question-export`
+      (csv | xlsx, status/topic filters; staff only — includes answer keys). **3NF:** `import_jobs` (file, sha, format,
+      who, when), `import_job_rows` (row number, external_ref, outcome, question), `import_row_problems` (level,
+      column, reason) — counts are calculated; test runs aren't stored. Migration 0009. Export = latest version of each
+      question in the same columns + question_id, version_no, status, live; CSV has a BOM (Excel reads Indian
+      scripts) and cells starting with = + - @ get a leading apostrophe (import takes it off); Excel cells are text.
+      Portal: Export CSV / Export Excel on the question list (follows status + topic filter) via
+      `cms/src/app/(app)/questions/export/route.ts`. Libraries: csv-parse 7.0.3, read-excel-file 9.3.12,
+      write-excel-file 4.1.1 (exceljs was avoided: old, many dependencies); runtime audit still clean. Server action
+      upload limit raised to 3 MB (`next.config.ts`). Tests: backend 65 unit + 83 API. Checked in the browser as the
+      editor: test run, real import of a 5-row file (2 drafts, 1 skipped, 2 errors), saved report, past imports, both
+      export downloads. Local dev gotcha: the dev API has no fixed JWT_SECRET, so every restart signs everyone out.
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
    P3 is done (server progress Parts 1–3, M08, M12 — see 2026-10-29). Next-phase plan agreed 2026-10-29:
    finish P2 — (1) sources on the questions [done in code, staging review pending], (2) CSV/Excel import + export
-   (M09, drafts only), (3) taxonomy pages, (4) staff account pages, (5) a real reviewer publishes a sample pack —
+   [done], (3) taxonomy pages, (4) staff account pages, (5) a real reviewer publishes a sample pack —
    then P4 beta hardening (crash reporting, analytics M11, accessibility, translations of English-only screens,
    security/privacy incl. in-app account deletion and rotating the Azure key, store prep with a separate
    production environment), then P5 controlled launch. Open decisions for the user: who the legal reviewer is,

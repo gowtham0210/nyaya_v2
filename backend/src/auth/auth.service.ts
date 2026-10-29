@@ -5,7 +5,7 @@ import { and, eq, isNull } from 'drizzle-orm';
 import { AuditService } from '../core/audit.service.js';
 import { APP_CONFIG, type AppConfig } from '../core/config.js';
 import { DB, type Db, type Tx } from '../core/db.js';
-import { ApiError } from '../core/errors.js';
+import { ApiError, isUniqueViolation } from '../core/errors.js';
 import { newId } from '../core/ids.js';
 import { refreshTokens, users } from '../db/schema.js';
 import type { MeDto, SessionDto } from './auth.dto.js';
@@ -14,12 +14,6 @@ import { DUMMY_HASH, hashPassword, verifyPassword } from './passwords.js';
 type UserRow = typeof users.$inferSelect;
 
 const REUSE_GRACE_MS = 30_000;
-
-/** Postgres unique_violation, possibly wrapped by the query builder. */
-const isUniqueViolation = (e: unknown): boolean => {
-  for (let x: any = e; x; x = x.cause) if (x.code === '23505') return true;
-  return false;
-};
 
 const sha256 = (s: string) => createHash('sha256').update(s).digest('hex');
 const invalidRefresh = () =>
