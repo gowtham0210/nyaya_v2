@@ -320,3 +320,16 @@ export const quizSessionQuestions = pgTable(
     ),
   ],
 );
+
+/** AI chat answers per learner per India date, for the daily limit. */
+export const chatUsage = pgTable(
+  'chat_usage',
+  {
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    day: date('day').notNull(),
+    answers: integer('answers').notNull().default(0),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.day] })],
+);

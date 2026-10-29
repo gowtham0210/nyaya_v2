@@ -10,6 +10,7 @@ import '../../../core/services/feedback.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/pressable.dart';
+import '../../auth/application/auth_controller.dart';
 import '../../profile/application/profile_controller.dart';
 import '../application/chat_controller.dart';
 import '../data/chat_repository.dart';
@@ -51,10 +52,15 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     super.dispose();
   }
 
-  void _send([String? text]) {
+  Future<void> _send([String? text]) async {
     final msg = text ?? _input.text;
     if (msg.trim().isEmpty) return;
     ref.read(feedbackProvider).play(Haptic.tap);
+    // Answers come from the Nyaya API, which needs an account.
+    if (!ref.read(authProvider.notifier).isSignedIn) {
+      final signedIn = await context.push<bool>(Routes.signIn);
+      if (signedIn != true || !mounted) return;
+    }
     _input.clear();
     ref.read(chatControllerProvider.notifier).send(msg);
     _scrollToEnd();

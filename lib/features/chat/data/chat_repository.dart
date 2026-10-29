@@ -1,36 +1,14 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http/http.dart' as http;
 
+import '../../../core/api/api_client.dart';
 import '../../profile/domain/user_profile.dart';
 import '../domain/chat_message.dart';
 
-/// Build-time AI configuration:
-///
-///   flutter run --dart-define=NYAYA_AI_BASE_URL=https://your-proxy.example.com \
-///               --dart-define=NYAYA_AI_KEY=...
-///
-/// Production builds should point NYAYA_AI_BASE_URL at your own backend proxy
-/// that holds the Anthropic key server-side — never ship a raw API key in a
-/// mobile binary. With no key configured the app uses [OfflineChatRepository].
-abstract final class AiConfig {
-  static const baseUrl = String.fromEnvironment('NYAYA_AI_BASE_URL', defaultValue: 'https://api.anthropic.com');
-  static const apiKey = String.fromEnvironment('NYAYA_AI_KEY');
-  static const model = String.fromEnvironment('NYAYA_AI_MODEL', defaultValue: 'claude-opus-5-5');
-
-  static bool get isConfigured => apiKey.isNotEmpty;
-}
-
-final chatRepositoryProvider = Provider<ChatRepository>((ref) {
-  if (AiConfig.isConfigured) {
-    final client = http.Client();
-    ref.onDispose(client.close);
-    return ClaudeChatRepository(client: client);
-  }
-  return const OfflineChatRepository();
-});
+final chatRepositoryProvider = Provider<ChatRepository>(
+  (ref) => BackendChatRepository(ref.watch(apiClientProvider)),
+);
 
 abstract interface class ChatRepository {
   bool get isOnline;
@@ -42,36 +20,17 @@ abstract interface class ChatRepository {
   });
 }
 
-String nyayaSystemPrompt(AppLanguage language, Persona persona) {
-  final audience = switch (persona) {
-    Persona.advocate =>
-      'The user is a practising advocate: be precise, cite sections, landmark judgments and procedure.',
-    Persona.aspirant =>
-      'The user is a law aspirant (CLAT/AIBE/judiciary): explain clearly, cite sections and add a one-line exam tip when useful.',
-    Persona.citizen =>
-      'The user is a common citizen: use very simple everyday language, avoid jargon, and focus on practical next steps.',
-  };
-  return '''
-You are Nyaya AI, a legal information assistant inside the Nyaya app, focused on the law of India.
+/// Ask AI through the Nyaya API (`POST /v1/chat`), which holds the model key
+/// and the instructions. When the server can't be reached, or has no AI
+/// configured, falls back to [OfflineChatRepository] so the tab still helps.
+class BackendChatRepository implements ChatRepository {
+  BackendChatRepository(this._api, {this.offline = const OfflineChatRepository()});
 
-$audience
+  final ApiClient _api;
+  final ChatRepository offline;
 
-How to answer:
-- Reply in ${language.englishName}${language == AppLanguage.en ? '' : ' (${language.nativeName})'}. Keep statute names, section numbers and case names accurate; you may add the English term in brackets.
-- Criminal law changed on 1 July 2024: the Bharatiya Nyaya Sanhita (BNS), Bharatiya Nagarik Suraksha Sanhita (BNSS) and Bharatiya Sakshya Adhiniyam (BSA) replaced the IPC, CrPC and Indian Evidence Act for offences after that date. Cite the new sections, and mention the old IPC/CrPC equivalent when it helps.
-- Be concise for a phone screen: a short direct answer first, then up to 5 short bullet points starting with "• ". Plain text only — no markdown headings or tables; **bold** is fine for key terms.
-- If you are not sure of a section number or a recent change, say so rather than guessing.
-- You give general legal information, not legal advice. For a specific case, suggest consulting an advocate or the free legal aid helpline 15100 (NALSA). In an emergency, tell the user to call 112.
-- Politely decline requests to evade the law, harm others or fabricate documents, and offer a lawful alternative.
-- For questions unrelated to law, briefly steer back to legal topics.
-''';
-}
-
-/// Claude Messages API over HTTP (Dart has no official Anthropic SDK).
-class ClaudeChatRepository implements ChatRepository {
-  ClaudeChatRepository({required this._client});
-
-  final http.Client _client;
+  /// The server keeps at most this many turns of history.
+  static const maxTurns = 20;
 
   @override
   bool get isOnline => true;
@@ -82,61 +41,24 @@ class ClaudeChatRepository implements ChatRepository {
     required AppLanguage language,
     required Persona persona,
   }) async {
-    final messages = [
-      for (final m in history.where((m) => !m.isError))
-        {
-          'role': m.role == ChatRole.user ? 'user' : 'assistant',
-          'content': m.role == ChatRole.assistant && m.rawContent != null ? m.rawContent : m.text,
-        },
-    ];
-
-    final http.Response res;
+    final turns = history.where((m) => !m.isError && m.text.isNotEmpty).toList();
+    final recent = turns.length > maxTurns ? turns.sublist(turns.length - maxTurns) : turns;
     try {
-      res = await _client
-          .post(
-            Uri.parse('${AiConfig.baseUrl}/v1/messages'),
-            headers: {
-              'content-type': 'application/json',
-              'x-api-key': AiConfig.apiKey,
-              'anthropic-version': '2023-06-01',
-              'anthropic-beta': 'server-side-fallback-2026-07-01',
-            },
-            body: jsonEncode({
-              'model': AiConfig.model,
-              // Answers are deliberately short for a phone screen.
-              'max_tokens': 4096,
-              'system': nyayaSystemPrompt(language, persona),
-              'output_config': {'effort': 'medium'},
-              // Re-runs a classifier-declined request on a suitable model.
-              'fallbacks': 'default',
-              'messages': messages,
-            }),
-          )
-          .timeout(const Duration(seconds: 90));
-    } on TimeoutException {
-      throw const ChatException('timeout');
-    } on http.ClientException catch (e) {
-      throw ChatException(e.message);
+      final res = await _api.post('/v1/chat', body: {
+        'messages': [
+          for (final m in recent) {'role': m.role.name, 'content': m.text},
+        ],
+        'language': language.code,
+        'persona': persona.name,
+      }) as Map<String, dynamic>;
+      return AssistantReply(text: res['reply'] as String);
+    } on ApiException catch (e) {
+      if (e.isNetwork || e.code == 'chat_unavailable') {
+        return offline.reply(history: history, language: language, persona: persona);
+      }
+      if (e.code == 'chat_limit_reached') throw const ChatLimitException();
+      throw ChatException(e.code);
     }
-
-    if (res.statusCode != 200) throw ChatException('HTTP ${res.statusCode}');
-    final body = jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
-    final content = body['content'] as List<dynamic>? ?? const [];
-
-    if (body['stop_reason'] == 'refusal') {
-      return const AssistantReply(
-        text: 'I can\'t help with that request. I can explain the relevant law, your rights, or how to get free legal aid (call 15100).',
-      );
-    }
-
-    final text = content
-        .whereType<Map<String, dynamic>>()
-        .where((b) => b['type'] == 'text')
-        .map((b) => b['text'] as String)
-        .join('\n')
-        .trim();
-    if (text.isEmpty) throw const ChatException('empty');
-    return AssistantReply(text: text, rawContent: content);
   }
 }
 

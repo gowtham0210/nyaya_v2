@@ -18,6 +18,10 @@ export interface AppConfig {
   corsOrigins: string[];
   /** Reverse proxies in front of the API (Express `trust proxy` hops), so rate limits see client IPs. */
   trustProxyHops: number;
+  /** Azure OpenAI chat for Ask AI; chat is unavailable when endpoint or key is missing. */
+  azureOpenAi?: { endpoint: string; apiKey: string; chatDeployment: string };
+  /** AI answers each learner may get per India date. */
+  chatDailyLimit: number;
 }
 
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
@@ -45,5 +49,27 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
       .map((s) => s.trim())
       .filter(Boolean),
     trustProxyHops: Number(env.TRUST_PROXY_HOPS ?? 0),
+    azureOpenAi:
+      env.AZURE_OPENAI_ENDPOINT && env.AZURE_OPENAI_API_KEY
+        ? {
+            endpoint: env.AZURE_OPENAI_ENDPOINT.replace(/\/+$/, ''),
+            apiKey: env.AZURE_OPENAI_API_KEY,
+            chatDeployment: env.AZURE_OPENAI_CHAT_DEPLOYMENT || 'gpt-5.4-mini',
+          }
+        : undefined,
+    chatDailyLimit: positiveInt(env.CHAT_DAILY_LIMIT, 'CHAT_DAILY_LIMIT', 50),
   };
+}
+
+/** An unset value takes the default; anything but a whole number above 0 stops startup. */
+function positiveInt(
+  value: string | undefined,
+  name: string,
+  fallback: number,
+) {
+  if (value === undefined || value === '') return fallback;
+  const n = Number(value);
+  if (!Number.isInteger(n) || n < 1)
+    throw new Error(`${name} must be a whole number above 0, got "${value}"`);
+  return n;
 }

@@ -2,7 +2,7 @@ import { randomBytes } from 'node:crypto';
 import type { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { createApp } from '../src/app.setup.js';
-import { loadConfig } from '../src/core/config.js';
+import { loadConfig, type AppConfig } from '../src/core/config.js';
 import { DB, type Db } from '../src/core/db.js';
 import { newId } from '../src/core/ids.js';
 import { hashPassword } from '../src/auth/passwords.js';
@@ -26,7 +26,7 @@ export interface TestApp {
 
 /** A fresh app on an in-memory database with one subject and topic. */
 export async function startApp(
-  overrides: { authRateLimitPerMinute?: number; trustProxyHops?: number } = {},
+  overrides: Partial<AppConfig> = {},
 ): Promise<TestApp> {
   const config = {
     ...loadConfig({}),

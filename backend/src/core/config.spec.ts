@@ -19,4 +19,31 @@ describe('loadConfig', () => {
     expect(loadConfig({}).trustProxyHops).toBe(0);
     expect(loadConfig({ TRUST_PROXY_HOPS: '1' }).trustProxyHops).toBe(1);
   });
+
+  it('turns on Azure chat only with an endpoint and a key', () => {
+    expect(loadConfig({}).azureOpenAi).toBeUndefined();
+    expect(
+      loadConfig({ AZURE_OPENAI_ENDPOINT: 'https://x.openai.azure.com/' })
+        .azureOpenAi,
+    ).toBeUndefined();
+    expect(
+      loadConfig({
+        AZURE_OPENAI_ENDPOINT: 'https://x.openai.azure.com/',
+        AZURE_OPENAI_API_KEY: 'k',
+      }).azureOpenAi,
+    ).toEqual({
+      endpoint: 'https://x.openai.azure.com',
+      apiKey: 'k',
+      chatDeployment: 'gpt-5.4-mini',
+    });
+  });
+
+  it('stops on a daily chat limit that is not a whole number above 0', () => {
+    expect(loadConfig({}).chatDailyLimit).toBe(50);
+    expect(loadConfig({ CHAT_DAILY_LIMIT: '5' }).chatDailyLimit).toBe(5);
+    for (const bad of ['abc', '0', '-3', '2.5'])
+      expect(() => loadConfig({ CHAT_DAILY_LIMIT: bad })).toThrow(
+        'CHAT_DAILY_LIMIT',
+      );
+  });
 });

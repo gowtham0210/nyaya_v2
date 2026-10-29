@@ -372,6 +372,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/chat": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Ask AI: answers a legal question about Indian law. Limited per learner per day. */
+        post: operations["ChatController_reply"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -793,6 +810,24 @@ export interface components {
             questions_answered: number;
             correct: number;
             topics: components["schemas"]["TopicProgressDto"][];
+        };
+        ChatTurnDto: {
+            /** @enum {string} */
+            role: "user" | "assistant";
+            content: string;
+        };
+        ChatRequestDto: {
+            /** @description The conversation so far, oldest first, ending with the learner's question (at most 20 turns) */
+            messages: components["schemas"]["ChatTurnDto"][];
+            /** @enum {string} */
+            language: "en" | "hi" | "ta" | "te" | "kn" | "ml";
+            /** @enum {string} */
+            persona: "advocate" | "aspirant" | "citizen";
+        };
+        ChatReplyDto: {
+            reply: string;
+            /** @description AI answers left today (India date) */
+            remaining_today: number;
         };
     };
     responses: never;
@@ -1341,6 +1376,29 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ProgressDto"];
+                };
+            };
+        };
+    };
+    ChatController_reply: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ChatRequestDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ChatReplyDto"];
                 };
             };
         };

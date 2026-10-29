@@ -74,12 +74,14 @@ class ChatController extends Notifier<ChatState> {
         ChatMessage(
           role: ChatRole.assistant,
           text: reply.text,
-          rawContent: reply.rawContent,
           at: ref.read(clockProvider)(),
         ),
       ];
       state = state.copyWith(messages: updated, sending: false);
       _persist(updated);
+    } on ChatLimitException {
+      // Put the conversation back as it was; the limit banner explains why.
+      state = state.copyWith(messages: base, sending: false, limitReached: true);
     } catch (_) {
       state = state.copyWith(
         messages: [

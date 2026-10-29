@@ -8,24 +8,18 @@ class ChatMessage {
     required this.role,
     required this.text,
     required this.at,
-    this.rawContent,
     this.isError = false,
   });
 
   final ChatRole role;
   final String text;
   final DateTime at;
-
-  /// The provider's raw assistant content blocks, re-sent unchanged on the
-  /// next turn so the conversation history stays append-only.
-  final List<dynamic>? rawContent;
   final bool isError;
 
   Map<String, dynamic> toJson() => {
         'role': role.name,
         'text': text,
         'at': at.toIso8601String(),
-        if (rawContent != null) 'raw': rawContent,
         if (isError) 'error': true,
       };
 
@@ -33,7 +27,6 @@ class ChatMessage {
         role: ChatRole.values.asNameMap()[j['role']] ?? ChatRole.user,
         text: j['text'] as String? ?? '',
         at: DateTime.tryParse(j['at'] as String? ?? '') ?? DateTime.now(),
-        rawContent: j['raw'] as List<dynamic>?,
         isError: j['error'] == true,
       );
 }
@@ -41,10 +34,9 @@ class ChatMessage {
 /// Result of one assistant turn.
 @immutable
 class AssistantReply {
-  const AssistantReply({required this.text, this.rawContent, this.offline = false});
+  const AssistantReply({required this.text, this.offline = false});
 
   final String text;
-  final List<dynamic>? rawContent;
   final bool offline;
 }
 
@@ -54,4 +46,9 @@ class ChatException implements Exception {
 
   @override
   String toString() => 'ChatException: $message';
+}
+
+/// The server's daily AI answer limit is used up.
+class ChatLimitException implements Exception {
+  const ChatLimitException();
 }

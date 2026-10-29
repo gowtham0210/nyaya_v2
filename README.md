@@ -15,17 +15,12 @@ flutter gen-l10n
 flutter run
 ```
 
-### Enable the live AI assistant
-Without a key, the assistant runs in offline mode, with canned answers on common topics.
-
-```bash
-# Development only: talks to the Anthropic API directly
-flutter run --dart-define=NYAYA_AI_KEY=sk-ant-...
-
-# Production: point at your own backend proxy that holds the key
-flutter run --dart-define=NYAYA_AI_BASE_URL=https://api.yourdomain.com --dart-define=NYAYA_AI_KEY=<proxy token>
-```
-Optional: `--dart-define=NYAYA_AI_MODEL=claude-opus-5-5` (this is the default).
+### AI assistant (Ask AI)
+Answers come from the Nyaya API (`POST /v1/chat`), which calls an Azure OpenAI deployment and keeps
+the key on the server; the app holds no AI key. Asking needs an account. Without a reachable API, or
+when the API has no AI configured, the app answers common topics from built-in offline answers.
+Server settings: `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_CHAT_DEPLOYMENT`
+(default `gpt-5.4-mini`) and `CHAT_DAILY_LIMIT` (answers per learner per day, default 50).
 
 ## Test
 ```bash

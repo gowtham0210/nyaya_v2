@@ -203,9 +203,29 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       staging, production will need an off-server copy. Restore steps are at the top of `backup.sh`; a restore into
       a scratch database was tested and matched the live row counts.
 
+- [x] 2026-10-29: **Ask AI runs through the backend** (Azure OpenAI, deployment `gpt-5.4-mini`). `POST /v1/chat`
+      (`backend/src/chat/`): signed-in users only; the server holds the key and the system prompt (moved from the app;
+      language + persona as before); Azure v1 chat completions with a 60 s timeout; content-filter blocks return the
+      polite "can't help" reply. Daily limit per learner per India date in `chat_usage` (migration 0003): taken before
+      the Azure call with a conditional upsert (parallel requests can't pass it), given back when the call fails or is
+      filtered; `CHAT_DAILY_LIMIT` default 50 (an abuse guard), invalid values stop startup. Settings:
+      `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_CHAT_DEPLOYMENT` (in `/opt/nyaya-v2/.env` on staging
+      only); unset → 503 `chat_unavailable`. Endpoint also has gpt-5.4, gpt-5.4-nano, gpt-5.6-terra, gpt-6-luna, gpt-6-sol
+      and text-embedding-3-small deployed (all answered a test question). App: `BackendChatRepository` replaces the
+      direct Claude call (no AI key in the app any more, `NYAYA_AI_*` defines removed); asking opens sign-in first;
+      when the API can't be reached or answers `chat_unavailable` it falls back to the built-in offline answers.
+      Two separate counters for now: the app's free 5/day (premium unlimited, still simulated on the phone) and the
+      server's 50/day — move to the server's `remaining_today` once purchases are real. Tests: backend 21 unit + 40 API,
+      Flutter 38. Checked by the user on the iPhone against staging.
+      The Azure key was pasted in chat on 2026-10-29 — rotate it in the Azure portal and update `/opt/nyaya-v2/.env`.
+      Gotchas: `devicectl device install` can fail with "Insufficient storage" while the last output line still looks
+      fine — check for "App installed". On a flaky connection rsync to the VPS can drop ("incorrect signature",
+      "closed by remote host"); deploy.sh then fails, so retry, or scp the changed files and run
+      `docker compose up -d --build` on the server.
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
-1. Platform (P1) still to do: route AI chat through the backend. (CI and staging are done — see 2026-10-28/29.)
+1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
    Then P3: M08 bookmarks/mistake review, M12 report-a-question, server-side progress and exam marking.
 2. Dark-mode visual pass on simulator (Terracotta dark theme exists, not yet eyeballed).
 3. Note: a debug build launched via `simctl launch` without `flutter run` can show a blank screen —
@@ -282,7 +302,7 @@ test/  gamification_test.dart content_test.dart app_flow_test.dart
   Mix 60/20/15/5. No purple, neon, metallic or decorative gradients (all fills flat). Ochre #C28A2C for
   XP/stars (fills only), Moss/Brick for success/error. Full table in docs/DESIGN.md §3; tokens in
   `core/theme/app_colors.dart`. Native launch screens use Warm Cream. Fonts: Plus Jakarta Sans + DM Serif Display.
-- **AI:** Claude Messages API via HTTP, model `claude-opus-5-5`, effort medium, `fallbacks: "default"`
+- **AI (before 2026-10-29, replaced by the backend + Azure):** Claude Messages API via HTTP, model `claude-opus-5-5`, effort medium, `fallbacks: "default"`
   (beta header `server-side-fallback-2026-07-01`), handles `stop_reason: refusal`, re-sends raw assistant
   content blocks (append-only history). Config via `--dart-define=NYAYA_AI_KEY=... NYAYA_AI_BASE_URL=...`.
   **Production must use a backend proxy** — never ship a raw key. No key → offline canned answers.

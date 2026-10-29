@@ -928,6 +928,43 @@
           "learn"
         ]
       }
+    },
+    "/v1/chat": {
+      "post": {
+        "operationId": "ChatController_reply",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatReplyDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Ask AI: answers a legal question about Indian law. Limited per learner per day.",
+        "tags": [
+          "chat"
+        ]
+      }
     }
   },
   "info": {
@@ -2321,6 +2358,78 @@
           "questions_answered",
           "correct",
           "topics"
+        ]
+      },
+      "ChatTurnDto": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "assistant"
+            ]
+          },
+          "content": {
+            "type": "string",
+            "maxLength": 4000
+          }
+        },
+        "required": [
+          "role",
+          "content"
+        ]
+      },
+      "ChatRequestDto": {
+        "type": "object",
+        "properties": {
+          "messages": {
+            "description": "The conversation so far, oldest first, ending with the learner's question (at most 20 turns)",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChatTurnDto"
+            }
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "en",
+              "hi",
+              "ta",
+              "te",
+              "kn",
+              "ml"
+            ]
+          },
+          "persona": {
+            "type": "string",
+            "enum": [
+              "advocate",
+              "aspirant",
+              "citizen"
+            ]
+          }
+        },
+        "required": [
+          "messages",
+          "language",
+          "persona"
+        ]
+      },
+      "ChatReplyDto": {
+        "type": "object",
+        "properties": {
+          "reply": {
+            "type": "string"
+          },
+          "remaining_today": {
+            "type": "number",
+            "description": "AI answers left today (India date)"
+          }
+        },
+        "required": [
+          "reply",
+          "remaining_today"
         ]
       }
     }
