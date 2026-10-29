@@ -351,7 +351,11 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       note saved on each, a summary listing failures with links and reasons (failed rows stay selected), and a
       new page size choice (25 / 50 / 100, `per=` in the URL). Tests: backend 38 unit + 79 API. Checked in the
       browser as the editor: 99 local drafts submitted in one click, 1 incomplete draft refused with its reasons.
-      Approve / publish not clicked through in the browser (API tests cover them).
+      Approve / publish not clicked through in the browser (API tests cover them). OpenQodex review (agent mode)
+      found that the selection carried over to the next page (fixed: the table is keyed by the page cursor too);
+      pushed as `8b9d873`, CI green, staging deployed (no seed needed). Staging's 107 source drafts can now be
+      reviewed in about 6 batches: All questions → status Draft, 100 a page → select all → Submit; then the
+      reviewer approves from Review queue, then the publisher publishes from Ready to publish.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
