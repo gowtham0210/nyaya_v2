@@ -2,6 +2,8 @@ import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
   ArrayMaxSize,
+  ArrayMinSize,
+  ArrayUnique,
   IsArray,
   IsIn,
   IsInt,
@@ -166,6 +168,36 @@ export class ReviseDto {
   change_note: string;
 }
 
+/** Lifecycle steps that can run on many questions at once (no per-question reason). */
+export const BULK_ACTIONS = ['submit', 'approve', 'publish'] as const;
+export type BulkAction = (typeof BULK_ACTIONS)[number];
+
+export class BulkActionDto {
+  @ApiProperty({ enum: BULK_ACTIONS })
+  @IsIn(BULK_ACTIONS)
+  action: BulkAction;
+
+  @ApiProperty({
+    type: [String],
+    format: 'uuid',
+    minItems: 1,
+    maxItems: 100,
+    description: 'Questions to act on; each is checked and run on its own',
+  })
+  @IsArray()
+  @ArrayMinSize(1)
+  @ArrayMaxSize(100)
+  @ArrayUnique()
+  @IsUUID('all', { each: true })
+  question_ids: string[];
+
+  @ApiPropertyOptional({ description: 'Approval note, for approve only' })
+  @IsOptional()
+  @IsString()
+  @MaxLength(2000)
+  note?: string;
+}
+
 export class ListQuestionsQuery {
   @ApiPropertyOptional({
     enum: VERSION_STATUSES,
@@ -299,4 +331,34 @@ export class QuestionDetailDto {
   latest: VersionDto;
   @ApiProperty({ type: [VersionSummaryDto] }) versions: VersionSummaryDto[];
   @ApiProperty({ type: [ReviewDecisionDto] }) reviews: ReviewDecisionDto[];
+}
+
+export class BulkErrorDetailDto {
+  @ApiPropertyOptional() field?: string;
+  @ApiProperty() reason: string;
+}
+
+export class BulkErrorDto {
+  @ApiProperty() code: string;
+  @ApiProperty() message: string;
+  @ApiPropertyOptional({ type: [BulkErrorDetailDto] })
+  details?: BulkErrorDetailDto[];
+}
+
+export class BulkItemResultDto {
+  @ApiProperty({ format: 'uuid' }) question_id: string;
+  @ApiProperty() ok: boolean;
+  @ApiPropertyOptional({
+    enum: VERSION_STATUSES,
+    description: 'Status of the latest version after the step, when ok',
+  })
+  status?: VersionStatus;
+  @ApiPropertyOptional({ type: BulkErrorDto }) error?: BulkErrorDto;
+}
+
+export class BulkResultDto {
+  @ApiProperty({ type: [BulkItemResultDto], description: 'In request order' })
+  results: BulkItemResultDto[];
+  @ApiProperty() succeeded: number;
+  @ApiProperty() failed: number;
 }

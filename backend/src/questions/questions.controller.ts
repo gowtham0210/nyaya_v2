@@ -16,10 +16,15 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { CurrentActor, Roles } from '../auth/decorators.js';
+import type { AuthUser } from '../auth/auth-user.js';
+import { CurrentActor, CurrentUser, Roles } from '../auth/decorators.js';
 import type { Actor } from '../core/audit.service.js';
+import { ApiError } from '../core/errors.js';
+import type { Role } from '../db/schema.js';
 import {
   ApproveDto,
+  BulkActionDto,
+  BulkResultDto,
   CreateQuestionDto,
   ListQuestionsQuery,
   QuestionDetailDto,
@@ -74,6 +79,30 @@ export class QuestionsController {
     @Body() body: UpdateQuestionDto,
   ) {
     return this.questions.update(actor, id, body);
+  }
+
+  @Post('bulk')
+  @HttpCode(200)
+  @Roles(
+    ...new Set([
+      ...ACTIONS.submit.roles,
+      ...ACTIONS.approve.roles,
+      ...ACTIONS.publish.roles,
+    ]),
+  )
+  @ApiOperation({
+    summary:
+      'Submit, approve or publish many questions; each is checked and run on its own',
+  })
+  @ApiOkResponse({ type: BulkResultDto })
+  bulk(
+    @CurrentActor() actor: Actor,
+    @CurrentUser() user: AuthUser,
+    @Body() body: BulkActionDto,
+  ) {
+    const roles: readonly Role[] = ACTIONS[body.action].roles;
+    if (!roles.some((r) => user.roles.includes(r))) throw ApiError.forbidden();
+    return this.questions.bulk(actor, body);
   }
 
   @Post(':id/submit')

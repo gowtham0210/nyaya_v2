@@ -4,8 +4,8 @@ import { refresh } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { api, asApiError, type ApiError } from '@/lib/api';
 import { SESSION_ENDED_URL } from '@/lib/session-cookies';
-import type { WorkflowAction } from '@/lib/workflow';
-import type { ActionState, QuestionInput } from './form-state';
+import { BULK_ACTIONS, type BulkAction, type WorkflowAction } from '@/lib/workflow';
+import type { ActionState, BulkState, QuestionInput } from './form-state';
 
 /*
  * Every action calls the API as the signed-in user; the API decides whether
@@ -104,4 +104,29 @@ export async function runAction(id: string, action: WorkflowAction, _: ActionSta
   if (!data) return toState(asApiError(error, response.status), response.status);
   refresh();
   return { ok: true, message: DONE[action] };
+}
+
+/** Runs one step on the selected questions; the API checks each one on its own. */
+export async function runBulk(action: BulkAction, questionIds: string[], note?: string): Promise<BulkState> {
+  if (!BULK_ACTIONS.includes(action)) return { error: 'Unknown action' };
+  if (questionIds.length === 0) return { error: 'Select at least one question' };
+  const client = await api();
+  const { data, error, response } = await client.POST('/v1/editor/questions/bulk', {
+    body: { action, question_ids: questionIds, ...(action === 'approve' && note?.trim() ? { note: note.trim() } : {}) },
+  });
+  if (!data) {
+    if (response.status === 401) redirect(SESSION_ENDED_URL);
+    return { error: asApiError(error, response.status).message };
+  }
+  refresh();
+  return {
+    succeeded: data.succeeded,
+    failures: data.results
+      .filter((r) => !r.ok)
+      .map((r) => ({
+        questionId: r.question_id,
+        message: r.error?.message ?? 'Failed',
+        reasons: (r.error?.details ?? []).map((d) => d.reason),
+      })),
+  };
 }

@@ -339,6 +339,20 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       so the seed left it: an editor must revise it by hand (Motor Vehicles Act, 1988 —
       https://indiacode.gov.in/handle/123456789/619305 — valid from 2019-09-01).
 
+- [x] 2026-10-29: **Bulk submit / approve / publish in the portal.** `POST /v1/editor/questions/bulk`
+      {action: submit | approve | publish, question_ids (1–100, unique), note?}: each question runs through the
+      same service method as a single request, in its own transaction and in request order, so all checks apply
+      (complete content, reviewer ≠ author/editor, publish needs a review) and one failure doesn't stop the rest;
+      the response has a result per question (`ok`, new `status` or `error` {code, message, details}) plus counts.
+      The route checks the chosen step's roles (403 otherwise). Request changes / revise stay one at a time (they
+      need a reason each). Portal question list: checkboxes + "select all on this page" for staff who may run a
+      bulk step, buttons with counts ("Approve (25)") that act only on selected rows in the right status, a
+      confirm before approve ("you will be recorded as the legal reviewer…") and publish, an optional approval
+      note saved on each, a summary listing failures with links and reasons (failed rows stay selected), and a
+      new page size choice (25 / 50 / 100, `per=` in the URL). Tests: backend 38 unit + 79 API. Checked in the
+      browser as the editor: 99 local drafts submitted in one click, 1 incomplete draft refused with its reasons.
+      Approve / publish not clicked through in the browser (API tests cover them).
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
@@ -349,7 +363,7 @@ Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
    security/privacy incl. in-app account deletion and rotating the Azure key, store prep with a separate
    production environment), then P5 controlled launch. Open decisions for the user: who the legal reviewer is,
    crash/analytics tool, launch audience, premium during beta, production hosting. Also open: a real all-time
-   leaderboard, bulk review actions in the portal.
+   leaderboard.
 2. Dark-mode visual pass on simulator (Terracotta dark theme exists, not yet eyeballed).
 3. Note: a debug build launched via `simctl launch` without `flutter run` can show a blank screen —
    use `flutter run -d <device>` (or a release/profile build) when testing.

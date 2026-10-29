@@ -17,6 +17,10 @@ export const WORKFLOW = {
 
 export type WorkflowAction = keyof typeof WORKFLOW;
 
+/** Steps the question list can run on many questions at once (the others need a reason each). */
+export const BULK_ACTIONS = ['submit', 'approve', 'publish'] as const satisfies readonly WorkflowAction[];
+export type BulkAction = (typeof BULK_ACTIONS)[number];
+
 export const hasRole = (me: Me, ...roles: readonly Role[]) => roles.some((r) => me.roles.includes(r));
 
 /** Staff who handle learner reports (the API checks this too). */

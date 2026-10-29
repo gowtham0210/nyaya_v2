@@ -24,6 +24,9 @@ import {
   topics,
 } from '../db/schema.js';
 import type {
+  BulkActionDto,
+  BulkItemResultDto,
+  BulkResultDto,
   CreateQuestionDto,
   QuestionDetailDto,
   QuestionListItemDto,
@@ -380,6 +383,35 @@ export class QuestionsService {
         change_note: changeNote,
       };
     });
+  }
+
+  /**
+   * Runs one step on many questions. Each goes through the same method as a
+   * single request, in its own transaction and in request order, so the same
+   * checks apply and one failure does not undo or stop the others.
+   */
+  async bulk(actor: Actor, dto: BulkActionDto): Promise<BulkResultDto> {
+    const step = {
+      submit: (id: string) => this.submit(actor, id),
+      approve: (id: string) => this.approve(actor, id, dto.note),
+      publish: (id: string) => this.publish(actor, id),
+    }[dto.action];
+    const results: BulkItemResultDto[] = [];
+    for (const id of dto.question_ids) {
+      try {
+        const q = await step(id);
+        results.push({ question_id: id, ok: true, status: q.latest.status });
+      } catch (e) {
+        if (!(e instanceof ApiError)) throw e;
+        results.push({
+          question_id: id,
+          ok: false,
+          error: { code: e.code, message: e.message, details: e.details },
+        });
+      }
+    }
+    const succeeded = results.filter((r) => r.ok).length;
+    return { results, succeeded, failed: results.length - succeeded };
   }
 
   /** Takes the live version down. Any revision in progress is left as it is. */

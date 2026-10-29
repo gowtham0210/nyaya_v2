@@ -312,4 +312,129 @@ describe('question lifecycle', () => {
 
     await as(analyst).get('/v1/editor/questions?cursor=garbage').expect(400);
   });
+
+  describe('bulk steps', () => {
+    const bulk = (s: Session, body: object) =>
+      as(s).post('/v1/editor/questions/bulk', body);
+
+    it('runs each question on its own and reports each result in order', async () => {
+      const ready = await createDraft(completeContent);
+      const ready2 = await createDraft(completeContent);
+      const unfinished = await createDraft({ stem: 'No options yet' });
+      const missing = '00000000-0000-7000-8000-000000000000';
+
+      const submitted = await bulk(editor, {
+        action: 'submit',
+        question_ids: [ready.id, unfinished.id, missing, ready2.id],
+      }).expect(200);
+      expect(submitted.body).toMatchObject({ succeeded: 2, failed: 2 });
+      expect(submitted.body.results).toMatchObject([
+        { question_id: ready.id, ok: true, status: 'in_review' },
+        {
+          question_id: unfinished.id,
+          ok: false,
+          error: { code: 'content_incomplete' },
+        },
+        { question_id: missing, ok: false, error: { code: 'not_found' } },
+        { question_id: ready2.id, ok: true, status: 'in_review' },
+      ]);
+      expect(submitted.body.results[1].error.details.length).toBeGreaterThan(0);
+
+      const approved = await bulk(reviewer, {
+        action: 'approve',
+        question_ids: [ready.id, ready2.id],
+        note: 'Sources checked',
+      }).expect(200);
+      expect(approved.body).toMatchObject({ succeeded: 2, failed: 0 });
+      const detail = (await as(reviewer).get(q(ready.id)).expect(200)).body;
+      expect(detail.latest).toMatchObject({
+        status: 'approved',
+        reviewer_id: reviewer.id,
+      });
+      expect(detail.reviews.at(-1)).toMatchObject({
+        decision: 'approved',
+        reason: 'Sources checked',
+      });
+
+      // Publishing twice: the second run finds nothing approved.
+      await bulk(publisher, {
+        action: 'publish',
+        question_ids: [ready.id, ready2.id],
+      }).expect(200);
+      const again = await bulk(publisher, {
+        action: 'publish',
+        question_ids: [ready.id],
+      }).expect(200);
+      expect(again.body.results[0]).toMatchObject({
+        ok: false,
+        error: { code: 'invalid_transition' },
+      });
+
+      // Every question that moved has its own audit entries.
+      const audit = await t.db
+        .select()
+        .from(auditLog)
+        .where(eq(auditLog.entityId, ready2.id));
+      expect(audit.map((a) => a.action)).toEqual(
+        expect.arrayContaining([
+          'question.submitted',
+          'question.approved',
+          'question.published',
+        ]),
+      );
+    });
+
+    it("checks the chosen step's roles and the reviewer rule", async () => {
+      const own = await createDraft(completeContent);
+      await bulk(editor, { action: 'approve', question_ids: [own.id] }).expect(
+        403,
+      );
+      await bulk(reviewer, {
+        action: 'publish',
+        question_ids: [own.id],
+      }).expect(403);
+      await bulk(analyst, { action: 'submit', question_ids: [own.id] }).expect(
+        403,
+      );
+
+      // A reviewer who also edits cannot approve their own version in bulk either.
+      const both = await t.signInAs('content_editor', 'legal_reviewer');
+      const mine = (
+        await as(both)
+          .post('/v1/editor/questions', {
+            topic_id: t.topicId,
+            ...completeContent,
+          })
+          .expect(201)
+      ).body;
+      await bulk(both, { action: 'submit', question_ids: [mine.id] }).expect(
+        200,
+      );
+      const res = await bulk(both, {
+        action: 'approve',
+        question_ids: [mine.id],
+      }).expect(200);
+      expect(res.body.results[0]).toMatchObject({
+        ok: false,
+        error: { code: 'forbidden' },
+      });
+    });
+
+    it('validates the request', async () => {
+      for (const body of [
+        { action: 'retire', question_ids: [t.topicId] },
+        { action: 'submit', question_ids: [] },
+        { action: 'submit', question_ids: ['not-a-uuid'] },
+        { action: 'submit', question_ids: [t.topicId, t.topicId] },
+        {
+          action: 'submit',
+          question_ids: Array.from(
+            { length: 101 },
+            (_, i) => `00000000-0000-7000-8000-${String(i).padStart(12, '0')}`,
+          ),
+        },
+      ])
+        await bulk(editor, body).expect(400);
+    });
+  });
 });

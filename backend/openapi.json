@@ -362,6 +362,43 @@
         ]
       }
     },
+    "/v1/editor/questions/bulk": {
+      "post": {
+        "operationId": "QuestionsController_bulk",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkActionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkResultDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Submit, approve or publish many questions; each is checked and run on its own",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
     "/v1/editor/questions/{id}/submit": {
       "post": {
         "operationId": "QuestionsController_submit",
@@ -2383,6 +2420,127 @@
             "nullable": true
           }
         }
+      },
+      "BulkActionDto": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "submit",
+              "approve",
+              "publish"
+            ]
+          },
+          "question_ids": {
+            "minItems": 1,
+            "maxItems": 100,
+            "description": "Questions to act on; each is checked and run on its own",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "note": {
+            "type": "string",
+            "description": "Approval note, for approve only"
+          }
+        },
+        "required": [
+          "action",
+          "question_ids"
+        ]
+      },
+      "BulkErrorDetailDto": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ]
+      },
+      "BulkErrorDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BulkErrorDetailDto"
+            }
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      },
+      "BulkItemResultDto": {
+        "type": "object",
+        "properties": {
+          "question_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "in_review",
+              "changes_requested",
+              "approved",
+              "published",
+              "superseded",
+              "retired"
+            ],
+            "description": "Status of the latest version after the step, when ok"
+          },
+          "error": {
+            "$ref": "#/components/schemas/BulkErrorDto"
+          }
+        },
+        "required": [
+          "question_id",
+          "ok"
+        ]
+      },
+      "BulkResultDto": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "description": "In request order",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BulkItemResultDto"
+            }
+          },
+          "succeeded": {
+            "type": "number"
+          },
+          "failed": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "results",
+          "succeeded",
+          "failed"
+        ]
       },
       "ReasonDto": {
         "type": "object",

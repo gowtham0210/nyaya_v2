@@ -1,15 +1,16 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { StatusBadge } from '@/components/status-badge';
 import { Skeleton, buttonClass, inputClass } from '@/components/ui';
 import { api, must, type VersionStatus } from '@/lib/api';
 import { getMe, getTaxonomy, getTopicNames } from '@/lib/session';
-import { STATUS_LABEL, hasRole } from '@/lib/workflow';
+import { BULK_ACTIONS, STATUS_LABEL, WORKFLOW, hasRole } from '@/lib/workflow';
+import { QuestionTable } from './question-table';
 
 export const metadata: Metadata = { title: 'Questions' };
 
 const STATUSES = Object.keys(STATUS_LABEL) as VersionStatus[];
+const PAGE_SIZES = ['25', '50', '100'];
 
 export default function QuestionsPage({ searchParams }: PageProps<'/questions'>) {
   return (
@@ -29,6 +30,7 @@ async function QuestionList({ searchParams }: { searchParams: PageProps<'/questi
   const topic = first(sp.topic);
   const q = first(sp.q);
   const cursor = first(sp.cursor);
+  const per = PAGE_SIZES.find((n) => n === first(sp.per));
 
   const client = await api();
   const [me, taxonomy, topicNames, page] = await Promise.all([
@@ -37,14 +39,14 @@ async function QuestionList({ searchParams }: { searchParams: PageProps<'/questi
     getTopicNames(),
     client
       .GET('/v1/editor/questions', {
-        params: { query: { status, topic_id: topic, q, cursor, limit: 25 } },
+        params: { query: { status, topic_id: topic, q, cursor, limit: Number(per ?? 25) } },
       })
       .then(must),
   ]);
 
   const href = (patch: Record<string, string | undefined>) => {
     const p = new URLSearchParams();
-    for (const [k, v] of Object.entries({ status, topic, q, ...patch })) if (v) p.set(k, v);
+    for (const [k, v] of Object.entries({ status, topic, q, per, ...patch })) if (v) p.set(k, v);
     const s = p.toString();
     return s ? `/questions?${s}` : '/questions';
   };
@@ -66,7 +68,7 @@ async function QuestionList({ searchParams }: { searchParams: PageProps<'/questi
         )}
       </div>
 
-      <form method="get" action="/questions" className="grid gap-3 sm:grid-cols-[1fr_12rem_14rem_auto]" role="search">
+      <form method="get" action="/questions" className="grid gap-3 sm:grid-cols-[1fr_12rem_14rem_7rem_auto]" role="search">
         <label className="sr-only" htmlFor="q">Search</label>
         <input id="q" name="q" defaultValue={q} placeholder="Search question text" className={inputClass} />
         <label className="sr-only" htmlFor="status">Status</label>
@@ -87,6 +89,12 @@ async function QuestionList({ searchParams }: { searchParams: PageProps<'/questi
             </optgroup>
           ))}
         </select>
+        <label className="sr-only" htmlFor="per">Questions per page</label>
+        <select id="per" name="per" defaultValue={per ?? '25'} className={inputClass}>
+          {PAGE_SIZES.map((n) => (
+            <option key={n} value={n}>{n} a page</option>
+          ))}
+        </select>
         <button type="submit" className={buttonClass('secondary')}>Filter</button>
       </form>
 
@@ -95,35 +103,19 @@ async function QuestionList({ searchParams }: { searchParams: PageProps<'/questi
           No questions match these filters.
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-xl border border-border bg-surface">
-          <table className="w-full min-w-[640px] text-sm">
-            <thead className="border-b border-border text-left text-xs tracking-wide text-muted uppercase">
-              <tr>
-                <th className="px-4 py-3 font-medium">Question</th>
-                <th className="px-4 py-3 font-medium">Topic</th>
-                <th className="px-4 py-3 font-medium">Status</th>
-                <th className="px-4 py-3 font-medium">Live</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border">
-              {page.items.map((item) => (
-                <tr key={item.id} className="hover:bg-surface-2/60">
-                  <td className="max-w-md px-4 py-3">
-                    <Link href={`/questions/${item.id}`} className="line-clamp-2 font-medium hover:text-primary">
-                      {item.latest.stem || <span className="text-muted italic">Untitled draft</span>}
-                    </Link>
-                    <span className="text-xs text-muted">v{item.latest.version_no}</span>
-                  </td>
-                  <td className="px-4 py-3 text-muted">{topicNames.get(item.latest.topic_id) ?? '—'}</td>
-                  <td className="px-4 py-3"><StatusBadge status={item.latest.status} /></td>
-                  <td className="px-4 py-3 text-muted">
-                    {item.live_version_id ? 'Yes' : item.retired_at ? 'Retired' : '—'}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <QuestionTable
+          // A new page or filter starts with nothing selected.
+          key={href({ cursor })}
+          actions={BULK_ACTIONS.filter((a) => hasRole(me, ...WORKFLOW[a].roles))}
+          rows={page.items.map((item) => ({
+            id: item.id,
+            stem: item.latest.stem,
+            versionNo: item.latest.version_no,
+            status: item.latest.status,
+            topic: topicNames.get(item.latest.topic_id) ?? '—',
+            live: item.live_version_id ? 'Yes' : item.retired_at ? 'Retired' : '—',
+          }))}
+        />
       )}
 
       <div className="flex justify-between text-sm">

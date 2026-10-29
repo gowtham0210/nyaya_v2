@@ -24,4 +24,12 @@ export interface ActionState {
   otherErrors?: string[];
 }
 
+/** What a bulk step reports back to the question list. */
+export interface BulkState {
+  error?: string;
+  succeeded?: number;
+  /** Questions the step could not be run on, with the API's reasons. */
+  failures?: { questionId: string; message: string; reasons: string[] }[];
+}
+
 export const OPTION_IDS = ['a', 'b', 'c', 'd', 'e', 'f'];

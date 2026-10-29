@@ -135,6 +135,23 @@ export interface paths {
         patch: operations["QuestionsController_update"];
         trace?: never;
     };
+    "/v1/editor/questions/bulk": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Submit, approve or publish many questions; each is checked and run on its own */
+        post: operations["QuestionsController_bulk"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/editor/questions/{id}/submit": {
         parameters: {
             query?: never;
@@ -882,6 +899,40 @@ export interface components {
             /** Format: date */
             valid_to?: string | null;
         };
+        BulkActionDto: {
+            /** @enum {string} */
+            action: "submit" | "approve" | "publish";
+            /** @description Questions to act on; each is checked and run on its own */
+            question_ids: string[];
+            /** @description Approval note, for approve only */
+            note?: string;
+        };
+        BulkErrorDetailDto: {
+            field?: string;
+            reason: string;
+        };
+        BulkErrorDto: {
+            code: string;
+            message: string;
+            details?: components["schemas"]["BulkErrorDetailDto"][];
+        };
+        BulkItemResultDto: {
+            /** Format: uuid */
+            question_id: string;
+            ok: boolean;
+            /**
+             * @description Status of the latest version after the step, when ok
+             * @enum {string}
+             */
+            status?: "draft" | "in_review" | "changes_requested" | "approved" | "published" | "superseded" | "retired";
+            error?: components["schemas"]["BulkErrorDto"];
+        };
+        BulkResultDto: {
+            /** @description In request order */
+            results: components["schemas"]["BulkItemResultDto"][];
+            succeeded: number;
+            failed: number;
+        };
         ReasonDto: {
             reason: string;
         };
@@ -1544,6 +1595,29 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["QuestionDetailDto"];
+                };
+            };
+        };
+    };
+    QuestionsController_bulk: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BulkActionDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BulkResultDto"];
                 };
             };
         };
