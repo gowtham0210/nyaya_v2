@@ -381,6 +381,10 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       upload limit raised to 3 MB (`next.config.ts`). Tests: backend 65 unit + 83 API. Checked in the browser as the
       editor: test run, real import of a 5-row file (2 drafts, 1 skipped, 2 errors), saved report, past imports, both
       export downloads. Local dev gotcha: the dev API has no fixed JWT_SECRET, so every restart signs everyone out.
+      OpenQodex review (agent mode) passed (squawk's lock warnings dropped: new empty tables). Pushed `4c6f59a`, CI
+      green; staging deployed (backup `nyaya-2026-10-29-1736.sql.gz` first, migration 0009 applied on start).
+      Known limit: a file that was imported once can't be imported again unchanged, even if a topic it needed was
+      added since — change the file (e.g. drop the rows already imported) and upload it again.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
