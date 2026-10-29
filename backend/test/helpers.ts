@@ -26,7 +26,7 @@ export interface TestApp {
 
 /** A fresh app on an in-memory database with one subject and topic. */
 export async function startApp(
-  overrides: { authRateLimitPerMinute?: number } = {},
+  overrides: { authRateLimitPerMinute?: number; trustProxyHops?: number } = {},
 ): Promise<TestApp> {
   const config = {
     ...loadConfig({}),

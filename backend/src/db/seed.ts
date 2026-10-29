@@ -201,15 +201,19 @@ async function seed() {
     imported++;
   }
 
+  // Dev data (unreviewed content, shared-password staff) never goes to production.
+  const devDataAllowed = !config.isProduction || config.isStaging;
   let devPublished = 0;
   if (process.env.SEED_PUBLISH_IMPORTED === 'true') {
-    if (config.isProduction)
-      throw new Error('SEED_PUBLISH_IMPORTED is for development only');
+    if (!devDataAllowed)
+      throw new Error(
+        'SEED_PUBLISH_IMPORTED is for development and staging only',
+      );
     devPublished = await publishImportedForDev(db);
   }
 
   const password = process.env.SEED_PASSWORD;
-  if (password && !config.isProduction) {
+  if (password && devDataAllowed) {
     const hash = await hashPassword(password);
     for (const s of STAFF) {
       const [u] = await db
@@ -236,7 +240,7 @@ async function seed() {
   console.log(
     `Seeded ${ACTS.length} acts, ${Object.keys(topicIds).length} subjects/topics, ` +
       `${imported} new draft questions (${bank.questions.length - imported} already present)` +
-      (password && !config.isProduction
+      (password && devDataAllowed
         ? `, ${STAFF.length} dev accounts.`
         : '. Set SEED_PASSWORD to create dev accounts.') +
       (devPublished

@@ -207,3 +207,25 @@ describe('sign-in rate limit', () => {
     expect(res.body.code).toBe('rate_limited');
   });
 });
+
+describe('sign-in rate limit behind a proxy', () => {
+  let t: TestApp;
+  beforeAll(
+    async () =>
+      (t = await startApp({ authRateLimitPerMinute: 1, trustProxyHops: 1 })),
+  );
+  afterAll(() => t.close());
+
+  const attempt = (clientIp: string) =>
+    t
+      .http()
+      .post('/v1/auth/session')
+      .set('X-Forwarded-For', clientIp)
+      .send({ email: 'a@test.local', password: 'x' });
+
+  it('limits each client separately, not the proxy as a whole', async () => {
+    await attempt('203.0.113.1').expect(401);
+    await attempt('203.0.113.1').expect(429);
+    await attempt('203.0.113.2').expect(401);
+  });
+});

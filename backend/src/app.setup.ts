@@ -4,6 +4,7 @@ import {
   type INestApplication,
 } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import type { NestExpressApplication } from '@nestjs/platform-express';
 import {
   DocumentBuilder,
   SwaggerModule,
@@ -35,9 +36,11 @@ export async function createApp(
   config: AppConfig,
   opts: { logger?: false } = {},
 ): Promise<INestApplication> {
-  const app = await NestFactory.create(AppModule.register(config), {
-    logger: opts.logger,
-  });
+  const app = await NestFactory.create<NestExpressApplication>(
+    AppModule.register(config),
+    { logger: opts.logger },
+  );
+  if (config.trustProxyHops) app.set('trust proxy', config.trustProxyHops);
   app.setGlobalPrefix('v1');
   app.use(requestId);
   app.enableCors({

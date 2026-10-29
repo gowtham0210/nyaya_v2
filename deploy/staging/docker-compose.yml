@@ -1,0 +1,63 @@
+# Nyaya v2 staging: Postgres + API + Content Management Portal on the shared VPS.
+#
+#   ./deploy/staging/deploy.sh          (from the repo root, on your machine)
+#
+# Lives in /opt/nyaya-v2 on the VPS. Secrets come from .env next to this file
+# (made once by deploy.sh, never committed). The yercaud project's nginx-certbot
+# container terminates TLS for staging-api/staging-cms.deepwebstudio.dev
+# (nginx.conf here) and reaches the API and portal over yercaud_default.
+# Postgres is only on this stack's own network and is never published.
+name: nyaya-v2
+
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: nyaya
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set in .env}
+      POSTGRES_DB: nyaya
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U nyaya -d nyaya']
+      interval: 5s
+      retries: 20
+
+  api:
+    build: ./backend
+    image: nyaya-v2-api
+    container_name: nyaya-v2-api
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      DEPLOY_ENV: staging
+      PORT: 3000
+      DATABASE_URL: postgres://nyaya:${POSTGRES_PASSWORD}@db:5432/nyaya
+      JWT_SECRET: ${JWT_SECRET:?set in .env}
+      SEED_PASSWORD: ${SEED_PASSWORD:-}
+      CORS_ORIGINS: https://staging-cms.deepwebstudio.dev
+      # nginx-certbot sits in front.
+      TRUST_PROXY_HOPS: 1
+    networks: [default, edge]
+
+  cms:
+    build: ./cms
+    image: nyaya-v2-cms
+    container_name: nyaya-v2-cms
+    restart: unless-stopped
+    depends_on: [api]
+    environment:
+      API_URL: http://api:3000
+    networks: [default, edge]
+
+volumes:
+  pgdata:
+
+networks:
+  edge:
+    name: yercaud_default
+    external: true

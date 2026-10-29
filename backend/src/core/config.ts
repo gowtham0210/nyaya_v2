@@ -4,6 +4,8 @@ export const APP_CONFIG = Symbol('APP_CONFIG');
 
 export interface AppConfig {
   isProduction: boolean;
+  /** DEPLOY_ENV=staging: production settings, but the seed may add dev data. */
+  isStaging: boolean;
   /** Postgres connection string. When unset, an embedded PGlite database is used. */
   databaseUrl?: string;
   /** PGlite data directory; unset means in-memory (tests). */
@@ -14,6 +16,8 @@ export interface AppConfig {
   /** Sign-in/refresh attempts allowed per client per minute. */
   authRateLimitPerMinute: number;
   corsOrigins: string[];
+  /** Reverse proxies in front of the API (Express `trust proxy` hops), so rate limits see client IPs. */
+  trustProxyHops: number;
 }
 
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
@@ -29,6 +33,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
   }
   return {
     isProduction,
+    isStaging: env.DEPLOY_ENV === 'staging',
     databaseUrl: env.DATABASE_URL || undefined,
     pgliteDir: env.PGLITE_DIR || undefined,
     jwtSecret,
@@ -39,5 +44,6 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
       .split(',')
       .map((s) => s.trim())
       .filter(Boolean),
+    trustProxyHops: Number(env.TRUST_PROXY_HOPS ?? 0),
   };
 }

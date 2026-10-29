@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-27 (Flutter app on the backend, Claude Opus 5.5)
+> Last updated: 2026-10-29 (staging deploy, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -172,10 +172,33 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       with no findings. `.openqodex/config.yaml` + `custom-instructions.md` are committed (reports ignored).
       Backend tests now 17 unit + 32 API. OpenQodex 0.15.0 is available (`openqodex update`), not installed.
 
+- [x] 2026-10-28: **CI** — `.github/workflows/ci.yml` (commit `a531c5c`) runs on push to `main` and on PRs:
+      backend (oxlint, prettier check, unit + API tests, build, `openapi.json` drift), CMS (`api-schema.d.ts`
+      drift vs `backend/openapi.json`, eslint, `next typegen` + tsc, build), Flutter 3.47.5 (`gen-l10n` drift,
+      analyze, test). Actions pinned by SHA, read-only token, `persist-credentials: false`. First run green
+      (~30 s backend/CMS, ~2 min Flutter). So after changing an API DTO: `npm run openapi` in backend/, then
+      `npm run gen:api` in cms/, and commit both; after editing ARB files commit the regenerated `lib/l10n/*.dart`.
+
+- [x] 2026-10-29: **Staging is live** on the shared VPS (`root@200.141.13.65`, Ubuntu 24.04, also hosts yercaud,
+      freelance-flow, cal-tracker): API https://staging-api.deepwebstudio.dev, portal https://staging-cms.deepwebstudio.dev.
+      Stack `nyaya-v2` in `/opt/nyaya-v2` (`deploy/staging/docker-compose.yml`): own Postgres 17 (not published),
+      `nyaya-v2-api`, `nyaya-v2-cms`, joined to `yercaud_default` so the yercaud project's nginx-certbot container
+      terminates TLS (`deploy/staging/nginx.conf` → `/opt/yercaud/nginx/user_conf.d/nyaya-v2-staging.conf`; HUP that
+      container to get certificates for new names). Redeploy from the repo root: `./deploy/staging/deploy.sh`
+      (`--seed` re-imports questions + resets staff passwords). Secrets (POSTGRES_PASSWORD, JWT_SECRET, SEED_PASSWORD)
+      are generated once into `/opt/nyaya-v2/.env` on the server and never leave it; staff accounts are the dev ones
+      (`admin@/editor@/reviewer@/publisher@nyaya.local`) with that SEED_PASSWORD. Staging = `NODE_ENV=production` +
+      `DEPLOY_ENV=staging` (seed may publish the 108 imported questions UNREVIEWED there; refused in real production).
+      New `TRUST_PROXY_HOPS=1` so sign-in rate limits are per client behind nginx (verified; backend tests now 19 unit + 33 API). DNS A records were added
+      by the user (the domain isn't on the connected Hostinger account). The old Nyaya v1 containers (`nyaya-api`,
+      `nyaya-frontend`, `/root/nyaya_backend`, nyayaapi.deepwebstudio.dev) were STOPPED, not removed; their nginx
+      site `nyaya.conf` is still installed. Smoke-tested: catalog, staff sign-in, portal /login over HTTPS, other sites up.
+      Not yet done: portal sign-in in a browser, the Flutter app pointed at staging
+      (`--dart-define=NYAYA_API_URL=https://staging-api.deepwebstudio.dev`), backups of the staging DB.
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
-1. Platform (P1) still to do: CI on push (backend tests + CMS build + Flutter tests), a staging deploy
-   (managed Postgres, API, CMS, real secrets incl. `JWT_SECRET`), and route AI chat through the backend.
+1. Platform (P1) still to do: route AI chat through the backend. (CI and staging are done — see 2026-10-28/29.)
    Then P3: M08 bookmarks/mistake review, M12 report-a-question, server-side progress and exam marking.
 2. Dark-mode visual pass on simulator (Terracotta dark theme exists, not yet eyeballed).
 3. Note: a debug build launched via `simctl launch` without `flutter run` can show a blank screen —

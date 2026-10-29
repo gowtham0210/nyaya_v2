@@ -1,6 +1,8 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  // Self-contained server bundle for the Docker image (deploy/staging).
+  output: 'standalone',
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {
