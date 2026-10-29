@@ -400,6 +400,8 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       question forms still offer only shown topics. Tests: backend 65 unit + 88 API. Checked in the browser as admin:
       add subject (hidden), duplicate slug refused, add topic with act, rename, hide/show with confirms. Local dev DB
       has a hidden test subject "Test Family Law" (test-family-law) with topic test-marriage.
+      OpenQodex review (agent mode) found the topics server actions put an unchecked `kind` into the API path (fixed:
+      only subjects / topics / acts are accepted). Pushed `fcf6ec9`, CI green, staging deployed (no migration).
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
