@@ -331,9 +331,13 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       official text" link (https only, opens in the browser, `url_launcher` added); strings in all 6 languages.
       Checked on the simulator: the link opens the PIB page in Safari. The link sits partly under the answer bar
       until you scroll, like Save/Report. Tests: backend 38 unit + 76 API (new `seed-sources` API test and a bank
-      test that every question has a source), Flutter 41. **Not done yet:** staging still shows the unreviewed
-      questions — deploy, run `./deploy/staging/deploy.sh --seed` to create the 108 review drafts, then a reviewer
-      must submit/approve/publish each (no bulk action in the portal yet).
+      test that every question has a source), Flutter 41. Seed draft fills are audit-logged (`question.updated`,
+      `by: seed`). OpenQodex review (agent mode) passed; pushed as `bd6d7d0`, CI green. **Staging deployed** with
+      `--seed` (backup `nyaya-2026-10-29-1658.sql.gz` first): 107 draft revisions with sources are waiting in the
+      portal; learners still see the old live versions until each is submitted, approved and published (no bulk
+      action yet). The 108th, **eve_3_06**, was already revised and reviewed on staging with the placeholder source,
+      so the seed left it: an editor must revise it by hand (Motor Vehicles Act, 1988 —
+      https://indiacode.gov.in/handle/123456789/619305 — valid from 2019-09-01).
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
