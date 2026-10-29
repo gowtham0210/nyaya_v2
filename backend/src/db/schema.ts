@@ -244,20 +244,29 @@ export const auditLog = pgTable(
 
 // ---------------------------------------------------------------- learning
 
-export const SESSION_STATUSES = ['in_progress', 'submitted'] as const;
-export type SessionStatus = (typeof SESSION_STATUSES)[number];
-export const sessionStatus = pgEnum('quiz_session_status', SESSION_STATUSES);
-
 /**
  * immediate: each answer is final and its explanation is returned at once
  * (practice). end: answers can change until submit and nothing is revealed
- * before it (exam).
+ * before it (exam). Follows from the session's mode, so it is not stored.
  */
 export const FEEDBACK_MODES = ['immediate', 'end'] as const;
 export type FeedbackMode = (typeof FEEDBACK_MODES)[number];
-export const feedbackMode = pgEnum('quiz_feedback_mode', FEEDBACK_MODES);
 
-/** One attempt at a quiz. The server picks the questions and owns the score. */
+/** The app's four ways to play; decides feedback, rewards and the daily set. */
+export const QUIZ_MODES = [
+  'case_path',
+  'daily_docket',
+  'duel',
+  'exam',
+] as const;
+export type QuizMode = (typeof QUIZ_MODES)[number];
+export const quizMode = pgEnum('quiz_mode', QUIZ_MODES);
+
+/**
+ * One attempt at a quiz. The server picks the questions and owns the result.
+ * In progress until submitted_at is set. Feedback, the daily set's date, the
+ * deadline and the score are worked out from these columns, not stored.
+ */
 export const quizSessions = pgTable(
   'quiz_sessions',
   {
@@ -265,31 +274,35 @@ export const quizSessions = pgTable(
     userId: uuid('user_id')
       .notNull()
       .references(() => users.id),
-    /** Set when the quiz is one topic; superseded by topicIds. */
-    topicId: uuid('topic_id').references(() => topics.id),
-    /** Topics the questions were drawn from; empty means every topic. */
-    topicIds: uuid('topic_ids')
-      .array()
-      .notNull()
-      .default(sql`'{}'::uuid[]`),
+    mode: quizMode('mode').notNull(),
     language: text('language').notNull(),
-    difficulty: smallint('difficulty'),
+    /** One difficulty is stored as min = max; null means any. */
     minDifficulty: smallint('min_difficulty'),
     maxDifficulty: smallint('max_difficulty'),
-    /** The same questions for everyone with these filters on this India date. */
-    daily: date('daily'),
-    feedbackMode: feedbackMode('feedback_mode').notNull(),
-    status: sessionStatus('status').notNull().default('in_progress'),
     scoringVersion: text('scoring_version').notNull(),
     questionCount: integer('question_count').notNull(),
     startedAt: timestamp('started_at', { withTimezone: true }).notNull(),
-    expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
     submittedAt: timestamp('submitted_at', { withTimezone: true }),
-    score: integer('score'),
     correctCount: integer('correct_count'),
     answeredCount: integer('answered_count'),
+    /** XP given at submit; depends on the streak and best stars at that time. */
+    xpAwarded: integer('xp_awarded'),
   },
   (t) => [index('quiz_sessions_user_idx').on(t.userId, t.id)],
+);
+
+/** Topics a session's questions were drawn from; none means every topic. */
+export const quizSessionTopics = pgTable(
+  'quiz_session_topics',
+  {
+    sessionId: uuid('session_id')
+      .notNull()
+      .references(() => quizSessions.id, { onDelete: 'cascade' }),
+    topicId: uuid('topic_id')
+      .notNull()
+      .references(() => topics.id),
+  },
+  (t) => [primaryKey({ columns: [t.sessionId, t.topicId] })],
 );
 
 /**
@@ -332,4 +345,19 @@ export const chatUsage = pgTable(
     answers: integer('answers').notNull().default(0),
   },
   (t) => [primaryKey({ columns: [t.userId, t.day] })],
+);
+
+/** Chapter chests a learner has opened on the Case Path road (one per subject). */
+export const chestOpenings = pgTable(
+  'chest_openings',
+  {
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    subjectId: uuid('subject_id')
+      .notNull()
+      .references(() => subjects.id),
+    openedAt: timestamp('opened_at', { withTimezone: true }).notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.subjectId] })],
 );

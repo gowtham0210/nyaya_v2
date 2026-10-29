@@ -68,20 +68,14 @@ class JourneyController extends Notifier<JourneyProgress> {
     _store.writeJson(_key, p.toJson());
   }
 
-  /// Records a level result, keeping the best stars. Returns stars newly
-  /// gained (0 on replays that don't improve).
-  int recordStars(String levelId, int stars) {
-    final prev = state.stars[levelId] ?? 0;
-    if (stars <= prev) return 0;
-    _set(state.copyWith(stars: {...state.stars, levelId: stars}));
-    return stars - prev;
-  }
+  /// Copies the server's best stars and opened chests (the server owns them).
+  void applyServer({required Map<String, int> stars, required Set<String> openedChests}) =>
+      _set(JourneyProgress(stars: stars, openedChests: openedChests));
 
-  bool openChest(String chestId) {
-    final node = JourneyCatalog.byId(chestId);
-    if (node == null || state.status(node) != NodeStatus.current) return false;
-    _set(state.copyWith(openedChests: {...state.openedChests, chestId}));
-    return true;
+  /// Until the server's figures arrive, show a level result straight away.
+  void showBest(String levelId, int stars) {
+    if (stars <= (state.stars[levelId] ?? 0)) return;
+    _set(state.copyWith(stars: {...state.stars, levelId: stars}));
   }
 
   void reset() => _set(const JourneyProgress());

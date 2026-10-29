@@ -363,9 +363,27 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** XP, streak, Case Path stars and chests, worked out from submitted quizzes */
         get: operations["LearnController_progress"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/chests/{chest_id}/open": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Open a chapter chest (e.g. constitution_chest) once its levels are done */
+        post: operations["LearnController_openChest"];
         delete?: never;
         options?: never;
         head?: never;
@@ -409,6 +427,8 @@ export interface components {
         SessionDto: {
             /** Format: uuid */
             id: string;
+            /** @enum {string} */
+            mode: "case_path" | "daily_docket" | "duel" | "exam";
             /** @description Empty means every topic */
             topic_ids: string[];
             /** Format: date */
@@ -693,6 +713,16 @@ export interface components {
         };
         StartSessionDto: {
             /**
+             * @description case_path: one level (one subject, one difficulty). daily_docket: today's set, the same for everyone, once a day. duel: practice against the clock. exam: answers revealed at the end. Decides feedback and rewards.
+             * @enum {string}
+             */
+            mode: "case_path" | "daily_docket" | "duel" | "exam";
+            /**
+             * @description Exam only: take 0.25 off for each wrong answer
+             * @default true
+             */
+            negative_marking?: boolean;
+            /**
              * Format: uuid
              * @description A single topic
              */
@@ -705,19 +735,11 @@ export interface components {
             difficulty?: number;
             min_difficulty?: number;
             max_difficulty?: number;
-            /** @description Today's set: the same questions for everyone with the same filters (India date) */
-            daily?: boolean;
             /**
              * @default en
              * @enum {string}
              */
             language?: "en" | "hi" | "ta" | "te" | "kn" | "ml";
-            /**
-             * @description immediate: each answer is final and explained at once. end: answers can change; nothing is revealed until submit.
-             * @default immediate
-             * @enum {string}
-             */
-            feedback_mode?: "immediate" | "end";
         };
         FeedbackDto: {
             correct: boolean;
@@ -760,9 +782,37 @@ export interface components {
             /** @description Immediate mode only */
             feedback: components["schemas"]["FeedbackDto"] | null;
         };
+        XpBreakdownDto: {
+            question_xp: number;
+            completion_bonus: number;
+            perfect_bonus: number;
+            /** @description 1.25 for the docket, 0.5 for replaying a 3-star level, else 1 */
+            mode_multiplier: number;
+            streak_multiplier: number;
+            total: number;
+        };
+        RewardsDto: {
+            xp: components["schemas"]["XpBreakdownDto"];
+            /** @description Case Path level, e.g. constitution_2 */
+            level_id: string | null;
+            /** @description Case Path only */
+            stars: number | null;
+            /** @description Best stars on this level before this session */
+            best_stars_before: number;
+            /** @description Stars added to the level best */
+            new_stars: number;
+            /** @description Streak after this session */
+            streak: number;
+            /** @description True when this was today's first finished quiz */
+            streak_extended: boolean;
+            /** @description 3, 7, 14 … days */
+            streak_milestone: number | null;
+        };
         ResultDto: {
             /** Format: uuid */
             session_id: string;
+            /** @enum {string} */
+            mode: "case_path" | "daily_docket" | "duel" | "exam";
             topic_ids: string[];
             scoring_version: string;
             score: number;
@@ -775,13 +825,17 @@ export interface components {
             submitted_at: string;
             duration_seconds: number;
             questions: components["schemas"]["SessionQuestionDto"][];
+            rewards: components["schemas"]["RewardsDto"];
         };
         AttemptDto: {
             /** Format: uuid */
             session_id: string;
+            /** @enum {string} */
+            mode: "case_path" | "daily_docket" | "duel" | "exam";
             topic_ids: string[];
             score: number;
             total: number;
+            xp: number;
             scoring_version: string;
             /** @enum {string} */
             feedback_mode: "immediate" | "end";
@@ -791,6 +845,24 @@ export interface components {
         AttemptPageDto: {
             items: components["schemas"]["AttemptDto"][];
             next_cursor: string | null;
+        };
+        WeekXpDto: {
+            /** @example 2026-W44 */
+            week_id: string;
+            xp: number;
+        };
+        StreakDto: {
+            /** @description Current streak today; 0 once it has lapsed */
+            current: number;
+            longest: number;
+            /** @description Free freezes left (earned at 7, 30, 100 days) */
+            freezes: number;
+            /** Format: date */
+            last_active_day: string | null;
+            /** @description Days with a finished quiz, last 21, India dates */
+            active_days: string[];
+            /** @description Missed days a freeze covered, last 21 */
+            frozen_days: string[];
         };
         TopicProgressDto: {
             /** Format: uuid */
@@ -806,6 +878,34 @@ export interface components {
             last_attempt_at: string;
         };
         ProgressDto: {
+            /**
+             * Format: date
+             * @description India date the figures are for
+             */
+            today: string;
+            total_xp: number;
+            /** @description This week (Monday–Sunday, India) */
+            week: components["schemas"]["WeekXpDto"];
+            /** @description Last week, for closing the league */
+            last_week: components["schemas"]["WeekXpDto"];
+            streak: components["schemas"]["StreakDto"];
+            /**
+             * @description Best Case Path stars per level id
+             * @example {
+             *       "constitution_1": 3,
+             *       "constitution_2": 1
+             *     }
+             */
+            stars: Record<string, never>;
+            /**
+             * @example [
+             *       "constitution_chest"
+             *     ]
+             */
+            opened_chests: string[];
+            quizzes_completed: number;
+            quizzes_today: number;
+            docket_done_today: boolean;
             attempts: number;
             questions_answered: number;
             correct: number;
@@ -1366,6 +1466,27 @@ export interface operations {
             query?: never;
             header?: never;
             path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProgressDto"];
+                };
+            };
+        };
+    };
+    LearnController_openChest: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                chest_id: string;
+            };
             cookie?: never;
         };
         requestBody?: never;

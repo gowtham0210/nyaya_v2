@@ -103,32 +103,12 @@ void main() {
       expect(DailyPolicy.rollover(p, monday).energy, 1);
     });
 
-    test('missing a day breaks the streak without freezes', () {
-      const p = UserProfile(streak: 9, lastActiveDay: '2026-10-17');
-      expect(DailyPolicy.rollover(p, monday).streak, 0);
-    });
-
-    test('a freeze protects one missed day', () {
+    // Streak rules (freezes, milestones) moved to the server: backend/src/learn/rewards.spec.ts.
+    test('leaves the streak to the server', () {
       const p = UserProfile(streak: 9, lastActiveDay: '2026-10-17', streakFreezes: 1);
       final r = DailyPolicy.rollover(p, monday);
       expect(r.streak, 9);
-      expect(r.streakFreezes, 0);
-      expect(r.frozenDays, contains('2026-10-18'));
-      final (after, _, extended) = DailyPolicy.onQuizCompleted(r, monday);
-      expect(extended, isTrue);
-      expect(after.streak, 10);
-    });
-
-    test('first quiz of the day extends streak once and hits milestones', () {
-      const p = UserProfile(streak: 2, lastActiveDay: '2026-10-18', coins: 0);
-      final (a, milestone, extended) = DailyPolicy.onQuizCompleted(p, monday);
-      expect(extended, isTrue);
-      expect(a.streak, 3);
-      expect(milestone, 3);
-      expect(a.coins, GameRules.streakMilestones[3]);
-      final (b, _, again) = DailyPolicy.onQuizCompleted(a, monday);
-      expect(again, isFalse);
-      expect(b.streak, 3);
+      expect(r.streakFreezes, 1);
     });
 
     test('week close records an outcome and resets weekly XP', () {

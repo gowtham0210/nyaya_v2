@@ -184,8 +184,14 @@ class _ChestSheetState extends ConsumerState<_ChestSheet> {
     super.dispose();
   }
 
-  void _open() {
-    final coins = QuizCompletionService.openChest(ref, widget.node);
+  bool _opening = false;
+
+  Future<void> _open() async {
+    if (_opening) return;
+    setState(() => _opening = true);
+    final coins = await QuizCompletionService.openChest(ref, widget.node);
+    if (!mounted) return;
+    setState(() => _opening = false);
     if (coins == 0) return;
     ref.read(feedbackProvider).play(Haptic.celebrate);
     _confetti.play();
@@ -197,7 +203,7 @@ class _ChestSheetState extends ConsumerState<_ChestSheet> {
     final l = context.l10n;
     final status = ref.watch(journeyProvider).status(widget.node);
     final opened = _won != null || status == NodeStatus.completed;
-    final canOpen = status == NodeStatus.current && _won == null;
+    final canOpen = status == NodeStatus.current && _won == null && !_opening;
 
     return SafeArea(
       child: Stack(

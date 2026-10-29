@@ -11,26 +11,31 @@ import 'quiz_models.dart';
 @immutable
 class SessionPlan {
   const SessionPlan({
+    required this.mode,
     required this.count,
     this.chapterIds = const [],
     this.difficulty,
     this.minDifficulty,
     this.maxDifficulty,
-    this.daily = false,
-    this.revealAtEnd = false,
+    this.negativeMarking = false,
   });
 
+  /// Tells the server which rules and rewards apply.
+  final QuizMode mode;
   final int count;
   final List<String> chapterIds;
   final int? difficulty;
   final int? minDifficulty;
   final int? maxDifficulty;
 
+  /// Exam only: 0.25 off per wrong answer (not for citizens).
+  final bool negativeMarking;
+
   /// Today's shared set (same questions for everyone with these filters).
-  final bool daily;
+  bool get daily => mode == QuizMode.dailyDocket;
 
   /// Exam style: answers can change and nothing is revealed until submit.
-  final bool revealAtEnd;
+  bool get revealAtEnd => mode == QuizMode.exam;
 }
 
 /// Turns a quiz request into a [SessionPlan]; the server picks the questions.
@@ -46,6 +51,7 @@ abstract final class QuizBuilder {
       case QuizMode.casePath:
         final parts = request.levelId!.split('_');
         return SessionPlan(
+          mode: request.mode,
           count: GameRules.casePathQuestions,
           chapterIds: [parts[0]],
           difficulty: int.parse(parts[1]),
@@ -53,19 +59,20 @@ abstract final class QuizBuilder {
       case QuizMode.dailyDocket:
         // Same set for everyone with the same persona today → shareable.
         return SessionPlan(
+          mode: request.mode,
           count: GameRules.dailyDocketQuestions,
           minDifficulty: minD,
           maxDifficulty: maxD,
-          daily: true,
         );
       case QuizMode.duel:
-        return SessionPlan(count: GameRules.duelQuestions, chapterIds: [...reachedChapters]..sort());
+        return SessionPlan(mode: request.mode, count: GameRules.duelQuestions, chapterIds: [...reachedChapters]..sort());
       case QuizMode.exam:
         return SessionPlan(
+          mode: request.mode,
           count: GameRules.examQuestions,
           minDifficulty: minD,
           maxDifficulty: maxD,
-          revealAtEnd: true,
+          negativeMarking: persona != Persona.citizen,
         );
     }
   }

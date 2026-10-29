@@ -9,6 +9,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../gamification/domain/league.dart';
 import '../../profile/application/profile_controller.dart';
+import '../../progress/application/progress_sync.dart';
 import '../../profile/domain/user_profile.dart';
 import 'widgets/explore_sections.dart';
 
@@ -53,7 +54,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         bottom: false,
         child: RefreshIndicator(
           color: context.colors.primary,
-          onRefresh: () async => ref.read(profileProvider.notifier).refreshDay(),
+          onRefresh: () async {
+            ref.read(profileProvider.notifier).refreshDay();
+            await ref.read(progressSyncProvider.notifier).refresh();
+          },
           child: CustomScrollView(
             slivers: [
               const SliverToBoxAdapter(child: ExploreHeader()),

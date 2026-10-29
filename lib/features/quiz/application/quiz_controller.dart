@@ -11,7 +11,7 @@ import '../../gamification/domain/reward_summary.dart';
 import '../../gamification/domain/xp_calculator.dart';
 import '../../journey/application/journey_controller.dart';
 import '../../profile/application/profile_controller.dart';
-import '../../profile/domain/user_profile.dart';
+import '../../progress/application/progress_sync.dart';
 import '../data/quiz_api.dart';
 import '../domain/question.dart';
 import '../domain/quiz_builder.dart';
@@ -398,24 +398,20 @@ class QuizController extends Notifier<QuizState> {
       for (final (i, a) in s.answers.indexed)
         a.withServerVerdict(correct: submitted.verdicts[i].correct, reveal: submitted.verdicts[i].reveal),
     ];
-    double? examScore;
-    if (s.request.mode == QuizMode.exam) {
-      final negative = ref.read(profileProvider).persona == Persona.citizen ? 0.0 : GameRules.examNegativeMarks;
-      examScore = answers.fold<double>(0, (sum, a) {
-        if (a.isSkipped) return sum;
-        return sum + (a.isCorrect ? GameRules.examCorrectMarks : -negative);
-      });
-    }
+    // Progress after this quiz, so the screens show the server's numbers.
+    final progress = await ref.read(progressSyncProvider.notifier).refresh();
+    if (!ref.mounted) return;
     final result = QuizResult(
       request: s.request,
       answers: answers,
       durationMs: _now().difference(_quizStart).inMilliseconds,
-      examScore: examScore,
+      // The server marks exams (minus marks for wrong answers, except for citizens).
+      examScore: s.request.mode == QuizMode.exam ? submitted.score : null,
       duelPlayerPoints: s.request.mode == QuizMode.duel ? s.playerPoints : null,
       duelOpponentPoints: s.request.mode == QuizMode.duel ? s.opponentPoints : null,
       opponent: s.opponent,
     );
-    final rewards = QuizCompletionService(ref).complete(result);
+    final rewards = QuizCompletionService(ref).complete(result, submitted.rewards, progress);
     state = s.copyWith(phase: QuizPhase.finished, answers: answers, result: result, rewards: rewards);
   }
 }

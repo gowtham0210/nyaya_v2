@@ -1,14 +1,19 @@
 import 'package:nyaya/core/api/api_client.dart';
 import 'package:nyaya/core/api/token_store.dart';
+import 'package:nyaya/core/utils/day.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
 import 'package:nyaya/features/journey/domain/journey.dart';
+import 'package:nyaya/features/progress/data/progress_api.dart';
+import 'package:nyaya/features/progress/domain/server_progress.dart';
 import 'package:nyaya/features/quiz/data/quiz_api.dart';
 import 'package:nyaya/features/quiz/domain/question.dart';
 import 'package:nyaya/features/quiz/domain/quiz_builder.dart';
+import 'package:nyaya/features/quiz/domain/quiz_models.dart';
 
 /// A stand-in for the Nyaya API. Like the real server it keeps the answer
-/// key to itself: questions handed to the app carry none.
-class FakeQuizApi implements QuizApi {
+/// key to itself (questions handed to the app carry none) and works out
+/// stars, XP and the streak itself, with simpler XP than the real rules.
+class FakeQuizApi implements QuizApi, ProgressApi {
   FakeQuizApi({this.perLevel = 6}) {
     for (final c in JourneyCatalog.chapters) {
       for (var d = 1; d <= 3; d++) {
@@ -61,7 +66,13 @@ class FakeQuizApi implements QuizApi {
         .toList();
     if (picked.isEmpty) throw const ApiException(422, 'no_questions_available', 'none');
     final id = 'session-${++sessionsStarted}';
-    _sessions[id] = _FakeSession(picked, revealAtEnd: plan.revealAtEnd);
+    _sessions[id] = _FakeSession(
+      picked,
+      revealAtEnd: plan.revealAtEnd,
+      mode: plan.mode,
+      levelId: plan.mode == QuizMode.casePath ? '${plan.chapterIds.single}_${plan.difficulty}' : null,
+      negativeMarking: plan.negativeMarking,
+    );
     return StartedQuiz(
       sessionId: id,
       questions: [
@@ -95,10 +106,93 @@ class FakeQuizApi implements QuizApi {
   Future<SubmittedQuiz> submit(String sessionId, List<Question> questions) async {
     final s = _sessions[sessionId]!;
     final verdicts = [for (var i = 0; i < s.questions.length; i++) _verdict(s.questions[i], s.selected[i])];
+    final correct = verdicts.where((v) => v.correct).length;
+    final wrong = s.selected.length - correct;
+    final total = verdicts.length;
+    final level = s.levelId;
+    final before = level == null ? 0 : (stars[level] ?? 0);
+    final got = level == null ? null : _stars(correct, total);
+    if (level != null && got! > before) stars[level] = got;
+    final extended = quizzesCompleted == 0;
+    final xp = correct * 10 + 10 + (correct == total ? 10 : 0);
+    totalXp += xp;
+    quizzesCompleted++;
+    if (s.mode == QuizMode.dailyDocket) docketDone = true;
     return SubmittedQuiz(
-      score: verdicts.where((v) => v.correct).length,
-      total: verdicts.length,
+      // Exams with minus marks: +1 right, −0.25 wrong, like the real server.
+      score: s.negativeMarking ? correct - 0.25 * wrong : correct.toDouble(),
+      total: total,
       verdicts: verdicts,
+      rewards: ServerRewards(
+        questionXp: correct * 10,
+        completionBonus: 10,
+        perfectBonus: correct == total ? 10 : 0,
+        modeMultiplier: 1,
+        streakMultiplier: 1,
+        xp: xp,
+        levelId: level,
+        stars: got,
+        bestStarsBefore: before,
+        newStars: got == null ? 0 : (got - before).clamp(0, 3),
+        streak: 1,
+        streakExtended: extended,
+        streakMilestone: null,
+      ),
+    );
+  }
+
+  // ── Progress (the server owns it) ──────────────────────────────────────────
+
+  final stars = <String, int>{};
+  final openedChests = <String>{};
+  int totalXp = 0;
+  int quizzesCompleted = 0;
+  bool docketDone = false;
+
+  static int _stars(int correct, int total) {
+    final a = total == 0 ? 0 : correct / total;
+    return a >= 1 ? 3 : (a >= 0.8 ? 2 : (a >= 0.5 ? 1 : 0));
+  }
+
+  /// Set to answer progress in a shape the app can't read.
+  bool unreadableProgress = false;
+
+  @override
+  Future<ServerProgress> fetch() async {
+    if (unreadableProgress) throw TypeError();
+    return _progress();
+  }
+
+  @override
+  Future<ServerProgress> openChest(String chestId) async {
+    openedChests.add(chestId);
+    return _progress();
+  }
+
+  ServerProgress _progress() {
+    final now = DateTime.now();
+    final today = Day.key(now);
+    final played = quizzesCompleted > 0;
+    return ServerProgress(
+      today: today,
+      totalXp: totalXp,
+      weekId: Day.weekKey(now),
+      weeklyXp: totalXp,
+      lastWeekId: '',
+      lastWeekXp: 0,
+      streak: played ? 1 : 0,
+      longestStreak: played ? 1 : 0,
+      streakFreezes: 0,
+      lastActiveDay: played ? today : null,
+      activeDays: played ? [today] : const [],
+      frozenDays: const [],
+      stars: {...stars},
+      openedChests: {...openedChests},
+      quizzesCompleted: quizzesCompleted,
+      quizzesToday: quizzesCompleted,
+      docketDoneToday: docketDone,
+      questionsAnswered: 0,
+      correct: 0,
     );
   }
 
@@ -119,10 +213,14 @@ class _FakeQuestion {
 }
 
 class _FakeSession {
-  _FakeSession(this.questions, {required this.revealAtEnd});
+  _FakeSession(this.questions,
+      {required this.revealAtEnd, required this.mode, required this.levelId, required this.negativeMarking});
 
   final List<_FakeQuestion> questions;
   final bool revealAtEnd;
+  final QuizMode mode;
+  final String? levelId;
+  final bool negativeMarking;
   final selected = <int, int>{};
 }
 

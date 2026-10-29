@@ -959,6 +959,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get settingsFreezeEarned => 'Earned at 7, 30 and 100 days';
+
+  @override
   String get settingsFreezeBought => 'Streak freeze equipped!';
 
   @override
@@ -1019,7 +1022,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsResetConfirm =>
-      'This erases all XP, stars, streaks and coins on this device. This cannot be undone.';
+      'This erases coins, energy and settings on this device. XP, stars and streaks are saved to your account and stay. This cannot be undone.';
 
   @override
   String get settingsResetAction => 'Erase everything';

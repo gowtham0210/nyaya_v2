@@ -22,7 +22,7 @@ describe('scoring', () => {
       { selectedOptionIds: ['c'], correctOptionIds: ['b'] },
       { selectedOptionIds: null, correctOptionIds: ['d'] },
     ]);
-    expect(result).toEqual({ score: 1, correctCount: 1, answeredCount: 2 });
+    expect(result).toEqual({ correctCount: 1, answeredCount: 2 });
   });
 
   it('gives the same score for the same answers', () => {

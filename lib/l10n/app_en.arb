@@ -596,6 +596,8 @@
       }
     }
   },
+  "settingsFreezeEarned": "Earned at 7, 30 and 100 days",
+  "@settingsFreezeEarned": {"description": "Streak freeze row: how freezes are earned (buying is off for now)"},
   "settingsFreezeBought": "Streak freeze equipped!",
   "settingsFreezeFull": "You already have the maximum freezes equipped.",
   "settingsPremium": "Nyaya Premium",
@@ -621,7 +623,7 @@
     }
   },
   "settingsReset": "Reset progress",
-  "settingsResetConfirm": "This erases all XP, stars, streaks and coins on this device. This cannot be undone.",
+  "settingsResetConfirm": "This erases coins, energy and settings on this device. XP, stars and streaks are saved to your account and stay. This cannot be undone.",
   "settingsResetAction": "Erase everything",
   "premiumTitle": "Nyaya Premium",
   "premiumHeadline": "Learn without limits",

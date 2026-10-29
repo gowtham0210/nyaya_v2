@@ -5,6 +5,7 @@ import '../../../core/config/game_rules.dart';
 import '../../../core/storage/local_store.dart';
 import '../../../core/utils/day.dart';
 import '../../gamification/domain/daily_policy.dart';
+import '../../progress/domain/server_progress.dart';
 import '../data/profile_repository.dart';
 import '../domain/user_profile.dart';
 
@@ -100,22 +101,7 @@ class ProfileController extends Notifier<UserProfile> {
 
   void addCoins(int n) => _set(state.copyWith(coins: state.coins + n));
 
-  bool buyStreakFreeze() {
-    if (state.coins < GameRules.streakFreezeCoinCost ||
-        state.streakFreezes >= GameRules.maxStreakFreezes) {
-      return false;
-    }
-    _set(state.copyWith(
-      coins: state.coins - GameRules.streakFreezeCoinCost,
-      streakFreezes: state.streakFreezes + 1,
-    ));
-    return true;
-  }
-
-  void activatePremium() => _set(state.copyWith(
-        isPremium: true,
-        streakFreezes: GameRules.maxStreakFreezes,
-      ));
+  void activatePremium() => _set(state.copyWith(isPremium: true));
 
   void cancelPremium() => _set(state.copyWith(isPremium: false));
 
@@ -132,40 +118,61 @@ class ProfileController extends Notifier<UserProfile> {
     return true;
   }
 
-  // ── Quiz results (called by QuizCompletionService) ───────────────────────
+  // ── Server progress (XP, streak, totals) ──────────────────────────────────
 
-  /// Applies XP/coins/stats and the streak tick. Returns
-  /// `(milestone, streakExtended, dailyGoalJustReached)`.
-  (int?, bool, bool) applyQuizOutcome({
-    required int xp,
-    required int coins,
-    required int answered,
-    required int correct,
-    required int energyBonus,
-    bool isDocket = false,
-  }) {
-    final now = _now();
-    final today = Day.key(now);
-    final quizzesToday = (state.quizzesTodayDay == today ? state.quizzesToday : 0) + 1;
-    final goalJustReached = quizzesToday == state.dailyGoal;
-
-    var p = state.copyWith(
-      totalXp: state.totalXp + xp,
-      weeklyXp: state.weeklyXp + xp,
-      coins: state.coins + coins + (goalJustReached ? GameRules.coinsForDailyGoal : 0),
-      totalAnswered: state.totalAnswered + answered,
-      totalCorrect: state.totalCorrect + correct,
-      quizzesCompleted: state.quizzesCompleted + 1,
-      quizzesToday: quizzesToday,
+  /// Copies the server's learning progress into the profile. The server works
+  /// it out from submitted quizzes; the phone never changes these itself.
+  void applyServerProgress(ServerProgress p) {
+    final today = Day.key(_now());
+    var next = state;
+    // A new week: close last week's league with the server's figure first.
+    if (next.weekId != p.weekId) {
+      final closing = next.weekId == p.lastWeekId ? p.lastWeekXp : 0;
+      next = DailyPolicy.rollover(next.copyWith(weeklyXp: closing), _now());
+    }
+    _set(next.copyWith(
+      totalXp: p.totalXp,
+      weekId: p.weekId,
+      weeklyXp: p.weeklyXp,
+      streak: p.streak,
+      longestStreak: p.longestStreak,
+      streakFreezes: p.streakFreezes,
+      lastActiveDay: p.lastActiveDay,
+      clearLastActiveDay: p.lastActiveDay == null,
+      activeDays: p.activeDays,
+      frozenDays: p.frozenDays,
+      totalAnswered: p.questionsAnswered,
+      totalCorrect: p.correct,
+      quizzesCompleted: p.quizzesCompleted,
+      quizzesToday: p.quizzesToday,
       quizzesTodayDay: today,
-      energy: state.isPremium ? state.energy : state.energy + energyBonus,
-      lastDocketDay: isDocket ? today : state.lastDocketDay,
-    );
-    final (streaked, milestone, extended) = DailyPolicy.onQuizCompleted(p, now);
-    p = streaked;
-    _set(p);
-    return (milestone, extended, goalJustReached);
+      lastDocketDay: p.docketDoneToday ? today : null,
+      clearLastDocketDay: !p.docketDoneToday && state.lastDocketDay == today,
+    ));
   }
+
+  /// Signed out: show no learning progress (it belongs to the account).
+  void clearServerProgress() => _set(state.copyWith(
+        totalXp: 0,
+        weeklyXp: 0,
+        streak: 0,
+        longestStreak: 0,
+        streakFreezes: 0,
+        clearLastActiveDay: true,
+        activeDays: const [],
+        frozenDays: const [],
+        totalAnswered: 0,
+        totalCorrect: 0,
+        quizzesCompleted: 0,
+        quizzesToday: 0,
+        clearLastDocketDay: true,
+      ));
+
+  /// Coins and energy earned by a quiz. They stay on the phone for now.
+  void applyQuizEconomy({required int coins, required int energyBonus}) => _set(state.copyWith(
+        coins: state.coins + coins,
+        energy: state.isPremium ? state.energy : state.energy + energyBonus,
+      ));
 
   void applyDuel({required int newRating, required bool won}) => _set(state.copyWith(
         duelRating: newRating,

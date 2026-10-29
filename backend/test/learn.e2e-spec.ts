@@ -100,8 +100,13 @@ describe('learner quizzes', () => {
   });
   afterAll(() => t.close());
 
+  // Duels are plain practice: answers explained at once, any difficulty.
   const start = (s: Session, body: object = {}) =>
-    as(s).post('/v1/quiz-sessions', { topic_id: t.topicId, ...body });
+    as(s).post('/v1/quiz-sessions', {
+      mode: 'duel',
+      topic_id: t.topicId,
+      ...body,
+    });
 
   it('lists only published questions that are in force', async () => {
     const res = await t.http().get('/v1/quizzes').expect(200);
@@ -120,7 +125,7 @@ describe('learner quizzes', () => {
     await t
       .http()
       .post('/v1/quiz-sessions')
-      .send({ topic_id: t.topicId })
+      .send({ mode: 'duel', topic_id: t.topicId })
       .expect(401);
   });
 
@@ -224,9 +229,11 @@ describe('learner quizzes', () => {
 
   it('end mode: reveals nothing until submit, scores on the server, and submit is idempotent', async () => {
     const s = (
-      await start(learner, { question_count: 3, feedback_mode: 'end' }).expect(
-        201,
-      )
+      await start(learner, {
+        question_count: 3,
+        mode: 'exam',
+        negative_marking: false,
+      }).expect(201)
     ).body;
     const url = `/v1/quiz-sessions/${s.id}`;
 
@@ -302,13 +309,16 @@ describe('learner quizzes', () => {
 
   it('refuses answers after the time limit but still lets the learner submit', async () => {
     const s = (
-      await start(learner, { question_count: 1, feedback_mode: 'end' }).expect(
-        201,
-      )
+      await start(learner, {
+        question_count: 1,
+        mode: 'exam',
+        negative_marking: false,
+      }).expect(201)
     ).body;
     await t.db
       .update(quizSessions)
-      .set({ expiresAt: new Date(Date.now() - 1000) })
+      // A one-question session gets ten minutes.
+      .set({ startedAt: new Date(Date.now() - 11 * 60_000) })
       .where(eq(quizSessions.id, s.id));
     const late = await as(learner)
       .post(`/v1/quiz-sessions/${s.id}/answers`, {
@@ -434,14 +444,14 @@ describe('learner quizzes', () => {
     const mine = (
       await start(learner, {
         topic_id: undefined,
-        daily: true,
+        mode: 'daily_docket',
         question_count: 3,
       }).expect(201)
     ).body;
     const theirs = (
       await start(other, {
         topic_id: undefined,
-        daily: true,
+        mode: 'daily_docket',
         question_count: 3,
       }).expect(201)
     ).body;
@@ -469,9 +479,11 @@ describe('learner quizzes', () => {
     const fresh = await t.signInAs('learner');
     for (const answer of ['a', 'b']) {
       const s = (
-        await start(fresh, { question_count: 2, feedback_mode: 'end' }).expect(
-          201,
-        )
+        await start(fresh, {
+          question_count: 2,
+          mode: 'exam',
+          negative_marking: false,
+        }).expect(201)
       ).body;
       await as(fresh)
         .post(`/v1/quiz-sessions/${s.id}/answers`, {

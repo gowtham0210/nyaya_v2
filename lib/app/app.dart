@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 import '../core/l10n/l10n.dart';
 import '../core/theme/app_theme.dart';
 import '../features/profile/application/profile_controller.dart';
+import '../features/progress/application/progress_sync.dart';
 import 'router.dart';
 
 class NyayaApp extends ConsumerStatefulWidget {
@@ -19,10 +20,14 @@ class _NyayaAppState extends ConsumerState<NyayaApp> {
   @override
   void initState() {
     super.initState();
-    // Energy reset, streak check and league close happen on every resume.
+    // Energy reset and league close happen on every resume; progress comes from the server.
     _lifecycle = AppLifecycleListener(
-      onResume: () => ref.read(profileProvider.notifier).refreshDay(),
+      onResume: () {
+        ref.read(profileProvider.notifier).refreshDay();
+        ref.read(progressSyncProvider.notifier).refresh();
+      },
     );
+    ref.read(progressSyncProvider.notifier).refresh();
   }
 
   @override
@@ -33,6 +38,8 @@ class _NyayaAppState extends ConsumerState<NyayaApp> {
 
   @override
   Widget build(BuildContext context) {
+    // Keeps progress in step with sign-in and sign-out.
+    ref.watch(progressSyncProvider);
     return MaterialApp.router(
       title: 'Nyaya',
       debugShowCheckedModeBanner: false,

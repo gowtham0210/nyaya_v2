@@ -29,6 +29,20 @@
       "when": 1793255666225,
       "tag": "0003_chat_usage",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793258331761,
+      "tag": "0004_progress_tables",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1793258346926,
+      "tag": "0005_drop_derived_session_columns",
+      "breakpoints": true
     }
   ]
 }

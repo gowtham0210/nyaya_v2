@@ -924,6 +924,43 @@
             "bearer": []
           }
         ],
+        "summary": "XP, streak, Case Path stars and chests, worked out from submitted quizzes",
+        "tags": [
+          "learn"
+        ]
+      }
+    },
+    "/v1/me/chests/{chest_id}/open": {
+      "post": {
+        "operationId": "LearnController_openChest",
+        "parameters": [
+          {
+            "name": "chest_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Open a chapter chest (e.g. constitution_chest) once its levels are done",
         "tags": [
           "learn"
         ]
@@ -1043,6 +1080,15 @@
             "type": "string",
             "format": "uuid"
           },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "case_path",
+              "daily_docket",
+              "duel",
+              "exam"
+            ]
+          },
           "topic_ids": {
             "description": "Empty means every topic",
             "type": "array",
@@ -1105,6 +1151,7 @@
         },
         "required": [
           "id",
+          "mode",
           "topic_ids",
           "daily",
           "language",
@@ -1955,6 +2002,21 @@
       "StartSessionDto": {
         "type": "object",
         "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "case_path",
+              "daily_docket",
+              "duel",
+              "exam"
+            ],
+            "description": "case_path: one level (one subject, one difficulty). daily_docket: today's set, the same for everyone, once a day. duel: practice against the clock. exam: answers revealed at the end. Decides feedback and rewards."
+          },
+          "negative_marking": {
+            "type": "boolean",
+            "default": true,
+            "description": "Exam only: take 0.25 off for each wrong answer"
+          },
           "topic_id": {
             "type": "string",
             "format": "uuid",
@@ -1990,10 +2052,6 @@
             "minimum": 1,
             "maximum": 3
           },
-          "daily": {
-            "type": "boolean",
-            "description": "Today's set: the same questions for everyone with the same filters (India date)"
-          },
           "language": {
             "type": "string",
             "enum": [
@@ -2005,17 +2063,11 @@
               "ml"
             ],
             "default": "en"
-          },
-          "feedback_mode": {
-            "type": "string",
-            "enum": [
-              "immediate",
-              "end"
-            ],
-            "default": "immediate",
-            "description": "immediate: each answer is final and explained at once. end: answers can change; nothing is revealed until submit."
           }
-        }
+        },
+        "required": [
+          "mode"
+        ]
       },
       "FeedbackDto": {
         "type": "object",
@@ -2172,12 +2224,102 @@
           "feedback"
         ]
       },
+      "XpBreakdownDto": {
+        "type": "object",
+        "properties": {
+          "question_xp": {
+            "type": "number"
+          },
+          "completion_bonus": {
+            "type": "number"
+          },
+          "perfect_bonus": {
+            "type": "number"
+          },
+          "mode_multiplier": {
+            "type": "number",
+            "description": "1.25 for the docket, 0.5 for replaying a 3-star level, else 1"
+          },
+          "streak_multiplier": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "question_xp",
+          "completion_bonus",
+          "perfect_bonus",
+          "mode_multiplier",
+          "streak_multiplier",
+          "total"
+        ]
+      },
+      "RewardsDto": {
+        "type": "object",
+        "properties": {
+          "xp": {
+            "$ref": "#/components/schemas/XpBreakdownDto"
+          },
+          "level_id": {
+            "type": "string",
+            "nullable": true,
+            "description": "Case Path level, e.g. constitution_2"
+          },
+          "stars": {
+            "type": "number",
+            "nullable": true,
+            "description": "Case Path only"
+          },
+          "best_stars_before": {
+            "type": "number",
+            "description": "Best stars on this level before this session"
+          },
+          "new_stars": {
+            "type": "number",
+            "description": "Stars added to the level best"
+          },
+          "streak": {
+            "type": "number",
+            "description": "Streak after this session"
+          },
+          "streak_extended": {
+            "type": "boolean",
+            "description": "True when this was today's first finished quiz"
+          },
+          "streak_milestone": {
+            "type": "number",
+            "nullable": true,
+            "description": "3, 7, 14 … days"
+          }
+        },
+        "required": [
+          "xp",
+          "level_id",
+          "stars",
+          "best_stars_before",
+          "new_stars",
+          "streak",
+          "streak_extended",
+          "streak_milestone"
+        ]
+      },
       "ResultDto": {
         "type": "object",
         "properties": {
           "session_id": {
             "type": "string",
             "format": "uuid"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "case_path",
+              "daily_docket",
+              "duel",
+              "exam"
+            ]
           },
           "topic_ids": {
             "type": "array",
@@ -2216,10 +2358,14 @@
             "items": {
               "$ref": "#/components/schemas/SessionQuestionDto"
             }
+          },
+          "rewards": {
+            "$ref": "#/components/schemas/RewardsDto"
           }
         },
         "required": [
           "session_id",
+          "mode",
           "topic_ids",
           "scoring_version",
           "score",
@@ -2229,7 +2375,8 @@
           "started_at",
           "submitted_at",
           "duration_seconds",
-          "questions"
+          "questions",
+          "rewards"
         ]
       },
       "AttemptDto": {
@@ -2238,6 +2385,15 @@
           "session_id": {
             "type": "string",
             "format": "uuid"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "case_path",
+              "daily_docket",
+              "duel",
+              "exam"
+            ]
           },
           "topic_ids": {
             "type": "array",
@@ -2249,6 +2405,9 @@
             "type": "number"
           },
           "total": {
+            "type": "number"
+          },
+          "xp": {
             "type": "number"
           },
           "scoring_version": {
@@ -2268,9 +2427,11 @@
         },
         "required": [
           "session_id",
+          "mode",
           "topic_ids",
           "score",
           "total",
+          "xp",
           "scoring_version",
           "feedback_mode",
           "submitted_at"
@@ -2293,6 +2454,65 @@
         "required": [
           "items",
           "next_cursor"
+        ]
+      },
+      "WeekXpDto": {
+        "type": "object",
+        "properties": {
+          "week_id": {
+            "type": "string",
+            "example": "2026-W44"
+          },
+          "xp": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "week_id",
+          "xp"
+        ]
+      },
+      "StreakDto": {
+        "type": "object",
+        "properties": {
+          "current": {
+            "type": "number",
+            "description": "Current streak today; 0 once it has lapsed"
+          },
+          "longest": {
+            "type": "number"
+          },
+          "freezes": {
+            "type": "number",
+            "description": "Free freezes left (earned at 7, 30, 100 days)"
+          },
+          "last_active_day": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "active_days": {
+            "description": "Days with a finished quiz, last 21, India dates",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "frozen_days": {
+            "description": "Missed days a freeze covered, last 21",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "current",
+          "longest",
+          "freezes",
+          "last_active_day",
+          "active_days",
+          "frozen_days"
         ]
       },
       "TopicProgressDto": {
@@ -2337,6 +2557,59 @@
       "ProgressDto": {
         "type": "object",
         "properties": {
+          "today": {
+            "type": "string",
+            "format": "date",
+            "description": "India date the figures are for"
+          },
+          "total_xp": {
+            "type": "number"
+          },
+          "week": {
+            "description": "This week (Monday–Sunday, India)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WeekXpDto"
+              }
+            ]
+          },
+          "last_week": {
+            "description": "Last week, for closing the league",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WeekXpDto"
+              }
+            ]
+          },
+          "streak": {
+            "$ref": "#/components/schemas/StreakDto"
+          },
+          "stars": {
+            "type": "object",
+            "description": "Best Case Path stars per level id",
+            "example": {
+              "constitution_1": 3,
+              "constitution_2": 1
+            }
+          },
+          "opened_chests": {
+            "example": [
+              "constitution_chest"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "quizzes_completed": {
+            "type": "number"
+          },
+          "quizzes_today": {
+            "type": "number"
+          },
+          "docket_done_today": {
+            "type": "boolean"
+          },
           "attempts": {
             "type": "number"
           },
@@ -2354,6 +2627,16 @@
           }
         },
         "required": [
+          "today",
+          "total_xp",
+          "week",
+          "last_week",
+          "streak",
+          "stars",
+          "opened_chests",
+          "quizzes_completed",
+          "quizzes_today",
+          "docket_done_today",
           "attempts",
           "questions_answered",
           "correct",

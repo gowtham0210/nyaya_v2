@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
@@ -5,7 +7,6 @@ import 'package:material_ui/material_ui.dart';
 import '../../../app/router.dart';
 import '../../../core/config/game_rules.dart';
 import '../../../core/l10n/l10n.dart';
-import '../../../core/services/feedback.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/common.dart';
@@ -13,6 +14,7 @@ import '../../chat/application/chat_controller.dart';
 import '../../auth/application/auth_controller.dart';
 import '../../journey/application/journey_controller.dart';
 import '../../profile/application/profile_controller.dart';
+import '../../progress/application/progress_sync.dart';
 import '../../profile/domain/user_profile.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -127,23 +129,9 @@ class SettingsScreen extends ConsumerWidget {
               leading: const Icon(Icons.ac_unit_rounded, color: AppPalette.frost),
               title: Text(l.settingsStreakFreeze),
               subtitle: Text(l.settingsStreakFreezeSub(p.streakFreezes, GameRules.maxStreakFreezes)),
-              trailing: FilledButton.tonal(
-                onPressed: () {
-                  final msg = p.streakFreezes >= GameRules.maxStreakFreezes
-                      ? l.settingsFreezeFull
-                      : (ctl.buyStreakFreeze() ? l.settingsFreezeBought : l.energyNotEnoughCoins);
-                  ref.read(feedbackProvider).play(Haptic.tap);
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
-                },
-                child: const Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.monetization_on_rounded, size: 16, color: AppPalette.ochreText),
-                    SizedBox(width: 4),
-                    Text('${GameRules.streakFreezeCoinCost}'),
-                  ],
-                ),
-              ),
+              // Free freezes come with 7, 30 and 100-day streaks; buying them
+              // returns when coins move to the server.
+              trailing: Text(l.settingsFreezeEarned, style: context.text.labelSmall),
             ),
           ]),
 
@@ -351,6 +339,8 @@ class SettingsScreen extends ConsumerWidget {
     await ref.read(profileProvider.notifier).resetAll();
     ref.read(journeyProvider.notifier).reset();
     ref.read(chatControllerProvider.notifier).clear();
+    // XP, stars and streaks belong to the account, so they come back.
+    unawaited(ref.read(progressSyncProvider.notifier).refresh());
     if (context.mounted) context.go(Routes.onboarding);
   }
 }

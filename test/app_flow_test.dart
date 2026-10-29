@@ -11,6 +11,7 @@ import 'package:nyaya/core/theme/app_theme.dart';
 import 'package:nyaya/features/journey/application/journey_controller.dart';
 import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
 import 'package:nyaya/features/profile/application/profile_controller.dart';
+import 'package:nyaya/features/progress/data/progress_api.dart';
 import 'package:nyaya/features/quiz/application/quiz_controller.dart';
 import 'package:nyaya/features/quiz/data/quiz_api.dart';
 import 'package:nyaya/features/quiz/domain/question.dart';
@@ -29,6 +30,7 @@ void main() {
     WidgetTester tester, {
     Map<String, Object> prefs = const {},
     bool signedIn = true,
+    void Function(FakeQuizApi server)? server,
   }) async {
     tester.view.physicalSize = const Size(1170, 2532);
     tester.view.devicePixelRatio = 3;
@@ -37,10 +39,12 @@ void main() {
     final sp = await SharedPreferences.getInstance();
     final tokens = signedIn ? signedInTokens() : MemoryTokenStore();
     api = FakeQuizApi();
+    server?.call(api);
     final container = ProviderContainer(overrides: [
       sharedPreferencesProvider.overrideWithValue(sp),
       tokenStoreProvider.overrideWithValue(tokens),
       quizApiProvider.overrideWithValue(api),
+      progressApiProvider.overrideWithValue(api),
       authApiProvider.overrideWithValue(FakeAuthApi(tokens)),
     ]);
     addTearDown(container.dispose);
@@ -187,11 +191,14 @@ void main() {
 
   testWidgets('Home continue card resumes the next Case Path level', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
-    final journey = jsonEncode({
-      'stars': {'constitution_1': 3},
-      'chests': <String>[],
-    });
-    await pumpApp(tester, prefs: {'profile_v1': onboarded, 'journey_v1': journey});
+    // Stars live on the server; the phone shows its copy.
+    await pumpApp(
+      tester,
+      prefs: {'profile_v1': onboarded},
+      server: (s) => s
+        ..stars['constitution_1'] = 3
+        ..quizzesCompleted = 1,
+    );
     await settle(tester);
 
     expect(find.text('CONTINUE WHERE YOU LEFT OFF'), findsOneWidget);

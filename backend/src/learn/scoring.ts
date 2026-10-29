@@ -1,4 +1,5 @@
 import { randomInt } from 'node:crypto';
+import type { FeedbackMode, QuizMode } from '../db/schema.js';
 
 /**
  * Scoring policy recorded on every session, so a result can always be
@@ -9,6 +10,25 @@ import { randomInt } from 'node:crypto';
  * A single-select answer is correct when it picks exactly the correct option.
  */
 export const SCORING_VERSION = 'standard-v1';
+
+/** exam-negative-v1: +1 correct, −0.25 wrong, 0 unanswered (the app's Exam Chamber). */
+export const EXAM_NEGATIVE_VERSION = 'exam-negative-v1';
+const NEGATIVE_MARKS = 0.25;
+
+/** The score under a session's scoring version, from its counts. */
+export function scoreFor(
+  version: string,
+  correct: number,
+  answered: number,
+): number {
+  if (version === EXAM_NEGATIVE_VERSION)
+    return correct - NEGATIVE_MARKS * (answered - correct);
+  return correct;
+}
+
+/** Exams reveal answers at the end; every other mode explains each answer. */
+export const feedbackModeFor = (mode: QuizMode): FeedbackMode =>
+  mode === 'exam' ? 'end' : 'immediate';
 
 export function isCorrect(
   selected: readonly string[],
@@ -35,7 +55,7 @@ export function scoreSession(questions: readonly ScoredQuestion[]) {
     answered++;
     if (isCorrect(q.selectedOptionIds, q.correctOptionIds)) correct++;
   }
-  return { score: correct, correctCount: correct, answeredCount: answered };
+  return { correctCount: correct, answeredCount: answered };
 }
 
 export const MAX_QUESTIONS = 20;
@@ -57,6 +77,26 @@ const INDIA_DATE = new Intl.DateTimeFormat('en-CA', {
 
 /** Today's date in India (YYYY-MM-DD), which decides whether content is in force. */
 export const indiaToday = (now: Date): string => INDIA_DATE.format(now);
+
+/** The docket's question set is fixed per India date: the date it was started. */
+export const dailySetDate = (mode: QuizMode, startedAt: Date): string | null =>
+  mode === 'daily_docket' ? indiaToday(startedAt) : null;
+
+/** ISO week id (`2026-W44`, weeks start Monday) of a YYYY-MM-DD date. */
+export function isoWeek(day: string): string {
+  const d = new Date(`${day}T00:00:00Z`);
+  const weekday = (d.getUTCDay() + 6) % 7; // Monday = 0
+  d.setUTCDate(d.getUTCDate() - weekday + 3); // Thursday of this week
+  const year = d.getUTCFullYear();
+  const jan4 = new Date(Date.UTC(year, 0, 4));
+  const firstThursday = new Date(jan4);
+  firstThursday.setUTCDate(
+    jan4.getUTCDate() - ((jan4.getUTCDay() + 6) % 7) + 3,
+  );
+  const week =
+    1 + Math.round((d.getTime() - firstThursday.getTime()) / 604_800_000);
+  return `${year}-W${String(week).padStart(2, '0')}`;
+}
 
 /** Fisher–Yates with a crypto RNG, so option order cannot be predicted. */
 export function shuffled<T>(items: readonly T[]): T[] {

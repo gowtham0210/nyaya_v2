@@ -16,10 +16,13 @@ import {
 } from 'class-validator';
 import {
   FEEDBACK_MODES,
-  SESSION_STATUSES,
+  QUIZ_MODES,
   type FeedbackMode,
-  type SessionStatus,
+  type QuizMode,
 } from '../db/schema.js';
+
+export const SESSION_STATUSES = ['in_progress', 'submitted'] as const;
+export type SessionStatus = (typeof SESSION_STATUSES)[number];
 import { OptionDto } from '../questions/questions.dto.js';
 import { SUPPORTED_LANGUAGES } from '../questions/workflow.js';
 import { MAX_QUESTIONS } from './scoring.js';
@@ -55,6 +58,22 @@ export class CatalogDto {
 
 /** Which questions to draw. With no topic given, every topic is used. */
 export class StartSessionDto {
+  @ApiProperty({
+    enum: QUIZ_MODES,
+    description:
+      "case_path: one level (one subject, one difficulty). daily_docket: today's set, the same for everyone, once a day. duel: practice against the clock. exam: answers revealed at the end. Decides feedback and rewards.",
+  })
+  @IsIn(QUIZ_MODES)
+  mode: QuizMode;
+
+  @ApiPropertyOptional({
+    default: true,
+    description: 'Exam only: take 0.25 off for each wrong answer',
+  })
+  @IsOptional()
+  @IsBoolean()
+  negative_marking?: boolean;
+
   @ApiPropertyOptional({ format: 'uuid', description: 'A single topic' })
   @IsOptional()
   @IsUUID()
@@ -103,28 +122,10 @@ export class StartSessionDto {
   @Max(3)
   max_difficulty?: number;
 
-  @ApiPropertyOptional({
-    description:
-      "Today's set: the same questions for everyone with the same filters (India date)",
-  })
-  @IsOptional()
-  @IsBoolean()
-  daily?: boolean;
-
   @ApiPropertyOptional({ enum: SUPPORTED_LANGUAGES, default: 'en' })
   @IsOptional()
   @IsIn(SUPPORTED_LANGUAGES)
   language?: string;
-
-  @ApiPropertyOptional({
-    enum: FEEDBACK_MODES,
-    default: 'immediate',
-    description:
-      'immediate: each answer is final and explained at once. end: answers can change; nothing is revealed until submit.',
-  })
-  @IsOptional()
-  @IsIn(FEEDBACK_MODES)
-  feedback_mode?: FeedbackMode;
 }
 
 export class AnswerDto {
@@ -176,6 +177,7 @@ export class SessionQuestionDto {
 
 export class SessionDto {
   @ApiProperty({ format: 'uuid' }) id: string;
+  @ApiProperty({ enum: QUIZ_MODES }) mode: QuizMode;
   @ApiProperty({ type: [String], description: 'Empty means every topic' })
   topic_ids: string[];
   @ApiProperty({ type: String, format: 'date', nullable: true }) daily:
@@ -209,8 +211,46 @@ export class AnswerResultDto {
   feedback: FeedbackDto | null;
 }
 
+export class XpBreakdownDto {
+  @ApiProperty() question_xp: number;
+  @ApiProperty() completion_bonus: number;
+  @ApiProperty() perfect_bonus: number;
+  @ApiProperty({
+    description:
+      '1.25 for the docket, 0.5 for replaying a 3-star level, else 1',
+  })
+  mode_multiplier: number;
+  @ApiProperty() streak_multiplier: number;
+  @ApiProperty() total: number;
+}
+
+/** What this session earned, worked out by the server. */
+export class RewardsDto {
+  @ApiProperty({ type: XpBreakdownDto }) xp: XpBreakdownDto;
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    description: 'Case Path level, e.g. constitution_2',
+  })
+  level_id: string | null;
+  @ApiProperty({ type: Number, nullable: true, description: 'Case Path only' })
+  stars: number | null;
+  @ApiProperty({ description: 'Best stars on this level before this session' })
+  best_stars_before: number;
+  @ApiProperty({ description: 'Stars added to the level best' })
+  new_stars: number;
+  @ApiProperty({ description: 'Streak after this session' }) streak: number;
+  @ApiProperty({
+    description: "True when this was today's first finished quiz",
+  })
+  streak_extended: boolean;
+  @ApiProperty({ type: Number, nullable: true, description: '3, 7, 14 … days' })
+  streak_milestone: number | null;
+}
+
 export class ResultDto {
   @ApiProperty({ format: 'uuid' }) session_id: string;
+  @ApiProperty({ enum: QUIZ_MODES }) mode: QuizMode;
   @ApiProperty({ type: [String] }) topic_ids: string[];
   @ApiProperty() scoring_version: string;
   @ApiProperty() score: number;
@@ -221,6 +261,7 @@ export class ResultDto {
   @ApiProperty({ format: 'date-time' }) submitted_at: string;
   @ApiProperty() duration_seconds: number;
   @ApiProperty({ type: [SessionQuestionDto] }) questions: SessionQuestionDto[];
+  @ApiProperty({ type: RewardsDto }) rewards: RewardsDto;
 }
 
 export class AttemptsQuery {
@@ -241,9 +282,11 @@ export class AttemptsQuery {
 
 export class AttemptDto {
   @ApiProperty({ format: 'uuid' }) session_id: string;
+  @ApiProperty({ enum: QUIZ_MODES }) mode: QuizMode;
   @ApiProperty({ type: [String] }) topic_ids: string[];
   @ApiProperty() score: number;
   @ApiProperty() total: number;
+  @ApiProperty() xp: number;
   @ApiProperty() scoring_version: string;
   @ApiProperty({ enum: FEEDBACK_MODES }) feedback_mode: FeedbackMode;
   @ApiProperty({ format: 'date-time' }) submitted_at: string;
@@ -268,7 +311,59 @@ export class TopicProgressDto {
   @ApiProperty({ format: 'date-time' }) last_attempt_at: string;
 }
 
+export class StreakDto {
+  @ApiProperty({ description: 'Current streak today; 0 once it has lapsed' })
+  current: number;
+  @ApiProperty() longest: number;
+  @ApiProperty({ description: 'Free freezes left (earned at 7, 30, 100 days)' })
+  freezes: number;
+  @ApiProperty({ type: String, format: 'date', nullable: true })
+  last_active_day: string | null;
+  @ApiProperty({
+    type: [String],
+    description: 'Days with a finished quiz, last 21, India dates',
+  })
+  active_days: string[];
+  @ApiProperty({
+    type: [String],
+    description: 'Missed days a freeze covered, last 21',
+  })
+  frozen_days: string[];
+}
+
+export class WeekXpDto {
+  @ApiProperty({ example: '2026-W44' }) week_id: string;
+  @ApiProperty() xp: number;
+}
+
 export class ProgressDto {
+  @ApiProperty({
+    format: 'date',
+    description: 'India date the figures are for',
+  })
+  today: string;
+  @ApiProperty() total_xp: number;
+  @ApiProperty({
+    type: WeekXpDto,
+    description: 'This week (Monday–Sunday, India)',
+  })
+  week: WeekXpDto;
+  @ApiProperty({
+    type: WeekXpDto,
+    description: 'Last week, for closing the league',
+  })
+  last_week: WeekXpDto;
+  @ApiProperty({ type: StreakDto }) streak: StreakDto;
+  @ApiProperty({
+    description: 'Best Case Path stars per level id',
+    example: { constitution_1: 3, constitution_2: 1 },
+  })
+  stars: Record<string, number>;
+  @ApiProperty({ type: [String], example: ['constitution_chest'] })
+  opened_chests: string[];
+  @ApiProperty() quizzes_completed: number;
+  @ApiProperty() quizzes_today: number;
+  @ApiProperty() docket_done_today: boolean;
   @ApiProperty() attempts: number;
   @ApiProperty() questions_answered: number;
   @ApiProperty() correct: number;

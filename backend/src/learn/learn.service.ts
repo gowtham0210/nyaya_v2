@@ -8,6 +8,7 @@ import {
   gt,
   gte,
   inArray,
+  isNotNull,
   isNull,
   lt,
   lte,
@@ -20,13 +21,16 @@ import { ApiError } from '../core/errors.js';
 import { newId } from '../core/ids.js';
 import { decodeCursor, toPage, type Page } from '../core/pagination.js';
 import {
+  chestOpenings,
   questions,
   questionVersions,
   quizSessionQuestions,
   quizSessions,
+  quizSessionTopics,
   subjects,
   topics,
   type QuestionOption,
+  type QuizMode,
 } from '../db/schema.js';
 import type {
   AnswerDto,
@@ -37,21 +41,53 @@ import type {
   FeedbackDto,
   ProgressDto,
   ResultDto,
+  RewardsDto,
   SessionDto,
   SessionQuestionDto,
   StartSessionDto,
 } from './learn.dto.js';
+import { sessionXp, stars, type AnsweredQuestion } from './rewards.js';
 import {
+  EXAM_NEGATIVE_VERSION,
   MAX_QUESTIONS,
   SCORING_VERSION,
+  dailySetDate,
+  feedbackModeFor,
   indiaToday,
   isCorrect,
+  isoWeek,
+  scoreFor,
   scoreSession,
   sessionDeadline,
   shuffled,
 } from './scoring.js';
+import { milestoneFor, streakOn } from './streak.js';
 
-type SessionRow = typeof quizSessions.$inferSelect;
+/** A session row with its topics; everything else about it is worked out from these. */
+type SessionRow = typeof quizSessions.$inferSelect & { topicIds: string[] };
+
+const isSubmitted = (s: SessionRow) => s.submittedAt !== null;
+const feedbackOf = (s: SessionRow) => feedbackModeFor(s.mode);
+
+/** Levels per subject on the Case Path road (difficulties 1–3), then its chest. */
+export const ROAD_LEVELS = 3;
+const levelId = (subjectSlug: string, difficulty: number) =>
+  `${subjectSlug}_${difficulty}`;
+const chestId = (subjectSlug: string) => `${subjectSlug}_chest`;
+
+/** A submitted session, as progress and rewards need it. */
+interface Finished {
+  id: string;
+  mode: QuizMode;
+  submittedAt: Date;
+  day: string;
+  correct: number;
+  answered: number;
+  total: number;
+  xp: number;
+  /** Case Path level, e.g. constitution_2. */
+  level: string | null;
+}
 
 /** A session question joined with the version it shows. */
 interface Row {
@@ -179,12 +215,15 @@ export class LearnService {
         ...(dto.topic_id ? [dto.topic_id] : []),
       ]),
     ];
+    const minDifficulty = dto.difficulty ?? dto.min_difficulty ?? null;
+    const maxDifficulty = dto.difficulty ?? dto.max_difficulty ?? null;
     const now = new Date();
-    const daily = dto.daily ? indiaToday(now) : null;
+    const daily = dailySetDate(dto.mode, now);
     return this.db.transaction(async (tx) => {
+      let subjectIds = new Set<string>();
       if (topicIds.length) {
         const found = await tx
-          .select({ id: topics.id })
+          .select({ id: topics.id, subjectId: topics.subjectId })
           .from(topics)
           .innerJoin(subjects, eq(subjects.id, topics.subjectId))
           .where(
@@ -195,17 +234,36 @@ export class LearnService {
             ),
           );
         if (found.length !== topicIds.length) throw ApiError.notFound('Topic');
+        subjectIds = new Set(found.map((t) => t.subjectId));
       }
+      if (
+        dto.mode === 'case_path' &&
+        (subjectIds.size !== 1 ||
+          minDifficulty === null ||
+          minDifficulty !== maxDifficulty)
+      )
+        throw err(
+          HttpStatus.BAD_REQUEST,
+          'invalid_quiz',
+          'A Case Path level is one subject at one difficulty',
+        );
+      if (
+        dto.mode === 'daily_docket' &&
+        (await this.docketDone(tx, userId, now))
+      )
+        throw err(
+          HttpStatus.CONFLICT,
+          'docket_done_today',
+          "Today's docket is already done; a new one opens at midnight (India time)",
+        );
 
       const where = [this.eligible(language, now)];
       if (topicIds.length)
         where.push(inArray(questionVersions.topicId, topicIds));
-      if (dto.difficulty)
-        where.push(eq(questionVersions.difficulty, dto.difficulty));
-      if (dto.min_difficulty)
-        where.push(gte(questionVersions.difficulty, dto.min_difficulty));
-      if (dto.max_difficulty)
-        where.push(lte(questionVersions.difficulty, dto.max_difficulty));
+      if (minDifficulty)
+        where.push(gte(questionVersions.difficulty, minDifficulty));
+      if (maxDifficulty)
+        where.push(lte(questionVersions.difficulty, maxDifficulty));
       const picked = (await this.liveVersions(tx, {
         id: questionVersions.id,
         options: questionVersions.options,
@@ -233,19 +291,21 @@ export class LearnService {
       await tx.insert(quizSessions).values({
         id: sessionId,
         userId,
-        topicId: topicIds.length === 1 ? topicIds[0] : null,
-        topicIds,
+        mode: dto.mode,
         language,
-        difficulty: dto.difficulty ?? null,
-        minDifficulty: dto.min_difficulty ?? null,
-        maxDifficulty: dto.max_difficulty ?? null,
-        daily,
-        feedbackMode: dto.feedback_mode ?? 'immediate',
-        scoringVersion: SCORING_VERSION,
+        minDifficulty,
+        maxDifficulty,
+        scoringVersion:
+          dto.mode === 'exam' && dto.negative_marking !== false
+            ? EXAM_NEGATIVE_VERSION
+            : SCORING_VERSION,
         questionCount: picked.length,
         startedAt: now,
-        expiresAt: sessionDeadline(now, picked.length),
       });
+      if (topicIds.length)
+        await tx
+          .insert(quizSessionTopics)
+          .values(topicIds.map((topicId) => ({ sessionId, topicId })));
       await tx.insert(quizSessionQuestions).values(
         picked.map((p, i) => ({
           sessionId,
@@ -273,7 +333,7 @@ export class LearnService {
   ): Promise<AnswerResultDto> {
     return this.db.transaction(async (tx) => {
       const s = await this.load(tx, userId, id, true);
-      if (s.status === 'submitted')
+      if (isSubmitted(s))
         throw err(
           HttpStatus.CONFLICT,
           'session_submitted',
@@ -293,7 +353,7 @@ export class LearnService {
       const same =
         !!q.selectedOptionIds &&
         [...q.selectedOptionIds].sort().join() === [...selected].sort().join();
-      if (s.feedbackMode === 'immediate' && q.answeredAt) {
+      if (feedbackOf(s) === 'immediate' && q.answeredAt) {
         if (!same)
           throw err(
             HttpStatus.CONFLICT,
@@ -302,7 +362,7 @@ export class LearnService {
           );
         return this.answerView(s, q);
       }
-      if (new Date() > s.expiresAt)
+      if (new Date() > sessionDeadline(s.startedAt, s.questionCount))
         throw err(
           HttpStatus.CONFLICT,
           'session_expired',
@@ -350,16 +410,26 @@ export class LearnService {
     });
   }
 
-  /** Finalises and scores the session. Submitting again returns the same result. */
+  /**
+   * Finalises and scores the session and records its XP. Submitting again
+   * returns the same result.
+   */
   async submit(userId: string, id: string): Promise<ResultDto> {
     return this.db.transaction(async (tx) => {
       let s = await this.load(tx, userId, id, true);
-      if (s.status === 'in_progress') {
+      if (!isSubmitted(s)) {
+        // One submit at a time per learner, so rewards see a settled history.
+        await tx.execute(
+          sql`select pg_advisory_xact_lock(hashtext(${'progress:' + userId}))`,
+        );
         const rows = await this.rows(tx, s.id);
+        const submittedAt = new Date();
         const scored = scoreSession(rows);
+        const finished = { ...s, ...scored, submittedAt };
+        const rewards = await this.rewards(tx, finished, rows);
         await tx
           .update(quizSessions)
-          .set({ status: 'submitted', submittedAt: new Date(), ...scored })
+          .set({ submittedAt, ...scored, xpAwarded: rewards.xp.total })
           .where(eq(quizSessions.id, s.id));
         s = await this.load(tx, userId, id);
       }
@@ -369,7 +439,7 @@ export class LearnService {
 
   async result(userId: string, id: string): Promise<ResultDto> {
     const s = await this.load(this.db, userId, id);
-    if (s.status !== 'submitted')
+    if (!isSubmitted(s))
       throw err(
         HttpStatus.CONFLICT,
         'not_submitted',
@@ -386,7 +456,7 @@ export class LearnService {
     const after = decodeCursor(query.cursor);
     const where = [
       eq(quizSessions.userId, userId),
-      eq(quizSessions.status, 'submitted'),
+      isNotNull(quizSessions.submittedAt),
     ];
     if (after) where.push(lt(quizSessions.id, after));
     const rows = await this.db
@@ -395,13 +465,19 @@ export class LearnService {
       .where(and(...where))
       .orderBy(desc(quizSessions.id))
       .limit(limit + 1);
+    const topicsBy = await this.topicsOf(
+      this.db,
+      rows.map((r) => r.id),
+    );
     return toPage(rows, limit, (s) => ({
       session_id: s.id,
-      topic_ids: s.topicIds,
-      score: s.score!,
+      mode: s.mode,
+      topic_ids: topicsBy.get(s.id) ?? [],
+      score: scoreFor(s.scoringVersion, s.correctCount!, s.answeredCount!),
       total: s.questionCount,
+      xp: s.xpAwarded ?? 0,
       scoring_version: s.scoringVersion,
-      feedback_mode: s.feedbackMode,
+      feedback_mode: feedbackModeFor(s.mode),
       submitted_at: s.submittedAt!.toISOString(),
     }));
   }
@@ -438,7 +514,7 @@ export class LearnService {
       .where(
         and(
           eq(quizSessions.userId, userId),
-          eq(quizSessions.status, 'submitted'),
+          isNotNull(quizSessions.submittedAt),
         ),
       )
       .groupBy(
@@ -475,30 +551,249 @@ export class LearnService {
       best: r.best,
       last_attempt_at: r.last.toISOString(),
     }));
-    const [totals] = await this.db
+    const finished = await this.finished(this.db, userId);
+    return {
+      ...this.summary(finished, await this.openedChests(this.db, userId)),
+      attempts: finished.length,
+      questions_answered: finished.reduce((n, f) => n + f.answered, 0),
+      correct: finished.reduce((n, f) => n + f.correct, 0),
+      topics: topicsOut,
+    };
+  }
+
+  /**
+   * Opens a chapter chest on the Case Path road. Only the next step on the
+   * road can be opened; opening it again is harmless.
+   */
+  async openChest(userId: string, id: string): Promise<ProgressDto> {
+    await this.db.transaction(async (tx) => {
+      const road = await this.road(tx);
+      const node = road.find((n) => n.kind === 'chest' && n.id === id);
+      if (!node) throw ApiError.notFound('Chest');
+      const opened = await this.openedChests(tx, userId);
+      if (opened.has(id)) return;
+      const best = this.summary(await this.finished(tx, userId), opened).stars;
+      const next = road.find((n) =>
+        n.kind === 'chest' ? !opened.has(n.id) : !(best[n.id] > 0),
+      );
+      if (next?.id !== id)
+        throw err(
+          HttpStatus.CONFLICT,
+          'chest_locked',
+          'Finish the levels before this chest first',
+        );
+      await tx
+        .insert(chestOpenings)
+        .values({ userId, subjectId: node.subjectId, openedAt: new Date() });
+    });
+    return this.progress(userId);
+  }
+
+  // ---------------------------------------------------------------- progress
+
+  /** The Case Path road: each active subject's levels, then its chest. */
+  private async road(tx: Tx) {
+    const rows = await tx
+      .select({ id: subjects.id, slug: subjects.slug })
+      .from(subjects)
+      .where(eq(subjects.isActive, true))
+      .orderBy(asc(subjects.sortOrder), asc(subjects.slug));
+    return rows.flatMap((sub) => [
+      ...Array.from({ length: ROAD_LEVELS }, (_, i) => ({
+        kind: 'level' as const,
+        id: levelId(sub.slug, i + 1),
+        subjectId: sub.id,
+      })),
+      { kind: 'chest' as const, id: chestId(sub.slug), subjectId: sub.id },
+    ]);
+  }
+
+  private async openedChests(tx: Tx, userId: string): Promise<Set<string>> {
+    const rows = await tx
+      .select({ slug: subjects.slug })
+      .from(chestOpenings)
+      .innerJoin(subjects, eq(subjects.id, chestOpenings.subjectId))
+      .where(eq(chestOpenings.userId, userId));
+    return new Set(rows.map((r) => chestId(r.slug)));
+  }
+
+  /** Submitted sessions, oldest first, with each Case Path session's level. */
+  private async finished(tx: Tx, userId: string): Promise<Finished[]> {
+    const rows = await tx
       .select({
-        attempts: count(),
-        answered:
-          sql<number>`coalesce(sum(${quizSessions.answeredCount}), 0)`.mapWith(
-            Number,
-          ),
-        correct:
-          sql<number>`coalesce(sum(${quizSessions.correctCount}), 0)`.mapWith(
-            Number,
-          ),
+        id: quizSessions.id,
+        mode: quizSessions.mode,
+        submittedAt: quizSessions.submittedAt,
+        correct: quizSessions.correctCount,
+        answered: quizSessions.answeredCount,
+        total: quizSessions.questionCount,
+        xp: quizSessions.xpAwarded,
+        difficulty: quizSessions.minDifficulty,
+        subjectSlug: sql<string | null>`min(${subjects.slug})`,
       })
       .from(quizSessions)
+      .leftJoin(
+        quizSessionTopics,
+        eq(quizSessionTopics.sessionId, quizSessions.id),
+      )
+      .leftJoin(topics, eq(topics.id, quizSessionTopics.topicId))
+      .leftJoin(subjects, eq(subjects.id, topics.subjectId))
       .where(
         and(
           eq(quizSessions.userId, userId),
-          eq(quizSessions.status, 'submitted'),
+          isNotNull(quizSessions.submittedAt),
         ),
-      );
+      )
+      .groupBy(quizSessions.id)
+      .orderBy(asc(quizSessions.submittedAt), asc(quizSessions.id));
+    return rows.map((r) => ({
+      id: r.id,
+      mode: r.mode,
+      submittedAt: r.submittedAt!,
+      day: indiaToday(r.submittedAt!),
+      correct: r.correct ?? 0,
+      answered: r.answered ?? 0,
+      total: r.total,
+      xp: r.xp ?? 0,
+      level:
+        r.mode === 'case_path' && r.subjectSlug && r.difficulty
+          ? levelId(r.subjectSlug, r.difficulty)
+          : null,
+    }));
+  }
+
+  /** Everything progress shows, worked out from finished sessions. */
+  private summary(finished: Finished[], opened: Set<string>, now = new Date()) {
+    const today = indiaToday(now);
+    const week = isoWeek(today);
+    const lastWeek = isoWeek(
+      new Date(Date.parse(today) - 7 * 86_400_000).toISOString().slice(0, 10),
+    );
+    const best: Record<string, number> = {};
+    let weekXp = 0;
+    let lastWeekXp = 0;
+    for (const f of finished) {
+      if (f.level)
+        best[f.level] = Math.max(best[f.level] ?? 0, stars(f.correct, f.total));
+      const w = isoWeek(f.day);
+      if (w === week) weekXp += f.xp;
+      else if (w === lastWeek) lastWeekXp += f.xp;
+    }
+    const days = finished.map((f) => f.day);
+    const streak = streakOn(days, today);
+    const recent = (list: string[]) => [...new Set(list)].sort().slice(-21);
     return {
-      attempts: Number(totals.attempts),
-      questions_answered: totals.answered,
-      correct: totals.correct,
-      topics: topicsOut,
+      today,
+      total_xp: finished.reduce((n, f) => n + f.xp, 0),
+      week: { week_id: week, xp: weekXp },
+      last_week: { week_id: lastWeek, xp: lastWeekXp },
+      streak: {
+        current: streak.streak,
+        longest: streak.longest,
+        freezes: streak.freezes,
+        last_active_day: streak.lastActiveDay,
+        active_days: recent(days),
+        frozen_days: recent(streak.frozenDays),
+      },
+      stars: best,
+      opened_chests: [...opened].sort(),
+      quizzes_completed: finished.length,
+      quizzes_today: finished.filter((f) => f.day === today).length,
+      docket_done_today: finished.some(
+        (f) => f.mode === 'daily_docket' && f.day === today,
+      ),
+    };
+  }
+
+  private async docketDone(tx: Tx, userId: string, now: Date) {
+    const today = indiaToday(now);
+    return (await this.finished(tx, userId)).some(
+      (f) => f.mode === 'daily_docket' && f.day === today,
+    );
+  }
+
+  /** Rewards as recorded at submit (the XP total is the stored award). */
+  private async storedRewards(tx: Tx, s: SessionRow, rows: Row[]) {
+    const r = await this.rewards(
+      tx,
+      { ...s, submittedAt: s.submittedAt! },
+      rows,
+    );
+    return { ...r, xp: { ...r.xp, total: s.xpAwarded ?? 0 } };
+  }
+
+  /**
+   * What a session earns, from its answers and the learner's history before
+   * it: XP (speed timed by the server, between answers), stars and streak.
+   */
+  private async rewards(
+    tx: Tx,
+    s: SessionRow & { submittedAt: Date },
+    rows: Row[],
+  ): Promise<RewardsDto> {
+    const history = (await this.finished(tx, s.userId)).filter(
+      (f) => f.id !== s.id && f.submittedAt <= s.submittedAt,
+    );
+    const day = indiaToday(s.submittedAt);
+    const before = streakOn(
+      history.map((f) => f.day),
+      day,
+    );
+    const after = streakOn([...history.map((f) => f.day), day], day);
+    const extended = !history.some((f) => f.day === day);
+
+    let level: string | null = null;
+    if (s.mode === 'case_path') {
+      const [sub] = await tx
+        .select({ slug: subjects.slug })
+        .from(quizSessionTopics)
+        .innerJoin(topics, eq(topics.id, quizSessionTopics.topicId))
+        .innerJoin(subjects, eq(subjects.id, topics.subjectId))
+        .where(eq(quizSessionTopics.sessionId, s.id))
+        .limit(1);
+      if (sub && s.minDifficulty) level = levelId(sub.slug, s.minDifficulty);
+    }
+    const bestBefore = Math.max(
+      0,
+      ...history
+        .filter((f) => level && f.level === level)
+        .map((f) => stars(f.correct, f.total)),
+    );
+    const got = level ? stars(s.correctCount!, s.questionCount) : null;
+    const docketAgain =
+      s.mode === 'daily_docket' &&
+      history.some((f) => f.mode === 'daily_docket' && f.day === day);
+
+    let previous = s.startedAt.getTime();
+    const answered: AnsweredQuestion[] = rows.map((q) => {
+      const at = q.answeredAt?.getTime() ?? previous;
+      const elapsedMs = Math.max(0, at - previous);
+      previous = Math.max(previous, at);
+      return {
+        correct:
+          !!q.selectedOptionIds &&
+          isCorrect(q.selectedOptionIds, q.correctOptionIds),
+        difficulty: q.difficulty,
+        elapsedMs,
+      };
+    });
+    const xp = sessionXp({
+      mode: s.mode,
+      questions: answered,
+      streak: before.streak,
+      isReplayOfMastered: bestBefore === 3,
+    });
+    // A second docket on the same day earns nothing (the first one counts).
+    if (docketAgain) xp.total = 0;
+    return {
+      xp,
+      level_id: level,
+      stars: got,
+      best_stars_before: bestBefore,
+      new_stars: got === null ? 0 : Math.max(0, got - bestBefore),
+      streak: after.streak,
+      streak_extended: extended,
+      streak_milestone: extended ? milestoneFor(after.streak) : null,
     };
   }
 
@@ -517,7 +812,23 @@ export class LearnService {
       .where(and(eq(quizSessions.id, id), eq(quizSessions.userId, userId)));
     const [s] = lock ? await base.for('update').limit(1) : await base.limit(1);
     if (!s) throw ApiError.notFound('Quiz session');
-    return s;
+    return {
+      ...s,
+      topicIds: (await this.topicsOf(tx, [s.id])).get(s.id) ?? [],
+    };
+  }
+
+  private async topicsOf(tx: Tx, sessionIds: string[]) {
+    const out = new Map<string, string[]>();
+    if (!sessionIds.length) return out;
+    const rows = await tx
+      .select()
+      .from(quizSessionTopics)
+      .where(inArray(quizSessionTopics.sessionId, sessionIds))
+      .orderBy(asc(quizSessionTopics.topicId));
+    for (const r of rows)
+      out.set(r.sessionId, [...(out.get(r.sessionId) ?? []), r.topicId]);
+    return out;
   }
 
   private rows(tx: Tx, sessionId: string): Promise<Row[]> {
@@ -564,8 +875,7 @@ export class LearnService {
   /** The only place questions are rendered for learners; it decides when the key is revealed. */
   private questionView(s: SessionRow, q: Row): SessionQuestionDto {
     const reveal =
-      s.status === 'submitted' ||
-      (s.feedbackMode === 'immediate' && !!q.answeredAt);
+      isSubmitted(s) || (feedbackOf(s) === 'immediate' && !!q.answeredAt);
     const byId = new Map(q.options.map((o) => [o.id, o]));
     return {
       position: q.position,
@@ -588,7 +898,7 @@ export class LearnService {
       position: q.position,
       selected_option_ids: q.selectedOptionIds!,
       answered_at: q.answeredAt!.toISOString(),
-      feedback: s.feedbackMode === 'immediate' ? this.feedback(q) : null,
+      feedback: feedbackOf(s) === 'immediate' ? this.feedback(q) : null,
     };
   }
 
@@ -596,16 +906,20 @@ export class LearnService {
     const rows = await this.rows(tx, s.id);
     return {
       id: s.id,
+      mode: s.mode,
       topic_ids: s.topicIds,
-      daily: s.daily,
+      daily: dailySetDate(s.mode, s.startedAt),
       language: s.language,
-      difficulty: s.difficulty,
-      feedback_mode: s.feedbackMode,
-      status: s.status,
+      difficulty:
+        s.minDifficulty !== null && s.minDifficulty === s.maxDifficulty
+          ? s.minDifficulty
+          : null,
+      feedback_mode: feedbackOf(s),
+      status: isSubmitted(s) ? 'submitted' : 'in_progress',
       scoring_version: s.scoringVersion,
       question_count: s.questionCount,
       started_at: s.startedAt.toISOString(),
-      expires_at: s.expiresAt.toISOString(),
+      expires_at: sessionDeadline(s.startedAt, s.questionCount).toISOString(),
       submitted_at: s.submittedAt?.toISOString() ?? null,
       questions: rows.map((q) => this.questionView(s, q)),
     };
@@ -615,9 +929,10 @@ export class LearnService {
     const rows = await this.rows(tx, s.id);
     return {
       session_id: s.id,
+      mode: s.mode,
       topic_ids: s.topicIds,
       scoring_version: s.scoringVersion,
-      score: s.score!,
+      score: scoreFor(s.scoringVersion, s.correctCount!, s.answeredCount!),
       total: s.questionCount,
       correct_count: s.correctCount!,
       answered_count: s.answeredCount!,
@@ -627,6 +942,11 @@ export class LearnService {
         (s.submittedAt!.getTime() - s.startedAt.getTime()) / 1000,
       ),
       questions: rows.map((q) => this.questionView(s, q)),
+      rewards: await this.rewards(
+        tx,
+        { ...s, submittedAt: s.submittedAt! },
+        rows,
+      ),
     };
   }
 }

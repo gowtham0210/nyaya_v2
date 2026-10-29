@@ -42,6 +42,14 @@ enum QuizMode {
 
   /// Whether the right answer is revealed right after each pick.
   bool get instantFeedback => this != QuizMode.exam;
+
+  /// The mode's name on the Nyaya API.
+  String get apiName => switch (this) {
+        QuizMode.casePath => 'case_path',
+        QuizMode.dailyDocket => 'daily_docket',
+        QuizMode.duel => 'duel',
+        QuizMode.exam => 'exam',
+      };
 }
 
 /// What the user asked to play. Value-equal so it can key a provider family.

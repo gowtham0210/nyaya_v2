@@ -2,8 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/api/api_client.dart';
+import '../../progress/domain/server_progress.dart';
 import '../domain/question.dart';
 import '../domain/quiz_builder.dart';
+import '../domain/quiz_models.dart';
 
 /// Content is English-only on the server for now; translations come later.
 const quizLanguage = 'en';
@@ -64,10 +66,14 @@ class Verdict {
 
 @immutable
 class SubmittedQuiz {
-  const SubmittedQuiz({required this.score, required this.total, required this.verdicts});
+  const SubmittedQuiz({required this.score, required this.total, required this.verdicts, required this.rewards});
 
-  final int score;
+  /// Under the session's scoring rules; an exam with minus marks can be fractional.
+  final double score;
   final int total;
+
+  /// What the server awarded: XP, stars and streak.
+  final ServerRewards rewards;
 
   /// One per question, in order.
   final List<Verdict> verdicts;
@@ -115,14 +121,14 @@ class HttpQuizApi implements QuizApi {
   @override
   Future<StartedQuiz> start(SessionPlan plan, {required List<String> topicIds, required QuizCatalog catalog}) async {
     final j = await _client.post('/v1/quiz-sessions', body: {
+      'mode': plan.mode.apiName,
       'question_count': plan.count,
       'language': quizLanguage,
-      'feedback_mode': plan.revealAtEnd ? 'end' : 'immediate',
+      if (plan.mode == QuizMode.exam) 'negative_marking': plan.negativeMarking,
       if (topicIds.isNotEmpty) 'topic_ids': topicIds,
       if (plan.difficulty != null) 'difficulty': plan.difficulty,
       if (plan.minDifficulty != null) 'min_difficulty': plan.minDifficulty,
       if (plan.maxDifficulty != null) 'max_difficulty': plan.maxDifficulty,
-      if (plan.daily) 'daily': true,
     }) as Map<String, dynamic>;
     return StartedQuiz(
       sessionId: j['id'] as String,
@@ -157,8 +163,9 @@ class HttpQuizApi implements QuizApi {
       for (final q in (j['questions'] as List).cast<Map<String, dynamic>>()) q['position'] as int: q,
     };
     return SubmittedQuiz(
-      score: j['score'] as int,
+      score: (j['score'] as num).toDouble(),
       total: j['total'] as int,
+      rewards: ServerRewards.fromJson(j['rewards'] as Map<String, dynamic>),
       verdicts: [
         for (var i = 0; i < questions.length; i++)
           _verdict(byPosition[i + 1]!['feedback'] as Map<String, dynamic>, questions[i]),

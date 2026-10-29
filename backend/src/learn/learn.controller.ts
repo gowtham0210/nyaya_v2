@@ -118,8 +118,24 @@ export class LearnController {
 
   @ApiBearerAuth()
   @Get('me/progress')
+  @ApiOperation({
+    summary:
+      'XP, streak, Case Path stars and chests, worked out from submitted quizzes',
+  })
   @ApiOkResponse({ type: ProgressDto })
   progress(@CurrentUser() user: AuthUser) {
     return this.learn.progress(user.id);
+  }
+
+  @ApiBearerAuth()
+  @Post('me/chests/:chest_id/open')
+  @HttpCode(200)
+  @ApiOperation({
+    summary:
+      'Open a chapter chest (e.g. constitution_chest) once its levels are done',
+  })
+  @ApiOkResponse({ type: ProgressDto })
+  openChest(@CurrentUser() user: AuthUser, @Param('chest_id') chestId: string) {
+    return this.learn.openChest(user.id, chestId);
   }
 }

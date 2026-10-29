@@ -223,10 +223,38 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       "closed by remote host"); deploy.sh then fails, so retry, or scp the changed files and run
       `docker compose up -d --build` on the server.
 
+- [x] 2026-10-29: **Learning progress lives on the server (Part 1 of 3).** User's choices: every account starts
+      fresh (old phone progress is not imported); duels earn XP for correct answers only (win/loss and duel rating stay
+      on the phone). On submit the server works out stars (50/80/100 %), XP (`backend/src/learn/rewards.ts`, a copy of
+      the app's GameRules/XpCalculator — keep both in step; speed is timed by the server between answers), streak with
+      free freezes at 7/30/100 days (`streak.ts`, derived from India dates of finished quizzes), the docket's 1.25× (one
+      docket a day: `409 docket_done_today`), half XP for replaying a 3-star level, and exam minus marks
+      (`exam-negative-v1`: +1 / −0.25 / 0; `negative_marking: false` for citizens). `POST /v1/quiz-sessions` now needs
+      `mode` (case_path | daily_docket | duel | exam; a Case Path level is one subject at one difficulty); the result has
+      `rewards`. `GET /v1/me/progress` returns XP, this/last week's XP, streak, best stars per level (`constitution_2`),
+      opened chests and totals; `POST /v1/me/chests/:chest_id/open` opens the next chest on the road (subjects by
+      sort order × 3 levels + chest). **3NF:** `quiz_sessions` gained `mode` + `xp_awarded`; its topic list moved to
+      `quiz_session_topics`; `topic_id`, `topic_ids`, `feedback_mode`, `daily`, `difficulty` (now min = max),
+      `expires_at`, `score` and `status` were dropped because they follow from other columns (derived in
+      `scoring.ts`); new `chest_openings`. Stars, XP totals and streak are calculated, not stored. Kept on purpose:
+      `question_count` / `correct_count` / `answered_count` (summaries of the question rows, not a 3NF break). Still a
+      list column, not changed: `quiz_session_questions.selected_option_ids`. Migrations 0004 (add + copy data) and
+      0005 (drop) — split so drizzle-kit doesn't ask about renames (it can't prompt here).
+      App: `lib/features/progress/` (`ProgressApi`, `ServerProgress`/`ServerRewards`, `ProgressSync`). The profile and
+      journey keep a copy of the server's numbers (loaded on start, resume, sign-in, pull-to-refresh and after each
+      quiz; cleared on sign-out); coins, energy, premium, settings and duel rating stay local (Part 2). Buying streak
+      freezes is off (the server only counts free ones); the Settings reset text says XP/stars/streaks stay on the
+      account — **English only, the 5 other languages still have the old wording and need new translations**.
+      Old app builds can't start quizzes on this server (no `mode`). Tests: backend 32 unit + 47 API, Flutter 37.
+      Staging migrated (backup `nyaya-2026-10-29-0732.sql.gz` taken first); user checked on the iPhone: played a
+      level, signed out and in, progress came back. Next: Part 2 (settings, coins, energy, freezes on the server),
+      Part 3 (real leagues from the server's weekly XP).
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
-   Then P3: M08 bookmarks/mistake review, M12 report-a-question, server-side progress and exam marking.
+   Then P3: server progress Part 2 (economy + settings) and Part 3 (real leagues), M08 bookmarks/mistake review,
+   M12 report-a-question. (Server progress Part 1 and exam marking are done — see 2026-10-29.)
 2. Dark-mode visual pass on simulator (Terracotta dark theme exists, not yet eyeballed).
 3. Note: a debug build launched via `simctl launch` without `flutter run` can show a blank screen —
    use `flutter run -d <device>` (or a release/profile build) when testing.
@@ -295,7 +323,8 @@ test/  gamification_test.dart content_test.dart app_flow_test.dart
 - **Leagues (weekly, 30-person cohorts, Mon–Sun):** Nyaya Panchayat → Gram Nyayalaya → Munsiff →
   Magistrate → District → Sessions → High Court → Supreme Court. No demotion in 2 entry tiers.
   Cohort is simulated deterministically (`LeagueSimulator`) until a backend exists.
-- **Streak:** 1 quiz/day; up to 2 freezes (100 coins, or free at 7/30/100-day milestones; premium gets 2).
+- **Streak:** 1 quiz/day; up to 2 freezes (free at 7/30/100-day milestones; buying with 100 coins and premium's 2
+  are off until coins move to the server). Worked out by the server since 2026-10-29.
   Milestones 3/7/14/30/50/100/365 give coins.
 - **Palette (2026-10-26, user-finalised): "Terracotta × Sand"** — Terracotta #873F2B primary, Burnt Clay
   #B96243 accents/streak, Sand #D9B994 borders/surfaces, Warm Cream #F5EBDD background, Deep Earth #302923 text.

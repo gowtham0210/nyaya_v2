@@ -1726,6 +1726,12 @@ abstract class AppLocalizations {
   /// **'{coins} coins'**
   String settingsBuyFor(int coins);
 
+  /// Streak freeze row: how freezes are earned (buying is off for now)
+  ///
+  /// In en, this message translates to:
+  /// **'Earned at 7, 30 and 100 days'**
+  String get settingsFreezeEarned;
+
   /// No description provided for @settingsFreezeBought.
   ///
   /// In en, this message translates to:
@@ -1837,7 +1843,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsResetConfirm.
   ///
   /// In en, this message translates to:
-  /// **'This erases all XP, stars, streaks and coins on this device. This cannot be undone.'**
+  /// **'This erases coins, energy and settings on this device. XP, stars and streaks are saved to your account and stay. This cannot be undone.'**
   String get settingsResetConfirm;
 
   /// No description provided for @settingsResetAction.
