@@ -10,12 +10,15 @@ cd "$(git rev-parse --show-toplevel)"
 
 rsync -az --delete --exclude node_modules --exclude dist --exclude .next \
   --exclude .data --exclude .env --exclude '*.tsbuildinfo' backend cms "$HOST:$DIR/"
-rsync -az deploy/staging/docker-compose.yml "$HOST:$DIR/"
+rsync -az deploy/staging/docker-compose.yml deploy/staging/backup.sh "$HOST:$DIR/"
+scp -q deploy/staging/backup.cron "$HOST:/etc/cron.d/nyaya-v2-backup"
 rsync -az deploy/staging/nginx.conf "$HOST:/opt/yercaud/nginx/user_conf.d/nyaya-v2-staging.conf"
 
 ssh "$HOST" "DIR=$DIR SEED=${1:-}" bash -s <<'REMOTE'
 set -euo pipefail
 cd "$DIR"
+mkdir -p backups
+chmod 644 /etc/cron.d/nyaya-v2-backup
 # Secrets are made once on the server and stay there.
 if [ ! -f .env ]; then
   umask 077

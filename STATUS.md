@@ -193,8 +193,15 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       by the user (the domain isn't on the connected Hostinger account). The old Nyaya v1 containers (`nyaya-api`,
       `nyaya-frontend`, `/root/nyaya_backend`, nyayaapi.deepwebstudio.dev) were STOPPED, not removed; their nginx
       site `nyaya.conf` is still installed. Smoke-tested: catalog, staff sign-in, portal /login over HTTPS, other sites up.
-      Not yet done: portal sign-in in a browser, the Flutter app pointed at staging
-      (`--dart-define=NYAYA_API_URL=https://staging-api.deepwebstudio.dev`), backups of the staging DB.
+      User checked the portal in a browser on 2026-10-29: sign-in and role-based actions work.
+      iPhone 15 Plus release build against staging (`--dart-define=NYAYA_API_URL=https://staging-api.deepwebstudio.dev`)
+      checked by the user on 2026-10-29: sign-up and a full Case Path level work; the server stored the
+      account and a submitted 6-question session.
+      DB backups (2026-10-29): `deploy/staging/backup.sh` → `/opt/nyaya-v2/backup.sh`, run nightly at 02:00 IST
+      (20:30 UTC) by `/etc/cron.d/nyaya-v2-backup` (`deploy/staging/backup.cron`); `pg_dump --clean` gzip copies in
+      `/opt/nyaya-v2/backups/` (root-only, kept 14 days, log in `backups/backup.log`). Same server only — fine for
+      staging, production will need an off-server copy. Restore steps are at the top of `backup.sh`; a restore into
+      a scratch database was tested and matched the live row counts.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
