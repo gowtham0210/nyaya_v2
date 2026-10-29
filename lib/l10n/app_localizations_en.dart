@@ -959,9 +959,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get settingsFreezeEarned => 'Earned at 7, 30 and 100 days';
-
-  @override
   String get settingsFreezeBought => 'Streak freeze equipped!';
 
   @override

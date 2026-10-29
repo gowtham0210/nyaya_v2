@@ -22,19 +22,35 @@ export interface StreakState {
 /**
  * Replays the days a learner finished a quiz (India dates). A missed day is
  * covered by a freeze when enough are left, otherwise the streak restarts.
- * Same rules as the app's DailyPolicy, but derived from history instead of
- * stored, so nothing can drift.
+ * Freezes are earned at 7/30/100 days or bought (`boughtDays`, one date per
+ * purchase); one bought before a day is played can cover the gap before it.
+ * At most 2 are held. Same rules as the app's DailyPolicy, but derived from
+ * history instead of stored, so nothing can drift.
  */
 export function streakOn(
   activeDays: readonly string[],
   today: string,
+  boughtDays: readonly string[] = [],
 ): StreakState {
   const days = [...new Set(activeDays)].filter((d) => d <= today).sort();
+  const bought = boughtDays.filter((d) => d <= today).sort();
   let streak = 0;
   let longest = 0;
   let freezes = 0;
   const frozenDays: string[] = [];
   let last: string | null = null;
+
+  let nextBought = 0;
+  /** Adds the freezes bought before `day` (or on it, when inclusive). */
+  const buyUntil = (day: string, inclusive: boolean) => {
+    while (
+      nextBought < bought.length &&
+      (inclusive ? bought[nextBought] <= day : bought[nextBought] < day)
+    ) {
+      freezes = Math.min(RULES.maxStreakFreezes, freezes + 1);
+      nextBought++;
+    }
+  };
 
   const coverGap = (from: string, missed: number): boolean => {
     if (missed <= 0) return true;
@@ -45,6 +61,7 @@ export function streakOn(
   };
 
   for (const day of days) {
+    buyUntil(day, false);
     if (last === null || !coverGap(last, daysBetween(last, day) - 1)) {
       streak = 1;
     } else {
@@ -55,6 +72,7 @@ export function streakOn(
     longest = Math.max(longest, streak);
     last = day;
   }
+  buyUntil(today, true);
   // Today not played yet: the streak survives if freezes cover the gap so far.
   if (
     last !== null &&

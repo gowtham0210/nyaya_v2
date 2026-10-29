@@ -7,6 +7,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../../app/router.dart';
 import '../../../core/config/game_rules.dart';
 import '../../../core/l10n/l10n.dart';
+import '../../../core/services/feedback.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/common.dart';
@@ -116,7 +117,7 @@ class SettingsScreen extends ConsumerWidget {
           ]),
 
           // ── Premium & store ───────────────────────────────────────────────
-          _Header(l.settingsStore),
+          _Header('${l.settingsStore} · ${p.coins} ${l.statCoins}'),
           _Group(children: [
             ListTile(
               leading: const Icon(Icons.workspace_premium_rounded, color: AppPalette.ochreText),
@@ -129,9 +130,33 @@ class SettingsScreen extends ConsumerWidget {
               leading: const Icon(Icons.ac_unit_rounded, color: AppPalette.frost),
               title: Text(l.settingsStreakFreeze),
               subtitle: Text(l.settingsStreakFreezeSub(p.streakFreezes, GameRules.maxStreakFreezes)),
-              // Free freezes come with 7, 30 and 100-day streaks; buying them
-              // returns when coins move to the server.
-              trailing: Text(l.settingsFreezeEarned, style: context.text.labelSmall),
+              trailing: FilledButton.tonal(
+                onPressed: () async {
+                  final messenger = ScaffoldMessenger.of(context);
+                  ref.read(feedbackProvider).play(Haptic.tap);
+                  if (p.streakFreezes >= GameRules.maxStreakFreezes) {
+                    messenger.showSnackBar(SnackBar(content: Text(l.settingsFreezeFull)));
+                    return;
+                  }
+                  final failed = await ref.read(progressSyncProvider.notifier).buyStreakFreeze();
+                  messenger.showSnackBar(SnackBar(
+                    content: Text(switch (failed) {
+                      null => l.settingsFreezeBought,
+                      'not_enough_coins' => l.energyNotEnoughCoins,
+                      'freezes_full' => l.settingsFreezeFull,
+                      _ => l.commonSomethingWrong,
+                    }),
+                  ));
+                },
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.monetization_on_rounded, size: 16, color: AppPalette.ochreText),
+                    SizedBox(width: 4),
+                    Text('${GameRules.streakFreezeCoinCost}'),
+                  ],
+                ),
+              ),
             ),
           ]),
 
@@ -149,7 +174,10 @@ class SettingsScreen extends ConsumerWidget {
                 values: AppLanguage.values,
                 selected: p.language,
                 label: (v) => '${v.nativeName}  ·  ${v.englishName}',
-                onSelected: ctl.setLanguage,
+                onSelected: (v) {
+                  ctl.setLanguage(v);
+                  unawaited(ref.read(progressSyncProvider.notifier).pushSettings());
+                },
               ),
             ),
             ListTile(
@@ -163,7 +191,10 @@ class SettingsScreen extends ConsumerWidget {
                 values: Persona.values,
                 selected: p.persona,
                 label: l.personaName,
-                onSelected: ctl.setPersona,
+                onSelected: (v) {
+                  ctl.setPersona(v);
+                  unawaited(ref.read(progressSyncProvider.notifier).pushSettings());
+                },
               ),
             ),
             ListTile(
@@ -177,7 +208,10 @@ class SettingsScreen extends ConsumerWidget {
                 values: const [1, 3, 5],
                 selected: p.dailyGoal,
                 label: l.goalQuizzesPerDay,
-                onSelected: ctl.setDailyGoal,
+                onSelected: (v) {
+                  ctl.setDailyGoal(v);
+                  unawaited(ref.read(progressSyncProvider.notifier).pushSettings());
+                },
               ),
             ),
           ]),
@@ -270,7 +304,10 @@ class SettingsScreen extends ConsumerWidget {
       ),
     );
     controller.dispose();
-    if (name != null && name.trim().isNotEmpty) ref.read(profileProvider.notifier).setName(name);
+    if (name != null && name.trim().isNotEmpty) {
+      ref.read(profileProvider.notifier).setName(name);
+      unawaited(ref.read(progressSyncProvider.notifier).pushSettings());
+    }
   }
 
   Future<void> _pick<T>(

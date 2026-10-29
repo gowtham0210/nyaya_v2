@@ -33,6 +33,35 @@ export const RULES = {
   maxStreakFreezes: 2,
 } as const;
 
+/** Coins and energy (the app's GameRules economy). */
+export const ECONOMY = {
+  startingCoins: 60,
+  coinsPerNewStar: 5,
+  coinsPerChest: 30,
+  coinsForDailyDocket: 10,
+  coinsForDailyGoal: 15,
+  /** Streak days reached → bonus coins. */
+  streakMilestoneCoins: {
+    3: 15,
+    7: 30,
+    14: 50,
+    30: 100,
+    50: 150,
+    100: 300,
+    365: 1000,
+  } as Record<number, number>,
+  streakFreezeCost: 100,
+  energyRefillCost: 30,
+  freeDailyEnergy: 5,
+  /** Energy a quiz costs to start; the docket is always free. */
+  energyCost: { case_path: 1, daily_docket: 0, duel: 1, exam: 2 } as Record<
+    QuizMode,
+    number
+  >,
+  threeStarEnergyBonus: 1,
+  defaultDailyGoal: 3,
+} as const;
+
 /** Streak multiplier: 0–2 days ×1.0, 3–6 ×1.1, 7–29 ×1.2, 30+ ×1.3. */
 export function streakMultiplier(streak: number): number {
   if (streak >= 30) return 1.3;

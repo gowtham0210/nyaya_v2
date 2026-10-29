@@ -361,3 +361,122 @@ export const chestOpenings = pgTable(
   },
   (t) => [primaryKey({ columns: [t.userId, t.subjectId] })],
 );
+
+// ---------------------------------------------------------------- economy
+
+/**
+ * Why coins moved. Earning: welcome (once), new_stars, daily_docket,
+ * daily_goal and streak_milestone (per quiz session), chest (per subject).
+ * Spending: energy_refill, streak_freeze (the freeze purchase itself).
+ */
+export const COIN_REASONS = [
+  'welcome',
+  'new_stars',
+  'daily_docket',
+  'daily_goal',
+  'streak_milestone',
+  'chest',
+  'energy_refill',
+  'streak_freeze',
+] as const;
+export type CoinReason = (typeof COIN_REASONS)[number];
+export const coinReason = pgEnum('coin_reason', COIN_REASONS);
+
+/**
+ * Every coin earned (+) or spent (−). The balance is the sum, never stored.
+ * A reward is paid once per session or chest (partial unique indexes).
+ */
+export const coinLedger = pgTable(
+  'coin_ledger',
+  {
+    id: uuid('id').primaryKey(),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    amount: integer('amount').notNull(),
+    reason: coinReason('reason').notNull(),
+    sessionId: uuid('session_id').references(() => quizSessions.id, {
+      onDelete: 'set null',
+    }),
+    subjectId: uuid('subject_id').references(() => subjects.id),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index('coin_ledger_user_idx').on(t.userId),
+    uniqueIndex('coin_ledger_session_reason_idx')
+      .on(t.userId, t.reason, t.sessionId)
+      .where(sql`${t.sessionId} is not null`),
+    uniqueIndex('coin_ledger_chest_idx')
+      .on(t.userId, t.subjectId)
+      .where(sql`${t.reason} = 'chest'`),
+    uniqueIndex('coin_ledger_welcome_idx')
+      .on(t.userId)
+      .where(sql`${t.reason} = 'welcome'`),
+  ],
+);
+
+/** quiz_start (−cost), quiz_refund (quit before answering), three_star_bonus, refill. */
+export const ENERGY_REASONS = [
+  'quiz_start',
+  'quiz_refund',
+  'three_star_bonus',
+  'refill',
+] as const;
+export type EnergyReason = (typeof ENERGY_REASONS)[number];
+export const energyReason = pgEnum('energy_reason', ENERGY_REASONS);
+
+/**
+ * Energy used and gained. Today's energy is the free daily amount plus the
+ * rows dated today (India), so nothing has to be reset at midnight.
+ */
+export const energyLedger = pgTable(
+  'energy_ledger',
+  {
+    id: uuid('id').primaryKey(),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    amount: integer('amount').notNull(),
+    reason: energyReason('reason').notNull(),
+    sessionId: uuid('session_id').references(() => quizSessions.id, {
+      onDelete: 'set null',
+    }),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index('energy_ledger_user_idx').on(t.userId, t.createdAt),
+    uniqueIndex('energy_ledger_session_reason_idx')
+      .on(t.sessionId, t.reason)
+      .where(sql`${t.sessionId} is not null`),
+  ],
+);
+
+export const PERSONAS = ['advocate', 'aspirant', 'citizen'] as const;
+export const persona = pgEnum('persona', PERSONAS);
+
+/**
+ * Learning settings that follow the account (the name is users.display_name).
+ * Theme, sound, haptics and reminders stay on each phone.
+ */
+export const learnerSettings = pgTable('learner_settings', {
+  userId: uuid('user_id')
+    .primaryKey()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  persona: persona('persona').notNull(),
+  language: text('language').notNull(),
+  dailyGoal: smallint('daily_goal').notNull(),
+  onboardedAt: timestamp('onboarded_at', { withTimezone: true }),
+  updatedAt: updatedAt(),
+});
+
+/**
+ * Premium learners. A row means premium. Until real store purchases exist the
+ * app turns it on itself (source 'demo', testing only).
+ */
+export const premiumMemberships = pgTable('premium_memberships', {
+  userId: uuid('user_id')
+    .primaryKey()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  source: text('source').notNull(),
+  startedAt: timestamp('started_at', { withTimezone: true }).notNull(),
+});

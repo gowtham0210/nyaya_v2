@@ -96,6 +96,9 @@ abstract interface class QuizApi {
   Future<Verdict?> answer(String sessionId, {required int position, required Question question, required int option});
 
   Future<SubmittedQuiz> submit(String sessionId, List<Question> questions);
+
+  /// Leaves a quiz before its first answer; the server gives the energy back.
+  Future<void> abandon(String sessionId);
 }
 
 class HttpQuizApi implements QuizApi {
@@ -172,6 +175,9 @@ class HttpQuizApi implements QuizApi {
       ],
     );
   }
+
+  @override
+  Future<void> abandon(String sessionId) => _client.post('/v1/quiz-sessions/$sessionId/abandon');
 
   static Verdict _verdict(Map<String, dynamic> f, Question q) {
     final correctIds = (f['correct_option_ids'] as List).cast<String>();

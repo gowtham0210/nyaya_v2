@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -12,6 +14,7 @@ import '../../../core/widgets/chunky_button.dart';
 import '../../../core/widgets/common.dart';
 import '../../../core/widgets/pressable.dart';
 import '../../profile/application/profile_controller.dart';
+import '../../progress/application/progress_sync.dart';
 import '../../profile/domain/user_profile.dart';
 import 'intro_slides.dart';
 
@@ -65,6 +68,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           language: p.language,
           dailyGoal: _goal,
         );
+    // Signed in already (e.g. after a reset): save to the account now.
+    // Otherwise the first sign-in uploads these settings.
+    unawaited(ref.read(progressSyncProvider.notifier).pushSettings());
     ref.read(feedbackProvider).play(Haptic.celebrate);
     context.go(Routes.home);
     // Soft, skippable paywall right after onboarding converts best.

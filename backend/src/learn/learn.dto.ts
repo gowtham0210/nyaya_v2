@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   ArrayMaxSize,
   ArrayMinSize,
@@ -13,9 +13,11 @@ import {
   Max,
   MaxLength,
   Min,
+  MinLength,
 } from 'class-validator';
 import {
   FEEDBACK_MODES,
+  PERSONAS,
   QUIZ_MODES,
   type FeedbackMode,
   type QuizMode,
@@ -224,8 +226,19 @@ export class XpBreakdownDto {
   @ApiProperty() total: number;
 }
 
+export class CoinsEarnedDto {
+  @ApiProperty() new_stars: number;
+  @ApiProperty() daily_docket: number;
+  @ApiProperty() daily_goal: number;
+  @ApiProperty() streak_milestone: number;
+  @ApiProperty() total: number;
+}
+
 /** What this session earned, worked out by the server. */
 export class RewardsDto {
+  @ApiProperty({ type: CoinsEarnedDto }) coins: CoinsEarnedDto;
+  @ApiProperty({ description: 'Energy given back for a first 3-star clear' })
+  energy_bonus: number;
   @ApiProperty({ type: XpBreakdownDto }) xp: XpBreakdownDto;
   @ApiProperty({
     type: String,
@@ -336,12 +349,65 @@ export class WeekXpDto {
   @ApiProperty() xp: number;
 }
 
+export class EnergyDto {
+  @ApiProperty({ description: 'Energy left today' }) today: number;
+  @ApiProperty({ description: 'Free energy each day (India date)' })
+  free_daily: number;
+  @ApiProperty({ description: 'Premium: quizzes cost no energy' })
+  unlimited: boolean;
+}
+
+export class ChatAllowanceDto {
+  @ApiProperty() daily_limit: number;
+  @ApiProperty() used_today: number;
+}
+
+export class SettingsDto {
+  @ApiProperty({ maxLength: 60 })
+  // Trimmed before the checks, so a name of only spaces is refused.
+  @Transform(({ value }: { value: unknown }) =>
+    typeof value === 'string' ? value.trim() : value,
+  )
+  @IsString()
+  @MinLength(1)
+  @MaxLength(60)
+  name: string;
+
+  @ApiProperty({ enum: PERSONAS })
+  @IsIn(PERSONAS)
+  persona: (typeof PERSONAS)[number];
+
+  @ApiProperty({ enum: SUPPORTED_LANGUAGES })
+  @IsIn(SUPPORTED_LANGUAGES)
+  language: string;
+
+  @ApiProperty({ minimum: 1, maximum: 10, description: 'Quizzes a day' })
+  @IsInt()
+  @Min(1)
+  @Max(10)
+  daily_goal: number;
+
+  @ApiProperty({ description: 'Finished onboarding' })
+  @IsBoolean()
+  onboarded: boolean;
+}
+
 export class ProgressDto {
   @ApiProperty({
     format: 'date',
     description: 'India date the figures are for',
   })
   today: string;
+  @ApiProperty() coins: number;
+  @ApiProperty({ type: EnergyDto }) energy: EnergyDto;
+  @ApiProperty() premium: boolean;
+  @ApiProperty({
+    type: SettingsDto,
+    nullable: true,
+    description: 'Null until the learner saves settings once',
+  })
+  settings: SettingsDto | null;
+  @ApiProperty({ type: ChatAllowanceDto }) chat: ChatAllowanceDto;
   @ApiProperty() total_xp: number;
   @ApiProperty({
     type: WeekXpDto,

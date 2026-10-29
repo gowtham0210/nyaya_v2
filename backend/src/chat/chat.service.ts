@@ -5,6 +5,7 @@ import { DB, type Db } from '../core/db.js';
 import { ApiError } from '../core/errors.js';
 import { chatUsage } from '../db/schema.js';
 import { indiaToday } from '../learn/scoring.js';
+import { isPremium } from '../learn/wallet.js';
 import { azureChat } from './azure-chat.js';
 import type { ChatReplyDto, ChatRequestDto } from './chat.dto.js';
 import { DECLINED_REPLY, systemPrompt } from './chat.prompt.js';
@@ -36,7 +37,9 @@ export class ChatService {
       );
 
     const day = indiaToday(new Date());
-    const limit = this.config.chatDailyLimit;
+    const limit = (await isPremium(this.db, userId))
+      ? this.config.chatDailyLimit
+      : this.config.chatFreeDailyLimit;
     // Taken before the model call, so parallel requests can't pass the limit.
     const used = await this.reserve(userId, day, limit);
     if (used === null)

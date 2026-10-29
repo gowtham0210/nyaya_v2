@@ -250,6 +250,30 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       level, signed out and in, progress came back. Next: Part 2 (settings, coins, energy, freezes on the server),
       Part 3 (real leagues from the server's weekly XP).
 
+- [x] 2026-10-29: **Coins, energy, freezes, premium and settings live on the server (Part 2 of 3).** User's choices:
+      demo premium is turned on by the app (`POST/DELETE /v1/me/premium`, source 'demo', audit-logged; testing only —
+      replace with store receipt checks before launch); only learning settings follow the account (name, persona,
+      language, daily goal, onboarded) — theme, sound, haptics, reminders stay per phone. **3NF:** `coin_ledger` and
+      `energy_ledger` (every movement; balances are sums, never stored; partial unique indexes pay a reward once per
+      session / chest / welcome), `learner_settings` (name stays in `users.display_name`; onboarded = onboarded_at set),
+      `premium_memberships` (a row = premium). Kept on purpose: the chest payment row and `chest_openings` (money vs
+      road progress); ledger amounts are what was paid at the time, like `xp_awarded`. Migration 0006.
+      Server rules (`ECONOMY` in `rewards.ts`, same numbers as the app's GameRules): 60 welcome coins; quiz start charges
+      energy (case path/duel 1, exam 2, docket free; `409 not_enough_energy`); `POST /quiz-sessions/:id/abandon` before
+      the first answer deletes the quiz and refunds; submit pays 5/new star, 10 docket, 15 daily goal (once per India
+      day, even if the goal is raised), streak-milestone coins, +1 energy for a first 3-star clear; chests pay 30;
+      `POST /v1/me/energy/refill` (30 coins → 1), `POST /v1/me/streak-freezes` (100 coins, max 2; the streak replay
+      counts bought freezes from the day bought); `GET/PUT /v1/me/settings`. Progress now includes coins, energy,
+      premium, settings and chat use. Chat: 5/day free, 50 premium (`CHAT_FREE_DAILY_LIMIT`, `CHAT_DAILY_LIMIT`).
+      Dropped on purpose: duel-win coins (simulated opponent) and the league top-3 bonus (back with real leagues).
+      App: profile copies coins/energy/premium/chat use/settings from the server; first sign-in uploads the phone's
+      settings (and demo premium) once, then the account wins; progress refreshes right after a quiz starts; freeze shop
+      back on; coins shown on the Journey header and in Settings → Store (they had no place since the Home redesign).
+      Also fixed: "Play again" reopened the finished quiz (state is per quiz request; now invalidated first).
+      Tests: backend 33 unit + 56 API, Flutter 39. Staging migrated (backup `nyaya-2026-10-29-0813.sql.gz`); user
+      checked Part 2 on the iPhone. Known: Settings → Reset may not reopen onboarding (account settings come back);
+      premium chat stops at the server's 50/day while the app shows unlimited. Next: Part 3 (real leagues).
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).

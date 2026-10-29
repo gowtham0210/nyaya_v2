@@ -15,9 +15,9 @@ import '../../progress/data/progress_api.dart';
 import '../../progress/domain/server_progress.dart';
 import '../domain/quiz_models.dart';
 
-/// Coordinates every side effect of finishing a quiz. XP, stars and the
-/// streak come from the server ([ServerRewards], [ServerProgress]); coins,
-/// energy and the duel rating are still worked out here on the phone.
+/// Coordinates every side effect of finishing a quiz. XP, stars, the streak,
+/// coins and energy come from the server ([ServerRewards], [ServerProgress]);
+/// only the duel rating (simulated opponent) is worked out on the phone.
 class QuizCompletionService {
   QuizCompletionService(this.ref);
 
@@ -49,17 +49,7 @@ class QuizCompletionService {
     final stars = rewards.stars ?? 0;
     final isCasePath = result.request.mode == QuizMode.casePath;
     final unlockedNext = isCasePath && rewards.bestStarsBefore == 0 && stars > 0;
-    final energyBonus =
-        isCasePath && stars == 3 && rewards.bestStarsBefore < 3 ? GameRules.threeStarEnergyBonus : 0;
-    final quizzesToday = progress?.quizzesToday ?? before.quizzesToday + 1;
-    final goalReached = quizzesToday == before.dailyGoal;
-
-    // ── Coins (on the phone until the economy moves to the server) ─────────
-    var coins = rewards.newStars * GameRules.coinsPerNewStar;
-    if (result.request.mode == QuizMode.dailyDocket) coins += GameRules.coinsForDailyDocket;
-    if (result.duelWon == true) coins += GameRules.coinsForDuelWin;
-    if (rewards.streakMilestone != null) coins += GameRules.streakMilestones[rewards.streakMilestone!] ?? 0;
-    if (goalReached) coins += GameRules.coinsForDailyGoal;
+    final goalReached = (progress?.quizzesToday ?? before.quizzesToday + 1) == before.dailyGoal;
 
     // ── Duel rating (hidden Elo, simulated opponent) ───────────────────────
     int? ratingDelta;
@@ -78,7 +68,8 @@ class QuizCompletionService {
       profileCtl.applyDuel(newRating: updated, won: result.duelWon!);
     }
 
-    profileCtl.applyQuizEconomy(coins: coins, energyBonus: energyBonus);
+    // Coins and energy come with the server's progress; without it, show the rewards.
+    if (progress == null) profileCtl.applyQuizEconomy(coins: rewards.coins, energyBonus: rewards.energyBonus);
     final weeklyAfter = progress?.weeklyXp ?? before.weeklyXp + rewards.xp;
 
     return RewardSummary(
@@ -91,13 +82,13 @@ class QuizCompletionService {
         duelBonus: 0,
         total: rewards.xp,
       ),
-      coins: coins,
+      coins: rewards.coins,
       newStars: rewards.newStars,
       streak: rewards.streak,
       streakExtended: rewards.streakExtended,
       streakMilestone: rewards.streakMilestone,
       dailyGoalJustReached: goalReached,
-      energyBonus: before.isPremium ? 0 : energyBonus,
+      energyBonus: rewards.energyBonus,
       duelRatingDelta: ratingDelta,
       leagueRankBefore: rankBefore,
       leagueRankAfter: rankFor(weeklyAfter),
@@ -108,15 +99,13 @@ class QuizCompletionService {
   /// Opens a chapter chest on the map through the server. Returns the coins
   /// won, or 0 when the server refused (locked, already open or offline).
   static Future<int> openChest(WidgetRef ref, JourneyNode chest) async {
+    final coinsBefore = ref.read(profileProvider).coins;
     try {
       final progress = await ref.read(progressApiProvider).openChest(chest.id);
-      final wasOpen = ref.read(journeyProvider).openedChests.contains(chest.id);
       ref.read(progressSyncProvider.notifier).apply(progress);
-      if (wasOpen || !progress.openedChests.contains(chest.id)) return 0;
+      return (progress.coins - coinsBefore).clamp(0, GameRules.coinsPerChest);
     } on ApiException {
       return 0;
     }
-    ref.read(profileProvider.notifier).addCoins(GameRules.coinsPerChest);
-    return GameRules.coinsPerChest;
   }
 }

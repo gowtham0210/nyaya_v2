@@ -119,6 +119,25 @@ describe('streak', () => {
     expect(streakOn([...week, '2026-10-10'], '2026-10-10').streak).toBe(1);
   });
 
+  it('lets a bought freeze cover a missed day, holding at most 2', () => {
+    const days = ['2026-10-01', '2026-10-02'];
+    expect(streakOn([...days, '2026-10-04'], '2026-10-04').streak).toBe(1);
+    const covered = streakOn([...days, '2026-10-04'], '2026-10-04', [
+      '2026-10-03',
+    ]);
+    expect(covered).toMatchObject({
+      streak: 3,
+      freezes: 0,
+      frozenDays: ['2026-10-03'],
+    });
+    // Bought today and not played yet: it keeps yesterday's gap covered.
+    expect(streakOn(days, '2026-10-04', ['2026-10-04']).streak).toBe(2);
+    expect(
+      streakOn(days, '2026-10-02', ['2026-10-01', '2026-10-01', '2026-10-02'])
+        .freezes,
+    ).toBe(2);
+  });
+
   it('names milestones', () => {
     expect([2, 3, 7, 8].map(milestoneFor)).toEqual([null, 3, 7, null]);
   });

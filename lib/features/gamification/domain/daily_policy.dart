@@ -39,7 +39,7 @@ abstract final class DailyPolicy {
         next = next.copyWith(
           pendingLeagueOutcome: LeagueOutcome(rank: rank, fromTier: next.leagueTier, toTier: to),
           leagueTier: to,
-          coins: next.coins + (rank <= 3 ? 50 : 0),
+          // The top-3 coin bonus returns with real leagues (coins are on the server).
         );
       }
       next = next.copyWith(weekId: week, weeklyXp: 0);

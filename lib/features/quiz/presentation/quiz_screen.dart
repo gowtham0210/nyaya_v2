@@ -1,10 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
-import '../../profile/application/profile_controller.dart';
 import '../application/quiz_controller.dart';
 import '../data/quiz_api.dart';
 import '../domain/quiz_models.dart';
@@ -62,7 +63,7 @@ class _QuizSession extends ConsumerWidget {
       ),
     );
     if (leave == true && refund) {
-      ref.read(profileProvider.notifier).refundEnergy(request.mode.energyCost);
+      unawaited(ref.read(quizControllerProvider(request).notifier).abandon());
     }
     return leave == true;
   }
@@ -107,6 +108,7 @@ class _QuizError extends ConsumerWidget {
     final message = switch (failure) {
       QuizFailure.empty => l.quizEmpty,
       QuizFailure.network => l.quizOffline,
+      QuizFailure.noEnergy => l.energyOutTitle,
       QuizFailure.signedOut => l.quizSignedOut,
       _ => l.commonSomethingWrong,
     };
@@ -116,7 +118,7 @@ class _QuizError extends ConsumerWidget {
           icon: const Icon(Icons.close_rounded),
           onPressed: () {
             // Nothing was played — give the energy back.
-            ref.read(profileProvider.notifier).refundEnergy(request.mode.energyCost);
+            unawaited(ref.read(quizControllerProvider(request).notifier).abandon());
             Navigator.of(context).pop();
           },
         ),

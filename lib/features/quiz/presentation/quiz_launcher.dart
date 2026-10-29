@@ -13,6 +13,8 @@ import '../../../core/utils/day.dart';
 import '../../../core/widgets/chunky_button.dart';
 import '../../auth/application/auth_controller.dart';
 import '../../profile/application/profile_controller.dart';
+import '../../progress/application/progress_sync.dart';
+import '../application/quiz_controller.dart';
 import '../domain/quiz_models.dart';
 
 /// The single entry point for starting any quiz. Guards sign-in (the server
@@ -45,6 +47,9 @@ abstract final class QuizLauncher {
     }
     profile.spendEnergy(cost);
     if (replace) {
+      // "Play again" opens the same quiz: drop the finished one so a new
+      // attempt starts (its state is kept per quiz request).
+      ref.invalidate(quizControllerProvider(request));
       context.pushReplacement(Routes.quiz, extra: request);
     } else {
       await context.push(Routes.quiz, extra: request);
@@ -114,15 +119,22 @@ class OutOfEnergySheet extends ConsumerWidget {
             ),
             const SizedBox(height: 12),
             OutlinedButton.icon(
-              onPressed: () {
+              onPressed: () async {
+                final messenger = ScaffoldMessenger.of(context);
                 if (!canBuy) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l.energyNotEnoughCoins)));
+                  messenger.showSnackBar(SnackBar(content: Text(l.energyNotEnoughCoins)));
                   return;
                 }
-                ctl.refillEnergyWithCoins();
+                final failed = await ref.read(progressSyncProvider.notifier).refillEnergy();
+                if (failed != null) {
+                  messenger.showSnackBar(SnackBar(
+                    content: Text(failed == 'not_enough_coins' ? l.energyNotEnoughCoins : l.commonSomethingWrong),
+                  ));
+                  return;
+                }
                 ref.read(feedbackProvider).play(Haptic.success);
-                if (p.energy + 1 >= needed) close();
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l.energyRefilled)));
+                if (ref.read(profileProvider).energy >= needed) close();
+                messenger.showSnackBar(SnackBar(content: Text(l.energyRefilled)));
               },
               icon: const Icon(Icons.monetization_on_rounded),
               label: Text(l.energyRefillCoins(GameRules.energyRefillCoinCost)),

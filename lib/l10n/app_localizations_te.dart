@@ -964,9 +964,6 @@ class AppLocalizationsTe extends AppLocalizations {
   }
 
   @override
-  String get settingsFreezeEarned => 'Earned at 7, 30 and 100 days';
-
-  @override
   String get settingsFreezeBought => 'స్ట్రీక్ ఫ్రీజ్ సిద్ధం!';
 
   @override

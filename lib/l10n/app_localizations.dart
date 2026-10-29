@@ -1726,12 +1726,6 @@ abstract class AppLocalizations {
   /// **'{coins} coins'**
   String settingsBuyFor(int coins);
 
-  /// Streak freeze row: how freezes are earned (buying is off for now)
-  ///
-  /// In en, this message translates to:
-  /// **'Earned at 7, 30 and 100 days'**
-  String get settingsFreezeEarned;
-
   /// No description provided for @settingsFreezeBought.
   ///
   /// In en, this message translates to:

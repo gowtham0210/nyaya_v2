@@ -88,18 +88,7 @@ class ProfileController extends Notifier<UserProfile> {
 
   void addEnergy(int amount) => _set(state.copyWith(energy: state.energy + amount));
 
-  bool refillEnergyWithCoins() {
-    if (state.coins < GameRules.energyRefillCoinCost) return false;
-    _set(state.copyWith(
-      coins: state.coins - GameRules.energyRefillCoinCost,
-      energy: state.energy + 1,
-    ));
-    return true;
-  }
-
   // ── Coins & store ─────────────────────────────────────────────────────────
-
-  void addCoins(int n) => _set(state.copyWith(coins: state.coins + n));
 
   void activatePremium() => _set(state.copyWith(isPremium: true));
 
@@ -148,11 +137,28 @@ class ProfileController extends Notifier<UserProfile> {
       quizzesTodayDay: today,
       lastDocketDay: p.docketDoneToday ? today : null,
       clearLastDocketDay: !p.docketDoneToday && state.lastDocketDay == today,
+      coins: p.coins,
+      energy: p.energy,
+      energyDay: today,
+      isPremium: p.premium,
+      aiMessagesToday: p.chatUsedToday,
+      // Learning settings follow the account once it has them.
+      name: p.settings?.name,
+      persona: p.settings == null ? null : Persona.values.asNameMap()[p.settings!.persona],
+      language: p.settings == null
+          ? null
+          : AppLanguage.values.where((l) => l.code == p.settings!.language).firstOrNull,
+      dailyGoal: p.settings?.dailyGoal,
+      onboarded: p.settings?.onboarded,
     ));
   }
 
-  /// Signed out: show no learning progress (it belongs to the account).
+  /// Signed out: show no progress, coins or premium (they belong to the account).
   void clearServerProgress() => _set(state.copyWith(
+        coins: 0,
+        energy: GameRules.freeDailyEnergy,
+        isPremium: false,
+        aiMessagesToday: 0,
         totalXp: 0,
         weeklyXp: 0,
         streak: 0,
@@ -168,7 +174,7 @@ class ProfileController extends Notifier<UserProfile> {
         clearLastDocketDay: true,
       ));
 
-  /// Coins and energy earned by a quiz. They stay on the phone for now.
+  /// Coins and energy a quiz earned, shown until the server's figures load.
   void applyQuizEconomy({required int coins, required int energyBonus}) => _set(state.copyWith(
         coins: state.coins + coins,
         energy: state.isPremium ? state.energy : state.energy + energyBonus,

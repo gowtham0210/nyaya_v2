@@ -127,6 +127,30 @@ void main() {
     expect(find.text('NEXT LEVEL'), findsOneWidget);
   });
 
+  testWidgets('Play again after a failed level starts a fresh attempt', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+
+    await tester.tap(find.text('Explore').first);
+    await settle(tester);
+    // Every answer wrong, so the level fails and offers Play again.
+    for (var i = 0; i < 6; i++) {
+      await tester.tap(find.text(api.wrongTextFor(_current(c).id)).first);
+      await settle(tester);
+      await tester.tap(find.text(i == 5 ? 'FINISH' : 'NEXT'));
+      await settle(tester);
+    }
+    expect(find.text('PLAY AGAIN'), findsOneWidget);
+    final started = api.sessionsStarted;
+
+    await tester.tap(find.text('PLAY AGAIN'));
+    await settle(tester);
+    expect(api.sessionsStarted, started + 1, reason: 'a new server session');
+    expect(find.textContaining('Question 1 of'), findsOneWidget);
+    expect(find.text('PLAY AGAIN'), findsNothing);
+  });
+
   testWidgets('a wrong answer shows the right one from the server, and a failed send can be retried', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
@@ -167,7 +191,12 @@ void main() {
     await tester.tap(find.text('CREATE ACCOUNT'));
     await settle(tester);
     expect(find.textContaining('Question 1 of'), findsOneWidget);
+    expect(api.energy, 4, reason: 'the server charges the energy');
     expect(c.read(profileProvider).energy, 4);
+    // The new account took the settings chosen during onboarding.
+    expect(api.settings?.name, 'Asha');
+    expect(api.settings?.persona, 'citizen');
+    expect(api.settings?.onboarded, isTrue);
   });
 
   testWidgets('Journey tab shows the Case Path map and opens a level from its chapter card', (tester) async {
@@ -256,7 +285,8 @@ void main() {
     final today = DateTime.now();
     final key = '${today.year.toString().padLeft(4, '0')}-${today.month.toString().padLeft(2, '0')}-${today.day.toString().padLeft(2, '0')}';
     final profile = jsonEncode({'onboarded': true, 'name': 'Ravi', 'energy': 0, 'energyDay': key});
-    await pumpApp(tester, prefs: {'profile_v1': profile});
+    // Energy lives on the server; the phone shows its copy.
+    await pumpApp(tester, prefs: {'profile_v1': profile}, server: (s) => s.energy = 0);
     await settle(tester);
 
     await tester.tap(find.text('Explore').first); // Constitution "Start here" card

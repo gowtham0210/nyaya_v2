@@ -270,6 +270,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/quiz-sessions/{id}/abandon": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Leave before the first answer: the quiz is removed and its energy comes back */
+        post: operations["LearnController_abandon"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/quiz-sessions/{id}": {
         parameters: {
             query?: never;
@@ -384,6 +401,76 @@ export interface paths {
         put?: never;
         /** Open a chapter chest (e.g. constitution_chest) once its levels are done */
         post: operations["LearnController_openChest"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/energy/refill": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Spend 30 coins on 1 energy for today */
+        post: operations["LearnController_refill"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/streak-freezes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Spend 100 coins on a streak freeze (at most 2 held) */
+        post: operations["LearnController_buyStreakFreeze"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/premium": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Turn on demo premium (testing only; replaced by store receipt checks before launch) */
+        post: operations["LearnController_startPremium"];
+        /** Turn off demo premium */
+        delete: operations["LearnController_endPremium"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/settings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Learning settings; null until saved once */
+        get: operations["LearnController_getSettings"];
+        /** Save learning settings (name, persona, language, daily goal, onboarded) */
+        put: operations["LearnController_saveSettings"];
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -782,6 +869,13 @@ export interface components {
             /** @description Immediate mode only */
             feedback: components["schemas"]["FeedbackDto"] | null;
         };
+        CoinsEarnedDto: {
+            new_stars: number;
+            daily_docket: number;
+            daily_goal: number;
+            streak_milestone: number;
+            total: number;
+        };
         XpBreakdownDto: {
             question_xp: number;
             completion_bonus: number;
@@ -792,6 +886,9 @@ export interface components {
             total: number;
         };
         RewardsDto: {
+            coins: components["schemas"]["CoinsEarnedDto"];
+            /** @description Energy given back for a first 3-star clear */
+            energy_bonus: number;
             xp: components["schemas"]["XpBreakdownDto"];
             /** @description Case Path level, e.g. constitution_2 */
             level_id: string | null;
@@ -846,6 +943,29 @@ export interface components {
             items: components["schemas"]["AttemptDto"][];
             next_cursor: string | null;
         };
+        EnergyDto: {
+            /** @description Energy left today */
+            today: number;
+            /** @description Free energy each day (India date) */
+            free_daily: number;
+            /** @description Premium: quizzes cost no energy */
+            unlimited: boolean;
+        };
+        SettingsDto: {
+            name: string;
+            /** @enum {string} */
+            persona: "advocate" | "aspirant" | "citizen";
+            /** @enum {string} */
+            language: "en" | "hi" | "ta" | "te" | "kn" | "ml";
+            /** @description Quizzes a day */
+            daily_goal: number;
+            /** @description Finished onboarding */
+            onboarded: boolean;
+        };
+        ChatAllowanceDto: {
+            daily_limit: number;
+            used_today: number;
+        };
         WeekXpDto: {
             /** @example 2026-W44 */
             week_id: string;
@@ -883,6 +1003,12 @@ export interface components {
              * @description India date the figures are for
              */
             today: string;
+            coins: number;
+            energy: components["schemas"]["EnergyDto"];
+            premium: boolean;
+            /** @description Null until the learner saves settings once */
+            settings: components["schemas"]["SettingsDto"] | null;
+            chat: components["schemas"]["ChatAllowanceDto"];
             total_xp: number;
             /** @description This week (Monday–Sunday, India) */
             week: components["schemas"]["WeekXpDto"];
@@ -1348,6 +1474,25 @@ export interface operations {
             };
         };
     };
+    LearnController_abandon: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     LearnController_get: {
         parameters: {
             query?: never;
@@ -1497,6 +1642,124 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ProgressDto"];
+                };
+            };
+        };
+    };
+    LearnController_refill: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProgressDto"];
+                };
+            };
+        };
+    };
+    LearnController_buyStreakFreeze: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProgressDto"];
+                };
+            };
+        };
+    };
+    LearnController_startPremium: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProgressDto"];
+                };
+            };
+        };
+    };
+    LearnController_endPremium: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProgressDto"];
+                };
+            };
+        };
+    };
+    LearnController_getSettings: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SettingsDto"];
+                };
+            };
+        };
+    };
+    LearnController_saveSettings: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SettingsDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SettingsDto"];
                 };
             };
         };

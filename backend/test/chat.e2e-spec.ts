@@ -33,7 +33,12 @@ const answer = (text: string) => ({
 describe('chat', () => {
   let t: TestApp;
   beforeAll(
-    async () => (t = await startApp({ azureOpenAi: azure, chatDailyLimit: 2 })),
+    async () =>
+      (t = await startApp({
+        azureOpenAi: azure,
+        chatDailyLimit: 2,
+        chatFreeDailyLimit: 2,
+      })),
   );
   afterAll(() => t.close());
   afterEach(() => vi.unstubAllGlobals());

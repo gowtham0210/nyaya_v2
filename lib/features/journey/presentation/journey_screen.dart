@@ -1,7 +1,9 @@
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../../../app/router.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
@@ -211,6 +213,15 @@ class _MapHeader extends ConsumerWidget {
                       icon: Icons.bolt_rounded,
                       value: p.isPremium ? '∞' : '${p.energy}',
                       color: context.nyaya.energy,
+                    ),
+                    const SizedBox(width: 8),
+                    // Coins are spent in Settings → Store (energy refills, streak freezes).
+                    StatPill(
+                      icon: Icons.monetization_on_rounded,
+                      value: '${p.coins}',
+                      color: AppPalette.ochre,
+                      semanticLabel: '${p.coins} ${context.l10n.statCoins}',
+                      onTap: () => context.push(Routes.settings),
                     ),
                   ],
                 ),

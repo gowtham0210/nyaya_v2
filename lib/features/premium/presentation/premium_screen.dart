@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -11,6 +13,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/chunky_button.dart';
 import '../../../core/widgets/pressable.dart';
 import '../../profile/application/profile_controller.dart';
+import '../../progress/application/progress_sync.dart';
 import '../data/purchase_service.dart';
 
 class PremiumScreen extends ConsumerStatefulWidget {
@@ -32,13 +35,19 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
     }
   }
 
+  /// Shown at once; saved to the account when signed in (or at first sign-in).
+  void _activate() {
+    ref.read(profileProvider.notifier).activatePremium();
+    unawaited(ref.read(progressSyncProvider.notifier).setPremium(true));
+  }
+
   Future<void> _buy() async {
     setState(() => _busy = true);
     final ok = await ref.read(purchaseServiceProvider).purchase(_plan);
     if (!mounted) return;
     setState(() => _busy = false);
     if (ok) {
-      ref.read(profileProvider.notifier).activatePremium();
+      _activate();
       ref.read(feedbackProvider).play(Haptic.celebrate);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.l10n.premiumActivated)));
       _close();
@@ -48,7 +57,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
   Future<void> _restore() async {
     final ok = await ref.read(purchaseServiceProvider).restore();
     if (!mounted) return;
-    if (ok) ref.read(profileProvider.notifier).activatePremium();
+    if (ok) _activate();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(ok ? context.l10n.premiumActivated : context.l10n.premiumNothingToRestore)),
     );

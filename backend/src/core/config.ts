@@ -20,8 +20,10 @@ export interface AppConfig {
   trustProxyHops: number;
   /** Azure OpenAI chat for Ask AI; chat is unavailable when endpoint or key is missing. */
   azureOpenAi?: { endpoint: string; apiKey: string; chatDeployment: string };
-  /** AI answers each learner may get per India date. */
+  /** AI answers a premium learner may get per India date (also the abuse cap). */
   chatDailyLimit: number;
+  /** AI answers a free learner may get per India date. */
+  chatFreeDailyLimit: number;
 }
 
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
@@ -58,6 +60,11 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
           }
         : undefined,
     chatDailyLimit: positiveInt(env.CHAT_DAILY_LIMIT, 'CHAT_DAILY_LIMIT', 50),
+    chatFreeDailyLimit: positiveInt(
+      env.CHAT_FREE_DAILY_LIMIT,
+      'CHAT_FREE_DAILY_LIMIT',
+      5,
+    ),
   };
 }
 

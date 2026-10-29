@@ -52,6 +52,11 @@ class ApiClient {
   Future<dynamic> post(String path, {Object? body, bool auth = true}) =>
       _send('POST', path, body: body, auth: auth);
 
+  Future<dynamic> put(String path, {Object? body, bool auth = true}) =>
+      _send('PUT', path, body: body, auth: auth);
+
+  Future<dynamic> delete(String path, {bool auth = true}) => _send('DELETE', path, auth: auth);
+
   Future<dynamic> _send(String method, String path, {Object? body, Map<String, String>? query, required bool auth}) async {
     var res = await _raw(method, path, body: body, query: query, auth: auth);
     if (res.statusCode == 401 && auth && tokens.current != null) {

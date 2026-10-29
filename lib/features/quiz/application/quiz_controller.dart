@@ -41,6 +41,9 @@ enum QuizPhase {
 enum QuizFailure {
   /// No published questions match (yet).
   empty,
+
+  /// The server says there isn't enough energy today.
+  noEnergy,
   network,
   signedOut,
   other,
@@ -200,6 +203,8 @@ class QuizController extends Notifier<QuizState> {
       final started = await _api.start(plan, topicIds: topicIds, catalog: catalog);
       if (!ref.mounted) return;
       _sessionId = started.sessionId;
+      // The server charged the energy; show its figure.
+      unawaited(ref.read(progressSyncProvider.notifier).refresh());
       final questions = started.questions;
 
       DuelOpponent? opponent;
@@ -231,12 +236,30 @@ class QuizController extends Notifier<QuizState> {
       if (!ref.mounted) return;
       final failure = switch (e) {
         ApiException(code: 'no_questions_available') => QuizFailure.empty,
+        ApiException(code: 'not_enough_energy') => QuizFailure.noEnergy,
         ApiException(isNetwork: true) => QuizFailure.network,
         ApiException(status: 401) => QuizFailure.signedOut,
         _ => QuizFailure.other,
       };
       state = state.copyWith(phase: QuizPhase.failed, failure: failure);
     }
+  }
+
+  /// Leaves before the first answer: the server removes the quiz and gives the
+  /// energy back. Without a session (start failed) nothing was charged.
+  Future<void> abandon() async {
+    _timer?.cancel();
+    // The phone's copy took the energy when the quiz opened; give it back now.
+    ref.read(profileProvider.notifier).refundEnergy(request.mode.energyCost);
+    final id = _sessionId;
+    if (id == null) return;
+    try {
+      await _api.abandon(id);
+    } on ApiException {
+      // Offline: the server keeps the charge until the next sync shows it.
+    }
+    _sessionId = null;
+    await ref.read(progressSyncProvider.notifier).refresh();
   }
 
   void _startTimer() {

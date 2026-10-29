@@ -43,6 +43,13 @@
       "when": 1793258346926,
       "tag": "0005_drop_derived_session_columns",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793260954322,
+      "tag": "0006_economy_and_settings",
+      "breakpoints": true
     }
   ]
 }

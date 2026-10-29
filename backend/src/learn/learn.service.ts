@@ -16,12 +16,20 @@ import {
   sql,
   type SQL,
 } from 'drizzle-orm';
+import { APP_CONFIG, type AppConfig } from '../core/config.js';
 import { DB, type Db, type Tx } from '../core/db.js';
+import { AuditService, type Actor } from '../core/audit.service.js';
 import { ApiError } from '../core/errors.js';
 import { newId } from '../core/ids.js';
 import { decodeCursor, toPage, type Page } from '../core/pagination.js';
 import {
+  chatUsage,
   chestOpenings,
+  coinLedger,
+  energyLedger,
+  learnerSettings,
+  premiumMemberships,
+  users,
   questions,
   questionVersions,
   quizSessionQuestions,
@@ -42,11 +50,18 @@ import type {
   ProgressDto,
   ResultDto,
   RewardsDto,
+  SettingsDto,
   SessionDto,
   SessionQuestionDto,
   StartSessionDto,
 } from './learn.dto.js';
-import { sessionXp, stars, type AnsweredQuestion } from './rewards.js';
+import {
+  ECONOMY,
+  RULES,
+  sessionXp,
+  stars,
+  type AnsweredQuestion,
+} from './rewards.js';
 import {
   EXAM_NEGATIVE_VERSION,
   MAX_QUESTIONS,
@@ -62,6 +77,16 @@ import {
   shuffled,
 } from './scoring.js';
 import { milestoneFor, streakOn } from './streak.js';
+import {
+  addCoins,
+  addEnergy,
+  coinBalance,
+  energyToday,
+  ensureWelcome,
+  freezePurchaseDays,
+  isPremium,
+  paidOnDay,
+} from './wallet.js';
 
 /** A session row with its topics; everything else about it is worked out from these. */
 type SessionRow = typeof quizSessions.$inferSelect & { topicIds: string[] };
@@ -119,7 +144,23 @@ const err = (status: HttpStatus, code: string, message: string) =>
  */
 @Injectable()
 export class LearnService {
-  constructor(@Inject(DB) private readonly db: Db) {}
+  constructor(
+    @Inject(DB) private readonly db: Db,
+    @Inject(APP_CONFIG) private readonly config: AppConfig,
+    private readonly audit: AuditService,
+  ) {}
+
+  /** For read-only helpers the controller calls directly. */
+  get database(): Db {
+    return this.db;
+  }
+
+  /** One write at a time per learner, so balances and rewards see settled history. */
+  private lockLearner(tx: Tx, userId: string) {
+    return tx.execute(
+      sql`select pg_advisory_xact_lock(hashtext(${'progress:' + userId}))`,
+    );
+  }
 
   /** Published, live, in force today, in an active topic and subject. */
   private eligible(language: string, now: Date): SQL {
@@ -247,6 +288,7 @@ export class LearnService {
           'invalid_quiz',
           'A Case Path level is one subject at one difficulty',
         );
+      await this.lockLearner(tx, userId);
       if (
         dto.mode === 'daily_docket' &&
         (await this.docketDone(tx, userId, now))
@@ -255,6 +297,16 @@ export class LearnService {
           HttpStatus.CONFLICT,
           'docket_done_today',
           "Today's docket is already done; a new one opens at midnight (India time)",
+        );
+
+      const cost = (await isPremium(tx, userId))
+        ? 0
+        : ECONOMY.energyCost[dto.mode];
+      if (cost > 0 && (await energyToday(tx, userId, now)) < cost)
+        throw err(
+          HttpStatus.CONFLICT,
+          'not_enough_energy',
+          'Not enough energy for this quiz today',
         );
 
       const where = [this.eligible(language, now)];
@@ -314,7 +366,48 @@ export class LearnService {
           optionOrder: shuffled(p.options.map((o) => o.id)),
         })),
       );
+      // Charged when the quiz starts, never mid-quiz.
+      await addEnergy(tx, {
+        userId,
+        amount: -cost,
+        reason: 'quiz_start',
+        sessionId,
+      });
       return this.view(tx, await this.load(tx, userId, sessionId));
+    });
+  }
+
+  /**
+   * Leaving before the first answer: the quiz is removed as if it never
+   * started and its energy comes back.
+   */
+  async abandon(userId: string, id: string): Promise<void> {
+    await this.db.transaction(async (tx) => {
+      const s = await this.load(tx, userId, id, true);
+      const rows = await this.rows(tx, s.id);
+      if (isSubmitted(s) || rows.some((q) => q.answeredAt))
+        throw err(
+          HttpStatus.CONFLICT,
+          'quiz_started',
+          'This quiz has answers; finish it instead',
+        );
+      const [charged] = await tx
+        .select({ amount: energyLedger.amount })
+        .from(energyLedger)
+        .where(
+          and(
+            eq(energyLedger.sessionId, s.id),
+            eq(energyLedger.reason, 'quiz_start'),
+          ),
+        );
+      if (charged)
+        await addEnergy(tx, {
+          userId,
+          amount: -charged.amount,
+          reason: 'quiz_refund',
+          sessionId: s.id,
+        });
+      await tx.delete(quizSessions).where(eq(quizSessions.id, s.id));
     });
   }
 
@@ -418,10 +511,7 @@ export class LearnService {
     return this.db.transaction(async (tx) => {
       let s = await this.load(tx, userId, id, true);
       if (!isSubmitted(s)) {
-        // One submit at a time per learner, so rewards see a settled history.
-        await tx.execute(
-          sql`select pg_advisory_xact_lock(hashtext(${'progress:' + userId}))`,
-        );
+        await this.lockLearner(tx, userId);
         const rows = await this.rows(tx, s.id);
         const submittedAt = new Date();
         const scored = scoreSession(rows);
@@ -431,6 +521,22 @@ export class LearnService {
           .update(quizSessions)
           .set({ submittedAt, ...scored, xpAwarded: rewards.xp.total })
           .where(eq(quizSessions.id, s.id));
+        await ensureWelcome(tx, userId);
+        const pay = (
+          reason:
+            'new_stars' | 'daily_docket' | 'daily_goal' | 'streak_milestone',
+          amount: number,
+        ) => addCoins(tx, { userId, amount, reason, sessionId: s.id });
+        await pay('new_stars', rewards.coins.new_stars);
+        await pay('daily_docket', rewards.coins.daily_docket);
+        await pay('daily_goal', rewards.coins.daily_goal);
+        await pay('streak_milestone', rewards.coins.streak_milestone);
+        await addEnergy(tx, {
+          userId,
+          amount: rewards.energy_bonus,
+          reason: 'three_star_bonus',
+          sessionId: s.id,
+        });
         s = await this.load(tx, userId, id);
       }
       return this.resultView(tx, s);
@@ -552,8 +658,29 @@ export class LearnService {
       last_attempt_at: r.last.toISOString(),
     }));
     const finished = await this.finished(this.db, userId);
+    await ensureWelcome(this.db, userId);
+    const summary = this.summary(
+      finished,
+      await this.openedChests(this.db, userId),
+      await freezePurchaseDays(this.db, userId),
+    );
+    const premium = await isPremium(this.db, userId);
     return {
-      ...this.summary(finished, await this.openedChests(this.db, userId)),
+      ...summary,
+      coins: await coinBalance(this.db, userId),
+      energy: {
+        today: await energyToday(this.db, userId),
+        free_daily: ECONOMY.freeDailyEnergy,
+        unlimited: premium,
+      },
+      premium,
+      settings: await this.settings(this.db, userId),
+      chat: {
+        daily_limit: premium
+          ? this.config.chatDailyLimit
+          : this.config.chatFreeDailyLimit,
+        used_today: await this.chatUsedToday(userId, summary.today),
+      },
       attempts: finished.length,
       questions_answered: finished.reduce((n, f) => n + f.answered, 0),
       correct: finished.reduce((n, f) => n + f.correct, 0),
@@ -570,6 +697,7 @@ export class LearnService {
       const road = await this.road(tx);
       const node = road.find((n) => n.kind === 'chest' && n.id === id);
       if (!node) throw ApiError.notFound('Chest');
+      await this.lockLearner(tx, userId);
       const opened = await this.openedChests(tx, userId);
       if (opened.has(id)) return;
       const best = this.summary(await this.finished(tx, userId), opened).stars;
@@ -585,6 +713,13 @@ export class LearnService {
       await tx
         .insert(chestOpenings)
         .values({ userId, subjectId: node.subjectId, openedAt: new Date() });
+      await ensureWelcome(tx, userId);
+      await addCoins(tx, {
+        userId,
+        amount: ECONOMY.coinsPerChest,
+        reason: 'chest',
+        subjectId: node.subjectId,
+      });
     });
     return this.progress(userId);
   }
@@ -663,7 +798,12 @@ export class LearnService {
   }
 
   /** Everything progress shows, worked out from finished sessions. */
-  private summary(finished: Finished[], opened: Set<string>, now = new Date()) {
+  private summary(
+    finished: Finished[],
+    opened: Set<string>,
+    boughtFreezes: string[] = [],
+    now = new Date(),
+  ) {
     const today = indiaToday(now);
     const week = isoWeek(today);
     const lastWeek = isoWeek(
@@ -680,7 +820,7 @@ export class LearnService {
       else if (w === lastWeek) lastWeekXp += f.xp;
     }
     const days = finished.map((f) => f.day);
-    const streak = streakOn(days, today);
+    const streak = streakOn(days, today, boughtFreezes);
     const recent = (list: string[]) => [...new Set(list)].sort().slice(-21);
     return {
       today,
@@ -719,7 +859,39 @@ export class LearnService {
       { ...s, submittedAt: s.submittedAt! },
       rows,
     );
-    return { ...r, xp: { ...r.xp, total: s.xpAwarded ?? 0 } };
+    const paid = await tx
+      .select({ reason: coinLedger.reason, amount: coinLedger.amount })
+      .from(coinLedger)
+      .where(eq(coinLedger.sessionId, s.id));
+    const coin = (reason: string) =>
+      paid.find((p) => p.reason === reason)?.amount ?? 0;
+    const [bonus] = await tx
+      .select({ amount: energyLedger.amount })
+      .from(energyLedger)
+      .where(
+        and(
+          eq(energyLedger.sessionId, s.id),
+          eq(energyLedger.reason, 'three_star_bonus'),
+        ),
+      );
+    const coins = {
+      new_stars: coin('new_stars'),
+      daily_docket: coin('daily_docket'),
+      daily_goal: coin('daily_goal'),
+      streak_milestone: coin('streak_milestone'),
+      total: 0,
+    };
+    coins.total =
+      coins.new_stars +
+      coins.daily_docket +
+      coins.daily_goal +
+      coins.streak_milestone;
+    return {
+      ...r,
+      xp: { ...r.xp, total: s.xpAwarded ?? 0 },
+      coins,
+      energy_bonus: bonus?.amount ?? 0,
+    };
   }
 
   /**
@@ -735,11 +907,13 @@ export class LearnService {
       (f) => f.id !== s.id && f.submittedAt <= s.submittedAt,
     );
     const day = indiaToday(s.submittedAt);
+    const bought = await freezePurchaseDays(tx, s.userId);
     const before = streakOn(
       history.map((f) => f.day),
       day,
+      bought,
     );
-    const after = streakOn([...history.map((f) => f.day), day], day);
+    const after = streakOn([...history.map((f) => f.day), day], day, bought);
     const extended = !history.some((f) => f.day === day);
 
     let level: string | null = null;
@@ -785,16 +959,175 @@ export class LearnService {
     });
     // A second docket on the same day earns nothing (the first one counts).
     if (docketAgain) xp.total = 0;
+
+    const newStars = got === null ? 0 : Math.max(0, got - bestBefore);
+    const milestone = extended ? milestoneFor(after.streak) : null;
+    const settings = await this.settings(tx, s.userId);
+    const goal = settings?.daily_goal ?? ECONOMY.defaultDailyGoal;
+    const quizzesToday = history.filter((f) => f.day === day).length + 1;
+    // Once a day, even if the goal is changed after reaching it.
+    const goalReached =
+      quizzesToday >= goal &&
+      !(await paidOnDay(tx, s.userId, 'daily_goal', day, s.id));
+    const coins = {
+      new_stars: newStars * ECONOMY.coinsPerNewStar,
+      daily_docket:
+        s.mode === 'daily_docket' && !docketAgain
+          ? ECONOMY.coinsForDailyDocket
+          : 0,
+      daily_goal: goalReached ? ECONOMY.coinsForDailyGoal : 0,
+      streak_milestone: milestone
+        ? (ECONOMY.streakMilestoneCoins[milestone] ?? 0)
+        : 0,
+      total: 0,
+    };
+    coins.total =
+      coins.new_stars +
+      coins.daily_docket +
+      coins.daily_goal +
+      coins.streak_milestone;
+    const energyBonus =
+      got === 3 && bestBefore < 3 && !(await isPremium(tx, s.userId))
+        ? ECONOMY.threeStarEnergyBonus
+        : 0;
     return {
+      coins,
+      energy_bonus: energyBonus,
       xp,
       level_id: level,
       stars: got,
       best_stars_before: bestBefore,
-      new_stars: got === null ? 0 : Math.max(0, got - bestBefore),
+      new_stars: newStars,
       streak: after.streak,
       streak_extended: extended,
-      streak_milestone: extended ? milestoneFor(after.streak) : null,
+      streak_milestone: milestone,
     };
+  }
+
+  // ---------------------------------------------------------------- wallet & settings
+
+  /** Spends 30 coins on one energy for today. */
+  async refillEnergy(userId: string): Promise<ProgressDto> {
+    await this.db.transaction(async (tx) => {
+      await this.lockLearner(tx, userId);
+      await ensureWelcome(tx, userId);
+      await this.spend(tx, userId, ECONOMY.energyRefillCost, 'energy_refill');
+      await addEnergy(tx, { userId, amount: 1, reason: 'refill' });
+    });
+    return this.progress(userId);
+  }
+
+  /** Spends 100 coins on a streak freeze; at most 2 are held. */
+  async buyStreakFreeze(userId: string): Promise<ProgressDto> {
+    await this.db.transaction(async (tx) => {
+      await this.lockLearner(tx, userId);
+      await ensureWelcome(tx, userId);
+      const held = this.summary(
+        await this.finished(tx, userId),
+        new Set(),
+        await freezePurchaseDays(tx, userId),
+      ).streak.freezes;
+      if (held >= RULES.maxStreakFreezes)
+        throw err(
+          HttpStatus.CONFLICT,
+          'freezes_full',
+          'You already hold the most streak freezes',
+        );
+      await this.spend(tx, userId, ECONOMY.streakFreezeCost, 'streak_freeze');
+    });
+    return this.progress(userId);
+  }
+
+  private async spend(
+    tx: Tx,
+    userId: string,
+    cost: number,
+    reason: 'energy_refill' | 'streak_freeze',
+  ) {
+    if ((await coinBalance(tx, userId)) < cost)
+      throw err(HttpStatus.CONFLICT, 'not_enough_coins', 'Not enough coins');
+    await addCoins(tx, { userId, amount: -cost, reason });
+  }
+
+  /** Demo premium (testing only, until store purchases are checked). */
+  async setPremium(actor: Actor, on: boolean): Promise<ProgressDto> {
+    const userId = actor.id;
+    await this.db.transaction(async (tx) => {
+      if (on)
+        await tx
+          .insert(premiumMemberships)
+          .values({ userId, source: 'demo', startedAt: new Date() })
+          .onConflictDoNothing();
+      else
+        await tx
+          .delete(premiumMemberships)
+          .where(eq(premiumMemberships.userId, userId));
+      await this.audit.record(tx, actor, {
+        action: on ? 'premium.started' : 'premium.ended',
+        entityType: 'user',
+        entityId: userId,
+        data: { source: 'demo' },
+      });
+    });
+    return this.progress(userId);
+  }
+
+  async settings(tx: Tx, userId: string): Promise<SettingsDto | null> {
+    const [row] = await tx
+      .select({
+        name: users.displayName,
+        persona: learnerSettings.persona,
+        language: learnerSettings.language,
+        dailyGoal: learnerSettings.dailyGoal,
+        onboardedAt: learnerSettings.onboardedAt,
+      })
+      .from(learnerSettings)
+      .innerJoin(users, eq(users.id, learnerSettings.userId))
+      .where(eq(learnerSettings.userId, userId));
+    if (!row) return null;
+    return {
+      name: row.name,
+      persona: row.persona,
+      language: row.language,
+      daily_goal: row.dailyGoal,
+      onboarded: row.onboardedAt !== null,
+    };
+  }
+
+  async saveSettings(userId: string, dto: SettingsDto): Promise<SettingsDto> {
+    await this.db.transaction(async (tx) => {
+      const [old] = await tx
+        .select({ onboardedAt: learnerSettings.onboardedAt })
+        .from(learnerSettings)
+        .where(eq(learnerSettings.userId, userId));
+      const onboardedAt = dto.onboarded
+        ? (old?.onboardedAt ?? new Date())
+        : null;
+      const values = {
+        persona: dto.persona,
+        language: dto.language,
+        dailyGoal: dto.daily_goal,
+        onboardedAt,
+        updatedAt: new Date(),
+      };
+      await tx
+        .insert(learnerSettings)
+        .values({ userId, ...values })
+        .onConflictDoUpdate({ target: learnerSettings.userId, set: values });
+      await tx
+        .update(users)
+        .set({ displayName: dto.name.trim(), updatedAt: new Date() })
+        .where(eq(users.id, userId));
+    });
+    return (await this.settings(this.db, userId))!;
+  }
+
+  private async chatUsedToday(userId: string, today: string) {
+    const [row] = await this.db
+      .select({ answers: chatUsage.answers })
+      .from(chatUsage)
+      .where(and(eq(chatUsage.userId, userId), eq(chatUsage.day, today)));
+    return row?.answers ?? 0;
   }
 
   // ---------------------------------------------------------------- helpers

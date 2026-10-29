@@ -694,6 +694,35 @@
         ]
       }
     },
+    "/v1/quiz-sessions/{id}/abandon": {
+      "post": {
+        "operationId": "LearnController_abandon",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Leave before the first answer: the quiz is removed and its energy comes back",
+        "tags": [
+          "learn"
+        ]
+      }
+    },
     "/v1/quiz-sessions/{id}": {
       "get": {
         "operationId": "LearnController_get",
@@ -961,6 +990,174 @@
           }
         ],
         "summary": "Open a chapter chest (e.g. constitution_chest) once its levels are done",
+        "tags": [
+          "learn"
+        ]
+      }
+    },
+    "/v1/me/energy/refill": {
+      "post": {
+        "operationId": "LearnController_refill",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Spend 30 coins on 1 energy for today",
+        "tags": [
+          "learn"
+        ]
+      }
+    },
+    "/v1/me/streak-freezes": {
+      "post": {
+        "operationId": "LearnController_buyStreakFreeze",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Spend 100 coins on a streak freeze (at most 2 held)",
+        "tags": [
+          "learn"
+        ]
+      }
+    },
+    "/v1/me/premium": {
+      "post": {
+        "operationId": "LearnController_startPremium",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Turn on demo premium (testing only; replaced by store receipt checks before launch)",
+        "tags": [
+          "learn"
+        ]
+      },
+      "delete": {
+        "operationId": "LearnController_endPremium",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Turn off demo premium",
+        "tags": [
+          "learn"
+        ]
+      }
+    },
+    "/v1/me/settings": {
+      "get": {
+        "operationId": "LearnController_getSettings",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SettingsDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Learning settings; null until saved once",
+        "tags": [
+          "learn"
+        ]
+      },
+      "put": {
+        "operationId": "LearnController_saveSettings",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SettingsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SettingsDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Save learning settings (name, persona, language, daily goal, onboarded)",
         "tags": [
           "learn"
         ]
@@ -2224,6 +2421,33 @@
           "feedback"
         ]
       },
+      "CoinsEarnedDto": {
+        "type": "object",
+        "properties": {
+          "new_stars": {
+            "type": "number"
+          },
+          "daily_docket": {
+            "type": "number"
+          },
+          "daily_goal": {
+            "type": "number"
+          },
+          "streak_milestone": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "new_stars",
+          "daily_docket",
+          "daily_goal",
+          "streak_milestone",
+          "total"
+        ]
+      },
       "XpBreakdownDto": {
         "type": "object",
         "properties": {
@@ -2259,6 +2483,13 @@
       "RewardsDto": {
         "type": "object",
         "properties": {
+          "coins": {
+            "$ref": "#/components/schemas/CoinsEarnedDto"
+          },
+          "energy_bonus": {
+            "type": "number",
+            "description": "Energy given back for a first 3-star clear"
+          },
           "xp": {
             "$ref": "#/components/schemas/XpBreakdownDto"
           },
@@ -2295,6 +2526,8 @@
           }
         },
         "required": [
+          "coins",
+          "energy_bonus",
           "xp",
           "level_id",
           "stars",
@@ -2456,6 +2689,88 @@
           "next_cursor"
         ]
       },
+      "EnergyDto": {
+        "type": "object",
+        "properties": {
+          "today": {
+            "type": "number",
+            "description": "Energy left today"
+          },
+          "free_daily": {
+            "type": "number",
+            "description": "Free energy each day (India date)"
+          },
+          "unlimited": {
+            "type": "boolean",
+            "description": "Premium: quizzes cost no energy"
+          }
+        },
+        "required": [
+          "today",
+          "free_daily",
+          "unlimited"
+        ]
+      },
+      "SettingsDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 60
+          },
+          "persona": {
+            "type": "string",
+            "enum": [
+              "advocate",
+              "aspirant",
+              "citizen"
+            ]
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "en",
+              "hi",
+              "ta",
+              "te",
+              "kn",
+              "ml"
+            ]
+          },
+          "daily_goal": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 10,
+            "description": "Quizzes a day"
+          },
+          "onboarded": {
+            "type": "boolean",
+            "description": "Finished onboarding"
+          }
+        },
+        "required": [
+          "name",
+          "persona",
+          "language",
+          "daily_goal",
+          "onboarded"
+        ]
+      },
+      "ChatAllowanceDto": {
+        "type": "object",
+        "properties": {
+          "daily_limit": {
+            "type": "number"
+          },
+          "used_today": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "daily_limit",
+          "used_today"
+        ]
+      },
       "WeekXpDto": {
         "type": "object",
         "properties": {
@@ -2562,6 +2877,28 @@
             "format": "date",
             "description": "India date the figures are for"
           },
+          "coins": {
+            "type": "number"
+          },
+          "energy": {
+            "$ref": "#/components/schemas/EnergyDto"
+          },
+          "premium": {
+            "type": "boolean"
+          },
+          "settings": {
+            "nullable": true,
+            "description": "Null until the learner saves settings once",
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SettingsDto"
+              }
+            ]
+          },
+          "chat": {
+            "$ref": "#/components/schemas/ChatAllowanceDto"
+          },
           "total_xp": {
             "type": "number"
           },
@@ -2628,6 +2965,11 @@
         },
         "required": [
           "today",
+          "coins",
+          "energy",
+          "premium",
+          "settings",
+          "chat",
           "total_xp",
           "week",
           "last_week",

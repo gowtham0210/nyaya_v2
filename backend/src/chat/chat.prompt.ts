@@ -1,4 +1,6 @@
-export const PERSONAS = ['advocate', 'aspirant', 'citizen'] as const;
+import { PERSONAS } from '../db/schema.js';
+
+export { PERSONAS };
 export type Persona = (typeof PERSONAS)[number];
 
 const LANGUAGE_NAMES: Record<string, string> = {

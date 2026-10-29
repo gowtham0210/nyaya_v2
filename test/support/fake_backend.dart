@@ -11,8 +11,8 @@ import 'package:nyaya/features/quiz/domain/quiz_builder.dart';
 import 'package:nyaya/features/quiz/domain/quiz_models.dart';
 
 /// A stand-in for the Nyaya API. Like the real server it keeps the answer
-/// key to itself (questions handed to the app carry none) and works out
-/// stars, XP and the streak itself, with simpler XP than the real rules.
+/// key to itself (questions handed to the app carry none) and owns stars, XP,
+/// the streak, coins and energy, with simpler XP than the real rules.
 class FakeQuizApi implements QuizApi, ProgressApi {
   FakeQuizApi({this.perLevel = 6}) {
     for (final c in JourneyCatalog.chapters) {
@@ -65,6 +65,9 @@ class FakeQuizApi implements QuizApi, ProgressApi {
         .take(plan.count)
         .toList();
     if (picked.isEmpty) throw const ApiException(422, 'no_questions_available', 'none');
+    final cost = premium ? 0 : plan.mode.energyCost;
+    if (energy < cost) throw const ApiException(409, 'not_enough_energy', 'none');
+    energy -= cost;
     final id = 'session-${++sessionsStarted}';
     _sessions[id] = _FakeSession(
       picked,
@@ -72,6 +75,7 @@ class FakeQuizApi implements QuizApi, ProgressApi {
       mode: plan.mode,
       levelId: plan.mode == QuizMode.casePath ? '${plan.chapterIds.single}_${plan.difficulty}' : null,
       negativeMarking: plan.negativeMarking,
+      cost: cost,
     );
     return StartedQuiz(
       sessionId: id,
@@ -118,6 +122,11 @@ class FakeQuizApi implements QuizApi, ProgressApi {
     totalXp += xp;
     quizzesCompleted++;
     if (s.mode == QuizMode.dailyDocket) docketDone = true;
+    final newStars = got == null ? 0 : (got - before).clamp(0, 3);
+    final coinsEarned = newStars * 5;
+    final energyBonus = got == 3 && before < 3 && !premium ? 1 : 0;
+    coins += coinsEarned;
+    energy += energyBonus;
     return SubmittedQuiz(
       // Exams with minus marks: +1 right, −0.25 wrong, like the real server.
       score: s.negativeMarking ? correct - 0.25 * wrong : correct.toDouble(),
@@ -133,15 +142,28 @@ class FakeQuizApi implements QuizApi, ProgressApi {
         levelId: level,
         stars: got,
         bestStarsBefore: before,
-        newStars: got == null ? 0 : (got - before).clamp(0, 3),
+        newStars: newStars,
         streak: 1,
         streakExtended: extended,
         streakMilestone: null,
+        coins: coinsEarned,
+        energyBonus: energyBonus,
       ),
     );
   }
 
+  @override
+  Future<void> abandon(String sessionId) async {
+    final s = _sessions.remove(sessionId);
+    if (s != null) energy += s.cost;
+  }
+
   // ── Progress (the server owns it) ──────────────────────────────────────────
+
+  int coins = 60;
+  int energy = 5;
+  bool premium = false;
+  ServerSettings? settings;
 
   final stars = <String, int>{};
   final openedChests = <String>{};
@@ -165,9 +187,33 @@ class FakeQuizApi implements QuizApi, ProgressApi {
 
   @override
   Future<ServerProgress> openChest(String chestId) async {
-    openedChests.add(chestId);
+    if (openedChests.add(chestId)) coins += 30;
     return _progress();
   }
+
+  @override
+  Future<ServerProgress> refillEnergy() async {
+    if (coins < 30) throw const ApiException(409, 'not_enough_coins', 'none');
+    coins -= 30;
+    energy++;
+    return _progress();
+  }
+
+  @override
+  Future<ServerProgress> buyStreakFreeze() async {
+    if (coins < 100) throw const ApiException(409, 'not_enough_coins', 'none');
+    coins -= 100;
+    return _progress();
+  }
+
+  @override
+  Future<ServerProgress> setPremium(bool on) async {
+    premium = on;
+    return _progress();
+  }
+
+  @override
+  Future<void> saveSettings(ServerSettings value) async => settings = value;
 
   ServerProgress _progress() {
     final now = DateTime.now();
@@ -193,6 +239,11 @@ class FakeQuizApi implements QuizApi, ProgressApi {
       docketDoneToday: docketDone,
       questionsAnswered: 0,
       correct: 0,
+      coins: coins,
+      energy: energy,
+      premium: premium,
+      settings: settings,
+      chatUsedToday: 0,
     );
   }
 
@@ -214,13 +265,18 @@ class _FakeQuestion {
 
 class _FakeSession {
   _FakeSession(this.questions,
-      {required this.revealAtEnd, required this.mode, required this.levelId, required this.negativeMarking});
+      {required this.revealAtEnd,
+      required this.mode,
+      required this.levelId,
+      required this.negativeMarking,
+      required this.cost});
 
   final List<_FakeQuestion> questions;
   final bool revealAtEnd;
   final QuizMode mode;
   final String? levelId;
   final bool negativeMarking;
+  final int cost;
   final selected = <int, int>{};
 }
 

@@ -967,9 +967,6 @@ class AppLocalizationsTa extends AppLocalizations {
   }
 
   @override
-  String get settingsFreezeEarned => 'Earned at 7, 30 and 100 days';
-
-  @override
   String get settingsFreezeBought => 'தொடர் உறைவு சேர்க்கப்பட்டது!';
 
   @override

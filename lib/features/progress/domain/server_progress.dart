@@ -24,6 +24,11 @@ class ServerProgress {
     required this.docketDoneToday,
     required this.questionsAnswered,
     required this.correct,
+    required this.coins,
+    required this.energy,
+    required this.premium,
+    required this.settings,
+    required this.chatUsedToday,
   });
 
   /// India date the figures are for (YYYY-MM-DD).
@@ -48,6 +53,15 @@ class ServerProgress {
   final bool docketDoneToday;
   final int questionsAnswered;
   final int correct;
+  final int coins;
+
+  /// Energy left today (premium quizzes cost none).
+  final int energy;
+  final bool premium;
+
+  /// Null until the account has saved settings once.
+  final ServerSettings? settings;
+  final int chatUsedToday;
 
   factory ServerProgress.fromJson(Map<String, dynamic> j) {
     final week = j['week'] as Map<String, dynamic>;
@@ -74,8 +88,50 @@ class ServerProgress {
       docketDoneToday: j['docket_done_today'] as bool,
       questionsAnswered: j['questions_answered'] as int,
       correct: j['correct'] as int,
+      coins: j['coins'] as int,
+      energy: (j['energy'] as Map<String, dynamic>)['today'] as int,
+      premium: j['premium'] as bool,
+      settings: j['settings'] == null ? null : ServerSettings.fromJson(j['settings'] as Map<String, dynamic>),
+      chatUsedToday: (j['chat'] as Map<String, dynamic>)['used_today'] as int,
     );
   }
+}
+
+/// Learning settings that follow the account. Theme, sound, haptics and
+/// reminders stay on each phone.
+@immutable
+class ServerSettings {
+  const ServerSettings({
+    required this.name,
+    required this.persona,
+    required this.language,
+    required this.dailyGoal,
+    required this.onboarded,
+  });
+
+  final String name;
+
+  /// API names: advocate, aspirant, citizen.
+  final String persona;
+  final String language;
+  final int dailyGoal;
+  final bool onboarded;
+
+  factory ServerSettings.fromJson(Map<String, dynamic> j) => ServerSettings(
+        name: j['name'] as String,
+        persona: j['persona'] as String,
+        language: j['language'] as String,
+        dailyGoal: j['daily_goal'] as int,
+        onboarded: j['onboarded'] as bool,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'persona': persona,
+        'language': language,
+        'daily_goal': dailyGoal,
+        'onboarded': onboarded,
+      };
 }
 
 /// What one submitted quiz earned, as the server worked it out.
@@ -95,8 +151,15 @@ class ServerRewards {
     required this.streak,
     required this.streakExtended,
     required this.streakMilestone,
+    required this.coins,
+    required this.energyBonus,
   });
 
+  /// Coins the server paid for this quiz.
+  final int coins;
+
+  /// Energy given back for a first 3-star clear.
+  final int energyBonus;
   final int questionXp;
   final int completionBonus;
   final int perfectBonus;
@@ -127,6 +190,8 @@ class ServerRewards {
       streak: j['streak'] as int,
       streakExtended: j['streak_extended'] as bool,
       streakMilestone: j['streak_milestone'] as int?,
+      coins: (j['coins'] as Map<String, dynamic>)['total'] as int,
+      energyBonus: j['energy_bonus'] as int,
     );
   }
 }

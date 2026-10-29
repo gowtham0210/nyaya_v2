@@ -958,9 +958,6 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get settingsFreezeEarned => 'Earned at 7, 30 and 100 days';
-
-  @override
   String get settingsFreezeBought => 'स्ट्रीक फ़्रीज़ लग गया!';
 
   @override

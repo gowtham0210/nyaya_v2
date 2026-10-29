@@ -1,6 +1,7 @@
 import { eq } from 'drizzle-orm';
 import { newId } from '../src/core/ids.js';
 import {
+  premiumMemberships,
   questions,
   questionVersions,
   quizSessions,
@@ -86,6 +87,14 @@ describe('learner quizzes', () => {
       t.signInAs('legal_reviewer'),
       t.signInAs('publisher'),
     ]);
+    // These tests start many quizzes; energy is covered in economy.e2e-spec.ts.
+    await t.db.insert(premiumMemberships).values(
+      [learner, other].map((s) => ({
+        userId: s.id,
+        source: 'test',
+        startedAt: new Date(),
+      })),
+    );
     liveIds = [];
     for (let i = 0; i < 4; i++)
       liveIds.push(

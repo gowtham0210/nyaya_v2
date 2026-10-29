@@ -1,11 +1,13 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   Param,
   ParseUUIDPipe,
   Post,
+  Put,
   Query,
 } from '@nestjs/common';
 import {
@@ -16,7 +18,8 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import type { AuthUser } from '../auth/auth-user.js';
-import { CurrentUser, Public } from '../auth/decorators.js';
+import { CurrentActor, CurrentUser, Public } from '../auth/decorators.js';
+import type { Actor } from '../core/audit.service.js';
 import {
   AnswerDto,
   AnswerResultDto,
@@ -27,6 +30,7 @@ import {
   ProgressDto,
   ResultDto,
   SessionDto,
+  SettingsDto,
   StartSessionDto,
 } from './learn.dto.js';
 import { LearnService } from './learn.service.js';
@@ -58,6 +62,17 @@ export class LearnController {
   @HttpCode(201)
   start(@CurrentUser() user: AuthUser, @Body() body: StartSessionDto) {
     return this.learn.start(user.id, body);
+  }
+
+  @ApiBearerAuth()
+  @Post('quiz-sessions/:id/abandon')
+  @HttpCode(204)
+  @ApiOperation({
+    summary:
+      'Leave before the first answer: the quiz is removed and its energy comes back',
+  })
+  abandon(@CurrentUser() user: AuthUser, @Id() id: string) {
+    return this.learn.abandon(user.id, id);
   }
 
   @ApiBearerAuth()
@@ -137,5 +152,64 @@ export class LearnController {
   @ApiOkResponse({ type: ProgressDto })
   openChest(@CurrentUser() user: AuthUser, @Param('chest_id') chestId: string) {
     return this.learn.openChest(user.id, chestId);
+  }
+
+  @ApiBearerAuth()
+  @Post('me/energy/refill')
+  @HttpCode(200)
+  @ApiOperation({ summary: 'Spend 30 coins on 1 energy for today' })
+  @ApiOkResponse({ type: ProgressDto })
+  refill(@CurrentUser() user: AuthUser) {
+    return this.learn.refillEnergy(user.id);
+  }
+
+  @ApiBearerAuth()
+  @Post('me/streak-freezes')
+  @HttpCode(200)
+  @ApiOperation({
+    summary: 'Spend 100 coins on a streak freeze (at most 2 held)',
+  })
+  @ApiOkResponse({ type: ProgressDto })
+  buyStreakFreeze(@CurrentUser() user: AuthUser) {
+    return this.learn.buyStreakFreeze(user.id);
+  }
+
+  @ApiBearerAuth()
+  @Post('me/premium')
+  @HttpCode(200)
+  @ApiOperation({
+    summary:
+      'Turn on demo premium (testing only; replaced by store receipt checks before launch)',
+  })
+  @ApiOkResponse({ type: ProgressDto })
+  startPremium(@CurrentActor() actor: Actor) {
+    return this.learn.setPremium(actor, true);
+  }
+
+  @ApiBearerAuth()
+  @Delete('me/premium')
+  @ApiOperation({ summary: 'Turn off demo premium' })
+  @ApiOkResponse({ type: ProgressDto })
+  endPremium(@CurrentActor() actor: Actor) {
+    return this.learn.setPremium(actor, false);
+  }
+
+  @ApiBearerAuth()
+  @Get('me/settings')
+  @ApiOperation({ summary: 'Learning settings; null until saved once' })
+  @ApiOkResponse({ type: SettingsDto })
+  getSettings(@CurrentUser() user: AuthUser) {
+    return this.learn.settings(this.learn.database, user.id);
+  }
+
+  @ApiBearerAuth()
+  @Put('me/settings')
+  @ApiOperation({
+    summary:
+      'Save learning settings (name, persona, language, daily goal, onboarded)',
+  })
+  @ApiOkResponse({ type: SettingsDto })
+  saveSettings(@CurrentUser() user: AuthUser, @Body() body: SettingsDto) {
+    return this.learn.saveSettings(user.id, body);
   }
 }

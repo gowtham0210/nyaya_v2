@@ -6,6 +6,7 @@ import 'package:nyaya/core/api/token_store.dart';
 import 'package:nyaya/core/storage/local_store.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
 import 'package:nyaya/features/journey/application/journey_controller.dart';
+import 'package:nyaya/features/profile/application/profile_controller.dart';
 import 'package:nyaya/features/progress/data/progress_api.dart';
 import 'package:nyaya/features/quiz/application/quiz_controller.dart';
 import 'package:nyaya/features/quiz/data/quiz_api.dart';
@@ -95,6 +96,17 @@ void main() {
     // The server's rewards still show, and the map shows the stars.
     expect(s.rewards!.newStars, 3);
     expect(c.read(journeyProvider).stars['constitution_1'], 3);
+  });
+
+  test('leaving before the first answer gives the energy back on the server', () async {
+    const level = QuizRequest(QuizMode.casePath, levelId: 'constitution_1');
+    final sub = c.listen(quizControllerProvider(level), (_, _) {});
+    addTearDown(sub.close);
+    await idle();
+    expect(api.energy, 4);
+    await c.read(quizControllerProvider(level).notifier).abandon();
+    expect(api.energy, 5);
+    expect(c.read(profileProvider).energy, 5);
   });
 
   test('a quiz with nothing published says so', () async {
