@@ -64,6 +64,9 @@ abstract final class QuizBuilder {
           minDifficulty: minD,
           maxDifficulty: maxD,
         );
+      case QuizMode.mistakeReview:
+        // The server picks from the learner's own mistakes.
+        return SessionPlan(mode: request.mode, count: 10);
       case QuizMode.duel:
         return SessionPlan(mode: request.mode, count: GameRules.duelQuestions, chapterIds: [...reachedChapters]..sort());
       case QuizMode.exam:

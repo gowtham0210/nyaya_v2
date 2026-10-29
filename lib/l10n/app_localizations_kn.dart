@@ -31,6 +31,109 @@ class AppLocalizationsKn extends AppLocalizations {
   String get commonContinue => 'ಮುಂದುವರಿಸಿ';
 
   @override
+  String get reviewTitle => 'Review';
+
+  @override
+  String get reviewMistakesTab => 'Mistakes';
+
+  @override
+  String get reviewSavedTab => 'Saved';
+
+  @override
+  String get reviewPractise => 'Practise mistakes';
+
+  @override
+  String get reviewPractiseFree => 'Free · up to 10 questions · earns XP';
+
+  @override
+  String get reviewEmptyMistakes =>
+      'No mistakes to review. Questions you get wrong appear here until you answer them right.';
+
+  @override
+  String get reviewEmptySaved =>
+      'Nothing saved yet. After answering a question, tap Save to keep it here.';
+
+  @override
+  String get reviewSignIn =>
+      'Sign in to see your mistakes and saved questions.';
+
+  @override
+  String reviewWrongTimes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Wrong $count times',
+      one: 'Wrong once',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get reviewUpdatedSince =>
+      'Updated since you answered it. Shown as you saw it.';
+
+  @override
+  String get reviewUnavailable => 'This question is no longer available.';
+
+  @override
+  String reviewCardBody(int mistakes, int saved) {
+    String _temp0 = intl.Intl.pluralLogic(
+      mistakes,
+      locale: localeName,
+      other: '$mistakes mistakes',
+      one: '1 mistake',
+    );
+    return '$_temp0 · $saved saved';
+  }
+
+  @override
+  String get questionSave => 'Save';
+
+  @override
+  String get questionSaved => 'Saved';
+
+  @override
+  String get questionReport => 'Report';
+
+  @override
+  String get questionSaveFailed =>
+      'Couldn\'t save. Check your connection and try again.';
+
+  @override
+  String get reportTitle => 'Report a problem';
+
+  @override
+  String get reportReasonWrongAnswer => 'The answer is wrong';
+
+  @override
+  String get reportReasonUnclear => 'The question is unclear';
+
+  @override
+  String get reportReasonOutdatedLaw => 'The law has changed';
+
+  @override
+  String get reportReasonTypo => 'Typo or wording';
+
+  @override
+  String get reportReasonOther => 'Something else';
+
+  @override
+  String get reportComment => 'Anything else? (optional)';
+
+  @override
+  String get reportSend => 'Send report';
+
+  @override
+  String get reportSent => 'Thanks. Our legal team will check this question.';
+
+  @override
+  String get reportAlready => 'You already reported this question.';
+
+  @override
+  String get reportLimit =>
+      'You\'ve sent many reports today. Please try again tomorrow.';
+
+  @override
   String get commonBack => 'ಹಿಂದೆ';
 
   @override

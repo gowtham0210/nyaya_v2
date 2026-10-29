@@ -27,6 +27,7 @@ export const RULES = {
     daily_docket: 30,
     duel: 15,
     exam: 60,
+    mistake_review: 30,
   } as Record<QuizMode, number>,
   streakMilestones: [3, 7, 14, 30, 50, 100, 365],
   freezeMilestones: [7, 30, 100],
@@ -54,10 +55,14 @@ export const ECONOMY = {
   energyRefillCost: 30,
   freeDailyEnergy: 5,
   /** Energy a quiz costs to start; the docket is always free. */
-  energyCost: { case_path: 1, daily_docket: 0, duel: 1, exam: 2 } as Record<
-    QuizMode,
-    number
-  >,
+  /** Mistake practice is free, so learners fix weak spots. */
+  energyCost: {
+    case_path: 1,
+    daily_docket: 0,
+    duel: 1,
+    exam: 2,
+    mistake_review: 0,
+  } as Record<QuizMode, number>,
   threeStarEnergyBonus: 1,
   defaultDailyGoal: 3,
 } as const;

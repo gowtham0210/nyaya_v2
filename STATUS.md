@@ -292,11 +292,32 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       Tests: backend 37 unit + 63 API, Flutter 40. Staging migrated (backup `nyaya-2026-10-29-0915.sql.gz`); user checked
       the league on the iPhone.
 
+- [x] 2026-10-29: **P3 finished: saved questions, mistakes (M08) and report-a-question (M12).** User's choices:
+      mistake practice is free, earns XP and counts for the streak; a question leaves the mistakes list when answered
+      right later in any quiz; Review lives on a Home card + Review page. **3NF:** `question_bookmarks` (learner,
+      question — points at the question, not a version) and `content_reports` (learner, question version, reason,
+      comment; outcome / resolved_by / resolved_at / note, with a CHECK that a closed report has all three; one open
+      report per learner per version by a partial unique index). Mistakes are not stored: the questions whose latest
+      final answer was wrong (exam answers count only after submit); "open" is "no outcome"; the question follows
+      from the version. Migration 0008 (adds the `mistake_review` quiz mode). API: `GET /v1/me/mistakes`,
+      `GET/POST/DELETE /v1/me/bookmarks` (only answered questions can be saved), mode `mistake_review` (up to 10 of
+      your mistakes, 0 energy), `POST /v1/content-reports` (shown versions only; 20 a day), staff
+      `GET/PATCH /v1/admin/content-reports` (editor, reviewer, publisher, admin; urgent = wrong answer / outdated
+      law first; closing is audit-logged; reports never change content). Saved and mistake lists show the version the
+      learner answered (`updated_since` when revised later), so no unanswered version's key leaves the server.
+      Session questions now carry `question_id`. App: Save + Report under each explanation and in the results review,
+      report sheet, Review card on Home, Review page (Mistakes / Saved tabs, Practise mistakes). Portal: Reports
+      page (Open / Closed, close form) and "Open reports" on each question page — checked locally in the browser.
+      Not done: notifying reporters (needs M14) and the analytics events (M11). The Save/Report row can sit partly
+      under the answer bar (scroll a little). Tests: backend 37 unit + 72 API, Flutter 41. Staging migrated (backup
+      `nyaya-2026-10-29-1006.sql.gz`); user checked on the iPhone and in the portal.
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
-   Then P3: M08 bookmarks/mistake review, M12 report-a-question, a real all-time leaderboard. (Server progress
-   Parts 1–3 — progress, economy + settings, weekly leagues — are done; see 2026-10-29.)
+   P3 is done (server progress Parts 1–3, M08, M12 — see 2026-10-29). Next per the plan: finish P2 (M09 CSV import,
+   M04 sources on the questions, taxonomy and staff pages), then P4 beta hardening (M11 analytics + crash reporting,
+   accessibility, security, store prep). Also open: a real all-time leaderboard.
 2. Dark-mode visual pass on simulator (Terracotta dark theme exists, not yet eyeballed).
 3. Note: a debug build launched via `simctl launch` without `flutter run` can show a blank screen —
    use `flutter run -d <device>` (or a release/profile build) when testing.

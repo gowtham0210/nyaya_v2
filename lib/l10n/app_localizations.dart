@@ -148,6 +148,168 @@ abstract class AppLocalizations {
   /// **'Continue'**
   String get commonContinue;
 
+  /// No description provided for @reviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get reviewTitle;
+
+  /// No description provided for @reviewMistakesTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Mistakes'**
+  String get reviewMistakesTab;
+
+  /// No description provided for @reviewSavedTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get reviewSavedTab;
+
+  /// No description provided for @reviewPractise.
+  ///
+  /// In en, this message translates to:
+  /// **'Practise mistakes'**
+  String get reviewPractise;
+
+  /// No description provided for @reviewPractiseFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Free · up to 10 questions · earns XP'**
+  String get reviewPractiseFree;
+
+  /// No description provided for @reviewEmptyMistakes.
+  ///
+  /// In en, this message translates to:
+  /// **'No mistakes to review. Questions you get wrong appear here until you answer them right.'**
+  String get reviewEmptyMistakes;
+
+  /// No description provided for @reviewEmptySaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing saved yet. After answering a question, tap Save to keep it here.'**
+  String get reviewEmptySaved;
+
+  /// No description provided for @reviewSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to see your mistakes and saved questions.'**
+  String get reviewSignIn;
+
+  /// No description provided for @reviewWrongTimes.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Wrong once} other{Wrong {count} times}}'**
+  String reviewWrongTimes(int count);
+
+  /// No description provided for @reviewUpdatedSince.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated since you answered it. Shown as you saw it.'**
+  String get reviewUpdatedSince;
+
+  /// No description provided for @reviewUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'This question is no longer available.'**
+  String get reviewUnavailable;
+
+  /// No description provided for @reviewCardBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{mistakes, plural, =1{1 mistake} other{{mistakes} mistakes}} · {saved} saved'**
+  String reviewCardBody(int mistakes, int saved);
+
+  /// No description provided for @questionSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get questionSave;
+
+  /// No description provided for @questionSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get questionSaved;
+
+  /// No description provided for @questionReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Report'**
+  String get questionReport;
+
+  /// No description provided for @questionSaveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t save. Check your connection and try again.'**
+  String get questionSaveFailed;
+
+  /// No description provided for @reportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Report a problem'**
+  String get reportTitle;
+
+  /// No description provided for @reportReasonWrongAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'The answer is wrong'**
+  String get reportReasonWrongAnswer;
+
+  /// No description provided for @reportReasonUnclear.
+  ///
+  /// In en, this message translates to:
+  /// **'The question is unclear'**
+  String get reportReasonUnclear;
+
+  /// No description provided for @reportReasonOutdatedLaw.
+  ///
+  /// In en, this message translates to:
+  /// **'The law has changed'**
+  String get reportReasonOutdatedLaw;
+
+  /// No description provided for @reportReasonTypo.
+  ///
+  /// In en, this message translates to:
+  /// **'Typo or wording'**
+  String get reportReasonTypo;
+
+  /// No description provided for @reportReasonOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Something else'**
+  String get reportReasonOther;
+
+  /// No description provided for @reportComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Anything else? (optional)'**
+  String get reportComment;
+
+  /// No description provided for @reportSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send report'**
+  String get reportSend;
+
+  /// No description provided for @reportSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks. Our legal team will check this question.'**
+  String get reportSent;
+
+  /// No description provided for @reportAlready.
+  ///
+  /// In en, this message translates to:
+  /// **'You already reported this question.'**
+  String get reportAlready;
+
+  /// No description provided for @reportLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve sent many reports today. Please try again tomorrow.'**
+  String get reportLimit;
+
   /// No description provided for @commonBack.
   ///
   /// In en, this message translates to:

@@ -7,6 +7,7 @@ import type { AppConfig } from './core/config.js';
 import { CoreModule } from './core/core.module.js';
 import { LearnModule } from './learn/learn.module.js';
 import { QuestionsModule } from './questions/questions.module.js';
+import { ReportsModule } from './reports/reports.module.js';
 import { TaxonomyModule } from './taxonomy/taxonomy.module.js';
 
 @Module({})
@@ -34,6 +35,7 @@ export class AppModule {
         QuestionsModule,
         LearnModule,
         ChatModule,
+        ReportsModule,
       ],
     };
   }

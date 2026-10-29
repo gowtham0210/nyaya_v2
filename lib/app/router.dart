@@ -11,6 +11,7 @@ import '../features/legal_updates/presentation/update_detail_screen.dart';
 import '../features/legal_updates/presentation/updates_screen.dart';
 import '../features/onboarding/presentation/onboarding_screen.dart';
 import '../features/premium/presentation/premium_screen.dart';
+import '../features/review/presentation/review_screen.dart';
 import '../features/profile/application/profile_controller.dart';
 import '../features/quiz/domain/quiz_models.dart';
 import '../features/quiz/presentation/quiz_screen.dart';
@@ -25,6 +26,7 @@ abstract final class Routes {
   static const updates = '/updates';
   static const quiz = '/quiz';
   static const leaderboard = '/leaderboard';
+  static const review = '/review';
   static const settings = '/settings';
   static const premium = '/premium';
   static const signIn = '/sign-in';
@@ -91,6 +93,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: Routes.leaderboard,
         parentNavigatorKey: _rootKey,
         builder: (context, state) => const LeaderboardScreen(),
+      ),
+      GoRoute(
+        path: Routes.review,
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => const ReviewScreen(),
       ),
       GoRoute(
         path: Routes.settings,

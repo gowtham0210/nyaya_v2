@@ -494,6 +494,58 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/mistakes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Questions whose latest answer was wrong, newest first; answering one right later removes it */
+        get: operations["ReviewController_mistakes"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/bookmarks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Saved questions, newest first */
+        get: operations["ReviewController_bookmarks"];
+        put?: never;
+        /** Save a question you have answered (saving again is harmless) */
+        post: operations["ReviewController_save"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/bookmarks/{question_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Remove a saved question */
+        delete: operations["ReviewController_unsave"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/chat": {
         parameters: {
             query?: never;
@@ -509,6 +561,57 @@ export interface paths {
         options?: never;
         head?: never;
         patch?: never;
+        trace?: never;
+    };
+    "/v1/content-reports": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Report a problem with a question you were shown. Never changes the question; staff review it. */
+        post: operations["ReportsController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/content-reports": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Report queue: open (urgent first, then oldest) or closed */
+        get: operations["ReportsController_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/content-reports/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Close a report as fixed, retired or no change needed (revise or retire the question first) */
+        patch: operations["ReportsController_resolve"];
         trace?: never;
     };
 }
@@ -532,7 +635,7 @@ export interface components {
             /** Format: uuid */
             id: string;
             /** @enum {string} */
-            mode: "case_path" | "daily_docket" | "duel" | "exam";
+            mode: "case_path" | "daily_docket" | "duel" | "exam" | "mistake_review";
             /** @description Empty means every topic */
             topic_ids: string[];
             /** Format: date */
@@ -817,10 +920,10 @@ export interface components {
         };
         StartSessionDto: {
             /**
-             * @description case_path: one level (one subject, one difficulty). daily_docket: today's set, the same for everyone, once a day. duel: practice against the clock. exam: answers revealed at the end. Decides feedback and rewards.
+             * @description case_path: one level (one subject, one difficulty). daily_docket: today's set, the same for everyone, once a day. duel: practice against the clock. exam: answers revealed at the end. mistake_review: your own wrong answers, free. Decides feedback and rewards.
              * @enum {string}
              */
-            mode: "case_path" | "daily_docket" | "duel" | "exam";
+            mode: "case_path" | "daily_docket" | "duel" | "exam" | "mistake_review";
             /**
              * @description Exam only: take 0.25 off for each wrong answer
              * @default true
@@ -855,6 +958,11 @@ export interface components {
         };
         SessionQuestionDto: {
             position: number;
+            /**
+             * Format: uuid
+             * @description The question (all versions), for saving it
+             */
+            question_id: string;
             /** Format: uuid */
             question_version_id: string;
             /** Format: uuid */
@@ -926,7 +1034,7 @@ export interface components {
             /** Format: uuid */
             session_id: string;
             /** @enum {string} */
-            mode: "case_path" | "daily_docket" | "duel" | "exam";
+            mode: "case_path" | "daily_docket" | "duel" | "exam" | "mistake_review";
             topic_ids: string[];
             scoring_version: string;
             score: number;
@@ -945,7 +1053,7 @@ export interface components {
             /** Format: uuid */
             session_id: string;
             /** @enum {string} */
-            mode: "case_path" | "daily_docket" | "duel" | "exam";
+            mode: "case_path" | "daily_docket" | "duel" | "exam" | "mistake_review";
             topic_ids: string[];
             score: number;
             total: number;
@@ -1094,6 +1202,46 @@ export interface components {
             /** @description How the latest finished week ended */
             last_result: components["schemas"]["LeagueResultDto"] | null;
         };
+        ReviewQuestionDto: {
+            /** Format: uuid */
+            question_id: string;
+            /** @description False when retired or no longer in force */
+            available: boolean;
+            /** @description The question was revised after the learner answered it; this is the version they answered */
+            updated_since: boolean;
+            stem: string;
+            options: components["schemas"]["OptionDto"][];
+            correct_option_ids: string[];
+            explanation: string | null;
+            provision_reference: string | null;
+            source_title: string | null;
+            /** Format: uuid */
+            topic_id: string | null;
+        };
+        MistakeDto: {
+            question: components["schemas"]["ReviewQuestionDto"];
+            /** @description Times answered wrong */
+            wrong_count: number;
+            /** Format: date-time */
+            last_wrong_at: string;
+            /** @description Also saved by the learner */
+            saved: boolean;
+        };
+        MistakeListDto: {
+            items: components["schemas"]["MistakeDto"][];
+        };
+        BookmarkDto: {
+            question: components["schemas"]["ReviewQuestionDto"];
+            /** Format: date-time */
+            saved_at: string;
+        };
+        BookmarkListDto: {
+            items: components["schemas"]["BookmarkDto"][];
+        };
+        SaveBookmarkDto: {
+            /** Format: uuid */
+            question_id: string;
+        };
         ChatTurnDto: {
             /** @enum {string} */
             role: "user" | "assistant";
@@ -1111,6 +1259,58 @@ export interface components {
             reply: string;
             /** @description AI answers left today (India date) */
             remaining_today: number;
+        };
+        CreateReportDto: {
+            /**
+             * Format: uuid
+             * @description The version you were shown
+             */
+            question_version_id: string;
+            /** @enum {string} */
+            reason: "wrong_answer" | "unclear" | "outdated_law" | "typo" | "other";
+            comment?: string;
+        };
+        ReportReceiptDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: date-time */
+            created_at: string;
+        };
+        ReportDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            question_id: string;
+            /** Format: uuid */
+            question_version_id: string;
+            version_no: number;
+            /** @description Question text of the reported version */
+            stem: string;
+            /** @enum {string} */
+            reason: "wrong_answer" | "unclear" | "outdated_law" | "typo" | "other";
+            /** @description Wrong answer and outdated law are legal errors: handle first */
+            urgent: boolean;
+            comment: string | null;
+            /** Format: date-time */
+            created_at: string;
+            /** @enum {string|null} */
+            outcome: "fixed" | "retired" | "no_change" | null;
+            resolution_note: string | null;
+            /** Format: date-time */
+            resolved_at: string | null;
+            /** @description Staff name */
+            resolved_by: string | null;
+        };
+        ReportListDto: {
+            items: components["schemas"]["ReportDto"][];
+        };
+        ResolveReportDto: {
+            /**
+             * @description fixed: the question was revised; retired: taken out; no_change: the question is right
+             * @enum {string}
+             */
+            outcome: "fixed" | "retired" | "no_change";
+            note: string;
         };
     };
     responses: never;
@@ -1840,6 +2040,86 @@ export interface operations {
             };
         };
     };
+    ReviewController_mistakes: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MistakeListDto"];
+                };
+            };
+        };
+    };
+    ReviewController_bookmarks: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookmarkListDto"];
+                };
+            };
+        };
+    };
+    ReviewController_save: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveBookmarkDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookmarkDto"];
+                };
+            };
+        };
+    };
+    ReviewController_unsave: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                question_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     ChatController_reply: {
         parameters: {
             query?: never;
@@ -1859,6 +2139,78 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ChatReplyDto"];
+                };
+            };
+        };
+    };
+    ReportsController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateReportDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReportReceiptDto"];
+                };
+            };
+        };
+    };
+    ReportsController_list: {
+        parameters: {
+            query?: {
+                status?: "open" | "closed";
+                /** @description Only this question */
+                question_id?: string;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReportListDto"];
+                };
+            };
+        };
+    };
+    ReportsController_resolve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ResolveReportDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReportDto"];
                 };
             };
         };

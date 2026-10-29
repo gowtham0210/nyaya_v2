@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 class Question {
   const Question({
     required this.id,
+    this.questionId = '',
     required this.chapterId,
     required this.difficulty,
     required this.text,
@@ -15,6 +16,9 @@ class Question {
 
   /// The server's question_version_id.
   final String id;
+
+  /// The question across its versions (for saving it).
+  final String questionId;
   final String chapterId;
   final int difficulty;
   final String text;

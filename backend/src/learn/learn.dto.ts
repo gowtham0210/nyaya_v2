@@ -63,7 +63,7 @@ export class StartSessionDto {
   @ApiProperty({
     enum: QUIZ_MODES,
     description:
-      "case_path: one level (one subject, one difficulty). daily_docket: today's set, the same for everyone, once a day. duel: practice against the clock. exam: answers revealed at the end. Decides feedback and rewards.",
+      "case_path: one level (one subject, one difficulty). daily_docket: today's set, the same for everyone, once a day. duel: practice against the clock. exam: answers revealed at the end. mistake_review: your own wrong answers, free. Decides feedback and rewards.",
   })
   @IsIn(QUIZ_MODES)
   mode: QuizMode;
@@ -158,6 +158,11 @@ export class FeedbackDto {
 
 export class SessionQuestionDto {
   @ApiProperty() position: number;
+  @ApiProperty({
+    format: 'uuid',
+    description: 'The question (all versions), for saving it',
+  })
+  question_id: string;
   @ApiProperty({ format: 'uuid' }) question_version_id: string;
   @ApiProperty({ format: 'uuid' }) topic_id: string;
   @ApiProperty() difficulty: number;

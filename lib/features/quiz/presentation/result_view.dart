@@ -18,6 +18,7 @@ import '../../journey/application/journey_controller.dart';
 import '../../journey/domain/journey.dart';
 import '../application/quiz_controller.dart';
 import '../domain/quiz_models.dart';
+import '../../review/presentation/question_actions.dart';
 import 'quiz_launcher.dart';
 
 class ResultView extends ConsumerStatefulWidget {
@@ -69,6 +70,7 @@ class _ResultViewState extends ConsumerState<ResultView> {
         return r.isPerfect ? l.resultPerfect : (r.stars >= 2 ? l.resultGreat : l.resultGood);
       case QuizMode.dailyDocket:
       case QuizMode.exam:
+      case QuizMode.mistakeReview:
         if (r.isPerfect) return l.resultPerfect;
         return r.accuracy >= 0.5 ? l.resultGreat : l.resultTryAgain;
     }
@@ -320,10 +322,11 @@ class _Hero extends StatelessWidget {
           ),
         ).animate().fadeIn().scale(begin: const Offset(0.8, 0.8));
       case QuizMode.dailyDocket:
+      case QuizMode.mistakeReview:
         return Column(
           children: [
-            const Icon(
-              Icons.today_rounded,
+            Icon(
+              result.request.mode == QuizMode.dailyDocket ? Icons.today_rounded : Icons.fact_check_rounded,
               size: 84,
               color: AppPalette.burntClay,
             ).animate().scale(begin: const Offset(0.4, 0.4), curve: Curves.elasticOut, duration: 800.ms),
@@ -429,6 +432,7 @@ class _ReviewItem extends StatelessWidget {
               answer.reveal?.explanation ?? '',
               style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary, height: 1.4),
             ),
+            if (answer.reveal != null) QuestionActions(questionId: q.questionId, questionVersionId: q.id),
           ],
         ),
       ),

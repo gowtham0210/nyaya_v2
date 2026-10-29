@@ -12,6 +12,7 @@ import '../../../core/widgets/common.dart';
 import '../../../core/widgets/pressable.dart';
 import '../../journey/domain/journey.dart';
 import '../../profile/application/profile_controller.dart';
+import '../../review/presentation/question_actions.dart';
 import '../application/quiz_controller.dart';
 import '../domain/quiz_models.dart';
 
@@ -328,6 +329,8 @@ class _Explanation extends StatelessWidget {
                 style: context.text.labelSmall?.copyWith(color: context.colors.primary, fontWeight: FontWeight.w700),
               ),
             ],
+            const SizedBox(height: 4),
+            QuestionActions(questionId: answer.question.questionId, questionVersionId: answer.question.id),
           ],
         ],
       ),

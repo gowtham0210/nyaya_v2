@@ -9,6 +9,7 @@ import 'package:nyaya/features/journey/application/journey_controller.dart';
 import 'package:nyaya/features/profile/application/profile_controller.dart';
 import 'package:nyaya/features/leaderboard/data/league_api.dart';
 import 'package:nyaya/features/progress/data/progress_api.dart';
+import 'package:nyaya/features/review/data/review_api.dart';
 import 'package:nyaya/features/quiz/application/quiz_controller.dart';
 import 'package:nyaya/features/quiz/data/quiz_api.dart';
 import 'package:nyaya/features/quiz/domain/quiz_models.dart';
@@ -33,6 +34,7 @@ void main() {
       quizApiProvider.overrideWithValue(fake),
       progressApiProvider.overrideWithValue(fake),
       leagueApiProvider.overrideWithValue(fake),
+      reviewApiProvider.overrideWithValue(fake),
       authApiProvider.overrideWithValue(FakeAuthApi(tokens)),
     ]);
     addTearDown(c.dispose);

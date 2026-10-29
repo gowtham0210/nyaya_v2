@@ -13,6 +13,7 @@ import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart'
 import 'package:nyaya/features/profile/application/profile_controller.dart';
 import 'package:nyaya/features/leaderboard/data/league_api.dart';
 import 'package:nyaya/features/progress/data/progress_api.dart';
+import 'package:nyaya/features/review/data/review_api.dart';
 import 'package:nyaya/features/quiz/application/quiz_controller.dart';
 import 'package:nyaya/features/quiz/data/quiz_api.dart';
 import 'package:nyaya/features/quiz/domain/question.dart';
@@ -47,6 +48,7 @@ void main() {
       quizApiProvider.overrideWithValue(api),
       progressApiProvider.overrideWithValue(api),
       leagueApiProvider.overrideWithValue(api),
+      reviewApiProvider.overrideWithValue(api),
       authApiProvider.overrideWithValue(FakeAuthApi(tokens)),
     ]);
     addTearDown(container.dispose);
@@ -323,6 +325,63 @@ void main() {
     await tester.pageBack();
     await settle(tester);
     expect(find.text('Leaderboard'), findsNothing);
+  });
+
+  testWidgets('save and report a question, then find it on the Review page', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    await tester.tap(find.text('Explore').first);
+    await settle(tester);
+
+    // Wrong on the first question: the explanation offers Save and Report.
+    final first = _current(c);
+    await tester.tap(find.text(api.wrongTextFor(first.id)).first);
+    await settle(tester);
+    // Below the explanation: scroll it up from under the answer bar.
+    await tester.ensureVisible(find.text('Save'));
+    await settle(tester);
+    await tester.tap(find.text('Save'));
+    await settle(tester);
+    expect(api.savedQuestions, contains(first.questionId));
+    expect(find.text('Saved'), findsOneWidget);
+
+    await tester.ensureVisible(find.text('Report'));
+    await settle(tester);
+    await tester.tap(find.text('Report'));
+    await settle(tester);
+    await tester.tap(find.text('The law has changed'));
+    await tester.enterText(find.byType(TextField), 'Now Section 173 BNSS');
+    await tester.tap(find.text('Send report'));
+    await settle(tester);
+    expect(api.reports.single.versionId, first.id);
+    expect(api.reports.single.reason, ReportReason.outdatedLaw);
+    expect(api.reports.single.comment, 'Now Section 173 BNSS');
+    expect(find.text('Thanks. Our legal team will check this question.'), findsOneWidget);
+    // Let the message slide away from the answer bar.
+    await tester.pump(const Duration(seconds: 5));
+    await settle(tester);
+
+    // Finish the level (the rest right), then open Review from Home.
+    for (var i = 0; i < 6; i++) {
+      if (i > 0) {
+        await tester.tap(find.text(api.correctTextFor(_current(c).id)).first);
+        await settle(tester);
+      }
+      await tester.tap(find.text(i == 5 ? 'FINISH' : 'NEXT'));
+      await settle(tester);
+    }
+    await tester.tap(find.text('Back to map'));
+    await settle(tester);
+    await tester.tap(find.text('Home'));
+    await settle(tester);
+    final card = find.text('1 mistake · 1 saved');
+    await tester.scrollUntilVisible(card, 200, scrollable: find.byType(Scrollable).first);
+    await tester.tap(card);
+    await settle(tester);
+    expect(find.text('Question text ${first.id}'), findsOneWidget);
+    expect(find.text('Wrong once'), findsOneWidget);
+    expect(find.text('PRACTISE MISTAKES'), findsOneWidget);
   });
 }
 

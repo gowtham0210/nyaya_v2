@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import '../../../core/config/game_rules.dart';
 import 'question.dart';
 
-/// The four quiz modes (see docs/DESIGN.md §Quiz modes).
+/// The four quiz modes (see docs/DESIGN.md §Quiz modes), plus mistake practice.
 enum QuizMode {
   /// Level-map campaign. No hard timer; instant feedback.
   casePath,
@@ -15,13 +15,18 @@ enum QuizMode {
   duel,
 
   /// Exam simulator. 20 questions / 20 min, +1 / −0.25, review at the end.
-  exam;
+  exam,
+
+  /// Up to 10 of your own wrong answers. Free, untimed, instant feedback;
+  /// a question answered right leaves your mistakes list.
+  mistakeReview;
 
   int get energyCost => switch (this) {
         QuizMode.casePath => GameRules.casePathEnergyCost,
         QuizMode.dailyDocket => GameRules.dailyDocketEnergyCost,
         QuizMode.duel => GameRules.duelEnergyCost,
         QuizMode.exam => GameRules.examEnergyCost,
+        QuizMode.mistakeReview => 0,
       };
 
   /// Seconds allowed per question; null = untimed per question.
@@ -30,6 +35,7 @@ enum QuizMode {
         QuizMode.dailyDocket => GameRules.dailyDocketSeconds,
         QuizMode.duel => GameRules.duelSeconds,
         QuizMode.exam => null,
+        QuizMode.mistakeReview => null,
       };
 
   /// Reference time used for the XP speed bonus.
@@ -38,6 +44,7 @@ enum QuizMode {
         QuizMode.dailyDocket => GameRules.dailyDocketSeconds,
         QuizMode.duel => GameRules.duelSeconds,
         QuizMode.exam => 60,
+        QuizMode.mistakeReview => 30,
       };
 
   /// Whether the right answer is revealed right after each pick.
@@ -49,6 +56,7 @@ enum QuizMode {
         QuizMode.dailyDocket => 'daily_docket',
         QuizMode.duel => 'duel',
         QuizMode.exam => 'exam',
+        QuizMode.mistakeReview => 'mistake_review',
       };
 }
 

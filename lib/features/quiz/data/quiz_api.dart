@@ -139,6 +139,7 @@ class HttpQuizApi implements QuizApi {
         for (final q in (j['questions'] as List).cast<Map<String, dynamic>>())
           Question(
             id: q['question_version_id'] as String,
+            questionId: q['question_id'] as String? ?? '',
             chapterId: catalog.chapterForTopic(q['topic_id'] as String) ?? '',
             difficulty: q['difficulty'] as int,
             text: q['stem'] as String,

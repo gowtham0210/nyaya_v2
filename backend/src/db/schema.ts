@@ -259,6 +259,7 @@ export const QUIZ_MODES = [
   'daily_docket',
   'duel',
   'exam',
+  'mistake_review',
 ] as const;
 export type QuizMode = (typeof QUIZ_MODES)[number];
 export const quizMode = pgEnum('quiz_mode', QUIZ_MODES);
@@ -529,5 +530,79 @@ export const leagueMemberships = pgTable(
       columns: [t.cohortId, t.weekId],
       foreignColumns: [leagueCohorts.id, leagueCohorts.weekId],
     }).onDelete('cascade'),
+  ],
+);
+
+// ---------------------------------------------------------------- review & reports
+
+/**
+ * Questions a learner saved. Points at the question, not a version, so a
+ * saved question shows its latest version and survives revisions.
+ */
+export const questionBookmarks = pgTable(
+  'question_bookmarks',
+  {
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    questionId: uuid('question_id')
+      .notNull()
+      .references(() => questions.id),
+    createdAt: createdAt(),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.questionId] })],
+);
+
+export const REPORT_REASONS = [
+  'wrong_answer',
+  'unclear',
+  'outdated_law',
+  'typo',
+  'other',
+] as const;
+export type ReportReason = (typeof REPORT_REASONS)[number];
+export const reportReason = pgEnum('report_reason', REPORT_REASONS);
+
+/** How staff closed a report: the question was fixed, retired, or needed no change. */
+export const REPORT_OUTCOMES = ['fixed', 'retired', 'no_change'] as const;
+export type ReportOutcome = (typeof REPORT_OUTCOMES)[number];
+export const reportOutcome = pgEnum('report_outcome', REPORT_OUTCOMES);
+
+/**
+ * A learner's report about the exact question version they saw. Reports
+ * never change content; staff fix or retire the question, then close the
+ * report. Open = no outcome yet (not stored separately); the question
+ * follows from the version.
+ */
+export const contentReports = pgTable(
+  'content_reports',
+  {
+    id: uuid('id').primaryKey(),
+    userId: uuid('user_id').references(() => users.id, {
+      onDelete: 'set null',
+    }),
+    questionVersionId: uuid('question_version_id')
+      .notNull()
+      .references(() => questionVersions.id),
+    reason: reportReason('reason').notNull(),
+    comment: text('comment'),
+    createdAt: createdAt(),
+    outcome: reportOutcome('outcome'),
+    resolvedBy: uuid('resolved_by').references(() => users.id),
+    resolvedAt: timestamp('resolved_at', { withTimezone: true }),
+    resolutionNote: text('resolution_note'),
+  },
+  (t) => [
+    index('content_reports_open_idx').on(t.outcome, t.createdAt),
+    index('content_reports_version_idx').on(t.questionVersionId),
+    // One open report per learner per question version.
+    uniqueIndex('content_reports_open_per_user_idx')
+      .on(t.userId, t.questionVersionId)
+      .where(sql`${t.outcome} is null`),
+    // Closed reports say how, by whom and when; open ones say none of it.
+    check(
+      'content_reports_resolution_check',
+      sql`(${t.outcome} is null) = (${t.resolvedAt} is null) and (${t.outcome} is null) = (${t.resolvedBy} is null)`,
+    ),
   ],
 );

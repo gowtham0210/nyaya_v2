@@ -19,6 +19,9 @@ export type WorkflowAction = keyof typeof WORKFLOW;
 
 export const hasRole = (me: Me, ...roles: readonly Role[]) => roles.some((r) => me.roles.includes(r));
 
+/** Staff who handle learner reports (the API checks this too). */
+export const TRIAGE_ROLES = ['content_editor', 'legal_reviewer', 'publisher', 'admin'] as const satisfies readonly Role[];
+
 export const canEdit = (me: Me, status: VersionStatus) =>
   hasRole(me, 'content_editor') && (status === 'draft' || status === 'changes_requested');
 

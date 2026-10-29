@@ -1190,6 +1190,124 @@
         ]
       }
     },
+    "/v1/me/mistakes": {
+      "get": {
+        "operationId": "ReviewController_mistakes",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MistakeListDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Questions whose latest answer was wrong, newest first; answering one right later removes it",
+        "tags": [
+          "review"
+        ]
+      }
+    },
+    "/v1/me/bookmarks": {
+      "get": {
+        "operationId": "ReviewController_bookmarks",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookmarkListDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Saved questions, newest first",
+        "tags": [
+          "review"
+        ]
+      },
+      "post": {
+        "operationId": "ReviewController_save",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveBookmarkDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookmarkDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Save a question you have answered (saving again is harmless)",
+        "tags": [
+          "review"
+        ]
+      }
+    },
+    "/v1/me/bookmarks/{question_id}": {
+      "delete": {
+        "operationId": "ReviewController_unsave",
+        "parameters": [
+          {
+            "name": "question_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Remove a saved question",
+        "tags": [
+          "review"
+        ]
+      }
+    },
     "/v1/chat": {
       "post": {
         "operationId": "ChatController_reply",
@@ -1224,6 +1342,151 @@
         "summary": "Ask AI: answers a legal question about Indian law. Limited per learner per day.",
         "tags": [
           "chat"
+        ]
+      }
+    },
+    "/v1/content-reports": {
+      "post": {
+        "operationId": "ReportsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateReportDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportReceiptDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Report a problem with a question you were shown. Never changes the question; staff review it.",
+        "tags": [
+          "reports"
+        ]
+      }
+    },
+    "/v1/admin/content-reports": {
+      "get": {
+        "operationId": "ReportsController_list",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "open",
+              "type": "string",
+              "enum": [
+                "open",
+                "closed"
+              ]
+            }
+          },
+          {
+            "name": "question_id",
+            "required": false,
+            "in": "query",
+            "description": "Only this question",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportListDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Report queue: open (urgent first, then oldest) or closed",
+        "tags": [
+          "reports"
+        ]
+      }
+    },
+    "/v1/admin/content-reports/{id}": {
+      "patch": {
+        "operationId": "ReportsController_resolve",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveReportDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Close a report as fixed, retired or no change needed (revise or retire the question first)",
+        "tags": [
+          "reports"
         ]
       }
     }
@@ -1310,7 +1573,8 @@
               "case_path",
               "daily_docket",
               "duel",
-              "exam"
+              "exam",
+              "mistake_review"
             ]
           },
           "topic_ids": {
@@ -2232,9 +2496,10 @@
               "case_path",
               "daily_docket",
               "duel",
-              "exam"
+              "exam",
+              "mistake_review"
             ],
-            "description": "case_path: one level (one subject, one difficulty). daily_docket: today's set, the same for everyone, once a day. duel: practice against the clock. exam: answers revealed at the end. Decides feedback and rewards."
+            "description": "case_path: one level (one subject, one difficulty). daily_docket: today's set, the same for everyone, once a day. duel: practice against the clock. exam: answers revealed at the end. mistake_review: your own wrong answers, free. Decides feedback and rewards."
           },
           "negative_marking": {
             "type": "boolean",
@@ -2336,6 +2601,11 @@
           "position": {
             "type": "number"
           },
+          "question_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The question (all versions), for saving it"
+          },
           "question_version_id": {
             "type": "string",
             "format": "uuid"
@@ -2382,6 +2652,7 @@
         },
         "required": [
           "position",
+          "question_id",
           "question_version_id",
           "topic_id",
           "difficulty",
@@ -2578,7 +2849,8 @@
               "case_path",
               "daily_docket",
               "duel",
-              "exam"
+              "exam",
+              "mistake_review"
             ]
           },
           "topic_ids": {
@@ -2652,7 +2924,8 @@
               "case_path",
               "daily_docket",
               "duel",
-              "exam"
+              "exam",
+              "mistake_review"
             ]
           },
           "topic_ids": {
@@ -3131,6 +3404,149 @@
           "last_result"
         ]
       },
+      "ReviewQuestionDto": {
+        "type": "object",
+        "properties": {
+          "question_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "available": {
+            "type": "boolean",
+            "description": "False when retired or no longer in force"
+          },
+          "updated_since": {
+            "type": "boolean",
+            "description": "The question was revised after the learner answered it; this is the version they answered"
+          },
+          "stem": {
+            "type": "string"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OptionDto"
+            }
+          },
+          "correct_option_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "explanation": {
+            "type": "string",
+            "nullable": true
+          },
+          "provision_reference": {
+            "type": "string",
+            "nullable": true
+          },
+          "source_title": {
+            "type": "string",
+            "nullable": true
+          },
+          "topic_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "required": [
+          "question_id",
+          "available",
+          "updated_since",
+          "stem",
+          "options",
+          "correct_option_ids",
+          "explanation",
+          "provision_reference",
+          "source_title",
+          "topic_id"
+        ]
+      },
+      "MistakeDto": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "$ref": "#/components/schemas/ReviewQuestionDto"
+          },
+          "wrong_count": {
+            "type": "number",
+            "description": "Times answered wrong"
+          },
+          "last_wrong_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "saved": {
+            "type": "boolean",
+            "description": "Also saved by the learner"
+          }
+        },
+        "required": [
+          "question",
+          "wrong_count",
+          "last_wrong_at",
+          "saved"
+        ]
+      },
+      "MistakeListDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MistakeDto"
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "BookmarkDto": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "$ref": "#/components/schemas/ReviewQuestionDto"
+          },
+          "saved_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "question",
+          "saved_at"
+        ]
+      },
+      "BookmarkListDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BookmarkDto"
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "SaveBookmarkDto": {
+        "type": "object",
+        "properties": {
+          "question_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "question_id"
+        ]
+      },
       "ChatTurnDto": {
         "type": "object",
         "properties": {
@@ -3201,6 +3617,171 @@
         "required": [
           "reply",
           "remaining_today"
+        ]
+      },
+      "CreateReportDto": {
+        "type": "object",
+        "properties": {
+          "question_version_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The version you were shown"
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "wrong_answer",
+              "unclear",
+              "outdated_law",
+              "typo",
+              "other"
+            ]
+          },
+          "comment": {
+            "type": "string",
+            "maxLength": 500
+          }
+        },
+        "required": [
+          "question_version_id",
+          "reason"
+        ]
+      },
+      "ReportReceiptDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "created_at"
+        ]
+      },
+      "ReportDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "question_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "question_version_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version_no": {
+            "type": "number"
+          },
+          "stem": {
+            "type": "string",
+            "description": "Question text of the reported version"
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "wrong_answer",
+              "unclear",
+              "outdated_law",
+              "typo",
+              "other"
+            ]
+          },
+          "urgent": {
+            "type": "boolean",
+            "description": "Wrong answer and outdated law are legal errors: handle first"
+          },
+          "comment": {
+            "type": "string",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "fixed",
+              "retired",
+              "no_change"
+            ],
+            "nullable": true
+          },
+          "resolution_note": {
+            "type": "string",
+            "nullable": true
+          },
+          "resolved_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "resolved_by": {
+            "type": "string",
+            "nullable": true,
+            "description": "Staff name"
+          }
+        },
+        "required": [
+          "id",
+          "question_id",
+          "question_version_id",
+          "version_no",
+          "stem",
+          "reason",
+          "urgent",
+          "comment",
+          "created_at",
+          "outcome",
+          "resolution_note",
+          "resolved_at",
+          "resolved_by"
+        ]
+      },
+      "ReportListDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportDto"
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "ResolveReportDto": {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "fixed",
+              "retired",
+              "no_change"
+            ],
+            "description": "fixed: the question was revised; retired: taken out; no_change: the question is right"
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 1000
+          }
+        },
+        "required": [
+          "outcome",
+          "note"
         ]
       }
     }

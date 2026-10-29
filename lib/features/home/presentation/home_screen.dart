@@ -10,6 +10,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../gamification/domain/league.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../progress/application/progress_sync.dart';
+import '../../review/presentation/review_screen.dart';
 import '../../profile/domain/user_profile.dart';
 import 'widgets/explore_sections.dart';
 
@@ -46,6 +47,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     const sections = <Widget>[
       Padding(padding: page, child: FeaturedLawsCarousel()),
       Padding(padding: page, child: ContinueLearningCard()),
+      Padding(padding: page, child: ReviewCard()),
       SizedBox(height: AppSpacing.xl),
       // Scrolls edge to edge, so it pads itself.
       LatestUpdatesSection(),

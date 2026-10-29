@@ -5,6 +5,7 @@ import 'package:nyaya/features/auth/data/auth_api.dart';
 import 'package:nyaya/features/journey/domain/journey.dart';
 import 'package:nyaya/features/leaderboard/data/league_api.dart';
 import 'package:nyaya/features/progress/data/progress_api.dart';
+import 'package:nyaya/features/review/data/review_api.dart';
 import 'package:nyaya/features/progress/domain/server_progress.dart';
 import 'package:nyaya/features/quiz/data/quiz_api.dart';
 import 'package:nyaya/features/quiz/domain/question.dart';
@@ -14,7 +15,7 @@ import 'package:nyaya/features/quiz/domain/quiz_models.dart';
 /// A stand-in for the Nyaya API. Like the real server it keeps the answer
 /// key to itself (questions handed to the app carry none) and owns stars, XP,
 /// the streak, coins and energy, with simpler XP than the real rules.
-class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi {
+class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
   FakeQuizApi({this.perLevel = 6}) {
     for (final c in JourneyCatalog.chapters) {
       for (var d = 1; d <= 3; d++) {
@@ -84,6 +85,7 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi {
         for (final q in picked)
           Question(
             id: q.id,
+            questionId: 'q-${q.id}',
             chapterId: q.chapter,
             difficulty: q.difficulty,
             text: 'Question text ${q.id}',
@@ -111,6 +113,14 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi {
   Future<SubmittedQuiz> submit(String sessionId, List<Question> questions) async {
     final s = _sessions[sessionId]!;
     final verdicts = [for (var i = 0; i < s.questions.length; i++) _verdict(s.questions[i], s.selected[i])];
+    for (var i = 0; i < s.questions.length; i++) {
+      final id = s.questions[i].id;
+      if (verdicts[i].correct) {
+        wrongCounts.remove(id);
+      } else {
+        wrongCounts[id] = (wrongCounts[id] ?? 0) + 1;
+      }
+    }
     final correct = verdicts.where((v) => v.correct).length;
     final wrong = s.selected.length - correct;
     final total = verdicts.length;
@@ -157,6 +167,56 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi {
   Future<void> abandon(String sessionId) async {
     final s = _sessions.remove(sessionId);
     if (s != null) energy += s.cost;
+  }
+
+  // ── Review (saved questions, mistakes, reports) ───────────────────────────
+
+  /// Version id → times answered wrong, while the latest answer is wrong.
+  final wrongCounts = <String, int>{};
+  final savedQuestions = <String>{};
+  final reports = <({String versionId, ReportReason reason, String? comment})>[];
+
+  ReviewQuestion _reviewQuestion(String versionId) {
+    final q = _bank.firstWhere((q) => q.id == versionId);
+    return ReviewQuestion(
+      questionId: 'q-${q.id}',
+      available: true,
+      stem: 'Question text ${q.id}',
+      options: [for (final (i, o) in q.options.indexed) (id: 'abcd'[i], text: o)],
+      correctOptionIds: ['abcd'[q.correct]],
+      explanation: 'Because ${q.id}',
+      reference: 'Article ${q.difficulty}',
+    );
+  }
+
+  @override
+  Future<List<Mistake>> mistakes() async => [
+        for (final e in wrongCounts.entries)
+          Mistake(
+            question: _reviewQuestion(e.key),
+            wrongCount: e.value,
+            lastWrongAt: DateTime.now(),
+            saved: savedQuestions.contains('q-${e.key}'),
+          ),
+      ];
+
+  @override
+  Future<List<SavedQuestion>> saved() async => [
+        for (final id in savedQuestions) SavedQuestion(question: _reviewQuestion(id.substring(2)), savedAt: DateTime.now()),
+      ];
+
+  @override
+  Future<void> save(String questionId) async => savedQuestions.add(questionId);
+
+  @override
+  Future<void> unsave(String questionId) async => savedQuestions.remove(questionId);
+
+  @override
+  Future<void> report({required String questionVersionId, required ReportReason reason, String? comment}) async {
+    if (reports.any((r) => r.versionId == questionVersionId)) {
+      throw const ApiException(409, 'already_reported', 'none');
+    }
+    reports.add((versionId: questionVersionId, reason: reason, comment: comment));
   }
 
   // ── Progress (the server owns it) ──────────────────────────────────────────

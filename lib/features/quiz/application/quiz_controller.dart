@@ -12,6 +12,7 @@ import '../../gamification/domain/xp_calculator.dart';
 import '../../journey/application/journey_controller.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../progress/application/progress_sync.dart';
+import '../../review/application/review_controller.dart';
 import '../data/quiz_api.dart';
 import '../domain/question.dart';
 import '../domain/quiz_builder.dart';
@@ -434,6 +435,8 @@ class QuizController extends Notifier<QuizState> {
       duelOpponentPoints: s.request.mode == QuizMode.duel ? s.opponentPoints : null,
       opponent: s.opponent,
     );
+    // New mistakes, or ones now answered right.
+    ref.invalidate(reviewProvider);
     // The quiz may have joined this week's league, or moved the learner up in it.
     final league = await ref.read(progressSyncProvider.notifier).league();
     if (!ref.mounted) return;

@@ -5,14 +5,11 @@ import {
   count,
   desc,
   eq,
-  gt,
   gte,
   inArray,
   isNotNull,
-  isNull,
   lt,
   lte,
-  or,
   sql,
   type SQL,
 } from 'drizzle-orm';
@@ -76,7 +73,9 @@ import {
   sessionDeadline,
   shuffled,
 } from './scoring.js';
+import { eligible, liveVersions } from './eligibility.js';
 import { LeagueService } from './league.service.js';
+import { ReviewService } from './review.service.js';
 import { milestoneFor, streakOn } from './streak.js';
 import {
   addCoins,
@@ -118,6 +117,7 @@ interface Finished {
 /** A session question joined with the version it shows. */
 interface Row {
   position: number;
+  questionId: string;
   questionVersionId: string;
   topicId: string;
   optionOrder: string[];
@@ -150,6 +150,7 @@ export class LearnService {
     @Inject(APP_CONFIG) private readonly config: AppConfig,
     private readonly audit: AuditService,
     private readonly league: LeagueService,
+    private readonly review: ReviewService,
   ) {}
 
   /** For read-only helpers the controller calls directly. */
@@ -164,29 +165,12 @@ export class LearnService {
     );
   }
 
-  /** Published, live, in force today, in an active topic and subject. */
   private eligible(language: string, now: Date): SQL {
-    const today = indiaToday(now);
-    return and(
-      eq(questionVersions.status, 'published'),
-      isNull(questions.retiredAt),
-      eq(questionVersions.language, language),
-      eq(questionVersions.jurisdiction, 'IN'),
-      lte(questionVersions.validFrom, today),
-      or(isNull(questionVersions.validTo), gt(questionVersions.validTo, today)),
-      eq(topics.isActive, true),
-      eq(subjects.isActive, true),
-    )!;
+    return eligible(language, now);
   }
 
-  /** question_versions joined to the live pointer, topic and subject. */
   private liveVersions(tx: Tx, fields: Parameters<Db['select']>[0]) {
-    return tx
-      .select(fields!)
-      .from(questionVersions)
-      .innerJoin(questions, eq(questions.liveVersionId, questionVersions.id))
-      .innerJoin(topics, eq(topics.id, questionVersions.topicId))
-      .innerJoin(subjects, eq(subjects.id, topics.subjectId));
+    return liveVersions(tx, fields);
   }
 
   async catalog(language = 'en'): Promise<CatalogDto> {
@@ -312,7 +296,17 @@ export class LearnService {
         );
 
       const where = [this.eligible(language, now)];
-      if (topicIds.length)
+      if (dto.mode === 'mistake_review') {
+        // Your own mistakes, whatever their topic or difficulty.
+        const ids = await this.review.mistakeQuestionIds(tx, userId);
+        if (!ids.length)
+          throw err(
+            HttpStatus.UNPROCESSABLE_ENTITY,
+            'no_questions_available',
+            'No mistakes to practise right now',
+          );
+        where.push(inArray(questions.id, ids));
+      } else if (topicIds.length)
         where.push(inArray(questionVersions.topicId, topicIds));
       if (minDifficulty)
         where.push(gte(questionVersions.difficulty, minDifficulty));
@@ -1172,6 +1166,7 @@ export class LearnService {
     return tx
       .select({
         position: quizSessionQuestions.position,
+        questionId: questionVersions.questionId,
         questionVersionId: quizSessionQuestions.questionVersionId,
         topicId: questionVersions.topicId,
         optionOrder: quizSessionQuestions.optionOrder,
@@ -1216,6 +1211,7 @@ export class LearnService {
     const byId = new Map(q.options.map((o) => [o.id, o]));
     return {
       position: q.position,
+      question_id: q.questionId,
       question_version_id: q.questionVersionId,
       topic_id: q.topicId,
       difficulty: q.difficulty,

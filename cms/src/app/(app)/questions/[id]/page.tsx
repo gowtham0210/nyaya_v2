@@ -5,7 +5,8 @@ import { StatusBadge } from '@/components/status-badge';
 import { Card, Skeleton } from '@/components/ui';
 import { api, must, type Question, type Version } from '@/lib/api';
 import { getMe, getTaxonomy, getTopicNames } from '@/lib/session';
-import { STATUS_LABEL, availableActions, canEdit } from '@/lib/workflow';
+import { STATUS_LABEL, TRIAGE_ROLES, availableActions, canEdit, hasRole } from '@/lib/workflow';
+import { ReportList } from '../../reports/report-list';
 import { saveQuestion } from '../actions';
 import type { QuestionInput } from '../form-state';
 import { QuestionForm } from '../question-form';
@@ -109,9 +110,26 @@ async function QuestionDetail({ params }: { params: PageProps<'/questions/[id]'>
             approveBlocked={v.created_by === me.id || v.updated_by === me.id}
           />
         </Card>
+        {hasRole(me, ...TRIAGE_ROLES) && <OpenReports questionId={q.id} />}
         <History question={q} />
       </aside>
     </div>
+  );
+}
+
+/** Learner reports still waiting on this question. */
+async function OpenReports({ questionId }: { questionId: string }) {
+  const client = await api();
+  const page = await client
+    .GET('/v1/admin/content-reports', { params: { query: { status: 'open', question_id: questionId } } })
+    .then(must);
+  if (page.items.length === 0) return null;
+  return (
+    <Card>
+      <h2 className="mb-1 font-serif text-xl">Open reports</h2>
+      <p className="mb-4 text-xs text-muted">Revise or retire the question above, then close each report.</p>
+      <ReportList reports={page.items} showQuestion={false} />
+    </Card>
   );
 }
 

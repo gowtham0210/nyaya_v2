@@ -7,6 +7,7 @@ const LINKS = [
   { label: 'All questions', href: '/questions', status: null },
   { label: 'Review queue', href: '/questions?status=in_review', status: 'in_review' },
   { label: 'Ready to publish', href: '/questions?status=approved', status: 'approved' },
+  { label: 'Reports', href: '/reports', status: null, path: '/reports' },
 ];
 
 export function NavLinks() {
@@ -15,7 +16,8 @@ export function NavLinks() {
   return (
     <nav className="flex gap-1 overflow-x-auto text-sm" aria-label="Main">
       {LINKS.map((l) => {
-        const active = pathname === '/questions' && (status ?? null) === l.status;
+        const active =
+          'path' in l ? pathname === l.path : pathname === '/questions' && (status ?? null) === l.status;
         return (
           <Link
             key={l.href}
