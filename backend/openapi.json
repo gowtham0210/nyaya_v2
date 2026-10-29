@@ -166,6 +166,277 @@
         ]
       }
     },
+    "/v1/admin/taxonomy": {
+      "get": {
+        "operationId": "AdminTaxonomyController_overview",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminTaxonomyDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Every subject, topic and act, hidden ones included, with question counts",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/subjects": {
+      "post": {
+        "operationId": "AdminTaxonomyController_createSubject",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSubjectDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminTaxonomyDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Add a subject; it starts hidden from learners",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/subjects/{id}": {
+      "patch": {
+        "operationId": "AdminTaxonomyController_updateSubject",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSubjectDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminTaxonomyDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/topics": {
+      "post": {
+        "operationId": "AdminTaxonomyController_createTopic",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTopicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminTaxonomyDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/topics/{id}": {
+      "patch": {
+        "operationId": "AdminTaxonomyController_updateTopic",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTopicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminTaxonomyDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/acts": {
+      "post": {
+        "operationId": "AdminTaxonomyController_createAct",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateActDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminTaxonomyDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/acts/{id}": {
+      "patch": {
+        "operationId": "AdminTaxonomyController_updateAct",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateActDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminTaxonomyDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      }
+    },
     "/v1/admin/import-jobs": {
       "post": {
         "operationId": "ImportsController_create",
@@ -2024,6 +2295,336 @@
           "subjects",
           "acts"
         ]
+      },
+      "AdminTopicDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "subject_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "act_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "sort_order": {
+            "type": "number"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "question_count": {
+            "type": "number",
+            "description": "Questions whose latest version is in this topic"
+          },
+          "live_count": {
+            "type": "number",
+            "description": "Questions with a live (published) version here"
+          }
+        },
+        "required": [
+          "id",
+          "subject_id",
+          "slug",
+          "name",
+          "description",
+          "act_id",
+          "sort_order",
+          "is_active",
+          "question_count",
+          "live_count"
+        ]
+      },
+      "AdminSubjectDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "sort_order": {
+            "type": "number"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "topics": {
+            "description": "Hidden ones included",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminTopicDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "slug",
+          "name",
+          "description",
+          "sort_order",
+          "is_active",
+          "topics"
+        ]
+      },
+      "AdminActDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "short_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "year": {
+            "type": "number",
+            "nullable": true
+          },
+          "jurisdiction": {
+            "type": "string"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "topic_count": {
+            "type": "number",
+            "description": "Topics that name this act"
+          }
+        },
+        "required": [
+          "id",
+          "slug",
+          "name",
+          "short_name",
+          "year",
+          "jurisdiction",
+          "is_active",
+          "topic_count"
+        ]
+      },
+      "AdminTaxonomyDto": {
+        "type": "object",
+        "properties": {
+          "subjects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminSubjectDto"
+            }
+          },
+          "acts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminActDto"
+            }
+          }
+        },
+        "required": [
+          "subjects",
+          "acts"
+        ]
+      },
+      "CreateSubjectDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 120
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 1000
+          },
+          "sort_order": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10000
+          },
+          "slug": {
+            "type": "string",
+            "example": "family-law",
+            "description": "Lower-case letters, digits and single hyphens. Fixed once created: the app, progress and import files refer to it."
+          }
+        },
+        "required": [
+          "name",
+          "slug"
+        ]
+      },
+      "UpdateSubjectDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 120
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 1000
+          },
+          "sort_order": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10000
+          },
+          "is_active": {
+            "type": "boolean",
+            "description": "Shown to learners. Showing a subject adds a chapter to the Case Path road; hiding it removes its questions from quizzes."
+          }
+        }
+      },
+      "CreateTopicDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 120
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 1000
+          },
+          "sort_order": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10000
+          },
+          "subject_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "slug": {
+            "type": "string",
+            "example": "marriage-and-divorce",
+            "description": "Lower-case letters, digits and single hyphens. Fixed once created: the app, progress and import files refer to it."
+          },
+          "act_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "required": [
+          "name",
+          "subject_id",
+          "slug"
+        ]
+      },
+      "UpdateTopicDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 120
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 1000
+          },
+          "sort_order": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10000
+          },
+          "act_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "is_active": {
+            "type": "boolean",
+            "description": "Hiding a topic removes its questions from quizzes at once"
+          }
+        }
+      },
+      "CreateActDto": {
+        "type": "object",
+        "properties": {
+          "slug": {
+            "type": "string",
+            "example": "hindu-marriage-act-1955",
+            "description": "Lower-case letters, digits and single hyphens. Fixed once created: the app, progress and import files refer to it."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 200
+          },
+          "short_name": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 60
+          },
+          "year": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "slug",
+          "name"
+        ]
+      },
+      "UpdateActDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 200
+          },
+          "short_name": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 60
+          },
+          "year": {
+            "type": "number",
+            "nullable": true
+          },
+          "is_active": {
+            "type": "boolean"
+          }
+        }
       },
       "ImportTotalsDto": {
         "type": "object",

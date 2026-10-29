@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import { Skeleton, buttonClass, inputClass } from '@/components/ui';
 import { api, must, type VersionStatus } from '@/lib/api';
-import { getMe, getTaxonomy, getTopicNames } from '@/lib/session';
+import { getAllTaxonomy, getMe, getTopicNames } from '@/lib/session';
 import { BULK_ACTIONS, STATUS_LABEL, WORKFLOW, hasRole } from '@/lib/workflow';
 import { QuestionTable } from './question-table';
 
@@ -35,7 +35,7 @@ async function QuestionList({ searchParams }: { searchParams: PageProps<'/questi
   const client = await api();
   const [me, taxonomy, topicNames, page] = await Promise.all([
     getMe(),
-    getTaxonomy(),
+    getAllTaxonomy(),
     getTopicNames(),
     client
       .GET('/v1/editor/questions', {
@@ -96,7 +96,10 @@ async function QuestionList({ searchParams }: { searchParams: PageProps<'/questi
           {taxonomy.subjects.map((s) => (
             <optgroup key={s.id} label={s.name}>
               {s.topics.map((t) => (
-                <option key={t.id} value={t.id}>{t.name}</option>
+                <option key={t.id} value={t.id}>
+                  {t.name}
+                  {s.is_active && t.is_active ? '' : ' (hidden)'}
+                </option>
               ))}
             </optgroup>
           ))}

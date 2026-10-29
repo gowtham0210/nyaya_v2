@@ -7,8 +7,15 @@ export const getMe = cache(async (): Promise<Me> => must(await (await api()).GET
 
 export const getTaxonomy = cache(async () => must(await (await api()).GET('/v1/taxonomy')));
 
-/** "Subject › Topic" for every topic id. */
+/** Every subject, topic and act, hidden ones included, with question counts (staff only). */
+export const getAllTaxonomy = cache(async () => must(await (await api()).GET('/v1/admin/taxonomy')));
+
+/** "Subject › Topic" for every topic id, hidden ones marked. */
 export async function getTopicNames(): Promise<Map<string, string>> {
-  const { subjects } = await getTaxonomy();
-  return new Map(subjects.flatMap((s) => s.topics.map((t) => [t.id, `${s.name} › ${t.name}`] as const)));
+  const { subjects } = await getAllTaxonomy();
+  return new Map(
+    subjects.flatMap((s) =>
+      s.topics.map((t) => [t.id, `${s.name} › ${t.name}${s.is_active && t.is_active ? '' : ' (hidden)'}`] as const),
+    ),
+  );
 }

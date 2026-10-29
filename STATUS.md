@@ -386,12 +386,27 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       Known limit: a file that was imported once can't be imported again unchanged, even if a topic it needed was
       added since — change the file (e.g. drop the rows already imported) and upload it again.
 
+- [x] 2026-10-29: **Topics page: subjects, topics and acts (P2 step 3, M02 / M10).** Portal → **Topics**: each subject
+      with its topics (Shown/Hidden, slug, act, question count linking to the filtered list, live count), edit forms
+      under each row, add topic / subject / act. API (`backend/src/taxonomy/admin-taxonomy.*`): `GET /v1/admin/taxonomy`
+      (all staff; hidden included, counts), `POST/PATCH /v1/admin/subjects` (**admins only**), `POST/PATCH
+      /v1/admin/topics` and `/v1/admin/acts` (editors + admins); every change audit-logged (`taxonomy.*_created/
+      _updated`); taken slug → 409 `slug_taken`. Rules, because the app and stored progress refer to them: **slugs
+      never change**, **topics never move to another subject**, **new subjects start hidden** (showing one adds a
+      chapter to the server's Case Path road — the app still has its 6 chapters built in, so a shown new subject is
+      invisible in the app and, if its order is lower, stands in front of later chests). Hiding a topic or subject
+      takes its questions out of quizzes at once (the existing eligibility check); the portal's confirm says how
+      many live questions. The question list and its topic filter now use the full taxonomy and mark hidden topics;
+      question forms still offer only shown topics. Tests: backend 65 unit + 88 API. Checked in the browser as admin:
+      add subject (hidden), duplicate slug refused, add topic with act, rename, hide/show with confirms. Local dev DB
+      has a hidden test subject "Test Family Law" (test-family-law) with topic test-marriage.
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
    P3 is done (server progress Parts 1–3, M08, M12 — see 2026-10-29). Next-phase plan agreed 2026-10-29:
    finish P2 — (1) sources on the questions [done in code, staging review pending], (2) CSV/Excel import + export
-   [done], (3) taxonomy pages, (4) staff account pages, (5) a real reviewer publishes a sample pack —
+   [done], (3) taxonomy pages [done], (4) staff account pages, (5) a real reviewer publishes a sample pack —
    then P4 beta hardening (crash reporting, analytics M11, accessibility, translations of English-only screens,
    security/privacy incl. in-app account deletion and rotating the Azure key, store prep with a separate
    production environment), then P5 controlled launch. Open decisions for the user: who the legal reviewer is,

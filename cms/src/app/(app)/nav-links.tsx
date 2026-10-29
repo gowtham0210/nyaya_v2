@@ -8,6 +8,7 @@ const LINKS = [
   { label: 'Review queue', href: '/questions?status=in_review', status: 'in_review' },
   { label: 'Ready to publish', href: '/questions?status=approved', status: 'approved' },
   { label: 'Reports', href: '/reports', status: null, path: '/reports' },
+  { label: 'Topics', href: '/topics', status: null, path: '/topics' },
   { label: 'Imports', href: '/imports', status: null, path: '/imports' },
 ];
 

@@ -101,6 +101,120 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/taxonomy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Every subject, topic and act, hidden ones included, with question counts */
+        get: operations["AdminTaxonomyController_overview"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/subjects": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Add a subject; it starts hidden from learners */
+        post: operations["AdminTaxonomyController_createSubject"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/subjects/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["AdminTaxonomyController_updateSubject"];
+        trace?: never;
+    };
+    "/v1/admin/topics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["AdminTaxonomyController_createTopic"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/topics/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["AdminTaxonomyController_updateTopic"];
+        trace?: never;
+    };
+    "/v1/admin/acts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["AdminTaxonomyController_createAct"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/acts/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["AdminTaxonomyController_updateAct"];
+        trace?: never;
+    };
     "/v1/admin/import-jobs": {
         parameters: {
             query?: never;
@@ -767,6 +881,106 @@ export interface components {
         TaxonomyDto: {
             subjects: components["schemas"]["SubjectDto"][];
             acts: components["schemas"]["ActDto"][];
+        };
+        AdminTopicDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            subject_id: string;
+            slug: string;
+            name: string;
+            description: string | null;
+            /** Format: uuid */
+            act_id: string | null;
+            sort_order: number;
+            is_active: boolean;
+            /** @description Questions whose latest version is in this topic */
+            question_count: number;
+            /** @description Questions with a live (published) version here */
+            live_count: number;
+        };
+        AdminSubjectDto: {
+            /** Format: uuid */
+            id: string;
+            slug: string;
+            name: string;
+            description: string | null;
+            sort_order: number;
+            is_active: boolean;
+            /** @description Hidden ones included */
+            topics: components["schemas"]["AdminTopicDto"][];
+        };
+        AdminActDto: {
+            /** Format: uuid */
+            id: string;
+            slug: string;
+            name: string;
+            short_name: string | null;
+            year: number | null;
+            jurisdiction: string;
+            is_active: boolean;
+            /** @description Topics that name this act */
+            topic_count: number;
+        };
+        AdminTaxonomyDto: {
+            subjects: components["schemas"]["AdminSubjectDto"][];
+            acts: components["schemas"]["AdminActDto"][];
+        };
+        CreateSubjectDto: {
+            name: string;
+            description?: string | null;
+            sort_order?: number;
+            /**
+             * @description Lower-case letters, digits and single hyphens. Fixed once created: the app, progress and import files refer to it.
+             * @example family-law
+             */
+            slug: string;
+        };
+        UpdateSubjectDto: {
+            name?: string;
+            description?: string | null;
+            sort_order?: number;
+            /** @description Shown to learners. Showing a subject adds a chapter to the Case Path road; hiding it removes its questions from quizzes. */
+            is_active?: boolean;
+        };
+        CreateTopicDto: {
+            name: string;
+            description?: string | null;
+            sort_order?: number;
+            /** Format: uuid */
+            subject_id: string;
+            /**
+             * @description Lower-case letters, digits and single hyphens. Fixed once created: the app, progress and import files refer to it.
+             * @example marriage-and-divorce
+             */
+            slug: string;
+            /** Format: uuid */
+            act_id?: string | null;
+        };
+        UpdateTopicDto: {
+            name?: string;
+            description?: string | null;
+            sort_order?: number;
+            /** Format: uuid */
+            act_id?: string | null;
+            /** @description Hiding a topic removes its questions from quizzes at once */
+            is_active?: boolean;
+        };
+        CreateActDto: {
+            /**
+             * @description Lower-case letters, digits and single hyphens. Fixed once created: the app, progress and import files refer to it.
+             * @example hindu-marriage-act-1955
+             */
+            slug: string;
+            name: string;
+            short_name?: string | null;
+            year?: number | null;
+        };
+        UpdateActDto: {
+            name?: string;
+            short_name?: string | null;
+            year?: number | null;
+            is_active?: boolean;
         };
         ImportTotalsDto: {
             created: number;
@@ -1609,6 +1823,169 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TaxonomyDto"];
+                };
+            };
+        };
+    };
+    AdminTaxonomyController_overview: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminTaxonomyDto"];
+                };
+            };
+        };
+    };
+    AdminTaxonomyController_createSubject: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateSubjectDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminTaxonomyDto"];
+                };
+            };
+        };
+    };
+    AdminTaxonomyController_updateSubject: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateSubjectDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminTaxonomyDto"];
+                };
+            };
+        };
+    };
+    AdminTaxonomyController_createTopic: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateTopicDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminTaxonomyDto"];
+                };
+            };
+        };
+    };
+    AdminTaxonomyController_updateTopic: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateTopicDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminTaxonomyDto"];
+                };
+            };
+        };
+    };
+    AdminTaxonomyController_createAct: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateActDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminTaxonomyDto"];
+                };
+            };
+        };
+    };
+    AdminTaxonomyController_updateAct: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateActDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminTaxonomyDto"];
                 };
             };
         };
