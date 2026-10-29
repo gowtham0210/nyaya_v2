@@ -186,6 +186,7 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
       correctOptionIds: ['abcd'[q.correct]],
       explanation: 'Because ${q.id}',
       reference: 'Article ${q.difficulty}',
+      sourceUrl: 'https://www.indiacode.nic.in/',
     );
   }
 
@@ -339,7 +340,12 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
 
   Verdict _verdict(_FakeQuestion q, int? option) => Verdict(
         correct: option == q.correct,
-        reveal: Reveal(correctIndex: q.correct, explanation: 'Because ${q.id}', reference: 'Article ${q.difficulty}'),
+        reveal: Reveal(
+          correctIndex: q.correct,
+          explanation: 'Because ${q.id}',
+          reference: 'Article ${q.difficulty}',
+          sourceUrl: 'https://www.indiacode.nic.in/',
+        ),
       );
 }
 

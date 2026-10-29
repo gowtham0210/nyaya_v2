@@ -229,6 +229,8 @@ export class ReviewService {
         explanation: questionVersions.explanation,
         provision: questionVersions.provisionReference,
         sourceTitle: questionVersions.sourceTitle,
+        sourceUrl: questionVersions.sourceUrl,
+        citation: questionVersions.citation,
         topicId: questionVersions.topicId,
       })
       .from(questionVersions)
@@ -253,6 +255,8 @@ export class ReviewService {
           explanation: null,
           provision_reference: null,
           source_title: null,
+          source_url: null,
+          citation: null,
           topic_id: null,
         });
         continue;
@@ -270,6 +274,8 @@ export class ReviewService {
         explanation: v.explanation,
         provision_reference: v.provision,
         source_title: v.sourceTitle,
+        source_url: v.sourceUrl,
+        citation: v.citation,
         topic_id: v.topicId,
       });
     }

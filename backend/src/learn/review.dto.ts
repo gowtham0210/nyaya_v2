@@ -23,6 +23,8 @@ export class ReviewQuestionDto {
   @ApiProperty({ type: String, nullable: true }) provision_reference:
     string | null;
   @ApiProperty({ type: String, nullable: true }) source_title: string | null;
+  @ApiProperty({ type: String, nullable: true }) source_url: string | null;
+  @ApiProperty({ type: String, nullable: true }) citation: string | null;
   @ApiProperty({ type: String, format: 'uuid', nullable: true })
   topic_id: string | null;
 }

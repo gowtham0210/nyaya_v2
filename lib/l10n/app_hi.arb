@@ -121,6 +121,8 @@
   "quizAnswerWas": "उत्तर: {answer}",
   "quizWhy": "क्यों",
   "quizReference": "संदर्भ",
+  "quizOpenSource": "आधिकारिक पाठ पढ़ें",
+  "quizOpenSourceFailed": "लिंक नहीं खुल सका",
   "quizCombo": "{count}× कॉम्बो!",
   "quizFinish": "समाप्त",
   "quizSubmit": "परीक्षा जमा करें",

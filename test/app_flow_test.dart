@@ -173,6 +173,8 @@ void main() {
     await settle(tester);
     expect(find.text('Answer: ${api.correctTextFor(q.id)}'), findsOneWidget);
     expect(find.text('Because ${q.id}'), findsOneWidget, reason: 'explanation comes from the server');
+    expect(find.text('Reference: Article ${q.difficulty}'), findsOneWidget);
+    expect(find.text('Read the official text'), findsOneWidget, reason: 'the source has an official link');
   });
 
   testWidgets('a signed-out learner creates an account before the first quiz', (tester) async {

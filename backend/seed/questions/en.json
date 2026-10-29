@@ -40,7 +40,15 @@
       ],
       "answer": 0,
       "explanation": "The Constitution was adopted on 26 November 1949 and came fully into force on 26 January 1950, which we celebrate as Republic Day.",
-      "reference": "Article 394, Constitution of India"
+      "reference": "Article 394, Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1950-01-26",
+        "valid_to": null,
+        "note": "Art. 394 brings the rest of the Constitution into force on 26 Jan 1950 (Art. 394 itself and a few others from 26 Nov 1949); text checked in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "con_1_02",
@@ -56,7 +64,15 @@
       ],
       "answer": 1,
       "explanation": "Dr B.R. Ambedkar chaired the Drafting Committee. Dr Rajendra Prasad was the President of the Constituent Assembly.",
-      "reference": "Constituent Assembly of India, Drafting Committee (constituted 29 August 1947)"
+      "reference": "Constituent Assembly of India, Drafting Committee (constituted 29 August 1947)",
+      "source": {
+        "title": "Constituent Assembly of India, Drafting Committee",
+        "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2021/nov/doc2021112621.pdf",
+        "citation": null,
+        "valid_from": "1947-08-29",
+        "valid_to": null,
+        "note": "Drafting Committee chaired by Dr B.R. Ambedkar was set up on 29 Aug 1947 per the Govt of India (PIB/Ministry of Parliamentary Affairs) Constitution Day backgrounder; secondary sources say he was formally elected chairman at its first meeting on 30 Aug 1947. Confidence: medium."
+      }
     },
     {
       "id": "con_1_03",
@@ -72,7 +88,15 @@
       ],
       "answer": 0,
       "explanation": "Article 1 gives the name of the country and describes it as a Union of States. Article 3 deals with forming new States.",
-      "reference": "Article 1(1), Constitution of India"
+      "reference": "Article 1(1), Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1950-01-26",
+        "valid_to": null,
+        "note": "Art. 1(1) is original text with no amendment footnote in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "con_1_04",
@@ -88,7 +112,15 @@
       ],
       "answer": 3,
       "explanation": "A candidate for President must be a citizen of India, at least 35 years old, and qualified to be elected to the Lok Sabha.",
-      "reference": "Article 58(1)(b), Constitution of India"
+      "reference": "Article 58(1)(b), Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1950-01-26",
+        "valid_to": null,
+        "note": "Art. 58(1)(b) 'completed the age of thirty-five years' is original text with no amendment footnote in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "con_1_05",
@@ -104,7 +136,15 @@
       ],
       "answer": 2,
       "explanation": "The 42nd Amendment added 'Socialist' and 'Secular', and changed 'unity of the Nation' to 'unity and integrity of the Nation'.",
-      "reference": "Section 2, Constitution (Forty-second Amendment) Act, 1976"
+      "reference": "Section 2, Constitution (Forty-second Amendment) Act, 1976",
+      "source": {
+        "title": "Constitution (Forty-second Amendment) Act, 1976",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/9f820a53b6e6840a459bde27eb5d24e5.pdf",
+        "citation": null,
+        "valid_from": "1977-01-03",
+        "valid_to": null,
+        "note": "Preamble words substituted by s. 2 of the 42nd Amendment w.e.f. 3-1-1977, per footnotes in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026); Act text (s. 2) confirmed on legislative.gov.in. Confidence: high."
+      }
     },
     {
       "id": "con_1_06",
@@ -120,7 +160,15 @@
       ],
       "answer": 1,
       "explanation": "The Lok Sabha lasts five years from its first meeting unless dissolved earlier. Only during an Emergency can Parliament extend it, one year at a time.",
-      "reference": "Article 83(2), Constitution of India"
+      "reference": "Article 83(2), Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1979-06-20",
+        "valid_to": null,
+        "note": "Art. 83(2) 'five years' (original) was changed to 'six years' by 42nd Amdt s. 17 w.e.f. 3-1-1977 and restored to 'five years' by 44th Amdt s. 13 w.e.f. 20-6-1979, per footnotes in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "con_2_01",
@@ -136,7 +184,15 @@
       ],
       "answer": 2,
       "explanation": "Article 72 lets the President pardon, remit or commute sentences, including death sentences. Article 161 gives Governors a similar power.",
-      "reference": "Article 72, Constitution of India"
+      "reference": "Article 72, Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1950-01-26",
+        "valid_to": null,
+        "note": "Art. 72(1) pardon power, incl. death sentences (cl. (1)(c)), is original text with no amendment footnote, checked in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "con_2_02",
@@ -152,7 +208,15 @@
       ],
       "answer": 0,
       "explanation": "Article 110(3) makes the Speaker's decision on whether a Bill is a Money Bill final.",
-      "reference": "Article 110(3), Constitution of India"
+      "reference": "Article 110(3), Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1950-01-26",
+        "valid_to": null,
+        "note": "Art. 110(3) Speaker's decision final is original text with no amendment footnote in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "con_2_03",
@@ -168,7 +232,15 @@
       ],
       "answer": 3,
       "explanation": "The Rajya Sabha can only recommend changes to a Money Bill. If it does not return the Bill within 14 days, it is deemed passed by both Houses.",
-      "reference": "Article 109(5), Constitution of India"
+      "reference": "Article 109(5), Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1950-01-26",
+        "valid_to": null,
+        "note": "Art. 109 fourteen-day period is original text with no amendment footnote in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "con_2_04",
@@ -184,7 +256,15 @@
       ],
       "answer": 2,
       "explanation": "After the 1975 Emergency, the 44th Amendment narrowed Article 352 so that only war, external aggression or armed rebellion can justify it.",
-      "reference": "Article 352(1), as amended by the Constitution (Forty-fourth Amendment) Act, 1978"
+      "reference": "Article 352(1), as amended by the Constitution (Forty-fourth Amendment) Act, 1978",
+      "source": {
+        "title": "Constitution (Forty-fourth Amendment) Act, 1978",
+        "url": "https://cdnbbsr.s3waas.gov.in/s380537a945c7aaa788ccfcdf1b99b5d8f/uploads/2023/03/2023030242-2.pdf",
+        "citation": null,
+        "valid_from": "1979-06-20",
+        "valid_to": null,
+        "note": "s. 37 of the 44th Amendment substituted 'armed rebellion' for 'internal disturbance' in Art. 352(1) w.e.f. 20-6-1979, per footnote in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026); s. 37 text confirmed in the Act PDF (Legislative Department S3WaaS storage). Confidence: high."
+      }
     },
     {
       "id": "con_2_05",
@@ -200,7 +280,15 @@
       ],
       "answer": 0,
       "explanation": "Supreme Court judges hold office until 65. High Court judges retire at 62 under Article 217(1).",
-      "reference": "Article 124(2), Constitution of India"
+      "reference": "Article 124(2), Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1950-01-26",
+        "valid_to": null,
+        "note": "Art. 124(2) 'until he attains the age of sixty-five years' is original text, checked in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026) (the NJAC words added by the 99th Amdt were struck down). Confidence: high."
+      }
     },
     {
       "id": "con_2_06",
@@ -216,7 +304,15 @@
       ],
       "answer": 2,
       "explanation": "The President may call a joint sitting to resolve a deadlock on an ordinary Bill. It is not available for Money Bills or Constitution amendments.",
-      "reference": "Article 108, Constitution of India"
+      "reference": "Article 108, Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1950-01-26",
+        "valid_to": null,
+        "note": "Art. 108 joint sitting is original text, checked in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "con_3_01",
@@ -232,7 +328,15 @@
       ],
       "answer": 3,
       "explanation": "A 13-judge bench held by 7:6 that Parliament can amend any part of the Constitution but cannot destroy its basic structure.",
-      "reference": "Kesavananda Bharati v. State of Kerala, (1973) 4 SCC 225"
+      "reference": "Kesavananda Bharati v. State of Kerala, (1973) 4 SCC 225",
+      "source": {
+        "title": "Kesavananda Bharati v. State of Kerala",
+        "url": "https://api.sci.gov.in/pdf/aorexam/leading_cases/1.pdf",
+        "citation": "(1973) 4 SCC 225",
+        "valid_from": "1973-04-24",
+        "valid_to": null,
+        "note": "Judgment date 24 April 1973 and 13-judge bench confirmed on the reported judgment hosted by the Supreme Court (api.sci.gov.in leading cases); 7:6 majority is the standard reading of the case. Confidence: high."
+      }
     },
     {
       "id": "con_3_02",
@@ -248,7 +352,15 @@
       ],
       "answer": 1,
       "explanation": "Minerva Mills held that limited amending power and judicial review are part of the basic structure, so Parliament cannot give itself unlimited power.",
-      "reference": "Minerva Mills Ltd. v. Union of India, (1980) 3 SCC 625"
+      "reference": "Minerva Mills Ltd. v. Union of India, (1980) 3 SCC 625",
+      "source": {
+        "title": "Minerva Mills Ltd. v. Union of India",
+        "url": "https://api.sci.gov.in/pdf/aorexam/leading_cases/3.pdf",
+        "citation": "(1980) 3 SCC 625",
+        "valid_from": "1980-05-09",
+        "valid_to": null,
+        "note": "Court's order of 9 May 1980 declared s. 55 of the 42nd Amdt (Art. 368(4),(5)) void; reasons delivered 31 July 1980 (date in report heading); both confirmed in the SCR copy on api.sci.gov.in. Confidence: high."
+      }
     },
     {
       "id": "con_3_03",
@@ -264,7 +376,15 @@
       ],
       "answer": 1,
       "explanation": "24 April 1973 is the date of the Kesavananda Bharati judgment. Ninth Schedule laws added after it are open to basic structure review.",
-      "reference": "I.R. Coelho v. State of Tamil Nadu, (2007) 2 SCC 1"
+      "reference": "I.R. Coelho v. State of Tamil Nadu, (2007) 2 SCC 1",
+      "source": {
+        "title": "I.R. Coelho v. State of Tamil Nadu",
+        "url": "https://api.sci.gov.in/pdf/aorexam/leading_cases/23.pdf",
+        "citation": "(2007) 2 SCC 1",
+        "valid_from": "2007-01-11",
+        "valid_to": null,
+        "note": "Judgment dated 11 Jan 2007 and the 24.4.1973 cut-off confirmed in the SCR copy on api.sci.gov.in. Confidence: high."
+      }
     },
     {
       "id": "con_3_04",
@@ -280,7 +400,15 @@
       ],
       "answer": 0,
       "explanation": "The Fourth Judges Case (2015) held the NJAC unconstitutional as it hurt judicial independence, a basic feature, and restored the collegium system.",
-      "reference": "Supreme Court Advocates-on-Record Assn. v. Union of India, (2016) 5 SCC 1"
+      "reference": "Supreme Court Advocates-on-Record Assn. v. Union of India, (2016) 5 SCC 1",
+      "source": {
+        "title": "Supreme Court Advocates-on-Record Association v. Union of India",
+        "url": "https://api.sci.gov.in/pdf/aorexam/leading_cases/36.pdf",
+        "citation": "(2016) 5 SCC 1",
+        "valid_from": "2015-10-16",
+        "valid_to": null,
+        "note": "Judgment dated 16 Oct 2015 holding the 99th Amendment unconstitutional and void, confirmed in the SCR copy on api.sci.gov.in. Confidence: high."
+      }
     },
     {
       "id": "con_3_05",
@@ -296,7 +424,15 @@
       ],
       "answer": 3,
       "explanation": "Under the proviso to Article 368(2), amendments to federal features, such as representation of States in Parliament, need ratification by half the States.",
-      "reference": "Article 368(2), proviso, Constitution of India"
+      "reference": "Article 368(2), proviso, Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1950-01-26",
+        "valid_to": null,
+        "note": "Ratification by half the States for 'representation of States in Parliament' (proviso cl. (d)) is original; Art. 368 was only renumbered as cl. (2) by the 24th Amdt w.e.f. 5-11-1971, per footnotes in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "con_3_06",
@@ -312,7 +448,15 @@
       ],
       "answer": 1,
       "explanation": "Bommai held that majority is proved by a floor test, not the Governor's opinion, and that President's Rule under Article 356 is open to judicial review.",
-      "reference": "S.R. Bommai v. Union of India, (1994) 3 SCC 1"
+      "reference": "S.R. Bommai v. Union of India, (1994) 3 SCC 1",
+      "source": {
+        "title": "S.R. Bommai v. Union of India",
+        "url": "https://api.sci.gov.in/pdf/aorexam/leading_cases/8.pdf",
+        "citation": "(1994) 3 SCC 1",
+        "valid_from": "1994-03-11",
+        "valid_to": null,
+        "note": "Judgment dated 11 March 1994 and floor-test holding confirmed in the SCR copy on api.sci.gov.in. Confidence: high."
+      }
     },
     {
       "id": "rig_1_01",
@@ -328,7 +472,15 @@
       ],
       "answer": 3,
       "explanation": "Article 17 abolishes untouchability and forbids its practice in any form. Enforcing any disability arising from it is an offence.",
-      "reference": "Article 17, Constitution of India"
+      "reference": "Article 17, Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1950-01-26",
+        "valid_to": null,
+        "note": "Art. 17 is original text with no amendment footnote in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "rig_1_02",
@@ -344,7 +496,15 @@
       ],
       "answer": 2,
       "explanation": "Article 21A, added by the 86th Amendment in 2002, makes free and compulsory education for children aged 6 to 14 a Fundamental Right.",
-      "reference": "Article 21A, Constitution of India"
+      "reference": "Article 21A, Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "2010-04-01",
+        "valid_to": null,
+        "note": "Art. 21A inserted by s. 2 of the 86th Amendment Act, 2002 w.e.f. 1-4-2010, per footnote in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "rig_1_03",
@@ -360,7 +520,15 @@
       ],
       "answer": 3,
       "explanation": "Article 21 says no person shall be deprived of life or personal liberty except according to procedure established by law. It applies to everyone, not just citizens.",
-      "reference": "Article 21, Constitution of India"
+      "reference": "Article 21, Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1950-01-26",
+        "valid_to": null,
+        "note": "Art. 21 is original text, checked in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "rig_1_04",
@@ -376,7 +544,15 @@
       ],
       "answer": 3,
       "explanation": "Fundamental Duties were added in Part IVA (Article 51A) by the 42nd Amendment, 1976. There are now 11 duties.",
-      "reference": "Article 51A, Constitution of India"
+      "reference": "Article 51A, Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1977-01-03",
+        "valid_to": null,
+        "note": "Part IVA / Art. 51A inserted by s. 11 of the 42nd Amendment w.e.f. 3-1-1977 (11th duty, cl. (k), added by 86th Amdt s. 4 w.e.f. 1-4-2010), per footnotes in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "rig_1_05",
@@ -392,7 +568,15 @@
       ],
       "answer": 1,
       "explanation": "Article 32 lets a person go directly to the Supreme Court to enforce Fundamental Rights. Ambedkar called it the very soul and heart of the Constitution.",
-      "reference": "Article 32, Constitution of India; Constituent Assembly Debates, 9 December 1948"
+      "reference": "Article 32, Constitution of India; Constituent Assembly Debates, 9 December 1948",
+      "source": {
+        "title": "Constituent Assembly Debates, Vol. VII, 9 December 1948",
+        "url": "https://api.sci.gov.in/AMB/pdf/cad%2009.12.1948.pdf",
+        "citation": null,
+        "valid_from": "1948-12-09",
+        "valid_to": null,
+        "note": "Ambedkar's 'very soul of the Constitution and the very heart of it' remark on draft Art. 25 (now Art. 32) confirmed in the CAD 9 Dec 1948 PDF hosted by the Supreme Court (api.sci.gov.in/AMB). Confidence: high."
+      }
     },
     {
       "id": "rig_1_06",
@@ -408,7 +592,15 @@
       ],
       "answer": 0,
       "explanation": "Article 14 bars the State from denying any person equality before the law or equal protection of the laws within India.",
-      "reference": "Article 14, Constitution of India"
+      "reference": "Article 14, Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1950-01-26",
+        "valid_to": null,
+        "note": "Art. 14 is original text, checked in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "rig_2_01",
@@ -424,7 +616,15 @@
       ],
       "answer": 0,
       "explanation": "Habeas corpus means 'you may have the body'. The court orders the detainer to produce the person and justify the detention; it can issue even against private persons.",
-      "reference": "Articles 32(2) and 226, Constitution of India"
+      "reference": "Articles 32(2) and 226, Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1950-01-26",
+        "valid_to": null,
+        "note": "Habeas corpus has been named in Art. 32(2) since 1950 (original text, no footnote) and in Art. 226, checked in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "rig_2_02",
@@ -440,7 +640,15 @@
       ],
       "answer": 3,
       "explanation": "Quo warranto ('by what authority') asks the holder of a public office to show their legal right to it and can remove a usurper.",
-      "reference": "Articles 32(2) and 226, Constitution of India"
+      "reference": "Articles 32(2) and 226, Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1950-01-26",
+        "valid_to": null,
+        "note": "Quo warranto has been named in Art. 32(2) since 1950 (original text, no footnote) and in Art. 226, checked in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "rig_2_03",
@@ -456,7 +664,15 @@
       ],
       "answer": 2,
       "explanation": "The Court held that any law depriving liberty must be just, fair and reasonable, and read Articles 14, 19 and 21 together.",
-      "reference": "Maneka Gandhi v. Union of India, (1978) 1 SCC 248"
+      "reference": "Maneka Gandhi v. Union of India, (1978) 1 SCC 248",
+      "source": {
+        "title": "Maneka Gandhi v. Union of India",
+        "url": "https://api.sci.gov.in/pdf/aorexam/leading_cases/2.pdf",
+        "citation": "(1978) 1 SCC 248",
+        "valid_from": "1978-01-25",
+        "valid_to": null,
+        "note": "Judgment dated 25 Jan 1978 confirmed in the SCR copy on api.sci.gov.in. Confidence: high."
+      }
     },
     {
       "id": "rig_2_04",
@@ -472,7 +688,15 @@
       ],
       "answer": 1,
       "explanation": "The Court unanimously held that privacy is intrinsic to life and liberty under Article 21 and to the freedoms in Part III.",
-      "reference": "Justice K.S. Puttaswamy (Retd.) v. Union of India, (2017) 10 SCC 1"
+      "reference": "Justice K.S. Puttaswamy (Retd.) v. Union of India, (2017) 10 SCC 1",
+      "source": {
+        "title": "Justice K.S. Puttaswamy (Retd.) v. Union of India",
+        "url": "https://api.sci.gov.in/pdf/aorexam/leading_cases/43.pdf",
+        "citation": "(2017) 10 SCC 1",
+        "valid_from": "2017-08-24",
+        "valid_to": null,
+        "note": "Judgment dated 24 Aug 2017 (nine judges) holding privacy protected under Art. 21 and Part III, confirmed in the SCR copy on api.sci.gov.in. Confidence: high."
+      }
     },
     {
       "id": "rig_2_05",
@@ -488,7 +712,15 @@
       ],
       "answer": 1,
       "explanation": "Article 226 lets High Courts issue writs for Fundamental Rights and 'for any other purpose', such as enforcing legal rights.",
-      "reference": "Article 226(1), Constitution of India"
+      "reference": "Article 226(1), Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1979-08-01",
+        "valid_to": null,
+        "note": "'for any other purpose' was in original Art. 226, removed when the 42nd Amdt s. 38 substituted Art. 226 (w.e.f. 1-2-1977), and restored by 44th Amdt s. 30 w.e.f. 1-8-1979, per footnotes in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "rig_2_06",
@@ -504,7 +736,15 @@
       ],
       "answer": 3,
       "explanation": "Article 39A, added by the 42nd Amendment, directs equal justice and free legal aid. The Legal Services Authorities Act, 1987 gives effect to it.",
-      "reference": "Article 39A, Constitution of India"
+      "reference": "Article 39A, Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1977-01-03",
+        "valid_to": null,
+        "note": "Art. 39A inserted by s. 8 of the 42nd Amendment w.e.f. 3-1-1977, per footnote in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "rig_3_01",
@@ -520,7 +760,15 @@
       ],
       "answer": 0,
       "explanation": "The nine-judge bench overruled M.P. Sharma and Kharak Singh insofar as they held there is no constitutional right to privacy.",
-      "reference": "Justice K.S. Puttaswamy (Retd.) v. Union of India, (2017) 10 SCC 1"
+      "reference": "Justice K.S. Puttaswamy (Retd.) v. Union of India, (2017) 10 SCC 1",
+      "source": {
+        "title": "Justice K.S. Puttaswamy (Retd.) v. Union of India",
+        "url": "https://api.sci.gov.in/pdf/aorexam/leading_cases/43.pdf",
+        "citation": "(2017) 10 SCC 1",
+        "valid_from": "2017-08-24",
+        "valid_to": null,
+        "note": "Order of the Court dated 24 Aug 2017 overruling M.P. Sharma and Kharak Singh (to the extent they deny privacy) confirmed in the SCR copy on api.sci.gov.in. Confidence: high."
+      }
     },
     {
       "id": "rig_3_02",
@@ -536,7 +784,15 @@
       ],
       "answer": 2,
       "explanation": "Forcing narco-analysis, polygraph or brain-mapping tests breaches the right against self-incrimination and personal liberty.",
-      "reference": "Selvi v. State of Karnataka, (2010) 7 SCC 263"
+      "reference": "Selvi v. State of Karnataka, (2010) 7 SCC 263",
+      "source": {
+        "title": "Selvi v. State of Karnataka",
+        "url": "https://api.sci.gov.in/jonew/judis/36303.pdf",
+        "citation": "(2010) 7 SCC 263",
+        "valid_from": "2010-05-05",
+        "valid_to": null,
+        "note": "Judgment signed 'New Delhi, May 5, 2010' and Art. 20(3)/21 holding confirmed in the Supreme Court's own PDF (api.sci.gov.in). Confidence: high."
+      }
     },
     {
       "id": "rig_3_03",
@@ -552,7 +808,15 @@
       ],
       "answer": 0,
       "explanation": "The nine-judge bench set a 50% ceiling save in extraordinary situations and required exclusion of the 'creamy layer' among backward classes.",
-      "reference": "Indra Sawhney v. Union of India, 1992 Supp (3) SCC 217"
+      "reference": "Indra Sawhney v. Union of India, 1992 Supp (3) SCC 217",
+      "source": {
+        "title": "Indra Sawhney v. Union of India",
+        "url": "https://api.sci.gov.in/pdf/aorexam/leading_cases/7.pdf",
+        "citation": "1992 Supp (3) SCC 217",
+        "valid_from": "1992-11-16",
+        "valid_to": null,
+        "note": "Judgment dated 16 Nov 1992 (nine judges) confirmed on the scanned SCR copy on api.sci.gov.in, whose headnote covers the 50% rule. Confidence: high."
+      }
     },
     {
       "id": "rig_3_04",
@@ -568,7 +832,15 @@
       ],
       "answer": 2,
       "explanation": "No preventive detention law can authorise detention beyond three months unless an Advisory Board reports sufficient cause.",
-      "reference": "Article 22(4)(a), Constitution of India"
+      "reference": "Article 22(4)(a), Constitution of India",
+      "source": {
+        "title": "Constitution of India",
+        "url": "https://www.legislative.gov.in/static/uploads/2025/07/95ef471035ee0b5e4e5b1cac3d3584c1.pdf",
+        "citation": null,
+        "valid_from": "1950-01-26",
+        "valid_to": null,
+        "note": "Art. 22(4)(a) three-month limit is original text; the 44th Amdt s. 3 substitution (two months) is still 'date yet to be notified' in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026). Confidence: high."
+      }
     },
     {
       "id": "rig_3_05",
@@ -584,7 +856,15 @@
       ],
       "answer": 2,
       "explanation": "The 44th Amendment, 1978 barred suspension of Articles 20 and 21, undoing the effect of ADM Jabalpur (1976).",
-      "reference": "Article 359(1), as amended by the Constitution (Forty-fourth Amendment) Act, 1978"
+      "reference": "Article 359(1), as amended by the Constitution (Forty-fourth Amendment) Act, 1978",
+      "source": {
+        "title": "Constitution (Forty-fourth Amendment) Act, 1978",
+        "url": "https://cdnbbsr.s3waas.gov.in/s380537a945c7aaa788ccfcdf1b99b5d8f/uploads/2023/03/2023030242-2.pdf",
+        "citation": null,
+        "valid_from": "1979-06-20",
+        "valid_to": null,
+        "note": "s. 40 of the 44th Amendment added '(except articles 20 and 21)' to Art. 359(1) w.e.f. 20-6-1979, per footnote in the official Constitution of India text (Legislative Department, edition as on 10 Sept 2026); s. 40 text confirmed in the Act PDF. Confidence: high."
+      }
     },
     {
       "id": "rig_3_06",
@@ -600,7 +880,15 @@
       ],
       "answer": 1,
       "explanation": "The Court held these freedoms extend to the internet, so internet shutdown orders must be necessary, proportionate and open to judicial review.",
-      "reference": "Anuradha Bhasin v. Union of India, (2020) 3 SCC 637"
+      "reference": "Anuradha Bhasin v. Union of India, (2020) 3 SCC 637",
+      "source": {
+        "title": "Anuradha Bhasin v. Union of India",
+        "url": "https://api.sci.gov.in/supremecourt/2019/28817/28817_2019_2_1501_19350_Judgement_10-Jan-2020.pdf",
+        "citation": "(2020) 3 SCC 637",
+        "valid_from": "2020-01-10",
+        "valid_to": null,
+        "note": "Judgment dated 'New Delhi; January 10, 2020' and Art. 19(1)(a)/19(1)(g) holding confirmed in the Supreme Court's own PDF (api.sci.gov.in). Confidence: high."
+      }
     },
     {
       "id": "cri_1_01",
@@ -616,7 +904,15 @@
       ],
       "answer": 2,
       "explanation": "The BNS, 2023 came into force on 1 July 2024 and replaced the Indian Penal Code, 1860, along with the new BNSS and BSA.",
-      "reference": "Section 1(2), Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Section 1(2), Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250883.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "Commencement date 1 July 2024 appointed by S.O. 850(E) dated 23 Feb 2024 under s.1(2) BNS (confirmed in the Gazette copy of 24 Feb 2024); BNS s.358 repeals the IPC. Confidence: high."
+      }
     },
     {
       "id": "cri_1_02",
@@ -632,7 +928,15 @@
       ],
       "answer": 3,
       "explanation": "Theft is defined and punished in BNS Section 303 (old IPC 379). BNS 302 deals with wounding religious feelings, and 318 is cheating.",
-      "reference": "Section 303, Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Section 303, Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250883.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNS in force from 1 July 2024 under S.O. 850(E) dated 23 Feb 2024 (only s.106(2) held back); section text checked in the Gazette copy of Act 45 of 2023. Confidence: high."
+      }
     },
     {
       "id": "cri_1_03",
@@ -648,7 +952,15 @@
       ],
       "answer": 1,
       "explanation": "Section 4(f) adds community service as a punishment for some minor offences, such as small first-time theft and defamation.",
-      "reference": "Section 4(f), Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Section 4(f), Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250883.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNS in force from 1 July 2024 under S.O. 850(E) dated 23 Feb 2024 (only s.106(2) held back); section text checked in the Gazette copy of Act 45 of 2023. Confidence: high."
+      }
     },
     {
       "id": "cri_1_04",
@@ -664,7 +976,15 @@
       ],
       "answer": 3,
       "explanation": "The BNS defines a child as any person below eighteen years of age.",
-      "reference": "Section 2(3), Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Section 2(3), Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250883.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNS in force from 1 July 2024 under S.O. 850(E) dated 23 Feb 2024 (only s.106(2) held back); section text checked in the Gazette copy of Act 45 of 2023. Confidence: high."
+      }
     },
     {
       "id": "cri_1_05",
@@ -680,7 +1000,15 @@
       ],
       "answer": 0,
       "explanation": "Section 103 punishes murder with death or life imprisonment and fine (old IPC 302). Section 101 only defines murder.",
-      "reference": "Section 103(1), Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Section 103(1), Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250883.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNS in force from 1 July 2024 under S.O. 850(E) dated 23 Feb 2024 (only s.106(2) held back); section text checked in the Gazette copy of Act 45 of 2023. Confidence: high."
+      }
     },
     {
       "id": "cri_1_06",
@@ -696,7 +1024,15 @@
       ],
       "answer": 0,
       "explanation": "The law presumes a child under seven cannot form criminal intent, so their acts are not offences (old IPC 82).",
-      "reference": "Section 20, Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Section 20, Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250883.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNS in force from 1 July 2024 under S.O. 850(E) dated 23 Feb 2024 (only s.106(2) held back); section text checked in the Gazette copy of Act 45 of 2023. Confidence: high."
+      }
     },
     {
       "id": "cri_2_01",
@@ -712,7 +1048,15 @@
       ],
       "answer": 0,
       "explanation": "BNS Section 304 makes snatching a distinct form of theft: suddenly, quickly or forcibly seizing movable property from a person.",
-      "reference": "Section 304, Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Section 304, Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250883.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNS in force from 1 July 2024 under S.O. 850(E) dated 23 Feb 2024 (only s.106(2) held back); section text checked in the Gazette copy of Act 45 of 2023. Confidence: high."
+      }
     },
     {
       "id": "cri_2_02",
@@ -728,7 +1072,15 @@
       ],
       "answer": 2,
       "explanation": "Dowry death needs an unnatural death within seven years of marriage after dowry-related cruelty. Punishment is 7 years to life (old IPC 304B).",
-      "reference": "Section 80, Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Section 80, Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250883.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNS in force from 1 July 2024 under S.O. 850(E) dated 23 Feb 2024 (only s.106(2) held back); section text checked in the Gazette copy of Act 45 of 2023. Confidence: high."
+      }
     },
     {
       "id": "cri_2_03",
@@ -744,7 +1096,15 @@
       ],
       "answer": 1,
       "explanation": "Section 85 punishes such cruelty with up to three years and fine. Section 86 explains what 'cruelty' means.",
-      "reference": "Section 85, Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Section 85, Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250883.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNS in force from 1 July 2024 under S.O. 850(E) dated 23 Feb 2024 (only s.106(2) held back); section text checked in the Gazette copy of Act 45 of 2023. Confidence: high."
+      }
     },
     {
       "id": "cri_2_04",
@@ -760,7 +1120,15 @@
       ],
       "answer": 1,
       "explanation": "This new provision targets mob lynching: each member of a group of five or more is punished with death or life imprisonment and fine.",
-      "reference": "Section 103(2), Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Section 103(2), Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250883.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNS in force from 1 July 2024 under S.O. 850(E) dated 23 Feb 2024 (only s.106(2) held back); section text checked in the Gazette copy of Act 45 of 2023. Confidence: high."
+      }
     },
     {
       "id": "cri_2_05",
@@ -776,7 +1144,15 @@
       ],
       "answer": 2,
       "explanation": "Section 152 punishes acts endangering sovereignty, unity and integrity of India. Section 147 is waging war; 113 is terrorist act.",
-      "reference": "Section 152, Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Section 152, Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250883.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNS in force from 1 July 2024 under S.O. 850(E) dated 23 Feb 2024 (only s.106(2) held back); section text checked in the Gazette copy of Act 45 of 2023. Confidence: high."
+      }
     },
     {
       "id": "cri_2_06",
@@ -792,7 +1168,15 @@
       ],
       "answer": 3,
       "explanation": "Section 69 is a new offence covering intercourse by deceitful means, such as a false promise of marriage or job; up to 10 years and fine.",
-      "reference": "Section 69, Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Section 69, Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250883.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNS in force from 1 July 2024 under S.O. 850(E) dated 23 Feb 2024 (only s.106(2) held back); section text checked in the Gazette copy of Act 45 of 2023. Confidence: high."
+      }
     },
     {
       "id": "cri_3_01",
@@ -808,7 +1192,15 @@
       ],
       "answer": 0,
       "explanation": "The proviso allows community service only for a first-time offender where the stolen property is worth under ₹5,000 and is returned or its value paid.",
-      "reference": "Section 303(2), proviso, Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Section 303(2), proviso, Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250883.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNS in force from 1 July 2024 under S.O. 850(E) dated 23 Feb 2024 (only s.106(2) held back); section text checked in the Gazette copy of Act 45 of 2023. Confidence: high."
+      }
     },
     {
       "id": "cri_3_02",
@@ -824,7 +1216,15 @@
       ],
       "answer": 2,
       "explanation": "Section 111 covers continuing unlawful activity by a syndicate for material benefit. Section 112 is petty organised crime; 113 is terrorist act.",
-      "reference": "Section 111, Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Section 111, Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250883.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNS in force from 1 July 2024 under S.O. 850(E) dated 23 Feb 2024 (only s.106(2) held back); section text checked in the Gazette copy of Act 45 of 2023. Confidence: high."
+      }
     },
     {
       "id": "cri_3_03",
@@ -840,7 +1240,15 @@
       ],
       "answer": 2,
       "explanation": "Section 38 (old IPC 100) lists grave threats like fear of death, rape or kidnapping. Section 41 is the equivalent rule for defence of property.",
-      "reference": "Section 38, Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Section 38, Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250883.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNS in force from 1 July 2024 under S.O. 850(E) dated 23 Feb 2024 (only s.106(2) held back); section text checked in the Gazette copy of Act 45 of 2023. Confidence: high."
+      }
     },
     {
       "id": "cri_3_04",
@@ -856,7 +1264,15 @@
       ],
       "answer": 3,
       "explanation": "Joseph Shine held IPC 497 unconstitutional and the BNS did not re-enact it. Bigamy (BNS 82) and cruelty (BNS 85) remain offences.",
-      "reference": "Joseph Shine v. Union of India, (2019) 3 SCC 39; Chapter V, Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Joseph Shine v. Union of India, (2019) 3 SCC 39; Chapter V, Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Joseph Shine v. Union of India",
+        "url": "https://api.sci.gov.in/supremecourt/2017/32550/32550_2017_Judgement_27-Sep-2018.pdf",
+        "citation": "(2019) 3 SCC 39",
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "Judgment of 27 Sep 2018 (date checked in the official PDF) struck down IPC s.497; the 'no counterpart in the BNS' part became true when the BNS came into force on 1 July 2024 (S.O. 850(E)). The Gazette text of the BNS has no adultery offence. Confidence: high."
+      }
     },
     {
       "id": "cri_3_05",
@@ -872,7 +1288,15 @@
       ],
       "answer": 1,
       "explanation": "Section 105 punishes it. Section 100 defines culpable homicide, 106 covers death by negligence and 110 is attempt to commit culpable homicide.",
-      "reference": "Section 105, Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Section 105, Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250883.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNS in force from 1 July 2024 under S.O. 850(E) dated 23 Feb 2024 (only s.106(2) held back); section text checked in the Gazette copy of Act 45 of 2023. Confidence: high."
+      }
     },
     {
       "id": "cri_3_06",
@@ -888,7 +1312,15 @@
       ],
       "answer": 0,
       "explanation": "Death by negligence generally carries up to 5 years, but for a registered medical practitioner during a medical procedure the maximum is 2 years.",
-      "reference": "Section 106(1), Bharatiya Nyaya Sanhita, 2023"
+      "reference": "Section 106(1), Bharatiya Nyaya Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250883.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNS s.106(1) in force from 1 July 2024 under S.O. 850(E) dated 23 Feb 2024 (only s.106(2) was held back, not s.106(1)); proviso text checked in the Gazette copy of Act 45 of 2023. Confidence: high."
+      }
     },
     {
       "id": "pro_1_01",
@@ -904,7 +1336,15 @@
       ],
       "answer": 1,
       "explanation": "Police must record information of a cognizable offence irrespective of where it happened, and then transfer it to the police station with jurisdiction.",
-      "reference": "Section 173(1), Bharatiya Nagarik Suraksha Sanhita, 2023"
+      "reference": "Section 173(1), Bharatiya Nagarik Suraksha Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250884.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNSS in force from 1 July 2024 under S.O. 848(E) dated 23 Feb 2024 (only the First Schedule entry for BNS s.106(2) held back); section text checked in the Gazette copy of Act 46 of 2023. Confidence: high."
+      }
     },
     {
       "id": "pro_1_02",
@@ -920,7 +1360,15 @@
       ],
       "answer": 1,
       "explanation": "Information can be given electronically, but it is taken on record once the informant signs it within three days.",
-      "reference": "Section 173(1)(ii), Bharatiya Nagarik Suraksha Sanhita, 2023"
+      "reference": "Section 173(1)(ii), Bharatiya Nagarik Suraksha Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250884.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNSS in force from 1 July 2024 under S.O. 848(E) dated 23 Feb 2024 (only the First Schedule entry for BNS s.106(2) held back); section text checked in the Gazette copy of Act 46 of 2023. Confidence: high."
+      }
     },
     {
       "id": "pro_1_03",
@@ -936,7 +1384,15 @@
       ],
       "answer": 2,
       "explanation": "A copy of the recorded information must be given to the informant or victim forthwith, free of cost.",
-      "reference": "Section 173(2), Bharatiya Nagarik Suraksha Sanhita, 2023"
+      "reference": "Section 173(2), Bharatiya Nagarik Suraksha Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250884.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNSS in force from 1 July 2024 under S.O. 848(E) dated 23 Feb 2024 (only the First Schedule entry for BNS s.106(2) held back); section text checked in the Gazette copy of Act 46 of 2023. Confidence: high."
+      }
     },
     {
       "id": "pro_1_04",
@@ -952,7 +1408,15 @@
       ],
       "answer": 2,
       "explanation": "The police must inform a relative, friend or nominated person about the arrest and where the person is held, and also the designated police officer.",
-      "reference": "Section 48(1), Bharatiya Nagarik Suraksha Sanhita, 2023"
+      "reference": "Section 48(1), Bharatiya Nagarik Suraksha Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250884.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNSS in force from 1 July 2024 under S.O. 848(E) dated 23 Feb 2024 (only the First Schedule entry for BNS s.106(2) held back); section text checked in the Gazette copy of Act 46 of 2023. Confidence: high."
+      }
     },
     {
       "id": "pro_1_05",
@@ -968,7 +1432,15 @@
       ],
       "answer": 0,
       "explanation": "In exceptional cases a woman police officer must make a written report and get prior permission from a Judicial Magistrate of the first class.",
-      "reference": "Section 43(5), Bharatiya Nagarik Suraksha Sanhita, 2023"
+      "reference": "Section 43(5), Bharatiya Nagarik Suraksha Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250884.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNSS in force from 1 July 2024 under S.O. 848(E) dated 23 Feb 2024 (only the First Schedule entry for BNS s.106(2) held back); section text checked in the Gazette copy of Act 46 of 2023. Confidence: high."
+      }
     },
     {
       "id": "pro_1_06",
@@ -984,7 +1456,15 @@
       ],
       "answer": 3,
       "explanation": "The BNSS replaced the CrPC from 1 July 2024. The BNS replaced the IPC and the Bharatiya Sakshya Adhiniyam replaced the Evidence Act.",
-      "reference": "Section 531, Bharatiya Nagarik Suraksha Sanhita, 2023"
+      "reference": "Section 531, Bharatiya Nagarik Suraksha Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250884.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNSS s.531(1) repeals the CrPC, 1973; in force from 1 July 2024 under S.O. 848(E) dated 23 Feb 2024; text checked in the Gazette copy of Act 46 of 2023. Confidence: high."
+      }
     },
     {
       "id": "pro_2_01",
@@ -1000,7 +1480,15 @@
       ],
       "answer": 2,
       "explanation": "With a DSP's prior permission, police may hold a preliminary enquiry within 14 days to see if a prima facie case exists.",
-      "reference": "Section 173(3), Bharatiya Nagarik Suraksha Sanhita, 2023"
+      "reference": "Section 173(3), Bharatiya Nagarik Suraksha Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250884.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNSS in force from 1 July 2024 under S.O. 848(E) dated 23 Feb 2024 (only the First Schedule entry for BNS s.106(2) held back); section text checked in the Gazette copy of Act 46 of 2023. Confidence: high."
+      }
     },
     {
       "id": "pro_2_02",
@@ -1016,7 +1504,15 @@
       ],
       "answer": 1,
       "explanation": "BNSS 482 deals with bail to a person apprehending arrest. Note: BNSS 528 is the High Court's inherent power (old CrPC 482).",
-      "reference": "Section 482, Bharatiya Nagarik Suraksha Sanhita, 2023"
+      "reference": "Section 482, Bharatiya Nagarik Suraksha Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250884.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNSS in force from 1 July 2024 under S.O. 848(E) dated 23 Feb 2024 (only the First Schedule entry for BNS s.106(2) held back); section text checked in the Gazette copy of Act 46 of 2023. Confidence: high."
+      }
     },
     {
       "id": "pro_2_03",
@@ -1032,7 +1528,15 @@
       ],
       "answer": 0,
       "explanation": "No confession made to a police officer can be proved against an accused (old Evidence Act s.25), to guard against forced confessions.",
-      "reference": "Section 23(1), Bharatiya Sakshya Adhiniyam, 2023"
+      "reference": "Section 23(1), Bharatiya Sakshya Adhiniyam, 2023",
+      "source": {
+        "title": "Bharatiya Sakshya Adhiniyam, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250882.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BSA in force from 1 July 2024 under S.O. 849(E) dated 23 Feb 2024 (no exceptions); section text checked in the Gazette copy of Act 47 of 2023. Confidence: high."
+      }
     },
     {
       "id": "pro_2_04",
@@ -1048,7 +1552,15 @@
       ],
       "answer": 2,
       "explanation": "Section 63 sets the conditions for admitting electronic records. The certificate in the Schedule has Part A for the party and Part B for an expert.",
-      "reference": "Section 63(4) and Schedule, Bharatiya Sakshya Adhiniyam, 2023"
+      "reference": "Section 63(4) and Schedule, Bharatiya Sakshya Adhiniyam, 2023",
+      "source": {
+        "title": "Bharatiya Sakshya Adhiniyam, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250882.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BSA in force from 1 July 2024 under S.O. 849(E) dated 23 Feb 2024 (no exceptions); section text checked in the Gazette copy of Act 47 of 2023. Confidence: high."
+      }
     },
     {
       "id": "pro_2_05",
@@ -1064,7 +1576,15 @@
       ],
       "answer": 0,
       "explanation": "Other undertrials qualify at one-half; first-time offenders at one-third. It does not apply to offences punishable with death or life imprisonment.",
-      "reference": "Section 479(1), proviso, Bharatiya Nagarik Suraksha Sanhita, 2023"
+      "reference": "Section 479(1), proviso, Bharatiya Nagarik Suraksha Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250884.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNSS in force from 1 July 2024 under S.O. 848(E) dated 23 Feb 2024 (only the First Schedule entry for BNS s.106(2) held back); section text checked in the Gazette copy of Act 46 of 2023. Confidence: high."
+      }
     },
     {
       "id": "pro_2_06",
@@ -1080,7 +1600,15 @@
       ],
       "answer": 0,
       "explanation": "BNSS Section 35(7) protects infirm persons and those above 60 from arrest for minor offences without prior permission of a DSP-rank officer.",
-      "reference": "Section 35(7), Bharatiya Nagarik Suraksha Sanhita, 2023"
+      "reference": "Section 35(7), Bharatiya Nagarik Suraksha Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250884.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNSS in force from 1 July 2024 under S.O. 848(E) dated 23 Feb 2024 (only the First Schedule entry for BNS s.106(2) held back); section text checked in the Gazette copy of Act 46 of 2023. Confidence: high."
+      }
     },
     {
       "id": "pro_3_01",
@@ -1096,7 +1624,15 @@
       ],
       "answer": 1,
       "explanation": "The cap is 90 days for offences punishable with death, life or 10+ years, and 60 days for others; after that the accused gets default bail.",
-      "reference": "Section 187(3), Bharatiya Nagarik Suraksha Sanhita, 2023"
+      "reference": "Section 187(3), Bharatiya Nagarik Suraksha Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250884.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNSS in force from 1 July 2024 under S.O. 848(E) dated 23 Feb 2024 (only the First Schedule entry for BNS s.106(2) held back); section text checked in the Gazette copy of Act 46 of 2023. Confidence: high."
+      }
     },
     {
       "id": "pro_3_02",
@@ -1112,7 +1648,15 @@
       ],
       "answer": 3,
       "explanation": "The 15 days of police custody may be taken whole or in parts at any time during the initial 40 or 60 days of the 60/90-day detention period.",
-      "reference": "Section 187(2), Bharatiya Nagarik Suraksha Sanhita, 2023"
+      "reference": "Section 187(2), Bharatiya Nagarik Suraksha Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250884.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNSS in force from 1 July 2024 under S.O. 848(E) dated 23 Feb 2024 (only the First Schedule entry for BNS s.106(2) held back); section text checked in the Gazette copy of Act 46 of 2023. Confidence: high."
+      }
     },
     {
       "id": "pro_3_03",
@@ -1128,7 +1672,15 @@
       ],
       "answer": 1,
       "explanation": "BNSS Section 176(3) mandates a forensic team visit and videography of evidence collection for offences punishable with seven years or more.",
-      "reference": "Section 176(3), Bharatiya Nagarik Suraksha Sanhita, 2023"
+      "reference": "Section 176(3), Bharatiya Nagarik Suraksha Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250884.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "The 7-year threshold in s.176(3) is in the BNSS text in force from 1 July 2024 (S.O. 848(E)), but the forensic-visit duty itself starts only from a date each State Government notifies, within five years. Confidence: medium. Check: ok: 7 years is the correct threshold. But s.176(3) applies only from a date each State notifies (within five years), so the explanation's 'mandates' is not yet true in every State."
+      }
     },
     {
       "id": "pro_3_04",
@@ -1144,7 +1696,15 @@
       ],
       "answer": 3,
       "explanation": "Information from an accused in police custody that leads to discovery of a fact may be proved to that extent, even if it is confessional.",
-      "reference": "Section 23(2), proviso, Bharatiya Sakshya Adhiniyam, 2023"
+      "reference": "Section 23(2), proviso, Bharatiya Sakshya Adhiniyam, 2023",
+      "source": {
+        "title": "Bharatiya Sakshya Adhiniyam, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250882.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BSA in force from 1 July 2024 under S.O. 849(E) dated 23 Feb 2024 (no exceptions); section text checked in the Gazette copy of Act 47 of 2023. Confidence: high."
+      }
     },
     {
       "id": "pro_3_05",
@@ -1160,7 +1720,15 @@
       ],
       "answer": 3,
       "explanation": "Evidence is weighed, not counted: a single reliable witness can be enough to prove a fact (old Evidence Act s.134).",
-      "reference": "Section 139, Bharatiya Sakshya Adhiniyam, 2023"
+      "reference": "Section 139, Bharatiya Sakshya Adhiniyam, 2023",
+      "source": {
+        "title": "Bharatiya Sakshya Adhiniyam, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250882.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BSA in force from 1 July 2024 under S.O. 849(E) dated 23 Feb 2024 (no exceptions); section text checked in the Gazette copy of Act 47 of 2023. Confidence: high."
+      }
     },
     {
       "id": "pro_3_06",
@@ -1176,7 +1744,15 @@
       ],
       "answer": 3,
       "explanation": "Section 356 lets courts try and decide the case of a proclaimed offender who absconds to evade trial. Sections 398 and 472 deal with witness protection and mercy petitions.",
-      "reference": "Section 356, Bharatiya Nagarik Suraksha Sanhita, 2023"
+      "reference": "Section 356, Bharatiya Nagarik Suraksha Sanhita, 2023",
+      "source": {
+        "title": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+        "url": "https://egazette.gov.in/WriteReadData/2023/250884.pdf",
+        "citation": null,
+        "valid_from": "2024-07-01",
+        "valid_to": null,
+        "note": "BNSS in force from 1 July 2024 under S.O. 848(E) dated 23 Feb 2024 (only the First Schedule entry for BNS s.106(2) held back); section text checked in the Gazette copy of Act 46 of 2023. Confidence: high."
+      }
     },
     {
       "id": "civ_1_01",
@@ -1192,7 +1768,15 @@
       ],
       "answer": 3,
       "explanation": "Under the 2021 Rules, District Commissions hear complaints where the consideration paid is up to ₹50 lakh.",
-      "reference": "Section 34(1), Consumer Protection Act, 2019 read with Consumer Protection (Jurisdiction) Rules, 2021"
+      "reference": "Section 34(1), Consumer Protection Act, 2019 read with Consumer Protection (Jurisdiction) Rules, 2021",
+      "source": {
+        "title": "Consumer Protection (Jurisdiction of the District Commission, the State Commission and the National Commission) Rules, 2021",
+        "url": null,
+        "citation": null,
+        "valid_from": "2021-12-30",
+        "valid_to": null,
+        "note": "The ₹50 lakh District Commission limit comes from the Jurisdiction Rules, G.S.R. 912(E) dated 30 Dec 2021, in force on publication (before that s. 34(1) set ₹1 crore); confirmed by SCC Online and other reports, Rules page found on consumeraffairs.nic.in. Confidence: high. The Rules page on consumeraffairs.nic.in did not open when checked on 29 Oct 2026; add an official link."
+      }
     },
     {
       "id": "civ_1_02",
@@ -1208,7 +1792,15 @@
       ],
       "answer": 0,
       "explanation": "A minor is not competent to contract, so the agreement is void ab initio, as held in Mohori Bibee v. Dharmodas Ghose (1903).",
-      "reference": "Sections 10 and 11, Indian Contract Act, 1872; Mohori Bibee v. Dharmodas Ghose (1903) 30 IA 114"
+      "reference": "Sections 10 and 11, Indian Contract Act, 1872; Mohori Bibee v. Dharmodas Ghose (1903) 30 IA 114",
+      "source": {
+        "title": "Mohori Bibee v. Dharmodas Ghose",
+        "url": null,
+        "citation": "(1903) LR 30 IA 114; (1903) ILR 30 Cal 539",
+        "valid_from": "1903-03-04",
+        "valid_to": null,
+        "note": "Privy Council judgment of 4 March 1903 held a minor's agreement void ab initio (ss. 10-11 Contract Act); date from consistent secondary sources, no official Indian government copy found. Confidence: medium. No official link found."
+      }
     },
     {
       "id": "civ_1_03",
@@ -1224,7 +1816,15 @@
       ],
       "answer": 3,
       "explanation": "The 2019 Act allows complaints to be filed electronically, and consumers can file without a lawyer.",
-      "reference": "Section 35, Consumer Protection Act, 2019"
+      "reference": "Section 35, Consumer Protection Act, 2019",
+      "source": {
+        "title": "Consumer Protection Act, 2019",
+        "url": "https://indiacode.gov.in/handle/123456789/496115",
+        "citation": null,
+        "valid_from": "2020-07-20",
+        "valid_to": null,
+        "note": "CPA 2019 ss. 28-73 (Chapter IV, Consumer Commissions) in force from 20 July 2020 by S.O. 2351(E) dated 15 July 2020 (India Code s. 1 footnote). Electronic filing is the proviso to s. 35(1). Confidence: high. Check: Law still correct, but the option's example 'e-Daakhil' is out of date: from 1 Jan 2025 e-Daakhil was folded into the new e-Jagriti portal (PIB year-end review); consider changing the example."
+      }
     },
     {
       "id": "civ_1_04",
@@ -1240,7 +1840,15 @@
       ],
       "answer": 3,
       "explanation": "Section 2(h) defines a contract as an agreement enforceable by law. Every contract is an agreement, but not every agreement is a contract.",
-      "reference": "Section 2(h), Indian Contract Act, 1872"
+      "reference": "Section 2(h), Indian Contract Act, 1872",
+      "source": {
+        "title": "Indian Contract Act, 1872",
+        "url": "https://indiacode.gov.in/handle/123456789/496413",
+        "citation": null,
+        "valid_from": "1872-09-01",
+        "valid_to": null,
+        "note": "Indian Contract Act in force from 1 September 1872 (India Code record, enforcement date 01-09-1872); this provision is unchanged since. Confidence: high."
+      }
     },
     {
       "id": "civ_1_05",
@@ -1256,7 +1864,15 @@
       ],
       "answer": 1,
       "explanation": "A Consumer Commission will not admit a complaint filed after two years unless the delay is explained with sufficient cause.",
-      "reference": "Section 69(1), Consumer Protection Act, 2019"
+      "reference": "Section 69(1), Consumer Protection Act, 2019",
+      "source": {
+        "title": "Consumer Protection Act, 2019",
+        "url": "https://indiacode.gov.in/handle/123456789/496115",
+        "citation": null,
+        "valid_from": "2020-07-20",
+        "valid_to": null,
+        "note": "CPA 2019 ss. 28-73 (Chapter IV, Consumer Commissions) in force from 20 July 2020 by S.O. 2351(E) dated 15 July 2020 (India Code s. 1 footnote). s. 69(1) sets two years (same period existed under s. 24A of the 1986 Act). Confidence: high."
+      }
     },
     {
       "id": "civ_1_06",
@@ -1272,7 +1888,15 @@
       ],
       "answer": 0,
       "explanation": "Agreements by way of wager are void, and no suit can be brought to recover anything won on a bet.",
-      "reference": "Section 30, Indian Contract Act, 1872"
+      "reference": "Section 30, Indian Contract Act, 1872",
+      "source": {
+        "title": "Indian Contract Act, 1872",
+        "url": "https://indiacode.gov.in/handle/123456789/496413",
+        "citation": null,
+        "valid_from": "1872-09-01",
+        "valid_to": null,
+        "note": "Indian Contract Act in force from 1 September 1872 (India Code record, enforcement date 01-09-1872); this provision is unchanged since. Confidence: high."
+      }
     },
     {
       "id": "civ_2_01",
@@ -1288,7 +1912,15 @@
       ],
       "answer": 1,
       "explanation": "State Commissions hear complaints where consideration paid is above ₹50 lakh and up to ₹2 crore; above ₹2 crore goes to the National Commission.",
-      "reference": "Section 47(1)(a)(i), Consumer Protection Act, 2019 read with Consumer Protection (Jurisdiction) Rules, 2021"
+      "reference": "Section 47(1)(a)(i), Consumer Protection Act, 2019 read with Consumer Protection (Jurisdiction) Rules, 2021",
+      "source": {
+        "title": "Consumer Protection Act, 2019",
+        "url": "https://indiacode.gov.in/handle/123456789/496115",
+        "citation": null,
+        "valid_from": "2020-07-20",
+        "valid_to": null,
+        "note": "CPA 2019 ss. 28-73 (Chapter IV, Consumer Commissions) in force from 20 July 2020 by S.O. 2351(E) dated 15 July 2020 (India Code s. 1 footnote). Under s. 47(1)(a)(i) as enacted (₹1-10 crore) and under the 2021 Jurisdiction Rules (₹50 lakh-2 crore), ₹1.5 crore goes to the State Commission; under the 1986 Act it went to the National Commission. Confidence: high. Check: ok (note: the explanation's ₹50 lakh-₹2 crore band comes from the 2021 Jurisdiction Rules, in force 30 Dec 2021)"
+      }
     },
     {
       "id": "civ_2_02",
@@ -1304,7 +1936,15 @@
       ],
       "answer": 2,
       "explanation": "The 2019 Act lets consumers sue from home: they can file where they reside or work, not only where the seller is.",
-      "reference": "Section 34(2)(d), Consumer Protection Act, 2019"
+      "reference": "Section 34(2)(d), Consumer Protection Act, 2019",
+      "source": {
+        "title": "Consumer Protection Act, 2019",
+        "url": "https://indiacode.gov.in/handle/123456789/496115",
+        "citation": null,
+        "valid_from": "2020-07-20",
+        "valid_to": null,
+        "note": "CPA 2019 ss. 28-73 (Chapter IV, Consumer Commissions) in force from 20 July 2020 by S.O. 2351(E) dated 15 July 2020 (India Code s. 1 footnote). s. 34(2)(d) (complainant's residence) was new in the 2019 Act. Confidence: high."
+      }
     },
     {
       "id": "civ_2_03",
@@ -1320,7 +1960,15 @@
       ],
       "answer": 2,
       "explanation": "Section 25(3) makes a written, signed promise to pay a debt barred by limitation enforceable even without fresh consideration.",
-      "reference": "Section 25(3), Indian Contract Act, 1872"
+      "reference": "Section 25(3), Indian Contract Act, 1872",
+      "source": {
+        "title": "Indian Contract Act, 1872",
+        "url": "https://indiacode.gov.in/handle/123456789/496413",
+        "citation": null,
+        "valid_from": "1872-09-01",
+        "valid_to": null,
+        "note": "Indian Contract Act in force from 1 September 1872 (India Code record, enforcement date 01-09-1872); this provision is unchanged since. Confidence: high."
+      }
     },
     {
       "id": "civ_2_04",
@@ -1336,7 +1984,15 @@
       ],
       "answer": 0,
       "explanation": "A contract becomes void when performance becomes impossible or unlawful after it is made, as explained in Satyabrata Ghose v. Mugneeram Bangur (1954).",
-      "reference": "Section 56, Indian Contract Act, 1872"
+      "reference": "Section 56, Indian Contract Act, 1872",
+      "source": {
+        "title": "Indian Contract Act, 1872",
+        "url": "https://indiacode.gov.in/handle/123456789/496413",
+        "citation": null,
+        "valid_from": "1872-09-01",
+        "valid_to": null,
+        "note": "Indian Contract Act in force from 1 September 1872 (India Code record, enforcement date 01-09-1872); this provision is unchanged since. Confidence: high."
+      }
     },
     {
       "id": "civ_2_05",
@@ -1352,7 +2008,15 @@
       ],
       "answer": 1,
       "explanation": "Section 6 gives a quick remedy to recover possession without proving title, but the suit must be filed within six months of dispossession.",
-      "reference": "Section 6(2)(a), Specific Relief Act, 1963"
+      "reference": "Section 6(2)(a), Specific Relief Act, 1963",
+      "source": {
+        "title": "Specific Relief Act, 1963",
+        "url": "https://indiacode.gov.in/handle/123456789/496392",
+        "citation": null,
+        "valid_from": "1964-03-01",
+        "valid_to": null,
+        "note": "Specific Relief Act in force from 1 March 1964 (India Code enforcement date 01-03-1964); s. 6(2)(a) six-month bar unchanged (the 2018 amendment only changed s. 6(1)). Confidence: high."
+      }
     },
     {
       "id": "civ_2_06",
@@ -1368,7 +2032,15 @@
       ],
       "answer": 0,
       "explanation": "Delay in filing a suit cannot be condoned under Section 5; it covers appeals and applications (except under Order XXI CPC).",
-      "reference": "Section 5, Limitation Act, 1963"
+      "reference": "Section 5, Limitation Act, 1963",
+      "source": {
+        "title": "Limitation Act, 1963",
+        "url": "https://indiacode.gov.in/handle/123456789/496389",
+        "citation": null,
+        "valid_from": "1964-01-01",
+        "valid_to": null,
+        "note": "Limitation Act in force from 1 January 1964 (India Code enforcement date 01-01-1964); s. 5 text confirmed on India Code. Confidence: high."
+      }
     },
     {
       "id": "civ_3_01",
@@ -1384,7 +2056,15 @@
       ],
       "answer": 2,
       "explanation": "The 2018 amendment removed judicial discretion: courts must enforce specific performance except in the cases the Act excludes.",
-      "reference": "Section 10, Specific Relief Act, 1963 (as substituted by Act 18 of 2018)"
+      "reference": "Section 10, Specific Relief Act, 1963 (as substituted by Act 18 of 2018)",
+      "source": {
+        "title": "Specific Relief Act, 1963",
+        "url": "https://indiacode.gov.in/handle/123456789/496392",
+        "citation": null,
+        "valid_from": "2018-10-01",
+        "valid_to": null,
+        "note": "s. 10 substituted by Act 18 of 2018, w.e.f. 1-10-2018 (India Code footnote; notification S.O. 4888(E) dated 19 Sept 2018 per law-firm reports). Confidence: high."
+      }
     },
     {
       "id": "civ_3_02",
@@ -1400,7 +2080,15 @@
       ],
       "answer": 3,
       "explanation": "Damages cover loss that naturally arose from the breach or that the parties knew was likely when contracting, not remote or indirect loss.",
-      "reference": "Section 73, Indian Contract Act, 1872"
+      "reference": "Section 73, Indian Contract Act, 1872",
+      "source": {
+        "title": "Indian Contract Act, 1872",
+        "url": "https://indiacode.gov.in/handle/123456789/496413",
+        "citation": null,
+        "valid_from": "1872-09-01",
+        "valid_to": null,
+        "note": "Indian Contract Act in force from 1 September 1872 (India Code record, enforcement date 01-09-1872); this provision is unchanged since. Confidence: high."
+      }
     },
     {
       "id": "civ_3_03",
@@ -1416,7 +2104,15 @@
       ],
       "answer": 0,
       "explanation": "Courts award reasonable compensation not exceeding the named sum, whether it is called a penalty or liquidated damages (Kailash Nath v. DDA, 2015).",
-      "reference": "Section 74, Indian Contract Act, 1872; Kailash Nath Associates v. DDA, (2015) 4 SCC 136"
+      "reference": "Section 74, Indian Contract Act, 1872; Kailash Nath Associates v. DDA, (2015) 4 SCC 136",
+      "source": {
+        "title": "Indian Contract Act, 1872",
+        "url": "https://indiacode.gov.in/handle/123456789/496413",
+        "citation": null,
+        "valid_from": "1872-09-01",
+        "valid_to": null,
+        "note": "Contract Act in force 1 Sept 1872; the 'reasonable compensation not exceeding the amount named' rule is in s. 74 (first paragraph re-worded by Act 6 of 1899 per India Code footnote, but the cap rule was in the original text). Kailash Nath (2015) applies it but does not create it. Confidence: medium."
+      }
     },
     {
       "id": "civ_3_04",
@@ -1432,7 +2128,15 @@
       ],
       "answer": 2,
       "explanation": "The owner must sue within 12 years from when the defendant's possession becomes adverse; after that the owner's right is extinguished (Section 27).",
-      "reference": "Article 65, Schedule, Limitation Act, 1963; Ravinder Kaur Grewal v. Manjit Kaur, (2019) 8 SCC 729"
+      "reference": "Article 65, Schedule, Limitation Act, 1963; Ravinder Kaur Grewal v. Manjit Kaur, (2019) 8 SCC 729",
+      "source": {
+        "title": "Limitation Act, 1963",
+        "url": "https://indiacode.gov.in/handle/123456789/496389",
+        "citation": null,
+        "valid_from": "1964-01-01",
+        "valid_to": null,
+        "note": "Limitation Act in force from 1 January 1964 (India Code); Article 65 sets 12 years from when possession becomes adverse. Ravinder Kaur Grewal (2019) does not change this period. Confidence: high."
+      }
     },
     {
       "id": "civ_3_05",
@@ -1448,7 +2152,15 @@
       ],
       "answer": 3,
       "explanation": "An appeal lies to the State Commission within 45 days, which it may extend for sufficient cause.",
-      "reference": "Section 41, Consumer Protection Act, 2019"
+      "reference": "Section 41, Consumer Protection Act, 2019",
+      "source": {
+        "title": "Consumer Protection Act, 2019",
+        "url": "https://indiacode.gov.in/handle/123456789/496115",
+        "citation": null,
+        "valid_from": "2020-07-20",
+        "valid_to": null,
+        "note": "CPA 2019 ss. 28-73 (Chapter IV, Consumer Commissions) in force from 20 July 2020 by S.O. 2351(E) dated 15 July 2020 (India Code s. 1 footnote). s. 41 sets 45 days (it was 30 days under the 1986 Act). Confidence: high."
+      }
     },
     {
       "id": "civ_3_06",
@@ -1464,7 +2176,15 @@
       ],
       "answer": 1,
       "explanation": "A bilateral mistake of an essential fact makes the agreement void. A mistake by only one party does not, under Section 22.",
-      "reference": "Section 20, Indian Contract Act, 1872"
+      "reference": "Section 20, Indian Contract Act, 1872",
+      "source": {
+        "title": "Indian Contract Act, 1872",
+        "url": "https://indiacode.gov.in/handle/123456789/496413",
+        "citation": null,
+        "valid_from": "1872-09-01",
+        "valid_to": null,
+        "note": "Indian Contract Act in force from 1 September 1872 (India Code record, enforcement date 01-09-1872); this provision is unchanged since. Confidence: high."
+      }
     },
     {
       "id": "eve_1_01",
@@ -1480,7 +2200,15 @@
       ],
       "answer": 1,
       "explanation": "The PIO must provide the information or reject the request with reasons within 30 days of receiving the application.",
-      "reference": "Section 7(1), Right to Information Act, 2005"
+      "reference": "Section 7(1), Right to Information Act, 2005",
+      "source": {
+        "title": "Right to Information Act, 2005",
+        "url": "https://indiacode.gov.in/handle/123456789/496169",
+        "citation": null,
+        "valid_from": "2005-10-12",
+        "valid_to": null,
+        "note": "s. 7 came into force on the 120th day after enactment on 15 June 2005, i.e. 12 Oct 2005 (India Code enforcement note). Confidence: high."
+      }
     },
     {
       "id": "eve_1_02",
@@ -1496,7 +2224,15 @@
       ],
       "answer": 3,
       "explanation": "Call 1930 quickly to help freeze the money trail, and also report on cybercrime.gov.in. 1098 is the child helpline; 112 is general emergency.",
-      "reference": "National Cyber Crime Reporting Portal (cybercrime.gov.in), Ministry of Home Affairs"
+      "reference": "National Cyber Crime Reporting Portal (cybercrime.gov.in), Ministry of Home Affairs",
+      "source": {
+        "title": "National Cyber Crime Reporting Portal (Ministry of Home Affairs)",
+        "url": "https://cybercrime.gov.in/",
+        "citation": null,
+        "valid_from": "2022-04-01",
+        "valid_to": null,
+        "note": "MHA helpline 1930 replaced 155260 (soft-launched 1 April 2021) during April 2022 per Vikaspedia citing PIB; exact day not confirmed. cybercrime.gov.in today says financial fraud victims can dial 1930. Confidence: low."
+      }
     },
     {
       "id": "eve_1_03",
@@ -1512,7 +2248,15 @@
       ],
       "answer": 2,
       "explanation": "The bridegroom must be 21 and the bride 18. Marrying below these ages is a child marriage under the 2006 Act.",
-      "reference": "Section 5(iii), Hindu Marriage Act, 1955"
+      "reference": "Section 5(iii), Hindu Marriage Act, 1955",
+      "source": {
+        "title": "Hindu Marriage Act, 1955",
+        "url": "https://indiacode.gov.in/handle/123456789/496388",
+        "citation": null,
+        "valid_from": "1978-10-01",
+        "valid_to": null,
+        "note": "s. 5(iii) ages (21/18) substituted by Act 2 of 1978, w.e.f. 1-10-1978 (India Code footnote). Confidence: high. Check: ok (Prohibition of Child Marriage (Amendment) Bill 2021 to raise women's age to 21 was never enacted)"
+      }
     },
     {
       "id": "eve_1_04",
@@ -1528,7 +2272,15 @@
       ],
       "answer": 1,
       "explanation": "Section 12(c) makes every woman and child eligible for free legal aid, without an income test.",
-      "reference": "Section 12(c), Legal Services Authorities Act, 1987"
+      "reference": "Section 12(c), Legal Services Authorities Act, 1987",
+      "source": {
+        "title": "Legal Services Authorities Act, 1987",
+        "url": "https://indiacode.gov.in/handle/123456789/496492",
+        "citation": null,
+        "valid_from": "1995-11-09",
+        "valid_to": null,
+        "note": "Legal Services Authorities Act in force from 9 Nov 1995 (India Code enforcement date); s. 12(c) is original text. Confidence: high."
+      }
     },
     {
       "id": "eve_1_05",
@@ -1544,7 +2296,15 @@
       ],
       "answer": 2,
       "explanation": "Every employer with 10 or more workers must form an Internal Complaints Committee; smaller workplaces are covered by the district Local Committee.",
-      "reference": "Section 4(1), Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013"
+      "reference": "Section 4(1), Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+      "source": {
+        "title": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+        "url": "https://indiacode.gov.in/handle/123456789/496008",
+        "citation": null,
+        "valid_from": "2013-12-09",
+        "valid_to": null,
+        "note": "POSH Act in force from 9 Dec 2013 (India Code enforcement date 09-12-2013); s. 4(1) unchanged. Confidence: high."
+      }
     },
     {
       "id": "eve_1_06",
@@ -1560,7 +2320,15 @@
       ],
       "answer": 3,
       "explanation": "No one under 18 may drive a motor vehicle in a public place. At 16 one may only drive a motorcycle up to 50cc.",
-      "reference": "Section 4(1), Motor Vehicles Act, 1988"
+      "reference": "Section 4(1), Motor Vehicles Act, 1988",
+      "source": {
+        "title": "Motor Vehicles Act, 1988",
+        "url": "https://indiacode.gov.in/handle/123456789/619305",
+        "citation": null,
+        "valid_from": "1989-07-01",
+        "valid_to": null,
+        "note": "Motor Vehicles Act 1988 in force from 1 July 1989 (India Code enforcement date); s. 4(1) age 18 is original text. Confidence: high."
+      }
     },
     {
       "id": "eve_2_01",
@@ -1576,7 +2344,15 @@
       ],
       "answer": 0,
       "explanation": "Information concerning the life or liberty of a person must be given within 48 hours of receiving the request.",
-      "reference": "Section 7(1), proviso, Right to Information Act, 2005"
+      "reference": "Section 7(1), proviso, Right to Information Act, 2005",
+      "source": {
+        "title": "Right to Information Act, 2005",
+        "url": "https://indiacode.gov.in/handle/123456789/496169",
+        "citation": null,
+        "valid_from": "2005-10-12",
+        "valid_to": null,
+        "note": "s. 7(1) proviso (48 hours) came into force on 12 Oct 2005, the 120th day after enactment (India Code enforcement note). Confidence: high."
+      }
     },
     {
       "id": "eve_2_02",
@@ -1592,7 +2368,15 @@
       ],
       "answer": 3,
       "explanation": "A Lok Adalat award is deemed a civil court decree, is final on all parties, and cannot be appealed. Court fee paid is refunded.",
-      "reference": "Section 21, Legal Services Authorities Act, 1987"
+      "reference": "Section 21, Legal Services Authorities Act, 1987",
+      "source": {
+        "title": "Legal Services Authorities Act, 1987",
+        "url": "https://indiacode.gov.in/handle/123456789/496492",
+        "citation": null,
+        "valid_from": "1995-11-09",
+        "valid_to": null,
+        "note": "Act in force from 9 Nov 1995 (India Code); s. 21(2) finality is original text (s. 21(1) re-worded by Act 59 of 1994 before commencement). Confidence: high."
+      }
     },
     {
       "id": "eve_2_03",
@@ -1608,7 +2392,15 @@
       ],
       "answer": 2,
       "explanation": "A child is anyone under 18. Data fiduciaries must get verifiable parental consent and must not track or target ads at children.",
-      "reference": "Section 9, Digital Personal Data Protection Act, 2023"
+      "reference": "Section 9, Digital Personal Data Protection Act, 2023",
+      "source": {
+        "title": "Digital Personal Data Protection Act, 2023",
+        "url": "https://indiacode.gov.in/handle/123456789/496508",
+        "citation": null,
+        "valid_from": "2027-05-13",
+        "valid_to": null,
+        "note": "DPDP Act commencement notification G.S.R. 843(E) dated 13 Nov 2025 (India Code s. 1 footnote) puts ss. 3-17 and 28-34 in force eighteen months from 13 Nov 2025, i.e. 13 May 2027. s. 9 is in the 18-month group. Confidence: medium. Check: Not yet in force on 2026-10-29: s. 9 commences 13 May 2027 under G.S.R. 843(E). Correct as the Act's text, but the question should say it is a coming rule (or be held back until then). A Jan 2026 MeitY proposal to bring this forward to 13 Nov 2026 was not found notified."
+      }
     },
     {
       "id": "eve_2_04",
@@ -1624,7 +2416,15 @@
       ],
       "answer": 0,
       "explanation": "The complaint must be filed within three months of the incident (or the last one in a series); the committee may extend this by another three months.",
-      "reference": "Section 9(1), Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013"
+      "reference": "Section 9(1), Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+      "source": {
+        "title": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+        "url": "https://indiacode.gov.in/handle/123456789/496008",
+        "citation": null,
+        "valid_from": "2013-12-09",
+        "valid_to": null,
+        "note": "POSH Act in force from 9 Dec 2013 (India Code); s. 9(1) unchanged. Confidence: high."
+      }
     },
     {
       "id": "eve_2_05",
@@ -1640,7 +2440,15 @@
       ],
       "answer": 1,
       "explanation": "The Act takes a wide view: depriving a woman of money or resources she is entitled to is economic abuse and counts as domestic violence.",
-      "reference": "Section 3, Protection of Women from Domestic Violence Act, 2005"
+      "reference": "Section 3, Protection of Women from Domestic Violence Act, 2005",
+      "source": {
+        "title": "Protection of Women from Domestic Violence Act, 2005",
+        "url": "https://indiacode.gov.in/handle/123456789/496007",
+        "citation": null,
+        "valid_from": "2006-10-26",
+        "valid_to": null,
+        "note": "DV Act in force from 26 Oct 2006 (India Code enforcement date); s. 3 unchanged. Confidence: high."
+      }
     },
     {
       "id": "eve_2_06",
@@ -1656,7 +2464,15 @@
       ],
       "answer": 0,
       "explanation": "Section 134A protects good-faith helpers from liability for injury or death from emergency care, encouraging people to help victims.",
-      "reference": "Section 134A, Motor Vehicles Act, 1988"
+      "reference": "Section 134A, Motor Vehicles Act, 1988",
+      "source": {
+        "title": "Motor Vehicles Act, 1988",
+        "url": "https://indiacode.gov.in/handle/123456789/619305",
+        "citation": null,
+        "valid_from": "2020-10-01",
+        "valid_to": null,
+        "note": "s. 134A inserted by Act 32 of 2019, s. 45, w.e.f. 1-10-2020 (India Code footnote); not part of the 1 Sept 2019 batch. Confidence: high."
+      }
     },
     {
       "id": "eve_3_01",
@@ -1672,7 +2488,15 @@
       ],
       "answer": 2,
       "explanation": "The Commission can fine a PIO ₹250 per day of delay or obstruction, capped at ₹25,000, after giving a hearing.",
-      "reference": "Section 20(1), Right to Information Act, 2005"
+      "reference": "Section 20(1), Right to Information Act, 2005",
+      "source": {
+        "title": "Right to Information Act, 2005",
+        "url": "https://indiacode.gov.in/handle/123456789/496169",
+        "citation": null,
+        "valid_from": "2005-10-12",
+        "valid_to": null,
+        "note": "s. 20 came into force on 12 Oct 2005, the 120th day after enactment (India Code enforcement note); amounts unchanged. Confidence: high."
+      }
     },
     {
       "id": "eve_3_02",
@@ -1688,7 +2512,15 @@
       ],
       "answer": 1,
       "explanation": "A three-judge bench held daughters are coparceners by birth like sons; the father need not have been alive on 9 September 2005.",
-      "reference": "Vineeta Sharma v. Rakesh Sharma, (2020) 9 SCC 1; Section 6, Hindu Succession Act, 1956"
+      "reference": "Vineeta Sharma v. Rakesh Sharma, (2020) 9 SCC 1; Section 6, Hindu Succession Act, 1956",
+      "source": {
+        "title": "Vineeta Sharma v. Rakesh Sharma",
+        "url": "https://api.sci.gov.in/pdfdate/index1.php?dno=326012018&dt=2020-08-11&filename=supremecourt%2F2018%2F32601%2F32601_2018_33_1501_23387_Judgement_11-Aug-2020.pdf",
+        "citation": "(2020) 9 SCC 1; 2020 INSC 487",
+        "valid_from": "2020-08-11",
+        "valid_to": null,
+        "note": "Three-judge bench judgment dated 11 Aug 2020 (confirmed on the SC PDF, 2020 INSC 487); before it, Prakash v. Phulavati (2015) required the father to be alive on 9.9.2005. Confidence: high."
+      }
     },
     {
       "id": "eve_3_03",
@@ -1704,7 +2536,15 @@
       ],
       "answer": 2,
       "explanation": "The Court held a woman's right of residence extends to the household where she lived in a domestic relationship, even if owned by her in-laws.",
-      "reference": "Satish Chander Ahuja v. Sneha Ahuja, (2021) 1 SCC 414; Section 2(s), Protection of Women from Domestic Violence Act, 2005"
+      "reference": "Satish Chander Ahuja v. Sneha Ahuja, (2021) 1 SCC 414; Section 2(s), Protection of Women from Domestic Violence Act, 2005",
+      "source": {
+        "title": "Satish Chander Ahuja v. Sneha Ahuja",
+        "url": null,
+        "citation": "(2021) 1 SCC 414; [2020] 12 SCR 189",
+        "valid_from": "2020-10-15",
+        "valid_to": null,
+        "note": "Three-judge bench judgment in C.A. 2483 of 2020 dated 15 Oct 2020 (overruled S.R. Batra v. Taruna Batra); date from consistent reports and later SC citations, official PDF not found. Confidence: high. No official link found."
+      }
     },
     {
       "id": "eve_3_04",
@@ -1720,7 +2560,15 @@
       ],
       "answer": 1,
       "explanation": "The Schedule sets up to ₹250 crore for security failures; failing to notify a breach or breaching child-data duties can draw up to ₹200 crore.",
-      "reference": "Schedule, Item 1, Digital Personal Data Protection Act, 2023"
+      "reference": "Schedule, Item 1, Digital Personal Data Protection Act, 2023",
+      "source": {
+        "title": "Digital Personal Data Protection Act, 2023",
+        "url": "https://indiacode.gov.in/handle/123456789/496508",
+        "citation": null,
+        "valid_from": "2027-05-13",
+        "valid_to": null,
+        "note": "DPDP Act commencement notification G.S.R. 843(E) dated 13 Nov 2025 (India Code s. 1 footnote) puts ss. 3-17 and 28-34 in force eighteen months from 13 Nov 2025, i.e. 13 May 2027. s. 33 and the Schedule penalties are in the 18-month group. Confidence: medium. Check: Not yet in force on 2026-10-29: s. 33 and the Schedule (₹250 crore for security safeguards) commence 13 May 2027 under G.S.R. 843(E). Amount is correct as the Act's text, but no penalty can be imposed yet."
+      }
     },
     {
       "id": "eve_3_05",
@@ -1736,7 +2584,15 @@
       ],
       "answer": 0,
       "explanation": "Section 66A (offensive online messages) was held vague and violative of Article 19(1)(a). Section 69A blocking was upheld and Section 79 read down.",
-      "reference": "Shreya Singhal v. Union of India, (2015) 5 SCC 1"
+      "reference": "Shreya Singhal v. Union of India, (2015) 5 SCC 1",
+      "source": {
+        "title": "Shreya Singhal v. Union of India",
+        "url": "https://api.sci.gov.in/jonew/ropor/rop/all/250446.pdf",
+        "citation": "(2015) 5 SCC 1; AIR 2015 SC 1523; 2015 INSC 257",
+        "valid_from": "2015-03-24",
+        "valid_to": null,
+        "note": "Judgment dated 24 March 2015 (SC PDF and India Code footnote to IT Act s. 66A). Confidence: high."
+      }
     },
     {
       "id": "eve_3_06",
@@ -1752,7 +2608,15 @@
       ],
       "answer": 3,
       "explanation": "Section 199A also holds the guardian or owner guilty (up to 3 years and ₹25,000 fine) and cancels the vehicle's registration.",
-      "reference": "Section 199A, Motor Vehicles Act, 1988"
+      "reference": "Section 199A, Motor Vehicles Act, 1988",
+      "source": {
+        "title": "Motor Vehicles Act, 1988",
+        "url": "https://indiacode.gov.in/handle/123456789/619305",
+        "citation": null,
+        "valid_from": "2019-09-01",
+        "valid_to": null,
+        "note": "s. 199A inserted by Act 32 of 2019, s. 85, w.e.f. 1-9-2019 (India Code footnote; also in MoRTH list of sections in force from 1 Sept 2019 on PIB). Confidence: high."
+      }
     }
   ]
 }

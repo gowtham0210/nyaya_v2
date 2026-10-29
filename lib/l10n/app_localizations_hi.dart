@@ -634,6 +634,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get quizReference => 'संदर्भ';
 
   @override
+  String get quizOpenSource => 'आधिकारिक पाठ पढ़ें';
+
+  @override
+  String get quizOpenSourceFailed => 'लिंक नहीं खुल सका';
+
+  @override
   String quizCombo(int count) {
     return '$count× कॉम्बो!';
   }

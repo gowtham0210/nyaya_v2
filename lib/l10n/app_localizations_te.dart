@@ -639,6 +639,12 @@ class AppLocalizationsTe extends AppLocalizations {
   String get quizReference => 'ఆధారం';
 
   @override
+  String get quizOpenSource => 'అధికారిక పాఠం చదవండి';
+
+  @override
+  String get quizOpenSourceFailed => 'లింక్ తెరవలేకపోయాం';
+
+  @override
   String quizCombo(int count) {
     return '$count× కాంబో!';
   }

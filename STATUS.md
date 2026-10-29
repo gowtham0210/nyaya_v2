@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-29 (staging deploy, Claude Opus 5.5)
+> Last updated: 2026-10-29 (question sources, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -312,12 +312,40 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       under the answer bar (scroll a little). Tests: backend 37 unit + 72 API, Flutter 41. Staging migrated (backup
       `nyaya-2026-10-29-1006.sql.gz`); user checked on the iPhone and in the portal.
 
+- [x] 2026-10-29: **Sources and dates on the 108 starter questions (P2 step 1, M04).** Each question in
+      `backend/seed/questions/en.json` now has `source` {title, url, citation, valid_from, valid_to, note}: researched
+      on 29 Oct (official Gazette PDFs for BNS/BNSS/BSA, India Code — now **indiacode.gov.in**, the old .nic.in links
+      are dead — Legislative Department, PIB, Supreme Court PDFs); every link was opened and checked, and the India
+      Code handles checked through its API. 3 have no link (Mohori Bibee, Satish Chander Ahuja, and the CPA
+      Jurisdiction Rules page on consumeraffairs.nic.in, which did not open). `valid_from` = when the answer became
+      law (amendment commencement or judgment date), e.g. 1979-06-20 for 44th Amendment changes, 2024-07-01 for the
+      new criminal laws. `note` says where the date came from, how sure it is, and any problem for the reviewer:
+      **eve_2_03 and eve_3_04 (DPDP Act s.9 and the Schedule) are not in force until 2027-05-13**, so learners won't
+      see them until then; civ_1_03's "e-Daakhil" option is out of date (now e-Jagriti); pro_3_03's "mandates" is
+      only true once each State notifies BNSS s.176(3). Seed (`backend/src/db/seed-sources.ts`): new imports get the
+      source; an open draft gets it only where it has none (or the dev placeholders); a version published without
+      review gets a **new draft revision** with the source (audit `question.revised`); reviewed / in-review versions
+      are left alone. Nothing is published by this. Local dev DB: 107 revisions made, then con_1_01–06 taken through
+      submit → approve → publish to test. API: answer feedback has `citation`; saved/mistake items have `source_url`
+      and `citation`. App: `SourceLine` (quiz, results review, Review page) shows "Reference: …" and a "Read the
+      official text" link (https only, opens in the browser, `url_launcher` added); strings in all 6 languages.
+      Checked on the simulator: the link opens the PIB page in Safari. The link sits partly under the answer bar
+      until you scroll, like Save/Report. Tests: backend 38 unit + 76 API (new `seed-sources` API test and a bank
+      test that every question has a source), Flutter 41. **Not done yet:** staging still shows the unreviewed
+      questions — deploy, run `./deploy/staging/deploy.sh --seed` to create the 108 review drafts, then a reviewer
+      must submit/approve/publish each (no bulk action in the portal yet).
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
-   P3 is done (server progress Parts 1–3, M08, M12 — see 2026-10-29). Next per the plan: finish P2 (M09 CSV import,
-   M04 sources on the questions, taxonomy and staff pages), then P4 beta hardening (M11 analytics + crash reporting,
-   accessibility, security, store prep). Also open: a real all-time leaderboard.
+   P3 is done (server progress Parts 1–3, M08, M12 — see 2026-10-29). Next-phase plan agreed 2026-10-29:
+   finish P2 — (1) sources on the questions [done in code, staging review pending], (2) CSV/Excel import + export
+   (M09, drafts only), (3) taxonomy pages, (4) staff account pages, (5) a real reviewer publishes a sample pack —
+   then P4 beta hardening (crash reporting, analytics M11, accessibility, translations of English-only screens,
+   security/privacy incl. in-app account deletion and rotating the Azure key, store prep with a separate
+   production environment), then P5 controlled launch. Open decisions for the user: who the legal reviewer is,
+   crash/analytics tool, launch audience, premium during beta, production hosting. Also open: a real all-time
+   leaderboard, bulk review actions in the portal.
 2. Dark-mode visual pass on simulator (Terracotta dark theme exists, not yet eyeballed).
 3. Note: a debug build launched via `simctl launch` without `flutter run` can show a blank screen —
    use `flutter run -d <device>` (or a release/profile build) when testing.

@@ -189,6 +189,7 @@ class HttpQuizApi implements QuizApi {
         correctIndex: index < 0 ? null : index,
         explanation: f['explanation'] as String? ?? '',
         reference: (f['provision_reference'] as String?) ?? (f['source_title'] as String?) ?? '',
+        sourceUrl: f['source_url'] as String?,
       ),
     );
   }

@@ -1162,6 +1162,18 @@ abstract class AppLocalizations {
   /// **'Reference'**
   String get quizReference;
 
+  /// No description provided for @quizOpenSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Read the official text'**
+  String get quizOpenSource;
+
+  /// No description provided for @quizOpenSourceFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t open the link'**
+  String get quizOpenSourceFailed;
+
   /// No description provided for @quizCombo.
   ///
   /// In en, this message translates to:

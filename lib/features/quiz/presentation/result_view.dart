@@ -20,6 +20,7 @@ import '../application/quiz_controller.dart';
 import '../domain/quiz_models.dart';
 import '../../review/presentation/question_actions.dart';
 import 'quiz_launcher.dart';
+import 'source_line.dart';
 
 class ResultView extends ConsumerStatefulWidget {
   const ResultView({super.key, required this.state});
@@ -432,6 +433,10 @@ class _ReviewItem extends StatelessWidget {
               answer.reveal?.explanation ?? '',
               style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary, height: 1.4),
             ),
+            if (answer.reveal case final reveal?) ...[
+              const SizedBox(height: 6),
+              SourceLine(reference: reveal.reference, url: reveal.sourceUrl),
+            ],
             if (answer.reveal != null) QuestionActions(questionId: q.questionId, questionVersionId: q.id),
           ],
         ),

@@ -15,6 +15,7 @@ import '../../profile/application/profile_controller.dart';
 import '../../review/presentation/question_actions.dart';
 import '../application/quiz_controller.dart';
 import '../domain/quiz_models.dart';
+import 'source_line.dart';
 
 /// The question screen: progress + timer, question, four options, feedback
 /// and the Next button.
@@ -322,13 +323,8 @@ class _Explanation extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Text(reveal.explanation, style: context.text.bodyMedium?.copyWith(height: 1.5)),
-            if (reveal.reference.isNotEmpty) ...[
-              const SizedBox(height: 8),
-              Text(
-                '${l.quizReference}: ${reveal.reference}',
-                style: context.text.labelSmall?.copyWith(color: context.colors.primary, fontWeight: FontWeight.w700),
-              ),
-            ],
+            const SizedBox(height: 8),
+            SourceLine(reference: reveal.reference, url: reveal.sourceUrl),
             const SizedBox(height: 4),
             QuestionActions(questionId: answer.question.questionId, questionVersionId: answer.question.id),
           ],

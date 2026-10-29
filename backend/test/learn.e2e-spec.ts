@@ -58,6 +58,8 @@ describe('learner quizzes', () => {
       correctOptionIds: ['a'],
       explanation: `${SECRET} for ${versionId}`,
       sourceTitle: 'Constitution of India',
+      sourceUrl: 'https://legislative.gov.in/constitution-of-india/',
+      citation: 'Art. 1',
       validFrom: f.validFrom ?? '2000-01-01',
       validTo: f.validTo ?? null,
     });
@@ -192,6 +194,9 @@ describe('learner quizzes', () => {
     expect(right.body.feedback).toMatchObject({
       correct: true,
       correct_option_ids: ['a'],
+      source_title: 'Constitution of India',
+      source_url: 'https://legislative.gov.in/constitution-of-india/',
+      citation: 'Art. 1',
     });
     expect(right.body.feedback.explanation).toContain(SECRET);
 

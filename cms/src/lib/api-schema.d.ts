@@ -955,6 +955,7 @@ export interface components {
             source_title: string | null;
             source_url: string | null;
             provision_reference: string | null;
+            citation: string | null;
         };
         SessionQuestionDto: {
             position: number;
@@ -1215,6 +1216,8 @@ export interface components {
             explanation: string | null;
             provision_reference: string | null;
             source_title: string | null;
+            source_url: string | null;
+            citation: string | null;
             /** Format: uuid */
             topic_id: string | null;
         };

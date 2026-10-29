@@ -641,6 +641,12 @@ class AppLocalizationsMl extends AppLocalizations {
   String get quizReference => 'അവലംബം';
 
   @override
+  String get quizOpenSource => 'ഔദ്യോഗിക രേഖ വായിക്കുക';
+
+  @override
+  String get quizOpenSourceFailed => 'ലിങ്ക് തുറക്കാനായില്ല';
+
+  @override
   String quizCombo(int count) {
     return '$count× കോംബോ!';
   }

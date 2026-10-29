@@ -121,6 +121,8 @@
   "quizAnswerWas": "జవాబు: {answer}",
   "quizWhy": "ఎందుకు",
   "quizReference": "ఆధారం",
+  "quizOpenSource": "అధికారిక పాఠం చదవండి",
+  "quizOpenSourceFailed": "లింక్ తెరవలేకపోయాం",
   "quizCombo": "{count}× కాంబో!",
   "quizFinish": "ముగించు",
   "quizSubmit": "పరీక్ష సమర్పించు",

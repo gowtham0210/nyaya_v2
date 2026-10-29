@@ -2584,6 +2584,10 @@
           "provision_reference": {
             "type": "string",
             "nullable": true
+          },
+          "citation": {
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
@@ -2592,7 +2596,8 @@
           "explanation",
           "source_title",
           "source_url",
-          "provision_reference"
+          "provision_reference",
+          "citation"
         ]
       },
       "SessionQuestionDto": {
@@ -3446,6 +3451,14 @@
             "type": "string",
             "nullable": true
           },
+          "source_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "citation": {
+            "type": "string",
+            "nullable": true
+          },
           "topic_id": {
             "type": "string",
             "format": "uuid",
@@ -3462,6 +3475,8 @@
           "explanation",
           "provision_reference",
           "source_title",
+          "source_url",
+          "citation",
           "topic_id"
         ]
       },

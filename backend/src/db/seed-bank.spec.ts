@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs';
+import type { BankSource } from './seed-sources.js';
 
 /** The starter bank the seed imports; translations overlay English by id. */
 interface Bank {
@@ -12,6 +13,7 @@ interface Bank {
     options: string[];
     answer?: number;
     explanation: string;
+    source?: BankSource;
   }[];
 }
 
@@ -54,6 +56,23 @@ describe('starter question bank', () => {
       expect(q.question.trim(), q.id).not.toBe('');
       expect(q.explanation.trim(), q.id).not.toBe('');
       expect(CHAPTERS, q.id).toContain(q.chapter);
+    }
+  });
+
+  it('gives every question a source, an https link or none, and dates', () => {
+    const date = /^\d{4}-\d{2}-\d{2}$/;
+    for (const q of en.questions) {
+      const src = q.source;
+      expect(src, q.id).toBeDefined();
+      if (!src) continue;
+      expect(src.title.trim(), q.id).not.toBe('');
+      if (src.url !== null) expect(src.url, q.id).toMatch(/^https:\/\/\S+$/);
+      expect(src.valid_from, q.id).toMatch(date);
+      if (src.valid_to !== null) {
+        expect(src.valid_to, q.id).toMatch(date);
+        expect(src.valid_to > src.valid_from, q.id).toBe(true);
+      }
+      expect(src.note.trim(), q.id).not.toBe('');
     }
   });
 

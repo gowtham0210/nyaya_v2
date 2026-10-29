@@ -132,6 +132,7 @@ interface Row {
   sourceTitle: string | null;
   sourceUrl: string | null;
   provisionReference: string | null;
+  citation: string | null;
 }
 
 const err = (status: HttpStatus, code: string, message: string) =>
@@ -1181,6 +1182,7 @@ export class LearnService {
         sourceTitle: questionVersions.sourceTitle,
         sourceUrl: questionVersions.sourceUrl,
         provisionReference: questionVersions.provisionReference,
+        citation: questionVersions.citation,
       })
       .from(quizSessionQuestions)
       .innerJoin(
@@ -1201,6 +1203,7 @@ export class LearnService {
       source_title: q.sourceTitle,
       source_url: q.sourceUrl,
       provision_reference: q.provisionReference,
+      citation: q.citation,
     };
   }
 

@@ -323,6 +323,8 @@
   },
   "quizWhy": "Why",
   "quizReference": "Reference",
+  "quizOpenSource": "Read the official text",
+  "quizOpenSourceFailed": "Couldn't open the link",
   "quizCombo": "{count}× combo!",
   "@quizCombo": {
     "placeholders": {

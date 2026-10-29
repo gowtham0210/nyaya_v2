@@ -34,7 +34,7 @@ class Question {
 /// (practice modes) or the quiz is submitted (exam).
 @immutable
 class Reveal {
-  const Reveal({required this.correctIndex, required this.explanation, required this.reference});
+  const Reveal({required this.correctIndex, required this.explanation, required this.reference, this.sourceUrl});
 
   /// Index into [Question.options]; null if the server named an unknown option.
   final int? correctIndex;
@@ -42,4 +42,7 @@ class Reveal {
 
   /// Provision or source, e.g. "Article 394, Constitution of India".
   final String reference;
+
+  /// Official text of the source (https), when the question has one.
+  final String? sourceUrl;
 }

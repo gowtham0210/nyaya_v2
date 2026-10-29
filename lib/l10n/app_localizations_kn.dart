@@ -640,6 +640,12 @@ class AppLocalizationsKn extends AppLocalizations {
   String get quizReference => 'ಆಧಾರ';
 
   @override
+  String get quizOpenSource => 'ಅಧಿಕೃತ ಪಠ್ಯವನ್ನು ಓದಿ';
+
+  @override
+  String get quizOpenSourceFailed => 'ಲಿಂಕ್ ತೆರೆಯಲು ಆಗಲಿಲ್ಲ';
+
+  @override
   String quizCombo(int count) {
     return '$count× ಕಾಂಬೊ!';
   }

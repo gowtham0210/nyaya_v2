@@ -82,6 +82,8 @@ describe('saved questions and mistakes', () => {
         correctOptionIds: ['a'],
         explanation: `Because ${i}.`,
         provisionReference: `Article ${i}`,
+        sourceTitle: 'Constitution of India',
+        sourceUrl: 'https://legislative.gov.in/constitution-of-india/',
         validFrom: '2000-01-01',
       });
       await t.db
@@ -118,6 +120,9 @@ describe('saved questions and mistakes', () => {
         correct_option_ids: ['a'],
         explanation: 'Because 0.',
         provision_reference: 'Article 0',
+        source_title: 'Constitution of India',
+        source_url: 'https://legislative.gov.in/constitution-of-india/',
+        citation: null,
       },
     });
     // q1 was answered right in the second duel, so only q0 is left.

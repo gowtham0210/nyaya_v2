@@ -121,6 +121,8 @@
   "quizAnswerWas": "ಉತ್ತರ: {answer}",
   "quizWhy": "ಏಕೆ",
   "quizReference": "ಆಧಾರ",
+  "quizOpenSource": "ಅಧಿಕೃತ ಪಠ್ಯವನ್ನು ಓದಿ",
+  "quizOpenSourceFailed": "ಲಿಂಕ್ ತೆರೆಯಲು ಆಗಲಿಲ್ಲ",
   "quizCombo": "{count}× ಕಾಂಬೊ!",
   "quizFinish": "ಮುಗಿಸಿ",
   "quizSubmit": "ಪರೀಕ್ಷೆ ಸಲ್ಲಿಸಿ",

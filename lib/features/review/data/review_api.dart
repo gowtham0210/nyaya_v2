@@ -17,6 +17,7 @@ class ReviewQuestion {
     required this.correctOptionIds,
     required this.explanation,
     required this.reference,
+    this.sourceUrl,
   });
 
   final String questionId;
@@ -31,6 +32,7 @@ class ReviewQuestion {
   final List<String> correctOptionIds;
   final String? explanation;
   final String? reference;
+  final String? sourceUrl;
 
   List<String> get correctTexts => [
         for (final o in options)
@@ -49,6 +51,7 @@ class ReviewQuestion {
         correctOptionIds: (j['correct_option_ids'] as List).cast<String>(),
         explanation: j['explanation'] as String?,
         reference: (j['provision_reference'] as String?) ?? (j['source_title'] as String?),
+        sourceUrl: j['source_url'] as String?,
       );
 }
 

@@ -634,6 +634,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get quizReference => 'Reference';
 
   @override
+  String get quizOpenSource => 'Read the official text';
+
+  @override
+  String get quizOpenSourceFailed => 'Couldn\'t open the link';
+
+  @override
   String quizCombo(int count) {
     return '$count× combo!';
   }

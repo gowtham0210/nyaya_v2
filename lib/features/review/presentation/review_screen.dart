@@ -11,6 +11,7 @@ import '../../../core/widgets/common.dart';
 import '../../auth/application/auth_controller.dart';
 import '../../quiz/domain/quiz_models.dart';
 import '../../quiz/presentation/quiz_launcher.dart';
+import '../../quiz/presentation/source_line.dart';
 import '../application/review_controller.dart';
 import '../data/review_api.dart';
 
@@ -165,13 +166,8 @@ class _QuestionCard extends ConsumerWidget {
                   style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary, height: 1.4),
                 ),
               ],
-              if ((q.reference ?? '').isNotEmpty) ...[
-                const SizedBox(height: 6),
-                Text(
-                  '${l.quizReference}: ${q.reference}',
-                  style: context.text.labelSmall?.copyWith(color: context.colors.primary, fontWeight: FontWeight.w700),
-                ),
-              ],
+              const SizedBox(height: 6),
+              SourceLine(reference: q.reference ?? '', url: q.sourceUrl),
             ],
           ],
         ),

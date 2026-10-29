@@ -154,6 +154,7 @@ export class FeedbackDto {
   @ApiProperty({ type: String, nullable: true }) source_url: string | null;
   @ApiProperty({ type: String, nullable: true }) provision_reference:
     string | null;
+  @ApiProperty({ type: String, nullable: true }) citation: string | null;
 }
 
 export class SessionQuestionDto {

@@ -121,6 +121,8 @@
   "quizAnswerWas": "ഉത്തരം: {answer}",
   "quizWhy": "എന്തുകൊണ്ട്",
   "quizReference": "അവലംബം",
+  "quizOpenSource": "ഔദ്യോഗിക രേഖ വായിക്കുക",
+  "quizOpenSourceFailed": "ലിങ്ക് തുറക്കാനായില്ല",
   "quizCombo": "{count}× കോംബോ!",
   "quizFinish": "പൂർത്തിയാക്കുക",
   "quizSubmit": "പരീക്ഷ സമർപ്പിക്കുക",

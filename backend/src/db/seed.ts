@@ -5,6 +5,13 @@ import { loadConfig } from '../core/config.js';
 import { openDb, type Db } from '../core/db.js';
 import { newId } from '../core/ids.js';
 import {
+  addSources,
+  DEV_SOURCE_TITLE,
+  DEV_VALID_FROM,
+  sourceFields,
+  type BankSource,
+} from './seed-sources.js';
+import {
   acts,
   auditLog,
   questions,
@@ -19,7 +26,9 @@ import {
  * Dev seed, safe to re-run (everything is upserted by slug, email or external ref):
  * - taxonomy built from the app's six chapters, plus the core acts;
  * - the starter question bank (seed/questions/en.json) as DRAFTS (imports
- *   never publish; each needs a source, validity date and legal review first);
+ *   never publish; each needs legal review first). The bank carries researched
+ *   sources and dates; re-running fills them into imported questions (see
+ *   addSources) without publishing anything;
  * - one account per role when SEED_PASSWORD is set (never in production);
  * - with SEED_PUBLISH_IMPORTED=true (never in production), the imported drafts
  *   are published so the app has content locally. They are marked as
@@ -103,6 +112,7 @@ interface Bank {
     answer: number;
     explanation: string;
     reference: string;
+    source?: BankSource;
   }[];
 }
 
@@ -163,6 +173,7 @@ async function seed() {
   }
 
   let imported = 0;
+  const sourced = { filled: 0, revised: 0 };
   for (const q of bank.questions) {
     const externalRef = `app:${q.id}`;
     const [existing] = await db
@@ -170,7 +181,13 @@ async function seed() {
       .from(questions)
       .where(eq(questions.externalRef, externalRef))
       .limit(1);
-    if (existing) continue;
+    if (existing) {
+      if (q.source) {
+        const r = await addSources(db, existing.id, q.source);
+        if (r) sourced[r]++;
+      }
+      continue;
+    }
     const letters = q.options.map((_, i) => String.fromCharCode(97 + i));
     await db.transaction(async (tx) => {
       const questionId = newId();
@@ -188,7 +205,10 @@ async function seed() {
         correctOptionIds: [letters[q.answer]],
         explanation: q.explanation,
         provisionReference: q.reference,
-        changeNote: 'Imported from the app question bank',
+        ...sourceFields(q.source),
+        changeNote: q.source
+          ? `Imported from the app question bank. Source research: ${q.source.note}`
+          : 'Imported from the app question bank',
       });
       await tx.insert(auditLog).values({
         id: newId(),
@@ -240,6 +260,9 @@ async function seed() {
   console.log(
     `Seeded ${ACTS.length} acts, ${Object.keys(topicIds).length} subjects/topics, ` +
       `${imported} new draft questions (${bank.questions.length - imported} already present)` +
+      (sourced.filled || sourced.revised
+        ? `, sources filled into ${sourced.filled} drafts and ${sourced.revised} new draft revisions for review`
+        : '') +
       (password && devDataAllowed
         ? `, ${STAFF.length} dev accounts.`
         : '. Set SEED_PASSWORD to create dev accounts.') +
@@ -271,8 +294,8 @@ async function publishImportedForDev(db: Db): Promise<number> {
         .update(questionVersions)
         .set({
           status: 'published',
-          sourceTitle: sql`coalesce(${questionVersions.sourceTitle}, 'Nyaya starter bank (UNREVIEWED dev data)')`,
-          validFrom: sql`coalesce(${questionVersions.validFrom}, '2000-01-01')`,
+          sourceTitle: sql`coalesce(${questionVersions.sourceTitle}, ${DEV_SOURCE_TITLE})`,
+          validFrom: sql`coalesce(${questionVersions.validFrom}, ${DEV_VALID_FROM})`,
           changeNote:
             'Imported from the app question bank · published by the dev seed without legal review',
           publishedAt: now,

@@ -121,6 +121,8 @@
   "quizAnswerWas": "விடை: {answer}",
   "quizWhy": "ஏன்",
   "quizReference": "ஆதாரம்",
+  "quizOpenSource": "அதிகாரப்பூர்வ உரையைப் படிக்கவும்",
+  "quizOpenSourceFailed": "இணைப்பைத் திறக்க முடியவில்லை",
   "quizCombo": "{count}× காம்போ!",
   "quizFinish": "முடி",
   "quizSubmit": "தேர்வைச் சமர்ப்பி",
