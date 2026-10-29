@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/api/api_client.dart';
 import '../../auth/application/auth_controller.dart';
 import '../../journey/application/journey_controller.dart';
+import '../../leaderboard/data/league_api.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../profile/domain/user_profile.dart';
 import '../data/progress_api.dart';
@@ -45,7 +46,18 @@ class ProgressSync extends Notifier<void> {
       if (uploaded != null) p = uploaded;
     }
     if (ref.mounted) apply(p);
+    // The league closes weeks and pays the top-3 bonus; its coins show on the next sync.
+    final league = await _guard(ref.read(leagueApiProvider).league);
+    if (league != null && ref.mounted) ref.read(profileProvider.notifier).applyServerLeague(league);
     return p;
+  }
+
+  /// This week's league, or null when signed out or offline.
+  Future<LeagueView?> league() async {
+    if (!ref.read(authProvider.notifier).isSignedIn) return null;
+    final league = await _guard(ref.read(leagueApiProvider).league);
+    if (league != null && ref.mounted) ref.read(profileProvider.notifier).applyServerLeague(league);
+    return league;
   }
 
   /// Spends coins on energy or a freeze, or switches demo premium, on the

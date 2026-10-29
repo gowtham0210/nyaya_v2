@@ -746,6 +746,9 @@ class AppLocalizationsMl extends AppLocalizations {
   }
 
   @override
+  String get leaderboardPractice => 'Practice player';
+
+  @override
   String get leaderboardYou => 'നിങ്ങൾ';
 
   @override

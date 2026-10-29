@@ -50,6 +50,13 @@
       "when": 1793260954322,
       "tag": "0006_economy_and_settings",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1793264887929,
+      "tag": "0007_leagues",
+      "breakpoints": true
     }
   ]
 }

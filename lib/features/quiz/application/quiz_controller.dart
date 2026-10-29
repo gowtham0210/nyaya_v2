@@ -434,7 +434,10 @@ class QuizController extends Notifier<QuizState> {
       duelOpponentPoints: s.request.mode == QuizMode.duel ? s.opponentPoints : null,
       opponent: s.opponent,
     );
-    final rewards = QuizCompletionService(ref).complete(result, submitted.rewards, progress);
+    // The quiz may have joined this week's league, or moved the learner up in it.
+    final league = await ref.read(progressSyncProvider.notifier).league();
+    if (!ref.mounted) return;
+    final rewards = QuizCompletionService(ref).complete(result, submitted.rewards, progress, league: league);
     state = s.copyWith(phase: QuizPhase.finished, answers: answers, result: result, rewards: rewards);
   }
 }

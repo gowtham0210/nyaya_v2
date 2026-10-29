@@ -45,6 +45,7 @@ export async function addCoins(
     reason: CoinReason;
     sessionId?: string;
     subjectId?: string;
+    cohortId?: string;
   },
 ): Promise<void> {
   if (entry.amount === 0) return;

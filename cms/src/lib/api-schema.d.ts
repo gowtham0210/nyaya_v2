@@ -407,6 +407,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/league": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** This week's league group (real learners, topped up with practice players) and last week's result */
+        get: operations["LearnController_leagueView"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/me/energy/refill": {
         parameters: {
             query?: never;
@@ -1037,6 +1054,46 @@ export interface components {
             correct: number;
             topics: components["schemas"]["TopicProgressDto"][];
         };
+        StandingDto: {
+            rank: number;
+            /** @description First name and last initial */
+            name: string;
+            /** @description XP this week */
+            xp: number;
+            /** @description This row is the signed-in learner */
+            me: boolean;
+            /** @description A simulated player topping up a small group */
+            practice: boolean;
+        };
+        LeagueResultDto: {
+            week_id: string;
+            rank: number;
+            from_tier: number;
+            to_tier: number;
+            /** @description Coins for finishing in the top 3 */
+            bonus_coins: number;
+        };
+        LeagueDto: {
+            /** @example 2026-W44 */
+            week_id: string;
+            /**
+             * Format: date-time
+             * @description Monday 00:00 India time
+             */
+            ends_at: string;
+            /** @description 1 (Nyaya Panchayat) … 8 (Supreme Court) */
+            tier: number;
+            /** @description Joined this week's league (with a quiz) */
+            joined: boolean;
+            cohort_size: number;
+            /** @description Ranks 1…promote move up */
+            promote: number;
+            /** @description The last `demote` ranks move down */
+            demote: number;
+            standings: components["schemas"]["StandingDto"][];
+            /** @description How the latest finished week ended */
+            last_result: components["schemas"]["LeagueResultDto"] | null;
+        };
         ChatTurnDto: {
             /** @enum {string} */
             role: "user" | "assistant";
@@ -1642,6 +1699,25 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ProgressDto"];
+                };
+            };
+        };
+    };
+    LearnController_leagueView: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LeagueDto"];
                 };
             };
         };

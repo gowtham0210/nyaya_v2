@@ -435,3 +435,46 @@ export class ProgressDto {
   @ApiProperty() correct: number;
   @ApiProperty({ type: [TopicProgressDto] }) topics: TopicProgressDto[];
 }
+
+export class StandingDto {
+  @ApiProperty() rank: number;
+  @ApiProperty({ description: 'First name and last initial' }) name: string;
+  @ApiProperty({ description: 'XP this week' }) xp: number;
+  @ApiProperty({ description: 'This row is the signed-in learner' })
+  me: boolean;
+  @ApiProperty({ description: 'A simulated player topping up a small group' })
+  practice: boolean;
+}
+
+export class LeagueResultDto {
+  @ApiProperty() week_id: string;
+  @ApiProperty() rank: number;
+  @ApiProperty() from_tier: number;
+  @ApiProperty() to_tier: number;
+  @ApiProperty({ description: 'Coins for finishing in the top 3' })
+  bonus_coins: number;
+}
+
+export class LeagueDto {
+  @ApiProperty({ example: '2026-W44' }) week_id: string;
+  @ApiProperty({
+    format: 'date-time',
+    description: 'Monday 00:00 India time',
+  })
+  ends_at: string;
+  @ApiProperty({ description: '1 (Nyaya Panchayat) … 8 (Supreme Court)' })
+  tier: number;
+  @ApiProperty({ description: "Joined this week's league (with a quiz)" })
+  joined: boolean;
+  @ApiProperty() cohort_size: number;
+  @ApiProperty({ description: 'Ranks 1…promote move up' }) promote: number;
+  @ApiProperty({ description: 'The last `demote` ranks move down' })
+  demote: number;
+  @ApiProperty({ type: [StandingDto] }) standings: StandingDto[];
+  @ApiProperty({
+    type: LeagueResultDto,
+    nullable: true,
+    description: 'How the latest finished week ended',
+  })
+  last_result: LeagueResultDto | null;
+}

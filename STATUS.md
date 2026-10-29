@@ -274,11 +274,29 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       checked Part 2 on the iPhone. Known: Settings → Reset may not reopen onboarding (account settings come back);
       premium chat stops at the server's 50/day while the app shows unlimited. Next: Part 3 (real leagues).
 
+- [x] 2026-10-29: **Real weekly leagues on the server (Part 3 of 3).** User's choices: small groups are topped up to 30
+      with practice players (labelled in the app, generated from the group id and week progress, never stored; ranks,
+      zones and the bonus count everyone shown); other learners see first name + last initial ("Asha K."). **3NF:**
+      `league_cohorts` (id, ISO week in India time, tier) and `league_memberships` (learner, week, group; PK learner +
+      week = one group a week; a composite FK checks the group's week). Weekly XP, ranks, results and tier moves are
+      calculated from `quiz_sessions`, not stored; the top-3 bonus is a `coin_ledger` row (`league_top3`, `cohort_id`,
+      paid once per group). Migration 0007 (the unique index the composite FK needs was moved above it by hand).
+      Rules in `backend/src/learn/league.ts` (copy of the app's league.dart): 8 tiers, promote/demote zones, no demotion
+      in tiers 1–2, weeks Monday 00:00 India time. You join with your first submitted quiz of the week (open group at
+      your tier, else a new one). The previous week is settled lazily on the next visit (rank, tier move, bonus), so no
+      scheduled job. Ties: real learners before practice players; between real learners, earliest to join first (the
+      same for every viewer). `GET /v1/me/league`. App: trophy button on Home opens the league (the screen had no entry
+      point since the Home redesign); league screen shows the server's group; the results screen's "moved up to #N"
+      uses it; last week's result shows once (`leagueResultSeen`); the phone's week close is gone. The All-time tab is
+      still simulated on the phone. API test hook timeout raised to 30 s (8 files start their own database in parallel).
+      Tests: backend 37 unit + 63 API, Flutter 40. Staging migrated (backup `nyaya-2026-10-29-0915.sql.gz`); user checked
+      the league on the iPhone.
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
-   Then P3: server progress Part 2 (economy + settings) and Part 3 (real leagues), M08 bookmarks/mistake review,
-   M12 report-a-question. (Server progress Part 1 and exam marking are done — see 2026-10-29.)
+   Then P3: M08 bookmarks/mistake review, M12 report-a-question, a real all-time leaderboard. (Server progress
+   Parts 1–3 — progress, economy + settings, weekly leagues — are done; see 2026-10-29.)
 2. Dark-mode visual pass on simulator (Terracotta dark theme exists, not yet eyeballed).
 3. Note: a debug build launched via `simctl launch` without `flutter run` can show a blank screen —
    use `flutter run -d <device>` (or a release/profile build) when testing.
@@ -346,7 +364,8 @@ test/  gamification_test.dart content_test.dart app_flow_test.dart
   Premium never boosts XP (fair leagues).
 - **Leagues (weekly, 30-person cohorts, Mon–Sun):** Nyaya Panchayat → Gram Nyayalaya → Munsiff →
   Magistrate → District → Sessions → High Court → Supreme Court. No demotion in 2 entry tiers.
-  Cohort is simulated deterministically (`LeagueSimulator`) until a backend exists.
+  Real groups on the server since 2026-10-29, topped up with practice players (`LeagueSimulator` in the app is now
+  only used by the unused old Home widgets).
 - **Streak:** 1 quiz/day; up to 2 freezes (free at 7/30/100-day milestones; buying with 100 coins and premium's 2
   are off until coins move to the server). Worked out by the server since 2026-10-29.
   Milestones 3/7/14/30/50/100/365 give coins.

@@ -76,6 +76,7 @@ import {
   sessionDeadline,
   shuffled,
 } from './scoring.js';
+import { LeagueService } from './league.service.js';
 import { milestoneFor, streakOn } from './streak.js';
 import {
   addCoins,
@@ -148,6 +149,7 @@ export class LearnService {
     @Inject(DB) private readonly db: Db,
     @Inject(APP_CONFIG) private readonly config: AppConfig,
     private readonly audit: AuditService,
+    private readonly league: LeagueService,
   ) {}
 
   /** For read-only helpers the controller calls directly. */
@@ -537,6 +539,8 @@ export class LearnService {
           reason: 'three_star_bonus',
           sessionId: s.id,
         });
+        // The first finished quiz of the week joins this week's league.
+        await this.league.join(tx, userId, submittedAt);
         s = await this.load(tx, userId, id);
       }
       return this.resultView(tx, s);

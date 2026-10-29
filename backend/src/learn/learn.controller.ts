@@ -27,12 +27,14 @@ import {
   AttemptsQuery,
   CatalogDto,
   CatalogQuery,
+  LeagueDto,
   ProgressDto,
   ResultDto,
   SessionDto,
   SettingsDto,
   StartSessionDto,
 } from './learn.dto.js';
+import { LeagueService } from './league.service.js';
 import { LearnService } from './learn.service.js';
 
 const Id = () => Param('id', new ParseUUIDPipe());
@@ -40,7 +42,10 @@ const Id = () => Param('id', new ParseUUIDPipe());
 @ApiTags('learn')
 @Controller()
 export class LearnController {
-  constructor(private readonly learn: LearnService) {}
+  constructor(
+    private readonly learn: LearnService,
+    private readonly league: LeagueService,
+  ) {}
 
   @Public()
   @Get('quizzes')
@@ -152,6 +157,17 @@ export class LearnController {
   @ApiOkResponse({ type: ProgressDto })
   openChest(@CurrentUser() user: AuthUser, @Param('chest_id') chestId: string) {
     return this.learn.openChest(user.id, chestId);
+  }
+
+  @ApiBearerAuth()
+  @Get('me/league')
+  @ApiOperation({
+    summary:
+      "This week's league group (real learners, topped up with practice players) and last week's result",
+  })
+  @ApiOkResponse({ type: LeagueDto })
+  leagueView(@CurrentUser() user: AuthUser) {
+    return this.league.view(user.id);
   }
 
   @ApiBearerAuth()

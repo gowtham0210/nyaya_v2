@@ -75,6 +75,7 @@ class UserProfile {
     this.weeklyXp = 0,
     this.leagueTier = 1,
     this.pendingLeagueOutcome,
+    this.leagueResultSeen = '',
     this.duelRating = 1000,
     this.duelsPlayed = 0,
     this.duelsWon = 0,
@@ -121,6 +122,9 @@ class UserProfile {
   final int leagueTier;
   final LeagueOutcome? pendingLeagueOutcome;
 
+  /// Week id of the last league result shown, so each is shown once.
+  final String leagueResultSeen;
+
   final int duelRating;
   final int duelsPlayed;
   final int duelsWon;
@@ -160,6 +164,7 @@ class UserProfile {
     int? weeklyXp,
     int? leagueTier,
     LeagueOutcome? pendingLeagueOutcome,
+    String? leagueResultSeen,
     bool clearLeagueOutcome = false,
     bool clearLastActiveDay = false,
     bool clearLastDocketDay = false,
@@ -198,6 +203,7 @@ class UserProfile {
       weekId: weekId ?? this.weekId,
       weeklyXp: weeklyXp ?? this.weeklyXp,
       leagueTier: leagueTier ?? this.leagueTier,
+      leagueResultSeen: leagueResultSeen ?? this.leagueResultSeen,
       pendingLeagueOutcome:
           clearLeagueOutcome ? null : (pendingLeagueOutcome ?? this.pendingLeagueOutcome),
       duelRating: duelRating ?? this.duelRating,
@@ -238,6 +244,7 @@ class UserProfile {
         'weeklyXp': weeklyXp,
         'leagueTier': leagueTier,
         'pendingLeagueOutcome': pendingLeagueOutcome?.toJson(),
+        'leagueResultSeen': leagueResultSeen,
         'duelRating': duelRating,
         'duelsPlayed': duelsPlayed,
         'duelsWon': duelsWon,
@@ -278,6 +285,7 @@ class UserProfile {
       weekId: v('weekId', ''),
       weeklyXp: v('weeklyXp', 0),
       leagueTier: v('leagueTier', 1),
+      leagueResultSeen: v('leagueResultSeen', ''),
       pendingLeagueOutcome: j['pendingLeagueOutcome'] is Map<String, dynamic>
           ? LeagueOutcome.fromJson(j['pendingLeagueOutcome'] as Map<String, dynamic>)
           : null,

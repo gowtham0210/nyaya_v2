@@ -740,6 +740,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get leaderboardPractice => 'Practice player';
+
+  @override
   String get leaderboardYou => 'You';
 
   @override

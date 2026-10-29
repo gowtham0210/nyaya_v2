@@ -995,6 +995,33 @@
         ]
       }
     },
+    "/v1/me/league": {
+      "get": {
+        "operationId": "LearnController_leagueView",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeagueDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "This week's league group (real learners, topped up with practice players) and last week's result",
+        "tags": [
+          "learn"
+        ]
+      }
+    },
     "/v1/me/energy/refill": {
       "post": {
         "operationId": "LearnController_refill",
@@ -2983,6 +3010,125 @@
           "questions_answered",
           "correct",
           "topics"
+        ]
+      },
+      "StandingDto": {
+        "type": "object",
+        "properties": {
+          "rank": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "description": "First name and last initial"
+          },
+          "xp": {
+            "type": "number",
+            "description": "XP this week"
+          },
+          "me": {
+            "type": "boolean",
+            "description": "This row is the signed-in learner"
+          },
+          "practice": {
+            "type": "boolean",
+            "description": "A simulated player topping up a small group"
+          }
+        },
+        "required": [
+          "rank",
+          "name",
+          "xp",
+          "me",
+          "practice"
+        ]
+      },
+      "LeagueResultDto": {
+        "type": "object",
+        "properties": {
+          "week_id": {
+            "type": "string"
+          },
+          "rank": {
+            "type": "number"
+          },
+          "from_tier": {
+            "type": "number"
+          },
+          "to_tier": {
+            "type": "number"
+          },
+          "bonus_coins": {
+            "type": "number",
+            "description": "Coins for finishing in the top 3"
+          }
+        },
+        "required": [
+          "week_id",
+          "rank",
+          "from_tier",
+          "to_tier",
+          "bonus_coins"
+        ]
+      },
+      "LeagueDto": {
+        "type": "object",
+        "properties": {
+          "week_id": {
+            "type": "string",
+            "example": "2026-W44"
+          },
+          "ends_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Monday 00:00 India time"
+          },
+          "tier": {
+            "type": "number",
+            "description": "1 (Nyaya Panchayat) … 8 (Supreme Court)"
+          },
+          "joined": {
+            "type": "boolean",
+            "description": "Joined this week's league (with a quiz)"
+          },
+          "cohort_size": {
+            "type": "number"
+          },
+          "promote": {
+            "type": "number",
+            "description": "Ranks 1…promote move up"
+          },
+          "demote": {
+            "type": "number",
+            "description": "The last `demote` ranks move down"
+          },
+          "standings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StandingDto"
+            }
+          },
+          "last_result": {
+            "nullable": true,
+            "description": "How the latest finished week ended",
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LeagueResultDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "week_id",
+          "ends_at",
+          "tier",
+          "joined",
+          "cohort_size",
+          "promote",
+          "demote",
+          "standings",
+          "last_result"
         ]
       },
       "ChatTurnDto": {

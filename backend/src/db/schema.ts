@@ -3,6 +3,7 @@ import {
   boolean,
   check,
   date,
+  foreignKey,
   index,
   integer,
   jsonb,
@@ -368,6 +369,7 @@ export const chestOpenings = pgTable(
  * Why coins moved. Earning: welcome (once), new_stars, daily_docket,
  * daily_goal and streak_milestone (per quiz session), chest (per subject).
  * Spending: energy_refill, streak_freeze (the freeze purchase itself).
+ * league_top3: finishing a week in the top 3 of a league group (per cohort).
  */
 export const COIN_REASONS = [
   'welcome',
@@ -378,6 +380,7 @@ export const COIN_REASONS = [
   'chest',
   'energy_refill',
   'streak_freeze',
+  'league_top3',
 ] as const;
 export type CoinReason = (typeof COIN_REASONS)[number];
 export const coinReason = pgEnum('coin_reason', COIN_REASONS);
@@ -399,10 +402,15 @@ export const coinLedger = pgTable(
       onDelete: 'set null',
     }),
     subjectId: uuid('subject_id').references(() => subjects.id),
+    /** league_top3: the league group the bonus is for. */
+    cohortId: uuid('cohort_id').references((): AnyPgColumn => leagueCohorts.id),
     createdAt: createdAt(),
   },
   (t) => [
     index('coin_ledger_user_idx').on(t.userId),
+    uniqueIndex('coin_ledger_cohort_idx')
+      .on(t.userId, t.cohortId)
+      .where(sql`${t.cohortId} is not null`),
     uniqueIndex('coin_ledger_session_reason_idx')
       .on(t.userId, t.reason, t.sessionId)
       .where(sql`${t.sessionId} is not null`),
@@ -480,3 +488,46 @@ export const premiumMemberships = pgTable('premium_memberships', {
   source: text('source').notNull(),
   startedAt: timestamp('started_at', { withTimezone: true }).notNull(),
 });
+
+// ---------------------------------------------------------------- leagues
+
+/**
+ * One weekly league group of up to 30 learners at one tier. Weeks are ISO
+ * weeks in India time (`2026-W44`). Standings, results and tier changes are
+ * worked out from the members' quiz XP, not stored.
+ */
+export const leagueCohorts = pgTable(
+  'league_cohorts',
+  {
+    id: uuid('id').primaryKey(),
+    weekId: text('week_id').notNull(),
+    tier: smallint('tier').notNull(),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index('league_cohorts_week_tier_idx').on(t.weekId, t.tier),
+    // Lets memberships check that their week matches their group's week.
+    uniqueIndex('league_cohorts_id_week_idx').on(t.id, t.weekId),
+  ],
+);
+
+/** A learner's group for one week; one group per learner per week. */
+export const leagueMemberships = pgTable(
+  'league_memberships',
+  {
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    weekId: text('week_id').notNull(),
+    cohortId: uuid('cohort_id').notNull(),
+    joinedAt: timestamp('joined_at', { withTimezone: true }).notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.userId, t.weekId] }),
+    index('league_memberships_cohort_idx').on(t.cohortId),
+    foreignKey({
+      columns: [t.cohortId, t.weekId],
+      foreignColumns: [leagueCohorts.id, leagueCohorts.weekId],
+    }).onDelete('cascade'),
+  ],
+);

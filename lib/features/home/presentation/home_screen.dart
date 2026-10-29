@@ -25,6 +25,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => _maybeShowLeagueOutcome());
+    // The result arrives from the server after a sync, often after Home opens.
+    ref.listenManual(profileProvider.select((p) => p.pendingLeagueOutcome), (before, after) {
+      if (before == null && after != null) _maybeShowLeagueOutcome();
+    });
   }
 
   void _maybeShowLeagueOutcome() {

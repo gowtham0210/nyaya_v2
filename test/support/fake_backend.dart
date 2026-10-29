@@ -3,6 +3,7 @@ import 'package:nyaya/core/api/token_store.dart';
 import 'package:nyaya/core/utils/day.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
 import 'package:nyaya/features/journey/domain/journey.dart';
+import 'package:nyaya/features/leaderboard/data/league_api.dart';
 import 'package:nyaya/features/progress/data/progress_api.dart';
 import 'package:nyaya/features/progress/domain/server_progress.dart';
 import 'package:nyaya/features/quiz/data/quiz_api.dart';
@@ -13,7 +14,7 @@ import 'package:nyaya/features/quiz/domain/quiz_models.dart';
 /// A stand-in for the Nyaya API. Like the real server it keeps the answer
 /// key to itself (questions handed to the app carry none) and owns stars, XP,
 /// the streak, coins and energy, with simpler XP than the real rules.
-class FakeQuizApi implements QuizApi, ProgressApi {
+class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi {
   FakeQuizApi({this.perLevel = 6}) {
     for (final c in JourneyCatalog.chapters) {
       for (var d = 1; d <= 3; d++) {
@@ -178,6 +179,35 @@ class FakeQuizApi implements QuizApi, ProgressApi {
 
   /// Set to answer progress in a shape the app can't read.
   bool unreadableProgress = false;
+
+  /// The fake league: you join with your first quiz; 29 practice players.
+  LeagueResult? lastResult;
+
+  @override
+  Future<LeagueView> league() async => _league();
+
+  LeagueView _league() {
+    final joined = quizzesCompleted > 0;
+    final rows = <({String name, int xp, bool me})>[
+      if (joined) (name: 'Ravi', xp: totalXp, me: true),
+      if (joined)
+        for (var i = 0; i < 29; i++) (name: 'Practice $i', xp: 300 - i * 10, me: false),
+    ]..sort((a, b) => b.xp != a.xp ? b.xp.compareTo(a.xp) : (a.me ? -1 : 1));
+    return LeagueView(
+      weekId: Day.weekKey(DateTime.now()),
+      endsAt: DateTime.now().add(const Duration(days: 3)),
+      tier: 1,
+      joined: joined,
+      promote: 15,
+      demote: 0,
+      cohortSize: 30,
+      standings: [
+        for (final (i, r) in rows.indexed)
+          LeagueStanding(rank: i + 1, name: r.name, xp: r.xp, me: r.me, practice: !r.me),
+      ],
+      lastResult: lastResult,
+    );
+  }
 
   @override
   Future<ServerProgress> fetch() async {

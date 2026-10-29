@@ -3,12 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/api/api_client.dart';
 
 import '../../../core/config/game_rules.dart';
-import '../../../core/storage/local_store.dart';
 import '../../gamification/domain/league.dart';
 import '../../gamification/domain/reward_summary.dart';
 import '../../gamification/domain/xp_calculator.dart';
 import '../../journey/application/journey_controller.dart';
 import '../../journey/domain/journey.dart';
+import '../../leaderboard/data/league_api.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../progress/application/progress_sync.dart';
 import '../../progress/data/progress_api.dart';
@@ -25,20 +25,16 @@ class QuizCompletionService {
 
   /// [progress] is the server's progress after this quiz; null when it could
   /// not be loaded, in which case the rewards are shown on their own.
-  RewardSummary complete(QuizResult result, ServerRewards rewards, ServerProgress? progress) {
+  RewardSummary complete(
+    QuizResult result,
+    ServerRewards rewards,
+    ServerProgress? progress, {
+    LeagueView? league,
+  }) {
     final profileCtl = ref.read(profileProvider.notifier);
     final before = ref.read(profileProvider);
-    final now = ref.read(clockProvider)();
-    final weekProgress = LeagueSimulator.weekProgress(now);
-
-    int rankFor(int xp) => LeagueSimulator.userRank(LeagueSimulator.cohort(
-          weekId: before.weekId,
-          tier: before.leagueTier,
-          userXp: xp,
-          userName: before.name,
-          progress: weekProgress,
-        ));
-    final rankBefore = rankFor(before.weeklyXp);
+    // Rank in this week's league group, before and after this quiz's XP.
+    final (rankBefore, rankAfter) = _ranks(league, rewards.xp);
 
     // ── Progress from the server ───────────────────────────────────────────
     if (progress != null) {
@@ -70,7 +66,6 @@ class QuizCompletionService {
 
     // Coins and energy come with the server's progress; without it, show the rewards.
     if (progress == null) profileCtl.applyQuizEconomy(coins: rewards.coins, energyBonus: rewards.energyBonus);
-    final weeklyAfter = progress?.weeklyXp ?? before.weeklyXp + rewards.xp;
 
     return RewardSummary(
       xp: XpBreakdown(
@@ -91,9 +86,19 @@ class QuizCompletionService {
       energyBonus: rewards.energyBonus,
       duelRatingDelta: ratingDelta,
       leagueRankBefore: rankBefore,
-      leagueRankAfter: rankFor(weeklyAfter),
+      leagueRankAfter: rankAfter,
       unlockedNext: unlockedNext,
     );
+  }
+
+  /// The learner's rank now, and what it was without [gained] XP (ties go
+  /// to the learner, as on the server). (0, 0) when the league isn't known.
+  static (int, int) _ranks(LeagueView? league, int gained) {
+    final me = league?.standings.where((s) => s.me).firstOrNull;
+    if (league == null || me == null) return (0, 0);
+    final before = me.xp - gained;
+    final ahead = league.standings.where((s) => !s.me && s.xp > before).length;
+    return (ahead + 1, me.rank);
   }
 
   /// Opens a chapter chest on the map through the server. Returns the coins

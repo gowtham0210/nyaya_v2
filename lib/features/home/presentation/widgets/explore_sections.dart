@@ -64,6 +64,11 @@ class ExploreHeader extends StatelessWidget {
                   icon: const Icon(Icons.search_rounded, size: 28),
                 ),
                 IconButton(
+                  tooltip: l.leaderboardTitle,
+                  onPressed: () => context.push(Routes.leaderboard),
+                  icon: const Icon(Icons.emoji_events_outlined, size: 26),
+                ),
+                IconButton(
                   tooltip: l.settingsTitle,
                   onPressed: () => context.push(Routes.settings),
                   icon: const Icon(Icons.settings_outlined, size: 26),

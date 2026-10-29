@@ -7,5 +7,8 @@ export default defineConfig({
     globals: true,
     root: './',
     include: ['**/*.e2e-spec.ts'],
+    // Each file starts its own in-memory database and runs every migration;
+    // with several files in parallel that can take a while on a busy machine.
+    hookTimeout: 30_000,
   },
 });

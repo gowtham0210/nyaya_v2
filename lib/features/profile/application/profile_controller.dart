@@ -5,6 +5,7 @@ import '../../../core/config/game_rules.dart';
 import '../../../core/storage/local_store.dart';
 import '../../../core/utils/day.dart';
 import '../../gamification/domain/daily_policy.dart';
+import '../../leaderboard/data/league_api.dart';
 import '../../progress/domain/server_progress.dart';
 import '../data/profile_repository.dart';
 import '../domain/user_profile.dart';
@@ -113,13 +114,7 @@ class ProfileController extends Notifier<UserProfile> {
   /// it out from submitted quizzes; the phone never changes these itself.
   void applyServerProgress(ServerProgress p) {
     final today = Day.key(_now());
-    var next = state;
-    // A new week: close last week's league with the server's figure first.
-    if (next.weekId != p.weekId) {
-      final closing = next.weekId == p.lastWeekId ? p.lastWeekXp : 0;
-      next = DailyPolicy.rollover(next.copyWith(weeklyXp: closing), _now());
-    }
-    _set(next.copyWith(
+    _set(state.copyWith(
       totalXp: p.totalXp,
       weekId: p.weekId,
       weeklyXp: p.weeklyXp,
@@ -155,6 +150,8 @@ class ProfileController extends Notifier<UserProfile> {
 
   /// Signed out: show no progress, coins or premium (they belong to the account).
   void clearServerProgress() => _set(state.copyWith(
+        leagueTier: 1,
+        clearLeagueOutcome: true,
         coins: 0,
         energy: GameRules.freeDailyEnergy,
         isPremium: false,
@@ -185,6 +182,20 @@ class ProfileController extends Notifier<UserProfile> {
         duelsPlayed: state.duelsPlayed + 1,
         duelsWon: state.duelsWon + (won ? 1 : 0),
       ));
+
+  /// Copies the server's league: this week's tier, and last week's result
+  /// to show once (the server closes weeks and pays the top-3 bonus).
+  void applyServerLeague(LeagueView league) {
+    final result = league.lastResult;
+    final unseen = result != null && result.weekId != state.leagueResultSeen;
+    _set(state.copyWith(
+      leagueTier: league.tier,
+      pendingLeagueOutcome: unseen
+          ? LeagueOutcome(rank: result.rank, fromTier: result.fromTier, toTier: result.toTier)
+          : null,
+      leagueResultSeen: unseen ? result.weekId : null,
+    ));
+  }
 
   void acknowledgeLeagueOutcome() => _set(state.copyWith(clearLeagueOutcome: true));
 

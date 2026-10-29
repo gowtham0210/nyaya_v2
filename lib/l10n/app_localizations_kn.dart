@@ -745,6 +745,9 @@ class AppLocalizationsKn extends AppLocalizations {
   }
 
   @override
+  String get leaderboardPractice => 'Practice player';
+
+  @override
   String get leaderboardYou => 'ನೀವು';
 
   @override

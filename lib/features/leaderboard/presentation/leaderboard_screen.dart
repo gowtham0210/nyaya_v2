@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../core/l10n/l10n.dart';
-import '../../../core/storage/local_store.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/day.dart';
@@ -14,6 +13,7 @@ import '../../../core/widgets/ticking_builder.dart';
 import '../../gamification/domain/league.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../profile/domain/user_profile.dart';
+import '../data/league_api.dart';
 
 class LeaderboardScreen extends ConsumerWidget {
   const LeaderboardScreen({super.key});
@@ -43,46 +43,89 @@ class _WeeklyLeague extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
-    final p = ref.watch(profileProvider);
-    final now = ref.watch(clockProvider)();
-    final tier = Leagues.tier(p.leagueTier);
-    final cohort = LeagueSimulator.cohort(
-      weekId: p.weekId,
-      tier: p.leagueTier,
-      userXp: p.weeklyXp,
-      userName: p.name,
-      progress: LeagueSimulator.weekProgress(now),
+    final league = ref.watch(leagueProvider);
+    return league.when(
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (_, _) => _Retry(onRetry: () => ref.invalidate(leagueProvider)),
+      data: (view) => view == null
+          ? _Retry(onRetry: () => ref.invalidate(leagueProvider))
+          : RefreshIndicator(
+              onRefresh: () => ref.refresh(leagueProvider.future),
+              child: _Standings(view: view, l: l),
+            ),
     );
-    final nextTier = p.leagueTier < Leagues.tiers.length ? Leagues.tier(p.leagueTier + 1) : null;
-    final demoteFrom = Leagues.cohortSize - tier.demote;
+  }
+}
+
+/// Offline or signed out: the league lives on the server.
+class _Retry extends StatelessWidget {
+  const _Retry({required this.onRetry});
+
+  final VoidCallback onRetry;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpacing.page),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(l.quizOffline, textAlign: TextAlign.center, style: context.text.bodyLarge),
+            const SizedBox(height: AppSpacing.md),
+            FilledButton(onPressed: onRetry, child: Text(l.commonRetry)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _Standings extends StatelessWidget {
+  const _Standings({required this.view, required this.l});
+
+  final LeagueView view;
+  final AppLocalizations l;
+
+  @override
+  Widget build(BuildContext context) {
+    final tier = Leagues.tier(view.tier);
+    final nextTier = view.tier < Leagues.tiers.length ? Leagues.tier(view.tier + 1) : null;
+    final demoteFrom = view.cohortSize - view.demote;
+    final rows = view.standings;
 
     return CustomScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
       slivers: [
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.md, AppSpacing.page, 0),
             child: Column(
               children: [
-                _TierStrip(current: p.leagueTier),
+                _TierStrip(current: view.tier),
                 const SizedBox(height: AppSpacing.md),
                 Text(l.tierName(tier), style: context.text.headlineMedium),
                 const SizedBox(height: 4),
                 TickingBuilder(
-                  builder: (context) => Text(
-                    l.leaderboardEndsIn(formatCountdown(Day.untilWeekEnd(ref.read(clockProvider)()))),
-                    style: context.text.bodyMedium?.copyWith(color: context.nyaya.textSecondary),
-                  ),
+                  builder: (context) {
+                    final left = view.endsAt.difference(DateTime.now());
+                    return Text(
+                      l.leaderboardEndsIn(formatCountdown(left.isNegative ? Duration.zero : left)),
+                      style: context.text.bodyMedium?.copyWith(color: context.nyaya.textSecondary),
+                    );
+                  },
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  nextTier != null && tier.promote > 0
-                      ? l.leaderboardTopPromote(tier.promote, l.tierName(nextTier))
+                  nextTier != null && view.promote > 0
+                      ? l.leaderboardTopPromote(view.promote, l.tierName(nextTier))
                       : '',
                   style: context.text.bodySmall?.copyWith(color: context.nyaya.success, fontWeight: FontWeight.w700),
                 ),
-                if (tier.demote == 0)
+                if (view.demote == 0)
                   Text(l.leaderboardNoDemotion, style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary)),
-                if (p.weeklyXp == 0) ...[
+                if (!view.joined) ...[
                   const SizedBox(height: AppSpacing.md),
                   NyayaCard(
                     color: context.colors.primaryContainer.withValues(alpha: 0.5),
@@ -103,19 +146,24 @@ class _WeeklyLeague extends ConsumerWidget {
         SliverPadding(
           padding: const EdgeInsets.fromLTRB(AppSpacing.page, 0, AppSpacing.page, AppSpacing.xl),
           sliver: SliverList.builder(
-            itemCount: cohort.length,
+            itemCount: rows.length,
             itemBuilder: (context, i) {
-              final rank = i + 1;
-              final e = cohort[i];
-              final row = _LeagueRow(rank: rank, entry: e);
+              final s = rows[i];
+              final entry = LeagueEntry(
+                name: s.name,
+                xp: s.xp,
+                avatarSeed: s.name.hashCode & 0xFFFFF,
+                isUser: s.me,
+                city: s.practice ? l.leaderboardPractice : '',
+              );
               final children = <Widget>[];
-              if (tier.promote > 0 && rank == tier.promote + 1) {
+              if (view.promote > 0 && s.rank == view.promote + 1) {
                 children.add(_ZoneDivider(label: l.leaderboardPromotionZone, color: context.nyaya.success, up: true));
               }
-              if (tier.demote > 0 && rank == demoteFrom + 1) {
+              if (view.demote > 0 && s.rank == demoteFrom + 1) {
                 children.add(_ZoneDivider(label: l.leaderboardDemotionZone, color: context.nyaya.error, up: false));
               }
-              children.add(row.animate().fadeIn(delay: (min(i, 12) * 25).ms));
+              children.add(_LeagueRow(rank: s.rank, entry: entry).animate().fadeIn(delay: (min(i, 12) * 25).ms));
               return Column(children: children);
             },
           ),

@@ -11,6 +11,7 @@ import 'package:nyaya/core/theme/app_theme.dart';
 import 'package:nyaya/features/journey/application/journey_controller.dart';
 import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
 import 'package:nyaya/features/profile/application/profile_controller.dart';
+import 'package:nyaya/features/leaderboard/data/league_api.dart';
 import 'package:nyaya/features/progress/data/progress_api.dart';
 import 'package:nyaya/features/quiz/application/quiz_controller.dart';
 import 'package:nyaya/features/quiz/data/quiz_api.dart';
@@ -45,6 +46,7 @@ void main() {
       tokenStoreProvider.overrideWithValue(tokens),
       quizApiProvider.overrideWithValue(api),
       progressApiProvider.overrideWithValue(api),
+      leagueApiProvider.overrideWithValue(api),
       authApiProvider.overrideWithValue(FakeAuthApi(tokens)),
     ]);
     addTearDown(container.dispose);
@@ -295,7 +297,35 @@ void main() {
     expect(find.text("Play today's Daily Docket (free)"), findsOneWidget);
     expect(find.text('Ask the AI a legal question'), findsOneWidget);
   });
+
+  testWidgets('the league shows the server group, you, practice players and last week', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(
+      tester,
+      prefs: {'profile_v1': onboarded},
+      server: (s) => s
+        ..quizzesCompleted = 1
+        ..totalXp = 250
+        ..lastResult = const LeagueResult(weekId: '2026-W43', rank: 2, fromTier: 1, toTier: 2, bonusCoins: 50),
+    );
+    await settle(tester);
+    // Last week's result arrives with the sync and is shown once.
+    expect(find.text('Leaderboard'), findsOneWidget);
+    await tester.tap(find.text('Leaderboard'));
+    await settle(tester);
+    expect(c.read(profileProvider).pendingLeagueOutcome, isNull);
+
+    expect(find.textContaining('Ravi (You)'), findsOneWidget);
+    expect(find.text('Practice player'), findsWidgets);
+    expect(find.text('Finish a quiz this week to join a league.'), findsNothing);
+
+    // Opening Home again doesn't show the same result twice.
+    await tester.pageBack();
+    await settle(tester);
+    expect(find.text('Leaderboard'), findsNothing);
+  });
 }
+
 
 Question _current(ProviderContainer c) =>
     c.read(quizControllerProvider(const QuizRequest(QuizMode.casePath, levelId: 'constitution_1'))).current;

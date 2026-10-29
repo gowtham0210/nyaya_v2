@@ -473,6 +473,8 @@
       }
     }
   },
+  "leaderboardPractice": "Practice player",
+  "@leaderboardPractice": {"description": "League row label for a simulated player that tops up a small group"},
   "leaderboardYou": "You",
   "leaderboardTiers": "League tiers",
   "leagueOutcomePromoted": "Promoted to {tier}!",

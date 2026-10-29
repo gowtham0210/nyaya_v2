@@ -111,14 +111,13 @@ void main() {
       expect(r.streakFreezes, 1);
     });
 
-    test('week close records an outcome and resets weekly XP', () {
+    // Weeks are closed by the server (backend/test/league.e2e-spec.ts).
+    test('leaves the league week to the server', () {
       final lastWeek = Day.weekKey(monday.subtract(const Duration(days: 7)));
       final p = UserProfile(weekId: lastWeek, weeklyXp: 100000, leagueTier: 1, name: 'Test');
       final r = DailyPolicy.rollover(p, monday);
-      expect(r.weekId, Day.weekKey(monday));
-      expect(r.weeklyXp, 0);
-      expect(r.pendingLeagueOutcome?.rank, 1);
-      expect(r.leagueTier, 2);
+      expect(r.leagueTier, 1);
+      expect(r.pendingLeagueOutcome, isNull);
     });
   });
 

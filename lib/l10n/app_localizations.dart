@@ -1342,6 +1342,12 @@ abstract class AppLocalizations {
   /// **'{xp} XP'**
   String leaderboardXp(int xp);
 
+  /// League row label for a simulated player that tops up a small group
+  ///
+  /// In en, this message translates to:
+  /// **'Practice player'**
+  String get leaderboardPractice;
+
   /// No description provided for @leaderboardYou.
   ///
   /// In en, this message translates to:
