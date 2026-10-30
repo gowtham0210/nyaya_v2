@@ -31,107 +31,108 @@ class AppLocalizationsKn extends AppLocalizations {
   String get commonContinue => 'ಮುಂದುವರಿಸಿ';
 
   @override
-  String get reviewTitle => 'Review';
+  String get reviewTitle => 'ಪರಿಶೀಲನೆ';
 
   @override
-  String get reviewMistakesTab => 'Mistakes';
+  String get reviewMistakesTab => 'ತಪ್ಪುಗಳು';
 
   @override
-  String get reviewSavedTab => 'Saved';
+  String get reviewSavedTab => 'ಉಳಿಸಿದವು';
 
   @override
-  String get reviewPractise => 'Practise mistakes';
+  String get reviewPractise => 'ತಪ್ಪುಗಳನ್ನು ಅಭ್ಯಾಸ ಮಾಡಿ';
 
   @override
-  String get reviewPractiseFree => 'Free · up to 10 questions · earns XP';
+  String get reviewPractiseFree => 'ಉಚಿತ · ಗರಿಷ್ಠ 10 ಪ್ರಶ್ನೆಗಳು · XP ಗಳಿಸಿ';
 
   @override
   String get reviewEmptyMistakes =>
-      'No mistakes to review. Questions you get wrong appear here until you answer them right.';
+      'ಪರಿಶೀಲಿಸಲು ತಪ್ಪುಗಳಿಲ್ಲ. ನೀವು ತಪ್ಪಾಗಿ ಉತ್ತರಿಸಿದ ಪ್ರಶ್ನೆಗಳು, ಸರಿಯಾಗಿ ಉತ್ತರಿಸುವವರೆಗೆ ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತವೆ.';
 
   @override
   String get reviewEmptySaved =>
-      'Nothing saved yet. After answering a question, tap Save to keep it here.';
+      'ಇನ್ನೂ ಏನೂ ಉಳಿಸಿಲ್ಲ. ಪ್ರಶ್ನೆಗೆ ಉತ್ತರಿಸಿದ ನಂತರ ‘ಉಳಿಸಿ’ ಒತ್ತಿದರೆ ಅದು ಇಲ್ಲಿ ಇರುತ್ತದೆ.';
 
   @override
   String get reviewSignIn =>
-      'Sign in to see your mistakes and saved questions.';
+      'ನಿಮ್ಮ ತಪ್ಪುಗಳು ಮತ್ತು ಉಳಿಸಿದ ಪ್ರಶ್ನೆಗಳನ್ನು ನೋಡಲು ಸೈನ್ ಇನ್ ಮಾಡಿ.';
 
   @override
   String reviewWrongTimes(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Wrong $count times',
-      one: 'Wrong once',
+      other: '$count ಬಾರಿ ತಪ್ಪಾಗಿದೆ',
+      one: 'ಒಮ್ಮೆ ತಪ್ಪಾಗಿದೆ',
     );
     return '$_temp0';
   }
 
   @override
   String get reviewUpdatedSince =>
-      'Updated since you answered it. Shown as you saw it.';
+      'ನೀವು ಉತ್ತರಿಸಿದ ನಂತರ ಇದನ್ನು ಬದಲಾಯಿಸಲಾಗಿದೆ. ನೀವು ನೋಡಿದಂತೆಯೇ ತೋರಿಸಲಾಗಿದೆ.';
 
   @override
-  String get reviewUnavailable => 'This question is no longer available.';
+  String get reviewUnavailable => 'ಈ ಪ್ರಶ್ನೆ ಈಗ ಲಭ್ಯವಿಲ್ಲ.';
 
   @override
   String reviewCardBody(int mistakes, int saved) {
     String _temp0 = intl.Intl.pluralLogic(
       mistakes,
       locale: localeName,
-      other: '$mistakes mistakes',
-      one: '1 mistake',
+      other: '$mistakes ತಪ್ಪುಗಳು',
+      one: '1 ತಪ್ಪು',
     );
-    return '$_temp0 · $saved saved';
+    return '$_temp0 · $saved ಉಳಿಸಿದವು';
   }
 
   @override
-  String get questionSave => 'Save';
+  String get questionSave => 'ಉಳಿಸಿ';
 
   @override
-  String get questionSaved => 'Saved';
+  String get questionSaved => 'ಉಳಿಸಲಾಗಿದೆ';
 
   @override
-  String get questionReport => 'Report';
+  String get questionReport => 'ವರದಿ ಮಾಡಿ';
 
   @override
   String get questionSaveFailed =>
-      'Couldn\'t save. Check your connection and try again.';
+      'ಉಳಿಸಲು ಆಗಲಿಲ್ಲ. ನಿಮ್ಮ ಸಂಪರ್ಕ ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
 
   @override
-  String get reportTitle => 'Report a problem';
+  String get reportTitle => 'ಸಮಸ್ಯೆಯನ್ನು ವರದಿ ಮಾಡಿ';
 
   @override
-  String get reportReasonWrongAnswer => 'The answer is wrong';
+  String get reportReasonWrongAnswer => 'ಉತ್ತರ ತಪ್ಪಾಗಿದೆ';
 
   @override
-  String get reportReasonUnclear => 'The question is unclear';
+  String get reportReasonUnclear => 'ಪ್ರಶ್ನೆ ಸ್ಪಷ್ಟವಾಗಿಲ್ಲ';
 
   @override
-  String get reportReasonOutdatedLaw => 'The law has changed';
+  String get reportReasonOutdatedLaw => 'ಕಾನೂನು ಬದಲಾಗಿದೆ';
 
   @override
-  String get reportReasonTypo => 'Typo or wording';
+  String get reportReasonTypo => 'ಕಾಗುಣಿತ ಅಥವಾ ಪದಬಳಕೆ ತಪ್ಪು';
 
   @override
-  String get reportReasonOther => 'Something else';
+  String get reportReasonOther => 'ಬೇರೆ ಏನೋ';
 
   @override
-  String get reportComment => 'Anything else? (optional)';
+  String get reportComment => 'ಇನ್ನೇನಾದರೂ ಇದೆಯೇ? (ಐಚ್ಛಿಕ)';
 
   @override
-  String get reportSend => 'Send report';
+  String get reportSend => 'ವರದಿ ಕಳುಹಿಸಿ';
 
   @override
-  String get reportSent => 'Thanks. Our legal team will check this question.';
+  String get reportSent =>
+      'ಧನ್ಯವಾದಗಳು. ನಮ್ಮ ಕಾನೂನು ತಂಡ ಈ ಪ್ರಶ್ನೆಯನ್ನು ಪರಿಶೀಲಿಸುತ್ತದೆ.';
 
   @override
-  String get reportAlready => 'You already reported this question.';
+  String get reportAlready => 'ನೀವು ಈ ಪ್ರಶ್ನೆಯನ್ನು ಈಗಾಗಲೇ ವರದಿ ಮಾಡಿದ್ದೀರಿ.';
 
   @override
   String get reportLimit =>
-      'You\'ve sent many reports today. Please try again tomorrow.';
+      'ನೀವು ಇಂದು ಹಲವು ವರದಿಗಳನ್ನು ಕಳುಹಿಸಿದ್ದೀರಿ. ದಯವಿಟ್ಟು ನಾಳೆ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
 
   @override
   String get commonBack => 'ಹಿಂದೆ';
@@ -202,84 +203,84 @@ class AppLocalizationsKn extends AppLocalizations {
       'ನಿಮ್ಮ ಸ್ಟ್ರೀಕ್ ಉಳಿಸಿಕೊಳ್ಳಿ, ವಾರದ ನ್ಯಾಯಾಲಯ ಲೀಗ್‌ಗಳಲ್ಲಿ ಮೇಲೇರಿ ಮತ್ತು ಕಾನೂನಿನ ಬಗ್ಗೆ ಏನನ್ನಾದರೂ ನಮ್ಮ AI ಗೆ ಕೇಳಿ.';
 
   @override
-  String get onbSkip => 'Skip';
+  String get onbSkip => 'ಬಿಟ್ಟುಬಿಡಿ';
 
   @override
-  String get onbGetStarted => 'Get Started';
+  String get onbGetStarted => 'ಪ್ರಾರಂಭಿಸಿ';
 
   @override
-  String get onbBrandTagline => 'Learn Law. Live It.';
+  String get onbBrandTagline => 'ಕಾನೂನು ಕಲಿಯಿರಿ. ಬದುಕಿನಲ್ಲಿ ಬಳಸಿ.';
 
   @override
-  String get onbIntro1Title => 'Your Guide to Indian Law';
+  String get onbIntro1Title => 'ಭಾರತೀಯ ಕಾನೂನಿಗೆ ನಿಮ್ಮ ಮಾರ್ಗದರ್ಶಿ';
 
   @override
   String get onbIntro1Body =>
-      'Learn with clarity, practise with purpose, and understand the law that shapes your everyday life.';
+      'ಸ್ಪಷ್ಟವಾಗಿ ಕಲಿಯಿರಿ, ಉದ್ದೇಶದಿಂದ ಅಭ್ಯಾಸ ಮಾಡಿ, ನಿಮ್ಮ ದೈನಂದಿನ ಜೀವನವನ್ನು ರೂಪಿಸುವ ಕಾನೂನನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ.';
 
   @override
-  String get onbIntro2Label => 'Structured learning';
+  String get onbIntro2Label => 'ಕ್ರಮಬದ್ಧ ಕಲಿಕೆ';
 
   @override
-  String get onbIntro2Title => 'Learn at Your Own Pace';
+  String get onbIntro2Title => 'ನಿಮ್ಮ ವೇಗದಲ್ಲಿ ಕಲಿಯಿರಿ';
 
   @override
   String get onbIntro2Body =>
-      'Explore the Constitution, BNS, BNSS, BSA and more with structured lessons, notes and real-world examples.';
+      'ಸಂವಿಧಾನ, BNS, BNSS, BSA ಮತ್ತು ಇನ್ನಷ್ಟನ್ನು ಹಂತಹಂತದ ಪಾಠಗಳು, ಟಿಪ್ಪಣಿಗಳು ಮತ್ತು ನಿಜ ಜೀವನದ ಉದಾಹರಣೆಗಳೊಂದಿಗೆ ತಿಳಿಯಿರಿ.';
 
   @override
-  String get onbIntro3Label => 'Practice & apply';
+  String get onbIntro3Label => 'ಅಭ್ಯಾಸ ಮತ್ತು ಬಳಕೆ';
 
   @override
-  String get onbIntro3Title => 'Build Real Understanding';
+  String get onbIntro3Title => 'ನಿಜವಾದ ತಿಳುವಳಿಕೆ ಬೆಳೆಸಿ';
 
   @override
   String get onbIntro3Body =>
-      'Test your knowledge with quizzes, read the latest legal updates, and see how law applies in real life.';
+      'ರಸಪ್ರಶ್ನೆಗಳಲ್ಲಿ ನಿಮ್ಮ ಜ್ಞಾನ ಪರೀಕ್ಷಿಸಿ, ಇತ್ತೀಚಿನ ಕಾನೂನು ಸುದ್ದಿಗಳನ್ನು ಓದಿ, ಕಾನೂನು ನಿಜ ಜೀವನದಲ್ಲಿ ಹೇಗೆ ಅನ್ವಯಿಸುತ್ತದೆ ಎಂದು ನೋಡಿ.';
 
   @override
-  String get onbDemoChapter => 'Fundamental Rights';
+  String get onbDemoChapter => 'ಮೂಲಭೂತ ಹಕ್ಕುಗಳು';
 
   @override
-  String get onbDemoChapterSub => 'Constitution of India · Chapter 3';
+  String get onbDemoChapterSub => 'ಭಾರತದ ಸಂವಿಧಾನ · ಅಧ್ಯಾಯ 3';
 
   @override
-  String get onbDemoProgress => '5 of 8 lessons completed';
+  String get onbDemoProgress => '8 ಪಾಠಗಳಲ್ಲಿ 5 ಪೂರ್ಣ';
 
   @override
-  String get onbDemoContinue => 'Continue Learning';
+  String get onbDemoContinue => 'ಕಲಿಕೆ ಮುಂದುವರಿಸಿ';
 
   @override
-  String get onbDemoLesson1 => 'Introduction';
+  String get onbDemoLesson1 => 'ಪರಿಚಯ';
 
   @override
-  String get onbDemoLesson2 => 'Right to Equality';
+  String get onbDemoLesson2 => 'ಸಮಾನತೆಯ ಹಕ್ಕು';
 
   @override
-  String get onbDemoLesson3 => 'Right to Freedom';
+  String get onbDemoLesson3 => 'ಸ್ವಾತಂತ್ರ್ಯದ ಹಕ್ಕು';
 
   @override
-  String get onbDemoLesson4 => 'Right against Exploitation';
+  String get onbDemoLesson4 => 'ಶೋಷಣೆ ವಿರುದ್ಧದ ಹಕ್ಕು';
 
   @override
-  String get onbDemoQuiz => 'Daily Quiz';
+  String get onbDemoQuiz => 'ದೈನಂದಿನ ರಸಪ್ರಶ್ನೆ';
 
   @override
-  String get onbDemoQuizSub => '3 of 5 activities';
+  String get onbDemoQuizSub => '5 ಚಟುವಟಿಕೆಗಳಲ್ಲಿ 3';
 
   @override
-  String get onbDemoUpdates => 'Legal Updates';
+  String get onbDemoUpdates => 'ಕಾನೂನು ಸುದ್ದಿಗಳು';
 
   @override
   String get onbDemoUpdatesSub =>
-      'Stay informed with important judgments and developments.';
+      'ಮುಖ್ಯ ತೀರ್ಪುಗಳು ಮತ್ತು ಬೆಳವಣಿಗೆಗಳ ಬಗ್ಗೆ ತಿಳಿದಿರಿ.';
 
   @override
-  String get onbDemoScenarios => 'Real Life Scenarios';
+  String get onbDemoScenarios => 'ನಿಜ ಜೀವನದ ಸನ್ನಿವೇಶಗಳು';
 
   @override
   String get onbDemoScenariosSub =>
-      'Understand how law works in everyday life.';
+      'ಕಾನೂನು ದಿನನಿತ್ಯದ ಜೀವನದಲ್ಲಿ ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ ಎಂದು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ.';
 
   @override
   String get onbWhoAreYou => 'ನೀವು ಯಾರಾಗಿ ಕಲಿಯುತ್ತಿದ್ದೀರಿ?';
@@ -368,7 +369,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get homeContinueJourney => 'ನಿಮ್ಮ ಕೇಸ್ ಪಾತ್ ಮುಂದುವರಿಸಿ';
 
   @override
-  String get homeContinueLeftOff => 'Continue where you left off';
+  String get homeContinueLeftOff => 'ನಿಲ್ಲಿಸಿದ ಜಾಗದಿಂದ ಮುಂದುವರಿಸಿ';
 
   @override
   String homeChapterLevel(int chapter, int level) {
@@ -544,10 +545,10 @@ class AppLocalizationsKn extends AppLocalizations {
   String get journeyTitle => 'ಕೇಸ್ ಪಾತ್';
 
   @override
-  String get journeySubtitle => 'Your journey through Indian law';
+  String get journeySubtitle => 'ಭಾರತೀಯ ಕಾನೂನಿನ ಮೂಲಕ ನಿಮ್ಮ ಪಯಣ';
 
   @override
-  String get journeyKeepGoing => 'Keep going!';
+  String get journeyKeepGoing => 'ಮುಂದುವರಿಸಿ!';
 
   @override
   String journeyStars(int count) {
@@ -854,7 +855,7 @@ class AppLocalizationsKn extends AppLocalizations {
   }
 
   @override
-  String get leaderboardPractice => 'Practice player';
+  String get leaderboardPractice => 'ಅಭ್ಯಾಸ ಆಟಗಾರ';
 
   @override
   String get leaderboardYou => 'ನೀವು';
@@ -1013,10 +1014,10 @@ class AppLocalizationsKn extends AppLocalizations {
   String get updatesEmpty => 'ಈ ವರ್ಗದಲ್ಲಿ ಇನ್ನೂ ಯಾವುದೇ ಸುದ್ದಿಗಳಿಲ್ಲ.';
 
   @override
-  String get updatesSave => 'Save update';
+  String get updatesSave => 'ಸುದ್ದಿ ಉಳಿಸಿ';
 
   @override
-  String get updatesUnsave => 'Remove from saved';
+  String get updatesUnsave => 'ಉಳಿಸಿದವುಗಳಿಂದ ತೆಗೆಯಿರಿ';
 
   @override
   String get updatesInEnglish => 'ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿ ತೋರಿಸಲಾಗಿದೆ';
@@ -1236,84 +1237,85 @@ class AppLocalizationsKn extends AppLocalizations {
   String get statStars => 'ನಕ್ಷತ್ರಗಳು';
 
   @override
-  String get exploreTitle => 'Explore Law';
+  String get exploreTitle => 'ಕಾನೂನು ಅನ್ವೇಷಿಸಿ';
 
   @override
-  String get exploreSubtitle => 'Build your understanding of Indian law';
+  String get exploreSubtitle => 'ಭಾರತೀಯ ಕಾನೂನಿನ ಬಗ್ಗೆ ನಿಮ್ಮ ತಿಳುವಳಿಕೆ ಬೆಳೆಸಿ';
 
   @override
-  String get exploreStartHere => 'Start here';
+  String get exploreStartHere => 'ಇಲ್ಲಿಂದ ಪ್ರಾರಂಭಿಸಿ';
 
   @override
-  String get exploreFeatured => 'Featured';
+  String get exploreFeatured => 'ವಿಶೇಷ';
 
   @override
-  String get exploreButton => 'Explore';
+  String get exploreButton => 'ಅನ್ವೇಷಿಸಿ';
 
   @override
-  String get exploreCoreLaws => 'Core Laws';
+  String get exploreCoreLaws => 'ಪ್ರಮುಖ ಕಾನೂನುಗಳು';
 
   @override
-  String get exploreViewAll => 'View All';
+  String get exploreViewAll => 'ಎಲ್ಲಾ ನೋಡಿ';
 
   @override
-  String get exploreLegacy => 'Legacy';
+  String get exploreLegacy => 'ಹಳೆಯವು';
 
   @override
-  String get exploreAskAi => 'Ask AI';
+  String get exploreAskAi => 'AI ಕೇಳಿ';
 
   @override
   String exploreAskPrompt(String law) {
-    return 'Explain the $law in simple terms: what it covers and the key provisions I should know.';
+    return '$law ಅನ್ನು ಸರಳ ಮಾತುಗಳಲ್ಲಿ ವಿವರಿಸಿ: ಇದು ಯಾವುದನ್ನು ಒಳಗೊಂಡಿದೆ ಮತ್ತು ನಾನು ತಿಳಿಯಬೇಕಾದ ಮುಖ್ಯ ನಿಬಂಧನೆಗಳೇನು.';
   }
 
   @override
-  String get lawConstitutionTitle => 'Constitution of India';
+  String get lawConstitutionTitle => 'ಭಾರತದ ಸಂವಿಧಾನ';
 
   @override
   String get lawConstitutionDesc =>
-      'Fundamental rights, directive principles, duties and more.';
+      'ಮೂಲಭೂತ ಹಕ್ಕುಗಳು, ನಿರ್ದೇಶಕ ತತ್ವಗಳು, ಕರ್ತವ್ಯಗಳು ಮತ್ತು ಇನ್ನಷ್ಟು.';
 
   @override
-  String get lawBnsTitle => 'Bharatiya Nyaya Sanhita (BNS)';
+  String get lawBnsTitle => 'ಭಾರತೀಯ ನ್ಯಾಯ ಸಂಹಿತೆ (BNS)';
 
   @override
-  String get lawBnsShort => 'Bharatiya Nyaya Sanhita';
+  String get lawBnsShort => 'ಭಾರತೀಯ ನ್ಯಾಯ ಸಂಹಿತೆ';
 
   @override
-  String get lawBnsDesc => 'Substantive criminal law';
+  String get lawBnsDesc => 'ಮೂಲ ಕ್ರಿಮಿನಲ್ ಕಾನೂನು';
 
   @override
   String get lawBnsFeatured =>
-      'Offences and punishments under India\'s new criminal code.';
+      'ಭಾರತದ ಹೊಸ ಕ್ರಿಮಿನಲ್ ಸಂಹಿತೆಯಡಿ ಅಪರಾಧಗಳು ಮತ್ತು ಶಿಕ್ಷೆಗಳು.';
 
   @override
-  String get lawBnssTitle => 'Bharatiya Nagarik Suraksha Sanhita (BNSS)';
+  String get lawBnssTitle => 'ಭಾರತೀಯ ನಾಗರಿಕ ಸುರಕ್ಷಾ ಸಂಹಿತೆ (BNSS)';
 
   @override
-  String get lawBnssDesc => 'Criminal procedure law';
+  String get lawBnssDesc => 'ಕ್ರಿಮಿನಲ್ ಪ್ರಕ್ರಿಯಾ ಕಾನೂನು';
 
   @override
-  String get lawBsaTitle => 'Bharatiya Sakshya Adhiniyam (BSA)';
+  String get lawBsaTitle => 'ಭಾರತೀಯ ಸಾಕ್ಷ್ಯ ಅಧಿನಿಯಮ (BSA)';
 
   @override
-  String get lawBsaDesc => 'Law of evidence';
+  String get lawBsaDesc => 'ಸಾಕ್ಷ್ಯ ಕಾನೂನು';
 
   @override
-  String get lawEverydayTitle => 'Everyday Law';
+  String get lawEverydayTitle => 'ದೈನಂದಿನ ಕಾನೂನು';
 
   @override
-  String get lawEverydayDesc => 'Know your rights in daily life';
+  String get lawEverydayDesc =>
+      'ದಿನನಿತ್ಯದ ಜೀವನದಲ್ಲಿ ನಿಮ್ಮ ಹಕ್ಕುಗಳನ್ನು ತಿಳಿಯಿರಿ';
 
   @override
   String get lawEverydayFeatured =>
-      'Consumer, tenancy, workplace and family rights, explained simply.';
+      'ಗ್ರಾಹಕ, ಬಾಡಿಗೆ, ಕೆಲಸದ ಸ್ಥಳ ಮತ್ತು ಕುಟುಂಬದ ಹಕ್ಕುಗಳು, ಸರಳವಾಗಿ ವಿವರಿಸಲಾಗಿದೆ.';
 
   @override
-  String get lawLegacyTitle => 'IPC & CrPC (Legacy)';
+  String get lawLegacyTitle => 'IPC ಮತ್ತು CrPC (ಹಳೆಯವು)';
 
   @override
-  String get lawLegacyDesc => 'Older laws for reference';
+  String get lawLegacyDesc => 'ಉಲ್ಲೇಖಕ್ಕಾಗಿ ಹಳೆಯ ಕಾನೂನುಗಳು';
 
   @override
   String get chapterConstitutionTitle => 'ಸಂವಿಧಾನದ ಮೂಲಾಂಶಗಳು';
@@ -1354,77 +1356,77 @@ class AppLocalizationsKn extends AppLocalizations {
   String get chapterEverydaySubtitle => 'ದಿನನಿತ್ಯದ ಜೀವನಕ್ಕೆ ಕಾನೂನು';
 
   @override
-  String get authCreateTitle => 'Create your free account';
+  String get authCreateTitle => 'ನಿಮ್ಮ ಉಚಿತ ಖಾತೆ ತೆರೆಯಿರಿ';
 
   @override
   String get authCreateSubtitle =>
-      'Questions come from Nyaya\'s reviewed library, and your results are saved to your account.';
+      'ಪ್ರಶ್ನೆಗಳು Nyaya ಪರಿಶೀಲಿಸಿದ ಸಂಗ್ರಹದಿಂದ ಬರುತ್ತವೆ, ಮತ್ತು ನಿಮ್ಮ ಫಲಿತಾಂಶಗಳನ್ನು ನಿಮ್ಮ ಖಾತೆಯಲ್ಲಿ ಉಳಿಸಲಾಗುತ್ತದೆ.';
 
   @override
-  String get authSignInTitle => 'Welcome back';
+  String get authSignInTitle => 'ಮತ್ತೆ ಸ್ವಾಗತ';
 
   @override
-  String get authSignInSubtitle => 'Sign in to keep practising.';
+  String get authSignInSubtitle => 'ಅಭ್ಯಾಸ ಮುಂದುವರಿಸಲು ಸೈನ್ ಇನ್ ಮಾಡಿ.';
 
   @override
-  String get authName => 'Your name';
+  String get authName => 'ನಿಮ್ಮ ಹೆಸರು';
 
   @override
-  String get authEmail => 'Email';
+  String get authEmail => 'ಇಮೇಲ್';
 
   @override
-  String get authPassword => 'Password';
+  String get authPassword => 'ಪಾಸ್‌ವರ್ಡ್';
 
   @override
-  String get authPasswordHint => 'At least 8 characters';
+  String get authPasswordHint => 'ಕನಿಷ್ಠ 8 ಅಕ್ಷರಗಳು';
 
   @override
-  String get authCreate => 'CREATE ACCOUNT';
+  String get authCreate => 'ಖಾತೆ ತೆರೆಯಿರಿ';
 
   @override
-  String get authSignIn => 'SIGN IN';
+  String get authSignIn => 'ಸೈನ್ ಇನ್';
 
   @override
-  String get authHaveAccount => 'I already have an account';
+  String get authHaveAccount => 'ನನಗೆ ಈಗಾಗಲೇ ಖಾತೆ ಇದೆ';
 
   @override
-  String get authNeedAccount => 'New here? Create an account';
+  String get authNeedAccount => 'ಹೊಸಬರೇ? ಖಾತೆ ತೆರೆಯಿರಿ';
 
   @override
-  String get authErrorCredentials => 'Email or password is incorrect.';
+  String get authErrorCredentials => 'ಇಮೇಲ್ ಅಥವಾ ಪಾಸ್‌ವರ್ಡ್ ಸರಿಯಿಲ್ಲ.';
 
   @override
   String get authErrorEmailTaken =>
-      'An account with this email already exists. Sign in instead.';
+      'ಈ ಇಮೇಲ್‌ನ ಖಾತೆ ಈಗಾಗಲೇ ಇದೆ. ಬದಲಿಗೆ ಸೈನ್ ಇನ್ ಮಾಡಿ.';
 
   @override
   String get authErrorNetwork =>
-      'Can\'t reach Nyaya right now. Check your connection and try again.';
+      'ಈಗ Nyaya ಅನ್ನು ತಲುಪಲು ಆಗುತ್ತಿಲ್ಲ. ನಿಮ್ಮ ಸಂಪರ್ಕ ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
 
   @override
   String get authErrorRateLimited =>
-      'Too many attempts. Wait a minute and try again.';
+      'ತುಂಬಾ ಪ್ರಯತ್ನಗಳಾಗಿವೆ. ಒಂದು ನಿಮಿಷ ಕಾದು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
 
   @override
   String get authErrorInvalid =>
-      'Enter a valid email and a password of at least 8 characters.';
+      'ಸರಿಯಾದ ಇಮೇಲ್ ಮತ್ತು ಕನಿಷ್ಠ 8 ಅಕ್ಷರಗಳ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ.';
 
   @override
-  String get authErrorName => 'Enter your name.';
+  String get authErrorName => 'ನಿಮ್ಮ ಹೆಸರನ್ನು ನಮೂದಿಸಿ.';
 
   @override
-  String get settingsAccount => 'Account';
+  String get settingsAccount => 'ಖಾತೆ';
 
   @override
   String settingsSignedInAs(String email) {
-    return 'Signed in as $email';
+    return '$email ಆಗಿ ಸೈನ್ ಇನ್ ಆಗಿದ್ದೀರಿ';
   }
 
   @override
-  String get settingsSignIn => 'Sign in or create an account';
+  String get settingsSignIn => 'ಸೈನ್ ಇನ್ ಮಾಡಿ ಅಥವಾ ಖಾತೆ ತೆರೆಯಿರಿ';
 
   @override
-  String get settingsSignOut => 'Sign out';
+  String get settingsSignOut => 'ಸೈನ್ ಔಟ್';
 
   @override
   String get updateRequiredTitle => 'ದಯವಿಟ್ಟು Nyaya ಅನ್ನು ಅಪ್‌ಡೇಟ್ ಮಾಡಿ';
@@ -1458,22 +1460,22 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get quizSendFailed =>
-      'Couldn\'t send your answer. Check your connection and tap again.';
+      'ನಿಮ್ಮ ಉತ್ತರ ಕಳುಹಿಸಲು ಆಗಲಿಲ್ಲ. ಸಂಪರ್ಕ ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಒತ್ತಿ.';
 
   @override
   String get quizSubmitFailed =>
-      'Couldn\'t get your result. Check your connection.';
+      'ನಿಮ್ಮ ಫಲಿತಾಂಶ ಪಡೆಯಲು ಆಗಲಿಲ್ಲ. ಸಂಪರ್ಕ ಪರಿಶೀಲಿಸಿ.';
 
   @override
-  String get quizRetry => 'TRY AGAIN';
+  String get quizRetry => 'ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ';
 
   @override
-  String get quizScoring => 'Scoring your case…';
+  String get quizScoring => 'ನಿಮ್ಮ ಪ್ರಕರಣಕ್ಕೆ ಅಂಕ ನೀಡಲಾಗುತ್ತಿದೆ…';
 
   @override
   String get quizOffline =>
-      'Can\'t reach Nyaya. Check your connection and try again.';
+      'Nyaya ಅನ್ನು ತಲುಪಲು ಆಗುತ್ತಿಲ್ಲ. ಸಂಪರ್ಕ ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
 
   @override
-  String get quizSignedOut => 'Your session ended. Sign in again to play.';
+  String get quizSignedOut => 'ನಿಮ್ಮ ಸೆಷನ್ ಮುಗಿದಿದೆ. ಆಡಲು ಮತ್ತೆ ಸೈನ್ ಇನ್ ಮಾಡಿ.';
 }

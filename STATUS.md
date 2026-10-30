@@ -432,7 +432,7 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       account and gives the DSNs) + usage analytics as **our own events** in our database with a portal dashboard
       (no learner data to third parties); **premium hidden** in the beta; **production hosting: decide later**;
       **beta audience: citizens**. P4 order (hosting-free first): hide premium [done] → in-app account deletion [done] →
-      Sentry → own analytics (done, calculated from existing records) + dashboard → minimum app version [done] → translations of English-only screens →
+      Sentry → own analytics (done, calculated from existing records) + dashboard → minimum app version [done] → translations of English-only screens [done] →
       accessibility + dark mode pass → shared sign-in rate limit → rotate the Azure key (user) → store prep.
 - [x] 2026-10-30: **Premium hidden for the beta.** App: build switch `Features.premium`
       (`lib/core/config/features.dart`, `--dart-define=NYAYA_PREMIUM=true` to show it) hides the post-onboarding
@@ -532,6 +532,20 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       Pushed `1dd6a2e`, CI green, staging deployed (no migration, so no backup; without `--seed`). `/v1/app-config`
       answers `{min_app_version: null, update_url: null}` on staging: nothing is blocked until `MIN_APP_VERSION` is set in
       `/opt/nyaya-v2/.env` and the API restarted.
+
+- [x] 2026-10-30: **Translations of the English-only screens (P4).** 111 texts were missing in each of Hindi, Tamil,
+      Telugu, Kannada and Malayalam (onboarding intro and demo cards, sign-in and sign-up, Explore Law home and the
+      law names, Review (mistakes and saved), report-a-problem, save/report buttons, quiz error messages, journey,
+      leaderboard, updates save). They are now all in `lib/l10n/app_<lang>.arb`, so those screens no longer fall
+      back to English. Drafted by Sonnet translators from the existing wording in each file, then checked by script
+      (same keys, same placeholders, plural forms kept) and by eye in Tamil on the simulator (home and sign-up
+      screens). New test `test/l10n_test.dart` fails if any language lacks a text English has, has an extra one, or
+      changes a placeholder, so a new screen can't ship English-only by accident. **These are machine drafts: have a
+      native speaker of each language read them before the beta** (the translators were least sure of: "Review"
+      as a screen title, the tagline "Learn Law. Live It.", "Practice player", sign in/out wording, and the
+      spellings of Bharatiya Sakshya Adhiniyam in each script). Still English: the sample legal-update articles
+      (content, due to come from the portal), the questions themselves (the bank is English only), AI answers, and
+      the debug-only Sentry test row. Flutter tests: 60.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
