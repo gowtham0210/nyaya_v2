@@ -31,6 +31,9 @@ export function initMonitoring(
     },
     tracesSampleRate: 0,
     maxBreadcrumbs: 0,
+    // No release-health "sessions" either: errors only.
+    integrations: (defaults) =>
+      defaults.filter((i) => i.name !== 'ProcessSession'),
     beforeSend: scrub,
     ...extra,
   });

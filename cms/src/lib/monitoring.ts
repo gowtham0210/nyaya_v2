@@ -21,6 +21,8 @@ export const monitoringOptions = (dsn: string | undefined): BrowserOptions => ({
   },
   tracesSampleRate: 0,
   maxBreadcrumbs: 0,
+  // No release-health "sessions" either: errors only.
+  integrations: (defaults) => defaults.filter((i) => i.name !== 'BrowserSession' && i.name !== 'ProcessSession'),
   beforeSend: scrub,
 });
 

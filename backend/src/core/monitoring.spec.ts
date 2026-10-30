@@ -8,12 +8,14 @@ import { HttpException, type ArgumentsHost } from '@nestjs/common';
 const DSN = 'https://abc123@o1.ingest.us.sentry.io/42';
 
 /** Runs the real reporting path but keeps what would be sent, instead of sending it. */
-function capture() {
+function capture(extra: Record<string, unknown> = {}) {
   const sent: any[] = [];
   const ok = initMonitoring(loadConfig({ SENTRY_DSN: DSN }), {
+    ...extra,
     transport: () => ({
       send: async (envelope: any) => {
-        for (const item of envelope[1]) sent.push(item[1]);
+        for (const [header, payload] of envelope[1])
+          sent.push({ ...payload, __type: header.type });
         return {};
       },
       flush: async () => true,
@@ -53,6 +55,15 @@ describe('crash reports', () => {
     expect(event.request).toBeUndefined();
     expect(event.breadcrumbs).toEqual([]);
     expect(JSON.stringify(event)).not.toContain(email);
+  });
+
+  it('are the only thing sent, even when a release name is known', async () => {
+    // With a release, the SDK would also send release-health sessions (as CI does via GITHUB_SHA).
+    const { sent } = capture({ release: 'nyaya-api@1' });
+    reportError(new Error('boom'));
+    await Sentry.close(1000);
+    expect(sent.length).toBeGreaterThan(0);
+    expect(new Set(sent.map((i) => i.__type))).toEqual(new Set(['event']));
   });
 
   it('come from the error filter for unexpected faults only', async () => {

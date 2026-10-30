@@ -552,7 +552,8 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       **`nyaya-portal`** (Next.js). Both keys (DSNs) are **not in git**: they go in `/opt/nyaya-v2/.env` on the server
       as `API_SENTRY_DSN` and `PORTAL_SENTRY_DSN` (docker-compose passes them on; empty = nothing reported). Same
       privacy rules as the app: **errors only**: no user, cookies, headers, request bodies, query strings, local
-      variables, breadcrumbs, traces or replay (SDK 11's `dataCollection` switches are all off). **API**
+      variables, breadcrumbs, traces, replay or release-health sessions (SDK 11's `dataCollection` switches are all off; the
+      session integrations are removed; a test checks that only error events are sent even when a release name is set). **API**
       (`backend/src/core/monitoring.ts`, `@sentry/node` 11.7.0 pinned): started in `main.ts` when `SENTRY_DSN` is set;
       the error filter reports every **unexpected** error (a real fault, not a 4xx and not a 5xx the code throws on purpose
       such as "AI chat not set up" or "AI service did not answer") with the request id as a tag; crashes and unhandled rejections are
