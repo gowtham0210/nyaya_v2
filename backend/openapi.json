@@ -821,6 +821,69 @@
         ]
       }
     },
+    "/v1/admin/analytics/overview": {
+      "get": {
+        "operationId": "AnalyticsController_overview",
+        "parameters": [
+          {
+            "name": "days",
+            "required": false,
+            "in": "query",
+            "description": "Days to show, ending today (India date)",
+            "schema": {
+              "default": 30,
+              "type": "number",
+              "enum": [
+                7,
+                30,
+                90
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalyticsOverviewDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Learners, activity, retention, quizzes and content health, calculated from what the app already records",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/me/app-open": {
+      "post": {
+        "operationId": "AppOpenController_appOpen",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Note that the learner opened the app today (once a day; used for retention)",
+        "tags": [
+          "me"
+        ]
+      }
+    },
     "/v1/editor/questions": {
       "get": {
         "operationId": "QuestionsController_list",
@@ -3204,6 +3267,257 @@
         "required": [
           "token",
           "password"
+        ]
+      },
+      "LearnerTotalsDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "description": "Learner accounts today"
+          },
+          "new_in_period": {
+            "type": "number",
+            "description": "Signed up in the period"
+          },
+          "onboarded": {
+            "type": "number",
+            "description": "Finished the onboarding questions"
+          },
+          "finished_a_quiz": {
+            "type": "number",
+            "description": "Finished at least one quiz"
+          }
+        },
+        "required": [
+          "total",
+          "new_in_period",
+          "onboarded",
+          "finished_a_quiz"
+        ]
+      },
+      "ActiveLearnersDto": {
+        "type": "object",
+        "properties": {
+          "today": {
+            "type": "number",
+            "description": "Active today"
+          },
+          "last_7_days": {
+            "type": "number",
+            "description": "Active in the last 7 days"
+          },
+          "last_30_days": {
+            "type": "number",
+            "description": "Active in the last 30 days"
+          }
+        },
+        "required": [
+          "today",
+          "last_7_days",
+          "last_30_days"
+        ]
+      },
+      "DailyUsageDto": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "new_learners": {
+            "type": "number"
+          },
+          "active_learners": {
+            "type": "number",
+            "description": "Opened the app, played a quiz or asked the AI"
+          },
+          "quizzes_started": {
+            "type": "number"
+          },
+          "quizzes_finished": {
+            "type": "number"
+          },
+          "ai_answers": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "date",
+          "new_learners",
+          "active_learners",
+          "quizzes_started",
+          "quizzes_finished",
+          "ai_answers"
+        ]
+      },
+      "RetentionDto": {
+        "type": "object",
+        "properties": {
+          "day": {
+            "type": "number",
+            "description": "Days after sign-up: 1, 7 or 30"
+          },
+          "eligible": {
+            "type": "number",
+            "description": "Sign-ups (last 90 days) old enough to be measured"
+          },
+          "retained": {
+            "type": "number",
+            "description": "Of those, active exactly that many days after signing up"
+          }
+        },
+        "required": [
+          "day",
+          "eligible",
+          "retained"
+        ]
+      },
+      "ModeUsageDto": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "case_path",
+              "daily_docket",
+              "duel",
+              "exam",
+              "mistake_review"
+            ]
+          },
+          "started": {
+            "type": "number"
+          },
+          "finished": {
+            "type": "number"
+          },
+          "average_score_percent": {
+            "type": "number",
+            "nullable": true,
+            "description": "Average share of questions right in finished quizzes, 0–100"
+          }
+        },
+        "required": [
+          "mode",
+          "started",
+          "finished",
+          "average_score_percent"
+        ]
+      },
+      "HardQuestionDto": {
+        "type": "object",
+        "properties": {
+          "question_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "stem": {
+            "type": "string"
+          },
+          "topic": {
+            "type": "string"
+          },
+          "answers": {
+            "type": "number"
+          },
+          "correct_percent": {
+            "type": "number",
+            "description": "Share of answers that were right, 0–100"
+          }
+        },
+        "required": [
+          "question_id",
+          "stem",
+          "topic",
+          "answers",
+          "correct_percent"
+        ]
+      },
+      "ContentHealthDto": {
+        "type": "object",
+        "properties": {
+          "open_reports": {
+            "type": "number",
+            "description": "Reports not yet closed by staff"
+          },
+          "reports_in_period": {
+            "type": "number",
+            "description": "Reports sent in the period"
+          },
+          "min_answers": {
+            "type": "number",
+            "description": "Answers needed before a question is ranked"
+          },
+          "hardest_questions": {
+            "description": "Most often missed, worst first",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HardQuestionDto"
+            }
+          }
+        },
+        "required": [
+          "open_reports",
+          "reports_in_period",
+          "min_answers",
+          "hardest_questions"
+        ]
+      },
+      "AnalyticsOverviewDto": {
+        "type": "object",
+        "properties": {
+          "as_of": {
+            "type": "string",
+            "format": "date",
+            "description": "Today in India"
+          },
+          "days": {
+            "type": "number",
+            "enum": [
+              7,
+              30,
+              90
+            ]
+          },
+          "learners": {
+            "$ref": "#/components/schemas/LearnerTotalsDto"
+          },
+          "active": {
+            "$ref": "#/components/schemas/ActiveLearnersDto"
+          },
+          "daily": {
+            "description": "One entry per day, oldest first",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DailyUsageDto"
+            }
+          },
+          "retention": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RetentionDto"
+            }
+          },
+          "modes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModeUsageDto"
+            }
+          },
+          "content": {
+            "$ref": "#/components/schemas/ContentHealthDto"
+          }
+        },
+        "required": [
+          "as_of",
+          "days",
+          "learners",
+          "active",
+          "daily",
+          "retention",
+          "modes",
+          "content"
         ]
       },
       "ListLatestDto": {

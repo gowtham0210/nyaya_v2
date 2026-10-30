@@ -11,6 +11,11 @@ export async function UserMenu() {
         <div className="font-medium">{me.display_name}</div>
         <div className="text-xs text-muted">{me.roles.map((r) => ROLE_LABEL[r]).join(', ')}</div>
       </div>
+      {hasRole(me, 'admin', 'analyst') && (
+        <Link href="/analytics" className="rounded-lg px-3 py-1.5 text-muted hover:bg-surface-2 hover:text-text">
+          Analytics
+        </Link>
+      )}
       {hasRole(me, 'admin') && (
         <Link href="/staff" className="rounded-lg px-3 py-1.5 text-muted hover:bg-surface-2 hover:text-text">
           Staff

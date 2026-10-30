@@ -350,6 +350,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/analytics/overview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Learners, activity, retention, quizzes and content health, calculated from what the app already records */
+        get: operations["AnalyticsController_overview"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/app-open": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Note that the learner opened the app today (once a day; used for retention) */
+        post: operations["AppOpenController_appOpen"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/editor/questions": {
         parameters: {
             query?: never;
@@ -1176,6 +1210,85 @@ export interface components {
             token: string;
             /** Format: password */
             password: string;
+        };
+        LearnerTotalsDto: {
+            /** @description Learner accounts today */
+            total: number;
+            /** @description Signed up in the period */
+            new_in_period: number;
+            /** @description Finished the onboarding questions */
+            onboarded: number;
+            /** @description Finished at least one quiz */
+            finished_a_quiz: number;
+        };
+        ActiveLearnersDto: {
+            /** @description Active today */
+            today: number;
+            /** @description Active in the last 7 days */
+            last_7_days: number;
+            /** @description Active in the last 30 days */
+            last_30_days: number;
+        };
+        DailyUsageDto: {
+            /** Format: date */
+            date: string;
+            new_learners: number;
+            /** @description Opened the app, played a quiz or asked the AI */
+            active_learners: number;
+            quizzes_started: number;
+            quizzes_finished: number;
+            ai_answers: number;
+        };
+        RetentionDto: {
+            /** @description Days after sign-up: 1, 7 or 30 */
+            day: number;
+            /** @description Sign-ups (last 90 days) old enough to be measured */
+            eligible: number;
+            /** @description Of those, active exactly that many days after signing up */
+            retained: number;
+        };
+        ModeUsageDto: {
+            /** @enum {string} */
+            mode: "case_path" | "daily_docket" | "duel" | "exam" | "mistake_review";
+            started: number;
+            finished: number;
+            /** @description Average share of questions right in finished quizzes, 0–100 */
+            average_score_percent: number | null;
+        };
+        HardQuestionDto: {
+            /** Format: uuid */
+            question_id: string;
+            stem: string;
+            topic: string;
+            answers: number;
+            /** @description Share of answers that were right, 0–100 */
+            correct_percent: number;
+        };
+        ContentHealthDto: {
+            /** @description Reports not yet closed by staff */
+            open_reports: number;
+            /** @description Reports sent in the period */
+            reports_in_period: number;
+            /** @description Answers needed before a question is ranked */
+            min_answers: number;
+            /** @description Most often missed, worst first */
+            hardest_questions: components["schemas"]["HardQuestionDto"][];
+        };
+        AnalyticsOverviewDto: {
+            /**
+             * Format: date
+             * @description Today in India
+             */
+            as_of: string;
+            /** @enum {number} */
+            days: 7 | 30 | 90;
+            learners: components["schemas"]["LearnerTotalsDto"];
+            active: components["schemas"]["ActiveLearnersDto"];
+            /** @description One entry per day, oldest first */
+            daily: components["schemas"]["DailyUsageDto"][];
+            retention: components["schemas"]["RetentionDto"][];
+            modes: components["schemas"]["ModeUsageDto"][];
+            content: components["schemas"]["ContentHealthDto"];
         };
         ListLatestDto: {
             /** Format: uuid */
@@ -2345,6 +2458,45 @@ export interface operations {
                 "application/json": components["schemas"]["SetupPasswordDto"];
             };
         };
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AnalyticsController_overview: {
+        parameters: {
+            query?: {
+                /** @description Days to show, ending today (India date) */
+                days?: 7 | 30 | 90;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AnalyticsOverviewDto"];
+                };
+            };
+        };
+    };
+    AppOpenController_appOpen: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
         responses: {
             204: {
                 headers: {

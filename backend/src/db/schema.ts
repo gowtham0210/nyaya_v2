@@ -706,3 +706,24 @@ export const importRowProblems = pgTable(
     }).onDelete('cascade'),
   ],
 );
+
+// ---------------------------------------------------------------- analytics
+
+/**
+ * One row per learner per India date they opened the app: the only usage the
+ * server does not already know from quizzes and chat, needed for retention.
+ * No device ids or screens. Removed with the account.
+ */
+export const appOpens = pgTable(
+  'app_opens',
+  {
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    day: date('day').notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.userId, t.day] }),
+    index('app_opens_day_idx').on(t.day),
+  ],
+);

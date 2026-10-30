@@ -25,9 +25,11 @@ class _NyayaAppState extends ConsumerState<NyayaApp> {
       onResume: () {
         ref.read(profileProvider.notifier).refreshDay();
         ref.read(progressSyncProvider.notifier).refresh();
+        ref.read(progressSyncProvider.notifier).noteOpen();
       },
     );
     ref.read(progressSyncProvider.notifier).refresh();
+    ref.read(progressSyncProvider.notifier).noteOpen();
   }
 
   @override

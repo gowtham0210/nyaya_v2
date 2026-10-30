@@ -1,6 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { AnalyticsModule } from './analytics/analytics.module.js';
 import { AuthModule } from './auth/auth.module.js';
 import { ChatModule } from './chat/chat.module.js';
 import { ImportsModule } from './imports/imports.module.js';
@@ -36,6 +37,7 @@ export class AppModule {
         TaxonomyModule,
         ImportsModule,
         StaffModule,
+        AnalyticsModule,
         QuestionsModule,
         LearnModule,
         ChatModule,

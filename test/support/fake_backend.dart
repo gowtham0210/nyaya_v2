@@ -270,6 +270,12 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
     );
   }
 
+  /// How many times the app told the server it was opened.
+  var appOpens = 0;
+
+  @override
+  Future<void> markAppOpen() async => appOpens++;
+
   @override
   Future<ServerProgress> fetch() async {
     if (unreadableProgress) throw TypeError();

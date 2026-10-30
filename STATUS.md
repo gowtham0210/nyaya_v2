@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-30 (account deletion, Claude Sonnet 5.5)
+> Last updated: 2026-10-30 (usage analytics, Claude Sonnet 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -432,7 +432,7 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       account and gives the DSNs) + usage analytics as **our own events** in our database with a portal dashboard
       (no learner data to third parties); **premium hidden** in the beta; **production hosting: decide later**;
       **beta audience: citizens**. P4 order (hosting-free first): hide premium [done] → in-app account deletion [done] →
-      Sentry → own analytics events + dashboard → minimum app version → translations of English-only screens →
+      Sentry → own analytics (done, calculated from existing records) + dashboard → minimum app version → translations of English-only screens →
       accessibility + dark mode pass → shared sign-in rate limit → rotate the Azure key (user) → store prep.
 - [x] 2026-10-30: **Premium hidden for the beta.** App: build switch `Features.premium`
       (`lib/core/config/features.dart`, `--dart-define=NYAYA_PREMIUM=true` to show it) hides the post-onboarding
@@ -486,6 +486,29 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       Issues → "Nyaya test error: Sentry is connected". Not done: uploading iOS/Android debug symbols so crash
       stack traces are readable (needs a Sentry auth token; do it with store prep), Sentry for the API and portal
       (need their DSNs), alerts.
+
+- [x] 2026-10-30: **Usage analytics and the portal Analytics page (P4, M11).** Almost every event in the plan's
+      analytics sheet was already stored as ordinary rows, so the dashboard is **calculated from existing records**
+      (no event stream, nothing extra tracked): sign-ups (`users`), onboarding (`learner_settings.onboarded_at`),
+      quiz started / finished and score (`quiz_sessions`), answers and correctness (`quiz_session_questions`), AI
+      questions (`chat_usage`), reports (`content_reports`). The only new data is **`app_opens`** (user, India
+      date; PK on both; cascade-deleted with the account; migration 0011): the app calls `POST /v1/me/app-open`
+      on start, resume and sign-in, at most once a day (`ProgressSync.noteOpen`; quiet when signed out/offline).
+      API (`backend/src/analytics/`): `GET /v1/admin/analytics/overview?days=7|30|90` (**admin + analyst only**):
+      learner totals (total, new, onboarded, finished a quiz), active today / 7 d / 30 d, a daily series (new,
+      active, quizzes started / finished, AI answers), D1 / D7 / D30 retention over the last 90 days of sign-ups
+      (only people old enough to measure; "active" = opened the app, started a quiz or asked the AI on exactly that
+      day), quizzes by mode (started, % finished, average score), and content health (open reports, reports in
+      the period, the 10 most-missed questions with ≥ 5 final answers; unsubmitted exam answers don't count).
+      Learner accounts only (staff left out); no names or emails anywhere; India dates throughout. Portal →
+      **Analytics** (link in the top-right menu for admins and analysts): period tabs, four stat tiles, four
+      plain-SVG bar charts (each also a hidden table for screen readers), retention table (shows "—" under 5
+      measured people), modes table, and "Questions to look at" linking to each question. Privacy text updated
+      (6 languages) to mention the days a learner opens the app. Tests: backend 65 unit + 102 API (new
+      `analytics.e2e-spec.ts` with exact expected numbers for retention, activity, modes, the hardest-question
+      ranking and the exam rule), Flutter 46. Checked in the browser against a throwaway demo database (48 fake
+      learners, 60 days; built outside the project) — all sections, the 7-day view, phone-width layout. Not done:
+      funnels by screen, per-topic breakdown, export, error rates (Sentry covers errors), an alert on a sudden drop.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

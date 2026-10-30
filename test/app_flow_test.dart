@@ -13,6 +13,7 @@ import 'package:nyaya/features/journey/application/journey_controller.dart';
 import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
 import 'package:nyaya/features/profile/application/profile_controller.dart';
 import 'package:nyaya/features/leaderboard/data/league_api.dart';
+import 'package:nyaya/features/progress/application/progress_sync.dart';
 import 'package:nyaya/features/progress/data/progress_api.dart';
 import 'package:nyaya/features/review/data/review_api.dart';
 import 'package:nyaya/features/quiz/application/quiz_controller.dart';
@@ -175,6 +176,27 @@ void main() {
     expect(find.text('Because ${q.id}'), findsOneWidget, reason: 'explanation comes from the server');
     expect(find.text('Reference: Article ${q.difficulty}'), findsOneWidget);
     expect(find.text('Read the official text'), findsOneWidget, reason: 'the source has an official link');
+  });
+
+  testWidgets('the app tells the server it was opened, once a day', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    expect(api.appOpens, 1, reason: 'on start, signed in');
+
+    // Coming back to the app the same day sends nothing more.
+    final notifier = c.read(progressSyncProvider.notifier);
+    await notifier.noteOpen();
+    await notifier.noteOpen();
+    expect(api.appOpens, 1);
+  });
+
+  testWidgets('a signed-out learner sends no app-open', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Asha', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, signedIn: false);
+    await settle(tester);
+    await c.read(progressSyncProvider.notifier).noteOpen();
+    expect(api.appOpens, 0);
   });
 
   testWidgets('a learner can delete their account with their password and starts over', (tester) async {

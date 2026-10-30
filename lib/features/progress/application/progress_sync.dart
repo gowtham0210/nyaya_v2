@@ -16,15 +16,33 @@ import '../domain/server_progress.dart';
 final progressSyncProvider = NotifierProvider<ProgressSync, void>(ProgressSync.new);
 
 class ProgressSync extends Notifier<void> {
+  /// The day the server was last told about, so it hears once a day, not on every resume.
+  String? _openedOn;
+
   @override
   void build() {
     ref.listen(authProvider, (before, after) {
       if (after == null) {
+        _openedOn = null;
         _clear();
       } else if (before?.id != after.id) {
         refresh();
+        noteOpen();
       }
     });
+  }
+
+  /// Tells the server the app was opened today. Quiet when signed out or offline.
+  Future<void> noteOpen() async {
+    if (!ref.read(authProvider.notifier).isSignedIn) return;
+    final now = DateTime.now();
+    final today = '${now.year}-${now.month}-${now.day}';
+    if (_openedOn == today) return;
+    final sent = await _guard(() async {
+      await ref.read(progressApiProvider).markAppOpen();
+      return true;
+    });
+    if (sent == true) _openedOn = today;
   }
 
   /// Loads progress from the server. Offline, signed out, or given a response

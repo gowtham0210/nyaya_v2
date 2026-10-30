@@ -22,6 +22,9 @@ abstract interface class ProgressApi {
   Future<ServerProgress> setPremium(bool on);
 
   Future<void> saveSettings(ServerSettings settings);
+
+  /// Tells the server the learner opened the app today (used for retention).
+  Future<void> markAppOpen();
 }
 
 class HttpProgressApi implements ProgressApi {
@@ -53,4 +56,7 @@ class HttpProgressApi implements ProgressApi {
 
   @override
   Future<void> saveSettings(ServerSettings settings) => _client.put('/v1/me/settings', body: settings.toJson());
+
+  @override
+  Future<void> markAppOpen() => _client.post('/v1/me/app-open');
 }
