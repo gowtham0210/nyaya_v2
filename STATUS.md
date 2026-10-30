@@ -529,6 +529,9 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       Tests: backend 67 unit + 104 API (new `appconfig.e2e-spec.ts`, config checks), Flutter 55 (new
       `update_check_test.dart`: version order incl. 0.9 vs 0.10, unreadable versions, offline, widget screens).
       Not done: a "new version available" nudge for non-blocking updates; setting the minimum from the portal.
+      Pushed `1dd6a2e`, CI green, staging deployed (no migration, so no backup; without `--seed`). `/v1/app-config`
+      answers `{min_app_version: null, update_url: null}` on staging: nothing is blocked until `MIN_APP_VERSION` is set in
+      `/opt/nyaya-v2/.env` and the API restarted.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
