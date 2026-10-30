@@ -443,6 +443,9 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       everyone gets the free limits; other sources (future store purchases, tests) still count. Tests: backend 65
       unit + 94 API (economy test runs with demoPremium on; new test for the beta behaviour), Flutter 41. Checked
       on the simulator: Settings → Store shows only Streak freeze. The old unused Home premium banner widget was left.
+      Review fix: the first sync after sign-in no longer uploads old local demo premium while premium is hidden.
+      Pushed `93a552e`, CI green, staging deployed (DEMO_PREMIUM unset there; the 1 demo membership on staging now
+      counts for nothing). The iPhone's current build still shows premium screens until it is rebuilt.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
