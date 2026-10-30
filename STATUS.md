@@ -422,6 +422,11 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       the right role, disable/enable, own admin role refused. Local dev DB has a test staff account
       test.reviewer@nyaya.local (legal reviewer). Staging still uses the shared dev staff accounts and SEED_PASSWORD;
       `deploy.sh --seed` resets their passwords — now real staff can be invited instead.
+      OpenQodex review (agent mode) found an admin could make a new setup link for themselves and get locked out
+      (fixed: refused with `own_account`, button hidden on your own row). Pushed `7cf26b9`, CI green; staging
+      deployed (backup `nyaya-2026-10-30-0426.sql.gz` first, migration 0010 applied). Noticed, older than this: the
+      portal calls the API from its own server, so the API's sign-in rate limit treats all portal users as one
+      client — a few wrong passwords make everyone wait a minute. Fix later (e.g. pass the browser's IP along).
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
