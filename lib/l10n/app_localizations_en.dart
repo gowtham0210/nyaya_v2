@@ -1419,6 +1419,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsSignOut => 'Sign out';
 
   @override
+  String get updateRequiredTitle => 'Please update Nyaya';
+
+  @override
+  String get updateRequiredBody =>
+      'This version of the app is too old to keep working. Update it to carry on. Your progress is saved on your account, so nothing will be lost.';
+
+  @override
+  String get updateRequiredAction => 'Update';
+
+  @override
   String get settingsDeleteAccount => 'Delete account';
 
   @override

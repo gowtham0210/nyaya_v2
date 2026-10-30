@@ -46,6 +46,9 @@ services:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT:-}
       AZURE_OPENAI_API_KEY: ${AZURE_OPENAI_API_KEY:-}
       AZURE_OPENAI_CHAT_DEPLOYMENT: ${AZURE_OPENAI_CHAT_DEPLOYMENT:-gpt-5.4-mini}
+      # Apps older than this show an update screen. Leave empty to block none.
+      MIN_APP_VERSION: ${MIN_APP_VERSION:-}
+      APP_UPDATE_URL: ${APP_UPDATE_URL:-}
     networks: [default, edge]
 
   cms:

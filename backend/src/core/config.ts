@@ -29,6 +29,10 @@ export interface AppConfig {
    * default, and the beta's setting), demo premium counts for nothing.
    */
   demoPremium: boolean;
+  /** The oldest app version still allowed (e.g. "0.2.0"); older builds are told to update. Unset: none is blocked. */
+  minAppVersion?: string;
+  /** Where the update screen sends people: the store page. Must be https. */
+  appUpdateUrl?: string;
 }
 
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
@@ -71,7 +75,32 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
       5,
     ),
     demoPremium: env.DEMO_PREMIUM === 'true',
+    minAppVersion: appVersion(env.MIN_APP_VERSION),
+    appUpdateUrl: httpsUrl(env.APP_UPDATE_URL, 'APP_UPDATE_URL'),
   };
+}
+
+/** Empty means "no minimum"; anything but three whole numbers like 1.2.3 stops startup. */
+function appVersion(value: string | undefined) {
+  if (!value) return undefined;
+  if (!/^\d+\.\d+\.\d+$/.test(value))
+    throw new Error(
+      `MIN_APP_VERSION must look like 1.2.3 (three whole numbers), got "${value}"`,
+    );
+  return value;
+}
+
+function httpsUrl(value: string | undefined, name: string) {
+  if (!value) return undefined;
+  let url: URL | undefined;
+  try {
+    url = new URL(value);
+  } catch {
+    // fall through to the error below
+  }
+  if (url?.protocol !== 'https:')
+    throw new Error(`${name} must be a full https link, got "${value}"`);
+  return value;
 }
 
 /** An unset value takes the default; anything but a whole number above 0 stops startup. */

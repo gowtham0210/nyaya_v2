@@ -1,6 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { AppConfigModule } from './appconfig/appconfig.module.js';
 import { AnalyticsModule } from './analytics/analytics.module.js';
 import { AuthModule } from './auth/auth.module.js';
 import { ChatModule } from './chat/chat.module.js';
@@ -34,6 +35,7 @@ export class AppModule {
           { ttl: 60_000, limit: config.authRateLimitPerMinute },
         ]),
         AuthModule,
+        AppConfigModule,
         TaxonomyModule,
         ImportsModule,
         StaffModule,

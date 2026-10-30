@@ -46,4 +46,24 @@ describe('loadConfig', () => {
         'CHAT_DAILY_LIMIT',
       );
   });
+
+  it('has no minimum app version unless one is set, and rejects a bad one', () => {
+    expect(loadConfig({}).minAppVersion).toBeUndefined();
+    expect(loadConfig({ MIN_APP_VERSION: '' }).minAppVersion).toBeUndefined();
+    expect(loadConfig({ MIN_APP_VERSION: '0.2.0' }).minAppVersion).toBe(
+      '0.2.0',
+    );
+    expect(() => loadConfig({ MIN_APP_VERSION: '0.2' })).toThrow(/1\.2\.3/);
+    expect(() => loadConfig({ MIN_APP_VERSION: 'v1.0.0' })).toThrow();
+  });
+
+  it('takes only an https link for the update page', () => {
+    expect(loadConfig({}).appUpdateUrl).toBeUndefined();
+    expect(
+      loadConfig({ APP_UPDATE_URL: 'https://apps.apple.com/app/id1' })
+        .appUpdateUrl,
+    ).toBe('https://apps.apple.com/app/id1');
+    expect(() => loadConfig({ APP_UPDATE_URL: 'http://x.test' })).toThrow();
+    expect(() => loadConfig({ APP_UPDATE_URL: 'not a link' })).toThrow();
+  });
 });

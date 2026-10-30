@@ -5,6 +5,8 @@ import '../core/l10n/l10n.dart';
 import '../core/theme/app_theme.dart';
 import '../features/profile/application/profile_controller.dart';
 import '../features/progress/application/progress_sync.dart';
+import '../features/update/application/update_check.dart';
+import '../features/update/presentation/update_required_screen.dart';
 import 'router.dart';
 
 class NyayaApp extends ConsumerStatefulWidget {
@@ -26,10 +28,12 @@ class _NyayaAppState extends ConsumerState<NyayaApp> {
         ref.read(profileProvider.notifier).refreshDay();
         ref.read(progressSyncProvider.notifier).refresh();
         ref.read(progressSyncProvider.notifier).noteOpen();
+        ref.read(updateCheckProvider.notifier).check();
       },
     );
     ref.read(progressSyncProvider.notifier).refresh();
     ref.read(progressSyncProvider.notifier).noteOpen();
+    ref.read(updateCheckProvider.notifier).check();
   }
 
   @override
@@ -42,6 +46,7 @@ class _NyayaAppState extends ConsumerState<NyayaApp> {
   Widget build(BuildContext context) {
     // Keeps progress in step with sign-in and sign-out.
     ref.watch(progressSyncProvider);
+    final update = ref.watch(updateCheckProvider);
     return MaterialApp.router(
       title: 'Nyaya',
       debugShowCheckedModeBanner: false,
@@ -55,6 +60,8 @@ class _NyayaAppState extends ConsumerState<NyayaApp> {
         ...GlobalMaterialLocalizations.delegates,
       ],
       routerConfig: ref.watch(routerProvider),
+      // A build the server no longer allows sees only the update screen.
+      builder: (context, child) => update != null ? UpdateRequiredScreen(updateUrl: update.updateUrl) : child!,
     );
   }
 }

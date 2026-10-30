@@ -1428,6 +1428,16 @@ class AppLocalizationsTe extends AppLocalizations {
   String get settingsSignOut => 'Sign out';
 
   @override
+  String get updateRequiredTitle => 'దయచేసి Nyaya ను అప్‌డేట్ చేయండి';
+
+  @override
+  String get updateRequiredBody =>
+      'యాప్ ఈ వెర్షన్ చాలా పాతది, ఇక పని చేయదు. కొనసాగడానికి అప్‌డేట్ చేయండి. మీ పురోగతి మీ ఖాతాలో భద్రంగా ఉంది, కాబట్టి ఏదీ పోదు.';
+
+  @override
+  String get updateRequiredAction => 'అప్‌డేట్ చేయండి';
+
+  @override
   String get settingsDeleteAccount => 'ఖాతాను తొలగించు';
 
   @override

@@ -175,6 +175,28 @@
         ]
       }
     },
+    "/v1/app-config": {
+      "get": {
+        "operationId": "AppConfigController_get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppConfigDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Settings the app reads before anything else: the minimum version",
+        "tags": [
+          "app"
+        ]
+      }
+    },
     "/v1/taxonomy": {
       "get": {
         "operationId": "TaxonomyController_get",
@@ -2453,6 +2475,26 @@
         },
         "required": [
           "password"
+        ]
+      },
+      "AppConfigDto": {
+        "type": "object",
+        "properties": {
+          "min_app_version": {
+            "type": "string",
+            "nullable": true,
+            "example": "0.2.0",
+            "description": "The oldest app version that may still be used. An older build shows an update screen. Null: no build is blocked."
+          },
+          "update_url": {
+            "type": "string",
+            "nullable": true,
+            "description": "The store page the update screen opens (https). Null: no button."
+          }
+        },
+        "required": [
+          "min_app_version",
+          "update_url"
         ]
       },
       "TopicDto": {

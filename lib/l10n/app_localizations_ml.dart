@@ -1429,6 +1429,16 @@ class AppLocalizationsMl extends AppLocalizations {
   String get settingsSignOut => 'Sign out';
 
   @override
+  String get updateRequiredTitle => 'ദയവായി Nyaya അപ്ഡേറ്റ് ചെയ്യുക';
+
+  @override
+  String get updateRequiredBody =>
+      'ആപ്പിന്റെ ഈ പതിപ്പ് വളരെ പഴയതാണ്, ഇനി പ്രവർത്തിക്കില്ല. തുടരാൻ അപ്ഡേറ്റ് ചെയ്യുക. നിങ്ങളുടെ പുരോഗതി അക്കൗണ്ടിൽ സൂക്ഷിച്ചിട്ടുണ്ട്, അതിനാൽ ഒന്നും നഷ്ടപ്പെടില്ല.';
+
+  @override
+  String get updateRequiredAction => 'അപ്ഡേറ്റ് ചെയ്യുക';
+
+  @override
   String get settingsDeleteAccount => 'അക്കൗണ്ട് ഇല്ലാതാക്കുക';
 
   @override

@@ -1434,6 +1434,16 @@ class AppLocalizationsTa extends AppLocalizations {
   String get settingsSignOut => 'Sign out';
 
   @override
+  String get updateRequiredTitle => 'Nyaya ஐ புதுப்பிக்கவும்';
+
+  @override
+  String get updateRequiredBody =>
+      'ஆப்பின் இந்தப் பதிப்பு மிகவும் பழையது, இனி வேலை செய்யாது. தொடர புதுப்பிக்கவும். உங்கள் முன்னேற்றம் உங்கள் கணக்கில் சேமிக்கப்பட்டுள்ளது, எதுவும் இழக்கப்படாது.';
+
+  @override
+  String get updateRequiredAction => 'புதுப்பிக்கவும்';
+
+  @override
   String get settingsDeleteAccount => 'கணக்கை நீக்கு';
 
   @override

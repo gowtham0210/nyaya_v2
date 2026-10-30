@@ -432,7 +432,7 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       account and gives the DSNs) + usage analytics as **our own events** in our database with a portal dashboard
       (no learner data to third parties); **premium hidden** in the beta; **production hosting: decide later**;
       **beta audience: citizens**. P4 order (hosting-free first): hide premium [done] → in-app account deletion [done] →
-      Sentry → own analytics (done, calculated from existing records) + dashboard → minimum app version → translations of English-only screens →
+      Sentry → own analytics (done, calculated from existing records) + dashboard → minimum app version [done] → translations of English-only screens →
       accessibility + dark mode pass → shared sign-in rate limit → rotate the Azure key (user) → store prep.
 - [x] 2026-10-30: **Premium hidden for the beta.** App: build switch `Features.premium`
       (`lib/core/config/features.dart`, `--dart-define=NYAYA_PREMIUM=true` to show it) hides the post-onboarding
@@ -513,6 +513,22 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       applied; `app_opens` empty until phones on a new build open the app). Not yet looked at on staging with a
       real sign-in (the staging admin password is only on the server). The iPhone needs a new build to send the
       daily app-open.
+
+- [x] 2026-10-30: **Minimum app version check (P4).** The API has a public `GET /v1/app-config` →
+      `{ min_app_version, update_url }` (`backend/src/appconfig/`), set by two optional environment values:
+      `MIN_APP_VERSION` (three numbers like `0.2.0`; unset = block nobody) and `APP_UPDATE_URL` (an https store
+      link); a wrong value stops the API at start with a clear message (`backend/src/core/config.ts`). Both are
+      passed through `deploy/staging/docker-compose.yml` (empty by default) and documented in `backend/.env.example`.
+      To block old builds: set `MIN_APP_VERSION` in `/opt/nyaya-v2/.env` on the server and restart the API (no new
+      migration, no new app build needed). App (`lib/features/update/`): on start and on every resume it asks the
+      server, compares with its own version (`package_info_plus`, from the bundle's `version:` in pubspec; the
+      `+build` number is ignored) and, if older, shows only a full-screen "Please update Nyaya" page in all 6
+      languages with an **Update** button that opens the store link (https only; no button without a link).
+      Offline, slow or unreadable replies never block anyone; the last answer stands until a new one arrives.
+      Builds made **before** this one don't ask, so they can't be blocked: this protects future builds only.
+      Tests: backend 67 unit + 104 API (new `appconfig.e2e-spec.ts`, config checks), Flutter 55 (new
+      `update_check_test.dart`: version order incl. 0.9 vs 0.10, unreadable versions, offline, widget screens).
+      Not done: a "new version available" nudge for non-blocking updates; setting the minimum from the portal.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

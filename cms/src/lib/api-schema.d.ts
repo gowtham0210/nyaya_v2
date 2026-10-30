@@ -102,6 +102,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/app-config": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Settings the app reads before anything else: the minimum version */
+        get: operations["AppConfigController_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/taxonomy": {
         parameters: {
             query?: never;
@@ -973,6 +990,15 @@ export interface components {
         DeleteAccountDto: {
             /** Format: password */
             password: string;
+        };
+        AppConfigDto: {
+            /**
+             * @description The oldest app version that may still be used. An older build shows an update screen. Null: no build is blocked.
+             * @example 0.2.0
+             */
+            min_app_version: string | null;
+            /** @description The store page the update screen opens (https). Null: no button. */
+            update_url: string | null;
         };
         TopicDto: {
             /** Format: uuid */
@@ -2074,6 +2100,25 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    AppConfigController_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AppConfigDto"];
+                };
             };
         };
     };

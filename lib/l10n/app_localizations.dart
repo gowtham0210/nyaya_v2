@@ -2560,6 +2560,24 @@ abstract class AppLocalizations {
   /// **'Sign out'**
   String get settingsSignOut;
 
+  /// No description provided for @updateRequiredTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Please update Nyaya'**
+  String get updateRequiredTitle;
+
+  /// No description provided for @updateRequiredBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This version of the app is too old to keep working. Update it to carry on. Your progress is saved on your account, so nothing will be lost.'**
+  String get updateRequiredBody;
+
+  /// No description provided for @updateRequiredAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get updateRequiredAction;
+
   /// No description provided for @settingsDeleteAccount.
   ///
   /// In en, this message translates to:
