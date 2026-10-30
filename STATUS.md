@@ -469,6 +469,24 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       default 5 s test limit and failed once under load — now 30 s. Pushed `98fb79d`, CI green, staging deployed
       (no migration). The iPhone needs a new build to get the Delete account row.
 
+- [x] 2026-10-30: **Sentry crash reporting in the app (P4).** Sentry org `deepwebstudio`, project `flutter` (the user
+      created it; the API and portal projects are not made yet). `sentry_flutter` pinned **10.1.0** (15 days old when
+      chosen; pub's newest was 10.2.0, 8 days). Off unless built with `SENTRY_DSN`; `Monitoring`
+      (`lib/core/monitoring/monitoring.dart`) wraps `main`. Errors only: no performance traces, screenshots, view
+      hierarchy, tap breadcrumbs or personal details (`sendDefaultPii` off, no user set). `worthReporting` drops normal
+      life — offline, timeouts, `http` client errors and the API's own refusals (`ApiException` < 500) — and keeps
+      server faults (5xx) and anything unexpected. **The key is not in the repo (it is public):** it lives in the
+      git-ignored `/.dart-defines.local.json` ({"SENTRY_DSN": …}) and is passed with `--dart-define-from-file=
+      .dart-defines.local.json` (add `--dart-define=NYAYA_API_URL=…` for staging; `SENTRY_ENV` defaults to
+      release/debug). Debug builds with a key show Settings → About → "Send a test error (debug)" (never shown to
+      learners). Also corrected the Privacy text (progress is saved to the account, not the device; AI questions go
+      to the provider; crash reports carry no answers or personal details; account deletion is in Settings) in all
+      6 languages. Tests: Flutter 44 (new `monitoring_test.dart`), backend unchanged. Checked on the iPhone simulator
+      with the key: the test error was sent ("Test error sent"; no errors in the app log). **To confirm in Sentry:**
+      Issues → "Nyaya test error: Sentry is connected". Not done: uploading iOS/Android debug symbols so crash
+      stack traces are readable (needs a Sentry auth token; do it with store prep), Sentry for the API and portal
+      (need their DSNs), alerts.
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).

@@ -5,9 +5,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/app.dart';
 import 'core/api/token_store.dart';
+import 'core/monitoring/monitoring.dart';
 import 'core/storage/local_store.dart';
 
-Future<void> main() async {
+Future<void> main() => Monitoring.run(_start);
+
+Future<void> _start() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   final prefs = await SharedPreferences.getInstance();

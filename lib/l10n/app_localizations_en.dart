@@ -1123,7 +1123,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsPrivacyBody =>
-      'Your progress is stored on this device. AI questions are sent to our AI provider only to generate answers.';
+      'Your progress is saved to your account. Questions you ask the AI are sent to our AI provider only to write the answer. If the app crashes, a short technical report (no answers or personal details) is sent to help us fix it. You can delete your account in Settings.';
 
   @override
   String settingsVersion(String version) {

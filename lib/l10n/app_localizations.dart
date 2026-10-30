@@ -2005,7 +2005,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsPrivacyBody.
   ///
   /// In en, this message translates to:
-  /// **'Your progress is stored on this device. AI questions are sent to our AI provider only to generate answers.'**
+  /// **'Your progress is saved to your account. Questions you ask the AI are sent to our AI provider only to write the answer. If the app crashes, a short technical report (no answers or personal details) is sent to help us fix it. You can delete your account in Settings.'**
   String get settingsPrivacyBody;
 
   /// No description provided for @settingsVersion.

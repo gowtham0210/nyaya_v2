@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
@@ -8,6 +9,7 @@ import '../../../app/router.dart';
 import '../../../core/config/features.dart';
 import '../../../core/config/game_rules.dart';
 import '../../../core/l10n/l10n.dart';
+import '../../../core/monitoring/monitoring.dart';
 import '../../../core/services/feedback.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
@@ -273,6 +275,18 @@ class SettingsScreen extends ConsumerWidget {
               title: Text(l.settingsPrivacy),
               onTap: () => _info(context, l.settingsPrivacy, l.settingsPrivacyBody),
             ),
+            // Debug builds with a Sentry key only: checks the setup. Never shown to learners.
+            if (kDebugMode && Monitoring.enabled)
+              ListTile(
+                leading: const Icon(Icons.bug_report_rounded),
+                title: const Text('Send a test error (debug)'),
+                onTap: () async {
+                  await Monitoring.sendTestError();
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Test error sent')));
+                  }
+                },
+              ),
             ListTile(
               leading: Icon(Icons.restart_alt_rounded, color: context.nyaya.error),
               title: Text(l.settingsReset, style: TextStyle(color: context.nyaya.error)),

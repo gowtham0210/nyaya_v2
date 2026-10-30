@@ -46,3 +46,6 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Build-time settings with keys (e.g. SENTRY_DSN); use --dart-define-from-file
+/.dart-defines.local.json
