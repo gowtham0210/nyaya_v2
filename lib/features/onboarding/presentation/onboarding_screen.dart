@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../app/router.dart';
+import '../../../core/config/features.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/services/feedback.dart';
 import '../../../core/theme/app_colors.dart';
@@ -73,6 +74,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     unawaited(ref.read(progressSyncProvider.notifier).pushSettings());
     ref.read(feedbackProvider).play(Haptic.celebrate);
     context.go(Routes.home);
+    if (!Features.premium) return;
     // Soft, skippable paywall right after onboarding converts best.
     Future.delayed(const Duration(milliseconds: 450), () {
       final ctx = _rootContext;

@@ -91,12 +91,10 @@ void main() {
     expect(p.onboarded, isTrue);
     expect(p.name, 'Asha');
     expect(p.energy, 5);
-    // Soft paywall is shown and can be dismissed without breaking the flow.
+    // Premium is hidden in the beta: no paywall after onboarding, straight to Home.
     await tester.pump(const Duration(milliseconds: 600));
     await settle(tester);
-    expect(find.text('Maybe later'), findsOneWidget);
-    await tester.tap(find.text('Maybe later'));
-    await settle(tester);
+    expect(find.text('Maybe later'), findsNothing);
     expect(find.text('Explore Law'), findsOneWidget);
     expect(find.text('CONTINUE WHERE YOU LEFT OFF'), findsNothing);
   });
@@ -300,6 +298,7 @@ void main() {
     expect(find.text("You're out of energy"), findsOneWidget);
     expect(find.text("Play today's Daily Docket (free)"), findsOneWidget);
     expect(find.text('Ask the AI a legal question'), findsOneWidget);
+    expect(find.text('Get unlimited energy'), findsNothing, reason: 'premium is hidden in the beta');
   });
 
   testWidgets('the league shows the server group, you, practice players and last week', (tester) async {

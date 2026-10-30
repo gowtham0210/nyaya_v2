@@ -286,7 +286,7 @@ export class LearnService {
           "Today's docket is already done; a new one opens at midnight (India time)",
         );
 
-      const cost = (await isPremium(tx, userId))
+      const cost = (await isPremium(tx, userId, this.premiumOpts))
         ? 0
         : ECONOMY.energyCost[dto.mode];
       if (cost > 0 && (await energyToday(tx, userId, now)) < cost)
@@ -663,7 +663,7 @@ export class LearnService {
       await this.openedChests(this.db, userId),
       await freezePurchaseDays(this.db, userId),
     );
-    const premium = await isPremium(this.db, userId);
+    const premium = await isPremium(this.db, userId, this.premiumOpts);
     return {
       ...summary,
       coins: await coinBalance(this.db, userId),
@@ -986,7 +986,9 @@ export class LearnService {
       coins.daily_goal +
       coins.streak_milestone;
     const energyBonus =
-      got === 3 && bestBefore < 3 && !(await isPremium(tx, s.userId))
+      got === 3 &&
+      bestBefore < 3 &&
+      !(await isPremium(tx, s.userId, this.premiumOpts))
         ? ECONOMY.threeStarEnergyBonus
         : 0;
     return {
@@ -1048,9 +1050,19 @@ export class LearnService {
     await addCoins(tx, { userId, amount: -cost, reason });
   }
 
+  private get premiumOpts() {
+    return { demo: this.config.demoPremium };
+  }
+
   /** Demo premium (testing only, until store purchases are checked). */
   async setPremium(actor: Actor, on: boolean): Promise<ProgressDto> {
     const userId = actor.id;
+    if (on && !this.config.demoPremium)
+      throw err(
+        HttpStatus.NOT_FOUND,
+        'premium_unavailable',
+        'Premium is not available yet',
+      );
     await this.db.transaction(async (tx) => {
       if (on)
         await tx

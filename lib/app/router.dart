@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../core/config/features.dart';
 import '../features/auth/presentation/auth_screen.dart';
 import '../features/chat/presentation/chat_screen.dart';
 import '../features/home/presentation/home_screen.dart';
@@ -42,6 +43,7 @@ final routerProvider = Provider<GoRouter>((ref) {
     redirect: (context, state) {
       final onboarded = ref.read(profileProvider).onboarded;
       final atOnboarding = state.matchedLocation == Routes.onboarding;
+      if (!Features.premium && state.matchedLocation == Routes.premium) return Routes.home;
       if (!onboarded && !atOnboarding && state.matchedLocation != Routes.premium) {
         return Routes.onboarding;
       }

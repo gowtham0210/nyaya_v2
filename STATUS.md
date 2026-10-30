@@ -428,6 +428,22 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       portal calls the API from its own server, so the API's sign-in rate limit treats all portal users as one
       client — a few wrong passwords make everyone wait a minute. Fix later (e.g. pass the browser's IP along).
 
+- [x] 2026-10-30: **P4 decisions (user):** crash reporting = **Sentry** (app, API, portal; the user creates the
+      account and gives the DSNs) + usage analytics as **our own events** in our database with a portal dashboard
+      (no learner data to third parties); **premium hidden** in the beta; **production hosting: decide later**;
+      **beta audience: citizens**. P4 order (hosting-free first): hide premium [done] → in-app account deletion →
+      Sentry → own analytics events + dashboard → minimum app version → translations of English-only screens →
+      accessibility + dark mode pass → shared sign-in rate limit → rotate the Azure key (user) → store prep.
+- [x] 2026-10-30: **Premium hidden for the beta.** App: build switch `Features.premium`
+      (`lib/core/config/features.dart`, `--dart-define=NYAYA_PREMIUM=true` to show it) hides the post-onboarding
+      paywall, the Settings premium row, the out-of-energy "Get unlimited energy" button and the Ask AI "upgrade"
+      button; `/premium` redirects home. Ask AI limit text without premium: `chatLimitReachedToday` (6 languages).
+      API: `DEMO_PREMIUM` setting (default off; documented in `backend/.env.example`): off → `POST /v1/me/premium`
+      404 `premium_unavailable` and existing demo memberships count for nothing (`isPremium(..., { demo })`), so
+      everyone gets the free limits; other sources (future store purchases, tests) still count. Tests: backend 65
+      unit + 94 API (economy test runs with demoPremium on; new test for the beta behaviour), Flutter 41. Checked
+      on the simulator: Settings → Store shows only Streak freeze. The old unused Home premium banner widget was left.
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).

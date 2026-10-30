@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../app/router.dart';
+import '../../../core/config/features.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/services/feedback.dart';
 import '../../../core/theme/app_colors.dart';
@@ -172,7 +173,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             // ── Quota / limit ───────────────────────────────────────────────
             if (!profile.isPremium)
               if (left <= 0 || chat.limitReached)
-                _LimitBanner(onUpgrade: () => context.push(Routes.premium))
+                _LimitBanner(onUpgrade: Features.premium ? () => context.push(Routes.premium) : null)
               else
                 Padding(
                   padding: const EdgeInsets.only(bottom: 4),
@@ -424,7 +425,8 @@ class _TypingBubble extends StatelessWidget {
 class _LimitBanner extends StatelessWidget {
   const _LimitBanner({required this.onUpgrade});
 
-  final VoidCallback onUpgrade;
+  /// Null while premium is hidden: the banner then only says when to come back.
+  final VoidCallback? onUpgrade;
 
   @override
   Widget build(BuildContext context) {
@@ -438,14 +440,20 @@ class _LimitBanner extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Icon(Icons.workspace_premium_rounded, color: AppPalette.deepEarth),
+          Icon(onUpgrade == null ? Icons.schedule_rounded : Icons.workspace_premium_rounded, color: AppPalette.deepEarth),
           const SizedBox(width: 10),
-          Expanded(child: Text(l.chatLimitReached, style: context.text.bodySmall?.copyWith(color: AppPalette.deepEarth))),
-          TextButton(
-            onPressed: onUpgrade,
-            style: TextButton.styleFrom(foregroundColor: AppPalette.deepEarth),
-            child: Text(l.settingsPremiumUpgrade),
+          Expanded(
+            child: Text(
+              onUpgrade == null ? l.chatLimitReachedToday : l.chatLimitReached,
+              style: context.text.bodySmall?.copyWith(color: AppPalette.deepEarth),
+            ),
           ),
+          if (onUpgrade != null)
+            TextButton(
+              onPressed: onUpgrade,
+              style: TextButton.styleFrom(foregroundColor: AppPalette.deepEarth),
+              child: Text(l.settingsPremiumUpgrade),
+            ),
         ],
       ),
     );

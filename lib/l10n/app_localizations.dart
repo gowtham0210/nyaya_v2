@@ -1678,6 +1678,12 @@ abstract class AppLocalizations {
   /// **'You\'ve used today\'s free questions. Come back tomorrow or go Premium for unlimited AI.'**
   String get chatLimitReached;
 
+  /// No description provided for @chatLimitReachedToday.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve used today\'s questions. You can ask more tomorrow.'**
+  String get chatLimitReachedToday;
+
   /// No description provided for @chatError.
   ///
   /// In en, this message translates to:

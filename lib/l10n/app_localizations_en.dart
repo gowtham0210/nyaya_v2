@@ -949,6 +949,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'You\'ve used today\'s free questions. Come back tomorrow or go Premium for unlimited AI.';
 
   @override
+  String get chatLimitReachedToday =>
+      'You\'ve used today\'s questions. You can ask more tomorrow.';
+
+  @override
   String get chatError =>
       'I couldn\'t reach the AI right now. Please check your connection and try again.';
 

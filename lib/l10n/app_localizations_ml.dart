@@ -955,6 +955,10 @@ class AppLocalizationsMl extends AppLocalizations {
       'ഇന്നത്തെ സൗജന്യ ചോദ്യങ്ങൾ തീർന്നു. നാളെ വരൂ, അല്ലെങ്കിൽ പരിധിയില്ലാത്ത AI-ക്ക് Premium എടുക്കൂ.';
 
   @override
+  String get chatLimitReachedToday =>
+      'ഇന്നത്തെ ചോദ്യങ്ങൾ കഴിഞ്ഞു. നാളെ വീണ്ടും ചോദിക്കാം.';
+
+  @override
   String get chatError =>
       'ഇപ്പോൾ AI-യുമായി ബന്ധപ്പെടാനായില്ല. കണക്ഷൻ പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.';
 

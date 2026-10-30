@@ -957,6 +957,10 @@ class AppLocalizationsTa extends AppLocalizations {
       'இன்றைய இலவசக் கேள்விகளைப் பயன்படுத்திவிட்டீர்கள். நாளை வாருங்கள் அல்லது வரம்பற்ற AI-க்கு Premium-க்கு மாறுங்கள்.';
 
   @override
+  String get chatLimitReachedToday =>
+      'இன்றைய கேள்விகள் முடிந்துவிட்டன. நாளை மீண்டும் கேட்கலாம்.';
+
+  @override
   String get chatError =>
       'இப்போது AI-ஐ அணுக முடியவில்லை. உங்கள் இணைய இணைப்பைச் சரிபார்த்து மீண்டும் முயலவும்.';
 

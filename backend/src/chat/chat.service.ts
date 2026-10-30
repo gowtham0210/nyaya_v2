@@ -37,7 +37,9 @@ export class ChatService {
       );
 
     const day = indiaToday(new Date());
-    const limit = (await isPremium(this.db, userId))
+    const limit = (await isPremium(this.db, userId, {
+      demo: this.config.demoPremium,
+    }))
       ? this.config.chatDailyLimit
       : this.config.chatFreeDailyLimit;
     // Taken before the model call, so parallel requests can't pass the limit.

@@ -24,6 +24,11 @@ export interface AppConfig {
   chatDailyLimit: number;
   /** AI answers a free learner may get per India date. */
   chatFreeDailyLimit: number;
+  /**
+   * DEMO_PREMIUM=true lets the app turn premium on for testing. Off (the
+   * default, and the beta's setting), demo premium counts for nothing.
+   */
+  demoPremium: boolean;
 }
 
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
@@ -65,6 +70,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
       'CHAT_FREE_DAILY_LIMIT',
       5,
     ),
+    demoPremium: env.DEMO_PREMIUM === 'true',
   };
 }
 

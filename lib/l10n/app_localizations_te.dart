@@ -954,6 +954,10 @@ class AppLocalizationsTe extends AppLocalizations {
       'ఈరోజు ఉచిత ప్రశ్నలు అయిపోయాయి. రేపు రండి లేదా అపరిమిత AI కోసం Premium తీసుకోండి.';
 
   @override
+  String get chatLimitReachedToday =>
+      'ఈ రోజు ప్రశ్నలు అయిపోయాయి. రేపు మళ్ళీ అడగవచ్చు.';
+
+  @override
   String get chatError =>
       'ప్రస్తుతం AIని చేరుకోలేకపోయాను. మీ కనెక్షన్ చూసి మళ్లీ ప్రయత్నించండి.';
 

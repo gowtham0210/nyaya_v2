@@ -1,4 +1,4 @@
-import { and, eq, sql } from 'drizzle-orm';
+import { and, eq, ne, sql } from 'drizzle-orm';
 import type { Tx } from '../core/db.js';
 import { newId } from '../core/ids.js';
 import {
@@ -129,11 +129,21 @@ export async function paidOnDay(
   return !!row;
 }
 
-export async function isPremium(tx: Tx, userId: string): Promise<boolean> {
+/** Demo premium counts only where the API allows it (DEMO_PREMIUM=true). */
+export async function isPremium(
+  tx: Tx,
+  userId: string,
+  opts: { demo: boolean },
+): Promise<boolean> {
   const [row] = await tx
     .select({ id: premiumMemberships.userId })
     .from(premiumMemberships)
-    .where(eq(premiumMemberships.userId, userId))
+    .where(
+      and(
+        eq(premiumMemberships.userId, userId),
+        opts.demo ? undefined : ne(premiumMemberships.source, 'demo'),
+      ),
+    )
     .limit(1);
   return !!row;
 }

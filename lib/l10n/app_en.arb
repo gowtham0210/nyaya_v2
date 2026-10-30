@@ -567,6 +567,7 @@
     }
   },
   "chatLimitReached": "You've used today's free questions. Come back tomorrow or go Premium for unlimited AI.",
+  "chatLimitReachedToday": "You've used today's questions. You can ask more tomorrow.",
   "chatError": "I couldn't reach the AI right now. Please check your connection and try again.",
   "chatOfflineNote": "Offline mode — connect an AI key for full answers.",
   "chatClear": "Clear chat",

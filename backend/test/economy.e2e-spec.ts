@@ -3,6 +3,7 @@ import { newId } from '../src/core/ids.js';
 import {
   auditLog,
   coinLedger,
+  premiumMemberships,
   questions,
   questionVersions,
   users,
@@ -54,7 +55,7 @@ describe('coins, energy, premium and settings', () => {
     });
 
   beforeAll(async () => {
-    t = await startApp();
+    t = await startApp({ demoPremium: true });
     for (const d of [1, 1, 2, 2, 3, 3]) {
       const questionId = newId();
       const versionId = newId();
@@ -252,6 +253,29 @@ describe('coins, energy, premium and settings', () => {
         .filter((a) => a.startsWith('premium.'))
         .sort(),
     ).toEqual(['premium.ended', 'premium.started']);
+  });
+
+  it('ignores and refuses demo premium unless the API allows it', async () => {
+    const beta = await startApp(); // DEMO_PREMIUM unset, as in the beta
+    try {
+      const s = await beta.signInAs('learner');
+      const call = (method: 'post' | 'get', url: string) =>
+        beta.http()[method](url).auth(s.token, { type: 'bearer' });
+      const refused = await call('post', '/v1/me/premium').expect(404);
+      expect(refused.body.code).toBe('premium_unavailable');
+      // A demo membership made while it was allowed no longer counts.
+      await beta.db
+        .insert(premiumMemberships)
+        .values({ userId: s.id, source: 'demo', startedAt: new Date() });
+      const p = (await call('get', '/v1/me/progress').expect(200)).body;
+      expect(p).toMatchObject({
+        premium: false,
+        energy: { unlimited: false },
+        chat: { daily_limit: 5 },
+      });
+    } finally {
+      await beta.close();
+    }
   });
 
   it('saves learning settings and the name on the account', async () => {

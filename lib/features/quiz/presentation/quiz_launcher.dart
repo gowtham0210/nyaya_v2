@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../app/router.dart';
+import '../../../core/config/features.dart';
 import '../../../core/config/game_rules.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/services/feedback.dart';
@@ -107,17 +108,19 @@ class OutOfEnergySheet extends ConsumerWidget {
               style: context.text.bodyLarge?.copyWith(color: context.nyaya.textSecondary),
             ),
             const SizedBox(height: AppSpacing.lg),
-            ChunkyButton(
-              label: l.energyGoUnlimited,
-              icon: Icons.workspace_premium_rounded,
-              color: AppPalette.ochre,
-              foreground: AppPalette.deepEarth,
-              onPressed: () {
-                close();
-                context.push(Routes.premium);
-              },
-            ),
-            const SizedBox(height: 12),
+            if (Features.premium) ...[
+              ChunkyButton(
+                label: l.energyGoUnlimited,
+                icon: Icons.workspace_premium_rounded,
+                color: AppPalette.ochre,
+                foreground: AppPalette.deepEarth,
+                onPressed: () {
+                  close();
+                  context.push(Routes.premium);
+                },
+              ),
+              const SizedBox(height: 12),
+            ],
             OutlinedButton.icon(
               onPressed: () async {
                 final messenger = ScaffoldMessenger.of(context);

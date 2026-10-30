@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/api/api_client.dart';
+import '../../../core/config/features.dart';
 import '../../auth/application/auth_controller.dart';
 import '../../journey/application/journey_controller.dart';
 import '../../leaderboard/data/league_api.dart';
@@ -30,8 +31,8 @@ class ProgressSync extends Notifier<void> {
   /// this build can't read, the last copy stays and null comes back.
   ///
   /// The first time an account is used, it takes the phone's settings (and
-  /// demo premium), since onboarding happens before sign-in. After that the
-  /// account's settings win.
+  /// demo premium, while premium is shown), since onboarding happens before
+  /// sign-in. After that the account's settings win.
   Future<ServerProgress?> refresh() async {
     if (!ref.read(authProvider.notifier).isSignedIn) return null;
     final api = ref.read(progressApiProvider);
@@ -41,7 +42,7 @@ class ProgressSync extends Notifier<void> {
     if (p.settings == null && local.onboarded) {
       final uploaded = await _guard(() async {
         await api.saveSettings(_settingsOf(local));
-        return local.isPremium && !p!.premium ? api.setPremium(true) : api.fetch();
+        return local.isPremium && Features.premium && !p!.premium ? api.setPremium(true) : api.fetch();
       });
       if (uploaded != null) p = uploaded;
     }

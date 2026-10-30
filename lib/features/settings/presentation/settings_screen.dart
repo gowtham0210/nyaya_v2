@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../app/router.dart';
+import '../../../core/config/features.dart';
 import '../../../core/config/game_rules.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/services/feedback.dart';
@@ -119,13 +120,14 @@ class SettingsScreen extends ConsumerWidget {
           // ── Premium & store ───────────────────────────────────────────────
           _Header('${l.settingsStore} · ${p.coins} ${l.statCoins}'),
           _Group(children: [
-            ListTile(
-              leading: const Icon(Icons.workspace_premium_rounded, color: AppPalette.ochreText),
-              title: Text(l.settingsPremium),
-              subtitle: Text(p.isPremium ? l.settingsPremiumActive : l.settingsPremiumUpgrade),
-              trailing: const Icon(Icons.chevron_right_rounded),
-              onTap: () => context.push(Routes.premium),
-            ),
+            if (Features.premium)
+              ListTile(
+                leading: const Icon(Icons.workspace_premium_rounded, color: AppPalette.ochreText),
+                title: Text(l.settingsPremium),
+                subtitle: Text(p.isPremium ? l.settingsPremiumActive : l.settingsPremiumUpgrade),
+                trailing: const Icon(Icons.chevron_right_rounded),
+                onTap: () => context.push(Routes.premium),
+              ),
             ListTile(
               leading: const Icon(Icons.ac_unit_rounded, color: AppPalette.frost),
               title: Text(l.settingsStreakFreeze),

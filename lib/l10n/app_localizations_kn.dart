@@ -954,6 +954,10 @@ class AppLocalizationsKn extends AppLocalizations {
       'ಇಂದಿನ ಉಚಿತ ಪ್ರಶ್ನೆಗಳು ಮುಗಿದಿವೆ. ನಾಳೆ ಬನ್ನಿ ಅಥವಾ ಅಮಿತ AI ಗಾಗಿ ಪ್ರೀಮಿಯಂ ಪಡೆಯಿರಿ.';
 
   @override
+  String get chatLimitReachedToday =>
+      'ಇಂದಿನ ಪ್ರಶ್ನೆಗಳು ಮುಗಿದಿವೆ. ನಾಳೆ ಮತ್ತೆ ಕೇಳಬಹುದು.';
+
+  @override
   String get chatError =>
       'ಈಗ AI ಅನ್ನು ಸಂಪರ್ಕಿಸಲು ಆಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ನಿಮ್ಮ ಸಂಪರ್ಕ ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
 
