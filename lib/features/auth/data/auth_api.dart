@@ -28,6 +28,10 @@ abstract interface class AuthApi {
   Future<Account> signIn({required String email, required String password});
   Future<Account> register({required String name, required String email, required String password});
   Future<void> signOut();
+
+  /// Deletes the account and everything on it; the session ends with it.
+  /// Throws an [ApiException] with code `wrong_password` when the password is wrong.
+  Future<void> deleteAccount({required String password});
 }
 
 class HttpAuthApi implements AuthApi {
@@ -59,6 +63,12 @@ class HttpAuthApi implements AuthApi {
     } on ApiException {
       // Signed out on this device regardless; the token expires on its own.
     }
+  }
+
+  @override
+  Future<void> deleteAccount({required String password}) async {
+    await _client.post('/v1/me/delete-account', body: {'password': password});
+    await _tokens.clear();
   }
 
   Future<Account> _store(Future<dynamic> call) async {

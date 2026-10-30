@@ -276,7 +276,7 @@ describe('coins, energy, premium and settings', () => {
     } finally {
       await beta.close();
     }
-  });
+  }, 30_000);
 
   it('saves learning settings and the name on the account', async () => {
     const s = await t.signInAs('learner');

@@ -85,6 +85,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/delete-account": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Delete the learner's account and personal data, confirmed with the password (rate-limited like sign-in) */
+        post: operations["MeController_deleteAccount"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/taxonomy": {
         parameters: {
             query?: never;
@@ -918,6 +935,10 @@ export interface components {
         };
         RefreshDto: {
             refresh_token: string;
+        };
+        DeleteAccountDto: {
+            /** Format: password */
+            password: string;
         };
         TopicDto: {
             /** Format: uuid */
@@ -1919,6 +1940,27 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["MeDto"];
                 };
+            };
+        };
+    };
+    MeController_deleteAccount: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DeleteAccountDto"];
+            };
+        };
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

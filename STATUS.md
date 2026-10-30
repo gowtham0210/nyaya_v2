@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-30 (staff accounts, Claude Opus 5.5)
+> Last updated: 2026-10-30 (account deletion, Claude Sonnet 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -431,7 +431,7 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
 - [x] 2026-10-30: **P4 decisions (user):** crash reporting = **Sentry** (app, API, portal; the user creates the
       account and gives the DSNs) + usage analytics as **our own events** in our database with a portal dashboard
       (no learner data to third parties); **premium hidden** in the beta; **production hosting: decide later**;
-      **beta audience: citizens**. P4 order (hosting-free first): hide premium [done] → in-app account deletion →
+      **beta audience: citizens**. P4 order (hosting-free first): hide premium [done] → in-app account deletion [done] →
       Sentry → own analytics events + dashboard → minimum app version → translations of English-only screens →
       accessibility + dark mode pass → shared sign-in rate limit → rotate the Azure key (user) → store prep.
 - [x] 2026-10-30: **Premium hidden for the beta.** App: build switch `Features.premium`
@@ -446,6 +446,25 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       Review fix: the first sync after sign-in no longer uploads old local demo premium while premium is hidden.
       Pushed `93a552e`, CI green, staging deployed (DEMO_PREMIUM unset there; the 1 demo membership on staging now
       counts for nothing). The iPhone's current build still shows premium screens until it is rebuilt.
+
+- [x] 2026-10-30: **In-app account deletion (P4; Apple and Google require it).** App: Settings → Account → **Delete
+      account** (red, only while signed in) → dialog that says what goes (progress, XP, coins, saved questions,
+      league place; can't be undone) and asks for the password; wrong password → "That password is not right." and
+      the dialog stays; success → the phone is cleared (profile, journey, chat) and onboarding starts again
+      (`lib/features/settings/presentation/delete_account_dialog.dart`, `AuthApi.deleteAccount`). Strings in all 6
+      languages. API: `POST /v1/me/delete-account` {password} → 204 (POST so no client or proxy drops the body;
+      rate-limited like sign-in; 403 `wrong_password`; 409 `staff_account` — staff are removed by admins). The
+      account row goes, and with it (FK cascade) wallet and energy ledgers, settings, premium, bookmarks, chest
+      openings, league places, chat counts and refresh tokens; quiz sessions and the learner's own audit entries are
+      deleted in the same transaction; **reports they sent stay for editors with the name removed** (user_id set
+      null) **and the free-text comment cleared** (review finding: it may hold personal details; reason and
+      question stay); one bare `account.deleted` audit entry (no actor, no data) is the only trace. Their
+      old access token fails at once (the guard finds no user); the email can be registered again. Tests: backend
+      65 unit + 97 API (new `account-deletion.e2e-spec.ts`: everything removed, wrong password changes nothing, staff
+      refused, other accounts untouched), Flutter 42 (new flow test). Checked on the iPhone simulator against the
+      local API with a throwaway account: dialog, wrong password, deletion → back to "Choose your language", and a
+      sign-in with the deleted account → 401. No migration. iOS Simulator gotcha: its "Strong Password" sheet
+      swallows typing in sign-up password fields — dismiss it (X), then select-all, delete, type.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

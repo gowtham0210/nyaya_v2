@@ -1434,6 +1434,26 @@ class AppLocalizationsTa extends AppLocalizations {
   String get settingsSignOut => 'Sign out';
 
   @override
+  String get settingsDeleteAccount => 'கணக்கை நீக்கு';
+
+  @override
+  String get settingsDeleteAccountBody =>
+      'இது உங்கள் கணக்கையும் அதில் உள்ள அனைத்தையும் நிரந்தரமாக நீக்கும்: முன்னேற்றம், XP, நாணயங்கள், சேமித்த கேள்விகள், லீக் இடம். இதைத் திரும்பப் பெற முடியாது. உறுதிப்படுத்த உங்கள் கடவுச்சொல்லை உள்ளிடவும்.';
+
+  @override
+  String get settingsDeleteAccountPassword => 'கடவுச்சொல்';
+
+  @override
+  String get settingsDeleteAccountAction => 'என் கணக்கை நீக்கு';
+
+  @override
+  String get settingsDeleteAccountWrong => 'அந்த கடவுச்சொல் சரியல்ல.';
+
+  @override
+  String get settingsDeleteAccountFailed =>
+      'கணக்கை நீக்க முடியவில்லை. இணைப்பைச் சரிபார்த்து மீண்டும் முயற்சிக்கவும்.';
+
+  @override
   String get quizSendFailed =>
       'Couldn\'t send your answer. Check your connection and tap again.';
 

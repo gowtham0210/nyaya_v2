@@ -1427,6 +1427,26 @@ class AppLocalizationsKn extends AppLocalizations {
   String get settingsSignOut => 'Sign out';
 
   @override
+  String get settingsDeleteAccount => 'ಖಾತೆಯನ್ನು ಅಳಿಸಿ';
+
+  @override
+  String get settingsDeleteAccountBody =>
+      'ಇದು ನಿಮ್ಮ ಖಾತೆಯನ್ನು ಮತ್ತು ಅದರಲ್ಲಿರುವ ಎಲ್ಲವನ್ನೂ ಶಾಶ್ವತವಾಗಿ ಅಳಿಸುತ್ತದೆ: ಪ್ರಗತಿ, XP, ನಾಣ್ಯಗಳು, ಉಳಿಸಿದ ಪ್ರಶ್ನೆಗಳು, ಲೀಗ್ ಸ್ಥಾನ. ಇದನ್ನು ಹಿಂತಿರುಗಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ಖಚಿತಪಡಿಸಲು ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ.';
+
+  @override
+  String get settingsDeleteAccountPassword => 'ಪಾಸ್‌ವರ್ಡ್';
+
+  @override
+  String get settingsDeleteAccountAction => 'ನನ್ನ ಖಾತೆಯನ್ನು ಅಳಿಸಿ';
+
+  @override
+  String get settingsDeleteAccountWrong => 'ಆ ಪಾಸ್‌ವರ್ಡ್ ಸರಿಯಿಲ್ಲ.';
+
+  @override
+  String get settingsDeleteAccountFailed =>
+      'ಖಾತೆಯನ್ನು ಅಳಿಸಲಾಗಲಿಲ್ಲ. ಸಂಪರ್ಕ ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
+
+  @override
   String get quizSendFailed =>
       'Couldn\'t send your answer. Check your connection and tap again.';
 

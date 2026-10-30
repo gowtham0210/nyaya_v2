@@ -382,6 +382,10 @@ class FakeAuthApi implements AuthApi {
 
   final TokenStore tokens;
   final registered = <String>[];
+  var deleted = 0;
+
+  /// Makes [deleteAccount] answer as the API does for a wrong password.
+  var wrongPassword = false;
 
   @override
   Future<Account> signIn({required String email, required String password}) => _session(email, 'Learner');
@@ -394,6 +398,13 @@ class FakeAuthApi implements AuthApi {
 
   @override
   Future<void> signOut() => tokens.clear();
+
+  @override
+  Future<void> deleteAccount({required String password}) async {
+    if (wrongPassword) throw const ApiException(403, 'wrong_password', 'The password is not right');
+    deleted++;
+    await tokens.clear();
+  }
 
   Future<Account> _session(String email, String name) async {
     final user = {'id': 'user-1', 'email': email, 'display_name': name, 'roles': ['learner']};

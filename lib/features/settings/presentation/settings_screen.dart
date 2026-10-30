@@ -18,6 +18,7 @@ import '../../journey/application/journey_controller.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../progress/application/progress_sync.dart';
 import '../../profile/domain/user_profile.dart';
+import 'delete_account_dialog.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -113,6 +114,11 @@ class SettingsScreen extends ConsumerWidget {
                 leading: const Icon(Icons.logout_rounded),
                 title: Text(l.settingsSignOut),
                 onTap: () => ref.read(authProvider.notifier).signOut(),
+              ),
+              ListTile(
+                leading: Icon(Icons.person_off_rounded, color: context.nyaya.error),
+                title: Text(l.settingsDeleteAccount, style: TextStyle(color: context.nyaya.error)),
+                onTap: () => _deleteAccount(context, ref),
               ),
             ],
           ]),
@@ -355,6 +361,16 @@ class SettingsScreen extends ConsumerWidget {
         actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text(context.l10n.commonOk))],
       ),
     );
+  }
+
+  Future<void> _deleteAccount(BuildContext context, WidgetRef ref) async {
+    final gone = await showDialog<bool>(context: context, builder: (_) => const DeleteAccountDialog());
+    if (gone != true || !context.mounted) return;
+    // The server holds no data any more; clear what the phone kept and start over.
+    await ref.read(profileProvider.notifier).resetAll();
+    ref.read(journeyProvider.notifier).reset();
+    ref.read(chatControllerProvider.notifier).clear();
+    if (context.mounted) context.go(Routes.onboarding);
   }
 
   Future<void> _reset(BuildContext context, WidgetRef ref) async {

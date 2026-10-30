@@ -1417,6 +1417,26 @@ class AppLocalizationsHi extends AppLocalizations {
   String get settingsSignOut => 'Sign out';
 
   @override
+  String get settingsDeleteAccount => 'खाता हटाएँ';
+
+  @override
+  String get settingsDeleteAccountBody =>
+      'इससे आपका खाता और उस पर मौजूद सब कुछ हमेशा के लिए हट जाएगा: प्रगति, XP, सिक्के, सहेजे गए सवाल और लीग में आपकी जगह। इसे वापस नहीं किया जा सकता। पुष्टि के लिए अपना पासवर्ड दर्ज करें।';
+
+  @override
+  String get settingsDeleteAccountPassword => 'पासवर्ड';
+
+  @override
+  String get settingsDeleteAccountAction => 'मेरा खाता हटाएँ';
+
+  @override
+  String get settingsDeleteAccountWrong => 'यह पासवर्ड सही नहीं है।';
+
+  @override
+  String get settingsDeleteAccountFailed =>
+      'खाता नहीं हटाया जा सका। अपना कनेक्शन जाँचें और फिर कोशिश करें।';
+
+  @override
   String get quizSendFailed =>
       'Couldn\'t send your answer. Check your connection and tap again.';
 

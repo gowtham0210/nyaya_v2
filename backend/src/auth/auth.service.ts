@@ -1,13 +1,19 @@
 import { createHash, randomBytes } from 'node:crypto';
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { and, eq, isNull } from 'drizzle-orm';
+import { and, eq, isNull, or } from 'drizzle-orm';
 import { AuditService } from '../core/audit.service.js';
 import { APP_CONFIG, type AppConfig } from '../core/config.js';
 import { DB, type Db, type Tx } from '../core/db.js';
 import { ApiError, isUniqueViolation } from '../core/errors.js';
 import { newId } from '../core/ids.js';
-import { refreshTokens, users } from '../db/schema.js';
+import {
+  auditLog,
+  contentReports,
+  quizSessions,
+  refreshTokens,
+  users,
+} from '../db/schema.js';
 import type { MeDto, SessionDto } from './auth.dto.js';
 import { DUMMY_HASH, hashPassword, verifyPassword } from './passwords.js';
 
@@ -178,6 +184,59 @@ export class AuthService {
           isNull(refreshTokens.revokedAt),
         ),
       );
+  }
+
+  /**
+   * Deletes a learner's account and the personal data on it, after the
+   * password is confirmed. Wallet, settings, bookmarks, league places, chat
+   * counts and sign-in tokens go with the account row; quiz sessions and the
+   * learner's own audit entries are removed here. Reports a learner sent stay
+   * for the editors with the reason and question, but without the learner's
+   * name or the free-text comment, which may hold personal details. Staff
+   * accounts are managed by admins, not deleted by their owners.
+   */
+  async deleteAccount(userId: string, password: string): Promise<void> {
+    const [user] = await this.db
+      .select()
+      .from(users)
+      .where(eq(users.id, userId))
+      .limit(1);
+    if (!user) throw ApiError.notFound('Account');
+    if (user.roles.some((r) => r !== 'learner'))
+      throw new ApiError(
+        HttpStatus.CONFLICT,
+        'staff_account',
+        'Staff accounts are removed by an admin',
+      );
+    if (!(await verifyPassword(password, user.passwordHash)))
+      throw new ApiError(
+        HttpStatus.FORBIDDEN,
+        'wrong_password',
+        'The password is not right',
+      );
+    await this.db.transaction(async (tx) => {
+      await tx.delete(quizSessions).where(eq(quizSessions.userId, userId));
+      // The row's user_id is set to null when the account goes; the comment is cleared first.
+      await tx
+        .update(contentReports)
+        .set({ comment: null })
+        .where(eq(contentReports.userId, userId));
+      await tx
+        .delete(auditLog)
+        .where(
+          or(
+            eq(auditLog.actorId, userId),
+            and(eq(auditLog.entityType, 'user'), eq(auditLog.entityId, userId)),
+          ),
+        );
+      await tx.delete(users).where(eq(users.id, userId));
+      // Nothing links this id to a person any more; the entry only shows it happened.
+      await this.audit.record(tx, null, {
+        action: 'account.deleted',
+        entityType: 'user',
+        entityId: userId,
+      });
+    });
   }
 
   async me(userId: string): Promise<MeDto> {

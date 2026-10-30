@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:nyaya/app/app.dart';
+import 'package:nyaya/app/router.dart';
 import 'package:nyaya/core/api/token_store.dart';
 import 'package:nyaya/core/storage/local_store.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
@@ -27,6 +28,7 @@ void main() {
   setUpAll(() => AppTheme.useGoogleFonts = false);
 
   late FakeQuizApi api;
+  late FakeAuthApi authApi;
 
   Future<ProviderContainer> pumpApp(
     WidgetTester tester, {
@@ -49,7 +51,7 @@ void main() {
       progressApiProvider.overrideWithValue(api),
       leagueApiProvider.overrideWithValue(api),
       reviewApiProvider.overrideWithValue(api),
-      authApiProvider.overrideWithValue(FakeAuthApi(tokens)),
+      authApiProvider.overrideWithValue(authApi = FakeAuthApi(tokens)),
     ]);
     addTearDown(container.dispose);
     await tester.pumpWidget(UncontrolledProviderScope(container: container, child: const NyayaApp()));
@@ -173,6 +175,35 @@ void main() {
     expect(find.text('Because ${q.id}'), findsOneWidget, reason: 'explanation comes from the server');
     expect(find.text('Reference: Article ${q.difficulty}'), findsOneWidget);
     expect(find.text('Read the official text'), findsOneWidget, reason: 'the source has an official link');
+  });
+
+  testWidgets('a learner can delete their account with their password and starts over', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    c.read(routerProvider).go(Routes.settings);
+    await settle(tester);
+    await tester.scrollUntilVisible(find.text('Delete account'), 300, scrollable: find.byType(Scrollable).first);
+    await tester.tap(find.text('Delete account'));
+    await settle(tester);
+
+    final dialog = find.byType(AlertDialog);
+    expect(find.descendant(of: dialog, matching: find.textContaining('cannot be undone')), findsOneWidget);
+
+    // A wrong password keeps the account and says so.
+    authApi.wrongPassword = true;
+    await tester.enterText(find.descendant(of: dialog, matching: find.byType(TextField)), 'nope');
+    await tester.tap(find.text('Delete my account'));
+    await settle(tester);
+    expect(find.text('That password is not right.'), findsOneWidget);
+    expect(authApi.deleted, 0);
+
+    authApi.wrongPassword = false;
+    await tester.tap(find.text('Delete my account'));
+    await settle(tester);
+    expect(authApi.deleted, 1);
+    expect(find.text('Choose your language'), findsOneWidget, reason: 'back to the start');
+    expect(c.read(profileProvider).onboarded, isFalse);
   });
 
   testWidgets('a signed-out learner creates an account before the first quiz', (tester) async {

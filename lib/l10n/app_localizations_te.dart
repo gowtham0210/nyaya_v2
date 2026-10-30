@@ -1428,6 +1428,26 @@ class AppLocalizationsTe extends AppLocalizations {
   String get settingsSignOut => 'Sign out';
 
   @override
+  String get settingsDeleteAccount => 'ఖాతాను తొలగించు';
+
+  @override
+  String get settingsDeleteAccountBody =>
+      'ఇది మీ ఖాతాను మరియు దానిలోని ప్రతిదాన్ని శాశ్వతంగా తొలగిస్తుంది: పురోగతి, XP, నాణేలు, సేవ్ చేసిన ప్రశ్నలు, లీగ్ స్థానం. దీన్ని తిరిగి తీసుకురాలేరు. నిర్ధారించడానికి మీ పాస్‌వర్డ్ నమోదు చేయండి.';
+
+  @override
+  String get settingsDeleteAccountPassword => 'పాస్‌వర్డ్';
+
+  @override
+  String get settingsDeleteAccountAction => 'నా ఖాతాను తొలగించు';
+
+  @override
+  String get settingsDeleteAccountWrong => 'ఆ పాస్‌వర్డ్ సరైనది కాదు.';
+
+  @override
+  String get settingsDeleteAccountFailed =>
+      'ఖాతాను తొలగించలేకపోయాం. కనెక్షన్ చూసి మళ్ళీ ప్రయత్నించండి.';
+
+  @override
   String get quizSendFailed =>
       'Couldn\'t send your answer. Check your connection and tap again.';
 

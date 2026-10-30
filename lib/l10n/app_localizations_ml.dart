@@ -1429,6 +1429,26 @@ class AppLocalizationsMl extends AppLocalizations {
   String get settingsSignOut => 'Sign out';
 
   @override
+  String get settingsDeleteAccount => 'അക്കൗണ്ട് ഇല്ലാതാക്കുക';
+
+  @override
+  String get settingsDeleteAccountBody =>
+      'ഇത് നിങ്ങളുടെ അക്കൗണ്ടും അതിലുള്ള എല്ലാം സ്ഥിരമായി ഇല്ലാതാക്കും: പുരോഗതി, XP, നാണയങ്ങൾ, സേവ് ചെയ്ത ചോദ്യങ്ങൾ, ലീഗ് സ്ഥാനം. ഇത് തിരികെ കൊണ്ടുവരാൻ കഴിയില്ല. സ്ഥിരീകരിക്കാൻ നിങ്ങളുടെ പാസ്‌വേഡ് നൽകുക.';
+
+  @override
+  String get settingsDeleteAccountPassword => 'പാസ്‌വേഡ്';
+
+  @override
+  String get settingsDeleteAccountAction => 'എന്റെ അക്കൗണ്ട് ഇല്ലാതാക്കുക';
+
+  @override
+  String get settingsDeleteAccountWrong => 'ആ പാസ്‌വേഡ് ശരിയല്ല.';
+
+  @override
+  String get settingsDeleteAccountFailed =>
+      'അക്കൗണ്ട് ഇല്ലാതാക്കാനായില്ല. കണക്ഷൻ പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.';
+
+  @override
   String get quizSendFailed =>
       'Couldn\'t send your answer. Check your connection and tap again.';
 

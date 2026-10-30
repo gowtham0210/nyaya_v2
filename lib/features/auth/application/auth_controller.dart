@@ -30,4 +30,9 @@ class AuthController extends Notifier<Account?> {
     await ref.read(authApiProvider).signOut();
     state = null;
   }
+
+  Future<void> deleteAccount({required String password}) async {
+    await ref.read(authApiProvider).deleteAccount(password: password);
+    state = null;
+  }
 }

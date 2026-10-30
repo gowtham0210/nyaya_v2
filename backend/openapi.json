@@ -145,6 +145,36 @@
         ]
       }
     },
+    "/v1/me/delete-account": {
+      "post": {
+        "operationId": "MeController_deleteAccount",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteAccountDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete the learner's account and personal data, confirmed with the password (rate-limited like sign-in)",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
     "/v1/taxonomy": {
       "get": {
         "operationId": "TaxonomyController_get",
@@ -2348,6 +2378,18 @@
         },
         "required": [
           "refresh_token"
+        ]
+      },
+      "DeleteAccountDto": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string",
+            "format": "password"
+          }
+        },
+        "required": [
+          "password"
         ]
       },
       "TopicDto": {

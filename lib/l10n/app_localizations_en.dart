@@ -1419,6 +1419,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsSignOut => 'Sign out';
 
   @override
+  String get settingsDeleteAccount => 'Delete account';
+
+  @override
+  String get settingsDeleteAccountBody =>
+      'This permanently deletes your account and everything on it: progress, XP, coins, saved questions and your league place. It cannot be undone. Enter your password to confirm.';
+
+  @override
+  String get settingsDeleteAccountPassword => 'Password';
+
+  @override
+  String get settingsDeleteAccountAction => 'Delete my account';
+
+  @override
+  String get settingsDeleteAccountWrong => 'That password is not right.';
+
+  @override
+  String get settingsDeleteAccountFailed =>
+      'Couldn\'t delete the account. Check your connection and try again.';
+
+  @override
   String get quizSendFailed =>
       'Couldn\'t send your answer. Check your connection and tap again.';
 

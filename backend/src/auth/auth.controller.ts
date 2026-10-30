@@ -18,6 +18,7 @@ import {
 import { ThrottlerGuard } from '@nestjs/throttler';
 import type { Request } from 'express';
 import {
+  DeleteAccountDto,
   MeDto,
   RefreshDto,
   RegisterDto,
@@ -83,5 +84,20 @@ export class MeController {
   @ApiOkResponse({ type: MeDto })
   me(@CurrentUser() user: AuthUser) {
     return this.auth.me(user.id);
+  }
+
+  @Post('delete-account')
+  @HttpCode(204)
+  @UseGuards(ThrottlerGuard)
+  @ApiOperation({
+    summary:
+      "Delete the learner's account and personal data, confirmed with the password (rate-limited like sign-in)",
+  })
+  @ApiNoContentResponse()
+  async deleteAccount(
+    @CurrentUser() user: AuthUser,
+    @Body() body: DeleteAccountDto,
+  ) {
+    await this.auth.deleteAccount(user.id, body.password);
   }
 }

@@ -2560,6 +2560,42 @@ abstract class AppLocalizations {
   /// **'Sign out'**
   String get settingsSignOut;
 
+  /// No description provided for @settingsDeleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get settingsDeleteAccount;
+
+  /// No description provided for @settingsDeleteAccountBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This permanently deletes your account and everything on it: progress, XP, coins, saved questions and your league place. It cannot be undone. Enter your password to confirm.'**
+  String get settingsDeleteAccountBody;
+
+  /// No description provided for @settingsDeleteAccountPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get settingsDeleteAccountPassword;
+
+  /// No description provided for @settingsDeleteAccountAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete my account'**
+  String get settingsDeleteAccountAction;
+
+  /// No description provided for @settingsDeleteAccountWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'That password is not right.'**
+  String get settingsDeleteAccountWrong;
+
+  /// No description provided for @settingsDeleteAccountFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t delete the account. Check your connection and try again.'**
+  String get settingsDeleteAccountFailed;
+
   /// No description provided for @quizSendFailed.
   ///
   /// In en, this message translates to:

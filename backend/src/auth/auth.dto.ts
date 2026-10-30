@@ -43,6 +43,15 @@ export class RefreshDto {
   refresh_token: string;
 }
 
+/** Deleting an account is confirmed with its password. */
+export class DeleteAccountDto {
+  @ApiProperty({ format: 'password' })
+  @IsString()
+  @MinLength(1)
+  @MaxLength(200)
+  password: string;
+}
+
 export class MeDto {
   @ApiProperty({ format: 'uuid' }) id: string;
   @ApiProperty() email: string;
