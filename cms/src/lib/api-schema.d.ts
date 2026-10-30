@@ -265,6 +265,74 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/staff": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["StaffController_list"];
+        put?: never;
+        /** Add a staff account and a one-time link for them to choose a password */
+        post: operations["StaffController_invite"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/staff/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Change name or roles, or disable (signs out at once); never your own admin role, never the last admin */
+        patch: operations["StaffController_update"];
+        trace?: never;
+    };
+    "/v1/admin/staff/{id}/setup-link": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** A new one-time setup link; the old password stops working and they are signed out */
+        post: operations["StaffController_resetLink"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/auth/setup-password": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Choose a password with a one-time setup link */
+        post: operations["StaffSetupController_setPassword"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/editor/questions": {
         parameters: {
             query?: never;
@@ -1041,6 +1109,52 @@ export interface components {
         ImportJobListDto: {
             /** @description Newest first, at most 50 */
             items: components["schemas"]["ImportJobSummaryDto"][];
+        };
+        StaffSetupDto: {
+            /** Format: date-time */
+            expires_at: string;
+            expired: boolean;
+        };
+        StaffMemberDto: {
+            /** Format: uuid */
+            id: string;
+            email: string;
+            display_name: string;
+            roles: ("admin" | "content_editor" | "legal_reviewer" | "publisher" | "analyst")[];
+            is_active: boolean;
+            /** @description Set while a setup link is waiting to be used */
+            setup: components["schemas"]["StaffSetupDto"] | null;
+            /** Format: date-time */
+            created_at: string;
+        };
+        StaffListDto: {
+            items: components["schemas"]["StaffMemberDto"][];
+        };
+        InviteStaffDto: {
+            roles: ("admin" | "content_editor" | "legal_reviewer" | "publisher" | "analyst")[];
+            /** @example priya@example.com */
+            email: string;
+            /** @example Priya Raman */
+            display_name: string;
+        };
+        SetupLinkDto: {
+            staff: components["schemas"]["StaffMemberDto"];
+            /** @description Shown once: put it in the link to the portal setup page and send it to the person */
+            setup_token: string;
+            /** Format: date-time */
+            expires_at: string;
+        };
+        UpdateStaffDto: {
+            display_name?: string;
+            roles?: ("admin" | "content_editor" | "legal_reviewer" | "publisher" | "analyst")[];
+            /** @description false disables the account and signs it out everywhere */
+            is_active?: boolean;
+        };
+        SetupPasswordDto: {
+            /** @description The token from the setup link */
+            token: string;
+            /** Format: password */
+            password: string;
         };
         ListLatestDto: {
             /** Format: uuid */
@@ -2086,6 +2200,115 @@ export interface operations {
                     "text/csv": string;
                     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": string;
                 };
+            };
+        };
+    };
+    StaffController_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StaffListDto"];
+                };
+            };
+        };
+    };
+    StaffController_invite: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["InviteStaffDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SetupLinkDto"];
+                };
+            };
+        };
+    };
+    StaffController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateStaffDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StaffMemberDto"];
+                };
+            };
+        };
+    };
+    StaffController_resetLink: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SetupLinkDto"];
+                };
+            };
+        };
+    };
+    StaffSetupController_setPassword: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetupPasswordDto"];
+            };
+        };
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

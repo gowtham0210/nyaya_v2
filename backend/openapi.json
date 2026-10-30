@@ -623,6 +623,174 @@
         ]
       }
     },
+    "/v1/admin/staff": {
+      "get": {
+        "operationId": "StaffController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaffListDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      },
+      "post": {
+        "operationId": "StaffController_invite",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InviteStaffDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetupLinkDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Add a staff account and a one-time link for them to choose a password",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/staff/{id}": {
+      "patch": {
+        "operationId": "StaffController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStaffDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaffMemberDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Change name or roles, or disable (signs out at once); never your own admin role, never the last admin",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/staff/{id}/setup-link": {
+      "post": {
+        "operationId": "StaffController_resetLink",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetupLinkDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "A new one-time setup link; the old password stops working and they are signed out",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/auth/setup-password": {
+      "post": {
+        "operationId": "StaffSetupController_setPassword",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupPasswordDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "summary": "Choose a password with a one-time setup link",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
     "/v1/editor/questions": {
       "get": {
         "operationId": "QuestionsController_list",
@@ -2813,6 +2981,187 @@
         },
         "required": [
           "items"
+        ]
+      },
+      "StaffSetupDto": {
+        "type": "object",
+        "properties": {
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expired": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "expires_at",
+          "expired"
+        ]
+      },
+      "StaffMemberDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "email": {
+            "type": "string"
+          },
+          "display_name": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "admin",
+                "content_editor",
+                "legal_reviewer",
+                "publisher",
+                "analyst"
+              ]
+            }
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "setup": {
+            "nullable": true,
+            "description": "Set while a setup link is waiting to be used",
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StaffSetupDto"
+              }
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "display_name",
+          "roles",
+          "is_active",
+          "setup",
+          "created_at"
+        ]
+      },
+      "StaffListDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StaffMemberDto"
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "InviteStaffDto": {
+        "type": "object",
+        "properties": {
+          "roles": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "enum": [
+                "admin",
+                "content_editor",
+                "legal_reviewer",
+                "publisher",
+                "analyst"
+              ]
+            }
+          },
+          "email": {
+            "type": "string",
+            "example": "priya@example.com"
+          },
+          "display_name": {
+            "type": "string",
+            "example": "Priya Raman"
+          }
+        },
+        "required": [
+          "roles",
+          "email",
+          "display_name"
+        ]
+      },
+      "SetupLinkDto": {
+        "type": "object",
+        "properties": {
+          "staff": {
+            "$ref": "#/components/schemas/StaffMemberDto"
+          },
+          "setup_token": {
+            "type": "string",
+            "description": "Shown once: put it in the link to the portal setup page and send it to the person"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "staff",
+          "setup_token",
+          "expires_at"
+        ]
+      },
+      "UpdateStaffDto": {
+        "type": "object",
+        "properties": {
+          "display_name": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "enum": [
+                "admin",
+                "content_editor",
+                "legal_reviewer",
+                "publisher",
+                "analyst"
+              ]
+            }
+          },
+          "is_active": {
+            "type": "boolean",
+            "description": "false disables the account and signs it out everywhere"
+          }
+        }
+      },
+      "SetupPasswordDto": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "The token from the setup link"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "minLength": 12
+          }
+        },
+        "required": [
+          "token",
+          "password"
         ]
       },
       "ListLatestDto": {

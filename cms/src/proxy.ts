@@ -38,6 +38,8 @@ function refreshOnce(token: string): Promise<SessionTokens | null> {
 
 export async function proxy(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
+  // Choosing a password from a setup link needs no session.
+  if (pathname === '/setup') return NextResponse.next();
   const onLogin = pathname === '/login';
   const access = req.cookies.get(ACCESS_COOKIE)?.value;
   const refresh = req.cookies.get(REFRESH_COOKIE)?.value;

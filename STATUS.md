@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-29 (question sources, Claude Opus 5.5)
+> Last updated: 2026-10-30 (staff accounts, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -403,12 +403,32 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       OpenQodex review (agent mode) found the topics server actions put an unchecked `kind` into the API path (fixed:
       only subjects / topics / acts are accepted). Pushed `fcf6ec9`, CI green, staging deployed (no migration).
 
+- [x] 2026-10-30: **Staff accounts (P2 step 4, M10).** Portal → **Staff** (link in the top-right menu, admins only):
+      list (Active / Waiting to set a password / Link expired / Disabled), add a person (name, email, roles) → a
+      **one-time setup link** shown once with a Copy button (valid 7 days; the admin sends it themselves — no email
+      service), edit name/roles, Disable/Enable, New setup link (old password stops working, signed out everywhere).
+      Public page `/setup#token=…` (the token is after `#`, so it never reaches a server log; the proxy lets `/setup`
+      through) → choose a password (≥ 12 characters for staff) → `/login?password_set=1`. API
+      (`backend/src/staff/`): `GET/POST /v1/admin/staff`, `PATCH /v1/admin/staff/:id`, `POST
+      /v1/admin/staff/:id/setup-link` (all admin-only), public `POST /v1/auth/setup-password` (rate-limited like
+      sign-in). Rules: you can't remove your own admin role or disable yourself; there's always an active admin
+      (row locks cover two admins acting at once); emails that already have an account → 409 `email_taken`; learner
+      accounts can't be changed here; disabling revokes refresh tokens, and roles/`is_active` are read on every
+      request, so changes apply at once. Invited people get a random unusable password until they use the link.
+      **3NF:** `staff_setup_tokens` (user, SHA-256 of the token, who made it, when, expiry, used_at); a newer link
+      deletes unused older ones; "waiting" is derived from an unused token. Migration 0010. Audit: staff.invited,
+      staff.updated (before/after), staff.setup_link_created, staff.password_set. Tests: backend 65 unit + 93 API.
+      Checked in the browser as admin: invite, setup page (mismatch caught), new person signs in via the API with
+      the right role, disable/enable, own admin role refused. Local dev DB has a test staff account
+      test.reviewer@nyaya.local (legal reviewer). Staging still uses the shared dev staff accounts and SEED_PASSWORD;
+      `deploy.sh --seed` resets their passwords — now real staff can be invited instead.
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
    P3 is done (server progress Parts 1–3, M08, M12 — see 2026-10-29). Next-phase plan agreed 2026-10-29:
    finish P2 — (1) sources on the questions [done in code, staging review pending], (2) CSV/Excel import + export
-   [done], (3) taxonomy pages [done], (4) staff account pages, (5) a real reviewer publishes a sample pack —
+   [done], (3) taxonomy pages [done], (4) staff account pages [done], (5) a real reviewer publishes a sample pack —
    then P4 beta hardening (crash reporting, analytics M11, accessibility, translations of English-only screens,
    security/privacy incl. in-app account deletion and rotating the Azure key, store prep with a separate
    production environment), then P5 controlled launch. Open decisions for the user: who the legal reviewer is,

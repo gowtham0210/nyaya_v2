@@ -10,11 +10,18 @@ export function LoginForm() {
   const params = useSearchParams();
   const next = params.get('next') ?? '';
   const ended = params.has(SESSION_ENDED_PARAM);
+  const passwordSet = params.has('password_set');
   const [state, action, pending] = useActionState<SignInState, FormData>(signIn, {});
   return (
     <form action={action} className="flex flex-col gap-4">
       <input type="hidden" name="next" value={next} />
-      {state.error ? <Alert>{state.error}</Alert> : ended && <Alert>Your session ended. Sign in again.</Alert>}
+      {state.error ? (
+        <Alert>{state.error}</Alert>
+      ) : passwordSet ? (
+        <Alert tone="success">Password saved. Sign in with it.</Alert>
+      ) : (
+        ended && <Alert>Your session ended. Sign in again.</Alert>
+      )}
       <Field label="Email" htmlFor="email">
         <input
           id="email"

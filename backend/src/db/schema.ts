@@ -63,6 +63,34 @@ export const refreshTokens = pgTable(
   (t) => [index('refresh_tokens_user_idx').on(t.userId)],
 );
 
+/** Every role except learner: the accounts admins manage on the Staff page. */
+export const STAFF_ROLES = ROLES.filter(
+  (r): r is Exclude<Role, 'learner'> => r !== 'learner',
+);
+
+/**
+ * One-time links for a staff member to choose their password: made when an
+ * admin invites them or resets their access. Only a SHA-256 hash is stored;
+ * a link works once, until it expires, and a newer link replaces it.
+ */
+export const staffSetupTokens = pgTable(
+  'staff_setup_tokens',
+  {
+    id: uuid('id').primaryKey(),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    tokenHash: text('token_hash').notNull().unique(),
+    createdBy: uuid('created_by')
+      .notNull()
+      .references(() => users.id),
+    createdAt: createdAt(),
+    expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+    usedAt: timestamp('used_at', { withTimezone: true }),
+  },
+  (t) => [index('staff_setup_tokens_user_idx').on(t.userId)],
+);
+
 // ---------------------------------------------------------------- taxonomy
 
 export const subjects = pgTable('subjects', {

@@ -26,6 +26,9 @@ export const hasRole = (me: Me, ...roles: readonly Role[]) => roles.some((r) => 
 /** Staff who handle learner reports (the API checks this too). */
 export const TRIAGE_ROLES = ['content_editor', 'legal_reviewer', 'publisher', 'admin'] as const satisfies readonly Role[];
 
+/** Roles an admin can give on the Staff page (everything but learner). */
+export const STAFF_ROLES = ['admin', 'content_editor', 'legal_reviewer', 'publisher', 'analyst'] as const satisfies readonly Role[];
+
 /** Staff who may import question files (the API checks this too). */
 export const IMPORT_ROLES = ['content_editor', 'admin'] as const satisfies readonly Role[];
 
