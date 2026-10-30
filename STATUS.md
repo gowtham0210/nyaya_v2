@@ -432,7 +432,7 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       account and gives the DSNs) + usage analytics as **our own events** in our database with a portal dashboard
       (no learner data to third parties); **premium hidden** in the beta; **production hosting: decide later**;
       **beta audience: citizens**. P4 order (hosting-free first): hide premium [done] → in-app account deletion [done] →
-      Sentry → own analytics (done, calculated from existing records) + dashboard → minimum app version [done] → translations of English-only screens [done] →
+      Sentry [done: app, API, portal] → own analytics (done, calculated from existing records) + dashboard → minimum app version [done] → translations of English-only screens [done] →
       accessibility + dark mode pass → shared sign-in rate limit → rotate the Azure key (user) → store prep.
 - [x] 2026-10-30: **Premium hidden for the beta.** App: build switch `Features.premium`
       (`lib/core/config/features.dart`, `--dart-define=NYAYA_PREMIUM=true` to show it) hides the post-onboarding
@@ -546,6 +546,32 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       spellings of Bharatiya Sakshya Adhiniyam in each script). Still English: the sample legal-update articles
       (content, due to come from the portal), the questions themselves (the bank is English only), AI answers, and
       the debug-only Sentry test row. Flutter tests: 60.
+
+- [x] 2026-10-30: **Sentry for the API and the portal (P4).** The Sentry plugin was installed for Claude Code and signed
+      in; the two projects were created through it in org `deepwebstudio`: **`nyaya-api`** (Node/NestJS) and
+      **`nyaya-portal`** (Next.js). Both keys (DSNs) are **not in git**: they go in `/opt/nyaya-v2/.env` on the server
+      as `API_SENTRY_DSN` and `PORTAL_SENTRY_DSN` (docker-compose passes them on; empty = nothing reported). Same
+      privacy rules as the app: **errors only**: no user, cookies, headers, request bodies, query strings, local
+      variables, breadcrumbs, traces or replay (SDK 11's `dataCollection` switches are all off). **API**
+      (`backend/src/core/monitoring.ts`, `@sentry/node` 11.7.0 pinned): started in `main.ts` when `SENTRY_DSN` is set;
+      the error filter reports every **unexpected** error (a real fault, not a 4xx and not a 5xx the code throws on purpose
+      such as "AI chat not set up" or "AI service did not answer") with the request id as a tag; crashes and unhandled rejections are
+      caught too; database error text after `params:` (which holds the query values, e.g. an email) is cut out. **Portal**
+      (`cms/src/instrumentation.ts`, `instrumentation-client.ts`, `global-error.tsx`, `lib/monitoring.ts`,
+      `@sentry/nextjs` 11.7.0 pinned): server errors through Next's `onRequestError`, browser errors through
+      `instrumentation-client`, and a "Something went wrong / Try again" page that reports; the page address is kept
+      without its query string and without the part after `#` (the staff setup link's one-time token). The browser key
+      is built into the page, so the Dockerfile takes `NEXT_PUBLIC_SENTRY_DSN` / `NEXT_PUBLIC_SENTRY_ENV` as build args
+      (compose sets the environment name `staging`). Checked for real: a test error reached `nyaya-api`
+      (NYAYA-API-1) and, from a production build with throwaway failing pages (removed), a server error and a browser
+      error reached `nyaya-portal` (NYAYA-PORTAL-1 and -2); the email in the query string and the `#token` were gone
+      from the stored address. Tests: backend 71 unit (new `monitoring.spec.ts` runs the real reporting path against a
+      fake transport: the email inside a database error is removed, no user/request/breadcrumbs, 4xx not sent,
+      a deliberate 503 not sent, a plain error sent) + 104 API. **User still to do in Sentry:** switch on **"Prevent Storing of IP Addresses"**
+      (Settings → Security & Privacy; Sentry adds a city-level "user.geo" from the sender's IP otherwise) for all
+      three projects, and resolve/delete the test issues NYAYA-API-1, NYAYA-PORTAL-1/2 (and the Flutter test event).
+      Not done: source maps / debug symbols upload (needs a Sentry auth token; with store prep), alert rules (e.g. email
+      on a new issue), staging deploy with the keys (see below once done).
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

@@ -49,16 +49,24 @@ services:
       # Apps older than this show an update screen. Leave empty to block none.
       MIN_APP_VERSION: ${MIN_APP_VERSION:-}
       APP_UPDATE_URL: ${APP_UPDATE_URL:-}
+      # Crash reports (errors only). Empty: nothing is reported.
+      SENTRY_DSN: ${API_SENTRY_DSN:-}
     networks: [default, edge]
 
   cms:
-    build: ./cms
+    build:
+      context: ./cms
+      args:
+        NEXT_PUBLIC_SENTRY_DSN: ${PORTAL_SENTRY_DSN:-}
+        NEXT_PUBLIC_SENTRY_ENV: staging
     image: nyaya-v2-cms
     container_name: nyaya-v2-cms
     restart: unless-stopped
     depends_on: [api]
     environment:
       API_URL: http://api:3000
+      # Crash reports (errors only). Empty: nothing is reported.
+      SENTRY_DSN: ${PORTAL_SENTRY_DSN:-}
     networks: [default, edge]
 
 volumes:

@@ -66,4 +66,12 @@ describe('loadConfig', () => {
     expect(() => loadConfig({ APP_UPDATE_URL: 'http://x.test' })).toThrow();
     expect(() => loadConfig({ APP_UPDATE_URL: 'not a link' })).toThrow();
   });
+
+  it('reports crashes only with an https SENTRY_DSN', () => {
+    expect(loadConfig({}).sentryDsn).toBeUndefined();
+    expect(loadConfig({ SENTRY_DSN: '' }).sentryDsn).toBeUndefined();
+    const dsn = 'https://key@o1.ingest.us.sentry.io/42';
+    expect(loadConfig({ SENTRY_DSN: dsn }).sentryDsn).toBe(dsn);
+    expect(() => loadConfig({ SENTRY_DSN: 'not a key' })).toThrow(/SENTRY_DSN/);
+  });
 });

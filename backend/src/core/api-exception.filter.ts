@@ -7,6 +7,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import type { Request, Response } from 'express';
+import { reportError } from './monitoring.js';
 
 const CODES: Record<number, string> = {
   400: 'bad_request',
@@ -52,6 +53,9 @@ export class ApiExceptionFilter implements ExceptionFilter {
         `${req.method} ${req.path} failed [request_id=${req.id}]`,
         exception instanceof Error ? exception.stack : String(exception),
       );
+      // Only real faults go to Sentry. A 5xx the code throws on purpose (AI chat not set up,
+      // the AI service not answering) is a handled answer, and the log above already has it.
+      if (!(exception instanceof HttpException)) reportError(exception, req.id);
     }
 
     res

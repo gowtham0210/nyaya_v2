@@ -33,6 +33,8 @@ export interface AppConfig {
   minAppVersion?: string;
   /** Where the update screen sends people: the store page. Must be https. */
   appUpdateUrl?: string;
+  /** Sentry project key for crash reports (errors only). Unset: nothing is reported. */
+  sentryDsn?: string;
 }
 
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
@@ -77,6 +79,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
     demoPremium: env.DEMO_PREMIUM === 'true',
     minAppVersion: appVersion(env.MIN_APP_VERSION),
     appUpdateUrl: httpsUrl(env.APP_UPDATE_URL, 'APP_UPDATE_URL'),
+    sentryDsn: httpsUrl(env.SENTRY_DSN, 'SENTRY_DSN'),
   };
 }
 
