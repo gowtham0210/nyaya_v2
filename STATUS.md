@@ -465,6 +465,9 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       local API with a throwaway account: dialog, wrong password, deletion → back to "Choose your language", and a
       sign-in with the deleted account → 401. No migration. iOS Simulator gotcha: its "Strong Password" sheet
       swallows typing in sign-up password fields — dismiss it (X), then select-all, delete, type.
+      Review fix: report comments are cleared on deletion. Also: the economy test that starts a second API had the
+      default 5 s test limit and failed once under load — now 30 s. Pushed `98fb79d`, CI green, staging deployed
+      (no migration). The iPhone needs a new build to get the Delete account row.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
