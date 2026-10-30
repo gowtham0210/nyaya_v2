@@ -509,6 +509,10 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       ranking and the exam rule), Flutter 46. Checked in the browser against a throwaway demo database (48 fake
       learners, 60 days; built outside the project) — all sections, the 7-day view, phone-width layout. Not done:
       funnels by screen, per-topic breakdown, export, error rates (Sentry covers errors), an alert on a sudden drop.
+      Pushed `ec11ef2`, CI green; staging deployed (backup `nyaya-2026-10-30-0603.sql.gz` first, migration 0011
+      applied; `app_opens` empty until phones on a new build open the app). Not yet looked at on staging with a
+      real sign-in (the staging admin password is only on the server). The iPhone needs a new build to send the
+      daily app-open.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
