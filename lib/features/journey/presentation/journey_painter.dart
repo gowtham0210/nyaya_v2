@@ -15,6 +15,7 @@ class RoadPainter extends CustomPainter {
     required this.edgeColor,
     required this.doneColor,
     required this.dashColor,
+    this.shadowColor,
   });
 
   final JourneyLayout layout;
@@ -25,6 +26,9 @@ class RoadPainter extends CustomPainter {
   final Color edgeColor;
   final Color doneColor;
   final Color dashColor;
+
+  /// A soft shadow under the whole road, so it sits on the scene (dark mode).
+  final Color? shadowColor;
 
   Path _segment(int i) {
     final (a, b, c, d) = layout.segment(i);
@@ -53,6 +57,17 @@ class RoadPainter extends CustomPainter {
       ..color = dashColor;
 
     final segments = [for (var i = 0; i < centers.length - 1; i++) _segment(i)];
+    if (shadowColor != null) {
+      final shadow = Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeCap = StrokeCap.round
+        ..strokeWidth = 64
+        ..color = shadowColor!
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10);
+      for (final s in segments) {
+        canvas.drawPath(s, shadow);
+      }
+    }
     for (final s in segments) {
       canvas.drawPath(s, edge);
     }
@@ -79,5 +94,6 @@ class RoadPainter extends CustomPainter {
       old.completedUpTo != completedUpTo ||
       old.roadColor != roadColor ||
       old.doneColor != doneColor ||
+      old.shadowColor != shadowColor ||
       old.layout != layout;
 }

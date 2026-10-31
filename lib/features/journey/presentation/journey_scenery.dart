@@ -30,7 +30,7 @@ class _Prop {
   final double widthFactor;
   final bool atBottom;
 
-  /// Light-theme opacity; watermark-like props (the scales) sit further back.
+  /// Opacity in both themes; watermark-like props (the scales) sit further back.
   final double opacity;
 }
 
@@ -154,6 +154,7 @@ abstract final class _Gaps {
   static const bannerOverlap = 70.0;
   static const landmarkInset = 6.0;
   static const noteHeight = 84.0;
+  static const quoteHeight = 200.0;
 }
 
 class _Painting extends StatelessWidget {
@@ -168,17 +169,23 @@ class _Painting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final image = Image.asset(
-      asset,
+    final icon = AspectRatio(
+      aspectRatio: 1,
+      child: Center(child: Icon(fallback, size: 72, color: context.colors.onSurface.withValues(alpha: 0.06))),
+    );
+    Widget painting(String file, Widget orElse) => Image.asset(
+      file,
       fit: BoxFit.fitWidth,
       excludeFromSemantics: true,
-      errorBuilder: (context, error, stack) => AspectRatio(
-        aspectRatio: 1,
-        child: Center(child: Icon(fallback, size: 72, color: context.colors.onSurface.withValues(alpha: 0.06))),
-      ),
+      errorBuilder: (context, error, stack) => orElse,
     );
+    // Dark mode uses the painting made for the dark page (docs/JOURNEY_DARK.md),
+    // at full strength; until it is added, the light one stands in.
+    final image = context.isDark
+        ? painting(darkAsset(asset), Opacity(opacity: opacity, child: painting(asset, icon)))
+        : Opacity(opacity: opacity, child: painting(asset, icon));
     // Soften every edge so paintings melt into the background.
-    final masked = ShaderMask(
+    return ShaderMask(
       blendMode: BlendMode.dstIn,
       shaderCallback: (bounds) => LinearGradient(
         begin: fadeRight ? Alignment.centerLeft : Alignment.centerRight,
@@ -197,14 +204,74 @@ class _Painting extends StatelessWidget {
         child: image,
       ),
     );
-    return Opacity(opacity: context.isDark ? opacity / 4 : opacity, child: masked);
   }
 }
 
+/// `journey_x.webp` → `journey_x_dark.webp`.
+String darkAsset(String asset) => asset.replaceFirst(RegExp(r'\.webp$'), '_dark.webp');
+
+/// Dark mode only: a soft warm glow behind the road and dark foliage down both
+/// edges of the map. Everything here sits behind the paintings and the road.
+List<Widget> darkBackdrop(BuildContext context, JourneyLayout layout) {
+  if (!context.isDark) return const [];
+  final strip = layout.width * 0.34;
+  // The strips fade out on their inner side in the files themselves: a mask
+  // here would cover the whole map's height, too big a layer for some phones.
+  Widget foliage(String asset, Alignment align) => IgnorePointer(
+    child: Image.asset(
+      asset,
+      width: strip,
+      fit: BoxFit.fitWidth,
+      alignment: align,
+      repeat: ImageRepeat.repeatY,
+      excludeFromSemantics: true,
+      // Until the strips are added the edges stay plain.
+      errorBuilder: (context, error, stack) => const SizedBox.shrink(),
+    ),
+  );
+  return [
+    const Positioned.fill(
+      child: IgnorePointer(
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0x00000000), AppPalette.darkGlow, Color(0x00000000)],
+              stops: [0.1, 0.5, 0.9],
+            ),
+          ),
+        ),
+      ),
+    ),
+    Positioned(left: 0, top: 0, bottom: 0, width: strip, child: foliage('assets/images/journey_dark_foliage_left.webp', Alignment.topLeft)),
+    Positioned(right: 0, top: 0, bottom: 0, width: strip, child: foliage('assets/images/journey_dark_foliage_right.webp', Alignment.topRight)),
+  ];
+}
+
 /// A handwritten "Keep going!" pointing at the current stop, placed only
-/// where it fits without touching the road.
+/// where it fits without touching the road. In dark mode a quote beside the
+/// road ahead takes its place when there is room for it.
 List<Widget> marginNotes(BuildContext context, JourneyLayout layout, JourneyNode? current) {
   final out = <Widget>[];
+
+  if (current != null && context.isDark) {
+    final at = layout.centers[current.globalIndex];
+    // Beside the stops just ahead, first choice highest.
+    for (final top in [at.dy - 380, at.dy - 320, at.dy - 260]) {
+      final bottom = top + _Gaps.quoteHeight;
+      final rightRoom = layout.freeWidth(left: false, top: top, bottom: bottom, margin: 16);
+      final leftRoom = layout.freeWidth(left: true, top: top, bottom: bottom, margin: 16);
+      final room = max(rightRoom, leftRoom);
+      if (room < 130) continue;
+      final w = min(room, 170.0);
+      final left = rightRoom >= leftRoom ? layout.width - 16 - w : 16.0;
+      return [
+        Positioned.fromRect(
+          rect: Rect.fromLTWH(left, top, w, _Gaps.quoteHeight),
+          child: const IgnorePointer(child: _Quote()),
+        ),
+      ];
+    }
+  }
 
   if (current != null) {
     final at = layout.centers[current.globalIndex];
@@ -227,6 +294,38 @@ List<Widget> marginNotes(BuildContext context, JourneyLayout layout, JourneyNode
   }
 
   return out;
+}
+
+/// An italic serif quote with a large quote mark and a short clay line.
+class _Quote extends StatelessWidget {
+  const _Quote();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '\u201C',
+          style: AppTheme.serif(const TextStyle(fontSize: 44, height: 0.75, color: AppPalette.burntClay)),
+        ),
+        const SizedBox(height: 4),
+        Flexible(
+          child: Text(
+            context.l10n.journeyQuote,
+            maxLines: 5,
+            overflow: TextOverflow.fade,
+            style: AppTheme.serif(
+              TextStyle(fontSize: 19, height: 1.35, fontStyle: FontStyle.italic, color: context.nyaya.textSecondary),
+              display: false,
+            ),
+          ),
+        ),
+        const SizedBox(height: 14),
+        Container(width: 28, height: 2, color: AppPalette.burntClay),
+      ],
+    );
+  }
 }
 
 class _KeepGoing extends StatelessWidget {

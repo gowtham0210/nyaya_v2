@@ -1018,6 +1018,12 @@ abstract class AppLocalizations {
   /// **'Keep going!'**
   String get journeyKeepGoing;
 
+  /// Encouraging quote beside the road on the dark-mode Journey map.
+  ///
+  /// In en, this message translates to:
+  /// **'Small steps build a stronger understanding of the law.'**
+  String get journeyQuote;
+
   /// No description provided for @journeyStars.
   ///
   /// In en, this message translates to:

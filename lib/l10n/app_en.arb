@@ -247,6 +247,8 @@
   "journeyTitle": "Case Path",
   "journeySubtitle": "Your journey through Indian law",
   "journeyKeepGoing": "Keep going!",
+  "journeyQuote": "Small steps build a stronger understanding of the law.",
+  "@journeyQuote": {"description": "Encouraging quote beside the road on the dark-mode Journey map."},
   "journeyStars": "{count} ★",
   "@journeyStars": {
     "placeholders": {

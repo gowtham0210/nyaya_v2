@@ -553,6 +553,10 @@ class AppLocalizationsMl extends AppLocalizations {
   String get journeyKeepGoing => 'മുന്നോട്ട് പോകൂ!';
 
   @override
+  String get journeyQuote =>
+      'ചെറിയ ചുവടുകൾ നിയമത്തെക്കുറിച്ചുള്ള അറിവ് കൂടുതൽ ശക്തമാക്കുന്നു.';
+
+  @override
   String journeyStars(int count) {
     return '$count ★';
   }

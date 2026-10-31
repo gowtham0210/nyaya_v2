@@ -72,7 +72,7 @@ class MapNode extends StatelessWidget {
               height: size + 44,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: context.colors.primary.withValues(alpha: context.isDark ? 0.12 : 0.07),
+                color: context.colors.primary.withValues(alpha: context.isDark ? 0.18 : 0.07),
               ),
             ),
             Container(
@@ -224,7 +224,8 @@ class _LockedDisc extends StatelessWidget {
       size: size,
       fill: context.isDark ? AppPalette.darkSurfaceHigh : AppPalette.sandLight,
       lip: context.isDark ? AppPalette.darkSurface : AppPalette.sand,
-      border: context.isDark ? AppPalette.darkSurface : AppPalette.creamLight,
+      // A faint warm rim so locked stops stand out from the dark map.
+      border: context.isDark ? AppPalette.darkRoadRim : AppPalette.creamLight,
       child: Icon(Icons.lock_rounded, color: context.nyaya.textSecondary.withValues(alpha: 0.85), size: size * 0.36),
     );
   }
@@ -244,7 +245,7 @@ class _Chest extends StatelessWidget {
       size: size,
       fill: context.colors.surface,
       lip: current ? AppPalette.burntClay : (context.isDark ? AppPalette.darkSurface : AppPalette.sand),
-      border: context.isDark ? AppPalette.darkSurfaceHigh : Colors.white,
+      border: context.isDark ? AppPalette.terracotta : Colors.white,
       glow: current ? AppPalette.ochre.withValues(alpha: 0.5) : null,
       child: Icon(
         opened ? Icons.inventory_2_outlined : Icons.redeem_rounded,

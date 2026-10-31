@@ -554,6 +554,10 @@ class AppLocalizationsTa extends AppLocalizations {
   String get journeyKeepGoing => 'தொடர்ந்து செல்லுங்கள்!';
 
   @override
+  String get journeyQuote =>
+      'சிறு சிறு அடிகள் சட்டத்தைப் பற்றிய புரிதலை வலுப்படுத்துகின்றன.';
+
+  @override
   String journeyStars(int count) {
     return '$count ★';
   }

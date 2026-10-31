@@ -85,19 +85,28 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                   child: Stack(
                     clipBehavior: Clip.none,
                     children: [
+                      ...darkBackdrop(context, layout),
                       ...sceneryLayer(context, layout),
                       Positioned.fill(
                         child: CustomPaint(
-                          painter: RoadPainter(
-                            layout: layout,
-                            completedUpTo: completedUpTo,
-                            roadColor: context.isDark ? const Color(0xFF3A3029) : AppPalette.sandLight,
-                            edgeColor: (context.isDark ? const Color(0xFF2A221C) : AppPalette.sand).withValues(
-                              alpha: 0.45,
-                            ),
-                            doneColor: context.isDark ? const Color(0xFF4A3B30) : AppPalette.ochreSoft,
-                            dashColor: Colors.white.withValues(alpha: context.isDark ? 0.25 : 0.85),
-                          ),
+                          painter: context.isDark
+                              ? RoadPainter(
+                                  layout: layout,
+                                  completedUpTo: completedUpTo,
+                                  roadColor: AppPalette.darkRoad,
+                                  edgeColor: AppPalette.darkRoadRim,
+                                  doneColor: AppPalette.darkRoadDone,
+                                  dashColor: AppPalette.cream.withValues(alpha: 0.45),
+                                  shadowColor: Colors.black.withValues(alpha: 0.35),
+                                )
+                              : RoadPainter(
+                                  layout: layout,
+                                  completedUpTo: completedUpTo,
+                                  roadColor: AppPalette.sandLight,
+                                  edgeColor: AppPalette.sand.withValues(alpha: 0.45),
+                                  doneColor: AppPalette.ochreSoft,
+                                  dashColor: Colors.white.withValues(alpha: 0.85),
+                                ),
                         ),
                       ),
                       ...marginNotes(context, layout, current),
@@ -198,54 +207,61 @@ class _MapHeader extends ConsumerWidget {
       bottom: false,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.md, AppSpacing.page, AppSpacing.sm),
-        child: Row(
+        // Title and stats share the first line; the subtitle gets the full width below.
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
                     l.journeyTitle,
-                    style: AppTheme.serif(TextStyle(fontSize: 38, height: 1.1, color: context.colors.primary)),
+                    style: AppTheme.serif(
+                      TextStyle(
+                        fontSize: 38,
+                        height: 1.1,
+                        color: context.isDark ? AppPalette.darkTitle : context.colors.primary,
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    l.journeySubtitle,
-                    style: context.text.bodyLarge?.copyWith(color: context.nyaya.textSecondary),
+                ),
+                const SizedBox(width: 8),
+                Padding(
+                  padding: const EdgeInsets.only(top: 6),
+                  child: Row(
+                    children: [
+                      StatPill(
+                        icon: Icons.star_rounded,
+                        value: '$totalStars',
+                        color: AppPalette.ochre,
+                        semanticLabel: '$totalStars ${context.l10n.statStars}',
+                      ),
+                      const SizedBox(width: 8),
+                      StatPill(
+                        icon: Icons.bolt_rounded,
+                        value: p.isPremium ? '∞' : '${p.energy}',
+                        color: context.nyaya.energy,
+                        semanticLabel: p.isPremium ? context.l10n.energyUnlimited : context.l10n.energyLeft(p.energy),
+                      ),
+                      const SizedBox(width: 8),
+                      // Coins are spent in Settings → Store (energy refills, streak freezes).
+                      StatPill(
+                        icon: Icons.monetization_on_rounded,
+                        value: '${p.coins}',
+                        color: AppPalette.ochre,
+                        semanticLabel: '${p.coins} ${context.l10n.statCoins}',
+                        onTap: () => context.push(Routes.settings),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            const SizedBox(width: 8),
-            Padding(
-              padding: const EdgeInsets.only(top: 6),
-              child: Row(
-                children: [
-                  StatPill(
-                    icon: Icons.star_rounded,
-                    value: '$totalStars',
-                    color: AppPalette.ochre,
-                    semanticLabel: '$totalStars ${context.l10n.statStars}',
-                  ),
-                  const SizedBox(width: 8),
-                  StatPill(
-                    icon: Icons.bolt_rounded,
-                    value: p.isPremium ? '∞' : '${p.energy}',
-                    color: context.nyaya.energy,
-                    semanticLabel: p.isPremium ? context.l10n.energyUnlimited : context.l10n.energyLeft(p.energy),
-                  ),
-                  const SizedBox(width: 8),
-                  // Coins are spent in Settings → Store (energy refills, streak freezes).
-                  StatPill(
-                    icon: Icons.monetization_on_rounded,
-                    value: '${p.coins}',
-                    color: AppPalette.ochre,
-                    semanticLabel: '${p.coins} ${context.l10n.statCoins}',
-                    onTap: () => context.push(Routes.settings),
-                  ),
-                ],
-              ),
+            const SizedBox(height: 4),
+            Text(
+              l.journeySubtitle,
+              style: context.text.bodyLarge?.copyWith(color: context.nyaya.textSecondary),
             ),
           ],
         ),

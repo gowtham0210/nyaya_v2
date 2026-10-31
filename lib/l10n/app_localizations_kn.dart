@@ -551,6 +551,10 @@ class AppLocalizationsKn extends AppLocalizations {
   String get journeyKeepGoing => 'ಮುಂದುವರಿಸಿ!';
 
   @override
+  String get journeyQuote =>
+      'ಸಣ್ಣ ಸಣ್ಣ ಹೆಜ್ಜೆಗಳು ಕಾನೂನಿನ ತಿಳುವಳಿಕೆಯನ್ನು ಇನ್ನಷ್ಟು ಬಲಪಡಿಸುತ್ತವೆ.';
+
+  @override
   String journeyStars(int count) {
     return '$count ★';
   }

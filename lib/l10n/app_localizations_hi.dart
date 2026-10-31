@@ -545,6 +545,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get journeyKeepGoing => 'चलते रहिए!';
 
   @override
+  String get journeyQuote =>
+      'छोटे-छोटे कदम कानून की समझ को और मज़बूत बनाते हैं।';
+
+  @override
   String journeyStars(int count) {
     return '$count ★';
   }

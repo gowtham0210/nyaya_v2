@@ -544,6 +544,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get journeyKeepGoing => 'Keep going!';
 
   @override
+  String get journeyQuote =>
+      'Small steps build a stronger understanding of the law.';
+
+  @override
   String journeyStars(int count) {
     return '$count ★';
   }

@@ -56,6 +56,14 @@ abstract final class AppPalette {
   static const darkPrimary = Color(0xFFD98B6A);
   static const darkSuccess = Color(0xFF9DBB7A);
   static const darkError = Color(0xFFF08A7E);
+
+  /// Journey map in dark mode: pale peach title, warm glow behind the road,
+  /// and a warm brown road with a lighter rim.
+  static const darkTitle = Color(0xFFEDC0A4);
+  static const darkGlow = Color(0x1FB96243);
+  static const darkRoad = Color(0xFF45372D);
+  static const darkRoadRim = Color(0xFF5E4A3C);
+  static const darkRoadDone = Color(0xFF6A4A36);
 }
 
 /// Semantic colors not covered by [ColorScheme], exposed as a theme extension
