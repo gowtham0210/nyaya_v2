@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-30 (usage analytics, Claude Sonnet 5.5)
+> Last updated: 2026-10-31 (accessibility + dark mode pass, Sentry keys on staging, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -433,7 +433,7 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       (no learner data to third parties); **premium hidden** in the beta; **production hosting: decide later**;
       **beta audience: citizens**. P4 order (hosting-free first): hide premium [done] → in-app account deletion [done] →
       Sentry [done: app, API, portal] → own analytics (done, calculated from existing records) + dashboard → minimum app version [done] → translations of English-only screens [done] →
-      accessibility + dark mode pass → shared sign-in rate limit → rotate the Azure key (user) → store prep.
+      accessibility + dark mode pass [done] → shared sign-in rate limit → rotate the Azure key (user) → store prep.
 - [x] 2026-10-30: **Premium hidden for the beta.** App: build switch `Features.premium`
       (`lib/core/config/features.dart`, `--dart-define=NYAYA_PREMIUM=true` to show it) hides the post-onboarding
       paywall, the Settings premium row, the out-of-energy "Get unlimited energy" button and the Ask AI "upgrade"
@@ -574,6 +574,29 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       Not done: source maps / debug symbols upload (needs a Sentry auth token; with store prep), alert rules (e.g. email
       on a new issue), staging deploy with the keys (see below once done).
 
+- [x] 2026-10-31: **Sentry keys on staging.** The keys (DSNs) for `nyaya-api` and `nyaya-portal` were read through the
+      Sentry tools in Claude Code and added to `/opt/nyaya-v2/.env` as `API_SENTRY_DSN` / `PORTAL_SENTRY_DSN`; staging was
+      redeployed (no migration, no `--seed`). Checked: API and portal answer 200, both containers see `SENTRY_DSN`, and the
+      portal's browser key is built into its page. No test error was sent from staging (it would only add test issues).
+      The Sentry tools can't change "Prevent Storing of IP Addresses": **the user still sets that by hand** for all three
+      projects, and deletes the old test issues.
+
+- [x] 2026-10-31: **Accessibility and dark mode pass (P4).** New `test/accessibility_test.dart` opens Home, Journey, Ask AI,
+      Updates, Leaderboard, Review, Settings, a quiz (before and after a wrong answer), sign-in and onboarding, in **light and
+      dark**, and runs Flutter's checks: tap areas at least 48×48 (Android) / 44×44 (iOS), every tappable thing has a label,
+      and text contrast (WCAG). It also opens each screen with very large phone text and fails on any overflow. Fixed:
+      **text size** follows the phone up to **1.5×** (`maxTextScale` in `lib/app/app.dart`), the most the game layouts hold;
+      the Home "Start here" cards and the Settings stat tiles grow with it (and never shrink below their content at small text). `Pressable` no longer tells screen readers that
+      plain stats are buttons; tappable `StatPill`s get a 48-point tap area (same look); Journey's star and energy pills
+      are read out ("5 energy left"); the chat notice's close button and the Updates save button are full size; the league
+      row reads league names instead of emoji; `ChunkyButton` on the theme's own colour uses its text colour (white text on
+      light terracotta in dark mode was 2.7:1); chapter names in the quiz header and level sheet are lightened in dark mode
+      (`context.readable`). Seen on the simulator in dark mode (Tamil): Home, Journey, Ask AI, Updates, sign-up all fine.
+      Also found and fixed there: Journey's header faded out over its second subtitle line when the title wraps (Tamil),
+      so the map showed through the text: the header is now solid behind its text with a short fade below; and the wide
+      letter spacing on small capital labels split Tamil words apart: spacing is now English-only (`context.tracking`).
+      Flutter tests: 93. Reviewed with OpenQodex (run by the coding agent: the Claude Code CLI is not logged in on this Mac). Not covered: VoiceOver/TalkBack by hand on a real phone, the results screen, the portal (web).
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
@@ -585,7 +608,7 @@ Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
    production environment), then P5 controlled launch. Open decisions for the user: who the legal reviewer is,
    crash/analytics tool, launch audience, premium during beta, production hosting. Also open: a real all-time
    leaderboard.
-2. Dark-mode visual pass on simulator (Terracotta dark theme exists, not yet eyeballed).
+2. Dark-mode visual pass: done 2026-10-31 (see above).
 3. Note: a debug build launched via `simctl launch` without `flutter run` can show a blank screen —
    use `flutter run -d <device>` (or a release/profile build) when testing.
 4. Nice-to-have later: real backend (Firebase) for leaderboard/profile sync, real IAP (RevenueCat /
