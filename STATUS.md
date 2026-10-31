@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-31 (shared sign-in limits, Claude Opus 5.5)
+> Last updated: 2026-10-31 (legal news from the portal, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -617,6 +617,25 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       one email → 429 "15 minutes"; through the portal's header, browser A blocked on its 21st try while browser B and
       a wrong secret were counted apart.
 
+- [x] 2026-10-31: **Legal news from the portal.** User's choices: same steps as questions (editor writes → legal
+      reviewer approves → publisher publishes), **English only** for now, the app's starter articles imported **as
+      published** (there were 10, not 11). API (`backend/src/news/`): table `news_articles` (migration 0013; one row per
+      article, no versions: **"Correct this article" takes a published one back to draft and off the app** until it is
+      approved and published again; "Retire" takes it off), the app's 10 articles added as published by migration 0014
+      (`external_ref` = their old ids). Reviewer ≠ author/editor (checked against the audit log since the last
+      correction); review reasons live in the audit log. `GET /v1/news` is **public** (newest event date first, 50 max);
+      staff endpoints under `/v1/editor/news` (read: all staff roles). Portal: **News** link in the top bar → list
+      (status filter, title search), New article, article page with the actions and dates. App: the Updates tab and
+      Home's news cards read `/v1/news` and keep the last list on the phone (offline); no articles are built in any
+      more; the article page shows "Read the official text" when a source link is given. Note: updates a tester saved
+      before this build are not matched any more (new ids). Tests: backend 74 unit + 122 API (new `news.e2e-spec.ts`; API
+      tests now get 30 s like their start-up hooks), Flutter 96 (new `legal_updates_test.dart`). OpenQodex review (agent
+      mode) passed. Pushed `e6470a0`, CI green; staging deployed (backup `nyaya-2026-10-31-0914.sql.gz` first,
+      migrations 0013–0014 applied): `/v1/news` gives the 10 articles. **Not yet clicked through in the portal** (the
+      local test password could not be used from Claude): the user should try write → review → publish on staging.
+      The app needs a new build to read news from the server. Not done: article images (cards use the category
+      painting), translations, a "new" badge or push notice for fresh articles.
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
@@ -732,7 +751,7 @@ flutter test
 iOS simulator used: iPhone 17 Pro Max (`F7B886EB-4774-42E1-B77B-43FD22DA4455`).
 
 ## 7. Known issues / caveats
-- Leaderboard, purchases and legal news are local/simulated behind repository interfaces.
+- The all-time leaderboard, the duel opponent and purchases are simulated in the app; legal news comes from the portal (2026-10-31).
 - Legal updates content is English-only (labelled "Shown in English" in other locales).
 - Question bank notes from author agent: BNS s.106(2) hit-and-run deliberately excluded (in-force status
   unclear); Art. 22(4) answer is "3 months" (44th Amendment change never notified).
