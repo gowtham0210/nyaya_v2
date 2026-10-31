@@ -1071,6 +1071,39 @@ class AppLocalizationsMl extends AppLocalizations {
       'സ്ട്രീക്ക് നിലനിർത്താൻ ഒരു ഓർമ്മപ്പെടുത്തൽ';
 
   @override
+  String get reminderTitle => 'ഇന്നത്തെ പരിശീലനത്തിനുള്ള സമയം';
+
+  @override
+  String reminderStreak(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'നിങ്ങളുടെ $count ദിവസത്തെ സ്ട്രീക്ക് തുടരൂ: ഒരു ചെറിയ ക്വിസ് മതി.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get reminderLearn =>
+      'ദിവസവും ഒരു ചെറിയ ക്വിസ് യഥാർത്ഥ നിയമ അറിവ് വളർത്തുന്നു.';
+
+  @override
+  String get reminderJourney =>
+      'നിങ്ങളുടെ കേസ് പാത്ത് കാത്തിരിക്കുന്നു. അടുത്ത സ്റ്റോപ്പിന് തയ്യാറാണോ?';
+
+  @override
+  String get reminderRights =>
+      'നിങ്ങളുടെ അവകാശങ്ങൾ അറിയൂ: രണ്ട് മിനിറ്റ് ക്വിസ് നിങ്ങൾക്കായി തയ്യാറാണ്.';
+
+  @override
+  String get settingsReminderTime => 'ഓർമ്മപ്പെടുത്തൽ സമയം';
+
+  @override
+  String get settingsRemindersBlocked =>
+      'Nyaya-യ്ക്ക് അറിയിപ്പുകൾ ഓഫാണ്. ഓർമ്മപ്പെടുത്തലുകൾ ലഭിക്കാൻ ഫോണിന്റെ ക്രമീകരണങ്ങളിൽ അവ ഓണാക്കൂ.';
+
+  @override
   String get settingsStore => 'സ്റ്റോർ';
 
   @override

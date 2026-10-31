@@ -19,6 +19,7 @@ import '../../auth/application/auth_controller.dart';
 import '../../journey/application/journey_controller.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../progress/application/progress_sync.dart';
+import '../../reminders/application/reminder_sync.dart';
 import '../../profile/domain/user_profile.dart';
 import 'delete_account_dialog.dart';
 
@@ -259,8 +260,31 @@ class SettingsScreen extends ConsumerWidget {
               title: Text(l.settingsReminders),
               subtitle: Text(l.settingsRemindersSub),
               value: p.remindersOn,
-              onChanged: ctl.setReminders,
+              onChanged: (on) async {
+                if (!on) return ctl.setReminders(false);
+                // Turning on asks the phone; when notifications are blocked it says where to allow them.
+                final messenger = ScaffoldMessenger.of(context);
+                if (!await ref.read(reminderSyncProvider.notifier).enable()) {
+                  messenger.showSnackBar(SnackBar(content: Text(l.settingsRemindersBlocked)));
+                }
+              },
             ),
+            if (p.remindersOn)
+              ListTile(
+                leading: const Icon(Icons.schedule_rounded),
+                title: Text(l.settingsReminderTime),
+                trailing: Text(
+                  TimeOfDay(hour: p.reminderMinutes ~/ 60, minute: p.reminderMinutes % 60).format(context),
+                  style: context.text.titleSmall?.copyWith(color: context.colors.primary),
+                ),
+                onTap: () async {
+                  final picked = await showTimePicker(
+                    context: context,
+                    initialTime: TimeOfDay(hour: p.reminderMinutes ~/ 60, minute: p.reminderMinutes % 60),
+                  );
+                  if (picked != null) ctl.setReminderTime(picked.hour * 60 + picked.minute);
+                },
+              ),
           ]),
 
           // ── About ─────────────────────────────────────────────────────────

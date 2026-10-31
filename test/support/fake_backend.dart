@@ -12,6 +12,7 @@ import 'package:nyaya/features/quiz/data/quiz_api.dart';
 import 'package:nyaya/features/quiz/domain/question.dart';
 import 'package:nyaya/features/quiz/domain/quiz_builder.dart';
 import 'package:nyaya/features/quiz/domain/quiz_models.dart';
+import 'package:nyaya/features/reminders/data/reminder_notifications.dart';
 
 /// A stand-in for the Nyaya API. Like the real server it keeps the answer
 /// key to itself (questions handed to the app carry none) and owns stars, XP,
@@ -455,4 +456,23 @@ class FakeLegalUpdates implements LegalUpdatesRepository {
           readMinutes: 3,
         ),
       ];
+}
+
+/// Records what would be scheduled instead of touching the phone.
+class FakeReminderNotifications implements ReminderNotifications {
+  FakeReminderNotifications({this.allow = true});
+
+  /// The answer to the permission question.
+  bool allow;
+  int permissionAsks = 0;
+  List<ReminderNotice> scheduled = const [];
+
+  @override
+  Future<bool> requestPermission() async {
+    permissionAsks++;
+    return allow;
+  }
+
+  @override
+  Future<void> replaceAll(List<ReminderNotice> notices) async => scheduled = notices;
 }

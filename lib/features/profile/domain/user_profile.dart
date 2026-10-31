@@ -4,6 +4,9 @@ enum Persona { advocate, aspirant, citizen }
 
 /// Supported content + UI languages. English is the authoring language; the
 /// rest are the five launch Indian languages.
+/// 7 pm: after work or college, with time left to practise before the day ends.
+const defaultReminderMinutes = 19 * 60;
+
 enum AppLanguage {
   en('en', 'English', 'English'),
   hi('hi', 'हिन्दी', 'Hindi'),
@@ -56,6 +59,7 @@ class UserProfile {
     this.soundOn = true,
     this.hapticsOn = true,
     this.remindersOn = true,
+    this.reminderMinutes = defaultReminderMinutes,
     this.isPremium = false,
     this.totalXp = 0,
     this.coins = 0,
@@ -93,6 +97,9 @@ class UserProfile {
   final bool soundOn;
   final bool hapticsOn;
   final bool remindersOn;
+
+  /// When the daily reminder comes, in minutes after local midnight.
+  final int reminderMinutes;
   final bool isPremium;
 
   final int totalXp;
@@ -145,6 +152,7 @@ class UserProfile {
     bool? soundOn,
     bool? hapticsOn,
     bool? remindersOn,
+    int? reminderMinutes,
     bool? isPremium,
     int? totalXp,
     int? coins,
@@ -185,6 +193,7 @@ class UserProfile {
       soundOn: soundOn ?? this.soundOn,
       hapticsOn: hapticsOn ?? this.hapticsOn,
       remindersOn: remindersOn ?? this.remindersOn,
+      reminderMinutes: reminderMinutes ?? this.reminderMinutes,
       isPremium: isPremium ?? this.isPremium,
       totalXp: totalXp ?? this.totalXp,
       coins: coins ?? this.coins,
@@ -225,6 +234,7 @@ class UserProfile {
         'soundOn': soundOn,
         'hapticsOn': hapticsOn,
         'remindersOn': remindersOn,
+        'reminderMinutes': reminderMinutes,
         'isPremium': isPremium,
         'totalXp': totalXp,
         'coins': coins,
@@ -267,6 +277,7 @@ class UserProfile {
       soundOn: v('soundOn', true),
       hapticsOn: v('hapticsOn', true),
       remindersOn: v('remindersOn', true),
+      reminderMinutes: v('reminderMinutes', defaultReminderMinutes),
       isPremium: v('isPremium', false),
       totalXp: v('totalXp', 0),
       coins: v('coins', 0),

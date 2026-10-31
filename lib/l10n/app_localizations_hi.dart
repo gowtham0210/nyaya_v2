@@ -1062,6 +1062,39 @@ class AppLocalizationsHi extends AppLocalizations {
   String get settingsRemindersSub => 'स्ट्रीक बनाए रखने के लिए एक याद';
 
   @override
+  String get reminderTitle => 'आज के अभ्यास का समय';
+
+  @override
+  String reminderStreak(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'अपनी $count दिन की स्ट्रीक जारी रखें: बस एक छोटी क्विज़ काफ़ी है।',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get reminderLearn =>
+      'रोज़ एक छोटी क्विज़ से कानून की असली समझ बनती है।';
+
+  @override
+  String get reminderJourney =>
+      'आपका केस पाथ इंतज़ार कर रहा है। अगले पड़ाव के लिए तैयार?';
+
+  @override
+  String get reminderRights =>
+      'अपने अधिकार जानें: दो मिनट की एक क्विज़ आपके लिए तैयार है।';
+
+  @override
+  String get settingsReminderTime => 'रिमाइंडर का समय';
+
+  @override
+  String get settingsRemindersBlocked =>
+      'Nyaya के लिए सूचनाएँ बंद हैं। रिमाइंडर पाने के लिए फ़ोन की सेटिंग्स में इन्हें चालू करें।';
+
+  @override
   String get settingsStore => 'स्टोर';
 
   @override

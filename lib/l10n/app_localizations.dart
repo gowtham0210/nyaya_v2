@@ -1894,6 +1894,48 @@ abstract class AppLocalizations {
   /// **'A nudge to keep your streak alive'**
   String get settingsRemindersSub;
 
+  /// No description provided for @reminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Time for today\'s practice'**
+  String get reminderTitle;
+
+  /// No description provided for @reminderStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Keep your 1-day streak going: one short quiz is enough.} other{Keep your {count}-day streak going: one short quiz is enough.}}'**
+  String reminderStreak(int count);
+
+  /// No description provided for @reminderLearn.
+  ///
+  /// In en, this message translates to:
+  /// **'One short quiz a day builds real legal know-how.'**
+  String get reminderLearn;
+
+  /// No description provided for @reminderJourney.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Case Path is waiting. Ready for the next stop?'**
+  String get reminderJourney;
+
+  /// No description provided for @reminderRights.
+  ///
+  /// In en, this message translates to:
+  /// **'Know your rights: a two-minute quiz is ready for you.'**
+  String get reminderRights;
+
+  /// No description provided for @settingsReminderTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminder time'**
+  String get settingsReminderTime;
+
+  /// No description provided for @settingsRemindersBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications are off for Nyaya. Turn them on in your phone\'s Settings to get reminders.'**
+  String get settingsRemindersBlocked;
+
   /// No description provided for @settingsStore.
   ///
   /// In en, this message translates to:

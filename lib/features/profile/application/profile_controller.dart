@@ -68,6 +68,7 @@ class ProfileController extends Notifier<UserProfile> {
   void setSound(bool v) => _set(state.copyWith(soundOn: v));
   void setHaptics(bool v) => _set(state.copyWith(hapticsOn: v));
   void setReminders(bool v) => _set(state.copyWith(remindersOn: v));
+  void setReminderTime(int minutes) => _set(state.copyWith(reminderMinutes: minutes));
 
   // ── Energy ────────────────────────────────────────────────────────────────
 

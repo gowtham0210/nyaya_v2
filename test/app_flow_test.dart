@@ -11,6 +11,7 @@ import 'package:nyaya/features/auth/data/auth_api.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
 import 'package:nyaya/features/journey/application/journey_controller.dart';
 import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
+import 'package:nyaya/features/reminders/data/reminder_notifications.dart';
 import 'package:nyaya/features/profile/application/profile_controller.dart';
 import 'package:nyaya/features/leaderboard/data/league_api.dart';
 import 'package:nyaya/features/progress/application/progress_sync.dart';
@@ -53,6 +54,7 @@ void main() {
       leagueApiProvider.overrideWithValue(api),
       reviewApiProvider.overrideWithValue(api),
       legalUpdatesRepositoryProvider.overrideWithValue(FakeLegalUpdates()),
+      reminderNotificationsProvider.overrideWithValue(FakeReminderNotifications()),
       authApiProvider.overrideWithValue(authApi = FakeAuthApi(tokens)),
     ]);
     addTearDown(container.dispose);

@@ -5,6 +5,7 @@ import '../core/l10n/l10n.dart';
 import '../core/theme/app_theme.dart';
 import '../features/profile/application/profile_controller.dart';
 import '../features/progress/application/progress_sync.dart';
+import '../features/reminders/application/reminder_sync.dart';
 import '../features/update/application/update_check.dart';
 import '../features/update/presentation/update_required_screen.dart';
 import 'router.dart';
@@ -31,6 +32,8 @@ class _NyayaAppState extends ConsumerState<NyayaApp> {
         ref.read(profileProvider.notifier).refreshDay();
         ref.read(progressSyncProvider.notifier).refresh();
         ref.read(progressSyncProvider.notifier).noteOpen();
+        // A new day, or practice done elsewhere, changes which reminders are due.
+        ref.read(reminderSyncProvider.notifier).refresh();
         ref.read(updateCheckProvider.notifier).check();
       },
     );
@@ -49,6 +52,8 @@ class _NyayaAppState extends ConsumerState<NyayaApp> {
   Widget build(BuildContext context) {
     // Keeps progress in step with sign-in and sign-out.
     ref.watch(progressSyncProvider);
+    // Keeps the daily reminders in step with the profile.
+    ref.watch(reminderSyncProvider);
     final update = ref.watch(updateCheckProvider);
     return MaterialApp.router(
       title: 'Nyaya',

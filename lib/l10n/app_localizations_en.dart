@@ -1063,6 +1063,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsRemindersSub => 'A nudge to keep your streak alive';
 
   @override
+  String get reminderTitle => 'Time for today\'s practice';
+
+  @override
+  String reminderStreak(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Keep your $count-day streak going: one short quiz is enough.',
+      one: 'Keep your 1-day streak going: one short quiz is enough.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get reminderLearn =>
+      'One short quiz a day builds real legal know-how.';
+
+  @override
+  String get reminderJourney =>
+      'Your Case Path is waiting. Ready for the next stop?';
+
+  @override
+  String get reminderRights =>
+      'Know your rights: a two-minute quiz is ready for you.';
+
+  @override
+  String get settingsReminderTime => 'Reminder time';
+
+  @override
+  String get settingsRemindersBlocked =>
+      'Notifications are off for Nyaya. Turn them on in your phone\'s Settings to get reminders.';
+
+  @override
   String get settingsStore => 'Store';
 
   @override

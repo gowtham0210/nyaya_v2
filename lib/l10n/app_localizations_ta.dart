@@ -1073,6 +1073,39 @@ class AppLocalizationsTa extends AppLocalizations {
   String get settingsRemindersSub => 'உங்கள் தொடரைத் தக்கவைக்க ஒரு நினைவூட்டல்';
 
   @override
+  String get reminderTitle => 'இன்றைய பயிற்சிக்கான நேரம்';
+
+  @override
+  String reminderStreak(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'உங்கள் $count நாள் தொடரைத் தொடருங்கள்: ஒரு சிறிய வினாடி வினா போதும்.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get reminderLearn =>
+      'தினமும் ஒரு சிறிய வினாடி வினா உண்மையான சட்ட அறிவை வளர்க்கிறது.';
+
+  @override
+  String get reminderJourney =>
+      'உங்கள் வழக்குப் பாதை காத்திருக்கிறது. அடுத்த நிறுத்தத்திற்குத் தயாரா?';
+
+  @override
+  String get reminderRights =>
+      'உங்கள் உரிமைகளை அறியுங்கள்: இரண்டு நிமிட வினாடி வினா தயாராக உள்ளது.';
+
+  @override
+  String get settingsReminderTime => 'நினைவூட்டல் நேரம்';
+
+  @override
+  String get settingsRemindersBlocked =>
+      'Nyaya-க்கு அறிவிப்புகள் முடக்கப்பட்டுள்ளன. நினைவூட்டல்களைப் பெற, தொலைபேசியின் அமைப்புகளில் அவற்றை இயக்கவும்.';
+
+  @override
   String get settingsStore => 'கடை';
 
   @override

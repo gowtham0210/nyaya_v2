@@ -1069,6 +1069,38 @@ class AppLocalizationsTe extends AppLocalizations {
   String get settingsRemindersSub => 'మీ స్ట్రీక్ కొనసాగడానికి ఒక చిన్న గుర్తు';
 
   @override
+  String get reminderTitle => 'నేటి సాధనకు సమయం';
+
+  @override
+  String reminderStreak(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'మీ $count రోజుల స్ట్రీక్‌ను కొనసాగించండి: ఒక చిన్న క్విజ్ చాలు.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get reminderLearn =>
+      'రోజుకు ఒక చిన్న క్విజ్ నిజమైన న్యాయ అవగాహనను పెంచుతుంది.';
+
+  @override
+  String get reminderJourney =>
+      'మీ కేస్ పాత్ ఎదురుచూస్తోంది. తదుపరి మజిలీకి సిద్ధమా?';
+
+  @override
+  String get reminderRights =>
+      'మీ హక్కులు తెలుసుకోండి: రెండు నిమిషాల క్విజ్ మీ కోసం సిద్ధంగా ఉంది.';
+
+  @override
+  String get settingsReminderTime => 'రిమైండర్ సమయం';
+
+  @override
+  String get settingsRemindersBlocked =>
+      'Nyayaకు నోటిఫికేషన్లు ఆఫ్‌లో ఉన్నాయి. రిమైండర్లు పొందడానికి ఫోన్ సెట్టింగ్స్‌లో వాటిని ఆన్ చేయండి.';
+
+  @override
   String get settingsStore => 'స్టోర్';
 
   @override
