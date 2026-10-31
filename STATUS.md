@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-31 (dark Journey redesign, Claude Opus 5.5)
+> Last updated: 2026-10-31 (daily practice reminders, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -648,6 +648,24 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       bottom bar (the reference floats it; it is shared by all tabs). Pushed `ee63d72`, CI green. Note: on this Mac,
       builds from Claude's shell only work outside the command sandbox, and the machine was heavily loaded.
 
+- [x] 2026-10-31: **Daily practice reminders.** Local notifications on the phone (`flutter_local_notifications` 22,
+      `timezone`, `flutter_timezone`); nothing on the server. `lib/features/reminders/`: `planReminders` makes one
+      reminder a day at the learner's time for the next 7 days (today skipped once they practised — `lastActiveDay` —
+      or once the time has passed); the first one says "Keep your N-day streak going" while the streak can still be
+      kept, the others take turns with three short messages; all in the learner's app language (6 languages, machine
+      drafts). `ReminderSync` reschedules on start, on resume and whenever the switch, time, language, streak or last
+      practice day changes; a learner who stops opening the app gets a week of reminders, then quiet. Permission is
+      asked **once, right after onboarding** (the switch was already on by default); refused → the switch turns off.
+      Settings → Daily reminder: turning it on asks again (blocked → a message saying to allow it in the phone's
+      Settings); new **Reminder time** row (time picker; default **7 pm**, `reminderMinutes` in the profile). Android:
+      desugaring in `build.gradle.kts`, `POST_NOTIFICATIONS` + `RECEIVE_BOOT_COMPLETED` and the plugin's two receivers in
+      the manifest; scheduled "inexact" (within minutes, no exact-alarm permission). Checked on the iOS simulator: the
+      permission question shows on Home, the time row works, and a reminder set two minutes ahead arrived on time
+      ("Time for today's practice — Your Case Path is waiting…"). A debug Android build compiles; not yet tried on an
+      Android phone. **Android minimum raised to 8.0 (`minSdk 26`)**: `sentry_flutter` needs it, and the Android app
+      had not built since Sentry was added (CI does not build Android). Known gap: if the learner later blocks notifications in the phone's Settings, the switch still
+      shows on. Tests: Flutter 104 (new `reminders_test.dart`).
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
@@ -662,9 +680,19 @@ Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 2. Dark-mode visual pass: done 2026-10-31 (see above).
 3. Note: a debug build launched via `simctl launch` without `flutter run` can show a blank screen —
    use `flutter run -d <device>` (or a release/profile build) when testing.
-4. Nice-to-have later: real backend (Firebase) for leaderboard/profile sync, real IAP (RevenueCat /
-   `in_app_purchase`), push reminders (`flutter_local_notifications`), live legal-news CMS,
-   more chapters/questions, sound effects (setting exists, no audio yet).
+4. **Features still to build** (agreed list, 2026-10-31; everything else on the original list works):
+   1. ~~Daily practice reminders~~ — done 2026-10-31 (see above).
+   2. **Moot Court Duel opponent** — still simulated on the phone; a real one would replay another learner's
+      recorded run, worked out on the server.
+   3. **All-time leaderboard tab** — still simulated on the phone (the weekly league is real); needs a real
+      ranking from the server.
+   4. **Sound effects** — the setting exists, nothing plays (right/wrong answer, level done, chest open).
+   5. **News extras** — pictures for articles (cards use the category painting) and a notice when a new
+      article is published.
+   Smaller extras: a "new version available" nudge for optional updates; setting the minimum app version
+   from the portal; the floating bottom bar from the dark-mode reference (shared by all tabs).
+   Later, not for the beta: real payments (premium is hidden), more chapters and questions.
+   Not development but needed first: store prep, which waits on the production hosting decision.
 5. Before any `git push`: user's global rule = review with the **openqodex** skill.
 
 ## 4. Architecture & file map (feature-first, Riverpod 3, go_router 18)
