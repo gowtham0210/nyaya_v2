@@ -369,6 +369,8 @@ export const quizSessionQuestions = pgTable(
     selectedOptionIds: text('selected_option_ids').array(),
     answeredAt: timestamp('answered_at', { withTimezone: true }),
     isCorrect: boolean('is_correct'),
+    /** Time the app measured from showing the question to the answer (duels race on it). */
+    elapsedMs: integer('elapsed_ms'),
   },
   (t) => [
     primaryKey({ columns: [t.sessionId, t.position] }),
@@ -377,6 +379,42 @@ export const quizSessionQuestions = pgTable(
       t.questionVersionId,
     ),
   ],
+);
+
+export const DUEL_OUTCOMES = ['won', 'lost', 'draw'] as const;
+export const duelOutcome = pgEnum('duel_outcome', DUEL_OUTCOMES);
+
+/**
+ * The opponent of a duel session and how it ended. The opponent is another
+ * learner's finished duel on the same questions (opponent_session_id), or a
+ * practice player when none fitted. Their answers are copied in, so the
+ * result stays the same whatever happens to their account. Outcome and the
+ * rating after are set on submit; a learner's rating is their latest.
+ */
+export const duelMatches = pgTable(
+  'duel_matches',
+  {
+    sessionId: uuid('session_id')
+      .primaryKey()
+      .references(() => quizSessions.id, { onDelete: 'cascade' }),
+    opponentSessionId: uuid('opponent_session_id').references(
+      (): AnyPgColumn => quizSessions.id,
+      { onDelete: 'set null' },
+    ),
+    /** "Asha K." (league rule), or the practice player's name. */
+    opponentName: text('opponent_name').notNull(),
+    practice: boolean('practice').notNull(),
+    opponentRating: integer('opponent_rating').notNull(),
+    opponentAnswers: jsonb('opponent_answers')
+      .$type<{ correct: boolean; elapsed_ms: number }[]>()
+      .notNull(),
+    ratingBefore: integer('rating_before').notNull(),
+    playerPoints: integer('player_points'),
+    opponentPoints: integer('opponent_points'),
+    outcome: duelOutcome('outcome'),
+    ratingAfter: integer('rating_after'),
+  },
+  (t) => [index('duel_matches_opponent_idx').on(t.opponentSessionId)],
 );
 
 /** AI chat answers per learner per India date, for the daily limit. */
@@ -425,6 +463,7 @@ export const COIN_REASONS = [
   'energy_refill',
   'streak_freeze',
   'league_top3',
+  'duel_win',
 ] as const;
 export type CoinReason = (typeof COIN_REASONS)[number];
 export const coinReason = pgEnum('coin_reason', COIN_REASONS);

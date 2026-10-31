@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,13 +17,6 @@ import '../domain/question.dart';
 import '../domain/quiz_builder.dart';
 import '../domain/quiz_models.dart';
 import 'quiz_completion.dart';
-
-@immutable
-class OpponentAnswer {
-  const OpponentAnswer({required this.correct, required this.elapsedMs});
-  final bool correct;
-  final int elapsedMs;
-}
 
 enum QuizPhase {
   /// Asking the server for questions.
@@ -208,19 +200,9 @@ class QuizController extends Notifier<QuizState> {
       unawaited(ref.read(progressSyncProvider.notifier).refresh());
       final questions = started.questions;
 
-      DuelOpponent? opponent;
-      var opponentAnswers = const <OpponentAnswer>[];
-      if (request.mode == QuizMode.duel) {
-        final rng = Random();
-        opponent = QuizBuilder.opponent(profile.duelRating, rng);
-        opponentAnswers = [
-          for (final q in questions)
-            () {
-              final (c, ms) = QuizBuilder.opponentAnswer(opponent!, q, rng);
-              return OpponentAnswer(correct: c, elapsedMs: ms);
-            }(),
-        ];
-      }
+      // Duels: the server picked the opponent and sent their recorded run.
+      final opponent = started.opponent;
+      final opponentAnswers = started.opponentAnswers;
 
       _quizStart = _now();
       _questionStart = _quizStart;
@@ -299,7 +281,13 @@ class QuizController extends Notifier<QuizState> {
     final elapsed = _elapsedMs;
     state = s.copyWith(selected: option, sending: true);
     try {
-      final verdict = await _api.answer(_sessionId!, position: s.index + 1, question: s.current, option: option);
+      final verdict = await _api.answer(
+        _sessionId!,
+        position: s.index + 1,
+        question: s.current,
+        option: option,
+        elapsedMs: elapsed,
+      );
       if (!ref.mounted) return;
       _lockAnswer(option, verdict: verdict, elapsedMs: elapsed);
     } on ApiException {
@@ -431,8 +419,9 @@ class QuizController extends Notifier<QuizState> {
       durationMs: _now().difference(_quizStart).inMilliseconds,
       // The server marks exams (minus marks for wrong answers, except for citizens).
       examScore: s.request.mode == QuizMode.exam ? submitted.score : null,
-      duelPlayerPoints: s.request.mode == QuizMode.duel ? s.playerPoints : null,
-      duelOpponentPoints: s.request.mode == QuizMode.duel ? s.opponentPoints : null,
+      // The server's points decide the duel; the running score was the phone's estimate.
+      duelPlayerPoints: s.request.mode == QuizMode.duel ? (submitted.duel?.playerPoints ?? s.playerPoints) : null,
+      duelOpponentPoints: s.request.mode == QuizMode.duel ? (submitted.duel?.opponentPoints ?? s.opponentPoints) : null,
       opponent: s.opponent,
     );
     // New mistakes, or ones now answered right.
@@ -440,7 +429,13 @@ class QuizController extends Notifier<QuizState> {
     // The quiz may have joined this week's league, or moved the learner up in it.
     final league = await ref.read(progressSyncProvider.notifier).league();
     if (!ref.mounted) return;
-    final rewards = QuizCompletionService(ref).complete(result, submitted.rewards, progress, league: league);
+    final rewards = QuizCompletionService(ref).complete(
+      result,
+      submitted.rewards,
+      progress,
+      league: league,
+      duel: submitted.duel,
+    );
     state = s.copyWith(phase: QuizPhase.finished, answers: answers, result: result, rewards: rewards);
   }
 }

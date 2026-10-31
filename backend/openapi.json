@@ -2864,6 +2864,16 @@
             "items": {
               "$ref": "#/components/schemas/SessionQuestionDto"
             }
+          },
+          "duel": {
+            "nullable": true,
+            "description": "Duels only",
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionDuelDto"
+              }
+            ]
           }
         },
         "required": [
@@ -2880,7 +2890,8 @@
           "started_at",
           "expires_at",
           "submitted_at",
-          "questions"
+          "questions",
+          "duel"
         ]
       },
       "RegisterDto": {
@@ -5001,6 +5012,61 @@
           "feedback"
         ]
       },
+      "DuelOpponentDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "\"Asha K.\", or a practice player's name"
+          },
+          "rating": {
+            "type": "number"
+          },
+          "practice": {
+            "type": "boolean",
+            "description": "A practice player, used when no learner's duel fitted"
+          }
+        },
+        "required": [
+          "name",
+          "rating",
+          "practice"
+        ]
+      },
+      "DuelAnswerDto": {
+        "type": "object",
+        "properties": {
+          "correct": {
+            "type": "boolean"
+          },
+          "elapsed_ms": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "correct",
+          "elapsed_ms"
+        ]
+      },
+      "SessionDuelDto": {
+        "type": "object",
+        "properties": {
+          "opponent": {
+            "$ref": "#/components/schemas/DuelOpponentDto"
+          },
+          "opponent_answers": {
+            "description": "The opponent's run, in question order: whether each answer was right and how long it took",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DuelAnswerDto"
+            }
+          }
+        },
+        "required": [
+          "opponent",
+          "opponent_answers"
+        ]
+      },
       "AnswerDto": {
         "type": "object",
         "properties": {
@@ -5016,6 +5082,12 @@
             "items": {
               "type": "string"
             }
+          },
+          "elapsed_ms": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 600000,
+            "description": "Milliseconds from showing the question to answering, as the app measured it. Duels race on it."
           }
         },
         "required": [
@@ -5072,6 +5144,9 @@
           "streak_milestone": {
             "type": "number"
           },
+          "duel_win": {
+            "type": "number"
+          },
           "total": {
             "type": "number"
           }
@@ -5081,6 +5156,7 @@
           "daily_docket",
           "daily_goal",
           "streak_milestone",
+          "duel_win",
           "total"
         ]
       },
@@ -5103,6 +5179,10 @@
           "streak_multiplier": {
             "type": "number"
           },
+          "duel_win_bonus": {
+            "type": "number",
+            "description": "Added for winning a duel"
+          },
           "total": {
             "type": "number"
           }
@@ -5113,6 +5193,7 @@
           "perfect_bonus",
           "mode_multiplier",
           "streak_multiplier",
+          "duel_win_bonus",
           "total"
         ]
       },
@@ -5174,6 +5255,42 @@
           "streak_milestone"
         ]
       },
+      "ResultDuelDto": {
+        "type": "object",
+        "properties": {
+          "opponent": {
+            "$ref": "#/components/schemas/DuelOpponentDto"
+          },
+          "player_points": {
+            "type": "number"
+          },
+          "opponent_points": {
+            "type": "number"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "won",
+              "lost",
+              "draw"
+            ]
+          },
+          "rating_before": {
+            "type": "number"
+          },
+          "rating_after": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "opponent",
+          "player_points",
+          "opponent_points",
+          "outcome",
+          "rating_before",
+          "rating_after"
+        ]
+      },
       "ResultDto": {
         "type": "object",
         "properties": {
@@ -5231,6 +5348,16 @@
           },
           "rewards": {
             "$ref": "#/components/schemas/RewardsDto"
+          },
+          "duel": {
+            "nullable": true,
+            "description": "Duels only",
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResultDuelDto"
+              }
+            ]
           }
         },
         "required": [
@@ -5246,7 +5373,8 @@
           "submitted_at",
           "duration_seconds",
           "questions",
-          "rewards"
+          "rewards",
+          "duel"
         ]
       },
       "AttemptDto": {
@@ -5507,6 +5635,26 @@
           "last_attempt_at"
         ]
       },
+      "DuelRecordDto": {
+        "type": "object",
+        "properties": {
+          "rating": {
+            "type": "number",
+            "description": "Hidden rating used to pick opponents"
+          },
+          "played": {
+            "type": "number"
+          },
+          "won": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "rating",
+          "played",
+          "won"
+        ]
+      },
       "ProgressDto": {
         "type": "object",
         "properties": {
@@ -5599,6 +5747,9 @@
             "items": {
               "$ref": "#/components/schemas/TopicProgressDto"
             }
+          },
+          "duel": {
+            "$ref": "#/components/schemas/DuelRecordDto"
           }
         },
         "required": [
@@ -5620,7 +5771,8 @@
           "attempts",
           "questions_answered",
           "correct",
-          "topics"
+          "topics",
+          "duel"
         ]
       },
       "StandingDto": {

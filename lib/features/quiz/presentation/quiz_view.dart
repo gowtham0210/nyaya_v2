@@ -544,7 +544,7 @@ class _DuelHeader extends ConsumerWidget {
     final l = context.l10n;
     final name = ref.watch(profileProvider.select((p) => p.name));
     final o = state.opponent!;
-    Widget side(String n, int seed, int points, bool alignEnd) => Expanded(
+    Widget side(String n, int seed, int points, bool alignEnd, {String? tag}) => Expanded(
       child: Row(
         mainAxisAlignment: alignEnd ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: [
@@ -554,6 +554,13 @@ class _DuelHeader extends ConsumerWidget {
               crossAxisAlignment: alignEnd ? CrossAxisAlignment.end : CrossAxisAlignment.start,
               children: [
                 Text(n, maxLines: 1, overflow: TextOverflow.ellipsis, style: context.text.labelMedium),
+                if (tag != null)
+                  Text(
+                    tag,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: context.text.labelSmall?.copyWith(color: context.nyaya.textSecondary),
+                  ),
                 Text(
                   '$points',
                   style: context.text.titleMedium?.copyWith(fontFeatures: const [FontFeature.tabularFigures()]),
@@ -574,7 +581,8 @@ class _DuelHeader extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Text(l.quizVs, style: context.text.titleSmall?.copyWith(color: AppPalette.burntClay)),
           ),
-          side(o.name, o.avatarSeed, state.opponentPoints, true),
+          // A practice player stands in when no learner's run fitted; say so.
+          side(o.name, o.avatarSeed, state.opponentPoints, true, tag: o.practice ? l.leaderboardPractice : null),
         ],
       ),
     );

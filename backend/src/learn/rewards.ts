@@ -111,13 +111,15 @@ export interface XpBreakdown {
   perfect_bonus: number;
   mode_multiplier: number;
   streak_multiplier: number;
+  /** Set by the caller when a duel is won. */
+  duel_win_bonus: number;
   total: number;
 }
 
 /**
  * XP for a finished session. Never negative: exam minus marks change the
- * score, not XP. Duels earn XP for correct answers only (the opponent is
- * simulated on the phone, so the server can't confirm a win).
+ * score, not XP. A duel win's bonus is added by the caller, which knows
+ * the duel's result.
  */
 export function sessionXp(opts: {
   mode: QuizMode;
@@ -160,6 +162,7 @@ export function sessionXp(opts: {
     perfect_bonus: perfect,
     mode_multiplier: modeMul,
     streak_multiplier: streakMul,
+    duel_win_bonus: 0,
     total: Math.round((sum + completion + perfect) * modeMul * streakMul),
   };
 }

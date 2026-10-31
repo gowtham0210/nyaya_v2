@@ -135,6 +135,9 @@ class ProfileController extends Notifier<UserProfile> {
       clearLastDocketDay: !p.docketDoneToday && state.lastDocketDay == today,
       coins: p.coins,
       energy: p.energy,
+      duelRating: p.duelRating,
+      duelsPlayed: p.duelsPlayed,
+      duelsWon: p.duelsWon,
       energyDay: today,
       isPremium: p.premium,
       aiMessagesToday: p.chatUsedToday,
@@ -176,12 +179,6 @@ class ProfileController extends Notifier<UserProfile> {
   void applyQuizEconomy({required int coins, required int energyBonus}) => _set(state.copyWith(
         coins: state.coins + coins,
         energy: state.isPremium ? state.energy : state.energy + energyBonus,
-      ));
-
-  void applyDuel({required int newRating, required bool won}) => _set(state.copyWith(
-        duelRating: newRating,
-        duelsPlayed: state.duelsPlayed + 1,
-        duelsWon: state.duelsWon + (won ? 1 : 0),
       ));
 
   /// Copies the server's league: this week's tier, and last week's result

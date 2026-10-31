@@ -162,7 +162,11 @@ describe('learner quizzes', () => {
         'c',
       ]);
     }
-    const raw = JSON.stringify(s);
+    // The duel opponent's run says only whether they were right and how fast,
+    // never which option is right; everything else must not mention it.
+    for (const a of s.duel.opponent_answers)
+      expect(Object.keys(a).sort()).toEqual(['correct', 'elapsed_ms']);
+    const raw = JSON.stringify({ ...s, duel: undefined });
     expect(raw).not.toContain('correct');
     expect(raw).not.toContain(SECRET);
     for (const hidden of ['DRAFT', 'RETIRED', 'FUTURE', 'EXPIRED', 'HINDI'])

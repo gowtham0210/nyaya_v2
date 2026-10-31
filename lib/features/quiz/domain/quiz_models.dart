@@ -112,19 +112,43 @@ class AnswerRecord {
       );
 }
 
+/// Who a duel races: another learner's recorded run ("Asha K."), or a
+/// practice player when none fitted. Picked by the server.
 @immutable
 class DuelOpponent {
-  const DuelOpponent({
-    required this.name,
-    required this.avatarSeed,
-    required this.rating,
-    required this.city,
-  });
+  const DuelOpponent({required this.name, required this.rating, required this.practice});
 
   final String name;
-  final int avatarSeed;
   final int rating;
-  final String city;
+  final bool practice;
+
+  /// Avatar colour, the same for the same name.
+  int get avatarSeed => name.hashCode & 0xFFFFF;
+}
+
+/// One of the opponent's recorded answers: right or not, and how long it took.
+@immutable
+class OpponentAnswer {
+  const OpponentAnswer({required this.correct, required this.elapsedMs});
+
+  final bool correct;
+  final int elapsedMs;
+}
+
+/// How a duel ended, as the server settled it.
+@immutable
+class DuelOutcome {
+  const DuelOutcome({
+    required this.playerPoints,
+    required this.opponentPoints,
+    required this.ratingBefore,
+    required this.ratingAfter,
+  });
+
+  final int playerPoints;
+  final int opponentPoints;
+  final int ratingBefore;
+  final int ratingAfter;
 }
 
 @immutable

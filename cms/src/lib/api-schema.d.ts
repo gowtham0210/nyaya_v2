@@ -1127,6 +1127,8 @@ export interface components {
             /** Format: date-time */
             submitted_at: string | null;
             questions: components["schemas"]["SessionQuestionDto"][];
+            /** @description Duels only */
+            duel: components["schemas"]["SessionDuelDto"] | null;
         };
         RegisterDto: {
             /** @example asha@example.com */
@@ -1779,6 +1781,22 @@ export interface components {
             /** @description Only after this question is answered (immediate mode) or the session is submitted */
             feedback: components["schemas"]["FeedbackDto"] | null;
         };
+        DuelOpponentDto: {
+            /** @description "Asha K.", or a practice player's name */
+            name: string;
+            rating: number;
+            /** @description A practice player, used when no learner's duel fitted */
+            practice: boolean;
+        };
+        DuelAnswerDto: {
+            correct: boolean;
+            elapsed_ms: number;
+        };
+        SessionDuelDto: {
+            opponent: components["schemas"]["DuelOpponentDto"];
+            /** @description The opponent's run, in question order: whether each answer was right and how long it took */
+            opponent_answers: components["schemas"]["DuelAnswerDto"][];
+        };
         AnswerDto: {
             position: number;
             /**
@@ -1787,6 +1805,8 @@ export interface components {
              *     ]
              */
             selected_option_ids: string[];
+            /** @description Milliseconds from showing the question to answering, as the app measured it. Duels race on it. */
+            elapsed_ms?: number;
         };
         AnswerResultDto: {
             position: number;
@@ -1801,6 +1821,7 @@ export interface components {
             daily_docket: number;
             daily_goal: number;
             streak_milestone: number;
+            duel_win: number;
             total: number;
         };
         XpBreakdownDto: {
@@ -1810,6 +1831,8 @@ export interface components {
             /** @description 1.25 for the docket, 0.5 for replaying a 3-star level, else 1 */
             mode_multiplier: number;
             streak_multiplier: number;
+            /** @description Added for winning a duel */
+            duel_win_bonus: number;
             total: number;
         };
         RewardsDto: {
@@ -1832,6 +1855,15 @@ export interface components {
             /** @description 3, 7, 14 … days */
             streak_milestone: number | null;
         };
+        ResultDuelDto: {
+            opponent: components["schemas"]["DuelOpponentDto"];
+            player_points: number;
+            opponent_points: number;
+            /** @enum {string} */
+            outcome: "won" | "lost" | "draw";
+            rating_before: number;
+            rating_after: number;
+        };
         ResultDto: {
             /** Format: uuid */
             session_id: string;
@@ -1850,6 +1882,8 @@ export interface components {
             duration_seconds: number;
             questions: components["schemas"]["SessionQuestionDto"][];
             rewards: components["schemas"]["RewardsDto"];
+            /** @description Duels only */
+            duel: components["schemas"]["ResultDuelDto"] | null;
         };
         AttemptDto: {
             /** Format: uuid */
@@ -1924,6 +1958,12 @@ export interface components {
             /** Format: date-time */
             last_attempt_at: string;
         };
+        DuelRecordDto: {
+            /** @description Hidden rating used to pick opponents */
+            rating: number;
+            played: number;
+            won: number;
+        };
         ProgressDto: {
             /**
              * Format: date
@@ -1963,6 +2003,7 @@ export interface components {
             questions_answered: number;
             correct: number;
             topics: components["schemas"]["TopicProgressDto"][];
+            duel: components["schemas"]["DuelRecordDto"];
         };
         StandingDto: {
             rank: number;

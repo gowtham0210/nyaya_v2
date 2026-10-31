@@ -153,6 +153,7 @@ describe('coins, energy, premium and settings', () => {
       daily_docket: 0,
       daily_goal: 15,
       streak_milestone: 0,
+      duel_win: 0,
       total: 30,
     });
     expect(result.rewards.energy_bonus).toBe(1);

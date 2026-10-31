@@ -16,6 +16,8 @@ import {
 import { APP_CONFIG, type AppConfig } from '../core/config.js';
 import { DB, type Db, type Tx } from '../core/db.js';
 import { AuditService, type Actor } from '../core/audit.service.js';
+import { DuelService, type Ghost } from './duel.service.js';
+import { DUEL } from './duel.js';
 import { ApiError } from '../core/errors.js';
 import { newId } from '../core/ids.js';
 import { decodeCursor, toPage, type Page } from '../core/pagination.js';
@@ -123,6 +125,7 @@ interface Row {
   optionOrder: string[];
   selectedOptionIds: string[] | null;
   answeredAt: Date | null;
+  elapsedMs: number | null;
   difficulty: number;
   questionType: string;
   stem: string;
@@ -152,6 +155,7 @@ export class LearnService {
     private readonly audit: AuditService,
     private readonly league: LeagueService,
     private readonly review: ReviewService,
+    private readonly duels: DuelService,
   ) {}
 
   /** For read-only helpers the controller calls directly. */
@@ -296,6 +300,21 @@ export class LearnService {
           'Not enough energy for this quiz today',
         );
 
+      // A duel races another learner's run of the same questions when one fits.
+      let duelRating: number = DUEL.startingRating;
+      let ghost: Ghost | null = null;
+      if (dto.mode === 'duel') {
+        duelRating = (await this.duels.record(tx, userId)).rating;
+        ghost = await this.duels.findGhost(tx, {
+          userId,
+          rating: duelRating,
+          language,
+          topicIds,
+          count: wanted,
+          now,
+        });
+      }
+
       const where = [this.eligible(language, now)];
       if (dto.mode === 'mistake_review') {
         // Your own mistakes, whatever their topic or difficulty.
@@ -313,21 +332,25 @@ export class LearnService {
         where.push(gte(questionVersions.difficulty, minDifficulty));
       if (maxDifficulty)
         where.push(lte(questionVersions.difficulty, maxDifficulty));
-      const picked = (await this.liveVersions(tx, {
-        id: questionVersions.id,
-        options: questionVersions.options,
-      })
-        .where(and(...where))
-        // A daily set is ordered by a hash of the date, so everyone gets the same questions.
-        .orderBy(
-          daily
-            ? sql`md5(${questionVersions.id}::text || ${daily})`
-            : sql`random()`,
-        )
-        .limit(wanted)) as unknown as {
-        id: string;
-        options: QuestionOption[];
-      }[];
+      const picked =
+        ghost?.questions ??
+        ((await this.liveVersions(tx, {
+          id: questionVersions.id,
+          options: questionVersions.options,
+          difficulty: questionVersions.difficulty,
+        })
+          .where(and(...where))
+          // A daily set is ordered by a hash of the date, so everyone gets the same questions.
+          .orderBy(
+            daily
+              ? sql`md5(${questionVersions.id}::text || ${daily})`
+              : sql`random()`,
+          )
+          .limit(wanted)) as unknown as {
+          id: string;
+          options: QuestionOption[];
+          difficulty: number;
+        }[]);
       if (picked.length === 0) {
         throw err(
           HttpStatus.UNPROCESSABLE_ENTITY,
@@ -363,6 +386,13 @@ export class LearnService {
           optionOrder: shuffled(p.options.map((o) => o.id)),
         })),
       );
+      if (dto.mode === 'duel')
+        await this.duels.open(tx, {
+          sessionId,
+          rating: duelRating,
+          ghost,
+          questions: picked,
+        });
       // Charged when the quiz starts, never mid-quiz.
       await addEnergy(tx, {
         userId,
@@ -429,9 +459,8 @@ export class LearnService {
           'session_submitted',
           'This quiz has already been submitted',
         );
-      const [q] = (await this.rows(tx, s.id)).filter(
-        (r) => r.position === dto.position,
-      );
+      const all = await this.rows(tx, s.id);
+      const [q] = all.filter((r) => r.position === dto.position);
       if (!q)
         throw err(
           HttpStatus.BAD_REQUEST,
@@ -479,12 +508,25 @@ export class LearnService {
       }
 
       const answeredAt = new Date();
+      // The app's time, never longer than the server saw since the last answer.
+      const since = Math.max(
+        s.startedAt.getTime(),
+        ...all.map((r) => r.answeredAt?.getTime() ?? 0),
+      );
+      const elapsedMs =
+        dto.elapsed_ms === undefined
+          ? null
+          : Math.max(
+              DUEL.minAnswerMs,
+              Math.min(dto.elapsed_ms, answeredAt.getTime() - since),
+            );
       await tx
         .update(quizSessionQuestions)
         .set({
           selectedOptionIds: selected,
           answeredAt,
           isCorrect: isCorrect(selected, q.correctOptionIds),
+          elapsedMs,
         })
         .where(
           and(
@@ -513,6 +555,17 @@ export class LearnService {
         const submittedAt = new Date();
         const scored = scoreSession(rows);
         const finished = { ...s, ...scored, submittedAt };
+        if (s.mode === 'duel')
+          await this.duels.settle(tx, {
+            sessionId: s.id,
+            userId,
+            answers: rows.map((q) => ({
+              correct:
+                !!q.selectedOptionIds &&
+                isCorrect(q.selectedOptionIds, q.correctOptionIds),
+              elapsedMs: q.answeredAt ? q.elapsedMs : null,
+            })),
+          });
         const rewards = await this.rewards(tx, finished, rows);
         await tx
           .update(quizSessions)
@@ -521,13 +574,18 @@ export class LearnService {
         await ensureWelcome(tx, userId);
         const pay = (
           reason:
-            'new_stars' | 'daily_docket' | 'daily_goal' | 'streak_milestone',
+            | 'new_stars'
+            | 'daily_docket'
+            | 'daily_goal'
+            | 'streak_milestone'
+            | 'duel_win',
           amount: number,
         ) => addCoins(tx, { userId, amount, reason, sessionId: s.id });
         await pay('new_stars', rewards.coins.new_stars);
         await pay('daily_docket', rewards.coins.daily_docket);
         await pay('daily_goal', rewards.coins.daily_goal);
         await pay('streak_milestone', rewards.coins.streak_milestone);
+        await pay('duel_win', rewards.coins.duel_win);
         await addEnergy(tx, {
           userId,
           amount: rewards.energy_bonus,
@@ -666,6 +724,7 @@ export class LearnService {
     const premium = await isPremium(this.db, userId, this.premiumOpts);
     return {
       ...summary,
+      duel: await this.duels.record(this.db, userId),
       coins: await coinBalance(this.db, userId),
       energy: {
         today: await energyToday(this.db, userId),
@@ -878,13 +937,15 @@ export class LearnService {
       daily_docket: coin('daily_docket'),
       daily_goal: coin('daily_goal'),
       streak_milestone: coin('streak_milestone'),
+      duel_win: coin('duel_win'),
       total: 0,
     };
     coins.total =
       coins.new_stars +
       coins.daily_docket +
       coins.daily_goal +
-      coins.streak_milestone;
+      coins.streak_milestone +
+      coins.duel_win;
     return {
       ...r,
       xp: { ...r.xp, total: s.xpAwarded ?? 0 },
@@ -958,6 +1019,12 @@ export class LearnService {
     });
     // A second docket on the same day earns nothing (the first one counts).
     if (docketAgain) xp.total = 0;
+    // A duel won against a recorded run or a practice player, settled on submit.
+    const duelWon = s.mode === 'duel' && (await this.duels.won(tx, s.id));
+    if (duelWon) {
+      xp.duel_win_bonus = DUEL.winXp;
+      xp.total += DUEL.winXp;
+    }
 
     const newStars = got === null ? 0 : Math.max(0, got - bestBefore);
     const milestone = extended ? milestoneFor(after.streak) : null;
@@ -978,13 +1045,15 @@ export class LearnService {
       streak_milestone: milestone
         ? (ECONOMY.streakMilestoneCoins[milestone] ?? 0)
         : 0,
+      duel_win: duelWon ? DUEL.winCoins : 0,
       total: 0,
     };
     coins.total =
       coins.new_stars +
       coins.daily_docket +
       coins.daily_goal +
-      coins.streak_milestone;
+      coins.streak_milestone +
+      coins.duel_win;
     const energyBonus =
       got === 3 &&
       bestBefore < 3 &&
@@ -1185,6 +1254,7 @@ export class LearnService {
         optionOrder: quizSessionQuestions.optionOrder,
         selectedOptionIds: quizSessionQuestions.selectedOptionIds,
         answeredAt: quizSessionQuestions.answeredAt,
+        elapsedMs: quizSessionQuestions.elapsedMs,
         difficulty: questionVersions.difficulty,
         questionType: questionVersions.questionType,
         stem: questionVersions.stem,
@@ -1270,6 +1340,7 @@ export class LearnService {
       expires_at: sessionDeadline(s.startedAt, s.questionCount).toISOString(),
       submitted_at: s.submittedAt?.toISOString() ?? null,
       questions: rows.map((q) => this.questionView(s, q)),
+      duel: s.mode === 'duel' ? await this.duels.sessionView(tx, s.id) : null,
     };
   }
 
@@ -1295,6 +1366,7 @@ export class LearnService {
         { ...s, submittedAt: s.submittedAt! },
         rows,
       ),
+      duel: s.mode === 'duel' ? await this.duels.resultView(tx, s.id) : null,
     };
   }
 }

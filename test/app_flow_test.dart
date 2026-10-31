@@ -384,6 +384,45 @@ void main() {
     expect(find.text('Leaderboard'), findsNothing);
   });
 
+  testWidgets('a duel races the opponent the server picked, and the server settles it', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    const duel = QuizRequest(QuizMode.duel);
+    c.read(routerProvider).push(Routes.quiz, extra: duel);
+    await settle(tester);
+
+    // The opponent comes from the server, not a made-up list.
+    expect(find.text('Asha K.'), findsWidgets);
+    expect(find.text('Practice player'), findsNothing);
+    final count = c.read(quizControllerProvider(duel)).questions.length;
+    for (var i = 0; i < count; i++) {
+      final q = c.read(quizControllerProvider(duel)).current;
+      await tester.tap(find.text(api.correctTextFor(q.id)).first);
+      await settle(tester);
+      await tester.tap(find.text(i == count - 1 ? 'FINISH' : 'NEXT'));
+      await settle(tester);
+    }
+    expect(find.text('You won the duel!'), findsOneWidget);
+    // The answer times reached the server, and the record is the server's.
+    expect(api.duelsWon, 1);
+    final p = c.read(profileProvider);
+    expect((p.duelRating, p.duelsPlayed, p.duelsWon), (1016, 1, 1));
+  });
+
+  testWidgets('a practice opponent is labelled as one', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, server: (s) => s.practiceOpponent = true);
+    await settle(tester);
+    c.read(routerProvider).push(Routes.quiz, extra: const QuizRequest(QuizMode.duel));
+    await settle(tester);
+    expect(find.text('Meera K.'), findsWidgets);
+    expect(find.text('Practice player'), findsOneWidget);
+    // Leave the quiz, so its countdown stops.
+    c.read(routerProvider).go(Routes.home);
+    await settle(tester);
+  });
+
   testWidgets('save and report a question, then find it on the Review page', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});

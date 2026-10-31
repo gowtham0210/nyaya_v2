@@ -49,10 +49,14 @@ class QuizCatalog {
 
 @immutable
 class StartedQuiz {
-  const StartedQuiz({required this.sessionId, required this.questions});
+  const StartedQuiz({required this.sessionId, required this.questions, this.opponent, this.opponentAnswers = const []});
 
   final String sessionId;
   final List<Question> questions;
+
+  /// Duels: who the server picked, and their run in question order.
+  final DuelOpponent? opponent;
+  final List<OpponentAnswer> opponentAnswers;
 }
 
 /// The server's verdict on one answer.
@@ -66,7 +70,16 @@ class Verdict {
 
 @immutable
 class SubmittedQuiz {
-  const SubmittedQuiz({required this.score, required this.total, required this.verdicts, required this.rewards});
+  const SubmittedQuiz({
+    required this.score,
+    required this.total,
+    required this.verdicts,
+    required this.rewards,
+    this.duel,
+  });
+
+  /// Duels: points, result and rating as the server settled them.
+  final DuelOutcome? duel;
 
   /// Under the session's scoring rules; an exam with minus marks can be fractional.
   final double score;
@@ -93,7 +106,14 @@ abstract interface class QuizApi {
 
   /// Saves an answer. Practice sessions return the verdict at once; exam
   /// sessions return null and reveal everything on [submit].
-  Future<Verdict?> answer(String sessionId, {required int position, required Question question, required int option});
+  /// [elapsedMs] is how long the learner took; duels race on it.
+  Future<Verdict?> answer(
+    String sessionId, {
+    required int position,
+    required Question question,
+    required int option,
+    int? elapsedMs,
+  });
 
   Future<SubmittedQuiz> submit(String sessionId, List<Question> questions);
 
@@ -133,8 +153,21 @@ class HttpQuizApi implements QuizApi {
       if (plan.minDifficulty != null) 'min_difficulty': plan.minDifficulty,
       if (plan.maxDifficulty != null) 'max_difficulty': plan.maxDifficulty,
     }) as Map<String, dynamic>;
+    final duel = j['duel'] as Map<String, dynamic>?;
+    final opponent = duel?['opponent'] as Map<String, dynamic>?;
     return StartedQuiz(
       sessionId: j['id'] as String,
+      opponent: opponent == null
+          ? null
+          : DuelOpponent(
+              name: opponent['name'] as String,
+              rating: opponent['rating'] as int,
+              practice: opponent['practice'] as bool,
+            ),
+      opponentAnswers: [
+        for (final a in (duel?['opponent_answers'] as List? ?? const []).cast<Map<String, dynamic>>())
+          OpponentAnswer(correct: a['correct'] as bool, elapsedMs: a['elapsed_ms'] as int),
+      ],
       questions: [
         for (final q in (j['questions'] as List).cast<Map<String, dynamic>>())
           Question(
@@ -151,10 +184,17 @@ class HttpQuizApi implements QuizApi {
   }
 
   @override
-  Future<Verdict?> answer(String sessionId, {required int position, required Question question, required int option}) async {
+  Future<Verdict?> answer(
+    String sessionId, {
+    required int position,
+    required Question question,
+    required int option,
+    int? elapsedMs,
+  }) async {
     final j = await _client.post('/v1/quiz-sessions/$sessionId/answers', body: {
       'position': position,
       'selected_option_ids': [question.optionIds[option]],
+      'elapsed_ms': ?elapsedMs,
     }) as Map<String, dynamic>;
     final feedback = j['feedback'] as Map<String, dynamic>?;
     return feedback == null ? null : _verdict(feedback, question);
@@ -166,9 +206,18 @@ class HttpQuizApi implements QuizApi {
     final byPosition = {
       for (final q in (j['questions'] as List).cast<Map<String, dynamic>>()) q['position'] as int: q,
     };
+    final duel = j['duel'] as Map<String, dynamic>?;
     return SubmittedQuiz(
       score: (j['score'] as num).toDouble(),
       total: j['total'] as int,
+      duel: duel == null
+          ? null
+          : DuelOutcome(
+              playerPoints: duel['player_points'] as int,
+              opponentPoints: duel['opponent_points'] as int,
+              ratingBefore: duel['rating_before'] as int,
+              ratingAfter: duel['rating_after'] as int,
+            ),
       rewards: ServerRewards.fromJson(j['rewards'] as Map<String, dynamic>),
       verdicts: [
         for (var i = 0; i < questions.length; i++)

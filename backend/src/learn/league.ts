@@ -128,6 +128,12 @@ function seeded(seed: string) {
   };
 }
 
+/** A practice player's name ("Meera K."), always the same for the same seed. */
+export function practiceName(seed: string): string {
+  const rnd = seeded(seed);
+  return `${FIRST[Math.floor(rnd() * FIRST.length)]} ${INITIAL[Math.floor(rnd() * INITIAL.length)]}.`;
+}
+
 export interface PracticePlayer {
   name: string;
   xp: number;

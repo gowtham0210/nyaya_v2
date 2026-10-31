@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/api/api_client.dart';
 
 import '../../../core/config/game_rules.dart';
-import '../../gamification/domain/league.dart';
 import '../../gamification/domain/reward_summary.dart';
 import '../../gamification/domain/xp_calculator.dart';
 import '../../journey/application/journey_controller.dart';
@@ -16,8 +15,8 @@ import '../../progress/domain/server_progress.dart';
 import '../domain/quiz_models.dart';
 
 /// Coordinates every side effect of finishing a quiz. XP, stars, the streak,
-/// coins and energy come from the server ([ServerRewards], [ServerProgress]);
-/// only the duel rating (simulated opponent) is worked out on the phone.
+/// coins, energy and the duel's result and rating come from the server
+/// ([ServerRewards], [ServerProgress], [DuelOutcome]).
 class QuizCompletionService {
   QuizCompletionService(this.ref);
 
@@ -30,6 +29,7 @@ class QuizCompletionService {
     ServerRewards rewards,
     ServerProgress? progress, {
     LeagueView? league,
+    DuelOutcome? duel,
   }) {
     final profileCtl = ref.read(profileProvider.notifier);
     final before = ref.read(profileProvider);
@@ -47,22 +47,8 @@ class QuizCompletionService {
     final unlockedNext = isCasePath && rewards.bestStarsBefore == 0 && stars > 0;
     final goalReached = (progress?.quizzesToday ?? before.quizzesToday + 1) == before.dailyGoal;
 
-    // ── Duel rating (hidden Elo, simulated opponent) ───────────────────────
-    int? ratingDelta;
-    if (result.request.mode == QuizMode.duel && result.opponent != null) {
-      final score = result.duelDraw ? 0.5 : (result.duelWon! ? 1.0 : 0.0);
-      final k = before.duelsPlayed < GameRules.provisionalDuels
-          ? GameRules.eloKProvisional
-          : GameRules.eloKSettled;
-      final updated = Elo.update(
-        rating: before.duelRating,
-        opponent: result.opponent!.rating,
-        score: score,
-        k: k,
-      );
-      ratingDelta = updated - before.duelRating;
-      profileCtl.applyDuel(newRating: updated, won: result.duelWon!);
-    }
+    // ── Duel rating, settled by the server ────────────────────────────────
+    final ratingDelta = duel == null ? null : duel.ratingAfter - duel.ratingBefore;
 
     // Coins and energy come with the server's progress; without it, show the rewards.
     if (progress == null) profileCtl.applyQuizEconomy(coins: rewards.coins, energyBonus: rewards.energyBonus);
@@ -74,7 +60,7 @@ class QuizCompletionService {
         perfectBonus: rewards.perfectBonus,
         modeMultiplier: rewards.modeMultiplier,
         streakMultiplier: rewards.streakMultiplier,
-        duelBonus: 0,
+        duelBonus: rewards.duelBonus,
         total: rewards.xp,
       ),
       coins: rewards.coins,

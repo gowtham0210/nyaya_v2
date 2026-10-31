@@ -2,6 +2,7 @@ import 'package:nyaya/core/api/api_client.dart';
 import 'package:nyaya/core/api/token_store.dart';
 import 'package:nyaya/core/utils/day.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
+import 'package:nyaya/features/gamification/domain/xp_calculator.dart';
 import 'package:nyaya/features/journey/domain/journey.dart';
 import 'package:nyaya/features/leaderboard/data/league_api.dart';
 import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
@@ -18,6 +19,12 @@ import 'package:nyaya/features/reminders/data/reminder_notifications.dart';
 /// key to itself (questions handed to the app carry none) and owns stars, XP,
 /// the streak, coins and energy, with simpler XP than the real rules.
 class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
+  /// The next duel's opponent is a practice player (no learner's run fitted).
+  bool practiceOpponent = false;
+  int duelRating = 1000;
+  int duelsPlayed = 0;
+  int duelsWon = 0;
+
   FakeQuizApi({this.perLevel = 6}) {
     for (final c in JourneyCatalog.chapters) {
       for (var d = 1; d <= 3; d++) {
@@ -81,8 +88,17 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
       negativeMarking: plan.negativeMarking,
       cost: cost,
     );
+    // Duels race a recorded run: every answer wrong, so a learner who knows the answers wins.
+    final duel = plan.mode == QuizMode.duel;
     return StartedQuiz(
       sessionId: id,
+      opponent: duel
+          ? DuelOpponent(name: practiceOpponent ? 'Meera K.' : 'Asha K.', rating: 1000, practice: practiceOpponent)
+          : null,
+      opponentAnswers: [
+        if (duel)
+          for (final _ in picked) const OpponentAnswer(correct: false, elapsedMs: 5000),
+      ],
       questions: [
         for (final q in picked)
           Question(
@@ -99,13 +115,20 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
   }
 
   @override
-  Future<Verdict?> answer(String sessionId, {required int position, required Question question, required int option}) async {
+  Future<Verdict?> answer(
+    String sessionId, {
+    required int position,
+    required Question question,
+    required int option,
+    int? elapsedMs,
+  }) async {
     if (failNextAnswer) {
       failNextAnswer = false;
       throw const ApiException(0, 'network', 'offline');
     }
     final s = _sessions[sessionId]!;
     s.selected[position - 1] = option;
+    if (elapsedMs != null) s.elapsed[position - 1] = elapsedMs;
     final verdict = s.revealAtEnd ? null : _verdict(s.questions[position - 1], option);
     verdictsSent.add(verdict);
     return verdict;
@@ -131,7 +154,26 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
     final got = level == null ? null : _stars(correct, total);
     if (level != null && got! > before) stars[level] = got;
     final extended = quizzesCompleted == 0;
-    final xp = correct * 10 + 10 + (correct == total ? 10 : 0);
+    // Duels: the opponent got nothing, so any right answer wins.
+    DuelOutcome? duel;
+    if (s.mode == QuizMode.duel) {
+      final points = [
+        for (var i = 0; i < verdicts.length; i++)
+          XpCalculator.duelPoints(correct: verdicts[i].correct, elapsedMs: s.elapsed[i] ?? 15000, limitSeconds: 15),
+      ].fold(0, (a, b) => a + b);
+      final won = points > 0;
+      duel = DuelOutcome(
+        playerPoints: points,
+        opponentPoints: 0,
+        ratingBefore: duelRating,
+        ratingAfter: duelRating + (won ? 16 : -16),
+      );
+      duelRating = duel.ratingAfter;
+      duelsPlayed++;
+      if (won) duelsWon++;
+    }
+    final duelBonus = duel != null && duel.playerPoints > duel.opponentPoints ? 15 : 0;
+    final xp = correct * 10 + 10 + (correct == total ? 10 : 0) + duelBonus;
     totalXp += xp;
     quizzesCompleted++;
     if (s.mode == QuizMode.dailyDocket) docketDone = true;
@@ -145,6 +187,7 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
       score: s.negativeMarking ? correct - 0.25 * wrong : correct.toDouble(),
       total: total,
       verdicts: verdicts,
+      duel: duel,
       rewards: ServerRewards(
         questionXp: correct * 10,
         completionBonus: 10,
@@ -161,6 +204,7 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
         streakMilestone: null,
         coins: coinsEarned,
         energyBonus: energyBonus,
+        duelBonus: duelBonus,
       ),
     );
   }
@@ -343,6 +387,9 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
       premium: premium,
       settings: settings,
       chatUsedToday: 0,
+      duelRating: duelRating,
+      duelsPlayed: duelsPlayed,
+      duelsWon: duelsWon,
     );
   }
 
@@ -382,6 +429,7 @@ class _FakeSession {
   final bool negativeMarking;
   final int cost;
   final selected = <int, int>{};
+  final elapsed = <int, int>{};
 }
 
 /// Accepts any email and password; stores a session like the real one.

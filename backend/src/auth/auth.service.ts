@@ -1,7 +1,7 @@
 import { createHash, randomBytes } from 'node:crypto';
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { and, eq, isNull, or } from 'drizzle-orm';
+import { and, eq, inArray, isNull, or } from 'drizzle-orm';
 import { AuditService } from '../core/audit.service.js';
 import { APP_CONFIG, type AppConfig } from '../core/config.js';
 import { DB, type Db, type Tx } from '../core/db.js';
@@ -11,6 +11,7 @@ import { RateLimitStore } from '../core/rate-limits.js';
 import {
   auditLog,
   contentReports,
+  duelMatches,
   quizSessions,
   refreshTokens,
   users,
@@ -242,6 +243,19 @@ export class AuthService {
         'The password is not right',
       );
     await this.db.transaction(async (tx) => {
+      // Their name leaves the duels other learners raced against them.
+      await tx
+        .update(duelMatches)
+        .set({ opponentName: 'Former learner' })
+        .where(
+          inArray(
+            duelMatches.opponentSessionId,
+            tx
+              .select({ id: quizSessions.id })
+              .from(quizSessions)
+              .where(eq(quizSessions.userId, userId)),
+          ),
+        );
       await tx.delete(quizSessions).where(eq(quizSessions.userId, userId));
       // The row's user_id is set to null when the account goes; the comment is cleared first.
       await tx

@@ -19,6 +19,7 @@ import {
   FEEDBACK_MODES,
   PERSONAS,
   QUIZ_MODES,
+  DUEL_OUTCOMES,
   type FeedbackMode,
   type QuizMode,
 } from '../db/schema.js';
@@ -27,6 +28,7 @@ export const SESSION_STATUSES = ['in_progress', 'submitted'] as const;
 export type SessionStatus = (typeof SESSION_STATUSES)[number];
 import { OptionDto } from '../questions/questions.dto.js';
 import { SUPPORTED_LANGUAGES } from '../questions/workflow.js';
+import type { DuelOutcome } from './duel.js';
 import { MAX_QUESTIONS } from './scoring.js';
 
 export class CatalogQuery {
@@ -144,6 +146,18 @@ export class AnswerDto {
   @IsString({ each: true })
   @MaxLength(8, { each: true })
   selected_option_ids: string[];
+
+  @ApiPropertyOptional({
+    minimum: 0,
+    maximum: 600000,
+    description:
+      'Milliseconds from showing the question to answering, as the app measured it. Duels race on it.',
+  })
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  @Max(600000)
+  elapsed_ms?: number;
 }
 
 export class FeedbackDto {
@@ -183,6 +197,31 @@ export class SessionQuestionDto {
   feedback: FeedbackDto | null;
 }
 
+export class DuelOpponentDto {
+  @ApiProperty({ description: '"Asha K.", or a practice player\'s name' })
+  name: string;
+  @ApiProperty() rating: number;
+  @ApiProperty({
+    description: "A practice player, used when no learner's duel fitted",
+  })
+  practice: boolean;
+}
+
+export class DuelAnswerDto {
+  @ApiProperty() correct: boolean;
+  @ApiProperty() elapsed_ms: number;
+}
+
+export class SessionDuelDto {
+  @ApiProperty({ type: DuelOpponentDto }) opponent: DuelOpponentDto;
+  @ApiProperty({
+    type: [DuelAnswerDto],
+    description:
+      "The opponent's run, in question order: whether each answer was right and how long it took",
+  })
+  opponent_answers: DuelAnswerDto[];
+}
+
 export class SessionDto {
   @ApiProperty({ format: 'uuid' }) id: string;
   @ApiProperty({ enum: QUIZ_MODES }) mode: QuizMode;
@@ -205,6 +244,12 @@ export class SessionDto {
   @ApiProperty({ type: String, format: 'date-time', nullable: true })
   submitted_at: string | null;
   @ApiProperty({ type: [SessionQuestionDto] }) questions: SessionQuestionDto[];
+  @ApiProperty({
+    type: SessionDuelDto,
+    nullable: true,
+    description: 'Duels only',
+  })
+  duel: SessionDuelDto | null;
 }
 
 export class AnswerResultDto {
@@ -229,6 +274,8 @@ export class XpBreakdownDto {
   })
   mode_multiplier: number;
   @ApiProperty() streak_multiplier: number;
+  @ApiProperty({ description: 'Added for winning a duel' })
+  duel_win_bonus: number;
   @ApiProperty() total: number;
 }
 
@@ -237,6 +284,7 @@ export class CoinsEarnedDto {
   @ApiProperty() daily_docket: number;
   @ApiProperty() daily_goal: number;
   @ApiProperty() streak_milestone: number;
+  @ApiProperty() duel_win: number;
   @ApiProperty() total: number;
 }
 
@@ -267,6 +315,15 @@ export class RewardsDto {
   streak_milestone: number | null;
 }
 
+export class ResultDuelDto {
+  @ApiProperty({ type: DuelOpponentDto }) opponent: DuelOpponentDto;
+  @ApiProperty() player_points: number;
+  @ApiProperty() opponent_points: number;
+  @ApiProperty({ enum: DUEL_OUTCOMES }) outcome: DuelOutcome;
+  @ApiProperty() rating_before: number;
+  @ApiProperty() rating_after: number;
+}
+
 export class ResultDto {
   @ApiProperty({ format: 'uuid' }) session_id: string;
   @ApiProperty({ enum: QUIZ_MODES }) mode: QuizMode;
@@ -281,6 +338,12 @@ export class ResultDto {
   @ApiProperty() duration_seconds: number;
   @ApiProperty({ type: [SessionQuestionDto] }) questions: SessionQuestionDto[];
   @ApiProperty({ type: RewardsDto }) rewards: RewardsDto;
+  @ApiProperty({
+    type: ResultDuelDto,
+    nullable: true,
+    description: 'Duels only',
+  })
+  duel: ResultDuelDto | null;
 }
 
 export class AttemptsQuery {
@@ -398,6 +461,13 @@ export class SettingsDto {
   onboarded: boolean;
 }
 
+export class DuelRecordDto {
+  @ApiProperty({ description: 'Hidden rating used to pick opponents' })
+  rating: number;
+  @ApiProperty() played: number;
+  @ApiProperty() won: number;
+}
+
 export class ProgressDto {
   @ApiProperty({
     format: 'date',
@@ -440,6 +510,7 @@ export class ProgressDto {
   @ApiProperty() questions_answered: number;
   @ApiProperty() correct: number;
   @ApiProperty({ type: [TopicProgressDto] }) topics: TopicProgressDto[];
+  @ApiProperty({ type: DuelRecordDto }) duel: DuelRecordDto;
 }
 
 export class StandingDto {

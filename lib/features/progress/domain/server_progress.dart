@@ -28,6 +28,9 @@ class ServerProgress {
     required this.energy,
     required this.premium,
     required this.settings,
+    this.duelRating,
+    this.duelsPlayed,
+    this.duelsWon,
     required this.chatUsedToday,
   });
 
@@ -58,6 +61,11 @@ class ServerProgress {
   /// Energy left today (premium quizzes cost none).
   final int energy;
   final bool premium;
+
+  /// Hidden duel rating and record; null from a server without duels.
+  final int? duelRating;
+  final int? duelsPlayed;
+  final int? duelsWon;
 
   /// Null until the account has saved settings once.
   final ServerSettings? settings;
@@ -93,6 +101,9 @@ class ServerProgress {
       premium: j['premium'] as bool,
       settings: j['settings'] == null ? null : ServerSettings.fromJson(j['settings'] as Map<String, dynamic>),
       chatUsedToday: (j['chat'] as Map<String, dynamic>)['used_today'] as int,
+      duelRating: (j['duel'] as Map<String, dynamic>?)?['rating'] as int?,
+      duelsPlayed: (j['duel'] as Map<String, dynamic>?)?['played'] as int?,
+      duelsWon: (j['duel'] as Map<String, dynamic>?)?['won'] as int?,
     );
   }
 }
@@ -153,7 +164,11 @@ class ServerRewards {
     required this.streakMilestone,
     required this.coins,
     required this.energyBonus,
+    this.duelBonus = 0,
   });
+
+  /// XP added for winning a duel.
+  final int duelBonus;
 
   /// Coins the server paid for this quiz.
   final int coins;
@@ -192,6 +207,7 @@ class ServerRewards {
       streakMilestone: j['streak_milestone'] as int?,
       coins: (j['coins'] as Map<String, dynamic>)['total'] as int,
       energyBonus: j['energy_bonus'] as int,
+      duelBonus: xp['duel_win_bonus'] as int? ?? 0,
     );
   }
 }
