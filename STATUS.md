@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-31 (real duel opponents, Claude Opus 5.5)
+> Last updated: 2026-10-31 (quiz modes back on Home, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -687,6 +687,16 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       inactive so testers never meet them. **Not tried in the app UI: duels can't be opened from the app** (see
       the features list below).
 
+- [x] 2026-10-31: **Quiz modes back on Home** (user's choice: a section on Home). Since the 2026-10-26 redesign the
+      Duel, Exam and Daily Docket could not be started from the app. Home now shows **Quiz modes** (`QuizModesGrid`,
+      serif heading like the other Explore sections) after "Start here" and the Continue/Review cards, before
+      "Latest legal updates": Case Path → Journey tab, the others start the quiz. Energy badges draw a lightning icon
+      (the app fonts have no ⚡ emoji, so it showed as a box on the phone; the screen reader still hears the cost);
+      tiles grow with large text. Checked on the simulator against staging: Home tile → sign-up → duel against a
+      labelled practice player ("Deepak M.") → result "2097 vs 2896", stored by the server as lost, rating
+      1000 → 979; that throwaway account was then set inactive. Flutter tests: 106 (the duel test now starts from
+      the Home tile).
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
@@ -703,9 +713,7 @@ Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
    use `flutter run -d <device>` (or a release/profile build) when testing.
 4. **Features still to build** (agreed list, 2026-10-31; everything else on the original list works):
    1. ~~Daily practice reminders~~ — done 2026-10-31 (see above).
-   2. ~~Moot Court Duel opponent~~ — done 2026-10-31 (see above). **But the Duel, Exam and Daily Docket can't be
-      started from the app**: their tiles (`QuizModesGrid`) left Home in the 2026-10-26 redesign; only the
-      out-of-energy sheet still offers the docket. Needs a decision on where the modes go.
+   2. ~~Moot Court Duel opponent~~ — done 2026-10-31 (see above); the modes are back on Home (see above).
    3. **All-time leaderboard tab** — still simulated on the phone (the weekly league is real); needs a real
       ranking from the server.
    4. **Sound effects** — the setting exists, nothing plays (right/wrong answer, level done, chest open).

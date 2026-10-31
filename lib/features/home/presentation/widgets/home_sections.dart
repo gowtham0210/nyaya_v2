@@ -276,22 +276,36 @@ class DailyDocketCard extends ConsumerWidget {
 }
 
 class _Badge extends StatelessWidget {
-  const _Badge({required this.text, required this.color});
+  const _Badge({required this.text, required this.color, this.icon, this.semanticLabel});
 
   final String text;
   final Color color;
 
+  /// Drawn after the text; the app's fonts have no emoji such as ⚡.
+  final IconData? icon;
+  final String? semanticLabel;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.14),
-        borderRadius: BorderRadius.circular(AppRadius.xl),
-      ),
-      child: Text(
-        text,
-        style: context.text.labelSmall?.copyWith(color: color, fontWeight: FontWeight.w800),
+    return Semantics(
+      label: semanticLabel,
+      excludeSemantics: semanticLabel != null,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+        decoration: BoxDecoration(
+          color: color.withValues(alpha: 0.14),
+          borderRadius: BorderRadius.circular(AppRadius.xl),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              text,
+              style: context.text.labelSmall?.copyWith(color: color, fontWeight: FontWeight.w800),
+            ),
+            if (icon != null) Icon(icon, size: 14, color: color),
+          ],
+        ),
       ),
     );
   }
@@ -321,14 +335,20 @@ class QuizModesGrid extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionHeader(title: l.homeModesTitle),
+        // Same serif heading as the other Explore Law sections.
+        Text(
+          l.homeModesTitle,
+          style: AppTheme.serif(TextStyle(fontSize: 26, height: 1.15, color: context.colors.onSurface)),
+        ),
+        const SizedBox(height: AppSpacing.md),
         GridView.count(
           crossAxisCount: 2,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           mainAxisSpacing: 12,
           crossAxisSpacing: 12,
-          childAspectRatio: 0.95,
+          // Taller tiles when the phone uses larger text.
+          childAspectRatio: 1.05 / MediaQuery.textScalerOf(context).scale(1).clamp(1.0, double.infinity),
           children: [
             for (final (mode, name, desc, icon, color) in modes)
               NyayaCard(
@@ -350,10 +370,14 @@ class QuizModesGrid extends ConsumerWidget {
                           child: Icon(icon, color: color, size: 26),
                         ),
                         const Spacer(),
-                        _Badge(
-                          text: mode.energyCost == 0 ? l.modeFree : l.modeEnergyCost(mode.energyCost),
-                          color: mode.energyCost == 0 ? context.nyaya.success : AppPalette.ochreText,
-                        ),
+                        mode.energyCost == 0
+                            ? _Badge(text: l.modeFree, color: context.nyaya.success)
+                            : _Badge(
+                                text: '${mode.energyCost}',
+                                icon: Icons.bolt_rounded,
+                                semanticLabel: l.modeEnergyCost(mode.energyCost),
+                                color: AppPalette.ochreText,
+                              ),
                       ],
                     ),
                     const Spacer(),

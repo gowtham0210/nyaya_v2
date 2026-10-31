@@ -13,6 +13,7 @@ import '../../progress/application/progress_sync.dart';
 import '../../review/presentation/review_screen.dart';
 import '../../profile/domain/user_profile.dart';
 import 'widgets/explore_sections.dart';
+import 'widgets/home_sections.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -48,6 +49,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       Padding(padding: page, child: FeaturedLawsCarousel()),
       Padding(padding: page, child: ContinueLearningCard()),
       Padding(padding: page, child: ReviewCard()),
+      // Duel, Exam and Daily Docket start here; Case Path opens the Journey tab.
+      SizedBox(height: AppSpacing.lg),
+      Padding(padding: page, child: QuizModesGrid()),
       SizedBox(height: AppSpacing.xl),
       // Scrolls edge to edge, so it pads itself.
       LatestUpdatesSection(),

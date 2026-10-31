@@ -384,12 +384,18 @@ void main() {
     expect(find.text('Leaderboard'), findsNothing);
   });
 
-  testWidgets('a duel races the opponent the server picked, and the server settles it', (tester) async {
+  testWidgets('a duel from Home races the opponent the server picked, and the server settles it', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
     await settle(tester);
     const duel = QuizRequest(QuizMode.duel);
-    c.read(routerProvider).push(Routes.quiz, extra: duel);
+    // Home's quiz modes section opens it.
+    final tile = find.text('Moot Court Duel');
+    await tester.scrollUntilVisible(tile, 200, scrollable: find.byType(Scrollable).first);
+    // Clear of the bottom navigation bar.
+    await tester.drag(find.byType(Scrollable).first, const Offset(0, -300));
+    await settle(tester);
+    await tester.tap(tile);
     await settle(tester);
 
     // The opponent comes from the server, not a made-up list.
