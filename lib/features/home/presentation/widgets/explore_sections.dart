@@ -162,7 +162,7 @@ class ContinueLearningCard extends ConsumerWidget {
                   style: context.text.labelMedium?.copyWith(
                     color: context.colors.primary,
                     fontWeight: FontWeight.w700,
-                    letterSpacing: 1.6,
+                    letterSpacing: context.tracking(1.6),
                   ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
@@ -250,7 +250,8 @@ class _FeaturedLawsCarouselState extends ConsumerState<FeaturedLawsCarousel> {
     return Column(
       children: [
         SizedBox(
-          height: 268,
+          // Grows with the text size so the title, text and button still fit.
+          height: 268 + (MediaQuery.textScalerOf(context).scale(1) - 1) * 140,
           child: PageView(
             controller: _controller,
             onPageChanged: (i) => setState(() => _page = i),
@@ -374,7 +375,7 @@ class _FeaturedCard extends StatelessWidget {
                     style: context.text.labelMedium?.copyWith(
                       color: context.colors.primary,
                       fontWeight: FontWeight.w700,
-                      letterSpacing: 2,
+                      letterSpacing: context.tracking(2),
                     ),
                   ),
                   const SizedBox(height: AppSpacing.sm),
@@ -398,7 +399,7 @@ class _FeaturedCard extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(l.exploreButton),
+                        Flexible(child: Text(l.exploreButton, overflow: TextOverflow.ellipsis)),
                         const SizedBox(width: AppSpacing.sm),
                         const Icon(Icons.arrow_forward_rounded, size: 18),
                       ],
@@ -538,7 +539,7 @@ class _UpdateCard extends StatelessWidget {
                               style: context.text.labelSmall?.copyWith(
                                 color: tint,
                                 fontWeight: FontWeight.w700,
-                                letterSpacing: 1.4,
+                                letterSpacing: context.tracking(1.4),
                               ),
                             ),
                           ),

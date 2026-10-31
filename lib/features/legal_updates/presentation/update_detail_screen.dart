@@ -48,7 +48,7 @@ class UpdateDetailScreen extends ConsumerWidget {
                 style: context.text.labelMedium?.copyWith(
                   color: c.tint(context),
                   fontWeight: FontWeight.w800,
-                  letterSpacing: 0.8,
+                  letterSpacing: context.tracking(0.8),
                 ),
               ),
               const Spacer(),

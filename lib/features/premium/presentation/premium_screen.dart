@@ -100,7 +100,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                     Text(
                       l.premiumTitle.toUpperCase(),
                       textAlign: TextAlign.center,
-                      style: context.text.labelLarge?.copyWith(color: AppPalette.ochre, letterSpacing: 2),
+                      style: context.text.labelLarge?.copyWith(color: AppPalette.ochre, letterSpacing: context.tracking(2)),
                     ),
                     const SizedBox(height: 6),
                     Text(

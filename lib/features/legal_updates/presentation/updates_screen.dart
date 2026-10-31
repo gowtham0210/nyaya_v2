@@ -272,7 +272,7 @@ class UpdateTile extends ConsumerWidget {
                         style: context.text.labelSmall?.copyWith(
                           color: tint,
                           fontWeight: FontWeight.w700,
-                          letterSpacing: 1.6,
+                          letterSpacing: context.tracking(1.6),
                         ),
                       ),
                     ),
@@ -331,6 +331,8 @@ class _Thumbnail extends ConsumerWidget {
       width: width,
       height: height,
       child: Stack(
+        // The notch sits 1 point past the corner; don't trim its tap area.
+        clipBehavior: Clip.none,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(AppRadius.md),
@@ -348,7 +350,7 @@ class _Thumbnail extends ConsumerWidget {
             top: -1,
             right: -1,
             child: Container(
-              padding: const EdgeInsets.fromLTRB(6, 0, 0, 6),
+              padding: const EdgeInsets.fromLTRB(2, 0, 0, 2),
               decoration: BoxDecoration(
                 color: surface,
                 borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(AppRadius.md)),
@@ -360,17 +362,23 @@ class _Thumbnail extends ConsumerWidget {
                 child: Pressable(
                   onTap: () => ref.read(savedUpdatesProvider.notifier).toggle(update.id),
                   scale: 0.85,
-                  child: Container(
-                    width: 34,
-                    height: 34,
-                    decoration: BoxDecoration(
-                      color: context.colors.surfaceContainerHigh.withValues(alpha: 0.6),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      saved ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
-                      size: 20,
-                      color: context.colors.primary,
+                  // 48 x 48 tap area around the 34 point circle.
+                  child: SizedBox.square(
+                    dimension: 48,
+                    child: Center(
+                      child: Container(
+                        width: 34,
+                        height: 34,
+                        decoration: BoxDecoration(
+                          color: context.colors.surfaceContainerHigh.withValues(alpha: 0.6),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          saved ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
+                          size: 20,
+                          color: context.colors.primary,
+                        ),
+                      ),
                     ),
                   ),
                 ),

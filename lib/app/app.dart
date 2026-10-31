@@ -9,6 +9,9 @@ import '../features/update/application/update_check.dart';
 import '../features/update/presentation/update_required_screen.dart';
 import 'router.dart';
 
+/// Largest text size the app follows from the phone's settings.
+const maxTextScale = 1.5;
+
 class NyayaApp extends ConsumerStatefulWidget {
   const NyayaApp({super.key});
 
@@ -61,7 +64,11 @@ class _NyayaAppState extends ConsumerState<NyayaApp> {
       ],
       routerConfig: ref.watch(routerProvider),
       // A build the server no longer allows sees only the update screen.
-      builder: (context, child) => update != null ? UpdateRequiredScreen(updateUrl: update.updateUrl) : child!,
+      // Text follows the phone's size setting up to 1.5x, the most the game layouts can hold.
+      builder: (context, child) => MediaQuery.withClampedTextScaling(
+        maxScaleFactor: maxTextScale,
+        child: update != null ? UpdateRequiredScreen(updateUrl: update.updateUrl) : child!,
+      ),
     );
   }
 }

@@ -23,11 +23,13 @@ class _PressableState extends State<Pressable> {
 
   @override
   Widget build(BuildContext context) {
+    // Without onTap there is nothing to press, so screen readers don't call it a button.
+    final enabled = widget.onTap != null;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTapDown: (_) => _set(true),
-      onTapUp: (_) => _set(false),
-      onTapCancel: () => _set(false),
+      onTapDown: enabled ? (_) => _set(true) : null,
+      onTapUp: enabled ? (_) => _set(false) : null,
+      onTapCancel: enabled ? () => _set(false) : null,
       onTap: widget.onTap,
       child: AnimatedScale(
         scale: _down ? widget.scale : 1,

@@ -147,4 +147,11 @@ extension NyayaThemeX on BuildContext {
   ColorScheme get colors => Theme.of(this).colorScheme;
   TextTheme get text => Theme.of(this).textTheme;
   bool get isDark => Theme.of(this).brightness == Brightness.dark;
+
+  /// [color] lightened in dark mode so text or icons in it stay readable on dark surfaces.
+  Color readable(Color color) => isDark ? Color.lerp(color, Colors.white, 0.45)! : color;
+
+  /// Extra letter spacing for small label text. Indian scripts join their
+  /// letters, so spacing pulls words apart: only English gets it.
+  double tracking(double value) => Localizations.localeOf(this).languageCode == 'en' ? value : 0;
 }

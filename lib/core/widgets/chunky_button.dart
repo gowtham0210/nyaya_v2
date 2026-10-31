@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 
+import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 
 /// Primary game button with a solid "3D" lip that presses down on tap.
@@ -36,7 +37,10 @@ class _ChunkyButtonState extends State<ChunkyButton> {
     final scheme = Theme.of(context).colorScheme;
     final enabled = widget.onPressed != null;
     final base = enabled ? (widget.color ?? scheme.primary) : scheme.outlineVariant;
-    final fg = enabled ? (widget.foreground ?? Colors.white) : scheme.onSurfaceVariant;
+    // On the theme's own primary use its matching text colour (dark text in dark mode).
+    final fg = enabled
+        ? (widget.foreground ?? (widget.color == null ? scheme.onPrimary : Colors.white))
+        : scheme.onSurfaceVariant;
     final lipColor = Color.lerp(base, Colors.black, 0.28)!;
     final offset = _down ? _lip : 0.0;
 
@@ -56,7 +60,7 @@ class _ChunkyButtonState extends State<ChunkyButton> {
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   color: fg,
                   fontSize: 15,
-                  letterSpacing: 0.8,
+                  letterSpacing: context.tracking(0.8),
                 ),
           ),
         ),

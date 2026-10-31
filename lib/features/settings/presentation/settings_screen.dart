@@ -85,7 +85,8 @@ class SettingsScreen extends ConsumerWidget {
             physics: const NeverScrollableScrollPhysics(),
             mainAxisSpacing: 10,
             crossAxisSpacing: 10,
-            childAspectRatio: 1.15,
+            // Taller tiles when the phone uses larger text.
+            childAspectRatio: 1.15 / MediaQuery.textScalerOf(context).scale(1).clamp(1.0, double.infinity),
             children: [
               _Stat(Icons.diamond_rounded, '${p.totalXp}', l.settingsTotalXp, context.colors.primary),
               _Stat(Icons.local_fire_department_rounded, '${p.longestStreak}', l.settingsLongestStreak, context.nyaya.streak),
@@ -425,7 +426,7 @@ class _Header extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(4, AppSpacing.lg, 4, AppSpacing.sm),
       child: Text(
         text.toUpperCase(),
-        style: context.text.labelMedium?.copyWith(color: context.nyaya.textSecondary, letterSpacing: 1.1),
+        style: context.text.labelMedium?.copyWith(color: context.nyaya.textSecondary, letterSpacing: context.tracking(1.1)),
       ),
     );
   }

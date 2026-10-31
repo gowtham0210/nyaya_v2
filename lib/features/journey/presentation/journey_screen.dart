@@ -10,6 +10,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/common.dart';
 import '../../../core/widgets/pressable.dart';
 import '../../profile/application/profile_controller.dart';
+import '../../profile/domain/user_profile.dart';
 import '../application/journey_controller.dart';
 import '../domain/journey.dart';
 import 'journey_layout.dart';
@@ -170,64 +171,83 @@ class _MapHeader extends ConsumerWidget {
     final l = context.l10n;
     final p = ref.watch(profileProvider);
     final bg = Theme.of(context).scaffoldBackgroundColor;
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [bg, bg.withValues(alpha: 0.0)],
-          stops: const [0.72, 1],
-        ),
-      ),
-      child: SafeArea(
-        bottom: false,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.md, AppSpacing.page, AppSpacing.lg),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      l.journeyTitle,
-                      style: AppTheme.serif(TextStyle(fontSize: 38, height: 1.1, color: context.colors.primary)),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      l.journeySubtitle,
-                      style: context.text.bodyLarge?.copyWith(color: context.nyaya.textSecondary),
-                    ),
-                  ],
-                ),
+    // Solid behind the text however many lines it wraps to, then a short fade onto the map.
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        ColoredBox(color: bg, child: _content(context, l, p)),
+        IgnorePointer(
+          child: Container(
+            height: AppSpacing.lg,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [bg, bg.withValues(alpha: 0.0)],
               ),
-              const SizedBox(width: 8),
-              Padding(
-                padding: const EdgeInsets.only(top: 6),
-                child: Row(
-                  children: [
-                    StatPill(icon: Icons.star_rounded, value: '$totalStars', color: AppPalette.ochre),
-                    const SizedBox(width: 8),
-                    StatPill(
-                      icon: Icons.bolt_rounded,
-                      value: p.isPremium ? '∞' : '${p.energy}',
-                      color: context.nyaya.energy,
-                    ),
-                    const SizedBox(width: 8),
-                    // Coins are spent in Settings → Store (energy refills, streak freezes).
-                    StatPill(
-                      icon: Icons.monetization_on_rounded,
-                      value: '${p.coins}',
-                      color: AppPalette.ochre,
-                      semanticLabel: '${p.coins} ${context.l10n.statCoins}',
-                      onTap: () => context.push(Routes.settings),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
+        ),
+      ],
+    );
+  }
+
+  Widget _content(BuildContext context, AppLocalizations l, UserProfile p) {
+    return SafeArea(
+      bottom: false,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.md, AppSpacing.page, AppSpacing.sm),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l.journeyTitle,
+                    style: AppTheme.serif(TextStyle(fontSize: 38, height: 1.1, color: context.colors.primary)),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    l.journeySubtitle,
+                    style: context.text.bodyLarge?.copyWith(color: context.nyaya.textSecondary),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 8),
+            Padding(
+              padding: const EdgeInsets.only(top: 6),
+              child: Row(
+                children: [
+                  StatPill(
+                    icon: Icons.star_rounded,
+                    value: '$totalStars',
+                    color: AppPalette.ochre,
+                    semanticLabel: '$totalStars ${context.l10n.statStars}',
+                  ),
+                  const SizedBox(width: 8),
+                  StatPill(
+                    icon: Icons.bolt_rounded,
+                    value: p.isPremium ? '∞' : '${p.energy}',
+                    color: context.nyaya.energy,
+                    semanticLabel: p.isPremium ? context.l10n.energyUnlimited : context.l10n.energyLeft(p.energy),
+                  ),
+                  const SizedBox(width: 8),
+                  // Coins are spent in Settings → Store (energy refills, streak freezes).
+                  StatPill(
+                    icon: Icons.monetization_on_rounded,
+                    value: '${p.coins}',
+                    color: AppPalette.ochre,
+                    semanticLabel: '${p.coins} ${context.l10n.statCoins}',
+                    onTap: () => context.push(Routes.settings),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -307,7 +327,7 @@ class ChapterBanner extends StatelessWidget {
                         style: context.text.labelSmall?.copyWith(
                           color: accent,
                           fontWeight: FontWeight.w600,
-                          letterSpacing: 1.4,
+                          letterSpacing: context.tracking(1.4),
                         ),
                       ),
                       const SizedBox(height: 2),

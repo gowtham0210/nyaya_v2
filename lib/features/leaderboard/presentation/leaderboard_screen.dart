@@ -201,9 +201,16 @@ class _TierStrip extends StatelessWidget {
                     width: t.level == current ? 3 : 1,
                   ),
                 ),
-                child: Opacity(
-                  opacity: t.level <= current ? 1 : 0.35,
-                  child: Text(t.emblem, style: TextStyle(fontSize: t.level == current ? 28 : 20)),
+                // Read out as the league's name; the faded emblem is only a picture.
+                child: Semantics(
+                  label: context.l10n.tierName(t),
+                  selected: t.level == current,
+                  child: ExcludeSemantics(
+                    child: Opacity(
+                      opacity: t.level <= current ? 1 : 0.35,
+                      child: Text(t.emblem, style: TextStyle(fontSize: t.level == current ? 28 : 20)),
+                    ),
+                  ),
                 ),
               ),
             ),

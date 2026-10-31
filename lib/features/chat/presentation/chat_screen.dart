@@ -141,7 +141,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                     const SizedBox(width: 8),
                     Expanded(child: Text(l.chatDisclaimer, style: context.text.bodySmall)),
                     IconButton(
-                      visualDensity: VisualDensity.compact,
                       tooltip: l.commonClose,
                       onPressed: () => setState(() => _showDisclaimer = false),
                       icon: const Icon(Icons.close_rounded, size: 18),

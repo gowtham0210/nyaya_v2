@@ -166,7 +166,7 @@ class _Eyebrow extends StatelessWidget {
         style: context.text.labelLarge?.copyWith(
           color: context.colors.primary,
           fontWeight: FontWeight.w600,
-          letterSpacing: 3,
+          letterSpacing: context.tracking(3),
         ),
       );
 }

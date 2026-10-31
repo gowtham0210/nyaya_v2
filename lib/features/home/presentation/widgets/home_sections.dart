@@ -71,7 +71,7 @@ class ContinueJourneyCard extends ConsumerWidget {
                   l.homeContinueJourney.toUpperCase(),
                   style: context.text.labelMedium?.copyWith(
                     color: AppPalette.ochreSoft,
-                    letterSpacing: 1.2,
+                    letterSpacing: context.tracking(1.2),
                     fontWeight: FontWeight.w800,
                   ),
                 ),

@@ -106,7 +106,7 @@ class QuizView extends ConsumerWidget {
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Icon(chapter.icon, size: 14, color: chapter.color),
+                                  Icon(chapter.icon, size: 14, color: context.readable(chapter.color)),
                                   const SizedBox(width: 6),
                                   Flexible(
                                     child: Text(
@@ -114,7 +114,7 @@ class QuizView extends ConsumerWidget {
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: context.text.labelMedium?.copyWith(
-                                        color: chapter.color,
+                                        color: context.readable(chapter.color),
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),

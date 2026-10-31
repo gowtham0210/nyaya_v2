@@ -30,7 +30,10 @@ class StatPill extends StatelessWidget {
       button: onTap != null,
       child: Pressable(
         onTap: onTap,
-        child: Container(
+        // A tappable pill gets a full-size tap area around the same look.
+        child: ConstrainedBox(
+          constraints: onTap == null ? const BoxConstraints() : const BoxConstraints(minWidth: 48, minHeight: 48),
+          child: Center(widthFactor: 1, heightFactor: 1, child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           decoration: BoxDecoration(
             color: color.withValues(alpha: context.isDark ? 0.18 : 0.12),
@@ -50,6 +53,7 @@ class StatPill extends StatelessWidget {
               ),
             ],
           ),
+        )),
         ),
       ),
     );

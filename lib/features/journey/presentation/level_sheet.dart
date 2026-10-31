@@ -75,7 +75,7 @@ class _LevelSheet extends ConsumerWidget {
             Text(
               '${l.journeyChapter(node.chapterIndex + 1)} · $chapterTitle',
               textAlign: TextAlign.center,
-              style: context.text.labelLarge?.copyWith(color: node.chapter.color),
+              style: context.text.labelLarge?.copyWith(color: context.readable(node.chapter.color)),
             ),
             const SizedBox(height: 4),
             Text(l.journeyLevel(node.level), textAlign: TextAlign.center, style: context.text.headlineSmall),
