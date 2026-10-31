@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-31 (daily practice reminders, Claude Opus 5.5)
+> Last updated: 2026-10-31 (real duel opponents, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -666,6 +666,27 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       had not built since Sentry was added (CI does not build Android). Known gap: if the learner later blocks notifications in the phone's Settings, the switch still
       shows on. Tests: Flutter 104 (new `reminders_test.dart`).
 
+- [x] 2026-10-31: **Real Moot Court Duel opponents.** User's choices: a labelled practice player when no learner's
+      run fits; opponents shown like the league ("Asha K."); a win pays **15 XP + 10 coins** (server). Server
+      (`backend/src/learn/duel.ts`, `duel.service.ts`, migration 0015): a duel now races a **"ghost"** — another
+      learner's finished duel with the same question count, rating within 400, not one of your last 5 opponents,
+      every question still live and inside the topics you sent (your reached chapters) — on the same questions
+      (options reshuffled). None fits → a practice player (league name list, seeded by session) with answers
+      simulated on the server. `duel_matches` keeps the opponent, a copy of their answers, rating before/after,
+      points and outcome; a learner's rating/played/won are worked out from it (`GET /v1/me/progress` → `duel`).
+      Answers carry the app's `elapsed_ms`, stored but never more than the server saw since the last answer, and
+      at least 0.5 s (a modified app could still claim fast times within that). Submit settles points (500–1000
+      per right answer by speed), win/loss/draw and Elo (K 32 for the first 20 duels, then 16); `duel_win` coins.
+      Account deletion turns the learner's name into "Former learner" in others' duels. App: uses the server's
+      opponent, run and result (local opponent list and Elo removed), sends answer times, shows "Practice player"
+      under a practice opponent; Settings' duel record comes from the server. Tests: backend 74 unit + 127 API
+      (new `duels.e2e-spec.ts`), Flutter 106. Pushed `5e68858`, CI green; staging deployed (backup
+      `nyaya-2026-10-31-1257.sql.gz`, migration 0015). Checked on staging with two throwaway learners (inside the
+      API container): the first raced a labelled practice player ("Tanvi P."), the second raced the first's run
+      ("Duel A.", same 7 questions) and won 3932–1966, rating 1000 → 1016; both test learners were then set
+      inactive so testers never meet them. **Not tried in the app UI: duels can't be opened from the app** (see
+      the features list below).
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
@@ -682,8 +703,9 @@ Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
    use `flutter run -d <device>` (or a release/profile build) when testing.
 4. **Features still to build** (agreed list, 2026-10-31; everything else on the original list works):
    1. ~~Daily practice reminders~~ — done 2026-10-31 (see above).
-   2. **Moot Court Duel opponent** — still simulated on the phone; a real one would replay another learner's
-      recorded run, worked out on the server.
+   2. ~~Moot Court Duel opponent~~ — done 2026-10-31 (see above). **But the Duel, Exam and Daily Docket can't be
+      started from the app**: their tiles (`QuizModesGrid`) left Home in the 2026-10-26 redesign; only the
+      out-of-energy sheet still offers the docket. Needs a decision on where the modes go.
    3. **All-time leaderboard tab** — still simulated on the phone (the weekly league is real); needs a real
       ranking from the server.
    4. **Sound effects** — the setting exists, nothing plays (right/wrong answer, level done, chest open).
