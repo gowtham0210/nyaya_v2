@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-31 (accessibility + dark mode pass, Sentry keys on staging, Claude Opus 5.5)
+> Last updated: 2026-10-31 (shared sign-in limits, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -426,14 +426,14 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       (fixed: refused with `own_account`, button hidden on your own row). Pushed `7cf26b9`, CI green; staging
       deployed (backup `nyaya-2026-10-30-0426.sql.gz` first, migration 0010 applied). Noticed, older than this: the
       portal calls the API from its own server, so the API's sign-in rate limit treats all portal users as one
-      client — a few wrong passwords make everyone wait a minute. Fix later (e.g. pass the browser's IP along).
+      client — a few wrong passwords make everyone wait a minute. Fixed 2026-10-31 (shared sign-in limits, below).
 
 - [x] 2026-10-30: **P4 decisions (user):** crash reporting = **Sentry** (app, API, portal; the user creates the
       account and gives the DSNs) + usage analytics as **our own events** in our database with a portal dashboard
       (no learner data to third parties); **premium hidden** in the beta; **production hosting: decide later**;
       **beta audience: citizens**. P4 order (hosting-free first): hide premium [done] → in-app account deletion [done] →
       Sentry [done: app, API, portal] → own analytics (done, calculated from existing records) + dashboard → minimum app version [done] → translations of English-only screens [done] →
-      accessibility + dark mode pass [done] → shared sign-in rate limit → rotate the Azure key (user) → store prep.
+      accessibility + dark mode pass [done] → shared sign-in rate limit [done] → rotate the Azure key (user) → store prep.
 - [x] 2026-10-30: **Premium hidden for the beta.** App: build switch `Features.premium`
       (`lib/core/config/features.dart`, `--dart-define=NYAYA_PREMIUM=true` to show it) hides the post-onboarding
       paywall, the Settings premium row, the out-of-energy "Get unlimited energy" button and the Ask AI "upgrade"
@@ -596,6 +596,26 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       so the map showed through the text: the header is now solid behind its text with a short fade below; and the wide
       letter spacing on small capital labels split Tamil words apart: spacing is now English-only (`context.tracking`).
       Flutter tests: 93. Reviewed with OpenQodex (run by the coding agent: the Claude Code CLI is not logged in on this Mac). Not covered: VoiceOver/TalkBack by hand on a real phone, the results screen, the portal (web).
+
+- [x] 2026-10-31: **Shared sign-in limits (P4).** Attempt counts moved from each API copy's memory into Postgres
+      (`rate_limits`, migration 0012; keys are hashes, no emails or addresses), so every API copy shares them and a
+      restart keeps them (`backend/src/core/rate-limits.ts`: `RateLimitStore`, and `SharedThrottlerStorage` for
+      @nestjs/throttler). **Per address:** 20 a minute (was 10; `AUTH_RATE_LIMIT_PER_MINUTE`) on sign-in, register,
+      refresh, password setup and account deletion. **Per account (new):** 5 password attempts in 15 minutes from any
+      address (`PASSWORD_ATTEMPTS_PER_ACCOUNT`), then `429 rate_limited` "Try again in N minutes" even with the right
+      password; a right password resets the count; unknown emails count the same (no hint which accounts exist);
+      wrong passwords on account deletion count too. Note: anyone who knows an email can keep that account waiting
+      15 minutes at a time; accepted. **Portal:** it calls the API from its own server, so all staff shared one limit
+      (and one person's wrong passwords, or many staff refreshing, could block everyone). Now sign-in, refresh and
+      password setup pass the browser's address (nginx's `X-Real-IP`) in `X-Nyaya-Client-Ip`, trusted by the API only
+      with `X-Nyaya-Proxy-Secret` = `PORTAL_PROXY_SECRET` (32+ characters, set on both; `AuthThrottlerGuard`). Staging:
+      `deploy.sh` makes the secret once in `/opt/nyaya-v2/.env`; **production must set it on both and keep nginx
+      setting `X-Real-IP`**. The app's "too many attempts" text now says "wait a few minutes" (6 languages) and the
+      delete-account dialog shows it too. Tests: backend 74 unit + 115 API (new `rate-limits.e2e-spec.ts`), Flutter 93.
+      OpenQodex review (agent mode) found the app's "wait a minute" text (fixed). Pushed `a6328bb`, CI green; staging
+      deployed (backup `nyaya-2026-10-31-0846.sql.gz` first, migration 0012 applied) and checked: 6th wrong password for
+      one email → 429 "15 minutes"; through the portal's header, browser A blocked on its 21st try while browser B and
+      a wrong secret were counted apart.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
