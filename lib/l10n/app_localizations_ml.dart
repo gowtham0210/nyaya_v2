@@ -1407,7 +1407,7 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get authErrorRateLimited =>
-      'വളരെയധികം ശ്രമങ്ങൾ. ഒരു മിനിറ്റ് കാത്തിരുന്ന് വീണ്ടും ശ്രമിക്കുക.';
+      'വളരെയധികം ശ്രമങ്ങൾ. കുറച്ച് മിനിറ്റ് കാത്തിരുന്ന് വീണ്ടും ശ്രമിക്കുക.';
 
   @override
   String get authErrorInvalid =>

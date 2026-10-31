@@ -1413,7 +1413,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get authErrorRateLimited =>
-      'பல முயற்சிகள். ஒரு நிமிடம் காத்திருந்து மீண்டும் முயலுங்கள்.';
+      'பல முயற்சிகள். சில நிமிடங்கள் காத்திருந்து மீண்டும் முயலுங்கள்.';
 
   @override
   String get authErrorInvalid =>

@@ -28,6 +28,10 @@ if [ ! -f .env ]; then
     echo "SEED_PASSWORD=$(openssl rand -base64 18 | tr -d '\n/+=')"
   } > .env
 fi
+# Added later than the first secrets: made once, then kept.
+if ! grep -q '^PORTAL_PROXY_SECRET=' .env; then
+  echo "PORTAL_PROXY_SECRET=$(openssl rand -hex 32)" >> .env
+fi
 docker compose up -d --build
 if [ "$SEED" = "--seed" ]; then
   docker compose exec -T -e SEED_PUBLISH_IMPORTED=true api node dist/db/seed.js

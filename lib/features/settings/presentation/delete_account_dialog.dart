@@ -40,7 +40,12 @@ class _DeleteAccountDialogState extends ConsumerState<DeleteAccountDialog> {
       if (!mounted) return;
       setState(() {
         _busy = false;
-        _error = e.code == 'wrong_password' ? l.settingsDeleteAccountWrong : l.settingsDeleteAccountFailed;
+        _error = switch (e.code) {
+          'wrong_password' => l.settingsDeleteAccountWrong,
+          // Wrong passwords here count towards the sign-in limit.
+          'rate_limited' => l.authErrorRateLimited,
+          _ => l.settingsDeleteAccountFailed,
+        };
       });
     }
   }

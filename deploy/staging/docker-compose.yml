@@ -42,6 +42,8 @@ services:
       CORS_ORIGINS: https://staging-cms.deepwebstudio.dev
       # nginx-certbot sits in front.
       TRUST_PROXY_HOPS: 1
+      # Lets the portal say which browser a staff sign-in came from.
+      PORTAL_PROXY_SECRET: ${PORTAL_PROXY_SECRET:?set in .env}
       # Ask AI. Without endpoint and key, chat answers 503 and the app falls back to offline answers.
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT:-}
       AZURE_OPENAI_API_KEY: ${AZURE_OPENAI_API_KEY:-}
@@ -65,6 +67,7 @@ services:
     depends_on: [api]
     environment:
       API_URL: http://api:3000
+      PORTAL_PROXY_SECRET: ${PORTAL_PROXY_SECRET:?set in .env}
       # Crash reports (errors only). Empty: nothing is reported.
       SENTRY_DSN: ${PORTAL_SENTRY_DSN:-}
     networks: [default, edge]

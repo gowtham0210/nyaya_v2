@@ -9,6 +9,7 @@ import { ImportsModule } from './imports/imports.module.js';
 import type { AppConfig } from './core/config.js';
 import { CoreModule } from './core/core.module.js';
 import { LearnModule } from './learn/learn.module.js';
+import { RateLimitStore, SharedThrottlerStorage } from './core/rate-limits.js';
 import { QuestionsModule } from './questions/questions.module.js';
 import { ReportsModule } from './reports/reports.module.js';
 import { StaffModule } from './staff/staff.module.js';
@@ -30,10 +31,15 @@ export class AppModule {
           },
           verifyOptions: { algorithms: ['HS256'] },
         }),
-        // Only applied where ThrottlerGuard is used (sign-in and refresh).
-        ThrottlerModule.forRoot([
-          { ttl: 60_000, limit: config.authRateLimitPerMinute },
-        ]),
+        // Only applied where AuthThrottlerGuard is used (sign-in, refresh and
+        // the like). Counts live in Postgres so every API copy shares them.
+        ThrottlerModule.forRootAsync({
+          inject: [RateLimitStore],
+          useFactory: (store: RateLimitStore) => ({
+            throttlers: [{ ttl: 60_000, limit: config.authRateLimitPerMinute }],
+            storage: new SharedThrottlerStorage(store),
+          }),
+        }),
         AuthModule,
         AppConfigModule,
         TaxonomyModule,

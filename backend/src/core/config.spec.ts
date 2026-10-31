@@ -67,6 +67,26 @@ describe('loadConfig', () => {
     expect(() => loadConfig({ APP_UPDATE_URL: 'not a link' })).toThrow();
   });
 
+  it('takes a portal secret only when it is long enough', () => {
+    expect(loadConfig({}).portalProxySecret).toBeUndefined();
+    expect(() => loadConfig({ PORTAL_PROXY_SECRET: 'short' })).toThrow(
+      /at least 32 characters/,
+    );
+    const secret = 'a'.repeat(32);
+    expect(loadConfig({ PORTAL_PROXY_SECRET: secret }).portalProxySecret).toBe(
+      secret,
+    );
+  });
+
+  it('allows 5 password attempts per account unless set', () => {
+    expect(loadConfig({}).passwordAttemptsPerAccount).toBe(5);
+    expect(
+      loadConfig({ PASSWORD_ATTEMPTS_PER_ACCOUNT: '8' })
+        .passwordAttemptsPerAccount,
+    ).toBe(8);
+    expect(() => loadConfig({ PASSWORD_ATTEMPTS_PER_ACCOUNT: '0' })).toThrow();
+  });
+
   it('reports crashes only with an https SENTRY_DSN', () => {
     expect(loadConfig({}).sentryDsn).toBeUndefined();
     expect(loadConfig({ SENTRY_DSN: '' }).sentryDsn).toBeUndefined();

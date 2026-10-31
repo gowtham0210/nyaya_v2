@@ -7,6 +7,7 @@ import { APP_CONFIG, type AppConfig } from '../core/config.js';
 import { DB, type Db, type Tx } from '../core/db.js';
 import { ApiError, isUniqueViolation } from '../core/errors.js';
 import { newId } from '../core/ids.js';
+import { RateLimitStore } from '../core/rate-limits.js';
 import {
   auditLog,
   contentReports,
@@ -20,6 +21,8 @@ import { DUMMY_HASH, hashPassword, verifyPassword } from './passwords.js';
 type UserRow = typeof users.$inferSelect;
 
 const REUSE_GRACE_MS = 30_000;
+/** Window for the per-account password limit. */
+const PASSWORD_WINDOW_MS = 15 * 60_000;
 
 const sha256 = (s: string) => createHash('sha256').update(s).digest('hex');
 const invalidRefresh = () =>
@@ -43,13 +46,34 @@ export class AuthService {
     @Inject(APP_CONFIG) private readonly config: AppConfig,
     private readonly jwt: JwtService,
     private readonly audit: AuditService,
+    private readonly limits: RateLimitStore,
   ) {}
+
+  /**
+   * Counts a password attempt for [email], from any address, and refuses once
+   * there were too many in the window. Unknown emails count the same, so the
+   * answer never shows which accounts exist. Returns the counter's key.
+   */
+  private async passwordAttempt(email: string): Promise<string> {
+    const key = `password:${email.trim().toLowerCase()}`;
+    const { hits, msLeft } = await this.limits.hit(key, PASSWORD_WINDOW_MS);
+    if (hits > this.config.passwordAttemptsPerAccount) {
+      const minutes = Math.max(1, Math.ceil(msLeft / 60_000));
+      throw new ApiError(
+        HttpStatus.TOO_MANY_REQUESTS,
+        'rate_limited',
+        `Too many wrong passwords for this account. Try again in ${minutes} ${minutes === 1 ? 'minute' : 'minutes'}.`,
+      );
+    }
+    return key;
+  }
 
   async signIn(
     email: string,
     password: string,
     requestId: string,
   ): Promise<SessionDto> {
+    const attempts = await this.passwordAttempt(email);
     const [user] = await this.db
       .select()
       .from(users)
@@ -64,6 +88,7 @@ export class AuthService {
         'Email or password is incorrect',
       );
     }
+    await this.limits.clear(attempts);
     return this.db.transaction(async (tx) => {
       await this.audit.record(
         tx,
@@ -208,6 +233,8 @@ export class AuthService {
         'staff_account',
         'Staff accounts are removed by an admin',
       );
+    // Wrong passwords here count towards the same limit as sign-in.
+    await this.passwordAttempt(user.email);
     if (!(await verifyPassword(password, user.passwordHash)))
       throw new ApiError(
         HttpStatus.FORBIDDEN,

@@ -13,8 +13,16 @@ export interface AppConfig {
   jwtSecret: string;
   accessTokenTtlSec: number;
   refreshTokenTtlDays: number;
-  /** Sign-in/refresh attempts allowed per client per minute. */
+  /** Sign-in/refresh attempts allowed per client address per minute. */
   authRateLimitPerMinute: number;
+  /** Password attempts allowed per account in 15 minutes, from any address. */
+  passwordAttemptsPerAccount: number;
+  /**
+   * Shared with the content portal, which calls the API from its own server:
+   * with it the portal may say which browser address a sign-in came from.
+   * Unset: the header is ignored and every portal user counts as one address.
+   */
+  portalProxySecret?: string;
   corsOrigins: string[];
   /** Reverse proxies in front of the API (Express `trust proxy` hops), so rate limits see client IPs. */
   trustProxyHops: number;
@@ -56,7 +64,13 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
     jwtSecret,
     accessTokenTtlSec: Number(env.ACCESS_TOKEN_TTL_SEC ?? 15 * 60),
     refreshTokenTtlDays: Number(env.REFRESH_TOKEN_TTL_DAYS ?? 30),
-    authRateLimitPerMinute: Number(env.AUTH_RATE_LIMIT_PER_MINUTE ?? 10),
+    authRateLimitPerMinute: Number(env.AUTH_RATE_LIMIT_PER_MINUTE ?? 20),
+    passwordAttemptsPerAccount: positiveInt(
+      env.PASSWORD_ATTEMPTS_PER_ACCOUNT,
+      'PASSWORD_ATTEMPTS_PER_ACCOUNT',
+      5,
+    ),
+    portalProxySecret: secret(env.PORTAL_PROXY_SECRET, 'PORTAL_PROXY_SECRET'),
     corsOrigins: (env.CORS_ORIGINS ?? 'http://localhost:3001')
       .split(',')
       .map((s) => s.trim())
@@ -103,6 +117,14 @@ function httpsUrl(value: string | undefined, name: string) {
   }
   if (url?.protocol !== 'https:')
     throw new Error(`${name} must be a full https link, got "${value}"`);
+  return value;
+}
+
+/** Empty means unset; anything shorter than 32 characters is too easy to guess and stops startup. */
+function secret(value: string | undefined, name: string) {
+  if (!value) return undefined;
+  if (value.length < 32)
+    throw new Error(`${name} must be at least 32 characters long`);
   return value;
 }
 

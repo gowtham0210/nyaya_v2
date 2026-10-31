@@ -1405,7 +1405,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get authErrorRateLimited =>
-      'చాలాసార్లు ప్రయత్నించారు. ఒక నిమిషం ఆగి మళ్లీ ప్రయత్నించండి.';
+      'చాలాసార్లు ప్రయత్నించారు. కొన్ని నిమిషాలు ఆగి మళ్లీ ప్రయత్నించండి.';
 
   @override
   String get authErrorInvalid =>

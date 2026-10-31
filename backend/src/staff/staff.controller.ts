@@ -18,8 +18,8 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { ThrottlerGuard } from '@nestjs/throttler';
 import type { Request } from 'express';
+import { AuthThrottlerGuard } from '../auth/auth-throttler.guard.js';
 import { CurrentActor, Public, Roles } from '../auth/decorators.js';
 import type { Actor } from '../core/audit.service.js';
 import {
@@ -86,7 +86,7 @@ export class StaffController {
 /** Public, and rate-limited like sign-in. */
 @ApiTags('auth')
 @Controller('auth')
-@UseGuards(ThrottlerGuard)
+@UseGuards(AuthThrottlerGuard)
 export class StaffSetupController {
   constructor(private readonly staff: StaffService) {}
 

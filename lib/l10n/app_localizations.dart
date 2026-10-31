@@ -2521,7 +2521,7 @@ abstract class AppLocalizations {
   /// No description provided for @authErrorRateLimited.
   ///
   /// In en, this message translates to:
-  /// **'Too many attempts. Wait a minute and try again.'**
+  /// **'Too many attempts. Wait a few minutes and try again.'**
   String get authErrorRateLimited;
 
   /// No description provided for @authErrorInvalid.

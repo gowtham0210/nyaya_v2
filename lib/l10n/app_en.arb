@@ -745,7 +745,7 @@
   "authErrorCredentials": "Email or password is incorrect.",
   "authErrorEmailTaken": "An account with this email already exists. Sign in instead.",
   "authErrorNetwork": "Can't reach Nyaya right now. Check your connection and try again.",
-  "authErrorRateLimited": "Too many attempts. Wait a minute and try again.",
+  "authErrorRateLimited": "Too many attempts. Wait a few minutes and try again.",
   "authErrorInvalid": "Enter a valid email and a password of at least 8 characters.",
   "authErrorName": "Enter your name.",
   "settingsAccount": "Account",

@@ -1395,7 +1395,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authErrorRateLimited =>
-      'Too many attempts. Wait a minute and try again.';
+      'Too many attempts. Wait a few minutes and try again.';
 
   @override
   String get authErrorInvalid =>

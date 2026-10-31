@@ -271,6 +271,21 @@ export const auditLog = pgTable(
   (t) => [index('audit_log_entity_idx').on(t.entityType, t.entityId)],
 );
 
+/**
+ * Attempt counters shared by every API copy (sign-in limits). The key is a
+ * hash, so no email or address is stored. A counter starts again at
+ * reset_at; old rows are swept now and then.
+ */
+export const rateLimits = pgTable(
+  'rate_limits',
+  {
+    key: text('key').primaryKey(),
+    hits: integer('hits').notNull(),
+    resetAt: timestamp('reset_at', { withTimezone: true }).notNull(),
+  },
+  (t) => [index('rate_limits_reset_at_idx').on(t.resetAt)],
+);
+
 // ---------------------------------------------------------------- learning
 
 /**

@@ -1,8 +1,8 @@
 'use server';
 
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { API_URL } from '@/lib/config';
+import { API_URL, clientAddressHeaders } from '@/lib/config';
 import { setSessionCookies, type SessionTokens } from '@/lib/session-cookies';
 
 export interface SignInState {
@@ -25,13 +25,17 @@ export async function signIn(_: SignInState, form: FormData): Promise<SignInStat
   try {
     res = await fetch(`${API_URL}/v1/auth/session`, {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', ...clientAddressHeaders((await headers()).get('x-real-ip')) },
       body: JSON.stringify({ email, password }),
     });
   } catch {
     return { error: 'Cannot reach the Nyaya API. Is the backend running?', email };
   }
-  if (res.status === 429) return { error: 'Too many attempts. Wait a minute and try again.', email };
+  if (res.status === 429) {
+    // The API says how long: a minute for one address, longer for one account.
+    const body = (await res.json().catch(() => ({}))) as { message?: string };
+    return { error: body.message ?? 'Too many attempts. Wait a minute and try again.', email };
+  }
   if (res.status === 400) return { error: 'Enter a valid email address.', email };
   if (!res.ok) return { error: 'Email or password is incorrect.', email };
 

@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { API_URL } from './lib/config';
+import { API_URL, clientAddressHeaders } from './lib/config';
 import {
   ACCESS_COOKIE,
   REFRESH_COOKIE,
@@ -20,14 +20,14 @@ import {
 const inflight = new Map<string, { at: number; result: Promise<SessionTokens | null> }>();
 const SHARE_MS = 20_000;
 
-function refreshOnce(token: string): Promise<SessionTokens | null> {
+function refreshOnce(token: string, realIp: string | null): Promise<SessionTokens | null> {
   const now = Date.now();
   for (const [k, v] of inflight) if (now - v.at > SHARE_MS) inflight.delete(k);
   const hit = inflight.get(token);
   if (hit) return hit.result;
   const result = fetch(`${API_URL}/v1/auth/refresh`, {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
+    headers: { 'content-type': 'application/json', ...clientAddressHeaders(realIp) },
     body: JSON.stringify({ refresh_token: token }),
   })
     .then((r) => (r.ok ? (r.json() as Promise<SessionTokens>) : null))
@@ -53,7 +53,7 @@ export async function proxy(req: NextRequest) {
   if (access) return onLogin ? NextResponse.redirect(new URL('/questions', req.url)) : NextResponse.next();
 
   if (refresh) {
-    const session = await refreshOnce(refresh);
+    const session = await refreshOnce(refresh, req.headers.get('x-real-ip'));
     if (session) {
       // Forward the new tokens to this render as well as to the browser.
       req.cookies.set(ACCESS_COOKIE, session.access_token);

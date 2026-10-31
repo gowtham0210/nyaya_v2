@@ -1,7 +1,8 @@
 'use server';
 
+import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { API_URL } from '@/lib/config';
+import { API_URL, clientAddressHeaders } from '@/lib/config';
 
 export interface SetupState {
   error?: string;
@@ -18,7 +19,7 @@ export async function choosePassword(token: string, _: SetupState, form: FormDat
   try {
     res = await fetch(`${API_URL}/v1/auth/setup-password`, {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', ...clientAddressHeaders((await headers()).get('x-real-ip')) },
       body: JSON.stringify({ token, password }),
     });
   } catch {

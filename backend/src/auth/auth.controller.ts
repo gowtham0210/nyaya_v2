@@ -15,8 +15,8 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { ThrottlerGuard } from '@nestjs/throttler';
 import type { Request } from 'express';
+import { AuthThrottlerGuard } from './auth-throttler.guard.js';
 import {
   DeleteAccountDto,
   MeDto,
@@ -31,7 +31,7 @@ import { CurrentUser, Public } from './decorators.js';
 
 @ApiTags('auth')
 @Controller('auth')
-@UseGuards(ThrottlerGuard)
+@UseGuards(AuthThrottlerGuard)
 export class AuthController {
   constructor(private readonly auth: AuthService) {}
 
@@ -88,7 +88,7 @@ export class MeController {
 
   @Post('delete-account')
   @HttpCode(204)
-  @UseGuards(ThrottlerGuard)
+  @UseGuards(AuthThrottlerGuard)
   @ApiOperation({
     summary:
       "Delete the learner's account and personal data, confirmed with the password (rate-limited like sign-in)",

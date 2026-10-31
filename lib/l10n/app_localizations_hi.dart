@@ -1393,7 +1393,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get authErrorRateLimited =>
-      'बहुत ज़्यादा कोशिशें हो गईं। एक मिनट रुकें और फिर कोशिश करें।';
+      'बहुत ज़्यादा कोशिशें हो गईं। कुछ मिनट रुकें और फिर कोशिश करें।';
 
   @override
   String get authErrorInvalid =>
