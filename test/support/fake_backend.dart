@@ -4,6 +4,7 @@ import 'package:nyaya/core/utils/day.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
 import 'package:nyaya/features/journey/domain/journey.dart';
 import 'package:nyaya/features/leaderboard/data/league_api.dart';
+import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
 import 'package:nyaya/features/progress/data/progress_api.dart';
 import 'package:nyaya/features/review/data/review_api.dart';
 import 'package:nyaya/features/progress/domain/server_progress.dart';
@@ -425,3 +426,33 @@ MemoryTokenStore signedInTokens() => MemoryTokenStore(const StoredSession(
       refreshToken: 'refresh',
       user: {'id': 'user-1', 'email': 'ravi@test.local', 'display_name': 'Ravi', 'roles': ['learner']},
     ));
+
+/// Two published articles, as the API would send them.
+class FakeLegalUpdates implements LegalUpdatesRepository {
+  @override
+  Future<List<LegalUpdate>> fetch() async => [
+        LegalUpdate(
+          id: 'news-1',
+          category: UpdateCategory.supremeCourt,
+          title: 'Supreme Court sets timelines for Governors on State Bills',
+          summary: 'A Governor cannot sit on Bills indefinitely.',
+          keyPoints: const ['There is no pocket veto.'],
+          whyItMatters: 'Elected legislatures are not stalled.',
+          source: 'Supreme Court of India, 8 April 2025',
+          sourceUrl: 'https://main.sci.gov.in/',
+          date: DateTime(2025, 4, 8),
+          readMinutes: 3,
+        ),
+        LegalUpdate(
+          id: 'news-2',
+          category: UpdateCategory.legislation,
+          title: 'Waqf (Amendment) Act, 2025 receives Presidential assent',
+          summary: 'Parliament amended the Waqf Act, 1995.',
+          keyPoints: const ['Changes how waqf boards are formed.'],
+          whyItMatters: 'It affects how waqf land is managed.',
+          source: 'Gazette of India, April 2025',
+          date: DateTime(2025, 4, 5),
+          readMinutes: 3,
+        ),
+      ];
+}

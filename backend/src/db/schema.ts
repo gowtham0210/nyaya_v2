@@ -576,6 +576,72 @@ export const leagueMemberships = pgTable(
   ],
 );
 
+// ---------------------------------------------------------------- legal news
+
+export const NEWS_CATEGORIES = [
+  'supreme_court',
+  'high_courts',
+  'legislation',
+  'explainer',
+] as const;
+export type NewsCategory = (typeof NEWS_CATEGORIES)[number];
+export const newsCategory = pgEnum('news_category', NEWS_CATEGORIES);
+
+export const NEWS_STATUSES = [
+  'draft',
+  'in_review',
+  'changes_requested',
+  'approved',
+  'published',
+  'retired',
+] as const;
+export type NewsStatus = (typeof NEWS_STATUSES)[number];
+export const newsStatus = pgEnum('news_status', NEWS_STATUSES);
+
+/**
+ * A legal news article for the app's Updates tab, in English. It goes through
+ * the same steps as a question (an editor writes, a legal reviewer approves,
+ * a publisher publishes) but keeps one row: correcting a published article
+ * takes it back to draft, off the app, until it is approved again. Review
+ * decisions and their reasons are in the audit log.
+ */
+export const newsArticles = pgTable(
+  'news_articles',
+  {
+    id: uuid('id').primaryKey(),
+    /** Id in an outside source (the app's starter articles). */
+    externalRef: text('external_ref').unique(),
+    status: newsStatus('status').notNull().default('draft'),
+    category: newsCategory('category').notNull(),
+    title: text('title').notNull().default(''),
+    summary: text('summary').notNull().default(''),
+    keyPoints: text('key_points')
+      .array()
+      .notNull()
+      .default(sql`'{}'::text[]`),
+    whyItMatters: text('why_it_matters').notNull().default(''),
+    /** Who decided or passed it and when, e.g. "Supreme Court of India, 8 April 2025". */
+    source: text('source').notNull().default(''),
+    sourceUrl: text('source_url'),
+    /** The day of the judgment, Act or event. */
+    eventDate: date('event_date'),
+    readMinutes: smallint('read_minutes').notNull().default(3),
+    createdBy: uuid('created_by').references(() => users.id),
+    updatedBy: uuid('updated_by').references(() => users.id),
+    reviewerId: uuid('reviewer_id').references(() => users.id),
+    approvedAt: timestamp('approved_at', { withTimezone: true }),
+    publishedBy: uuid('published_by').references(() => users.id),
+    publishedAt: timestamp('published_at', { withTimezone: true }),
+    retiredAt: timestamp('retired_at', { withTimezone: true }),
+    createdAt: createdAt(),
+    updatedAt: updatedAt(),
+  },
+  (t) => [
+    index('news_articles_status_idx').on(t.status, t.eventDate),
+    check('read_minutes_range', sql`${t.readMinutes} between 1 and 30`),
+  ],
+);
+
 // ---------------------------------------------------------------- review & reports
 
 /**

@@ -92,6 +92,20 @@
       "when": 1793435282706,
       "tag": "0012_rate_limits",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1793436992746,
+      "tag": "0013_news_articles",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1793437003992,
+      "tag": "0014_news_starter_articles",
+      "breakpoints": true
     }
   ]
 }

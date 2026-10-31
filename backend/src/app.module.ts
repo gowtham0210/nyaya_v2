@@ -9,6 +9,7 @@ import { ImportsModule } from './imports/imports.module.js';
 import type { AppConfig } from './core/config.js';
 import { CoreModule } from './core/core.module.js';
 import { LearnModule } from './learn/learn.module.js';
+import { NewsModule } from './news/news.module.js';
 import { RateLimitStore, SharedThrottlerStorage } from './core/rate-limits.js';
 import { QuestionsModule } from './questions/questions.module.js';
 import { ReportsModule } from './reports/reports.module.js';
@@ -50,6 +51,7 @@ export class AppModule {
         LearnModule,
         ChatModule,
         ReportsModule,
+        NewsModule,
       ],
     };
   }

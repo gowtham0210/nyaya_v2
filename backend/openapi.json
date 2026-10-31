@@ -2266,6 +2266,458 @@
           "reports"
         ]
       }
+    },
+    "/v1/news": {
+      "get": {
+        "operationId": "NewsController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicNewsListDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Published legal news, newest first",
+        "tags": [
+          "news"
+        ]
+      }
+    },
+    "/v1/editor/news": {
+      "get": {
+        "operationId": "EditorNewsController_list",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "in_review",
+                "changes_requested",
+                "approved",
+                "published",
+                "retired"
+              ]
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "description": "Searches titles",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewsPageDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "editor"
+        ]
+      },
+      "post": {
+        "operationId": "EditorNewsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNewsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewsDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Start a news article as a draft",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/news/{id}": {
+      "get": {
+        "operationId": "EditorNewsController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewsDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "editor"
+        ]
+      },
+      "patch": {
+        "operationId": "EditorNewsController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateNewsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewsDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Edit a draft, or one with changes requested",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/news/{id}/submit": {
+      "post": {
+        "operationId": "EditorNewsController_submit",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewsDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Send the article for legal review",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/news/{id}/request-changes": {
+      "post": {
+        "operationId": "EditorNewsController_requestChanges",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewsReasonDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewsDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/news/{id}/approve": {
+      "post": {
+        "operationId": "EditorNewsController_approve",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewsDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Approve the article under review (not your own)",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/news/{id}/publish": {
+      "post": {
+        "operationId": "EditorNewsController_publish",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewsDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Show the approved article in the app",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/news/{id}/revise": {
+      "post": {
+        "operationId": "EditorNewsController_revise",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewsReasonDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewsDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Take a published or retired article back to draft to correct it; it leaves the app until published again",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/news/{id}/retire": {
+      "post": {
+        "operationId": "EditorNewsController_retire",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewsReasonDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewsDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Take a published article off the app",
+        "tags": [
+          "editor"
+        ]
+      }
     }
   },
   "info": {
@@ -5678,6 +6130,389 @@
         "required": [
           "outcome",
           "note"
+        ]
+      },
+      "PublicNewsDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "supreme_court",
+              "high_courts",
+              "legislation",
+              "explainer"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "key_points": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "why_it_matters": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "read_minutes": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "category",
+          "title",
+          "summary",
+          "key_points",
+          "why_it_matters",
+          "source",
+          "source_url",
+          "date",
+          "read_minutes"
+        ]
+      },
+      "PublicNewsListDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicNewsDto"
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "NewsListItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "in_review",
+              "changes_requested",
+              "approved",
+              "published",
+              "retired"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "supreme_court",
+              "high_courts",
+              "legislation",
+              "explainer"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "event_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "category",
+          "title",
+          "event_date",
+          "updated_at"
+        ]
+      },
+      "NewsPageDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NewsListItemDto"
+            }
+          },
+          "next_cursor": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ]
+      },
+      "NewsDetailDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "in_review",
+              "changes_requested",
+              "approved",
+              "published",
+              "retired"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "supreme_court",
+              "high_courts",
+              "legislation",
+              "explainer"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "event_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "external_ref": {
+            "type": "string",
+            "nullable": true
+          },
+          "summary": {
+            "type": "string"
+          },
+          "key_points": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "why_it_matters": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "read_minutes": {
+            "type": "number"
+          },
+          "created_by": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "updated_by": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "reviewer_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "approved_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "retired_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "changes_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "Why changes were last requested, while they still are"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "category",
+          "title",
+          "event_date",
+          "updated_at",
+          "external_ref",
+          "summary",
+          "key_points",
+          "why_it_matters",
+          "source",
+          "source_url",
+          "read_minutes",
+          "created_by",
+          "updated_by",
+          "reviewer_id",
+          "approved_at",
+          "published_at",
+          "retired_at",
+          "created_at",
+          "changes_reason"
+        ]
+      },
+      "CreateNewsDto": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "supreme_court",
+              "high_courts",
+              "legislation",
+              "explainer"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "key_points": {
+            "maxItems": 6,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "why_it_matters": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string",
+            "example": "Supreme Court of India, 8 April 2025"
+          },
+          "source_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "event_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "read_minutes": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 30,
+            "default": 3
+          }
+        },
+        "required": [
+          "category"
+        ]
+      },
+      "UpdateNewsDto": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "supreme_court",
+              "high_courts",
+              "legislation",
+              "explainer"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "key_points": {
+            "maxItems": 6,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "why_it_matters": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string",
+            "example": "Supreme Court of India, 8 April 2025"
+          },
+          "source_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "event_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "read_minutes": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 30,
+            "default": 3
+          }
+        }
+      },
+      "NewsReasonDto": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "minLength": 3
+          }
+        },
+        "required": [
+          "reason"
         ]
       }
     }

@@ -52,6 +52,7 @@ void main() {
       progressApiProvider.overrideWithValue(api),
       leagueApiProvider.overrideWithValue(api),
       reviewApiProvider.overrideWithValue(api),
+      legalUpdatesRepositoryProvider.overrideWithValue(FakeLegalUpdates()),
       authApiProvider.overrideWithValue(authApi = FakeAuthApi(tokens)),
     ]);
     addTearDown(container.dispose);
@@ -331,7 +332,7 @@ void main() {
 
     await tester.tap(find.bySemanticsLabel('Save update').first);
     await settle(tester);
-    expect(c.read(savedUpdatesProvider), {'tn-governor-assent'});
+    expect(c.read(savedUpdatesProvider), {'news-1'});
 
     await tester.tap(find.text('All'));
     await settle(tester);

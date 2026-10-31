@@ -9,6 +9,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/chunky_button.dart';
 import '../../../core/widgets/common.dart';
+import '../../quiz/presentation/source_line.dart';
 import '../data/legal_updates_repository.dart';
 import 'updates_screen.dart';
 
@@ -113,6 +114,7 @@ class UpdateDetailScreen extends ConsumerWidget {
             '${l.updatesSource}: ${update.source}',
             style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary),
           ),
+          if (update.sourceUrl != null) Align(alignment: AlignmentDirectional.centerStart, child: SourceLine(reference: '', url: update.sourceUrl)),
           const SizedBox(height: AppSpacing.lg),
           ChunkyButton(
             label: l.updatesAskAi,

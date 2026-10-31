@@ -931,6 +931,158 @@ export interface paths {
         patch: operations["ReportsController_resolve"];
         trace?: never;
     };
+    "/v1/news": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Published legal news, newest first */
+        get: operations["NewsController_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/news": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EditorNewsController_list"];
+        put?: never;
+        /** Start a news article as a draft */
+        post: operations["EditorNewsController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/news/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EditorNewsController_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Edit a draft, or one with changes requested */
+        patch: operations["EditorNewsController_update"];
+        trace?: never;
+    };
+    "/v1/editor/news/{id}/submit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Send the article for legal review */
+        post: operations["EditorNewsController_submit"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/news/{id}/request-changes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["EditorNewsController_requestChanges"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/news/{id}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Approve the article under review (not your own) */
+        post: operations["EditorNewsController_approve"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/news/{id}/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Show the approved article in the app */
+        post: operations["EditorNewsController_publish"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/news/{id}/revise": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Take a published or retired article back to draft to correct it; it leaves the app until published again */
+        post: operations["EditorNewsController_revise"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/news/{id}/retire": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Take a published article off the app */
+        post: operations["EditorNewsController_retire"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1963,6 +2115,110 @@ export interface components {
              */
             outcome: "fixed" | "retired" | "no_change";
             note: string;
+        };
+        PublicNewsDto: {
+            /** Format: uuid */
+            id: string;
+            /** @enum {string} */
+            category: "supreme_court" | "high_courts" | "legislation" | "explainer";
+            title: string;
+            summary: string;
+            key_points: string[];
+            why_it_matters: string;
+            source: string;
+            source_url: string | null;
+            /** Format: date */
+            date: string;
+            read_minutes: number;
+        };
+        PublicNewsListDto: {
+            items: components["schemas"]["PublicNewsDto"][];
+        };
+        NewsListItemDto: {
+            /** Format: uuid */
+            id: string;
+            /** @enum {string} */
+            status: "draft" | "in_review" | "changes_requested" | "approved" | "published" | "retired";
+            /** @enum {string} */
+            category: "supreme_court" | "high_courts" | "legislation" | "explainer";
+            title: string;
+            /** Format: date */
+            event_date: string | null;
+            /** Format: date-time */
+            updated_at: string;
+        };
+        NewsPageDto: {
+            items: components["schemas"]["NewsListItemDto"][];
+            next_cursor: string | null;
+        };
+        NewsDetailDto: {
+            /** Format: uuid */
+            id: string;
+            /** @enum {string} */
+            status: "draft" | "in_review" | "changes_requested" | "approved" | "published" | "retired";
+            /** @enum {string} */
+            category: "supreme_court" | "high_courts" | "legislation" | "explainer";
+            title: string;
+            /** Format: date */
+            event_date: string | null;
+            /** Format: date-time */
+            updated_at: string;
+            external_ref: string | null;
+            summary: string;
+            key_points: string[];
+            why_it_matters: string;
+            source: string;
+            source_url: string | null;
+            read_minutes: number;
+            /** Format: uuid */
+            created_by: string | null;
+            /** Format: uuid */
+            updated_by: string | null;
+            /** Format: uuid */
+            reviewer_id: string | null;
+            /** Format: date-time */
+            approved_at: string | null;
+            /** Format: date-time */
+            published_at: string | null;
+            /** Format: date-time */
+            retired_at: string | null;
+            /** Format: date-time */
+            created_at: string;
+            /** @description Why changes were last requested, while they still are */
+            changes_reason: string | null;
+        };
+        CreateNewsDto: {
+            /** @enum {string} */
+            category: "supreme_court" | "high_courts" | "legislation" | "explainer";
+            title?: string;
+            summary?: string;
+            key_points?: string[];
+            why_it_matters?: string;
+            /** @example Supreme Court of India, 8 April 2025 */
+            source?: string;
+            source_url?: string | null;
+            /** Format: date */
+            event_date?: string | null;
+            /** @default 3 */
+            read_minutes?: number;
+        };
+        UpdateNewsDto: {
+            /** @enum {string} */
+            category?: "supreme_court" | "high_courts" | "legislation" | "explainer";
+            title?: string;
+            summary?: string;
+            key_points?: string[];
+            why_it_matters?: string;
+            /** @example Supreme Court of India, 8 April 2025 */
+            source?: string;
+            source_url?: string | null;
+            /** Format: date */
+            event_date?: string | null;
+            /** @default 3 */
+            read_minutes?: number;
+        };
+        NewsReasonDto: {
+            reason: string;
         };
     };
     responses: never;
@@ -3336,6 +3592,257 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ReportDto"];
+                };
+            };
+        };
+    };
+    NewsController_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PublicNewsListDto"];
+                };
+            };
+        };
+    };
+    EditorNewsController_list: {
+        parameters: {
+            query?: {
+                status?: "draft" | "in_review" | "changes_requested" | "approved" | "published" | "retired";
+                /** @description Searches titles */
+                q?: string;
+                cursor?: string;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NewsPageDto"];
+                };
+            };
+        };
+    };
+    EditorNewsController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateNewsDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NewsDetailDto"];
+                };
+            };
+        };
+    };
+    EditorNewsController_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NewsDetailDto"];
+                };
+            };
+        };
+    };
+    EditorNewsController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateNewsDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NewsDetailDto"];
+                };
+            };
+        };
+    };
+    EditorNewsController_submit: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NewsDetailDto"];
+                };
+            };
+        };
+    };
+    EditorNewsController_requestChanges: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["NewsReasonDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NewsDetailDto"];
+                };
+            };
+        };
+    };
+    EditorNewsController_approve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NewsDetailDto"];
+                };
+            };
+        };
+    };
+    EditorNewsController_publish: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NewsDetailDto"];
+                };
+            };
+        };
+    };
+    EditorNewsController_revise: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["NewsReasonDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NewsDetailDto"];
+                };
+            };
+        };
+    };
+    EditorNewsController_retire: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["NewsReasonDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NewsDetailDto"];
                 };
             };
         };

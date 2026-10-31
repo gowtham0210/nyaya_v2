@@ -1,4 +1,4 @@
-import type { Me, VersionStatus } from './api';
+import type { Me, NewsCategory, NewsStatus, VersionStatus } from './api';
 
 /**
  * Mirrors the API's lifecycle rules so the UI only offers allowed actions.
@@ -61,4 +61,31 @@ export const ROLE_LABEL: Record<Role, string> = {
   legal_reviewer: 'Legal reviewer',
   publisher: 'Publisher',
   analyst: 'Analyst',
+};
+
+/** The news article lifecycle, mirroring the API (which enforces it). */
+export const NEWS_WORKFLOW = {
+  submit: { label: 'Submit for review', from: ['draft', 'changes_requested'], roles: ['content_editor'] },
+  request_changes: { label: 'Request changes', from: ['in_review'], roles: ['legal_reviewer'] },
+  approve: { label: 'Approve', from: ['in_review'], roles: ['legal_reviewer'] },
+  publish: { label: 'Publish', from: ['approved'], roles: ['publisher', 'admin'] },
+  revise: { label: 'Correct this article', from: ['published', 'retired'], roles: ['content_editor'] },
+  retire: { label: 'Retire', from: ['published'], roles: ['publisher', 'admin'] },
+} as const satisfies Record<string, { label: string; from: readonly NewsStatus[]; roles: readonly Role[] }>;
+
+export type NewsAction = keyof typeof NEWS_WORKFLOW;
+
+export const canEditNews = (me: Me, status: NewsStatus) =>
+  hasRole(me, 'content_editor') && (status === 'draft' || status === 'changes_requested');
+
+export const newsActions = (me: Me, status: NewsStatus): NewsAction[] =>
+  (Object.keys(NEWS_WORKFLOW) as NewsAction[]).filter(
+    (a) => hasRole(me, ...NEWS_WORKFLOW[a].roles) && (NEWS_WORKFLOW[a].from as readonly string[]).includes(status),
+  );
+
+export const NEWS_CATEGORY_LABEL: Record<NewsCategory, string> = {
+  supreme_court: 'Supreme Court',
+  high_courts: 'High Courts',
+  legislation: 'Legislation',
+  explainer: 'Explainer',
 };

@@ -12,6 +12,9 @@ export type Question = Schemas['QuestionDetailDto'];
 export type Version = Schemas['VersionDto'];
 export type Taxonomy = Schemas['TaxonomyDto'];
 export type VersionStatus = Version['status'];
+export type News = Schemas['NewsDetailDto'];
+export type NewsStatus = News['status'];
+export type NewsCategory = News['category'];
 
 /** The API's standard error body. */
 export interface ApiError {
