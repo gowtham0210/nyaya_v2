@@ -862,6 +862,21 @@ class AppLocalizationsKn extends AppLocalizations {
   String get leaderboardPractice => 'ಅಭ್ಯಾಸ ಆಟಗಾರ';
 
   @override
+  String leaderboardLearners(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ಬೋರ್ಡ್‌ನಲ್ಲಿ $count ಕಲಿಯುವವರು',
+      one: 'ಬೋರ್ಡ್‌ನಲ್ಲಿ 1 ಕಲಿಯುವವರು',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get leaderboardAllTimeJoin =>
+      'ಸರ್ವಕಾಲಿಕ ಬೋರ್ಡ್‌ಗೆ ಸೇರಲು ಒಂದು ಕ್ವಿಜ್ ಮುಗಿಸಿ.';
+
+  @override
   String get leaderboardYou => 'ನೀವು';
 
   @override

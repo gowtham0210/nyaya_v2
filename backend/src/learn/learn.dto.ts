@@ -523,6 +523,27 @@ export class StandingDto {
   practice: boolean;
 }
 
+export class AllTimeRowDto {
+  @ApiProperty() rank: number;
+  @ApiProperty({ description: 'First name and last initial' }) name: string;
+  @ApiProperty({ description: 'XP from all finished quizzes' }) xp: number;
+  @ApiProperty({ description: 'This row is the signed-in learner' })
+  me: boolean;
+}
+
+export class AllTimeDto {
+  @ApiProperty({ description: 'Learners on the board (everyone with XP)' })
+  total: number;
+  @ApiProperty({ type: [AllTimeRowDto], description: 'The top 50' })
+  top: AllTimeRowDto[];
+  @ApiProperty({
+    type: AllTimeRowDto,
+    nullable: true,
+    description: 'The learner, also when outside the top 50; null without XP',
+  })
+  me: AllTimeRowDto | null;
+}
+
 export class LeagueResultDto {
   @ApiProperty() week_id: string;
   @ApiProperty() rank: number;

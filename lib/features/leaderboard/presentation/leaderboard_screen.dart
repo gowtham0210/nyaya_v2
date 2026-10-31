@@ -11,8 +11,6 @@ import '../../../core/utils/day.dart';
 import '../../../core/widgets/common.dart';
 import '../../../core/widgets/ticking_builder.dart';
 import '../../gamification/domain/league.dart';
-import '../../profile/application/profile_controller.dart';
-import '../../profile/domain/user_profile.dart';
 import '../data/league_api.dart';
 
 class LeaderboardScreen extends ConsumerWidget {
@@ -301,43 +299,81 @@ class _LeagueRow extends StatelessWidget {
   }
 }
 
-/// All-time board (simulated around the user's total XP until a backend exists).
+/// All-time board: every learner with XP, by total XP, from the server.
 class _AllTime extends ConsumerWidget {
   const _AllTime();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final p = ref.watch(profileProvider);
-    final entries = _allTime(p);
-    final rank = entries.indexWhere((e) => e.isUser) + 1;
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.md, AppSpacing.page, AppSpacing.xl),
-      children: [
-        if (entries.length >= 3) _Podium(top: entries.take(3).toList()),
-        const SizedBox(height: AppSpacing.md),
-        for (final (i, e) in entries.indexed.skip(3)) _LeagueRow(rank: i + 1, entry: e),
-        if (rank > 3) const SizedBox.shrink(),
-      ],
+    final board = ref.watch(allTimeProvider);
+    return board.when(
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (_, _) => _Retry(onRetry: () => ref.invalidate(allTimeProvider)),
+      data: (b) => b == null
+          ? _Retry(onRetry: () => ref.invalidate(allTimeProvider))
+          : RefreshIndicator(
+              onRefresh: () => ref.refresh(allTimeProvider.future),
+              child: _AllTimeList(board: b),
+            ),
     );
   }
+}
 
-  static List<LeagueEntry> _allTime(UserProfile p) {
-    final rng = Random(42);
-    final list = <LeagueEntry>[
-      for (var i = 0; i < 24; i++)
-        LeagueEntry(
-          name: '${['Adv.', '', '', ''][rng.nextInt(4)]} ${[
-            'Meera Nair', 'Arjun Rao', 'Kavya Iyer', 'Rohan Sharma', 'Lakshmi Menon', 'Imran Khan',
-            'Divya Reddy', 'Siddharth Joshi', 'Ananya Das', 'Harish Gowda', 'Fathima N', 'Vikram Singh',
-          ][i % 12]}'.trim(),
-          xp: (18000 * pow(0.86, i)).round() + rng.nextInt(120),
-          avatarSeed: rng.nextInt(1 << 20),
-          isUser: false,
-          city: ['Kochi', 'Hyderabad', 'Chennai', 'Delhi', 'Bengaluru', 'Lucknow'][rng.nextInt(6)],
-        ),
-      LeagueEntry(name: p.name.isEmpty ? 'You' : p.name, xp: p.totalXp, avatarSeed: 0, isUser: true, city: ''),
-    ]..sort((a, b) => b.xp.compareTo(a.xp));
-    return list;
+class _AllTimeList extends StatelessWidget {
+  const _AllTimeList({required this.board});
+
+  final AllTimeBoard board;
+
+  static LeagueEntry _entry(AllTimeRow r) =>
+      LeagueEntry(name: r.name, xp: r.xp, avatarSeed: r.name.hashCode & 0xFFFFF, isUser: r.me, city: '');
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final top = board.top;
+    final podium = top.length >= 3;
+    final rest = podium ? top.skip(3) : top;
+    final me = board.me;
+    return ListView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.md, AppSpacing.page, AppSpacing.xl),
+      children: [
+        if (board.total > 0)
+          Text(
+            l.leaderboardLearners(board.total),
+            textAlign: TextAlign.center,
+            style: context.text.bodyMedium?.copyWith(color: context.nyaya.textSecondary),
+          ),
+        if (me == null) ...[
+          const SizedBox(height: AppSpacing.md),
+          NyayaCard(
+            color: context.colors.primaryContainer.withValues(alpha: 0.5),
+            child: Row(
+              children: [
+                Icon(Icons.info_outline_rounded, color: context.colors.primary),
+                const SizedBox(width: 10),
+                Expanded(child: Text(l.leaderboardAllTimeJoin, style: context.text.bodyMedium)),
+              ],
+            ),
+          ),
+        ],
+        const SizedBox(height: AppSpacing.md),
+        if (podium) ...[
+          _Podium(top: [for (final r in top.take(3)) _entry(r)]),
+          const SizedBox(height: AppSpacing.md),
+        ],
+        for (final (i, r) in rest.indexed)
+          _LeagueRow(rank: r.rank, entry: _entry(r)).animate().fadeIn(delay: (min(i, 12) * 25).ms),
+        // Further down than the list goes: your own place after a gap.
+        if (me != null && me.rank > top.length) ...[
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Icon(Icons.more_vert_rounded, color: context.nyaya.textSecondary),
+          ),
+          _LeagueRow(rank: me.rank, entry: _entry(me)),
+        ],
+      ],
+    );
   }
 }
 

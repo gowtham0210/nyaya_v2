@@ -508,6 +508,15 @@
   },
   "leaderboardPractice": "Practice player",
   "@leaderboardPractice": {"description": "League row label for a simulated player that tops up a small group"},
+  "leaderboardLearners": "{count, plural, =1{1 learner on the board} other{{count} learners on the board}}",
+  "@leaderboardLearners": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "leaderboardAllTimeJoin": "Finish a quiz to get on the all-time board.",
   "leaderboardYou": "You",
   "leaderboardTiers": "League tiers",
   "leagueOutcomePromoted": "Promoted to {tier}!",

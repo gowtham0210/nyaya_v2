@@ -79,6 +79,12 @@ class ProgressSync extends Notifier<void> {
     return league;
   }
 
+  /// The all-time board, or null when signed out or offline.
+  Future<AllTimeBoard?> allTime() async {
+    if (!ref.read(authProvider.notifier).isSignedIn) return null;
+    return _guard(ref.read(leagueApiProvider).allTime);
+  }
+
   /// Spends coins on energy or a freeze, or switches demo premium, on the
   /// server. Returns the error code when the server says no (e.g.
   /// `not_enough_coins`), or null when it worked.

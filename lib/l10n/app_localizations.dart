@@ -1528,6 +1528,18 @@ abstract class AppLocalizations {
   /// **'Practice player'**
   String get leaderboardPractice;
 
+  /// No description provided for @leaderboardLearners.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 learner on the board} other{{count} learners on the board}}'**
+  String leaderboardLearners(int count);
+
+  /// No description provided for @leaderboardAllTimeJoin.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish a quiz to get on the all-time board.'**
+  String get leaderboardAllTimeJoin;
+
   /// No description provided for @leaderboardYou.
   ///
   /// In en, this message translates to:

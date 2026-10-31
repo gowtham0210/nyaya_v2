@@ -189,6 +189,8 @@
   "leaderboardNoDemotion": "ഈ ലീഗിൽ ഡിമോഷനില്ല — പഠനം തുടരൂ!",
   "leaderboardEarnToJoin": "ലീഗിൽ ചേരാൻ ഈ ആഴ്ച ഒരു ക്വിസ് പൂർത്തിയാക്കൂ.",
   "leaderboardXp": "{xp} XP",
+  "leaderboardLearners": "{count, plural, =1{ബോർഡിൽ 1 പഠിതാവ്} other{ബോർഡിൽ {count} പഠിതാക്കൾ}}",
+  "leaderboardAllTimeJoin": "എക്കാലത്തെയും ബോർഡിൽ ഇടം നേടാൻ ഒരു ക്വിസ് പൂർത്തിയാക്കൂ.",
   "leaderboardYou": "നിങ്ങൾ",
   "leaderboardTiers": "ലീഗ് തലങ്ങൾ",
   "leagueOutcomePromoted": "{tier}-ലേക്ക് പ്രമോഷൻ!",

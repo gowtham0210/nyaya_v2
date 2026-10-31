@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-31 (quiz modes back on Home, Claude Opus 5.5)
+> Last updated: 2026-10-31 (real all-time leaderboard, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -697,6 +697,19 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       1000 → 979; that throwaway account was then set inactive. Flutter tests: 106 (the duel test now starts from
       the Home tile).
 
+- [x] 2026-10-31: **Real all-time leaderboard.** The All-time tab was made up on the phone (24 invented names around
+      your XP); it now comes from the server. `GET /v1/me/leaderboard/all-time` (`backend/src/learn/leaderboard.service.ts`)
+      ranks every active learner with XP by total XP from finished quizzes (staff, inactive accounts and learners with
+      0 XP are left out; no practice players). Ties: older account first, the same for everyone. Returns `total`, the
+      top 50 and the learner's own row (`me`, also when below 50; null with no XP); names as in the league
+      ("Asha K."). Worked out on each request with one SQL query (window function over `quiz_sessions`), nothing
+      stored. App: `allTimeProvider` → podium for the top 3, then the list, then "⋮" and your own row if you are
+      further down; "N learners on the board"; without XP a card says "Finish a quiz to get on the all-time board.";
+      offline / signed out shows the same Try again as the weekly tab. New strings in all 6 languages. Tests: backend
+      74 unit + 131 API (4 new), Flutter 108 (2 new). Endpoint checked against the local API with a throwaway account
+      (empty board as expected: the local DB has no learners with XP). Not yet checked on the simulator signed in
+      (needs the dev learner password, which Claude may not read), and not on staging yet.
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
@@ -706,16 +719,15 @@ Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
    then P4 beta hardening (crash reporting, analytics M11, accessibility, translations of English-only screens,
    security/privacy incl. in-app account deletion, store prep with a separate
    production environment), then P5 controlled launch. Open decisions for the user: who the legal reviewer is,
-   crash/analytics tool, launch audience, premium during beta, production hosting. Also open: a real all-time
-   leaderboard.
+   crash/analytics tool, launch audience, premium during beta, production hosting. The all-time leaderboard is
+   real since 2026-10-31.
 2. Dark-mode visual pass: done 2026-10-31 (see above).
 3. Note: a debug build launched via `simctl launch` without `flutter run` can show a blank screen —
    use `flutter run -d <device>` (or a release/profile build) when testing.
 4. **Features still to build** (agreed list, 2026-10-31; everything else on the original list works):
    1. ~~Daily practice reminders~~ — done 2026-10-31 (see above).
    2. ~~Moot Court Duel opponent~~ — done 2026-10-31 (see above); the modes are back on Home (see above).
-   3. **All-time leaderboard tab** — still simulated on the phone (the weekly league is real); needs a real
-      ranking from the server.
+   3. ~~All-time leaderboard tab~~ — done 2026-10-31 (see above); still to deploy to staging.
    4. **Sound effects** — the setting exists, nothing plays (right/wrong answer, level done, chest open).
    5. **News extras** — pictures for articles (cards use the category painting) and a notice when a new
       article is published.
@@ -764,7 +776,7 @@ lib/
     profile/      UserProfile model, repository, ProfileController (single owner of economy)
     chat/         ChatRepository: ClaudeChatRepository (HTTP Messages API) + OfflineChatRepository
     legal_updates/ curated repo (10 real landmark items) + list/detail screens
-    leaderboard/  weekly league (zones) + all-time podium
+    leaderboard/  weekly league (zones) + all-time podium (both from the server)
     premium/      PurchaseService (DemoPurchaseService) + paywall
     settings/     profile, stats, store (streak freeze), language/persona/goal, theme, toggles, reset
 assets/questions/{en,hi,ta,te,kn,ml}.json   # en = authoritative answers; others overlay text by id
@@ -821,7 +833,7 @@ flutter test
 iOS simulator used: iPhone 17 Pro Max (`F7B886EB-4774-42E1-B77B-43FD22DA4455`).
 
 ## 7. Known issues / caveats
-- The all-time leaderboard, the duel opponent and purchases are simulated in the app; legal news comes from the portal (2026-10-31).
+- Purchases are simulated in the app; legal news comes from the portal (2026-10-31).
 - Legal updates content is English-only (labelled "Shown in English" in other locales).
 - Question bank notes from author agent: BNS s.106(2) hit-and-run deliberately excluded (in-force status
   unclear); Art. 22(4) answer is "3 months" (44th Amendment change never notified).

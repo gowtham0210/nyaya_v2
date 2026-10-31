@@ -741,6 +741,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/leaderboard/all-time": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** All-time board: the top 50 learners by total XP, and where the learner stands */
+        get: operations["LearnController_allTime"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/me/energy/refill": {
         parameters: {
             query?: never;
@@ -2045,6 +2062,23 @@ export interface components {
             /** @description How the latest finished week ended */
             last_result: components["schemas"]["LeagueResultDto"] | null;
         };
+        AllTimeRowDto: {
+            rank: number;
+            /** @description First name and last initial */
+            name: string;
+            /** @description XP from all finished quizzes */
+            xp: number;
+            /** @description This row is the signed-in learner */
+            me: boolean;
+        };
+        AllTimeDto: {
+            /** @description Learners on the board (everyone with XP) */
+            total: number;
+            /** @description The top 50 */
+            top: components["schemas"]["AllTimeRowDto"][];
+            /** @description The learner, also when outside the top 50; null without XP */
+            me: components["schemas"]["AllTimeRowDto"] | null;
+        };
         ReviewQuestionDto: {
             /** Format: uuid */
             question_id: string;
@@ -3340,6 +3374,25 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["LeagueDto"];
+                };
+            };
+        };
+    };
+    LearnController_allTime: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AllTimeDto"];
                 };
             };
         };

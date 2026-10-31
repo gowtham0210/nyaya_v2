@@ -189,6 +189,8 @@
   "leaderboardNoDemotion": "ಈ ಲೀಗ್‌ನಲ್ಲಿ ಹಿಂಬಡ್ತಿ ಇಲ್ಲ — ಕಲಿಯುತ್ತಲೇ ಇರಿ!",
   "leaderboardEarnToJoin": "ಲೀಗ್ ಸೇರಲು ಈ ವಾರ ಒಂದು ರಸಪ್ರಶ್ನೆ ಮುಗಿಸಿ.",
   "leaderboardXp": "{xp} XP",
+  "leaderboardLearners": "{count, plural, =1{ಬೋರ್ಡ್‌ನಲ್ಲಿ 1 ಕಲಿಯುವವರು} other{ಬೋರ್ಡ್‌ನಲ್ಲಿ {count} ಕಲಿಯುವವರು}}",
+  "leaderboardAllTimeJoin": "ಸರ್ವಕಾಲಿಕ ಬೋರ್ಡ್‌ಗೆ ಸೇರಲು ಒಂದು ಕ್ವಿಜ್ ಮುಗಿಸಿ.",
   "leaderboardYou": "ನೀವು",
   "leaderboardTiers": "ಲೀಗ್ ಶ್ರೇಣಿಗಳು",
   "leagueOutcomePromoted": "{tier} ಗೆ ಬಡ್ತಿ!",

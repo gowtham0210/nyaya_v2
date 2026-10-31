@@ -110,11 +110,56 @@ class LeagueView {
       );
 }
 
+/// One row of the all-time board.
+@immutable
+class AllTimeRow {
+  const AllTimeRow({required this.rank, required this.name, required this.xp, required this.me});
+
+  final int rank;
+
+  /// First name and last initial ("Asha K.").
+  final String name;
+
+  /// XP from every finished quiz.
+  final int xp;
+  final bool me;
+
+  factory AllTimeRow.fromJson(Map<String, dynamic> j) => AllTimeRow(
+        rank: j['rank'] as int,
+        name: j['name'] as String,
+        xp: j['xp'] as int,
+        me: j['me'] as bool,
+      );
+}
+
+/// Every learner with XP, by total XP (`GET /v1/me/leaderboard/all-time`).
+@immutable
+class AllTimeBoard {
+  const AllTimeBoard({required this.total, required this.top, required this.me});
+
+  /// Learners on the board.
+  final int total;
+
+  /// The top 50.
+  final List<AllTimeRow> top;
+
+  /// The learner, also when outside [top]; null until they earn XP.
+  final AllTimeRow? me;
+
+  factory AllTimeBoard.fromJson(Map<String, dynamic> j) => AllTimeBoard(
+        total: j['total'] as int,
+        top: [for (final r in (j['top'] as List).cast<Map<String, dynamic>>()) AllTimeRow.fromJson(r)],
+        me: j['me'] == null ? null : AllTimeRow.fromJson(j['me'] as Map<String, dynamic>),
+      );
+}
+
 final leagueApiProvider = Provider<LeagueApi>((ref) => HttpLeagueApi(ref.watch(apiClientProvider)));
 
-/// Weekly leagues on the Nyaya API: real learners, topped up with practice players.
+/// Weekly leagues on the Nyaya API (real learners, topped up with practice
+/// players) and the all-time board (real learners only).
 abstract interface class LeagueApi {
   Future<LeagueView> league();
+  Future<AllTimeBoard> allTime();
 }
 
 class HttpLeagueApi implements LeagueApi {
@@ -124,10 +169,20 @@ class HttpLeagueApi implements LeagueApi {
 
   @override
   Future<LeagueView> league() async => LeagueView.fromJson(await _client.get('/v1/me/league') as Map<String, dynamic>);
+
+  @override
+  Future<AllTimeBoard> allTime() async =>
+      AllTimeBoard.fromJson(await _client.get('/v1/me/leaderboard/all-time') as Map<String, dynamic>);
 }
 
 /// The league screen's data: loads (and copies the tier into the profile)
 /// each time it is opened. Null when signed out or offline.
 final leagueProvider = FutureProvider.autoDispose<LeagueView?>(
   (ref) => ref.read(progressSyncProvider.notifier).league(),
+);
+
+/// The all-time tab's data, loaded each time it is opened. Null when signed
+/// out or offline.
+final allTimeProvider = FutureProvider.autoDispose<AllTimeBoard?>(
+  (ref) => ref.read(progressSyncProvider.notifier).allTime(),
 );

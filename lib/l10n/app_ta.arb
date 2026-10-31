@@ -189,6 +189,8 @@
   "leaderboardNoDemotion": "இந்த லீக்கில் இறக்கம் இல்லை — தொடர்ந்து கற்றுக்கொள்ளுங்கள்!",
   "leaderboardEarnToJoin": "லீக்கில் சேர இந்த வாரம் ஒரு வினாடி வினாவை முடியுங்கள்.",
   "leaderboardXp": "{xp} XP",
+  "leaderboardLearners": "{count, plural, =1{பட்டியலில் 1 கற்பவர்} other{பட்டியலில் {count} கற்பவர்கள்}}",
+  "leaderboardAllTimeJoin": "எல்லா நேரப் பட்டியலில் இடம்பெற ஒரு வினாடி வினாவை முடிக்கவும்.",
   "leaderboardYou": "நீங்கள்",
   "leaderboardTiers": "லீக் நிலைகள்",
   "leagueOutcomePromoted": "{tier}-க்கு முன்னேறினீர்கள்!",

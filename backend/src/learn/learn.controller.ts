@@ -21,6 +21,7 @@ import type { AuthUser } from '../auth/auth-user.js';
 import { CurrentActor, CurrentUser, Public } from '../auth/decorators.js';
 import type { Actor } from '../core/audit.service.js';
 import {
+  AllTimeDto,
   AnswerDto,
   AnswerResultDto,
   AttemptPageDto,
@@ -34,6 +35,7 @@ import {
   SettingsDto,
   StartSessionDto,
 } from './learn.dto.js';
+import { LeaderboardService } from './leaderboard.service.js';
 import { LeagueService } from './league.service.js';
 import { LearnService } from './learn.service.js';
 
@@ -45,6 +47,7 @@ export class LearnController {
   constructor(
     private readonly learn: LearnService,
     private readonly league: LeagueService,
+    private readonly leaderboard: LeaderboardService,
   ) {}
 
   @Public()
@@ -168,6 +171,17 @@ export class LearnController {
   @ApiOkResponse({ type: LeagueDto })
   leagueView(@CurrentUser() user: AuthUser) {
     return this.league.view(user.id);
+  }
+
+  @ApiBearerAuth()
+  @Get('me/leaderboard/all-time')
+  @ApiOperation({
+    summary:
+      'All-time board: the top 50 learners by total XP, and where the learner stands',
+  })
+  @ApiOkResponse({ type: AllTimeDto })
+  allTime(@CurrentUser() user: AuthUser) {
+    return this.leaderboard.allTime(user.id);
   }
 
   @ApiBearerAuth()

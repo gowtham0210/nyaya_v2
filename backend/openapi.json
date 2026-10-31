@@ -1799,6 +1799,33 @@
         ]
       }
     },
+    "/v1/me/leaderboard/all-time": {
+      "get": {
+        "operationId": "LearnController_allTime",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllTimeDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "All-time board: the top 50 learners by total XP, and where the learner stands",
+        "tags": [
+          "learn"
+        ]
+      }
+    },
     "/v1/me/energy/refill": {
       "post": {
         "operationId": "LearnController_refill",
@@ -5892,6 +5919,63 @@
           "demote",
           "standings",
           "last_result"
+        ]
+      },
+      "AllTimeRowDto": {
+        "type": "object",
+        "properties": {
+          "rank": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "description": "First name and last initial"
+          },
+          "xp": {
+            "type": "number",
+            "description": "XP from all finished quizzes"
+          },
+          "me": {
+            "type": "boolean",
+            "description": "This row is the signed-in learner"
+          }
+        },
+        "required": [
+          "rank",
+          "name",
+          "xp",
+          "me"
+        ]
+      },
+      "AllTimeDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "description": "Learners on the board (everyone with XP)"
+          },
+          "top": {
+            "description": "The top 50",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AllTimeRowDto"
+            }
+          },
+          "me": {
+            "nullable": true,
+            "description": "The learner, also when outside the top 50; null without XP",
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AllTimeRowDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "total",
+          "top",
+          "me"
         ]
       },
       "ReviewQuestionDto": {

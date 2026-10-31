@@ -189,6 +189,8 @@
   "leaderboardNoDemotion": "इस लीग में डिमोशन नहीं — बस सीखते रहें!",
   "leaderboardEarnToJoin": "लीग में शामिल होने के लिए इस हफ़्ते एक क्विज़ पूरा करें।",
   "leaderboardXp": "{xp} XP",
+  "leaderboardLearners": "{count, plural, =1{बोर्ड पर 1 शिक्षार्थी} other{बोर्ड पर {count} शिक्षार्थी}}",
+  "leaderboardAllTimeJoin": "ऑल-टाइम बोर्ड पर आने के लिए एक क्विज़ पूरा करें।",
   "leaderboardYou": "आप",
   "leaderboardTiers": "लीग स्तर",
   "leagueOutcomePromoted": "{tier} में प्रमोशन!",

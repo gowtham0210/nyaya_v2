@@ -384,6 +384,49 @@ void main() {
     expect(find.text('Leaderboard'), findsNothing);
   });
 
+  testWidgets('the all-time tab shows the server board, and you further down', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(
+      tester,
+      prefs: {'profile_v1': onboarded},
+      server: (s) => s
+        ..quizzesCompleted = 1
+        ..totalXp = 5
+        ..allTimeOthers = [for (var i = 0; i < 55; i++) (name: 'Learner $i', xp: 1000 - i)],
+    );
+    await settle(tester);
+    c.read(routerProvider).push(Routes.leaderboard);
+    await settle(tester);
+    await tester.tap(find.text('All time'));
+    await settle(tester);
+    expect(find.text('56 learners on the board'), findsOneWidget);
+    // The podium shows the top three.
+    expect(find.text('Learner 0'), findsOneWidget);
+    expect(find.text('Learner 2'), findsOneWidget);
+    // Past the top 50, your own place still shows at the end.
+    final me = find.textContaining('Ravi (You)');
+    await tester.scrollUntilVisible(me, 400, scrollable: find.byType(Scrollable).last);
+    expect(me, findsOneWidget);
+    expect(find.text('56'), findsOneWidget);
+    expect(find.text('Learner 54'), findsNothing);
+  });
+
+  testWidgets('without XP the all-time tab asks for a first quiz', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(
+      tester,
+      prefs: {'profile_v1': onboarded},
+      server: (s) => s..allTimeOthers = [(name: 'Asha K.', xp: 40)],
+    );
+    await settle(tester);
+    c.read(routerProvider).push(Routes.leaderboard);
+    await settle(tester);
+    await tester.tap(find.text('All time'));
+    await settle(tester);
+    expect(find.text('Finish a quiz to get on the all-time board.'), findsOneWidget);
+    expect(find.text('Asha K.'), findsOneWidget);
+  });
+
   testWidgets('a duel from Home races the opponent the server picked, and the server settles it', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});

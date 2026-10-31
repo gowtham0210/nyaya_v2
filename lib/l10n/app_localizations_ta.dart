@@ -866,6 +866,21 @@ class AppLocalizationsTa extends AppLocalizations {
   String get leaderboardPractice => 'பயிற்சி வீரர்';
 
   @override
+  String leaderboardLearners(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'பட்டியலில் $count கற்பவர்கள்',
+      one: 'பட்டியலில் 1 கற்பவர்',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get leaderboardAllTimeJoin =>
+      'எல்லா நேரப் பட்டியலில் இடம்பெற ஒரு வினாடி வினாவை முடிக்கவும்.';
+
+  @override
   String get leaderboardYou => 'நீங்கள்';
 
   @override

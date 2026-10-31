@@ -316,6 +316,23 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
     );
   }
 
+  /// Other learners on the fake all-time board.
+  List<({String name, int xp})> allTimeOthers = [];
+
+  @override
+  Future<AllTimeBoard> allTime() async {
+    final rows = <({String name, int xp, bool me})>[
+      for (final o in allTimeOthers) (name: o.name, xp: o.xp, me: false),
+      if (totalXp > 0) (name: 'Ravi', xp: totalXp, me: true),
+    ]..sort((a, b) => b.xp.compareTo(a.xp));
+    final all = [for (final (i, r) in rows.indexed) AllTimeRow(rank: i + 1, name: r.name, xp: r.xp, me: r.me)];
+    return AllTimeBoard(
+      total: all.length,
+      top: all.take(50).toList(),
+      me: all.where((r) => r.me).firstOrNull,
+    );
+  }
+
   /// How many times the app told the server it was opened.
   var appOpens = 0;
 

@@ -855,6 +855,21 @@ class AppLocalizationsHi extends AppLocalizations {
   String get leaderboardPractice => 'अभ्यास खिलाड़ी';
 
   @override
+  String leaderboardLearners(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'बोर्ड पर $count शिक्षार्थी',
+      one: 'बोर्ड पर 1 शिक्षार्थी',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get leaderboardAllTimeJoin =>
+      'ऑल-टाइम बोर्ड पर आने के लिए एक क्विज़ पूरा करें।';
+
+  @override
   String get leaderboardYou => 'आप';
 
   @override
