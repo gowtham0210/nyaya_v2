@@ -6,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:nyaya/app/app.dart';
 import 'package:nyaya/app/router.dart';
 import 'package:nyaya/core/api/token_store.dart';
+import 'package:nyaya/core/services/sounds.dart';
 import 'package:nyaya/core/storage/local_store.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
@@ -31,6 +32,7 @@ void main() {
 
   late FakeQuizApi api;
   late FakeAuthApi authApi;
+  late FakeSounds sounds;
 
   Future<ProviderContainer> pumpApp(
     WidgetTester tester, {
@@ -55,6 +57,7 @@ void main() {
       reviewApiProvider.overrideWithValue(api),
       legalUpdatesRepositoryProvider.overrideWithValue(FakeLegalUpdates()),
       reminderNotificationsProvider.overrideWithValue(FakeReminderNotifications()),
+      soundPlayerProvider.overrideWithValue(sounds = FakeSounds()),
       authApiProvider.overrideWithValue(authApi = FakeAuthApi(tokens)),
     ]);
     addTearDown(container.dispose);
@@ -127,6 +130,7 @@ void main() {
     }
 
     expect(find.text('Perfect case!'), findsOneWidget);
+    expect(sounds.played, [...List.filled(6, Sfx.correct), Sfx.levelComplete]);
     expect(c.read(journeyProvider).stars['constitution_1'], 3);
     final p = c.read(profileProvider);
     expect(p.totalXp, greaterThan(0));
@@ -150,6 +154,7 @@ void main() {
       await settle(tester);
     }
     expect(find.text('PLAY AGAIN'), findsOneWidget);
+    expect(sounds.played, List.filled(6, Sfx.wrong), reason: 'a failed level ends quietly');
     final started = api.sessionsStarted;
 
     await tester.tap(find.text('PLAY AGAIN'));
@@ -453,10 +458,46 @@ void main() {
       await settle(tester);
     }
     expect(find.text('You won the duel!'), findsOneWidget);
+    expect(sounds.played.last, Sfx.duelWon);
     // The answer times reached the server, and the record is the server's.
     expect(api.duelsWon, 1);
     final p = c.read(profileProvider);
     expect((p.duelRating, p.duelsPlayed, p.duelsWon), (1016, 1, 1));
+  });
+
+  testWidgets('with sound effects off nothing plays, and sounds load only when on', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen', 'soundOn': false});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    expect(sounds.warmedUp, isFalse);
+    await tester.tap(find.text('Explore').first);
+    await settle(tester);
+    await tester.tap(find.text(api.correctTextFor(_current(c).id)).first);
+    await settle(tester);
+    expect(find.text('Correct!'), findsOneWidget);
+    expect(sounds.played, isEmpty);
+  });
+
+  testWidgets('a timed question ticks for its last five seconds', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    expect(sounds.warmedUp, isTrue);
+    const duel = QuizRequest(QuizMode.duel);
+    c.read(routerProvider).push(Routes.quiz, extra: duel);
+    await settle(tester);
+    int left() => c.read(quizControllerProvider(duel)).secondsLeft!;
+    // 15 seconds a question: quiet until 5 are left, then one tick a second.
+    while (left() > 6) {
+      await tester.pump(const Duration(seconds: 1));
+    }
+    expect(sounds.played, isEmpty);
+    while (left() > 1) {
+      await tester.pump(const Duration(seconds: 1));
+    }
+    expect(sounds.played, List.filled(5, Sfx.tick));
+    c.read(routerProvider).go(Routes.home);
+    await settle(tester);
   });
 
   testWidgets('a practice opponent is labelled as one', (tester) async {

@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../core/l10n/l10n.dart';
+import '../core/services/sounds.dart';
 import '../core/theme/app_theme.dart';
 import '../features/profile/application/profile_controller.dart';
 import '../features/progress/application/progress_sync.dart';
@@ -40,6 +41,7 @@ class _NyayaAppState extends ConsumerState<NyayaApp> {
     ref.read(progressSyncProvider.notifier).refresh();
     ref.read(progressSyncProvider.notifier).noteOpen();
     ref.read(updateCheckProvider.notifier).check();
+    ref.read(soundsProvider).warmUp();
   }
 
   @override

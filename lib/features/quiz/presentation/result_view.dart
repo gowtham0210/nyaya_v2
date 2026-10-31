@@ -8,6 +8,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../../app/router.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/services/feedback.dart';
+import '../../../core/services/sounds.dart';
 import '../../../core/storage/local_store.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
@@ -43,6 +44,17 @@ class _ResultViewState extends ConsumerState<ResultView> {
       r.isPerfect ||
       widget.state.rewards?.streakMilestone != null;
 
+  /// One sound for the result: the duel's outcome first, then a streak
+  /// milestone, then a celebration. A draw or a so-so run stays quiet.
+  Sfx? get _sound {
+    if (r.request.mode == QuizMode.duel) {
+      if (r.duelDraw) return null;
+      return r.duelWon == true ? Sfx.duelWon : Sfx.duelLost;
+    }
+    if (widget.state.rewards?.streakMilestone != null) return Sfx.streak;
+    return _celebrate ? Sfx.levelComplete : null;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -52,6 +64,8 @@ class _ResultViewState extends ConsumerState<ResultView> {
         _confetti.play();
         ref.read(feedbackProvider).play(Haptic.celebrate);
       }
+      final sound = _sound;
+      if (sound != null) ref.read(soundsProvider).play(sound);
     });
   }
 

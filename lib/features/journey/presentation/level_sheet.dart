@@ -8,6 +8,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../../core/config/game_rules.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/services/feedback.dart';
+import '../../../core/services/sounds.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/chunky_button.dart';
@@ -194,6 +195,7 @@ class _ChestSheetState extends ConsumerState<_ChestSheet> {
     setState(() => _opening = false);
     if (coins == 0) return;
     ref.read(feedbackProvider).play(Haptic.celebrate);
+    ref.read(soundsProvider).play(Sfx.chest);
     _confetti.play();
     setState(() => _won = coins);
   }

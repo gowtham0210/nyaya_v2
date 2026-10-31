@@ -6,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:nyaya/app/app.dart';
 import 'package:nyaya/app/router.dart';
 import 'package:nyaya/core/api/token_store.dart';
+import 'package:nyaya/core/services/sounds.dart';
 import 'package:nyaya/core/storage/local_store.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
@@ -54,6 +55,7 @@ void main() {
       reviewApiProvider.overrideWithValue(api),
       legalUpdatesRepositoryProvider.overrideWithValue(FakeLegalUpdates()),
       reminderNotificationsProvider.overrideWithValue(FakeReminderNotifications()),
+      soundPlayerProvider.overrideWithValue(FakeSounds()),
       authApiProvider.overrideWithValue(FakeAuthApi(tokens)),
     ]);
     addTearDown(container.dispose);

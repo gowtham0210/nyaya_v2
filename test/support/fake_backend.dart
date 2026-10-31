@@ -1,5 +1,6 @@
 import 'package:nyaya/core/api/api_client.dart';
 import 'package:nyaya/core/api/token_store.dart';
+import 'package:nyaya/core/services/sounds.dart';
 import 'package:nyaya/core/utils/day.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
 import 'package:nyaya/features/gamification/domain/xp_calculator.dart';
@@ -540,4 +541,16 @@ class FakeReminderNotifications implements ReminderNotifications {
 
   @override
   Future<void> replaceAll(List<ReminderNotice> notices) async => scheduled = notices;
+}
+
+/// Records which sounds would play instead of playing them.
+class FakeSounds implements SoundPlayer {
+  final played = <Sfx>[];
+  var warmedUp = false;
+
+  @override
+  void play(Sfx sound) => played.add(sound);
+
+  @override
+  void warmUp() => warmedUp = true;
 }

@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:nyaya/app/app.dart';
 import 'package:nyaya/core/api/api_client.dart';
 import 'package:nyaya/core/api/token_store.dart';
+import 'package:nyaya/core/services/sounds.dart';
 import 'package:nyaya/core/storage/local_store.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
@@ -124,6 +125,7 @@ void main() {
       progressApiProvider.overrideWithValue(api),
       leagueApiProvider.overrideWithValue(api),
       reviewApiProvider.overrideWithValue(api),
+      soundPlayerProvider.overrideWithValue(FakeSounds()),
       authApiProvider.overrideWithValue(FakeAuthApi(tokens)),
       appVersionProvider.overrideWithValue(installed),
       appConfigApiProvider.overrideWithValue(config),

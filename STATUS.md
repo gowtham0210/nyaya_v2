@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-31 (real all-time leaderboard, Claude Opus 5.5)
+> Last updated: 2026-10-31 (sound effects, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -712,6 +712,21 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       (empty board as expected: the local DB has no learners with XP). Not yet checked on the simulator signed in
       (needs the dev learner password, which Claude may not read), and not on staging yet.
 
+- [x] 2026-10-31: **Sound effects.** The Settings switch existed but nothing played. Sounds are from the user's Envato
+      Elements subscription; picks, cuts and the unused spares are in `docs/SOUNDS.md`. 8 MP3s in `assets/sounds/`
+      (~150 KB; trimmed, mono, levelled so wrong is never louder than right): right / wrong answer, level complete,
+      chest, streak milestone, duel won, duel lost (no suitable "lose" sound found — user said reuse, so a spare
+      wrong-answer tone), and a clock tick for each of the last 5 seconds of a running clock
+      (`GameRules.tickFromSeconds`; exam, Daily Docket and duel questions). Result screen plays one sound: duel outcome,
+      else streak milestone, else level complete when there is confetti; a draw or a failed level stays quiet.
+      Code: `lib/core/services/sounds.dart` (`soundsProvider` checks `soundOn`; `audioplayers` 6.8.1, one small
+      `AudioPool` per sound, loaded at start-up only when sound is on; iPhone audio session **ambient** = quiet with
+      the silent switch and other apps' music keeps playing; Android: game sounds without audio focus; a sound that
+      fails to load or play is ignored). Tests: `FakeSounds` records plays; new checks for right/wrong + level
+      complete, a failed level, duel won, sound off, and the 5 ticks. Flutter 110 tests pass. On the simulator the
+      app starts and the audio players load with no errors; **not listened to yet** (Claude can't hear the
+      simulator, and a quiz needs a sign-in) — the user should listen on the iPhone.
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
@@ -730,7 +745,7 @@ Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
    1. ~~Daily practice reminders~~ — done 2026-10-31 (see above).
    2. ~~Moot Court Duel opponent~~ — done 2026-10-31 (see above); the modes are back on Home (see above).
    3. ~~All-time leaderboard tab~~ — done 2026-10-31 (see above); still to deploy to staging.
-   4. **Sound effects** — the setting exists, nothing plays (right/wrong answer, level done, chest open).
+   4. ~~Sound effects~~ — done 2026-10-31 (see above); the user still has to listen on the phone.
    5. **News extras** — pictures for articles (cards use the category painting) and a notice when a new
       article is published.
    Smaller extras: a "new version available" nudge for optional updates; setting the minimum app version
@@ -758,6 +773,7 @@ lib/
     config/game_rules.dart       # ALL economy numbers (energy, XP, coins, timers, streak milestones)
     l10n/l10n.dart               # context.l10n, tier/persona name helpers
     services/feedback.dart       # haptics respecting settings
+    services/sounds.dart         # sound effects respecting settings (assets/sounds/, docs/SOUNDS.md)
     storage/local_store.dart     # SharedPreferences JSON wrapper + clockProvider (testable time)
     theme/app_colors.dart app_theme.dart   # palette, NyayaColors ThemeExtension, light/dark themes
     utils/day.dart               # day keys, ISO week keys, countdowns

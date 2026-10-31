@@ -72,6 +72,9 @@ abstract final class GameRules {
   static const double examCorrectMarks = 1.0;
   static const double examNegativeMarks = 0.25;
 
+  /// A clock ticks out loud for its last this many seconds (exam, timed questions).
+  static const int tickFromSeconds = 5;
+
   // ── Duel rating (hidden Elo, separate from XP) ────────────────────────────
   static const int startingDuelRating = 1000;
   static const int eloKProvisional = 32;

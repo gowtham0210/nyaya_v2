@@ -5,6 +5,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../../core/config/game_rules.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/services/feedback.dart';
+import '../../../core/services/sounds.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/chunky_button.dart';
@@ -36,11 +37,19 @@ class QuizView extends ConsumerWidget {
     final chapter = JourneyCatalog.chapter(q.chapterId);
     final chapterTitle = l.chapterTitle(chapter.id);
 
-    // Haptics + combo toast on answer reveal.
+    // Haptics, sound + combo toast on answer reveal.
     ref.listen(provider.select((st) => st.answers.length), (prev, next) {
       if (prev == null || next <= prev || !mode.instantFeedback) return;
       final last = ref.read(provider).answers.last;
       ref.read(feedbackProvider).play(last.isCorrect ? Haptic.success : Haptic.error);
+      ref.read(soundsProvider).play(last.isCorrect ? Sfx.correct : Sfx.wrong);
+    });
+
+    // A soft tick each of the last seconds on a running clock.
+    ref.listen(provider.select((st) => st.secondsLeft), (prev, next) {
+      if (prev == null || next == null || next >= prev) return;
+      if (next < 1 || next > GameRules.tickFromSeconds) return;
+      ref.read(soundsProvider).play(Sfx.tick);
     });
 
     // An answer that could not reach the server.
