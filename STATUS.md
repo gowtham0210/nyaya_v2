@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-31 (legal news from the portal, Claude Opus 5.5)
+> Last updated: 2026-10-31 (dark Journey redesign, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -217,7 +217,8 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       Two separate counters for now: the app's free 5/day (premium unlimited, still simulated on the phone) and the
       server's 50/day — move to the server's `remaining_today` once purchases are real. Tests: backend 21 unit + 40 API,
       Flutter 38. Checked by the user on the iPhone against staging.
-      The Azure key was pasted in chat on 2026-10-29 — rotate it in the Azure portal and update `/opt/nyaya-v2/.env`.
+      The Azure key was pasted in chat on 2026-10-29. Changing it was dropped from the plan on 2026-10-31: the user has
+      no access to the Azure portal (whoever owns the Azure account would have to do it).
       Gotchas: `devicectl device install` can fail with "Insufficient storage" while the last output line still looks
       fine — check for "App installed". On a flaky connection rsync to the VPS can drop ("incorrect signature",
       "closed by remote host"); deploy.sh then fails, so retry, or scp the changed files and run
@@ -433,7 +434,7 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       (no learner data to third parties); **premium hidden** in the beta; **production hosting: decide later**;
       **beta audience: citizens**. P4 order (hosting-free first): hide premium [done] → in-app account deletion [done] →
       Sentry [done: app, API, portal] → own analytics (done, calculated from existing records) + dashboard → minimum app version [done] → translations of English-only screens [done] →
-      accessibility + dark mode pass [done] → shared sign-in rate limit [done] → rotate the Azure key (user) → store prep.
+      accessibility + dark mode pass [done] → shared sign-in rate limit [done] → store prep. (Changing the Azure key was dropped: no portal access.)
 - [x] 2026-10-30: **Premium hidden for the beta.** App: build switch `Features.premium`
       (`lib/core/config/features.dart`, `--dart-define=NYAYA_PREMIUM=true` to show it) hides the post-onboarding
       paywall, the Settings premium row, the out-of-energy "Get unlimited energy" button and the Ask AI "upgrade"
@@ -636,6 +637,17 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       The app needs a new build to read news from the server. Not done: article images (cards use the category
       painting), translations, a "new" badge or push notice for fresh articles.
 
+- [x] 2026-10-31: **Journey map redesigned for dark mode** after a reference mockup from the user (comparison and one
+      self-contained prompt per picture in `docs/JOURNEY_DARK.md`). 12 candle-lit dark paintings (`journey_*_dark.webp`)
+      and 2 foliage strips (`journey_dark_foliage_left/right.webp`, inner fade saved in the files) were made by the user
+      from those prompts; 4 were mirrored so their subject faces the road. In dark mode the app uses the dark painting,
+      falling back to the light one, never dimmed; a faint warm glow behind the road; warmer road with rim and shadow;
+      pale peach title; terracotta ring on chests, warm rim on locked stops, wider glow on the current stop; a serif quote
+      "Small steps build a stronger understanding of the law." (6 languages, machine drafts) beside the road where it fits,
+      else "Keep going!". Both themes: the subtitle has its own line. Light mode otherwise unchanged. Not changed: the
+      bottom bar (the reference floats it; it is shared by all tabs). Pushed `ee63d72`, CI green. Note: on this Mac,
+      builds from Claude's shell only work outside the command sandbox, and the machine was heavily loaded.
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
@@ -643,7 +655,7 @@ Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
    finish P2 — (1) sources on the questions [done in code, staging review pending], (2) CSV/Excel import + export
    [done], (3) taxonomy pages [done], (4) staff account pages [done], (5) a real reviewer publishes a sample pack —
    then P4 beta hardening (crash reporting, analytics M11, accessibility, translations of English-only screens,
-   security/privacy incl. in-app account deletion and rotating the Azure key, store prep with a separate
+   security/privacy incl. in-app account deletion, store prep with a separate
    production environment), then P5 controlled launch. Open decisions for the user: who the legal reviewer is,
    crash/analytics tool, launch audience, premium during beta, production hosting. Also open: a real all-time
    leaderboard.
