@@ -702,11 +702,13 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       ranks every active learner with XP by total XP from finished quizzes (staff, inactive accounts and learners with
       0 XP are left out; no practice players). Ties: older account first, the same for everyone. Returns `total`, the
       top 50 and the learner's own row (`me`, also when below 50; null with no XP); names as in the league
-      ("Asha K."). Worked out on each request with one SQL query (window function over `quiz_sessions`), nothing
-      stored. App: `allTimeProvider` → podium for the top 3, then the list, then "⋮" and your own row if you are
+      ("Asha K."). Nothing stored: totals come from `quiz_sessions`. Review follow-up: summing every quiz on each
+      request would get slow, so the full ranking is kept in memory for 60 s and shared (`ALL_TIME_TTL_MS`, per
+      server process; a failed query isn't kept); the viewer's own total is always read fresh (indexed, one learner)
+      and placed into it, so your new XP shows straight after a quiz, other learners' may be up to a minute old. App: `allTimeProvider` → podium for the top 3, then the list, then "⋮" and your own row if you are
       further down; "N learners on the board"; without XP a card says "Finish a quiz to get on the all-time board.";
       offline / signed out shows the same Try again as the weekly tab. New strings in all 6 languages. Tests: backend
-      74 unit + 131 API (4 new), Flutter 108 (2 new). Endpoint checked against the local API with a throwaway account
+      74 unit + 132 API (5 new), Flutter 108 (2 new). Endpoint checked against the local API with a throwaway account
       (empty board as expected: the local DB has no learners with XP). Not yet checked on the simulator signed in
       (needs the dev learner password, which Claude may not read), and not on staging yet.
 

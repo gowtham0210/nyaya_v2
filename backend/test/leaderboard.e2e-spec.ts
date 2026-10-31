@@ -1,6 +1,10 @@
 import { eq } from 'drizzle-orm';
 import { newId } from '../src/core/ids.js';
 import { quizSessions, users } from '../src/db/schema.js';
+import {
+  ALL_TIME_TTL_MS,
+  LeaderboardService,
+} from '../src/learn/leaderboard.service.js';
 import { startApp, type TestApp } from './helpers.js';
 
 type Session = Awaited<ReturnType<TestApp['signInAs']>>;
@@ -61,6 +65,8 @@ describe('all-time leaderboard', () => {
 
   beforeAll(async () => {
     t = await startApp();
+    // Each test sees new XP at once; the shared ranking has its own test.
+    t.app.get(LeaderboardService).ttlMs = 0;
   });
   afterAll(() => t.close());
 
@@ -68,7 +74,7 @@ describe('all-time leaderboard', () => {
     const asha = await named('Asha Krishnan');
     const ravi = await named('Ravi');
     const new_ = await named('Nila Das');
-    const editor = await named('Staff Person', 'editor');
+    const editor = await named('Staff Person', 'content_editor');
     await earn(asha.id, 40);
     await earn(asha.id, 30);
     await earn(ravi.id, 90);
@@ -125,5 +131,34 @@ describe('all-time leaderboard', () => {
     const other = await named('Still Here');
     const names = (await board(other)).top.map((r: { name: string }) => r.name);
     expect(names).not.toContain('Gone S.');
+  });
+
+  it('shares one ranking for a minute, but always shows your own XP fresh', async () => {
+    const board = t.app.get(LeaderboardService);
+    board.ttlMs = ALL_TIME_TTL_MS;
+    try {
+      const me = await named('Fresh Me');
+      const rival = await named('Late Rival');
+      await earn(me.id, 9000);
+      const start = Date.now();
+      const first = await board.allTime(me.id, start);
+      expect(first.me).toMatchObject({ rank: 1, xp: 9000 });
+
+      // Within the minute: the rival's new XP waits, yours shows at once.
+      await earn(rival.id, 20000);
+      await earn(me.id, 1000);
+      const soon = await board.allTime(me.id, start + 1000);
+      expect(soon.me).toMatchObject({ rank: 1, xp: 10000 });
+      expect(soon.top.map((r) => r.name)).not.toContain('Late R.');
+      expect(soon.total).toBe(first.total);
+
+      // After it: everyone is up to date.
+      const later = await board.allTime(me.id, start + ALL_TIME_TTL_MS);
+      expect(later.top[0]).toMatchObject({ name: 'Late R.', xp: 20000 });
+      expect(later.me).toMatchObject({ rank: 2, xp: 10000 });
+      expect(later.total).toBe(first.total + 1);
+    } finally {
+      board.ttlMs = 0;
+    }
   });
 });
