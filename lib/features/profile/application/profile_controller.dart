@@ -98,9 +98,10 @@ class ProfileController extends Notifier<UserProfile> {
 
   // ── AI assistant quota ────────────────────────────────────────────────────
 
-  int get aiMessagesLeft => state.isPremium
-      ? 1 << 30
-      : (GameRules.freeDailyAiMessages - state.aiMessagesToday).clamp(0, GameRules.freeDailyAiMessages);
+  int get aiMessagesLeft {
+    final limit = state.isPremium ? GameRules.premiumDailyAiMessages : GameRules.freeDailyAiMessages;
+    return (limit - state.aiMessagesToday).clamp(0, limit);
+  }
 
   bool consumeAiMessage() {
     if (state.isPremium) return true;

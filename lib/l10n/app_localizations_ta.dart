@@ -975,7 +975,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get chatLimitReached =>
-      'இன்றைய இலவசக் கேள்விகளைப் பயன்படுத்திவிட்டீர்கள். நாளை வாருங்கள் அல்லது வரம்பற்ற AI-க்கு Premium-க்கு மாறுங்கள்.';
+      'இன்றைய இலவசக் கேள்விகளைப் பயன்படுத்திவிட்டீர்கள். நாளை வாருங்கள் அல்லது கூடுதல் AI கேள்விகளுக்கு Premium-க்கு மாறுங்கள்.';
 
   @override
   String get chatLimitReachedToday =>
@@ -1206,35 +1206,23 @@ class AppLocalizationsTa extends AppLocalizations {
   String get premiumTitle => 'Nyaya Premium';
 
   @override
-  String get premiumHeadline => 'வரம்பின்றிக் கற்றுக்கொள்ளுங்கள்';
+  String get premiumHeadline => 'ஒவ்வொரு நாளும் அதிகம் கற்றுக்கொள்ளுங்கள்';
 
   @override
   String get premiumBenefitEnergy => 'வரம்பற்ற ஆற்றல்';
 
   @override
-  String get premiumBenefitEnergySub =>
-      'விரும்பும் அளவு வினாடி வினாக்களை விளையாடுங்கள்';
+  String premiumBenefitEnergySub(int free) {
+    return 'இலவசம்: நாளுக்கு $free ஆற்றல். Premium: விரும்பும் அளவு வினாடி வினாக்களை விளையாடுங்கள்.';
+  }
 
   @override
-  String get premiumBenefitAi => 'வரம்பற்ற Nyaya AI';
+  String get premiumBenefitAi => 'கூடுதல் Nyaya AI';
 
   @override
-  String get premiumBenefitAiSub =>
-      'உங்கள் எல்லாச் சட்டக் கேள்விகளையும் கேளுங்கள்';
-
-  @override
-  String get premiumBenefitFreeze => 'தொடர் உறைவுகள் உள்ளடக்கம்';
-
-  @override
-  String get premiumBenefitFreezeSub =>
-      'வேலைப்பளுவான நாளால் தொடரை ஒருபோதும் இழக்க வேண்டாம்';
-
-  @override
-  String get premiumBenefitExam => 'முழு மாதிரித் தேர்வுகள்';
-
-  @override
-  String get premiumBenefitExamSub =>
-      'CLAT, AIBE & நீதித்துறைத் தேர்வு பாணி பயிற்சி';
+  String premiumBenefitAiSub(int free, int premium) {
+    return 'இலவசம்: நாளுக்கு $free கேள்விகள். Premium: நாளுக்கு $premium.';
+  }
 
   @override
   String get premiumFair =>

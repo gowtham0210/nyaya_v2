@@ -84,6 +84,9 @@ abstract final class GameRules {
   // ── AI assistant ──────────────────────────────────────────────────────────
   static const int freeDailyAiMessages = 5;
 
+  /// Matches the API's CHAT_DAILY_LIMIT; premium is not unlimited.
+  static const int premiumDailyAiMessages = 50;
+
   // ── Streak milestones (days) → bonus coins ────────────────────────────────
   static const Map<int, int> streakMilestones = {
     3: 15,

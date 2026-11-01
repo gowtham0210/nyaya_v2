@@ -971,7 +971,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get chatLimitReached =>
-      'ఈరోజు ఉచిత ప్రశ్నలు అయిపోయాయి. రేపు రండి లేదా అపరిమిత AI కోసం Premium తీసుకోండి.';
+      'ఈరోజు ఉచిత ప్రశ్నలు అయిపోయాయి. రేపు రండి లేదా మరిన్ని AI ప్రశ్నల కోసం Premium తీసుకోండి.';
 
   @override
   String get chatLimitReachedToday =>
@@ -1201,33 +1201,23 @@ class AppLocalizationsTe extends AppLocalizations {
   String get premiumTitle => 'Nyaya Premium';
 
   @override
-  String get premiumHeadline => 'పరిమితులు లేకుండా నేర్చుకోండి';
+  String get premiumHeadline => 'ప్రతిరోజూ మరింత నేర్చుకోండి';
 
   @override
   String get premiumBenefitEnergy => 'అపరిమిత ఎనర్జీ';
 
   @override
-  String get premiumBenefitEnergySub => 'మీకు నచ్చినన్ని క్విజ్‌లు ఆడండి';
+  String premiumBenefitEnergySub(int free) {
+    return 'ఉచితం: రోజుకు $free ఎనర్జీ. Premium: మీకు నచ్చినన్ని క్విజ్‌లు ఆడండి.';
+  }
 
   @override
-  String get premiumBenefitAi => 'అపరిమిత Nyaya AI';
+  String get premiumBenefitAi => 'మరింత Nyaya AI';
 
   @override
-  String get premiumBenefitAiSub => 'మీ ప్రతి న్యాయ సందేహాన్ని అడగండి';
-
-  @override
-  String get premiumBenefitFreeze => 'స్ట్రీక్ ఫ్రీజ్‌లు చేర్చబడ్డాయి';
-
-  @override
-  String get premiumBenefitFreezeSub =>
-      'బిజీ రోజు వల్ల మీ స్ట్రీక్ ఎప్పటికీ కోల్పోరు';
-
-  @override
-  String get premiumBenefitExam => 'పూర్తి మాక్ పరీక్షలు';
-
-  @override
-  String get premiumBenefitExamSub =>
-      'CLAT, AIBE & జ్యుడీషియరీ తరహా ప్రాక్టీస్';
+  String premiumBenefitAiSub(int free, int premium) {
+    return 'ఉచితం: రోజుకు $free ప్రశ్నలు. Premium: రోజుకు $premium.';
+  }
 
   @override
   String get premiumFair => 'న్యాయమైన ఆట: Premium ఎప్పుడూ లీగ్ XPను పెంచదు.';

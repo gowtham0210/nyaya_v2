@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../app/router.dart';
+import '../../../core/config/game_rules.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/services/feedback.dart';
 import '../../../core/theme/app_colors.dart';
@@ -67,11 +68,20 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
   Widget build(BuildContext context) {
     final l = context.l10n;
     final isPremium = ref.watch(profileProvider.select((p) => p.isPremium));
+    // Only what premium really changes, each with the free limit beside it.
     final benefits = [
-      (Icons.bolt_rounded, l.premiumBenefitEnergy, l.premiumBenefitEnergySub, AppPalette.ochre),
-      (Icons.auto_awesome, l.premiumBenefitAi, l.premiumBenefitAiSub, AppPalette.sand),
-      (Icons.ac_unit_rounded, l.premiumBenefitFreeze, l.premiumBenefitFreezeSub, AppPalette.frost),
-      (Icons.assignment_rounded, l.premiumBenefitExam, l.premiumBenefitExamSub, AppPalette.mossLight),
+      (
+        Icons.bolt_rounded,
+        l.premiumBenefitEnergy,
+        l.premiumBenefitEnergySub(GameRules.freeDailyEnergy),
+        AppPalette.ochre,
+      ),
+      (
+        Icons.auto_awesome,
+        l.premiumBenefitAi,
+        l.premiumBenefitAiSub(GameRules.freeDailyAiMessages, GameRules.premiumDailyAiMessages),
+        AppPalette.sand,
+      ),
     ];
 
     return Scaffold(

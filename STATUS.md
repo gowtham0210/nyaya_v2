@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-11-01 (premium offer after first quiz, Claude Opus 5.5)
+> Last updated: 2026-11-01 (honest paywall benefits, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -754,8 +754,15 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       again (a reset clears it). The banner moved from `home_sections.dart` (it was unused there) to
       `lib/features/premium/presentation/premium_banner.dart`. Other entry points unchanged: Settings, out-of-energy
       sheet, AI chat limit. Two tests in `app_flow_test.dart` run only with `--dart-define=NYAYA_PREMIUM=true`
-      (both pass); normal run: 112 pass, 2 skipped. Not checked on the simulator. Still open: the paywall lists
-      "Full mock exams" as premium, but Exam Chamber is free (costs energy); no free-vs-premium comparison.
+      (both pass); normal run: 112 pass, 2 skipped. Not checked on the simulator.
+- [x] 2026-11-01: **Paywall promises only what premium really gives.** Three of four benefits were not true:
+      "Unlimited Nyaya AI" (the API caps premium at 50 a day, `CHAT_DAILY_LIMIT`), "Streak freezes included" (premium
+      gives none) and "Full mock exams" (Exam Chamber is free). Now two benefits, each with the free limit beside it:
+      "Unlimited energy — Free: 5 energy a day…" and "More Nyaya AI — Free: 5 questions a day. Premium: 50 a day."
+      (numbers from `GameRules`; new `premiumDailyAiMessages = 50` must match the API). Headline "Learn more, every
+      day"; the chat limit message no longer says "unlimited AI". All 6 languages. The app's own premium AI count now
+      stops at 50 like the server (was "unlimited"). Paywall checked on the simulator. If premium should feel bigger,
+      real perks are a product choice (e.g. free monthly streak freezes, a premium-only mode).
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

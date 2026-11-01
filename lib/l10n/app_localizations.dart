@@ -1693,7 +1693,7 @@ abstract class AppLocalizations {
   /// No description provided for @chatLimitReached.
   ///
   /// In en, this message translates to:
-  /// **'You\'ve used today\'s free questions. Come back tomorrow or go Premium for unlimited AI.'**
+  /// **'You\'ve used today\'s free questions. Come back tomorrow or go Premium for more AI questions.'**
   String get chatLimitReached;
 
   /// No description provided for @chatLimitReachedToday.
@@ -2101,7 +2101,7 @@ abstract class AppLocalizations {
   /// No description provided for @premiumHeadline.
   ///
   /// In en, this message translates to:
-  /// **'Learn without limits'**
+  /// **'Learn more, every day'**
   String get premiumHeadline;
 
   /// No description provided for @premiumBenefitEnergy.
@@ -2113,44 +2113,20 @@ abstract class AppLocalizations {
   /// No description provided for @premiumBenefitEnergySub.
   ///
   /// In en, this message translates to:
-  /// **'Play as many quizzes as you like'**
-  String get premiumBenefitEnergySub;
+  /// **'Free: {free} energy a day. Premium: play as many quizzes as you like.'**
+  String premiumBenefitEnergySub(int free);
 
   /// No description provided for @premiumBenefitAi.
   ///
   /// In en, this message translates to:
-  /// **'Unlimited Nyaya AI'**
+  /// **'More Nyaya AI'**
   String get premiumBenefitAi;
 
   /// No description provided for @premiumBenefitAiSub.
   ///
   /// In en, this message translates to:
-  /// **'Ask every legal question you have'**
-  String get premiumBenefitAiSub;
-
-  /// No description provided for @premiumBenefitFreeze.
-  ///
-  /// In en, this message translates to:
-  /// **'Streak freezes included'**
-  String get premiumBenefitFreeze;
-
-  /// No description provided for @premiumBenefitFreezeSub.
-  ///
-  /// In en, this message translates to:
-  /// **'Never lose your streak to a busy day'**
-  String get premiumBenefitFreezeSub;
-
-  /// No description provided for @premiumBenefitExam.
-  ///
-  /// In en, this message translates to:
-  /// **'Full mock exams'**
-  String get premiumBenefitExam;
-
-  /// No description provided for @premiumBenefitExamSub.
-  ///
-  /// In en, this message translates to:
-  /// **'CLAT, AIBE & judiciary-style practice'**
-  String get premiumBenefitExamSub;
+  /// **'Free: {free} questions a day. Premium: {premium} a day.'**
+  String premiumBenefitAiSub(int free, int premium);
 
   /// No description provided for @premiumFair.
   ///

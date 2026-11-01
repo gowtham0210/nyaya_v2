@@ -577,7 +577,7 @@
       }
     }
   },
-  "chatLimitReached": "You've used today's free questions. Come back tomorrow or go Premium for unlimited AI.",
+  "chatLimitReached": "You've used today's free questions. Come back tomorrow or go Premium for more AI questions.",
   "chatLimitReachedToday": "You've used today's questions. You can ask more tomorrow.",
   "chatError": "I couldn't reach the AI right now. Please check your connection and try again.",
   "chatOfflineNote": "Offline mode — connect an AI key for full answers.",
@@ -677,15 +677,28 @@
   "settingsResetConfirm": "This erases coins, energy and settings on this device. XP, stars and streaks are saved to your account and stay. This cannot be undone.",
   "settingsResetAction": "Erase everything",
   "premiumTitle": "Nyaya Premium",
-  "premiumHeadline": "Learn without limits",
+  "premiumHeadline": "Learn more, every day",
   "premiumBenefitEnergy": "Unlimited energy",
-  "premiumBenefitEnergySub": "Play as many quizzes as you like",
-  "premiumBenefitAi": "Unlimited Nyaya AI",
-  "premiumBenefitAiSub": "Ask every legal question you have",
-  "premiumBenefitFreeze": "Streak freezes included",
-  "premiumBenefitFreezeSub": "Never lose your streak to a busy day",
-  "premiumBenefitExam": "Full mock exams",
-  "premiumBenefitExamSub": "CLAT, AIBE & judiciary-style practice",
+  "premiumBenefitEnergySub": "Free: {free} energy a day. Premium: play as many quizzes as you like.",
+  "@premiumBenefitEnergySub": {
+    "placeholders": {
+      "free": {
+        "type": "int"
+      }
+    }
+  },
+  "premiumBenefitAi": "More Nyaya AI",
+  "premiumBenefitAiSub": "Free: {free} questions a day. Premium: {premium} a day.",
+  "@premiumBenefitAiSub": {
+    "placeholders": {
+      "free": {
+        "type": "int"
+      },
+      "premium": {
+        "type": "int"
+      }
+    }
+  },
   "premiumFair": "Fair play: Premium never boosts league XP.",
   "premiumYearly": "Yearly",
   "premiumMonthly": "Monthly",

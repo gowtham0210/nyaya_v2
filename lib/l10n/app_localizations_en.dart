@@ -965,7 +965,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatLimitReached =>
-      'You\'ve used today\'s free questions. Come back tomorrow or go Premium for unlimited AI.';
+      'You\'ve used today\'s free questions. Come back tomorrow or go Premium for more AI questions.';
 
   @override
   String get chatLimitReachedToday =>
@@ -1196,31 +1196,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get premiumTitle => 'Nyaya Premium';
 
   @override
-  String get premiumHeadline => 'Learn without limits';
+  String get premiumHeadline => 'Learn more, every day';
 
   @override
   String get premiumBenefitEnergy => 'Unlimited energy';
 
   @override
-  String get premiumBenefitEnergySub => 'Play as many quizzes as you like';
+  String premiumBenefitEnergySub(int free) {
+    return 'Free: $free energy a day. Premium: play as many quizzes as you like.';
+  }
 
   @override
-  String get premiumBenefitAi => 'Unlimited Nyaya AI';
+  String get premiumBenefitAi => 'More Nyaya AI';
 
   @override
-  String get premiumBenefitAiSub => 'Ask every legal question you have';
-
-  @override
-  String get premiumBenefitFreeze => 'Streak freezes included';
-
-  @override
-  String get premiumBenefitFreezeSub => 'Never lose your streak to a busy day';
-
-  @override
-  String get premiumBenefitExam => 'Full mock exams';
-
-  @override
-  String get premiumBenefitExamSub => 'CLAT, AIBE & judiciary-style practice';
+  String premiumBenefitAiSub(int free, int premium) {
+    return 'Free: $free questions a day. Premium: $premium a day.';
+  }
 
   @override
   String get premiumFair => 'Fair play: Premium never boosts league XP.';
