@@ -611,10 +611,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get journeyLocked => 'Locked';
 
   @override
-  String get journeyLockedBody =>
-      'Clear the previous level to unlock this one.';
-
-  @override
   String journeyQuestions(int count) {
     return '$count questions';
   }
@@ -629,20 +625,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get journeyChest => 'Chapter chest';
 
   @override
-  String get journeyChestBody =>
-      'You finished the chapter! Open the chest for bonus coins.';
-
-  @override
   String get journeyOpenChest => 'Open chest';
-
-  @override
-  String journeyChestOpened(int coins) {
-    return '+$coins coins!';
-  }
-
-  @override
-  String get journeyChestLocked =>
-      'Finish every level in this chapter to open the chest.';
 
   @override
   String get journeyJumpToCurrent => 'Jump to current level';
@@ -651,8 +634,138 @@ class AppLocalizationsEn extends AppLocalizations {
   String get journeyYou => 'You';
 
   @override
-  String get journeyPassHint =>
-      'Score 50% to pass · 80% for 2 stars · 100% for 3 stars';
+  String get journeyNext => 'Next step';
+
+  @override
+  String get journeyDone => 'Completed';
+
+  @override
+  String journeyStarsOf(int count, int total) {
+    return '$count of $total stars';
+  }
+
+  @override
+  String journeyLockedNext(String step) {
+    return 'Levels open in order. Your next step is $step.';
+  }
+
+  @override
+  String get journeyGoToNext => 'Show my next step';
+
+  @override
+  String journeyStartCost(int count) {
+    return 'Start · $count energy';
+  }
+
+  @override
+  String journeyReplayCost(int count) {
+    return 'Replay · $count energy';
+  }
+
+  @override
+  String get journeyNoTimer => 'No time limit';
+
+  @override
+  String get journeyStarsTitle => 'Stars you can earn';
+
+  @override
+  String journeyPassMark(int percent) {
+    return '$percent% · pass';
+  }
+
+  @override
+  String journeyStarMark(int percent) {
+    return '$percent%';
+  }
+
+  @override
+  String get journeyHowScoring => 'How scoring works';
+
+  @override
+  String journeyRuleEnergy(int count) {
+    return 'Each try costs $count energy. If you leave before your first answer, you get it back.';
+  }
+
+  @override
+  String get journeyRuleRetry =>
+      'Didn\'t pass? You can try again as many times as you like.';
+
+  @override
+  String get journeyRuleBest =>
+      'Your best score is kept. A lower score never takes away stars.';
+
+  @override
+  String get journeyRuleNoMinus => 'Wrong answers don\'t take away marks.';
+
+  @override
+  String journeyRuleBonus(int count, int coins) {
+    return 'Your first 3-star score on a level gives $count energy back. Each new star earns $coins coins.';
+  }
+
+  @override
+  String get journeyChestLockedTitle => 'Chapter chest locked';
+
+  @override
+  String get journeyChestLockedText =>
+      'Complete all levels in this chapter to unlock your reward.';
+
+  @override
+  String get journeyChestReadyTitle => 'Your chapter reward is ready';
+
+  @override
+  String get journeyChestReadyText =>
+      'Well done! You\'ve completed this chapter.';
+
+  @override
+  String journeyChestReward(int coins) {
+    return 'Reward: $coins coins';
+  }
+
+  @override
+  String get journeyChestCollectedTitle => 'Chapter reward collected';
+
+  @override
+  String journeyChestCollectedText(int coins) {
+    return 'You received $coins coins.';
+  }
+
+  @override
+  String get journeyChestFailed =>
+      'Couldn\'t open the chest. Check your connection and try again. Your reward is still waiting.';
+
+  @override
+  String get journeyContinueLearning => 'Continue learning';
+
+  @override
+  String get journeyBackToMap => 'Back to the map';
+
+  @override
+  String journeyChapterProgress(int number, int done, int total) {
+    return 'Chapter $number · $done/$total completed';
+  }
+
+  @override
+  String journeyStarsInfo(int one, int two) {
+    return 'Earn up to 3 stars on each level: $one% for 1 star, $two% for 2 and 100% for 3. Your best score on each level counts.';
+  }
+
+  @override
+  String journeyEnergyInfo(int cost, int free, String time) {
+    return 'Each Case Path level costs $cost energy. You get $free free energy every day. It refills at midnight — in $time.';
+  }
+
+  @override
+  String get journeyCoinsInfo =>
+      'Earn coins from new stars, chapter chests, the Daily Docket, your daily goal and streak milestones. Spend them in the Store on energy refills and streak freezes.';
+
+  @override
+  String get journeyOpenStore => 'Open the Store';
+
+  @override
+  String get journeyListView => 'Show levels as a list';
+
+  @override
+  String get journeyAllLevels => 'All levels';
 
   @override
   String quizQuestionOf(int current, int total) {

@@ -339,14 +339,130 @@ void main() {
     await settle(tester);
     expect(find.text('Case Path'), findsOneWidget);
     expect(find.text('Your journey through Indian law'), findsOneWidget);
-    expect(find.text('CHAPTER 1 · 0/3'), findsOneWidget);
+    expect(find.text('CHAPTER 1 · 0/3 COMPLETED'), findsOneWidget);
     expect(find.text('You'), findsOneWidget);
     expect(tester.takeException(), isNull, reason: 'missing paintings fall back quietly');
 
-    await tester.tap(find.text('CHAPTER 1 · 0/3'));
+    await tester.tap(find.text('CHAPTER 1 · 0/3 COMPLETED'));
     await settle(tester);
     expect(find.text('Level 1'), findsOneWidget);
-    expect(find.text('START'), findsOneWidget);
+    // What a try costs and what each star needs, before starting.
+    expect(find.text('6 questions'), findsOneWidget);
+    expect(find.text('1 energy'), findsOneWidget);
+    expect(find.text('No time limit'), findsOneWidget);
+    expect(find.text('50% · pass'), findsOneWidget);
+    expect(find.text('80%'), findsOneWidget);
+    expect(find.text('100%'), findsOneWidget);
+    expect(find.text('START · 1 ENERGY'), findsOneWidget);
+
+    await tester.tap(find.text('How scoring works'));
+    await settle(tester);
+    expect(find.text('Your best score is kept. A lower score never takes away stars.'), findsOneWidget);
+    expect(find.text("Wrong answers don't take away marks."), findsOneWidget);
+  });
+
+  testWidgets('a locked level says what to do next and the list shows every state', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, server: (s) => s..stars['constitution_1'] = 2);
+    await settle(tester);
+    await tester.tap(find.text('Journey'));
+    await settle(tester);
+
+    await tester.tap(find.byTooltip('Show levels as a list'));
+    await settle(tester);
+    expect(find.text('All levels'), findsOneWidget);
+    expect(find.text('Completed'), findsOneWidget);
+    expect(find.text('Next step'), findsOneWidget);
+    expect(find.text('1 of 3 levels done'), findsOneWidget);
+
+    // Level 3 of the first chapter is locked.
+    await tester.tap(find.text('Level 3').first);
+    await settle(tester);
+    expect(find.text('Level 3 · Locked'), findsOneWidget);
+    expect(
+      find.text('Levels open in order. Your next step is Level 2 · Constitution Basics.'),
+      findsOneWidget,
+    );
+    expect(find.textContaining('ENERGY'), findsNothing, reason: 'a locked level has no start button');
+    await tester.tap(find.text('Show my next step'));
+    await settle(tester);
+    expect(find.text('Level 3 · Locked'), findsNothing);
+    expect(c.read(journeyProvider).current?.id, 'constitution_2');
+  });
+
+  testWidgets('a chapter chest goes from locked to ready to collected, once', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen', 'coins': 60});
+    final c = await pumpApp(
+      tester,
+      prefs: {'profile_v1': onboarded},
+      server: (s) => s
+        ..stars.addAll({'constitution_1': 3, 'constitution_2': 2, 'constitution_3': 1})
+        ..chestOffline = true,
+    );
+    await settle(tester);
+    await tester.tap(find.text('Journey'));
+    await settle(tester);
+
+    // The second chapter's chest is still locked.
+    await tester.tap(find.byTooltip('Show levels as a list'));
+    await settle(tester);
+    final locked = find.text('Chapter chest').at(1);
+    await tester.ensureVisible(locked);
+    await tester.pump();
+    await tester.tap(locked);
+    await settle(tester);
+    expect(find.text('Complete all levels in this chapter to unlock your reward.'), findsOneWidget);
+    expect(find.text('0 of 3 levels done'), findsOneWidget);
+    expect(find.text('CONTINUE LEARNING'), findsOneWidget);
+    expect(find.text('OPEN CHEST'), findsNothing);
+    await tester.tap(find.text('CONTINUE LEARNING'));
+    await settle(tester);
+
+    await tester.tap(find.byTooltip('Show levels as a list'));
+    await settle(tester);
+    await tester.tap(find.text('Your chapter reward is ready'));
+    await settle(tester);
+    expect(find.text('Reward: 30 coins'), findsOneWidget);
+
+    // Offline: no reward is shown and the chest can still be opened.
+    await tester.tap(find.text('OPEN CHEST'));
+    await settle(tester);
+    expect(find.textContaining("Couldn't open the chest"), findsOneWidget);
+    expect(find.text('OPEN CHEST'), findsOneWidget);
+    expect(c.read(journeyProvider).openedChests, isEmpty);
+
+    api.chestOffline = false;
+    await tester.tap(find.text('OPEN CHEST'));
+    await tester.tap(find.text('OPEN CHEST'), warnIfMissed: false); // a second tap while claiming
+    await settle(tester);
+    expect(find.text('Chapter reward collected'), findsOneWidget);
+    expect(find.text('You received 30 coins.'), findsOneWidget);
+    expect(find.text('OPEN CHEST'), findsNothing);
+    expect(api.openedChests, {'constitution_chest'});
+    expect(c.read(profileProvider).coins, 90, reason: 'paid once');
+    expect(c.read(journeyProvider).openedChests, {'constitution_chest'});
+  });
+
+  testWidgets('resource chips explain stars, energy and coins', (tester) async {
+    final semantics = tester.ensureSemantics();
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    await tester.tap(find.text('Journey'));
+    await settle(tester);
+
+    for (final (label, text) in [
+      ('0 Stars', 'Earn up to 3 stars on each level'),
+      ('5 energy left', 'Each Case Path level costs 1 energy. You get 5 free energy every day.'),
+      ('60 Coins', 'Spend them in the Store on energy refills and streak freezes.'),
+    ]) {
+      await tester.tap(find.bySemanticsLabel(label));
+      await settle(tester);
+      expect(find.textContaining(text), findsOneWidget, reason: label);
+      await tester.tapAt(const Offset(20, 20)); // outside the sheet
+      await settle(tester);
+    }
+    semantics.dispose();
   });
 
   testWidgets('Home continue card resumes the next Case Path level', (tester) async {

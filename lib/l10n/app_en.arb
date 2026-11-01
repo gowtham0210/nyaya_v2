@@ -307,7 +307,6 @@
   },
   "journeyLandmark": "Landmark level",
   "journeyLocked": "Locked",
-  "journeyLockedBody": "Clear the previous level to unlock this one.",
   "journeyQuestions": "{count} questions",
   "@journeyQuestions": {
     "placeholders": {
@@ -319,20 +318,155 @@
   "journeyBestStars": "Your best",
   "journeyReplay": "Replay",
   "journeyChest": "Chapter chest",
-  "journeyChestBody": "You finished the chapter! Open the chest for bonus coins.",
   "journeyOpenChest": "Open chest",
-  "journeyChestOpened": "+{coins} coins!",
-  "@journeyChestOpened": {
+  "journeyJumpToCurrent": "Jump to current level",
+  "journeyYou": "You",
+  "journeyNext": "Next step",
+  "journeyDone": "Completed",
+  "journeyStarsOf": "{count} of {total} stars",
+  "@journeyStarsOf": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyLockedNext": "Levels open in order. Your next step is {step}.",
+  "@journeyLockedNext": {
+    "placeholders": {
+      "step": {
+        "type": "String"
+      }
+    }
+  },
+  "journeyGoToNext": "Show my next step",
+  "journeyStartCost": "Start · {count} energy",
+  "@journeyStartCost": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyReplayCost": "Replay · {count} energy",
+  "@journeyReplayCost": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyNoTimer": "No time limit",
+  "journeyStarsTitle": "Stars you can earn",
+  "journeyPassMark": "{percent}% · pass",
+  "@journeyPassMark": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyStarMark": "{percent}%",
+  "@journeyStarMark": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyHowScoring": "How scoring works",
+  "journeyRuleEnergy": "Each try costs {count} energy. If you leave before your first answer, you get it back.",
+  "@journeyRuleEnergy": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyRuleRetry": "Didn't pass? You can try again as many times as you like.",
+  "journeyRuleBest": "Your best score is kept. A lower score never takes away stars.",
+  "journeyRuleNoMinus": "Wrong answers don't take away marks.",
+  "journeyRuleBonus": "Your first 3-star score on a level gives {count} energy back. Each new star earns {coins} coins.",
+  "@journeyRuleBonus": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyChestLockedTitle": "Chapter chest locked",
+  "journeyChestLockedText": "Complete all levels in this chapter to unlock your reward.",
+  "journeyChestReadyTitle": "Your chapter reward is ready",
+  "journeyChestReadyText": "Well done! You've completed this chapter.",
+  "journeyChestReward": "Reward: {coins} coins",
+  "@journeyChestReward": {
     "placeholders": {
       "coins": {
         "type": "int"
       }
     }
   },
-  "journeyChestLocked": "Finish every level in this chapter to open the chest.",
-  "journeyJumpToCurrent": "Jump to current level",
-  "journeyYou": "You",
-  "journeyPassHint": "Score 50% to pass · 80% for 2 stars · 100% for 3 stars",
+  "journeyChestCollectedTitle": "Chapter reward collected",
+  "journeyChestCollectedText": "You received {coins} coins.",
+  "@journeyChestCollectedText": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyChestFailed": "Couldn't open the chest. Check your connection and try again. Your reward is still waiting.",
+  "journeyContinueLearning": "Continue learning",
+  "journeyBackToMap": "Back to the map",
+  "journeyChapterProgress": "Chapter {number} · {done}/{total} completed",
+  "@journeyChapterProgress": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyStarsInfo": "Earn up to 3 stars on each level: {one}% for 1 star, {two}% for 2 and 100% for 3. Your best score on each level counts.",
+  "@journeyStarsInfo": {
+    "placeholders": {
+      "one": {
+        "type": "int"
+      },
+      "two": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyEnergyInfo": "Each Case Path level costs {cost} energy. You get {free} free energy every day. It refills at midnight — in {time}.",
+  "@journeyEnergyInfo": {
+    "placeholders": {
+      "cost": {
+        "type": "int"
+      },
+      "free": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "journeyCoinsInfo": "Earn coins from new stars, chapter chests, the Daily Docket, your daily goal and streak milestones. Spend them in the Store on energy refills and streak freezes.",
+  "journeyOpenStore": "Open the Store",
+  "journeyListView": "Show levels as a list",
+  "journeyAllLevels": "All levels",
   "quizQuestionOf": "Question {current} of {total}",
   "@quizQuestionOf": {
     "placeholders": {

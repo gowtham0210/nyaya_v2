@@ -18,6 +18,7 @@ import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart'
 import 'package:nyaya/features/onboarding/presentation/intro_slides.dart';
 import 'package:nyaya/features/profile/domain/user_profile.dart';
 import 'package:nyaya/features/reminders/data/reminder_notifications.dart';
+import 'package:nyaya/features/progress/application/progress_sync.dart';
 import 'package:nyaya/features/progress/data/progress_api.dart';
 import 'package:nyaya/features/quiz/application/quiz_controller.dart';
 import 'package:nyaya/features/quiz/data/quiz_api.dart';
@@ -252,6 +253,76 @@ void main() {
       }
     }
   }
+
+  // The Case Path map and its sheets on the same phones.
+  for (final (name, size) in [('a 320-point phone', const Size(960, 1704)), ('landscape', const Size(2532, 1170))]) {
+    for (final language in AppLanguage.values) {
+      for (final textScale in [1.0, 3.0]) {
+        testWidgets('Case Path in ${language.englishName} on $name lays out at text size $textScale', (tester) async {
+          final c = await pumpApp(tester, theme: 'light', textScale: textScale, language: language);
+          tester.view.physicalSize = size;
+          c.read(routerProvider).go(Routes.journey);
+          await settle(tester);
+          // The whole road, a screen at a time (level 1 is at the bottom).
+          for (var i = 0; i < 30; i++) {
+            await tester.drag(find.byType(Scrollable).first, const Offset(0, 500));
+            await tester.pump();
+            expect(tester.takeException(), isNull, reason: 'map at step $i');
+          }
+          await settle(tester);
+
+          // Large text can make a sheet fill the screen, so close it directly.
+          Future<void> closeSheet() async {
+            Navigator.of(tester.element(find.byType(BottomSheet))).pop();
+            await settle(tester);
+          }
+
+          // Each kind of sheet, opened from the level list.
+          Future<void> openFromList(int index) async {
+            await tester.tap(find.byIcon(Icons.format_list_bulleted_rounded));
+            await settle(tester);
+            final rows = find.descendant(of: find.byType(DraggableScrollableSheet), matching: find.byType(InkWell));
+            final row = rows.at(index);
+            await tester.ensureVisible(row);
+            await tester.pump();
+            await tester.tap(row);
+            await settle(tester);
+            expect(tester.takeException(), isNull, reason: 'sheet for row $index');
+          }
+
+          await openFromList(0); // level 1: the next step
+          final scoring = find.byType(ExpansionTile);
+          await tester.ensureVisible(scoring);
+          await tester.pump();
+          await tester.tap(scoring);
+          await settle(tester);
+          expect(tester.takeException(), isNull, reason: 'scoring rules open');
+          await closeSheet();
+          await openFromList(2); // level 3: locked
+          await closeSheet();
+          await openFromList(3); // the first chest: locked
+          await closeSheet();
+        });
+      }
+    }
+  }
+
+  testWidgets('screen readers hear each stop on the road and its state', (tester) async {
+    final handle = tester.ensureSemantics();
+    final c = await pumpApp(tester, theme: 'light');
+    api.stars['constitution_1'] = 2;
+    await c.read(progressSyncProvider.notifier).refresh();
+    c.read(routerProvider).go(Routes.journey);
+    await settle(tester);
+    expect(find.bySemanticsLabel('Level 1, Completed, 2 of 3 stars'), findsOneWidget);
+    expect(find.bySemanticsLabel('Level 2, Next step'), findsOneWidget);
+    expect(find.bySemanticsLabel('Level 3, Locked'), findsNWidgets(6), reason: 'one per chapter');
+    expect(find.bySemanticsLabel(RegExp(r'^Chapter 1, Constitution Basics, 1 of 3 levels done')), findsOneWidget);
+    // Both map buttons are named for screen readers by their tooltips.
+    expect(find.byTooltip('Jump to current level'), findsOneWidget);
+    expect(find.byTooltip('Show levels as a list'), findsOneWidget);
+    handle.dispose();
+  });
 
   testWidgets('quiz result lays out at the largest text size', (tester) async {
     await pumpApp(tester, theme: 'light', textScale: 3);

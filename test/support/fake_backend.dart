@@ -276,6 +276,9 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
 
   final stars = <String, int>{};
   final openedChests = <String>{};
+
+  /// Opening a chest fails as if the phone were offline.
+  bool chestOffline = false;
   int totalXp = 0;
   int quizzesCompleted = 0;
   bool docketDone = false;
@@ -348,6 +351,7 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
 
   @override
   Future<ServerProgress> openChest(String chestId) async {
+    if (chestOffline) throw const ApiException(0, 'network', 'offline');
     if (openedChests.add(chestId)) coins += 30;
     return _progress();
   }

@@ -1126,12 +1126,6 @@ abstract class AppLocalizations {
   /// **'Locked'**
   String get journeyLocked;
 
-  /// No description provided for @journeyLockedBody.
-  ///
-  /// In en, this message translates to:
-  /// **'Clear the previous level to unlock this one.'**
-  String get journeyLockedBody;
-
   /// No description provided for @journeyQuestions.
   ///
   /// In en, this message translates to:
@@ -1156,29 +1150,11 @@ abstract class AppLocalizations {
   /// **'Chapter chest'**
   String get journeyChest;
 
-  /// No description provided for @journeyChestBody.
-  ///
-  /// In en, this message translates to:
-  /// **'You finished the chapter! Open the chest for bonus coins.'**
-  String get journeyChestBody;
-
   /// No description provided for @journeyOpenChest.
   ///
   /// In en, this message translates to:
   /// **'Open chest'**
   String get journeyOpenChest;
-
-  /// No description provided for @journeyChestOpened.
-  ///
-  /// In en, this message translates to:
-  /// **'+{coins} coins!'**
-  String journeyChestOpened(int coins);
-
-  /// No description provided for @journeyChestLocked.
-  ///
-  /// In en, this message translates to:
-  /// **'Finish every level in this chapter to open the chest.'**
-  String get journeyChestLocked;
 
   /// No description provided for @journeyJumpToCurrent.
   ///
@@ -1192,11 +1168,209 @@ abstract class AppLocalizations {
   /// **'You'**
   String get journeyYou;
 
-  /// No description provided for @journeyPassHint.
+  /// No description provided for @journeyNext.
   ///
   /// In en, this message translates to:
-  /// **'Score 50% to pass · 80% for 2 stars · 100% for 3 stars'**
-  String get journeyPassHint;
+  /// **'Next step'**
+  String get journeyNext;
+
+  /// No description provided for @journeyDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get journeyDone;
+
+  /// No description provided for @journeyStarsOf.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} of {total} stars'**
+  String journeyStarsOf(int count, int total);
+
+  /// No description provided for @journeyLockedNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Levels open in order. Your next step is {step}.'**
+  String journeyLockedNext(String step);
+
+  /// No description provided for @journeyGoToNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Show my next step'**
+  String get journeyGoToNext;
+
+  /// No description provided for @journeyStartCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Start · {count} energy'**
+  String journeyStartCost(int count);
+
+  /// No description provided for @journeyReplayCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Replay · {count} energy'**
+  String journeyReplayCost(int count);
+
+  /// No description provided for @journeyNoTimer.
+  ///
+  /// In en, this message translates to:
+  /// **'No time limit'**
+  String get journeyNoTimer;
+
+  /// No description provided for @journeyStarsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stars you can earn'**
+  String get journeyStarsTitle;
+
+  /// No description provided for @journeyPassMark.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}% · pass'**
+  String journeyPassMark(int percent);
+
+  /// No description provided for @journeyStarMark.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}%'**
+  String journeyStarMark(int percent);
+
+  /// No description provided for @journeyHowScoring.
+  ///
+  /// In en, this message translates to:
+  /// **'How scoring works'**
+  String get journeyHowScoring;
+
+  /// No description provided for @journeyRuleEnergy.
+  ///
+  /// In en, this message translates to:
+  /// **'Each try costs {count} energy. If you leave before your first answer, you get it back.'**
+  String journeyRuleEnergy(int count);
+
+  /// No description provided for @journeyRuleRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Didn\'t pass? You can try again as many times as you like.'**
+  String get journeyRuleRetry;
+
+  /// No description provided for @journeyRuleBest.
+  ///
+  /// In en, this message translates to:
+  /// **'Your best score is kept. A lower score never takes away stars.'**
+  String get journeyRuleBest;
+
+  /// No description provided for @journeyRuleNoMinus.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong answers don\'t take away marks.'**
+  String get journeyRuleNoMinus;
+
+  /// No description provided for @journeyRuleBonus.
+  ///
+  /// In en, this message translates to:
+  /// **'Your first 3-star score on a level gives {count} energy back. Each new star earns {coins} coins.'**
+  String journeyRuleBonus(int count, int coins);
+
+  /// No description provided for @journeyChestLockedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Chapter chest locked'**
+  String get journeyChestLockedTitle;
+
+  /// No description provided for @journeyChestLockedText.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete all levels in this chapter to unlock your reward.'**
+  String get journeyChestLockedText;
+
+  /// No description provided for @journeyChestReadyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your chapter reward is ready'**
+  String get journeyChestReadyTitle;
+
+  /// No description provided for @journeyChestReadyText.
+  ///
+  /// In en, this message translates to:
+  /// **'Well done! You\'ve completed this chapter.'**
+  String get journeyChestReadyText;
+
+  /// No description provided for @journeyChestReward.
+  ///
+  /// In en, this message translates to:
+  /// **'Reward: {coins} coins'**
+  String journeyChestReward(int coins);
+
+  /// No description provided for @journeyChestCollectedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Chapter reward collected'**
+  String get journeyChestCollectedTitle;
+
+  /// No description provided for @journeyChestCollectedText.
+  ///
+  /// In en, this message translates to:
+  /// **'You received {coins} coins.'**
+  String journeyChestCollectedText(int coins);
+
+  /// No description provided for @journeyChestFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t open the chest. Check your connection and try again. Your reward is still waiting.'**
+  String get journeyChestFailed;
+
+  /// No description provided for @journeyContinueLearning.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue learning'**
+  String get journeyContinueLearning;
+
+  /// No description provided for @journeyBackToMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to the map'**
+  String get journeyBackToMap;
+
+  /// No description provided for @journeyChapterProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Chapter {number} · {done}/{total} completed'**
+  String journeyChapterProgress(int number, int done, int total);
+
+  /// No description provided for @journeyStarsInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn up to 3 stars on each level: {one}% for 1 star, {two}% for 2 and 100% for 3. Your best score on each level counts.'**
+  String journeyStarsInfo(int one, int two);
+
+  /// No description provided for @journeyEnergyInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Each Case Path level costs {cost} energy. You get {free} free energy every day. It refills at midnight — in {time}.'**
+  String journeyEnergyInfo(int cost, int free, String time);
+
+  /// No description provided for @journeyCoinsInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn coins from new stars, chapter chests, the Daily Docket, your daily goal and streak milestones. Spend them in the Store on energy refills and streak freezes.'**
+  String get journeyCoinsInfo;
+
+  /// No description provided for @journeyOpenStore.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the Store'**
+  String get journeyOpenStore;
+
+  /// No description provided for @journeyListView.
+  ///
+  /// In en, this message translates to:
+  /// **'Show levels as a list'**
+  String get journeyListView;
+
+  /// No description provided for @journeyAllLevels.
+  ///
+  /// In en, this message translates to:
+  /// **'All levels'**
+  String get journeyAllLevels;
 
   /// No description provided for @quizQuestionOf.
   ///

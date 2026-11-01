@@ -6,7 +6,10 @@ import '../domain/journey.dart';
 /// Pure geometry for the winding road. Level 1 sits at the bottom (like
 /// Candy Crush) and the road snakes upward chapter by chapter.
 class JourneyLayout {
-  JourneyLayout({required this.width, required List<JourneyNode> nodes}) {
+  /// [textScale] makes room in each chapter's band for a taller signpost
+  /// when the learner uses large text.
+  JourneyLayout({required this.width, required List<JourneyNode> nodes, this.textScale = 1})
+    : bannerHeight = 140 + (max(1.0, textScale) - 1) * 160 {
     var d = bottomPad;
     var lastChapter = -1;
     for (final n in nodes) {
@@ -38,7 +41,9 @@ class JourneyLayout {
   }
 
   static const spacing = 96.0;
-  static const bannerHeight = 128.0;
+  /// Height of the band each chapter signpost sits in.
+  final double bannerHeight;
+  final double textScale;
   static const bottomPad = 84.0;
   static const topPad = 150.0;
 

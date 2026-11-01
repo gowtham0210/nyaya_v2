@@ -611,9 +611,6 @@ class AppLocalizationsHi extends AppLocalizations {
   String get journeyLocked => 'लॉक है';
 
   @override
-  String get journeyLockedBody => 'इसे अनलॉक करने के लिए पिछला लेवल पूरा करें।';
-
-  @override
   String journeyQuestions(int count) {
     return '$count सवाल';
   }
@@ -628,20 +625,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get journeyChest => 'अध्याय संदूक';
 
   @override
-  String get journeyChestBody =>
-      'आपने अध्याय पूरा कर लिया! बोनस सिक्कों के लिए संदूक खोलें।';
-
-  @override
   String get journeyOpenChest => 'संदूक खोलें';
-
-  @override
-  String journeyChestOpened(int coins) {
-    return '+$coins सिक्के!';
-  }
-
-  @override
-  String get journeyChestLocked =>
-      'संदूक खोलने के लिए इस अध्याय के सभी लेवल पूरे करें।';
 
   @override
   String get journeyJumpToCurrent => 'मौजूदा लेवल पर जाएँ';
@@ -650,8 +634,138 @@ class AppLocalizationsHi extends AppLocalizations {
   String get journeyYou => 'आप';
 
   @override
-  String get journeyPassHint =>
-      'पास के लिए 50% · 2 स्टार के लिए 80% · 3 स्टार के लिए 100%';
+  String get journeyNext => 'अगला कदम';
+
+  @override
+  String get journeyDone => 'पूरा हुआ';
+
+  @override
+  String journeyStarsOf(int count, int total) {
+    return '$total में से $count स्टार';
+  }
+
+  @override
+  String journeyLockedNext(String step) {
+    return 'लेवल क्रम से खुलते हैं। आपका अगला कदम $step है।';
+  }
+
+  @override
+  String get journeyGoToNext => 'मेरा अगला कदम दिखाएँ';
+
+  @override
+  String journeyStartCost(int count) {
+    return 'शुरू करें · $count ऊर्जा';
+  }
+
+  @override
+  String journeyReplayCost(int count) {
+    return 'फिर से खेलें · $count ऊर्जा';
+  }
+
+  @override
+  String get journeyNoTimer => 'कोई समय सीमा नहीं';
+
+  @override
+  String get journeyStarsTitle => 'आप कितने स्टार पा सकते हैं';
+
+  @override
+  String journeyPassMark(int percent) {
+    return '$percent% · पास';
+  }
+
+  @override
+  String journeyStarMark(int percent) {
+    return '$percent%';
+  }
+
+  @override
+  String get journeyHowScoring => 'अंक कैसे मिलते हैं';
+
+  @override
+  String journeyRuleEnergy(int count) {
+    return 'हर कोशिश में $count ऊर्जा लगती है। पहले उत्तर से पहले छोड़ने पर यह वापस मिल जाती है।';
+  }
+
+  @override
+  String get journeyRuleRetry =>
+      'पास नहीं हुए? जितनी बार चाहें फिर से कोशिश करें।';
+
+  @override
+  String get journeyRuleBest =>
+      'आपका सबसे अच्छा स्कोर रखा जाता है। कम स्कोर से स्टार कभी नहीं घटते।';
+
+  @override
+  String get journeyRuleNoMinus => 'गलत उत्तर पर अंक नहीं कटते।';
+
+  @override
+  String journeyRuleBonus(int count, int coins) {
+    return 'किसी लेवल पर पहली बार 3 स्टार पाने पर $count ऊर्जा वापस मिलती है। हर नए स्टार पर $coins सिक्के मिलते हैं।';
+  }
+
+  @override
+  String get journeyChestLockedTitle => 'अध्याय संदूक बंद है';
+
+  @override
+  String get journeyChestLockedText =>
+      'अपना इनाम खोलने के लिए इस अध्याय के सभी लेवल पूरे करें।';
+
+  @override
+  String get journeyChestReadyTitle => 'आपका अध्याय इनाम तैयार है';
+
+  @override
+  String get journeyChestReadyText =>
+      'बहुत बढ़िया! आपने यह अध्याय पूरा कर लिया।';
+
+  @override
+  String journeyChestReward(int coins) {
+    return 'इनाम: $coins सिक्के';
+  }
+
+  @override
+  String get journeyChestCollectedTitle => 'अध्याय इनाम मिल गया';
+
+  @override
+  String journeyChestCollectedText(int coins) {
+    return 'आपको $coins सिक्के मिले।';
+  }
+
+  @override
+  String get journeyChestFailed =>
+      'संदूक नहीं खुल सका। अपना कनेक्शन जाँचें और फिर कोशिश करें। आपका इनाम सुरक्षित है।';
+
+  @override
+  String get journeyContinueLearning => 'सीखना जारी रखें';
+
+  @override
+  String get journeyBackToMap => 'नक्शे पर वापस';
+
+  @override
+  String journeyChapterProgress(int number, int done, int total) {
+    return 'अध्याय $number · $done/$total पूरे';
+  }
+
+  @override
+  String journeyStarsInfo(int one, int two) {
+    return 'हर लेवल पर 3 स्टार तक पाएँ: 1 स्टार के लिए $one%, 2 के लिए $two% और 3 के लिए 100%। हर लेवल पर आपका सबसे अच्छा स्कोर गिना जाता है।';
+  }
+
+  @override
+  String journeyEnergyInfo(int cost, int free, String time) {
+    return 'केस पथ के हर लेवल में $cost ऊर्जा लगती है। हर दिन आपको $free ऊर्जा मुफ़्त मिलती है। यह आधी रात को भरती है — $time में।';
+  }
+
+  @override
+  String get journeyCoinsInfo =>
+      'नए स्टार, अध्याय संदूक, डेली डॉकेट, रोज़ का लक्ष्य और स्ट्रीक पड़ावों से सिक्के कमाएँ। इन्हें स्टोर में ऊर्जा भरने और स्ट्रीक फ़्रीज़ पर खर्च करें।';
+
+  @override
+  String get journeyOpenStore => 'स्टोर खोलें';
+
+  @override
+  String get journeyListView => 'लेवल सूची के रूप में दिखाएँ';
+
+  @override
+  String get journeyAllLevels => 'सभी लेवल';
 
   @override
   String quizQuestionOf(int current, int total) {

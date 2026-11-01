@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-11-01 (learning-first Home, Claude Opus 5.5)
+> Last updated: 2026-11-01 (clearer Case Path, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -807,6 +807,21 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       fresh install) and the Review card hides; quizzes still start. Not done: separate loading/error placeholders
       per section (sections just hide), "Old articles" filtering, the legacy title still says "(Legacy)" next to the
       badge.
+- [x] 2026-11-01: **Case Path is clearer** (outside UX brief). Every stop says its state in words for screen
+      readers ("Level 1, Completed, 2 of 3 stars" / "Next step" / "Locked"); chests get a lock or tick badge and
+      three sheets: "Chapter chest locked" (levels done + "Continue learning"), "Your chapter reward is ready"
+      ("Reward: 30 coins", Open chest), "Chapter reward collected". A failed claim keeps the chest openable and says
+      so (`openChest` returns null and refreshes); the button is off while claiming. Level sheet: chapter eyebrow,
+      "6 questions · 1 energy · No time limit", star table from GameRules, folded "How scoring works" (rules checked
+      against the server: retry costs energy, leave before 1st answer = refund, best kept, no minus marks, first 3★
+      gives 1 energy back, 5 coins per new star), button "Start · 1 energy". Locked level: "Levels open in order.
+      Your next step is …" + "Show my next step" (scrolls the map). Header chips open notes on stars, energy, coins
+      (coins → Store). Banner: "CHAPTER 1 · 1/3 COMPLETED", 2-line title, band grows with text size
+      (`JourneyLayout.textScale`). New list button shows every stop as a list. Map scrolls to the new next step after
+      a level or chest. 192 app tests pass (24 new map layouts: 320 pt / landscape × 6 languages × 2 text sizes).
+      Checked on the simulator: returning learner (iPhone 17 Pro Max) and new learner (temporary iPhone SE, deleted).
+      Not checked on the simulator: opening a ready chest. Known risk (server): a quiz start whose reply is lost can
+      charge energy again on retry — `POST /v1/quiz-sessions` has no Idempotency-Key.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

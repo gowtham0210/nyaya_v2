@@ -618,10 +618,6 @@ class AppLocalizationsKn extends AppLocalizations {
   String get journeyLocked => 'ಲಾಕ್ ಆಗಿದೆ';
 
   @override
-  String get journeyLockedBody =>
-      'ಇದನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಹಿಂದಿನ ಹಂತವನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ.';
-
-  @override
   String journeyQuestions(int count) {
     return '$count ಪ್ರಶ್ನೆಗಳು';
   }
@@ -636,20 +632,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get journeyChest => 'ಅಧ್ಯಾಯದ ಪೆಟ್ಟಿಗೆ';
 
   @override
-  String get journeyChestBody =>
-      'ನೀವು ಅಧ್ಯಾಯ ಮುಗಿಸಿದ್ದೀರಿ! ಬೋನಸ್ ನಾಣ್ಯಗಳಿಗಾಗಿ ಪೆಟ್ಟಿಗೆ ತೆರೆಯಿರಿ.';
-
-  @override
   String get journeyOpenChest => 'ಪೆಟ್ಟಿಗೆ ತೆರೆಯಿರಿ';
-
-  @override
-  String journeyChestOpened(int coins) {
-    return '+$coins ನಾಣ್ಯಗಳು!';
-  }
-
-  @override
-  String get journeyChestLocked =>
-      'ಪೆಟ್ಟಿಗೆ ತೆರೆಯಲು ಈ ಅಧ್ಯಾಯದ ಎಲ್ಲಾ ಹಂತಗಳನ್ನು ಮುಗಿಸಿ.';
 
   @override
   String get journeyJumpToCurrent => 'ಪ್ರಸ್ತುತ ಹಂತಕ್ಕೆ ಹೋಗಿ';
@@ -658,8 +641,138 @@ class AppLocalizationsKn extends AppLocalizations {
   String get journeyYou => 'ನೀವು';
 
   @override
-  String get journeyPassHint =>
-      'ಉತ್ತೀರ್ಣರಾಗಲು 50% · 2 ನಕ್ಷತ್ರಕ್ಕೆ 80% · 3 ನಕ್ಷತ್ರಕ್ಕೆ 100%';
+  String get journeyNext => 'ಮುಂದಿನ ಹೆಜ್ಜೆ';
+
+  @override
+  String get journeyDone => 'ಪೂರ್ಣಗೊಂಡಿದೆ';
+
+  @override
+  String journeyStarsOf(int count, int total) {
+    return '$totalರಲ್ಲಿ $count ನಕ್ಷತ್ರಗಳು';
+  }
+
+  @override
+  String journeyLockedNext(String step) {
+    return 'ಹಂತಗಳು ಕ್ರಮವಾಗಿ ತೆರೆಯುತ್ತವೆ. ನಿಮ್ಮ ಮುಂದಿನ ಹೆಜ್ಜೆ $step.';
+  }
+
+  @override
+  String get journeyGoToNext => 'ನನ್ನ ಮುಂದಿನ ಹೆಜ್ಜೆ ತೋರಿಸಿ';
+
+  @override
+  String journeyStartCost(int count) {
+    return 'ಪ್ರಾರಂಭಿಸಿ · $count ಶಕ್ತಿ';
+  }
+
+  @override
+  String journeyReplayCost(int count) {
+    return 'ಮತ್ತೆ ಆಡಿ · $count ಶಕ್ತಿ';
+  }
+
+  @override
+  String get journeyNoTimer => 'ಸಮಯ ಮಿತಿ ಇಲ್ಲ';
+
+  @override
+  String get journeyStarsTitle => 'ನೀವು ಗಳಿಸಬಹುದಾದ ನಕ್ಷತ್ರಗಳು';
+
+  @override
+  String journeyPassMark(int percent) {
+    return '$percent% · ಉತ್ತೀರ್ಣ';
+  }
+
+  @override
+  String journeyStarMark(int percent) {
+    return '$percent%';
+  }
+
+  @override
+  String get journeyHowScoring => 'ಅಂಕಗಳು ಹೇಗೆ ಸಿಗುತ್ತವೆ';
+
+  @override
+  String journeyRuleEnergy(int count) {
+    return 'ಪ್ರತಿ ಪ್ರಯತ್ನಕ್ಕೆ $count ಶಕ್ತಿ ಖರ್ಚಾಗುತ್ತದೆ. ಮೊದಲ ಉತ್ತರಕ್ಕೂ ಮೊದಲು ಬಿಟ್ಟರೆ ಅದು ಮರಳಿ ಸಿಗುತ್ತದೆ.';
+  }
+
+  @override
+  String get journeyRuleRetry =>
+      'ಉತ್ತೀರ್ಣರಾಗಲಿಲ್ಲವೇ? ಎಷ್ಟು ಬಾರಿ ಬೇಕಾದರೂ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
+
+  @override
+  String get journeyRuleBest =>
+      'ನಿಮ್ಮ ಅತ್ಯುತ್ತಮ ಅಂಕ ಉಳಿಯುತ್ತದೆ. ಕಡಿಮೆ ಅಂಕದಿಂದ ನಕ್ಷತ್ರಗಳು ಎಂದೂ ಕಡಿಮೆಯಾಗುವುದಿಲ್ಲ.';
+
+  @override
+  String get journeyRuleNoMinus => 'ತಪ್ಪು ಉತ್ತರಗಳಿಗೆ ಅಂಕ ಕಳೆಯುವುದಿಲ್ಲ.';
+
+  @override
+  String journeyRuleBonus(int count, int coins) {
+    return 'ಒಂದು ಹಂತದಲ್ಲಿ ಮೊದಲ ಬಾರಿ 3 ನಕ್ಷತ್ರ ಪಡೆದರೆ $count ಶಕ್ತಿ ಮರಳಿ ಸಿಗುತ್ತದೆ. ಪ್ರತಿ ಹೊಸ ನಕ್ಷತ್ರಕ್ಕೆ $coins ನಾಣ್ಯಗಳು.';
+  }
+
+  @override
+  String get journeyChestLockedTitle => 'ಅಧ್ಯಾಯದ ಪೆಟ್ಟಿಗೆ ಲಾಕ್ ಆಗಿದೆ';
+
+  @override
+  String get journeyChestLockedText =>
+      'ನಿಮ್ಮ ಬಹುಮಾನ ತೆರೆಯಲು ಈ ಅಧ್ಯಾಯದ ಎಲ್ಲಾ ಹಂತಗಳನ್ನು ಮುಗಿಸಿ.';
+
+  @override
+  String get journeyChestReadyTitle => 'ನಿಮ್ಮ ಅಧ್ಯಾಯದ ಬಹುಮಾನ ಸಿದ್ಧವಾಗಿದೆ';
+
+  @override
+  String get journeyChestReadyText =>
+      'ಶಾಭಾಷ್! ನೀವು ಈ ಅಧ್ಯಾಯವನ್ನು ಮುಗಿಸಿದ್ದೀರಿ.';
+
+  @override
+  String journeyChestReward(int coins) {
+    return 'ಬಹುಮಾನ: $coins ನಾಣ್ಯಗಳು';
+  }
+
+  @override
+  String get journeyChestCollectedTitle => 'ಅಧ್ಯಾಯದ ಬಹುಮಾನ ಪಡೆಯಲಾಗಿದೆ';
+
+  @override
+  String journeyChestCollectedText(int coins) {
+    return 'ನಿಮಗೆ $coins ನಾಣ್ಯಗಳು ಸಿಕ್ಕಿವೆ.';
+  }
+
+  @override
+  String get journeyChestFailed =>
+      'ಪೆಟ್ಟಿಗೆ ತೆರೆಯಲಾಗಲಿಲ್ಲ. ನಿಮ್ಮ ಸಂಪರ್ಕ ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. ನಿಮ್ಮ ಬಹುಮಾನ ಕಾಯುತ್ತಿದೆ.';
+
+  @override
+  String get journeyContinueLearning => 'ಕಲಿಕೆ ಮುಂದುವರಿಸಿ';
+
+  @override
+  String get journeyBackToMap => 'ನಕ್ಷೆಗೆ ಹಿಂತಿರುಗಿ';
+
+  @override
+  String journeyChapterProgress(int number, int done, int total) {
+    return 'ಅಧ್ಯಾಯ $number · $done/$total ಪೂರ್ಣ';
+  }
+
+  @override
+  String journeyStarsInfo(int one, int two) {
+    return 'ಪ್ರತಿ ಹಂತದಲ್ಲಿ 3 ನಕ್ಷತ್ರಗಳವರೆಗೆ ಗಳಿಸಿ: 1 ನಕ್ಷತ್ರಕ್ಕೆ $one%, 2ಕ್ಕೆ $two%, 3ಕ್ಕೆ 100%. ಪ್ರತಿ ಹಂತದಲ್ಲಿ ನಿಮ್ಮ ಅತ್ಯುತ್ತಮ ಅಂಕ ಲೆಕ್ಕಕ್ಕೆ ಬರುತ್ತದೆ.';
+  }
+
+  @override
+  String journeyEnergyInfo(int cost, int free, String time) {
+    return 'ಕೇಸ್ ಪಾತ್‌ನ ಪ್ರತಿ ಹಂತಕ್ಕೆ $cost ಶಕ್ತಿ ಖರ್ಚಾಗುತ್ತದೆ. ಪ್ರತಿದಿನ $free ಶಕ್ತಿ ಉಚಿತ. ಮಧ್ಯರಾತ್ರಿ ಮತ್ತೆ ತುಂಬುತ್ತದೆ — $timeದಲ್ಲಿ.';
+  }
+
+  @override
+  String get journeyCoinsInfo =>
+      'ಹೊಸ ನಕ್ಷತ್ರಗಳು, ಅಧ್ಯಾಯದ ಪೆಟ್ಟಿಗೆಗಳು, ಡೈಲಿ ಡಾಕೆಟ್, ದೈನಂದಿನ ಗುರಿ ಮತ್ತು ಸ್ಟ್ರೀಕ್ ಮೈಲಿಗಲ್ಲುಗಳಿಂದ ನಾಣ್ಯ ಗಳಿಸಿ. ಅಂಗಡಿಯಲ್ಲಿ ಶಕ್ತಿ ತುಂಬಲು ಮತ್ತು ಸ್ಟ್ರೀಕ್ ಫ್ರೀಜ್‌ಗೆ ಖರ್ಚು ಮಾಡಿ.';
+
+  @override
+  String get journeyOpenStore => 'ಅಂಗಡಿ ತೆರೆಯಿರಿ';
+
+  @override
+  String get journeyListView => 'ಹಂತಗಳನ್ನು ಪಟ್ಟಿಯಾಗಿ ತೋರಿಸಿ';
+
+  @override
+  String get journeyAllLevels => 'ಎಲ್ಲಾ ಹಂತಗಳು';
 
   @override
   String quizQuestionOf(int current, int total) {

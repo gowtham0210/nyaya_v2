@@ -50,9 +50,18 @@ class MapNode extends StatelessWidget {
     final l = context.l10n;
     final isCurrent = status == NodeStatus.current;
     final size = isCurrent && node.kind == NodeKind.level ? 84.0 : 64.0;
+    // The state in words too, so it never depends on colour alone.
     final label = node.kind == NodeKind.chest
-        ? l.journeyChest
-        : '${l.journeyLevel(node.level)}${status == NodeStatus.locked ? ', ${l.journeyLocked}' : ''}';
+        ? switch (status) {
+            NodeStatus.locked => l.journeyChestLockedTitle,
+            NodeStatus.current => l.journeyChestReadyTitle,
+            NodeStatus.completed => l.journeyChestCollectedTitle,
+          }
+        : '${l.journeyLevel(node.level)}, ${switch (status) {
+            NodeStatus.locked => l.journeyLocked,
+            NodeStatus.current => l.journeyNext,
+            NodeStatus.completed => '${l.journeyDone}, ${l.journeyStarsOf(stars, 3)}',
+          }}';
 
     final bubble = node.kind == NodeKind.chest
         ? _Chest(status: status, size: size)
@@ -61,6 +70,7 @@ class MapNode extends StatelessWidget {
     return Semantics(
       button: true,
       label: label,
+      excludeSemantics: true,
       child: Stack(
         alignment: Alignment.center,
         clipBehavior: Clip.none,
@@ -241,18 +251,47 @@ class _Chest extends StatelessWidget {
   Widget build(BuildContext context) {
     final opened = status == NodeStatus.completed;
     final current = status == NodeStatus.current;
-    final chest = _RaisedDisc(
+    final locked = status == NodeStatus.locked;
+    final disc = _RaisedDisc(
       size: size,
-      fill: context.colors.surface,
+      fill: locked ? (context.isDark ? AppPalette.darkSurfaceHigh : AppPalette.sandLight) : context.colors.surface,
       lip: current ? AppPalette.burntClay : (context.isDark ? AppPalette.darkSurface : AppPalette.sand),
       border: context.isDark ? AppPalette.terracotta : Colors.white,
       glow: current ? AppPalette.ochre.withValues(alpha: 0.5) : null,
       child: Icon(
         opened ? Icons.inventory_2_outlined : Icons.redeem_rounded,
         size: size * 0.46,
-        color: context.colors.primary,
+        color: locked ? context.nyaya.textSecondary.withValues(alpha: 0.85) : context.colors.primary,
       ),
     );
+    // A small badge says locked or collected without relying on colour.
+    final badge = locked
+        ? (Icons.lock_rounded, context.nyaya.textSecondary)
+        : opened
+        ? (Icons.check_rounded, context.colors.primary)
+        : null;
+    final chest = badge == null
+        ? disc
+        : Stack(
+            clipBehavior: Clip.none,
+            children: [
+              disc,
+              Positioned(
+                right: -4,
+                bottom: 0,
+                child: Container(
+                  width: 24,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    color: badge.$2,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: context.colors.surface, width: 2),
+                  ),
+                  child: Icon(badge.$1, size: 14, color: context.colors.surface),
+                ),
+              ),
+            ],
+          );
     return current
         ? chest.animate(onPlay: (c) => c.repeat(reverse: true)).rotate(begin: -0.02, end: 0.02, duration: 300.ms)
         : chest;

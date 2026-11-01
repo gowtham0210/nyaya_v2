@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:material_ui/material_ui.dart';
 
+import '../l10n/l10n.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import 'pressable.dart';
@@ -33,7 +34,8 @@ class StatPill extends StatelessWidget {
         // A tappable pill gets a full-size tap area around the same look.
         child: ConstrainedBox(
           constraints: onTap == null ? const BoxConstraints() : const BoxConstraints(minWidth: 48, minHeight: 48),
-          child: Center(widthFactor: 1, heightFactor: 1, child: Container(
+          // The label already says the number; don't read it twice.
+          child: Center(widthFactor: 1, heightFactor: 1, child: ExcludeSemantics(excluding: semanticLabel != null, child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           decoration: BoxDecoration(
             color: color.withValues(alpha: context.isDark ? 0.18 : 0.12),
@@ -53,7 +55,7 @@ class StatPill extends StatelessWidget {
               ),
             ],
           ),
-        )),
+        ))),
         ),
       ),
     );
@@ -154,7 +156,7 @@ class StarRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: '$stars of 3 stars',
+      label: context.l10n.journeyStarsOf(stars, 3),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

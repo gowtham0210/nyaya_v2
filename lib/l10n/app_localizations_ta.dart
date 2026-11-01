@@ -621,9 +621,6 @@ class AppLocalizationsTa extends AppLocalizations {
   String get journeyLocked => 'பூட்டப்பட்டது';
 
   @override
-  String get journeyLockedBody => 'இதைத் திறக்க முந்தைய நிலையை முடியுங்கள்.';
-
-  @override
   String journeyQuestions(int count) {
     return '$count கேள்விகள்';
   }
@@ -638,20 +635,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get journeyChest => 'அத்தியாயப் பெட்டி';
 
   @override
-  String get journeyChestBody =>
-      'அத்தியாயத்தை முடித்துவிட்டீர்கள்! போனஸ் நாணயங்களுக்குப் பெட்டியைத் திறங்கள்.';
-
-  @override
   String get journeyOpenChest => 'பெட்டியைத் திற';
-
-  @override
-  String journeyChestOpened(int coins) {
-    return '+$coins நாணயங்கள்!';
-  }
-
-  @override
-  String get journeyChestLocked =>
-      'பெட்டியைத் திறக்க இந்த அத்தியாயத்தின் எல்லா நிலைகளையும் முடியுங்கள்.';
 
   @override
   String get journeyJumpToCurrent => 'தற்போதைய நிலைக்குச் செல்';
@@ -660,8 +644,139 @@ class AppLocalizationsTa extends AppLocalizations {
   String get journeyYou => 'நீங்கள்';
 
   @override
-  String get journeyPassHint =>
-      'தேர்ச்சிக்கு 50% · 2 நட்சத்திரங்களுக்கு 80% · 3 நட்சத்திரங்களுக்கு 100%';
+  String get journeyNext => 'அடுத்த படி';
+
+  @override
+  String get journeyDone => 'முடிந்தது';
+
+  @override
+  String journeyStarsOf(int count, int total) {
+    return '$total இல் $count நட்சத்திரங்கள்';
+  }
+
+  @override
+  String journeyLockedNext(String step) {
+    return 'நிலைகள் வரிசையாகத் திறக்கும். உங்கள் அடுத்த படி $step.';
+  }
+
+  @override
+  String get journeyGoToNext => 'என் அடுத்த படியைக் காட்டு';
+
+  @override
+  String journeyStartCost(int count) {
+    return 'தொடங்கு · $count ஆற்றல்';
+  }
+
+  @override
+  String journeyReplayCost(int count) {
+    return 'மீண்டும் விளையாடு · $count ஆற்றல்';
+  }
+
+  @override
+  String get journeyNoTimer => 'நேர வரம்பு இல்லை';
+
+  @override
+  String get journeyStarsTitle => 'நீங்கள் பெறக்கூடிய நட்சத்திரங்கள்';
+
+  @override
+  String journeyPassMark(int percent) {
+    return '$percent% · தேர்ச்சி';
+  }
+
+  @override
+  String journeyStarMark(int percent) {
+    return '$percent%';
+  }
+
+  @override
+  String get journeyHowScoring => 'மதிப்பெண் எப்படி கணக்கிடப்படுகிறது';
+
+  @override
+  String journeyRuleEnergy(int count) {
+    return 'ஒவ்வொரு முயற்சிக்கும் $count ஆற்றல் செலவாகும். முதல் பதிலுக்கு முன் வெளியேறினால் அது திரும்பக் கிடைக்கும்.';
+  }
+
+  @override
+  String get journeyRuleRetry =>
+      'தேர்ச்சி பெறவில்லையா? எத்தனை முறை வேண்டுமானாலும் மீண்டும் முயலலாம்.';
+
+  @override
+  String get journeyRuleBest =>
+      'உங்கள் சிறந்த மதிப்பெண் வைக்கப்படும். குறைந்த மதிப்பெண் நட்சத்திரங்களை ஒருபோதும் குறைக்காது.';
+
+  @override
+  String get journeyRuleNoMinus =>
+      'தவறான பதில்களுக்கு மதிப்பெண் கழிக்கப்படாது.';
+
+  @override
+  String journeyRuleBonus(int count, int coins) {
+    return 'ஒரு நிலையில் முதல் முறை 3 நட்சத்திரம் பெற்றால் $count ஆற்றல் திரும்பக் கிடைக்கும். ஒவ்வொரு புதிய நட்சத்திரத்துக்கும் $coins நாணயங்கள்.';
+  }
+
+  @override
+  String get journeyChestLockedTitle => 'அத்தியாயப் பெட்டி பூட்டப்பட்டுள்ளது';
+
+  @override
+  String get journeyChestLockedText =>
+      'உங்கள் பரிசைத் திறக்க இந்த அத்தியாயத்தின் எல்லா நிலைகளையும் முடிக்கவும்.';
+
+  @override
+  String get journeyChestReadyTitle => 'உங்கள் அத்தியாயப் பரிசு தயார்';
+
+  @override
+  String get journeyChestReadyText =>
+      'அருமை! இந்த அத்தியாயத்தை முடித்துவிட்டீர்கள்.';
+
+  @override
+  String journeyChestReward(int coins) {
+    return 'பரிசு: $coins நாணயங்கள்';
+  }
+
+  @override
+  String get journeyChestCollectedTitle => 'அத்தியாயப் பரிசு பெறப்பட்டது';
+
+  @override
+  String journeyChestCollectedText(int coins) {
+    return 'நீங்கள் $coins நாணயங்கள் பெற்றீர்கள்.';
+  }
+
+  @override
+  String get journeyChestFailed =>
+      'பெட்டியைத் திறக்க முடியவில்லை. இணைப்பைச் சரிபார்த்து மீண்டும் முயலவும். உங்கள் பரிசு காத்திருக்கிறது.';
+
+  @override
+  String get journeyContinueLearning => 'கற்றலைத் தொடருங்கள்';
+
+  @override
+  String get journeyBackToMap => 'வரைபடத்துக்குத் திரும்பு';
+
+  @override
+  String journeyChapterProgress(int number, int done, int total) {
+    return 'அத்தியாயம் $number · $done/$total முடிந்தது';
+  }
+
+  @override
+  String journeyStarsInfo(int one, int two) {
+    return 'ஒவ்வொரு நிலையிலும் 3 நட்சத்திரங்கள் வரை பெறலாம்: 1 நட்சத்திரத்துக்கு $one%, 2க்கு $two%, 3க்கு 100%. ஒவ்வொரு நிலையிலும் உங்கள் சிறந்த மதிப்பெண் கணக்கில் வரும்.';
+  }
+
+  @override
+  String journeyEnergyInfo(int cost, int free, String time) {
+    return 'வழக்குப் பாதையின் ஒவ்வொரு நிலைக்கும் $cost ஆற்றல் செலவாகும். ஒவ்வொரு நாளும் $free ஆற்றல் இலவசம். நள்ளிரவில் நிரம்பும் — இன்னும் $time.';
+  }
+
+  @override
+  String get journeyCoinsInfo =>
+      'புதிய நட்சத்திரங்கள், அத்தியாயப் பெட்டிகள், டெய்லி டாக்கெட், தினசரி இலக்கு, தொடர் மைல்கற்கள் மூலம் நாணயங்கள் பெறுங்கள். அவற்றை கடையில் ஆற்றல் நிரப்பவும் தொடர் முடக்கத்துக்கும் செலவிடுங்கள்.';
+
+  @override
+  String get journeyOpenStore => 'கடையைத் திற';
+
+  @override
+  String get journeyListView => 'நிலைகளைப் பட்டியலாகக் காட்டு';
+
+  @override
+  String get journeyAllLevels => 'எல்லா நிலைகளும்';
 
   @override
   String quizQuestionOf(int current, int total) {

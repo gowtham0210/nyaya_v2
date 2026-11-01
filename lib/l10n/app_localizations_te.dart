@@ -616,10 +616,6 @@ class AppLocalizationsTe extends AppLocalizations {
   String get journeyLocked => 'లాక్ అయింది';
 
   @override
-  String get journeyLockedBody =>
-      'దీన్ని అన్‌లాక్ చేయడానికి ముందు లెవెల్ పూర్తి చేయండి.';
-
-  @override
   String journeyQuestions(int count) {
     return '$count ప్రశ్నలు';
   }
@@ -634,20 +630,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get journeyChest => 'అధ్యాయ చెస్ట్';
 
   @override
-  String get journeyChestBody =>
-      'మీరు అధ్యాయం పూర్తి చేశారు! బోనస్ కాయిన్‌ల కోసం చెస్ట్ తెరవండి.';
-
-  @override
   String get journeyOpenChest => 'చెస్ట్ తెరవండి';
-
-  @override
-  String journeyChestOpened(int coins) {
-    return '+$coins కాయిన్‌లు!';
-  }
-
-  @override
-  String get journeyChestLocked =>
-      'చెస్ట్ తెరవడానికి ఈ అధ్యాయంలోని అన్ని లెవెల్‌లు పూర్తి చేయండి.';
 
   @override
   String get journeyJumpToCurrent => 'ప్రస్తుత లెవెల్‌కు వెళ్లండి';
@@ -656,8 +639,138 @@ class AppLocalizationsTe extends AppLocalizations {
   String get journeyYou => 'మీరు';
 
   @override
-  String get journeyPassHint =>
-      'పాస్ కావడానికి 50% · 2 స్టార్లకు 80% · 3 స్టార్లకు 100%';
+  String get journeyNext => 'తదుపరి అడుగు';
+
+  @override
+  String get journeyDone => 'పూర్తయింది';
+
+  @override
+  String journeyStarsOf(int count, int total) {
+    return '$totalలో $count స్టార్లు';
+  }
+
+  @override
+  String journeyLockedNext(String step) {
+    return 'లెవెల్స్ వరుసగా తెరుచుకుంటాయి. మీ తదుపరి అడుగు $step.';
+  }
+
+  @override
+  String get journeyGoToNext => 'నా తదుపరి అడుగు చూపించు';
+
+  @override
+  String journeyStartCost(int count) {
+    return 'ప్రారంభించండి · $count ఎనర్జీ';
+  }
+
+  @override
+  String journeyReplayCost(int count) {
+    return 'మళ్లీ ఆడండి · $count ఎనర్జీ';
+  }
+
+  @override
+  String get journeyNoTimer => 'సమయ పరిమితి లేదు';
+
+  @override
+  String get journeyStarsTitle => 'మీరు పొందగల స్టార్లు';
+
+  @override
+  String journeyPassMark(int percent) {
+    return '$percent% · పాస్';
+  }
+
+  @override
+  String journeyStarMark(int percent) {
+    return '$percent%';
+  }
+
+  @override
+  String get journeyHowScoring => 'స్కోర్ ఎలా లెక్కిస్తారు';
+
+  @override
+  String journeyRuleEnergy(int count) {
+    return 'ప్రతి ప్రయత్నానికి $count ఎనర్జీ ఖర్చవుతుంది. మొదటి జవాబుకు ముందే వదిలేస్తే అది తిరిగి వస్తుంది.';
+  }
+
+  @override
+  String get journeyRuleRetry =>
+      'పాస్ కాలేదా? ఎన్నిసార్లైనా మళ్లీ ప్రయత్నించవచ్చు.';
+
+  @override
+  String get journeyRuleBest =>
+      'మీ ఉత్తమ స్కోర్ ఉంచబడుతుంది. తక్కువ స్కోర్ స్టార్లను ఎప్పుడూ తగ్గించదు.';
+
+  @override
+  String get journeyRuleNoMinus => 'తప్పు జవాబులకు మార్కులు తగ్గవు.';
+
+  @override
+  String journeyRuleBonus(int count, int coins) {
+    return 'ఒక లెవెల్‌లో మొదటిసారి 3 స్టార్లు పొందితే $count ఎనర్జీ తిరిగి వస్తుంది. ప్రతి కొత్త స్టార్‌కు $coins కాయిన్‌లు.';
+  }
+
+  @override
+  String get journeyChestLockedTitle => 'అధ్యాయ చెస్ట్ లాక్ అయి ఉంది';
+
+  @override
+  String get journeyChestLockedText =>
+      'మీ బహుమతి తెరవడానికి ఈ అధ్యాయంలోని అన్ని లెవెల్స్ పూర్తి చేయండి.';
+
+  @override
+  String get journeyChestReadyTitle => 'మీ అధ్యాయ బహుమతి సిద్ధంగా ఉంది';
+
+  @override
+  String get journeyChestReadyText =>
+      'చాలా బాగుంది! మీరు ఈ అధ్యాయం పూర్తి చేశారు.';
+
+  @override
+  String journeyChestReward(int coins) {
+    return 'బహుమతి: $coins కాయిన్‌లు';
+  }
+
+  @override
+  String get journeyChestCollectedTitle => 'అధ్యాయ బహుమతి అందుకున్నారు';
+
+  @override
+  String journeyChestCollectedText(int coins) {
+    return 'మీకు $coins కాయిన్‌లు వచ్చాయి.';
+  }
+
+  @override
+  String get journeyChestFailed =>
+      'చెస్ట్ తెరవలేకపోయాం. మీ కనెక్షన్ చూసి మళ్లీ ప్రయత్నించండి. మీ బహుమతి వేచి ఉంది.';
+
+  @override
+  String get journeyContinueLearning => 'నేర్చుకోవడం కొనసాగించండి';
+
+  @override
+  String get journeyBackToMap => 'మ్యాప్‌కు తిరిగి';
+
+  @override
+  String journeyChapterProgress(int number, int done, int total) {
+    return 'అధ్యాయం $number · $done/$total పూర్తి';
+  }
+
+  @override
+  String journeyStarsInfo(int one, int two) {
+    return 'ప్రతి లెవెల్‌లో 3 స్టార్ల వరకు పొందండి: 1 స్టార్‌కు $one%, 2కు $two%, 3కు 100%. ప్రతి లెవెల్‌లో మీ ఉత్తమ స్కోర్ లెక్కలోకి వస్తుంది.';
+  }
+
+  @override
+  String journeyEnergyInfo(int cost, int free, String time) {
+    return 'కేస్ పాత్‌లో ప్రతి లెవెల్‌కు $cost ఎనర్జీ ఖర్చవుతుంది. ప్రతిరోజూ $free ఎనర్జీ ఉచితం. అర్ధరాత్రి తిరిగి నిండుతుంది — $timeలో.';
+  }
+
+  @override
+  String get journeyCoinsInfo =>
+      'కొత్త స్టార్లు, అధ్యాయ చెస్ట్‌లు, డైలీ డాకెట్, రోజువారీ లక్ష్యం, స్ట్రీక్ మైలురాళ్ల నుంచి కాయిన్‌లు సంపాదించండి. వాటిని స్టోర్‌లో ఎనర్జీ నింపడానికి, స్ట్రీక్ ఫ్రీజ్‌లకు ఖర్చు చేయండి.';
+
+  @override
+  String get journeyOpenStore => 'స్టోర్ తెరవండి';
+
+  @override
+  String get journeyListView => 'లెవెల్స్‌ను జాబితాగా చూపించు';
+
+  @override
+  String get journeyAllLevels => 'అన్ని లెవెల్స్';
 
   @override
   String quizQuestionOf(int current, int total) {
