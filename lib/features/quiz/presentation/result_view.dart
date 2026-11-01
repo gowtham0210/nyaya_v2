@@ -151,10 +151,13 @@ class _ResultViewState extends ConsumerState<ResultView> {
                     children: [
                       _Hero(result: r),
                       const SizedBox(height: AppSpacing.md),
-                      Text(
-                        _headline(l),
-                        textAlign: TextAlign.center,
-                        style: context.text.headlineLarge,
+                      Semantics(
+                        header: true,
+                        child: Text(
+                          _headline(l),
+                          textAlign: TextAlign.center,
+                          style: context.text.headlineLarge,
+                        ),
                       ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.2),
                       const SizedBox(height: 6),
                       Text(

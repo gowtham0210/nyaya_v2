@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-11-01 (forgot password, Claude Opus 5.5)
+> Last updated: 2026-11-01 (accessibility fixes, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -776,6 +776,20 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       (`/reset-password`): email (carried over), then code + new password; signs in and carries on (e.g. the
       quiz that asked for sign-in). Text in all 6 languages. Tests: API 75 unit + 141 e2e (9 new), app 113.
       Not tried on the simulator.
+- [x] 2026-11-01: **Accessibility fixes** (from an outside audit, checked with Flutter's guideline tests and
+      measured contrast: text 5.5:1 light / 7:1 paywall, tap targets all pass). Fixed: (1) intro slides overflowed by
+      up to 306 px at the largest text (1.5×, `maxTextScale`) — slides now scroll (`_SlidePage` + `_ArtRoom`, which
+      reports a small intrinsic height so normal text looks the same); "Get Started" text can wrap. (2) Home overflowed
+      sideways in hi/ta/te/ml at large text — quiz-mode badge scales down, Explore card grows 180 px per 1.0 of text
+      scale, its 30 pt title grows at most 1.2× (it broke "Constitution" mid-word). (3) `Pressable` (choice cards,
+      plan cards, Explore cards...) now takes keyboard focus, shows a ring and presses on Enter/Space. (4) Screen
+      readers: headings marked (step, slide, screen and section titles), intro dots say "Slide 2 of 3" (new
+      `onbSlidePosition`, 6 languages), sign-in and reset errors are read out (live region). (5) Paywall plan badge
+      wraps instead of overflowing. Tests: `accessibility_test.dart` now covers every onboarding step, reset
+      password, quiz result and paywall (premium build) in light/dark, onboarding/Home/reset in all 6 languages at the
+      largest text, heading + slide-position semantics and keyboard use; 138 app tests pass (paywall ones run with
+      `--dart-define=NYAYA_PREMIUM=true`). Home checked on the simulator at the largest iOS text size. Still open:
+      some 2-line descriptions end in "…" at the largest text; text is capped at 1.5× (WCAG asks 2×).
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

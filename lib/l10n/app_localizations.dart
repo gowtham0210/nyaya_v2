@@ -442,6 +442,12 @@ abstract class AppLocalizations {
   /// **'Skip'**
   String get onbSkip;
 
+  /// No description provided for @onbSlidePosition.
+  ///
+  /// In en, this message translates to:
+  /// **'Slide {current} of {total}'**
+  String onbSlidePosition(int current, int total);
+
   /// No description provided for @onbGetStarted.
   ///
   /// In en, this message translates to:

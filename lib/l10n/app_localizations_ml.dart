@@ -206,6 +206,11 @@ class AppLocalizationsMl extends AppLocalizations {
   String get onbSkip => 'ഒഴിവാക്കുക';
 
   @override
+  String onbSlidePosition(int current, int total) {
+    return 'സ്ലൈഡ് $current / $total';
+  }
+
+  @override
   String get onbGetStarted => 'തുടങ്ങാം';
 
   @override

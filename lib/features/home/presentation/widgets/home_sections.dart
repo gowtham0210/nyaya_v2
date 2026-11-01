@@ -336,9 +336,12 @@ class QuizModesGrid extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Same serif heading as the other Explore Law sections.
-        Text(
-          l.homeModesTitle,
-          style: AppTheme.serif(TextStyle(fontSize: 26, height: 1.15, color: context.colors.onSurface)),
+        Semantics(
+          header: true,
+          child: Text(
+            l.homeModesTitle,
+            style: AppTheme.serif(TextStyle(fontSize: 26, height: 1.15, color: context.colors.onSurface)),
+          ),
         ),
         const SizedBox(height: AppSpacing.md),
         GridView.count(
@@ -369,15 +372,24 @@ class QuizModesGrid extends ConsumerWidget {
                           ),
                           child: Icon(icon, color: color, size: 26),
                         ),
-                        const Spacer(),
-                        mode.energyCost == 0
-                            ? _Badge(text: l.modeFree, color: context.nyaya.success)
-                            : _Badge(
-                                text: '${mode.energyCost}',
-                                icon: Icons.bolt_rounded,
-                                semanticLabel: l.modeEnergyCost(mode.energyCost),
-                                color: AppPalette.ochreText,
-                              ),
+                        const SizedBox(width: 8),
+                        // Scales down rather than overflows with long words and large text.
+                        Expanded(
+                          child: Align(
+                            alignment: AlignmentDirectional.centerEnd,
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: mode.energyCost == 0
+                                  ? _Badge(text: l.modeFree, color: context.nyaya.success)
+                                  : _Badge(
+                                      text: '${mode.energyCost}',
+                                      icon: Icons.bolt_rounded,
+                                      semanticLabel: l.modeEnergyCost(mode.energyCost),
+                                      color: AppPalette.ochreText,
+                                    ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     const Spacer(),

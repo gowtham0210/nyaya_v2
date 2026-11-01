@@ -105,9 +105,12 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
           child: ListView(
             padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.sm, AppSpacing.page, AppSpacing.xl),
             children: [
-              Text(
-                _signIn ? l.authSignInTitle : l.authCreateTitle,
-                style: AppTheme.serif(TextStyle(fontSize: 34, height: 1.1, color: context.colors.onSurface)),
+              Semantics(
+                header: true,
+                child: Text(
+                  _signIn ? l.authSignInTitle : l.authCreateTitle,
+                  style: AppTheme.serif(TextStyle(fontSize: 34, height: 1.1, color: context.colors.onSurface)),
+                ),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
@@ -162,10 +165,10 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                 ),
               if (_error != null) ...[
                 const SizedBox(height: AppSpacing.md),
-                Text(
-                  _error!,
-                  style: context.text.bodyMedium?.copyWith(color: n.error),
-                  semanticsLabel: _error,
+                // Read out as soon as it appears.
+                Semantics(
+                  liveRegion: true,
+                  child: Text(_error!, style: context.text.bodyMedium?.copyWith(color: n.error)),
                 ),
               ],
               const SizedBox(height: AppSpacing.lg),

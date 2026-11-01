@@ -431,9 +431,12 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(4, AppSpacing.lg, 4, AppSpacing.sm),
-      child: Text(
-        text.toUpperCase(),
-        style: context.text.labelMedium?.copyWith(color: context.nyaya.textSecondary, letterSpacing: context.tracking(1.1)),
+      child: Semantics(
+        header: true,
+        child: Text(
+          text.toUpperCase(),
+          style: context.text.labelMedium?.copyWith(color: context.nyaya.textSecondary, letterSpacing: context.tracking(1.1)),
+        ),
       ),
     );
   }

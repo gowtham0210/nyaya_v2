@@ -251,7 +251,7 @@ class _FeaturedLawsCarouselState extends ConsumerState<FeaturedLawsCarousel> {
       children: [
         SizedBox(
           // Grows with the text size so the title, text and button still fit.
-          height: 268 + (MediaQuery.textScalerOf(context).scale(1) - 1) * 140,
+          height: 268 + (MediaQuery.textScalerOf(context).scale(1) - 1) * 180,
           child: PageView(
             controller: _controller,
             onPageChanged: (i) => setState(() => _page = i),
@@ -379,7 +379,14 @@ class _FeaturedCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: AppSpacing.sm),
-                  Text(title, maxLines: 3, overflow: TextOverflow.ellipsis, style: _serif(context, 30)),
+                  // Already large: growing it further would break words in the narrow column.
+                  Text(
+                    title,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    textScaler: MediaQuery.textScalerOf(context).clamp(maxScaleFactor: 1.2),
+                    style: _serif(context, 30),
+                  ),
                   const SizedBox(height: AppSpacing.sm),
                   Expanded(
                     child: Text(
@@ -426,7 +433,7 @@ class _SectionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(child: Text(title, style: _serif(context, 26))),
+        Expanded(child: Semantics(header: true, child: Text(title, style: _serif(context, 26)))),
         TextButton(
           onPressed: onViewAll,
           style: TextButton.styleFrom(

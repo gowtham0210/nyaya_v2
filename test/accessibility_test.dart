@@ -1,17 +1,22 @@
 import 'dart:convert';
 
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:nyaya/app/app.dart';
 import 'package:nyaya/app/router.dart';
 import 'package:nyaya/core/api/token_store.dart';
+import 'package:nyaya/core/config/features.dart';
 import 'package:nyaya/core/services/sounds.dart';
 import 'package:nyaya/core/storage/local_store.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
+import 'package:nyaya/core/widgets/pressable.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
 import 'package:nyaya/features/leaderboard/data/league_api.dart';
 import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
+import 'package:nyaya/features/onboarding/presentation/intro_slides.dart';
+import 'package:nyaya/features/profile/domain/user_profile.dart';
 import 'package:nyaya/features/reminders/data/reminder_notifications.dart';
 import 'package:nyaya/features/progress/data/progress_api.dart';
 import 'package:nyaya/features/quiz/application/quiz_controller.dart';
@@ -35,13 +40,21 @@ void main() {
     required String theme,
     double textScale = 1,
     bool onboarded = true,
+    AppLanguage language = AppLanguage.en,
   }) async {
     tester.view.physicalSize = const Size(1170, 2532);
     tester.view.devicePixelRatio = 3;
     tester.platformDispatcher.textScaleFactorTestValue = textScale;
     addTearDown(tester.view.reset);
     addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
-    final profile = jsonEncode({'onboarded': onboarded, 'name': 'Ravi', 'coins': 60, 'persona': 'citizen', 'themeMode': theme});
+    final profile = jsonEncode({
+      'onboarded': onboarded,
+      'name': 'Ravi',
+      'coins': 60,
+      'persona': 'citizen',
+      'themeMode': theme,
+      'language': language.code,
+    });
     SharedPreferences.setMockInitialValues({'profile_v1': profile});
     final sp = await SharedPreferences.getInstance();
     final tokens = signedInTokens();
@@ -62,6 +75,24 @@ void main() {
     await tester.pumpWidget(UncontrolledProviderScope(container: container, child: const NyayaApp()));
     await settle(tester);
     return container;
+  }
+
+  /// Plays the first Case Path level through to its result screen.
+  Future<void> finishLevel(WidgetTester tester) async {
+    await tester.tap(find.text('Explore').first);
+    await settle(tester);
+    final c = ProviderScope.containerOf(tester.element(find.byType(NyayaApp)));
+    for (var i = 0; i < 6; i++) {
+      final question = c.read(quizControllerProvider(const QuizRequest(QuizMode.casePath, levelId: 'constitution_1'))).current;
+      // Large text pushes answers below the fold.
+      final answer = find.text(api.correctTextFor(question.id)).first;
+      await tester.ensureVisible(answer);
+      await tester.pump();
+      await tester.tap(answer);
+      await settle(tester);
+      await tester.tap(find.text(i == 5 ? 'FINISH' : 'NEXT'));
+      await settle(tester);
+    }
   }
 
   const screens = [
@@ -116,16 +147,119 @@ void main() {
       handle.dispose();
     });
 
-    testWidgets('onboarding ($theme) meets accessibility guidelines', (tester) async {
+    testWidgets('every onboarding step ($theme) meets accessibility guidelines', (tester) async {
       final handle = tester.ensureSemantics();
       await pumpApp(tester, theme: theme, onboarded: false);
       await expectGuidelines(tester);
       await tester.tap(find.text('English').first);
       await settle(tester);
+      for (var i = 0; i < 2; i++) {
+        await expectGuidelines(tester);
+        await tester.tap(find.byTooltip('Continue'));
+        await settle(tester);
+      }
+      await expectGuidelines(tester);
+      await tester.tap(find.text('Get Started'));
+      await settle(tester);
+      await expectGuidelines(tester);
+      await tester.tap(find.text('Citizen'));
+      await settle(tester);
       await expectGuidelines(tester);
       handle.dispose();
     });
+
+    testWidgets('reset password ($theme) meets accessibility guidelines', (tester) async {
+      final handle = tester.ensureSemantics();
+      final c = await pumpApp(tester, theme: theme);
+      c.read(routerProvider).push(Routes.resetPassword);
+      await settle(tester);
+      await expectGuidelines(tester);
+      handle.dispose();
+    });
+
+    testWidgets('quiz result ($theme) meets accessibility guidelines', (tester) async {
+      final handle = tester.ensureSemantics();
+      await pumpApp(tester, theme: theme);
+      await finishLevel(tester);
+      expect(find.text('Perfect case!'), findsOneWidget);
+      await expectGuidelines(tester);
+      handle.dispose();
+    });
+
+    // Premium is hidden in the beta; run with --dart-define=NYAYA_PREMIUM=true.
+    testWidgets('paywall ($theme) meets accessibility guidelines', (tester) async {
+      final handle = tester.ensureSemantics();
+      final c = await pumpApp(tester, theme: theme);
+      c.read(routerProvider).push(Routes.premium);
+      await settle(tester);
+      await expectGuidelines(tester);
+      handle.dispose();
+    }, skip: !Features.premium);
   }
+
+  // Long words in Tamil and Malayalam, tall scripts in Hindi: every language
+  // at the largest text size.
+  for (final language in AppLanguage.values) {
+    testWidgets('onboarding in ${language.englishName} lays out at the largest text size', (tester) async {
+      await pumpApp(tester, theme: 'light', textScale: 3, onboarded: false, language: language);
+      final choice = find.text(language.nativeName).first;
+      await tester.ensureVisible(choice);
+      await tester.pump();
+      await tester.tap(choice);
+      await settle(tester);
+      for (var i = 0; i < 2; i++) {
+        await tester.tap(find.byType(IconButton).last); // the round next button
+        await settle(tester);
+      }
+      await tester.tap(find.byType(FilledButton).last); // Get Started
+      await settle(tester);
+      expect(find.byType(IntroSlides), findsNothing, reason: 'reached the role step');
+      expect(tester.takeException(), isNull);
+    });
+
+    for (final route in [Routes.home, Routes.resetPassword, if (Features.premium) Routes.premium]) {
+      testWidgets('$route in ${language.englishName} lays out at the largest text size', (tester) async {
+        final c = await pumpApp(tester, theme: 'light', textScale: 3, language: language);
+        if (route != Routes.home) {
+          expect(tester.takeException(), isNull, reason: 'Home under it');
+          c.read(routerProvider).push(route);
+          await settle(tester);
+        }
+        expect(tester.takeException(), isNull);
+      });
+    }
+  }
+
+  testWidgets('quiz result lays out at the largest text size', (tester) async {
+    await pumpApp(tester, theme: 'light', textScale: 3);
+    await finishLevel(tester);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('screen readers hear headings, the slide position and errors', (tester) async {
+    final handle = tester.ensureSemantics();
+    await pumpApp(tester, theme: 'light', onboarded: false);
+    expect(tester.getSemantics(find.text('Choose your language')), matchesSemantics(label: 'Choose your language', isHeader: true));
+    await tester.tap(find.text('English').first);
+    await settle(tester);
+    expect(find.bySemanticsLabel('Slide 1 of 3'), findsOneWidget);
+    await tester.tap(find.byTooltip('Continue'));
+    await settle(tester);
+    expect(find.bySemanticsLabel('Slide 2 of 3'), findsOneWidget);
+    handle.dispose();
+  });
+
+  testWidgets('choice cards work from a keyboard', (tester) async {
+    await pumpApp(tester, theme: 'light', onboarded: false);
+    // Tab to the first language card, then press it with Enter.
+    for (var i = 0; i < 5 && FocusManager.instance.primaryFocus?.context?.findAncestorWidgetOfExactType<Pressable>() == null; i++) {
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pump();
+    }
+    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await settle(tester);
+    expect(find.byType(IntroSlides), findsOneWidget);
+  });
 
   // The phone's largest sizes are capped at maxTextScale; check a bit above it.
   for (final route in [...screens, Routes.signIn]) {

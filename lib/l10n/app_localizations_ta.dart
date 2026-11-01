@@ -206,6 +206,11 @@ class AppLocalizationsTa extends AppLocalizations {
   String get onbSkip => 'தவிர்';
 
   @override
+  String onbSlidePosition(int current, int total) {
+    return 'ஸ்லைடு $current / $total';
+  }
+
+  @override
   String get onbGetStarted => 'தொடங்குவோம்';
 
   @override

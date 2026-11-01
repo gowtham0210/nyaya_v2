@@ -206,6 +206,11 @@ class AppLocalizationsKn extends AppLocalizations {
   String get onbSkip => 'ಬಿಟ್ಟುಬಿಡಿ';
 
   @override
+  String onbSlidePosition(int current, int total) {
+    return 'ಸ್ಲೈಡ್ $current / $total';
+  }
+
+  @override
   String get onbGetStarted => 'ಪ್ರಾರಂಭಿಸಿ';
 
   @override

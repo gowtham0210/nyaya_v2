@@ -346,6 +346,7 @@
   "reportAlready": "आप इस सवाल की रिपोर्ट पहले ही कर चुके हैं।",
   "reportLimit": "आज आपने बहुत सारी रिपोर्ट भेज दी हैं। कृपया कल फिर कोशिश करें।",
   "onbSkip": "छोड़ें",
+  "onbSlidePosition": "स्लाइड {current} / {total}",
   "onbGetStarted": "शुरू करें",
   "onbBrandTagline": "कानून सीखें। उसे जिएँ।",
   "onbIntro1Title": "भारतीय कानून के लिए आपका साथी",

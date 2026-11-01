@@ -206,6 +206,11 @@ class AppLocalizationsTe extends AppLocalizations {
   String get onbSkip => 'దాటవేయి';
 
   @override
+  String onbSlidePosition(int current, int total) {
+    return 'స్లైడ్ $current / $total';
+  }
+
+  @override
   String get onbGetStarted => 'ప్రారంభించండి';
 
   @override

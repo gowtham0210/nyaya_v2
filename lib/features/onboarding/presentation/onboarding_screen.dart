@@ -145,7 +145,10 @@ class _StepScaffold extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.lg, AppSpacing.page, AppSpacing.lg),
       children: [
-        Text(title, style: context.text.headlineLarge).animate().fadeIn().slideY(begin: 0.15),
+        Semantics(header: true, child: Text(title, style: context.text.headlineLarge))
+            .animate()
+            .fadeIn()
+            .slideY(begin: 0.15),
         if (subtitle != null) ...[
           const SizedBox(height: 8),
           Text(subtitle!, style: context.text.bodyLarge?.copyWith(color: context.nyaya.textSecondary))

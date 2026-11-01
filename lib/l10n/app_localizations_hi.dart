@@ -203,6 +203,11 @@ class AppLocalizationsHi extends AppLocalizations {
   String get onbSkip => 'छोड़ें';
 
   @override
+  String onbSlidePosition(int current, int total) {
+    return 'स्लाइड $current / $total';
+  }
+
+  @override
   String get onbGetStarted => 'शुरू करें';
 
   @override

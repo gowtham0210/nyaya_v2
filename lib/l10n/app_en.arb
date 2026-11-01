@@ -58,6 +58,17 @@
   "onbSlide3Title": "Build a daily habit",
   "onbSlide3Body": "Keep your streak alive, climb weekly court leagues and ask our AI anything legal.",
   "onbSkip": "Skip",
+  "onbSlidePosition": "Slide {current} of {total}",
+  "@onbSlidePosition": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "onbGetStarted": "Get Started",
   "onbBrandTagline": "Learn Law. Live It.",
   "onbIntro1Title": "Your Guide to Indian Law",

@@ -203,6 +203,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onbSkip => 'Skip';
 
   @override
+  String onbSlidePosition(int current, int total) {
+    return 'Slide $current of $total';
+  }
+
+  @override
   String get onbGetStarted => 'Get Started';
 
   @override

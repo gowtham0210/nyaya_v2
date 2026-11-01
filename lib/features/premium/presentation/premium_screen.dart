@@ -113,10 +113,13 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                       style: context.text.labelLarge?.copyWith(color: AppPalette.ochre, letterSpacing: context.tracking(2)),
                     ),
                     const SizedBox(height: 6),
-                    Text(
-                      l.premiumHeadline,
-                      textAlign: TextAlign.center,
-                      style: context.text.headlineLarge?.copyWith(color: Colors.white),
+                    Semantics(
+                      header: true,
+                      child: Text(
+                        l.premiumHeadline,
+                        textAlign: TextAlign.center,
+                        style: context.text.headlineLarge?.copyWith(color: Colors.white),
+                      ),
                     ),
                     const SizedBox(height: AppSpacing.lg),
                     for (final (i, (icon, title, sub, color)) in benefits.indexed)
@@ -265,17 +268,14 @@ class _PlanCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    // The badge moves to its own line when both don't fit.
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 4,
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
-                        Flexible(
-                          child: Text(
-                            title,
-                            overflow: TextOverflow.ellipsis,
-                            style: context.text.titleMedium?.copyWith(color: Colors.white),
-                          ),
-                        ),
-                        if (badge != null) ...[
-                          const SizedBox(width: 8),
+                        Text(title, style: context.text.titleMedium?.copyWith(color: Colors.white)),
+                        if (badge != null)
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                             decoration: BoxDecoration(
@@ -287,7 +287,6 @@ class _PlanCard extends StatelessWidget {
                               style: context.text.labelSmall?.copyWith(color: AppPalette.deepEarth, fontWeight: FontWeight.w800),
                             ),
                           ),
-                        ],
                       ],
                     ),
                     if (sub != null)
