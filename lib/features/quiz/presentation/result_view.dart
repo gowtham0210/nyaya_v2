@@ -224,14 +224,16 @@ class _ResultViewState extends ConsumerState<ResultView> {
                         const SizedBox(height: AppSpacing.sm),
                         const PremiumBanner().animate().fadeIn(delay: 900.ms),
                       ],
-                      const SizedBox(height: AppSpacing.sm),
-                      TextButton.icon(
+                      const SizedBox(height: AppSpacing.md),
+                      OutlinedButton.icon(
                         onPressed: () => setState(() => _showReview = !_showReview),
                         icon: Icon(_showReview ? Icons.expand_less_rounded : Icons.fact_check_rounded),
-                        label: Text(l.resultReview),
+                        label: Text(_showReview ? l.resultHideReview : l.resultReview),
                       ),
                       if (_showReview) ...[
-                        for (final (i, a) in r.answers.indexed) _ReviewItem(index: i + 1, answer: a),
+                        const SizedBox(height: AppSpacing.md),
+                        for (final (i, a) in r.answers.indexed)
+                          _ReviewItem(index: i + 1, answer: a, exam: mode == QuizMode.exam),
                       ],
                     ],
                   ),
@@ -311,7 +313,10 @@ class _Hero extends StatelessWidget {
     final l = context.l10n;
     switch (result.request.mode) {
       case QuizMode.casePath:
-        return Row(
+        return Semantics(
+          label: l.journeyStarsOf(result.stars, 3),
+          excludeSemantics: true,
+          child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
@@ -334,6 +339,7 @@ class _Hero extends StatelessWidget {
                         .rotate(begin: -0.2, delay: (250 * i).ms),
               ),
           ],
+        ),
         );
       case QuizMode.duel:
         final won = result.duelWon == true;
@@ -445,11 +451,16 @@ class _StatTile extends StatelessWidget {
   }
 }
 
+/// One answered question, read-only: what you chose, the right answer and
+/// why. Nothing here sends an answer.
 class _ReviewItem extends StatelessWidget {
-  const _ReviewItem({required this.index, required this.answer});
+  const _ReviewItem({required this.index, required this.answer, required this.exam});
 
   final int index;
   final AnswerRecord answer;
+
+  /// Exams skip questions; timed modes run out of time. Both leave no answer.
+  final bool exam;
 
   @override
   Widget build(BuildContext context) {
@@ -466,25 +477,30 @@ class _ReviewItem extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(ok ? Icons.check_circle_rounded : Icons.cancel_rounded, color: color, size: 22),
+                Icon(
+                  ok ? Icons.check_circle_rounded : Icons.cancel_rounded,
+                  color: color,
+                  size: 22,
+                  semanticLabel: ok ? l.quizCorrect : l.quizWrong,
+                ),
                 const SizedBox(width: 8),
                 Expanded(child: Text('$index. ${q.text}', style: context.text.titleSmall)),
               ],
             ),
             const SizedBox(height: 8),
+            Text(
+              '${l.resultYourAnswer}: ${answer.isSkipped ? (exam ? l.resultSkipped : l.resultNoAnswer) : q.options[answer.selectedIndex!]}',
+              style: context.text.bodySmall?.copyWith(color: color, fontWeight: FontWeight.w600),
+            ),
             if (!ok)
-              Text(
-                '${l.resultYourAnswer}: ${answer.isSkipped ? l.resultSkipped : q.options[answer.selectedIndex!]}',
-                style: context.text.bodySmall?.copyWith(color: context.nyaya.error),
-              ),
-            if (answer.reveal?.correctIndex case final correct?)
-              Text(
-                '${l.resultCorrectAnswer}: ${q.options[correct]}',
-                style: context.text.bodySmall?.copyWith(color: context.nyaya.success, fontWeight: FontWeight.w700),
-              ),
+              if (answer.reveal?.correctIndex case final correct?)
+                Text(
+                  '${l.resultCorrectAnswer}: ${q.options[correct]}',
+                  style: context.text.bodySmall?.copyWith(color: context.nyaya.success, fontWeight: FontWeight.w700),
+                ),
             const SizedBox(height: 6),
             Text(
-              answer.reveal?.explanation ?? '',
+              (answer.reveal?.explanation ?? '').trim().isEmpty ? l.quizNoExplanation : answer.reveal!.explanation,
               style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary, height: 1.4),
             ),
             if (answer.reveal case final reveal?) ...[

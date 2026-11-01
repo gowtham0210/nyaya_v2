@@ -1462,18 +1462,6 @@ abstract class AppLocalizations {
   /// **'Leave this quiz?'**
   String get quizQuitTitle;
 
-  /// No description provided for @quizQuitBody.
-  ///
-  /// In en, this message translates to:
-  /// **'Your progress in this quiz will be lost.'**
-  String get quizQuitBody;
-
-  /// No description provided for @quizQuitBodyRefund.
-  ///
-  /// In en, this message translates to:
-  /// **'You haven\'t answered yet, so your energy will be refunded.'**
-  String get quizQuitBodyRefund;
-
   /// No description provided for @quizQuitStay.
   ///
   /// In en, this message translates to:
@@ -1485,6 +1473,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Leave'**
   String get quizQuitLeave;
+
+  /// No description provided for @quizTapToCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap an answer to check it.'**
+  String get quizTapToCheck;
+
+  /// No description provided for @quizChecking.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking your answer…'**
+  String get quizChecking;
+
+  /// No description provided for @quizTimedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Answer within {seconds} seconds. No answer in time counts as wrong.'**
+  String quizTimedHint(int seconds);
+
+  /// No description provided for @quizDuelHint.
+  ///
+  /// In en, this message translates to:
+  /// **'A right answer scores up to 1,000 points, more the faster you answer. A wrong answer scores 0.'**
+  String get quizDuelHint;
+
+  /// No description provided for @quizExamHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick an answer, then move on. You can\'t go back to a question.'**
+  String get quizExamHint;
+
+  /// No description provided for @quizSecondsLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{seconds} seconds left'**
+  String quizSecondsLeft(int seconds);
+
+  /// No description provided for @quizTimeLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Time left: {time}'**
+  String quizTimeLeft(String time);
+
+  /// No description provided for @quizNoExplanation.
+  ///
+  /// In en, this message translates to:
+  /// **'No explanation is available for this question yet.'**
+  String get quizNoExplanation;
+
+  /// No description provided for @quizQuitRefund.
+  ///
+  /// In en, this message translates to:
+  /// **'You haven\'t answered yet, so you\'ll get your {count} energy back.'**
+  String quizQuitRefund(int count);
+
+  /// No description provided for @quizQuitFree.
+  ///
+  /// In en, this message translates to:
+  /// **'You haven\'t answered yet, so nothing is lost. You can start again later.'**
+  String get quizQuitFree;
+
+  /// No description provided for @quizQuitAnswered.
+  ///
+  /// In en, this message translates to:
+  /// **'This attempt will end and can\'t be continued later. Your answers so far won\'t count.'**
+  String get quizQuitAnswered;
+
+  /// No description provided for @quizQuitAnsweredEnergy.
+  ///
+  /// In en, this message translates to:
+  /// **'This attempt will end and can\'t be continued later. Your answers so far won\'t count, and the {count} energy isn\'t given back.'**
+  String quizQuitAnsweredEnergy(int count);
+
+  /// No description provided for @quizRefundFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t reach Nyaya, so your energy wasn\'t given back.'**
+  String get quizRefundFailed;
+
+  /// No description provided for @quizOptionCorrect.
+  ///
+  /// In en, this message translates to:
+  /// **'correct answer'**
+  String get quizOptionCorrect;
+
+  /// No description provided for @quizOptionWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'your answer, wrong'**
+  String get quizOptionWrong;
+
+  /// No description provided for @quizOptionSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'selected'**
+  String get quizOptionSelected;
+
+  /// No description provided for @quizOptionChecking.
+  ///
+  /// In en, this message translates to:
+  /// **'checking'**
+  String get quizOptionChecking;
+
+  /// No description provided for @resultNoAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'No answer'**
+  String get resultNoAnswer;
+
+  /// No description provided for @resultHideReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide answers'**
+  String get resultHideReview;
+
+  /// No description provided for @reportSending.
+  ///
+  /// In en, this message translates to:
+  /// **'Sending…'**
+  String get reportSending;
+
+  /// No description provided for @reportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t send your report. Your text is kept, so you can try again.'**
+  String get reportFailed;
 
   /// No description provided for @quizLoading.
   ///

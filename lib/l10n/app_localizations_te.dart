@@ -824,17 +824,89 @@ class AppLocalizationsTe extends AppLocalizations {
   String get quizQuitTitle => 'ఈ క్విజ్ నుండి బయటకు వెళ్లాలా?';
 
   @override
-  String get quizQuitBody => 'ఈ క్విజ్‌లో మీ పురోగతి పోతుంది.';
-
-  @override
-  String get quizQuitBodyRefund =>
-      'మీరు ఇంకా జవాబు ఇవ్వలేదు, కాబట్టి మీ ఎనర్జీ తిరిగి వస్తుంది.';
-
-  @override
   String get quizQuitStay => 'ఆడుతూ ఉండండి';
 
   @override
   String get quizQuitLeave => 'బయటకు వెళ్లు';
+
+  @override
+  String get quizTapToCheck => 'తనిఖీ చేయడానికి ఒక జవాబును నొక్కండి.';
+
+  @override
+  String get quizChecking => 'మీ జవాబు తనిఖీ అవుతోంది…';
+
+  @override
+  String quizTimedHint(int seconds) {
+    return '$seconds సెకన్లలో జవాబు ఇవ్వండి. సమయానికి జవాబు ఇవ్వకపోతే తప్పుగా లెక్కిస్తారు.';
+  }
+
+  @override
+  String get quizDuelHint =>
+      'సరైన జవాబుకు 1,000 పాయింట్ల వరకు — ఎంత వేగంగా ఇస్తే అంత ఎక్కువ. తప్పు జవాబుకు 0.';
+
+  @override
+  String get quizExamHint =>
+      'ఒక జవాబు ఎంచుకుని ముందుకు వెళ్లండి. వెనక్కి వెళ్లి ప్రశ్న మార్చలేరు.';
+
+  @override
+  String quizSecondsLeft(int seconds) {
+    return '$seconds సెకన్లు మిగిలాయి';
+  }
+
+  @override
+  String quizTimeLeft(String time) {
+    return 'మిగిలిన సమయం: $time';
+  }
+
+  @override
+  String get quizNoExplanation => 'ఈ ప్రశ్నకు వివరణ ఇంకా అందుబాటులో లేదు.';
+
+  @override
+  String quizQuitRefund(int count) {
+    return 'మీరు ఇంకా జవాబు ఇవ్వలేదు, కాబట్టి మీ $count ఎనర్జీ తిరిగి వస్తుంది.';
+  }
+
+  @override
+  String get quizQuitFree =>
+      'మీరు ఇంకా జవాబు ఇవ్వలేదు, కాబట్టి ఏమీ కోల్పోలేదు. తర్వాత మళ్లీ ప్రారంభించవచ్చు.';
+
+  @override
+  String get quizQuitAnswered =>
+      'ఈ ప్రయత్నం ముగుస్తుంది, తర్వాత కొనసాగించలేరు. ఇప్పటివరకు ఇచ్చిన జవాబులు లెక్కలోకి రావు.';
+
+  @override
+  String quizQuitAnsweredEnergy(int count) {
+    return 'ఈ ప్రయత్నం ముగుస్తుంది, తర్వాత కొనసాగించలేరు. ఇప్పటివరకు ఇచ్చిన జవాబులు లెక్కలోకి రావు, $count ఎనర్జీ తిరిగి రాదు.';
+  }
+
+  @override
+  String get quizRefundFailed =>
+      'Nyayaని చేరలేకపోయాం, కాబట్టి మీ ఎనర్జీ తిరిగి రాలేదు.';
+
+  @override
+  String get quizOptionCorrect => 'సరైన జవాబు';
+
+  @override
+  String get quizOptionWrong => 'మీ జవాబు, తప్పు';
+
+  @override
+  String get quizOptionSelected => 'ఎంచుకున్నారు';
+
+  @override
+  String get quizOptionChecking => 'తనిఖీ అవుతోంది';
+
+  @override
+  String get resultNoAnswer => 'జవాబు లేదు';
+
+  @override
+  String get resultHideReview => 'జవాబులు దాచు';
+
+  @override
+  String get reportSending => 'పంపుతోంది…';
+
+  @override
+  String get reportFailed =>
+      'రిపోర్ట్ పంపలేకపోయాం. మీరు రాసింది ఉంది, మళ్లీ ప్రయత్నించండి.';
 
   @override
   String get quizLoading => 'మీ కేసును సిద్ధం చేస్తున్నాం…';

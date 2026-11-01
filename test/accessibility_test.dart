@@ -307,6 +307,36 @@ void main() {
     }
   }
 
+  // A question, its feedback and the report sheet on the same phones, at the largest text.
+  for (final (name, size) in [('a 320-point phone', const Size(960, 1704)), ('landscape', const Size(2532, 1170))]) {
+    for (final language in AppLanguage.values) {
+      testWidgets('a quiz in ${language.englishName} on $name lays out at the largest text size', (tester) async {
+        final c = await pumpApp(tester, theme: 'light', textScale: 3, language: language);
+        tester.view.physicalSize = size;
+        const level = QuizRequest(QuizMode.casePath, levelId: 'constitution_1');
+        c.read(routerProvider).push(Routes.quiz, extra: level);
+        await settle(tester);
+        expect(tester.takeException(), isNull, reason: 'question');
+
+        final wrong = find.text(api.wrongTextFor(c.read(quizControllerProvider(level)).current.id)).first;
+        await tester.ensureVisible(wrong);
+        await tester.pump();
+        await tester.tap(wrong);
+        await settle(tester);
+        expect(tester.takeException(), isNull, reason: 'feedback');
+
+        final report = find.byIcon(Icons.flag_outlined);
+        await tester.ensureVisible(report);
+        await tester.pump();
+        await tester.tap(report);
+        await settle(tester);
+        expect(tester.takeException(), isNull, reason: 'report sheet');
+        Navigator.of(tester.element(find.byType(BottomSheet))).pop();
+        await settle(tester);
+      });
+    }
+  }
+
   testWidgets('screen readers hear each stop on the road and its state', (tester) async {
     final handle = tester.ensureSemantics();
     final c = await pumpApp(tester, theme: 'light');

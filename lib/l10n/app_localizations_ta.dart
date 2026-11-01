@@ -830,18 +830,89 @@ class AppLocalizationsTa extends AppLocalizations {
   String get quizQuitTitle => 'இந்த வினாடி வினாவிலிருந்து வெளியேறவா?';
 
   @override
-  String get quizQuitBody =>
-      'இந்த வினாடி வினாவில் உங்கள் முன்னேற்றம் இழக்கப்படும்.';
-
-  @override
-  String get quizQuitBodyRefund =>
-      'நீங்கள் இன்னும் விடையளிக்கவில்லை, எனவே உங்கள் ஆற்றல் திருப்பித் தரப்படும்.';
-
-  @override
   String get quizQuitStay => 'தொடர்ந்து விளையாடு';
 
   @override
   String get quizQuitLeave => 'வெளியேறு';
+
+  @override
+  String get quizTapToCheck => 'சரிபார்க்க ஒரு விடையைத் தொடுங்கள்.';
+
+  @override
+  String get quizChecking => 'உங்கள் விடை சரிபார்க்கப்படுகிறது…';
+
+  @override
+  String quizTimedHint(int seconds) {
+    return '$seconds வினாடிகளுக்குள் விடையளியுங்கள். நேரத்தில் விடையில்லை என்றால் தவறாகக் கணக்கிடப்படும்.';
+  }
+
+  @override
+  String get quizDuelHint =>
+      'சரியான விடைக்கு 1,000 புள்ளிகள் வரை — வேகமாக விடையளித்தால் அதிகம். தவறான விடைக்கு 0.';
+
+  @override
+  String get quizExamHint =>
+      'ஒரு விடையைத் தேர்ந்து அடுத்ததற்குச் செல்லுங்கள். முந்தைய கேள்விக்குத் திரும்ப முடியாது.';
+
+  @override
+  String quizSecondsLeft(int seconds) {
+    return '$seconds வினாடிகள் உள்ளன';
+  }
+
+  @override
+  String quizTimeLeft(String time) {
+    return 'மீதமுள்ள நேரம்: $time';
+  }
+
+  @override
+  String get quizNoExplanation => 'இந்தக் கேள்விக்கு விளக்கம் இன்னும் இல்லை.';
+
+  @override
+  String quizQuitRefund(int count) {
+    return 'நீங்கள் இன்னும் விடையளிக்கவில்லை, எனவே உங்கள் $count ஆற்றல் திரும்பக் கிடைக்கும்.';
+  }
+
+  @override
+  String get quizQuitFree =>
+      'நீங்கள் இன்னும் விடையளிக்கவில்லை, எனவே எதுவும் இழக்கவில்லை. பிறகு மீண்டும் தொடங்கலாம்.';
+
+  @override
+  String get quizQuitAnswered =>
+      'இந்த முயற்சி முடியும்; பிறகு தொடர முடியாது. இதுவரையான விடைகள் கணக்கில் வராது.';
+
+  @override
+  String quizQuitAnsweredEnergy(int count) {
+    return 'இந்த முயற்சி முடியும்; பிறகு தொடர முடியாது. இதுவரையான விடைகள் கணக்கில் வராது, $count ஆற்றல் திரும்பக் கிடைக்காது.';
+  }
+
+  @override
+  String get quizRefundFailed =>
+      'Nyaya-வை அடைய முடியவில்லை, எனவே உங்கள் ஆற்றல் திரும்பத் தரப்படவில்லை.';
+
+  @override
+  String get quizOptionCorrect => 'சரியான விடை';
+
+  @override
+  String get quizOptionWrong => 'உங்கள் விடை, தவறு';
+
+  @override
+  String get quizOptionSelected => 'தேர்ந்தெடுக்கப்பட்டது';
+
+  @override
+  String get quizOptionChecking => 'சரிபார்க்கப்படுகிறது';
+
+  @override
+  String get resultNoAnswer => 'விடை இல்லை';
+
+  @override
+  String get resultHideReview => 'விடைகளை மறை';
+
+  @override
+  String get reportSending => 'அனுப்பப்படுகிறது…';
+
+  @override
+  String get reportFailed =>
+      'புகாரை அனுப்ப முடியவில்லை. நீங்கள் எழுதியது உள்ளது, மீண்டும் முயலுங்கள்.';
 
   @override
   String get quizLoading => 'உங்கள் வழக்கைத் தயாரிக்கிறோம்…';

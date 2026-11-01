@@ -819,17 +819,90 @@ class AppLocalizationsEn extends AppLocalizations {
   String get quizQuitTitle => 'Leave this quiz?';
 
   @override
-  String get quizQuitBody => 'Your progress in this quiz will be lost.';
-
-  @override
-  String get quizQuitBodyRefund =>
-      'You haven\'t answered yet, so your energy will be refunded.';
-
-  @override
   String get quizQuitStay => 'Keep playing';
 
   @override
   String get quizQuitLeave => 'Leave';
+
+  @override
+  String get quizTapToCheck => 'Tap an answer to check it.';
+
+  @override
+  String get quizChecking => 'Checking your answer…';
+
+  @override
+  String quizTimedHint(int seconds) {
+    return 'Answer within $seconds seconds. No answer in time counts as wrong.';
+  }
+
+  @override
+  String get quizDuelHint =>
+      'A right answer scores up to 1,000 points, more the faster you answer. A wrong answer scores 0.';
+
+  @override
+  String get quizExamHint =>
+      'Pick an answer, then move on. You can\'t go back to a question.';
+
+  @override
+  String quizSecondsLeft(int seconds) {
+    return '$seconds seconds left';
+  }
+
+  @override
+  String quizTimeLeft(String time) {
+    return 'Time left: $time';
+  }
+
+  @override
+  String get quizNoExplanation =>
+      'No explanation is available for this question yet.';
+
+  @override
+  String quizQuitRefund(int count) {
+    return 'You haven\'t answered yet, so you\'ll get your $count energy back.';
+  }
+
+  @override
+  String get quizQuitFree =>
+      'You haven\'t answered yet, so nothing is lost. You can start again later.';
+
+  @override
+  String get quizQuitAnswered =>
+      'This attempt will end and can\'t be continued later. Your answers so far won\'t count.';
+
+  @override
+  String quizQuitAnsweredEnergy(int count) {
+    return 'This attempt will end and can\'t be continued later. Your answers so far won\'t count, and the $count energy isn\'t given back.';
+  }
+
+  @override
+  String get quizRefundFailed =>
+      'Couldn\'t reach Nyaya, so your energy wasn\'t given back.';
+
+  @override
+  String get quizOptionCorrect => 'correct answer';
+
+  @override
+  String get quizOptionWrong => 'your answer, wrong';
+
+  @override
+  String get quizOptionSelected => 'selected';
+
+  @override
+  String get quizOptionChecking => 'checking';
+
+  @override
+  String get resultNoAnswer => 'No answer';
+
+  @override
+  String get resultHideReview => 'Hide answers';
+
+  @override
+  String get reportSending => 'Sending…';
+
+  @override
+  String get reportFailed =>
+      'Couldn\'t send your report. Your text is kept, so you can try again.';
 
   @override
   String get quizLoading => 'Preparing your case…';

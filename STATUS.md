@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-11-01 (clearer Case Path, Claude Opus 5.5)
+> Last updated: 2026-11-01 (clearer quiz screens, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -822,6 +822,24 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       Checked on the simulator: returning learner (iPhone 17 Pro Max) and new learner (temporary iPhone SE, deleted).
       Not checked on the simulator: opening a ready chest. Known risk (server): a quiz start whose reply is lost can
       charge energy again on retry — `POST /v1/quiz-sessions` has no Idempotency-Key.
+- [x] 2026-11-01: **Quiz screens are clearer and more honest** (outside UX brief). Before an answer the bar says
+      "Tap an answer to check it." (no dead NEXT); timed modes add "Answer within 30 seconds. No answer in time counts
+      as wrong."; duels add the scoring rule (up to 1,000 points, faster = more, wrong = 0, from
+      `XpCalculator.duelPoints`). While an answer is checked the chosen option shows a spinner and the others lock.
+      Options say their state to screen readers ("correct answer" / "your answer, wrong"). After an answer the
+      explanation scrolls into view; empty explanations get a fallback line. "1/6" next to the bar removed (the bar
+      reads "Question 1 of 6"). Timers catch up after the app was in the background (`QuizController.catchUp`, from
+      an `AppLifecycleListener` in QuizView). Exam: "answered" no longer counts skipped questions; hint "You can't go
+      back to a question" (the app can't). Exit dialog says what really happens (server: refund only before the first
+      answer): 4 texts (refund n energy / free mode nothing lost / answered: attempt ends, answers don't count, energy
+      kept). An offline leave says the energy wasn't given back (`abandon()` returns false). Report sheet: spinner,
+      error inside the sheet (was a snackbar hidden behind it), text kept, "Try again". Results: stars spoken, Review
+      answers is a full button ("Hide answers"), review shows "Your answer" for every question ("No answer" /
+      "Skipped"). Save/Report and the "Why" title wrap at large text (overflowed before). 212 app tests pass (12 new
+      quiz layouts: 320 pt / landscape × 6 languages at the largest text). Checked on the simulator: question,
+      wrong-answer feedback, exit dialogs, report sheet, Daily Docket timer, background time-out. Not changed (server):
+      a quiz start whose reply is lost can still charge energy twice; duels race a recorded run, so there is no live
+      "waiting / disconnected" opponent state to show.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

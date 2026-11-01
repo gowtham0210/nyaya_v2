@@ -786,6 +786,182 @@ void main() {
     expect(find.text('Wrong once'), findsOneWidget);
     expect(find.text('PRACTISE MISTAKES'), findsOneWidget);
   });
+
+  testWidgets('before an answer there is no dead Next button, and answers say their state', (tester) async {
+    final semantics = tester.ensureSemantics();
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    await tester.tap(find.text('Start learning').first);
+    await settle(tester);
+
+    expect(find.text('Tap an answer to check it.'), findsOneWidget);
+    expect(find.text('NEXT'), findsNothing);
+    expect(find.text('Select an answer'), findsNothing);
+    expect(find.text('1/6'), findsNothing, reason: '"Question 1 of 6" is enough');
+
+    final q = _current(c);
+    final wrong = api.wrongTextFor(q.id);
+    await tester.tap(find.text(wrong).first);
+    await settle(tester);
+    expect(find.text('Not quite'), findsOneWidget);
+    expect(find.bySemanticsLabel(RegExp(', your answer, wrong\$')), findsOneWidget);
+    expect(find.bySemanticsLabel(RegExp(', correct answer\$')), findsOneWidget);
+    expect(find.text('NEXT'), findsOneWidget);
+
+    // A second tap on another option sends nothing.
+    await tester.tap(find.text(api.correctTextFor(q.id)).first, warnIfMissed: false);
+    await settle(tester);
+    expect(c.read(quizControllerProvider(const QuizRequest(QuizMode.casePath, levelId: 'constitution_1'))).answers, hasLength(1));
+    semantics.dispose();
+  });
+
+  testWidgets('leaving says exactly what happens to the energy', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    await tester.tap(find.text('Start learning').first);
+    await settle(tester);
+
+    await tester.tap(find.byTooltip('Close'));
+    await settle(tester);
+    expect(find.text("You haven't answered yet, so you'll get your 1 energy back."), findsOneWidget);
+    await tester.tap(find.text('Keep playing'));
+    await settle(tester);
+
+    await tester.tap(find.text(api.correctTextFor(_current(c).id)).first);
+    await settle(tester);
+    await tester.tap(find.byTooltip('Close'));
+    await settle(tester);
+    expect(
+      find.text(
+        "This attempt will end and can't be continued later. Your answers so far won't count, "
+        "and the 1 energy isn't given back.",
+      ),
+      findsOneWidget,
+    );
+    await tester.tap(find.text('Leave'));
+    await settle(tester);
+    expect(c.read(profileProvider).energy, 4, reason: 'an answered attempt keeps its charge');
+  });
+
+  testWidgets('leaving offline before answering says the energy was not given back', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    await pumpApp(tester, prefs: {'profile_v1': onboarded}, server: (s) => s.abandonOffline = true);
+    await settle(tester);
+    await tester.tap(find.text('Start learning').first);
+    await settle(tester);
+    await tester.tap(find.byTooltip('Close'));
+    await settle(tester);
+    await tester.tap(find.text('Leave'));
+    await settle(tester);
+    expect(find.text("Couldn't reach Nyaya, so your energy wasn't given back."), findsOneWidget);
+  });
+
+  testWidgets('the free Daily Docket promises no refund when you leave', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    c.read(routerProvider).push(Routes.quiz, extra: const QuizRequest(QuizMode.dailyDocket));
+    await settle(tester);
+    expect(find.text('Answer within 30 seconds. No answer in time counts as wrong.'), findsOneWidget);
+    await tester.tap(find.byTooltip('Close'));
+    await settle(tester);
+    expect(find.text("You haven't answered yet, so nothing is lost. You can start again later."), findsOneWidget);
+    await tester.tap(find.text('Leave'));
+    await settle(tester);
+  });
+
+  testWidgets('time away from the app comes off a running timer', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    const duel = QuizRequest(QuizMode.duel);
+    c.read(routerProvider).push(Routes.quiz, extra: duel);
+    await settle(tester);
+    expect(find.textContaining('A right answer scores up to 1,000 points'), findsOneWidget);
+    final ctl = c.read(quizControllerProvider(duel).notifier);
+    final before = c.read(quizControllerProvider(duel)).secondsLeft!;
+    ctl.catchUp(const Duration(seconds: 3));
+    expect(c.read(quizControllerProvider(duel)).secondsLeft, before - 3);
+    ctl.catchUp(const Duration(minutes: 5));
+    await settle(tester);
+    expect(c.read(quizControllerProvider(duel)).answers.single.isSkipped, isTrue);
+    expect(find.text("Time's up"), findsOneWidget);
+    c.read(routerProvider).go(Routes.home);
+    await settle(tester);
+  });
+
+  testWidgets('the exam counts answered questions, not skipped ones', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    const exam = QuizRequest(QuizMode.exam);
+    c.read(routerProvider).push(Routes.quiz, extra: exam);
+    await settle(tester);
+    final total = c.read(quizControllerProvider(exam)).questions.length;
+    expect(find.text('0 of $total answered'), findsOneWidget);
+    expect(find.text("Pick an answer, then move on. You can't go back to a question."), findsOneWidget);
+
+    await tester.tap(find.text('SKIP'));
+    await settle(tester);
+    expect(find.text('0 of $total answered'), findsOneWidget, reason: 'a skip is not an answer');
+    final q = c.read(quizControllerProvider(exam)).current;
+    await tester.tap(find.text(api.correctTextFor(q.id)).first);
+    await settle(tester);
+    expect(find.text('1 of $total answered'), findsOneWidget);
+    c.read(routerProvider).go(Routes.home);
+    await settle(tester);
+  });
+
+  testWidgets('a failed report says so in the sheet and keeps the text', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, server: (s) => s.reportOffline = true);
+    await settle(tester);
+    await tester.tap(find.text('Start learning').first);
+    await settle(tester);
+    await tester.tap(find.text(api.wrongTextFor(_current(c).id)).first);
+    await settle(tester);
+    await tester.ensureVisible(find.text('Report'));
+    await settle(tester);
+    await tester.tap(find.text('Report'));
+    await settle(tester);
+    await tester.tap(find.text('Typo or wording'));
+    await tester.enterText(find.byType(TextField), 'Article number looks off');
+    await tester.tap(find.text('Send report'));
+    await settle(tester);
+    expect(find.text("Couldn't send your report. Your text is kept, so you can try again."), findsOneWidget);
+    expect(find.text('Article number looks off'), findsOneWidget);
+    expect(api.reports, isEmpty);
+
+    api.reportOffline = false;
+    await tester.tap(find.text('Try again'));
+    await settle(tester);
+    expect(api.reports.single.comment, 'Article number looks off');
+    expect(find.text('Thanks. Our legal team will check this question.'), findsOneWidget);
+  });
+
+  testWidgets('answer review shows your answer and the right one', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    await tester.tap(find.text('Start learning').first);
+    await settle(tester);
+    final first = _current(c);
+    final wrong = api.wrongTextFor(first.id);
+    for (var i = 0; i < 6; i++) {
+      await tester.tap(find.text(i == 0 ? wrong : api.correctTextFor(_current(c).id)).first);
+      await settle(tester);
+      await tester.tap(find.text(i == 5 ? 'FINISH' : 'NEXT'));
+      await settle(tester);
+    }
+    expect(find.text('5/6 correct'), findsOneWidget);
+    await tester.tap(find.text('Review answers'));
+    await settle(tester);
+    expect(find.text('Hide answers'), findsOneWidget);
+    expect(find.text('Your answer: $wrong'), findsOneWidget);
+    expect(find.text('Correct answer: ${api.correctTextFor(first.id)}'), findsOneWidget);
+  });
 }
 
 

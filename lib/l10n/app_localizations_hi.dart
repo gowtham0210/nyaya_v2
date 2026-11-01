@@ -819,17 +819,89 @@ class AppLocalizationsHi extends AppLocalizations {
   String get quizQuitTitle => 'क्विज़ छोड़ें?';
 
   @override
-  String get quizQuitBody => 'इस क्विज़ में आपकी प्रगति खो जाएगी।';
-
-  @override
-  String get quizQuitBodyRefund =>
-      'आपने अभी कोई उत्तर नहीं दिया है, इसलिए आपकी ऊर्जा वापस मिल जाएगी।';
-
-  @override
   String get quizQuitStay => 'खेलते रहें';
 
   @override
   String get quizQuitLeave => 'छोड़ें';
+
+  @override
+  String get quizTapToCheck => 'जाँचने के लिए किसी उत्तर पर टैप करें।';
+
+  @override
+  String get quizChecking => 'आपका उत्तर जाँचा जा रहा है…';
+
+  @override
+  String quizTimedHint(int seconds) {
+    return '$seconds सेकंड में उत्तर दें। समय पर उत्तर न देने पर उसे गलत माना जाएगा।';
+  }
+
+  @override
+  String get quizDuelHint =>
+      'सही उत्तर पर 1,000 तक अंक मिलते हैं — जितनी जल्दी, उतने ज़्यादा। गलत उत्तर पर 0।';
+
+  @override
+  String get quizExamHint =>
+      'एक उत्तर चुनें, फिर आगे बढ़ें। आप किसी प्रश्न पर वापस नहीं जा सकते।';
+
+  @override
+  String quizSecondsLeft(int seconds) {
+    return '$seconds सेकंड बचे';
+  }
+
+  @override
+  String quizTimeLeft(String time) {
+    return 'बचा समय: $time';
+  }
+
+  @override
+  String get quizNoExplanation => 'इस प्रश्न की व्याख्या अभी उपलब्ध नहीं है।';
+
+  @override
+  String quizQuitRefund(int count) {
+    return 'आपने अभी उत्तर नहीं दिया है, इसलिए आपकी $count ऊर्जा वापस मिल जाएगी।';
+  }
+
+  @override
+  String get quizQuitFree =>
+      'आपने अभी उत्तर नहीं दिया है, इसलिए कुछ नहीं खोया। आप बाद में फिर शुरू कर सकते हैं।';
+
+  @override
+  String get quizQuitAnswered =>
+      'यह प्रयास खत्म हो जाएगा और बाद में जारी नहीं रहेगा। अब तक के उत्तर नहीं गिने जाएँगे।';
+
+  @override
+  String quizQuitAnsweredEnergy(int count) {
+    return 'यह प्रयास खत्म हो जाएगा और बाद में जारी नहीं रहेगा। अब तक के उत्तर नहीं गिने जाएँगे और $count ऊर्जा वापस नहीं मिलेगी।';
+  }
+
+  @override
+  String get quizRefundFailed =>
+      'Nyaya से जुड़ नहीं सके, इसलिए आपकी ऊर्जा वापस नहीं मिली।';
+
+  @override
+  String get quizOptionCorrect => 'सही उत्तर';
+
+  @override
+  String get quizOptionWrong => 'आपका उत्तर, गलत';
+
+  @override
+  String get quizOptionSelected => 'चुना गया';
+
+  @override
+  String get quizOptionChecking => 'जाँच हो रही है';
+
+  @override
+  String get resultNoAnswer => 'कोई उत्तर नहीं';
+
+  @override
+  String get resultHideReview => 'उत्तर छिपाएँ';
+
+  @override
+  String get reportSending => 'भेजा जा रहा है…';
+
+  @override
+  String get reportFailed =>
+      'रिपोर्ट नहीं भेज सके। आपका लिखा सुरक्षित है, फिर कोशिश करें।';
 
   @override
   String get quizLoading => 'आपका केस तैयार हो रहा है…';

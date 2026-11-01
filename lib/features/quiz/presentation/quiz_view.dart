@@ -1,11 +1,13 @@
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/rendering.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../core/config/game_rules.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/services/feedback.dart';
 import '../../../core/services/sounds.dart';
+import '../../../core/storage/local_store.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/chunky_button.dart';
@@ -20,15 +22,63 @@ import 'source_line.dart';
 
 /// The question screen: progress + timer, question, four options, feedback
 /// and the Next button.
-class QuizView extends ConsumerWidget {
+class QuizView extends ConsumerStatefulWidget {
   const QuizView({super.key, required this.request, required this.onClose});
 
   final QuizRequest request;
   final VoidCallback onClose;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<QuizView> createState() => _QuizViewState();
+}
+
+class _QuizViewState extends ConsumerState<QuizView> {
+  final _scroll = ScrollController();
+  final _explanationKey = GlobalKey();
+  late final AppLifecycleListener _lifecycle;
+  DateTime? _hiddenAt;
+
+  QuizRequest get request => widget.request;
+
+  @override
+  void initState() {
+    super.initState();
+    // Timers can't tick while the app is in the background; catch up after.
+    _lifecycle = AppLifecycleListener(
+      onHide: () => _hiddenAt = ref.read(clockProvider)(),
+      onShow: () {
+        final hidden = _hiddenAt;
+        _hiddenAt = null;
+        if (hidden == null) return;
+        ref.read(quizControllerProvider(request).notifier).catchUp(ref.read(clockProvider)().difference(hidden));
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _lifecycle.dispose();
+    _scroll.dispose();
+    super.dispose();
+  }
+
+  /// Scrolls just enough to show the explanation under the options, but
+  /// never past its top, so a long one is read from the start.
+  void _showExplanation() {
+    final box = _explanationKey.currentContext?.findRenderObject();
+    if (box == null || !_scroll.hasClients) return;
+    final viewport = RenderAbstractViewport.of(box);
+    final top = viewport.getOffsetToReveal(box, 0).offset;
+    final end = viewport.getOffsetToReveal(box, 1).offset;
+    final target = (end < top ? end : top).clamp(0.0, _scroll.position.maxScrollExtent);
+    if (target <= _scroll.offset) return;
+    _scroll.animateTo(target, duration: const Duration(milliseconds: 350), curve: Curves.easeOutCubic);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l = context.l10n;
+    final onClose = widget.onClose;
     final provider = quizControllerProvider(request);
     final s = ref.watch(provider);
     final ctl = ref.read(provider.notifier);
@@ -52,6 +102,11 @@ class QuizView extends ConsumerWidget {
       ref.read(soundsProvider).play(Sfx.tick);
     });
 
+    // Once the answer is known, bring its explanation into view.
+    ref.listen(provider.select((st) => st.revealed), (prev, next) {
+      if (prev == false && next) WidgetsBinding.instance.addPostFrameCallback((_) => _showExplanation());
+    });
+
     // An answer that could not reach the server.
     ref.listen(provider.select((st) => st.problem), (prev, next) {
       if (prev != null && next > prev) {
@@ -60,7 +115,6 @@ class QuizView extends ConsumerWidget {
     });
 
     final last = s.revealed ? s.lastAnswer : null;
-    final answeredCount = mode == QuizMode.exam ? s.index + (s.selected != null ? 1 : 0) : s.answers.length;
 
     return Scaffold(
       body: SafeArea(
@@ -72,14 +126,20 @@ class QuizView extends ConsumerWidget {
               child: Row(
                 children: [
                   IconButton(tooltip: l.commonClose, onPressed: onClose, icon: const Icon(Icons.close_rounded)),
-                  Expanded(child: GlossyProgressBar(value: s.progress)),
-                  const SizedBox(width: 12),
-                  if (mode == QuizMode.exam)
-                    _ExamClock(seconds: s.secondsLeft ?? 0)
-                  else if (s.combo >= GameRules.comboStart)
-                    _ComboBadge(count: s.combo)
-                  else
-                    Text('${s.index + 1}/${s.questions.length}', style: context.text.labelLarge),
+                  // "Question 2 of 6" is written under the bar; the bar says it to screen readers.
+                  Expanded(
+                    child: Semantics(
+                      label: l.quizQuestionOf(s.index + 1, s.questions.length),
+                      child: GlossyProgressBar(value: s.progress),
+                    ),
+                  ),
+                  if (mode == QuizMode.exam) ...[
+                    const SizedBox(width: 12),
+                    _ExamClock(seconds: s.secondsLeft ?? 0),
+                  ] else if (s.combo >= GameRules.comboStart) ...[
+                    const SizedBox(width: 12),
+                    _ComboBadge(count: s.combo),
+                  ],
                 ],
               ),
             ),
@@ -97,16 +157,19 @@ class QuizView extends ConsumerWidget {
             // ── Question + options ─────────────────────────────────────────
             Expanded(
               child: SingleChildScrollView(
+                controller: _scroll,
                 padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.lg, AppSpacing.page, AppSpacing.lg),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Row(
+                    // Chapter, then "Question 2 of 6"; wraps onto two lines on small screens.
+                    Wrap(
+                      alignment: WrapAlignment.spaceBetween,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      spacing: 12,
+                      runSpacing: 6,
                       children: [
-                        Expanded(
-                          child: Align(
-                            alignment: AlignmentDirectional.centerStart,
-                            child: Container(
+                        Container(
                               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                               decoration: BoxDecoration(
                                 color: chapter.color.withValues(alpha: 0.12),
@@ -131,9 +194,6 @@ class QuizView extends ConsumerWidget {
                                 ],
                               ),
                             ),
-                          ),
-                        ),
-                        const SizedBox(width: 12),
                         Text(
                           l.quizQuestionOf(s.index + 1, s.questions.length),
                           style: context.text.labelMedium?.copyWith(color: context.nyaya.textSecondary),
@@ -165,7 +225,7 @@ class QuizView extends ConsumerWidget {
                       ),
                     if (last != null && (last.reveal != null || mode == QuizMode.duel)) ...[
                       const SizedBox(height: 4),
-                      _Explanation(answer: last, opponent: mode == QuizMode.duel ? s : null),
+                      _Explanation(key: _explanationKey, answer: last, opponent: mode == QuizMode.duel ? s : null),
                     ],
                   ],
                 ),
@@ -175,7 +235,7 @@ class QuizView extends ConsumerWidget {
             // ── Bottom bar with Next ───────────────────────────────────────
             _BottomBar(
               state: s,
-              answered: answeredCount,
+              answered: s.answeredCount,
               onNext: () {
                 ref.read(feedbackProvider).play(Haptic.tap);
                 ctl.next();
@@ -189,7 +249,8 @@ class QuizView extends ConsumerWidget {
   }
 
   OptionState _optionState(QuizState s, int i) {
-    if (!s.request.mode.instantFeedback || s.sending) {
+    if (s.sending) return s.selected == i ? OptionState.checking : OptionState.locked;
+    if (!s.request.mode.instantFeedback) {
       return s.selected == i ? OptionState.selected : OptionState.idle;
     }
     if (!s.revealed) return OptionState.idle;
@@ -201,7 +262,9 @@ class QuizView extends ConsumerWidget {
   }
 }
 
-enum OptionState { idle, selected, correct, wrong, dimmed }
+/// [checking]: chosen and on its way to the server; [locked]: the others
+/// meanwhile, so no second answer can be sent.
+enum OptionState { idle, selected, checking, locked, correct, wrong, dimmed }
 
 class OptionTile extends StatelessWidget {
   const OptionTile({super.key, required this.letter, required this.text, required this.state, required this.onTap});
@@ -217,7 +280,7 @@ class OptionTile extends StatelessWidget {
     final scheme = context.colors;
     final (border, fill, badge, badgeText) = switch (state) {
       OptionState.idle => (n.cardBorder, scheme.surface, scheme.surfaceContainerLow, scheme.onSurface),
-      OptionState.selected => (
+      OptionState.selected || OptionState.checking => (
         scheme.primary,
         scheme.primaryContainer.withValues(alpha: 0.55),
         scheme.primary,
@@ -225,7 +288,12 @@ class OptionTile extends StatelessWidget {
       ),
       OptionState.correct => (n.success, n.successContainer, n.success, Colors.white),
       OptionState.wrong => (n.error, n.errorContainer, n.error, Colors.white),
-      OptionState.dimmed => (n.cardBorder, scheme.surface, scheme.surfaceContainerLow, n.textSecondary),
+      OptionState.dimmed || OptionState.locked => (
+        n.cardBorder,
+        scheme.surface,
+        scheme.surfaceContainerLow,
+        n.textSecondary,
+      ),
     };
     final icon = switch (state) {
       OptionState.correct => Icons.check_rounded,
@@ -251,7 +319,9 @@ class OptionTile extends StatelessWidget {
             height: 34,
             alignment: Alignment.center,
             decoration: BoxDecoration(color: badge, borderRadius: BorderRadius.circular(10)),
-            child: icon != null
+            child: state == OptionState.checking
+                ? SizedBox.square(dimension: 16, child: CircularProgressIndicator(strokeWidth: 2.5, color: badgeText))
+                : icon != null
                 ? Icon(icon, size: 20, color: badgeText)
                 : Text(letter, style: context.text.labelLarge?.copyWith(color: badgeText)),
           ),
@@ -261,7 +331,7 @@ class OptionTile extends StatelessWidget {
               text,
               style: context.text.bodyLarge?.copyWith(
                 fontWeight: FontWeight.w600,
-                color: state == OptionState.dimmed ? n.textSecondary : null,
+                color: state == OptionState.dimmed || state == OptionState.locked ? n.textSecondary : null,
               ),
             ),
           ),
@@ -274,17 +344,27 @@ class OptionTile extends StatelessWidget {
       tile = tile.animate().scale(begin: const Offset(0.97, 0.97), end: const Offset(1, 1), curve: Curves.elasticOut);
     }
 
+    // The state in words too, never by colour alone.
+    final l = context.l10n;
+    final status = switch (state) {
+      OptionState.correct => l.quizOptionCorrect,
+      OptionState.wrong => l.quizOptionWrong,
+      OptionState.selected => l.quizOptionSelected,
+      OptionState.checking => l.quizOptionChecking,
+      _ => null,
+    };
     return Semantics(
       button: interactive,
       selected: state == OptionState.selected,
-      label: '$letter. $text',
+      label: status == null ? '$letter. $text' : '$letter. $text, $status',
+      excludeSemantics: true,
       child: Pressable(onTap: interactive ? onTap : null, scale: 0.98, child: tile),
     );
   }
 }
 
 class _Explanation extends StatelessWidget {
-  const _Explanation({required this.answer, this.opponent});
+  const _Explanation({super.key, required this.answer, this.opponent});
 
   final AnswerRecord answer;
   final QuizState? opponent;
@@ -327,11 +407,17 @@ class _Explanation extends StatelessWidget {
               children: [
                 const Icon(Icons.menu_book_rounded, size: 18, color: AppPalette.ochreText),
                 const SizedBox(width: 6),
-                Text(l.quizWhy, style: context.text.titleSmall),
+                Flexible(child: Text(l.quizWhy, style: context.text.titleSmall)),
               ],
             ),
             const SizedBox(height: 6),
-            Text(reveal.explanation, style: context.text.bodyMedium?.copyWith(height: 1.5)),
+            if (reveal.explanation.trim().isEmpty)
+              Text(
+                l.quizNoExplanation,
+                style: context.text.bodyMedium?.copyWith(color: context.nyaya.textSecondary, fontStyle: FontStyle.italic),
+              )
+            else
+              Text(reveal.explanation, style: context.text.bodyMedium?.copyWith(height: 1.5)),
             const SizedBox(height: 8),
             SourceLine(reference: reveal.reference, url: reveal.sourceUrl),
             const SizedBox(height: 4),
@@ -440,23 +526,83 @@ class _BottomBar extends StatelessWidget {
             Text(
               l.quizMarkedAnswers(answered, state.questions.length),
               textAlign: TextAlign.center,
-              style: context.text.labelMedium?.copyWith(color: n.textSecondary),
+              style: context.text.labelLarge,
             ),
-            const SizedBox(height: 8),
-          ] else if (!state.revealed) ...[
+            const SizedBox(height: 2),
             Text(
-              l.quizSelectAnswer,
+              l.quizExamHint,
               textAlign: TextAlign.center,
               style: context.text.labelMedium?.copyWith(color: n.textSecondary),
             ),
             const SizedBox(height: 8),
           ],
-          ChunkyButton(
-            label: label,
-            color: tint ?? context.colors.primary,
-            onPressed: state.canAdvance ? onNext : null,
-          ),
+          // Before an answer there is nothing to press: say what to do instead
+          // of showing a dead button.
+          if (mode.instantFeedback && !state.revealed)
+            _AnswerPrompt(checking: state.sending, mode: mode)
+          else
+            ChunkyButton(
+              label: label,
+              color: tint ?? context.colors.primary,
+              onPressed: state.canAdvance ? onNext : null,
+            ),
         ],
+      ),
+    );
+  }
+}
+
+/// Shown in place of Next until the answer is known.
+class _AnswerPrompt extends StatelessWidget {
+  const _AnswerPrompt({required this.checking, required this.mode});
+
+  final bool checking;
+  final QuizMode mode;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final rule = switch (mode) {
+      QuizMode.duel => l.quizDuelHint,
+      _ when mode.secondsPerQuestion != null => l.quizTimedHint(mode.secondsPerQuestion!),
+      _ => null,
+    };
+    return Semantics(
+      liveRegion: true,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: 56),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (checking) ...[
+                  const SizedBox.square(dimension: 18, child: CircularProgressIndicator(strokeWidth: 2.5)),
+                  const SizedBox(width: 10),
+                ] else ...[
+                  Icon(Icons.touch_app_outlined, size: 20, color: context.colors.primary),
+                  const SizedBox(width: 8),
+                ],
+                Flexible(
+                  child: Text(
+                    checking ? l.quizChecking : l.quizTapToCheck,
+                    textAlign: TextAlign.center,
+                    style: context.text.titleSmall,
+                  ),
+                ),
+              ],
+            ),
+            if (rule != null && !checking) ...[
+              const SizedBox(height: 4),
+              Text(
+                rule,
+                textAlign: TextAlign.center,
+                style: context.text.labelMedium?.copyWith(color: context.nyaya.textSecondary),
+              ),
+            ],
+          ],
+        ),
       ),
     );
   }
@@ -473,7 +619,10 @@ class _QuestionTimer extends StatelessWidget {
   Widget build(BuildContext context) {
     final urgent = seconds <= 5 && !paused;
     final color = urgent ? context.nyaya.error : AppPalette.ochre;
-    return Row(
+    return Semantics(
+      label: context.l10n.quizSecondsLeft(seconds),
+      excludeSemantics: true,
+      child: Row(
       children: [
         Icon(Icons.timer_rounded, size: 18, color: color),
         const SizedBox(width: 6),
@@ -490,6 +639,7 @@ class _QuestionTimer extends StatelessWidget {
           ),
         ),
       ],
+    ),
     );
   }
 }
@@ -504,7 +654,10 @@ class _ExamClock extends StatelessWidget {
     final mm = (seconds ~/ 60).toString().padLeft(2, '0');
     final ss = (seconds % 60).toString().padLeft(2, '0');
     final urgent = seconds < 60;
-    return Container(
+    return Semantics(
+      label: context.l10n.quizTimeLeft('$mm:$ss'),
+      excludeSemantics: true,
+      child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: (urgent ? context.nyaya.error : context.colors.primary).withValues(alpha: 0.12),
@@ -518,6 +671,7 @@ class _ExamClock extends StatelessWidget {
           Text('$mm:$ss', style: context.text.labelLarge?.copyWith(fontFeatures: const [FontFeature.tabularFigures()])),
         ],
       ),
+    ),
     );
   }
 }

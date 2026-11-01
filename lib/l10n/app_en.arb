@@ -506,10 +506,64 @@
   "quizSkipQuestion": "Skip",
   "quizSelectAnswer": "Select an answer",
   "quizQuitTitle": "Leave this quiz?",
-  "quizQuitBody": "Your progress in this quiz will be lost.",
-  "quizQuitBodyRefund": "You haven't answered yet, so your energy will be refunded.",
   "quizQuitStay": "Keep playing",
   "quizQuitLeave": "Leave",
+  "quizTapToCheck": "Tap an answer to check it.",
+  "quizChecking": "Checking your answer…",
+  "quizTimedHint": "Answer within {seconds} seconds. No answer in time counts as wrong.",
+  "@quizTimedHint": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "quizDuelHint": "A right answer scores up to 1,000 points, more the faster you answer. A wrong answer scores 0.",
+  "quizExamHint": "Pick an answer, then move on. You can't go back to a question.",
+  "quizSecondsLeft": "{seconds} seconds left",
+  "@quizSecondsLeft": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "quizTimeLeft": "Time left: {time}",
+  "@quizTimeLeft": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "quizNoExplanation": "No explanation is available for this question yet.",
+  "quizQuitRefund": "You haven't answered yet, so you'll get your {count} energy back.",
+  "@quizQuitRefund": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizQuitFree": "You haven't answered yet, so nothing is lost. You can start again later.",
+  "quizQuitAnswered": "This attempt will end and can't be continued later. Your answers so far won't count.",
+  "quizQuitAnsweredEnergy": "This attempt will end and can't be continued later. Your answers so far won't count, and the {count} energy isn't given back.",
+  "@quizQuitAnsweredEnergy": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizRefundFailed": "Couldn't reach Nyaya, so your energy wasn't given back.",
+  "quizOptionCorrect": "correct answer",
+  "quizOptionWrong": "your answer, wrong",
+  "quizOptionSelected": "selected",
+  "quizOptionChecking": "checking",
+  "resultNoAnswer": "No answer",
+  "resultHideReview": "Hide answers",
+  "reportSending": "Sending…",
+  "reportFailed": "Couldn't send your report. Your text is kept, so you can try again.",
   "quizLoading": "Preparing your case…",
   "quizEmpty": "No questions available here yet.",
   "quizOpponent": "Opponent",

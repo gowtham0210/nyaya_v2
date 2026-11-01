@@ -105,6 +105,10 @@ class QuizState {
   AnswerRecord? get lastAnswer => answers.length > index ? answers[index] : null;
   bool get hasStarted => answers.isNotEmpty || selected != null;
 
+  /// Questions with an answer chosen (skipped and timed-out ones don't count).
+  int get answeredCount =>
+      answers.where((a) => !a.isSkipped).length + (request.mode == QuizMode.exam && selected != null ? 1 : 0);
+
   /// Whether the Next button is enabled.
   bool get canAdvance =>
       phase == QuizPhase.active && !sending && (request.mode.instantFeedback ? revealed : true);
@@ -230,19 +234,24 @@ class QuizController extends Notifier<QuizState> {
 
   /// Leaves before the first answer: the server removes the quiz and gives the
   /// energy back. Without a session (start failed) nothing was charged.
-  Future<void> abandon() async {
+  /// Returns false when the server could not be reached, so the energy was
+  /// not given back.
+  Future<bool> abandon() async {
     _timer?.cancel();
     // The phone's copy took the energy when the quiz opened; give it back now.
     ref.read(profileProvider.notifier).refundEnergy(request.mode.energyCost);
     final id = _sessionId;
-    if (id == null) return;
+    if (id == null) return true;
+    var refunded = true;
     try {
       await _api.abandon(id);
     } on ApiException {
-      // Offline: the server keeps the charge until the next sync shows it.
+      // Offline: the server keeps the charge, and the next sync shows it.
+      refunded = false;
     }
     _sessionId = null;
-    await ref.read(progressSyncProvider.notifier).refresh();
+    if (ref.mounted) await ref.read(progressSyncProvider.notifier).refresh();
+    return refunded;
   }
 
   void _startTimer() {
@@ -254,7 +263,21 @@ class QuizController extends Notifier<QuizState> {
     final s = state;
     if (s.phase != QuizPhase.active || s.secondsLeft == null || s.sending) return;
     if (s.request.mode != QuizMode.exam && s.revealed) return; // paused on feedback
-    final left = s.secondsLeft! - 1;
+    _countDown(1);
+  }
+
+  /// The app was in the background for [away]: the timer can't tick there,
+  /// but the server's clock kept going, so take that time off now.
+  void catchUp(Duration away) {
+    final s = state;
+    if (s.phase != QuizPhase.active || s.secondsLeft == null || s.sending) return;
+    if (s.request.mode != QuizMode.exam && s.revealed) return;
+    if (away.inSeconds > 0) _countDown(away.inSeconds);
+  }
+
+  void _countDown(int seconds) {
+    final s = state;
+    final left = s.secondsLeft! - seconds;
     if (left > 0) {
       state = s.copyWith(secondsLeft: left);
       return;

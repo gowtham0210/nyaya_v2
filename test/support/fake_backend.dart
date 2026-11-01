@@ -212,6 +212,7 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
 
   @override
   Future<void> abandon(String sessionId) async {
+    if (abandonOffline) throw const ApiException(0, 'network', 'offline');
     final s = _sessions.remove(sessionId);
     if (s != null) energy += s.cost;
   }
@@ -261,6 +262,7 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
 
   @override
   Future<void> report({required String questionVersionId, required ReportReason reason, String? comment}) async {
+    if (reportOffline) throw const ApiException(0, 'network', 'offline');
     if (reports.any((r) => r.versionId == questionVersionId)) {
       throw const ApiException(409, 'already_reported', 'none');
     }
@@ -279,6 +281,10 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
 
   /// Opening a chest fails as if the phone were offline.
   bool chestOffline = false;
+
+  /// Leaving a quiz, or reporting a question, fails as if offline.
+  bool abandonOffline = false;
+  bool reportOffline = false;
   int totalXp = 0;
   int quizzesCompleted = 0;
   bool docketDone = false;

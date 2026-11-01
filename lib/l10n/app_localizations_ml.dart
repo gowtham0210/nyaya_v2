@@ -827,17 +827,89 @@ class AppLocalizationsMl extends AppLocalizations {
   String get quizQuitTitle => 'ഈ ക്വിസ് ഉപേക്ഷിക്കണോ?';
 
   @override
-  String get quizQuitBody => 'ഈ ക്വിസിലെ നിങ്ങളുടെ പുരോഗതി നഷ്ടപ്പെടും.';
-
-  @override
-  String get quizQuitBodyRefund =>
-      'നിങ്ങൾ ഇതുവരെ ഉത്തരം നൽകിയിട്ടില്ല, അതിനാൽ എനർജി തിരികെ ലഭിക്കും.';
-
-  @override
   String get quizQuitStay => 'കളി തുടരുക';
 
   @override
   String get quizQuitLeave => 'ഉപേക്ഷിക്കുക';
+
+  @override
+  String get quizTapToCheck => 'പരിശോധിക്കാൻ ഒരു ഉത്തരം തൊടുക.';
+
+  @override
+  String get quizChecking => 'നിങ്ങളുടെ ഉത്തരം പരിശോധിക്കുന്നു…';
+
+  @override
+  String quizTimedHint(int seconds) {
+    return '$seconds സെക്കൻഡിനുള്ളിൽ ഉത്തരം നൽകുക. സമയത്ത് ഉത്തരമില്ലെങ്കിൽ തെറ്റായി കണക്കാക്കും.';
+  }
+
+  @override
+  String get quizDuelHint =>
+      'ശരിയുത്തരത്തിന് 1,000 പോയിന്റ് വരെ — വേഗം ഉത്തരം നൽകുംതോറും കൂടുതൽ. തെറ്റിന് 0.';
+
+  @override
+  String get quizExamHint =>
+      'ഒരു ഉത്തരം തിരഞ്ഞെടുത്ത് മുന്നോട്ട് പോകുക. മുമ്പത്തെ ചോദ്യത്തിലേക്ക് മടങ്ങാനാവില്ല.';
+
+  @override
+  String quizSecondsLeft(int seconds) {
+    return '$seconds സെക്കൻഡ് ബാക്കി';
+  }
+
+  @override
+  String quizTimeLeft(String time) {
+    return 'ബാക്കി സമയം: $time';
+  }
+
+  @override
+  String get quizNoExplanation => 'ഈ ചോദ്യത്തിന് വിശദീകരണം ഇതുവരെ ലഭ്യമല്ല.';
+
+  @override
+  String quizQuitRefund(int count) {
+    return 'നിങ്ങൾ ഇതുവരെ ഉത്തരം നൽകിയിട്ടില്ല, അതിനാൽ നിങ്ങളുടെ $count എനർജി തിരികെ ലഭിക്കും.';
+  }
+
+  @override
+  String get quizQuitFree =>
+      'നിങ്ങൾ ഇതുവരെ ഉത്തരം നൽകിയിട്ടില്ല, അതിനാൽ ഒന്നും നഷ്ടമില്ല. പിന്നീട് വീണ്ടും തുടങ്ങാം.';
+
+  @override
+  String get quizQuitAnswered =>
+      'ഈ ശ്രമം അവസാനിക്കും, പിന്നീട് തുടരാനാവില്ല. ഇതുവരെയുള്ള ഉത്തരങ്ങൾ കണക്കാക്കില്ല.';
+
+  @override
+  String quizQuitAnsweredEnergy(int count) {
+    return 'ഈ ശ്രമം അവസാനിക്കും, പിന്നീട് തുടരാനാവില്ല. ഇതുവരെയുള്ള ഉത്തരങ്ങൾ കണക്കാക്കില്ല, $count എനർജി തിരികെ ലഭിക്കില്ല.';
+  }
+
+  @override
+  String get quizRefundFailed =>
+      'Nyaya-യിൽ എത്താനായില്ല, അതിനാൽ നിങ്ങളുടെ എനർജി തിരികെ ലഭിച്ചില്ല.';
+
+  @override
+  String get quizOptionCorrect => 'ശരിയുത്തരം';
+
+  @override
+  String get quizOptionWrong => 'നിങ്ങളുടെ ഉത്തരം, തെറ്റ്';
+
+  @override
+  String get quizOptionSelected => 'തിരഞ്ഞെടുത്തു';
+
+  @override
+  String get quizOptionChecking => 'പരിശോധിക്കുന്നു';
+
+  @override
+  String get resultNoAnswer => 'ഉത്തരമില്ല';
+
+  @override
+  String get resultHideReview => 'ഉത്തരങ്ങൾ മറയ്ക്കുക';
+
+  @override
+  String get reportSending => 'അയയ്ക്കുന്നു…';
+
+  @override
+  String get reportFailed =>
+      'റിപ്പോർട്ട് അയയ്ക്കാനായില്ല. നിങ്ങൾ എഴുതിയത് സൂക്ഷിച്ചിട്ടുണ്ട്, വീണ്ടും ശ്രമിക്കുക.';
 
   @override
   String get quizLoading => 'നിങ്ങളുടെ കേസ് തയ്യാറാക്കുന്നു…';
