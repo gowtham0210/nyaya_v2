@@ -287,7 +287,7 @@ class _ArtRoom extends SingleChildRenderObjectWidget {
 }
 
 class _RenderArtRoom extends RenderProxyBox {
-  static const _min = 180.0;
+  static const _min = 120.0;
 
   @override
   double computeMinIntrinsicHeight(double width) => _min;

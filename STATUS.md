@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-11-01 (accessibility fixes, Claude Opus 5.5)
+> Last updated: 2026-11-01 (learning-first Home, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -790,6 +790,23 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       largest text, heading + slide-position semantics and keyboard use; 138 app tests pass (paywall ones run with
       `--dart-define=NYAYA_PREMIUM=true`). Home checked on the simulator at the largest iOS text size. Still open:
       some 2-line descriptions end in "…" at the largest text; text is capped at 1.5× (WCAG asks 2×).
+- [x] 2026-11-01: **Home is learning-first** (outside UX brief). New order: header → Continue / getting started →
+      Review → Quiz modes → Latest legal updates → Core Laws → Featured carousel (was first). New learners (no Case
+      Path stars) get "Start your learning journey" + a "Recommended start: Constitution of India" card ("Start
+      learning" → first Case Path level); returning learners get "Continue where you left off" with "1 of 3 levels
+      done". Both use one `_LearningCard` (explore_sections.dart). Quiz modes: `_ModeTile`, equal-height rows that fit
+      their text (no empty middle), one column under 300 pt of width, badges say "1 energy" / "2 energy" / "Free".
+      Review card: "Review your mistakes" (or "Your saved questions") + "Review now". Legacy row: badge above the title,
+      text "Replaced in July 2024. Kept for reference and comparison." Carousel: label "Featured", button says where it
+      goes ("Start learning" / "View on map"), dots read "Slide x of 3". Updates strip grows with text size. "View All"
+      can wrap. Only the first sections fade in (later ones looked blank while scrolling). Intro slide art minimum
+      180 → 120 pt (text was cut on a 375×667 phone). 11 new strings in 6 languages. Tests: new/returning order and
+      energy labels (`app_flow_test`), Home on a 320-pt phone and in landscape in all 6 languages at normal and largest
+      text (`accessibility_test`); 164 pass. Simulator: new learner on a temporary iPhone SE (375×667, deleted after),
+      returning learner on iPhone 17 Pro Max. With the API down, updates show from the phone's copy (or hide on a
+      fresh install) and the Review card hides; quizzes still start. Not done: separate loading/error placeholders
+      per section (sections just hide), "Old articles" filtering, the legacy title still says "(Legacy)" next to the
+      badge.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

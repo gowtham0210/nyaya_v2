@@ -276,42 +276,37 @@ class DailyDocketCard extends ConsumerWidget {
 }
 
 class _Badge extends StatelessWidget {
-  const _Badge({required this.text, required this.color, this.icon, this.semanticLabel});
+  const _Badge({required this.text, required this.color, this.icon});
 
   final String text;
   final Color color;
 
   /// Drawn after the text; the app's fonts have no emoji such as ⚡.
   final IconData? icon;
-  final String? semanticLabel;
 
   @override
   Widget build(BuildContext context) {
-    return Semantics(
-      label: semanticLabel,
-      excludeSemantics: semanticLabel != null,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-        decoration: BoxDecoration(
-          color: color.withValues(alpha: 0.14),
-          borderRadius: BorderRadius.circular(AppRadius.xl),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              text,
-              style: context.text.labelSmall?.copyWith(color: color, fontWeight: FontWeight.w800),
-            ),
-            if (icon != null) Icon(icon, size: 14, color: color),
-          ],
-        ),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.14),
+        borderRadius: BorderRadius.circular(AppRadius.xl),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            text,
+            style: context.text.labelSmall?.copyWith(color: color, fontWeight: FontWeight.w800),
+          ),
+          if (icon != null) Icon(icon, size: 14, color: color),
+        ],
       ),
     );
   }
 }
 
-/// The four quiz modes as a 2×2 grid.
+/// The four quiz modes, two per row.
 class QuizModesGrid extends ConsumerWidget {
   const QuizModesGrid({super.key});
 
@@ -344,69 +339,111 @@ class QuizModesGrid extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: AppSpacing.md),
-        GridView.count(
-          crossAxisCount: 2,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          // Taller tiles when the phone uses larger text.
-          childAspectRatio: 1.05 / MediaQuery.textScalerOf(context).scale(1).clamp(1.0, double.infinity),
-          children: [
-            for (final (mode, name, desc, icon, color) in modes)
-              NyayaCard(
-                padding: const EdgeInsets.all(14),
-                onTap: () => mode == QuizMode.casePath
-                    ? context.go(Routes.journey)
-                    : QuizLauncher.start(context, ref, QuizRequest(mode)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
+        // Two columns of equal-height tiles that fit their text; one column on
+        // very narrow screens.
+        LayoutBuilder(
+          builder: (context, box) {
+            final tiles = [
+              for (final (mode, name, desc, icon, color) in modes)
+                _ModeTile(
+                  mode: mode,
+                  name: name,
+                  desc: desc,
+                  icon: icon,
+                  color: color,
+                  onTap: () => mode == QuizMode.casePath
+                      ? context.go(Routes.journey)
+                      : QuizLauncher.start(context, ref, QuizRequest(mode)),
+                ),
+            ];
+            const gap = SizedBox(width: 12, height: 12);
+            if (box.maxWidth < 300) {
+              return Column(children: [for (final (i, t) in tiles.indexed) ...[if (i > 0) gap, t]]);
+            }
+            return Column(
+              children: [
+                for (var i = 0; i < tiles.length; i += 2) ...[
+                  if (i > 0) gap,
+                  IntrinsicHeight(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: color.withValues(alpha: 0.14),
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          child: Icon(icon, color: color, size: 26),
-                        ),
-                        const SizedBox(width: 8),
-                        // Scales down rather than overflows with long words and large text.
-                        Expanded(
-                          child: Align(
-                            alignment: AlignmentDirectional.centerEnd,
-                            child: FittedBox(
-                              fit: BoxFit.scaleDown,
-                              child: mode.energyCost == 0
-                                  ? _Badge(text: l.modeFree, color: context.nyaya.success)
-                                  : _Badge(
-                                      text: '${mode.energyCost}',
-                                      icon: Icons.bolt_rounded,
-                                      semanticLabel: l.modeEnergyCost(mode.energyCost),
-                                      color: AppPalette.ochreText,
-                                    ),
-                            ),
-                          ),
-                        ),
+                        Expanded(child: tiles[i]),
+                        gap,
+                        Expanded(child: i + 1 < tiles.length ? tiles[i + 1] : const SizedBox.shrink()),
                       ],
                     ),
-                    const Spacer(),
-                    Text(name, style: context.text.titleSmall, maxLines: 2, overflow: TextOverflow.ellipsis),
-                    const SizedBox(height: 2),
-                    Text(
-                      desc,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary),
-                    ),
-                  ],
-                ),
-              ),
-          ],
+                  ),
+                ],
+              ],
+            );
+          },
         ),
       ],
+    );
+  }
+}
+
+/// One quiz mode: icon and energy cost on top, then the name and what it is.
+class _ModeTile extends StatelessWidget {
+  const _ModeTile({
+    required this.mode,
+    required this.name,
+    required this.desc,
+    required this.icon,
+    required this.color,
+    required this.onTap,
+  });
+
+  final QuizMode mode;
+  final String name;
+  final String desc;
+  final IconData icon;
+  final Color color;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final cost = mode.energyCost;
+    return NyayaCard(
+      padding: const EdgeInsets.all(14),
+      onTap: onTap,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: color.withValues(alpha: 0.14),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Icon(icon, color: color, size: 26),
+              ),
+              const SizedBox(width: 8),
+              // Scales down rather than overflows with long words and large text.
+              Expanded(
+                child: Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    // In words, not just a bolt: "1 energy", "2 energy" or "Free".
+                    child: cost == 0
+                        ? _Badge(text: l.modeFree, color: context.nyaya.success)
+                        : _Badge(text: l.modeEnergyCost(cost), icon: Icons.bolt_rounded, color: AppPalette.ochreText),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(name, style: context.text.titleSmall),
+          const SizedBox(height: 2),
+          Text(desc, style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary)),
+        ],
+      ),
     );
   }
 }

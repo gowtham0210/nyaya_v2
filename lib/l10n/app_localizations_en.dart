@@ -372,6 +372,43 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeContinueLeftOff => 'Continue where you left off';
 
   @override
+  String get homeStartTitle => 'Start your learning journey';
+
+  @override
+  String get homeStartBody =>
+      'Build your understanding of Indian law, one concept at a time.';
+
+  @override
+  String get homeStartRecommended => 'Recommended start';
+
+  @override
+  String get homeStartLawDesc =>
+      'Understand fundamental rights, duties and constitutional principles.';
+
+  @override
+  String get homeStartLearning => 'Start learning';
+
+  @override
+  String homeLevelsDone(int done, int total) {
+    return '$done of $total levels done';
+  }
+
+  @override
+  String get homeFeatured => 'Featured';
+
+  @override
+  String get homeViewOnMap => 'View on map';
+
+  @override
+  String get homeReviewMistakes => 'Review your mistakes';
+
+  @override
+  String get homeReviewSaved => 'Your saved questions';
+
+  @override
+  String get homeReviewNow => 'Review now';
+
+  @override
   String homeChapterLevel(int chapter, int level) {
     return 'Chapter $chapter · Level $level';
   }
@@ -1355,7 +1392,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lawLegacyTitle => 'IPC & CrPC (Legacy)';
 
   @override
-  String get lawLegacyDesc => 'Older laws for reference';
+  String get lawLegacyDesc =>
+      'Replaced in July 2024. Kept for reference and comparison.';
 
   @override
   String get chapterConstitutionTitle => 'Constitution Basics';

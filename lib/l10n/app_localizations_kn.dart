@@ -377,6 +377,43 @@ class AppLocalizationsKn extends AppLocalizations {
   String get homeContinueLeftOff => 'ನಿಲ್ಲಿಸಿದ ಜಾಗದಿಂದ ಮುಂದುವರಿಸಿ';
 
   @override
+  String get homeStartTitle => 'ನಿಮ್ಮ ಕಲಿಕೆಯ ಪಯಣ ಆರಂಭಿಸಿ';
+
+  @override
+  String get homeStartBody =>
+      'ಭಾರತೀಯ ಕಾನೂನನ್ನು ಒಂದೊಂದೇ ಪರಿಕಲ್ಪನೆಯಾಗಿ ತಿಳಿಯಿರಿ.';
+
+  @override
+  String get homeStartRecommended => 'ಆರಂಭಕ್ಕೆ ಸಲಹೆ';
+
+  @override
+  String get homeStartLawDesc =>
+      'ಮೂಲಭೂತ ಹಕ್ಕುಗಳು, ಕರ್ತವ್ಯಗಳು ಮತ್ತು ಸಾಂವಿಧಾನಿಕ ತತ್ವಗಳನ್ನು ಅರಿಯಿರಿ.';
+
+  @override
+  String get homeStartLearning => 'ಕಲಿಯಲು ಆರಂಭಿಸಿ';
+
+  @override
+  String homeLevelsDone(int done, int total) {
+    return '$total ಹಂತಗಳಲ್ಲಿ $done ಮುಗಿದಿದೆ';
+  }
+
+  @override
+  String get homeFeatured => 'ವಿಶೇಷ';
+
+  @override
+  String get homeViewOnMap => 'ನಕ್ಷೆಯಲ್ಲಿ ನೋಡಿ';
+
+  @override
+  String get homeReviewMistakes => 'ನಿಮ್ಮ ತಪ್ಪುಗಳನ್ನು ಮತ್ತೆ ನೋಡಿ';
+
+  @override
+  String get homeReviewSaved => 'ನೀವು ಉಳಿಸಿದ ಪ್ರಶ್ನೆಗಳು';
+
+  @override
+  String get homeReviewNow => 'ಈಗ ನೋಡಿ';
+
+  @override
   String homeChapterLevel(int chapter, int level) {
     return 'ಅಧ್ಯಾಯ $chapter · ಹಂತ $level';
   }
@@ -1363,7 +1400,8 @@ class AppLocalizationsKn extends AppLocalizations {
   String get lawLegacyTitle => 'IPC ಮತ್ತು CrPC (ಹಳೆಯವು)';
 
   @override
-  String get lawLegacyDesc => 'ಉಲ್ಲೇಖಕ್ಕಾಗಿ ಹಳೆಯ ಕಾನೂನುಗಳು';
+  String get lawLegacyDesc =>
+      'ಜುಲೈ 2024ರಲ್ಲಿ ಬದಲಾಯಿಸಲಾಗಿದೆ. ಉಲ್ಲೇಖ ಮತ್ತು ಹೋಲಿಕೆಗಾಗಿ ಇರಿಸಲಾಗಿದೆ.';
 
   @override
   String get chapterConstitutionTitle => 'ಸಂವಿಧಾನದ ಮೂಲಾಂಶಗಳು';

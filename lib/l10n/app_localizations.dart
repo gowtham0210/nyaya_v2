@@ -742,6 +742,72 @@ abstract class AppLocalizations {
   /// **'Continue where you left off'**
   String get homeContinueLeftOff;
 
+  /// No description provided for @homeStartTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start your learning journey'**
+  String get homeStartTitle;
+
+  /// No description provided for @homeStartBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Build your understanding of Indian law, one concept at a time.'**
+  String get homeStartBody;
+
+  /// No description provided for @homeStartRecommended.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended start'**
+  String get homeStartRecommended;
+
+  /// No description provided for @homeStartLawDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Understand fundamental rights, duties and constitutional principles.'**
+  String get homeStartLawDesc;
+
+  /// No description provided for @homeStartLearning.
+  ///
+  /// In en, this message translates to:
+  /// **'Start learning'**
+  String get homeStartLearning;
+
+  /// No description provided for @homeLevelsDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{done} of {total} levels done'**
+  String homeLevelsDone(int done, int total);
+
+  /// No description provided for @homeFeatured.
+  ///
+  /// In en, this message translates to:
+  /// **'Featured'**
+  String get homeFeatured;
+
+  /// No description provided for @homeViewOnMap.
+  ///
+  /// In en, this message translates to:
+  /// **'View on map'**
+  String get homeViewOnMap;
+
+  /// No description provided for @homeReviewMistakes.
+  ///
+  /// In en, this message translates to:
+  /// **'Review your mistakes'**
+  String get homeReviewMistakes;
+
+  /// No description provided for @homeReviewSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Your saved questions'**
+  String get homeReviewSaved;
+
+  /// No description provided for @homeReviewNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Review now'**
+  String get homeReviewNow;
+
   /// No description provided for @homeChapterLevel.
   ///
   /// In en, this message translates to:
@@ -2395,7 +2461,7 @@ abstract class AppLocalizations {
   /// No description provided for @lawLegacyDesc.
   ///
   /// In en, this message translates to:
-  /// **'Older laws for reference'**
+  /// **'Replaced in July 2024. Kept for reference and comparison.'**
   String get lawLegacyDesc;
 
   /// No description provided for @chapterConstitutionTitle.

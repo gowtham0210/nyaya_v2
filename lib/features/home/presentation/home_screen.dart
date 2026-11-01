@@ -46,8 +46,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     const page = EdgeInsets.symmetric(horizontal: AppSpacing.page);
+    // Learning first: where to continue (or start), then what to review,
+    // then other ways to practise; reading and featured laws come after.
     const sections = <Widget>[
-      Padding(padding: page, child: FeaturedLawsCarousel()),
       Padding(padding: page, child: ContinueLearningCard()),
       Padding(padding: page, child: ReviewCard()),
       // Duel, Exam and Daily Docket start here; Case Path opens the Journey tab.
@@ -57,6 +58,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       // Scrolls edge to edge, so it pads itself.
       LatestUpdatesSection(),
       Padding(padding: page, child: CoreLawsSection()),
+      SizedBox(height: AppSpacing.xl),
+      Padding(padding: page, child: FeaturedLawsCarousel()),
     ];
 
     return Scaffold(
@@ -76,8 +79,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 padding: const EdgeInsets.only(top: AppSpacing.sm, bottom: AppSpacing.xl),
                 sliver: SliverList.list(
                   children: [
+                    // Only what shows on opening fades in; sections further down
+                    // are built while scrolling and would look blank for a moment.
                     for (final (i, s) in sections.indexed)
-                      s is SizedBox ? s : s.animate().fadeIn(delay: (40 * i).ms, duration: 350.ms).slideY(begin: 0.06),
+                      s is SizedBox || i > 3
+                          ? s
+                          : s.animate().fadeIn(delay: (40 * i).ms, duration: 350.ms).slideY(begin: 0.06),
                   ],
                 ),
               ),

@@ -379,6 +379,43 @@ class AppLocalizationsTa extends AppLocalizations {
   String get homeContinueLeftOff => 'விட்ட இடத்திலிருந்து தொடருங்கள்';
 
   @override
+  String get homeStartTitle => 'உங்கள் கற்றல் பயணத்தைத் தொடங்குங்கள்';
+
+  @override
+  String get homeStartBody =>
+      'இந்தியச் சட்டத்தை ஒவ்வொரு கருத்தாகப் புரிந்துகொள்ளுங்கள்.';
+
+  @override
+  String get homeStartRecommended => 'தொடங்க பரிந்துரை';
+
+  @override
+  String get homeStartLawDesc =>
+      'அடிப்படை உரிமைகள், கடமைகள் மற்றும் அரசியலமைப்புக் கொள்கைகளைப் புரிந்துகொள்ளுங்கள்.';
+
+  @override
+  String get homeStartLearning => 'கற்கத் தொடங்கு';
+
+  @override
+  String homeLevelsDone(int done, int total) {
+    return '$total நிலைகளில் $done முடிந்தது';
+  }
+
+  @override
+  String get homeFeatured => 'சிறப்பு';
+
+  @override
+  String get homeViewOnMap => 'வரைபடத்தில் பார்';
+
+  @override
+  String get homeReviewMistakes => 'உங்கள் தவறுகளை மீண்டும் பாருங்கள்';
+
+  @override
+  String get homeReviewSaved => 'நீங்கள் சேமித்த கேள்விகள்';
+
+  @override
+  String get homeReviewNow => 'இப்போது பார்';
+
+  @override
   String homeChapterLevel(int chapter, int level) {
     return 'அத்தியாயம் $chapter · நிலை $level';
   }
@@ -1367,7 +1404,8 @@ class AppLocalizationsTa extends AppLocalizations {
   String get lawLegacyTitle => 'IPC & CrPC (பழையவை)';
 
   @override
-  String get lawLegacyDesc => 'குறிப்புக்கான பழைய சட்டங்கள்';
+  String get lawLegacyDesc =>
+      'ஜூலை 2024-இல் மாற்றப்பட்டன. குறிப்புக்கும் ஒப்பீட்டுக்கும் வைக்கப்பட்டுள்ளன.';
 
   @override
   String get chapterConstitutionTitle => 'அரசியலமைப்பு அடிப்படைகள்';

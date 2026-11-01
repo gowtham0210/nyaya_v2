@@ -379,6 +379,42 @@ class AppLocalizationsMl extends AppLocalizations {
   String get homeContinueLeftOff => 'നിർത്തിയിടത്തു നിന്ന് തുടരുക';
 
   @override
+  String get homeStartTitle => 'നിങ്ങളുടെ പഠനയാത്ര തുടങ്ങൂ';
+
+  @override
+  String get homeStartBody => 'ഇന്ത്യൻ നിയമം ഓരോ ആശയമായി മനസ്സിലാക്കൂ.';
+
+  @override
+  String get homeStartRecommended => 'തുടങ്ങാൻ നിർദ്ദേശം';
+
+  @override
+  String get homeStartLawDesc =>
+      'മൗലികാവകാശങ്ങൾ, കടമകൾ, ഭരണഘടനാ തത്വങ്ങൾ എന്നിവ മനസ്സിലാക്കൂ.';
+
+  @override
+  String get homeStartLearning => 'പഠനം തുടങ്ങൂ';
+
+  @override
+  String homeLevelsDone(int done, int total) {
+    return '$total ലെവലുകളിൽ $done പൂർത്തിയായി';
+  }
+
+  @override
+  String get homeFeatured => 'പ്രത്യേകം';
+
+  @override
+  String get homeViewOnMap => 'മാപ്പിൽ കാണൂ';
+
+  @override
+  String get homeReviewMistakes => 'നിങ്ങളുടെ തെറ്റുകൾ വീണ്ടും നോക്കൂ';
+
+  @override
+  String get homeReviewSaved => 'നിങ്ങൾ സേവ് ചെയ്ത ചോദ്യങ്ങൾ';
+
+  @override
+  String get homeReviewNow => 'ഇപ്പോൾ നോക്കൂ';
+
+  @override
   String homeChapterLevel(int chapter, int level) {
     return 'അധ്യായം $chapter · ലെവൽ $level';
   }
@@ -1364,7 +1400,8 @@ class AppLocalizationsMl extends AppLocalizations {
   String get lawLegacyTitle => 'IPC & CrPC (പഴയ നിയമങ്ങൾ)';
 
   @override
-  String get lawLegacyDesc => 'റഫറൻസിനായുള്ള പഴയ നിയമങ്ങൾ';
+  String get lawLegacyDesc =>
+      '2024 ജൂലൈയിൽ മാറ്റിസ്ഥാപിച്ചു. റഫറൻസിനും താരതമ്യത്തിനുമായി സൂക്ഷിച്ചിരിക്കുന്നു.';
 
   @override
   String get chapterConstitutionTitle => 'ഭരണഘടനയുടെ അടിസ്ഥാനങ്ങൾ';

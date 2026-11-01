@@ -79,7 +79,10 @@ void main() {
 
   /// Plays the first Case Path level through to its result screen.
   Future<void> finishLevel(WidgetTester tester) async {
-    await tester.tap(find.text('Explore').first);
+    final start = find.text('Start learning').first;
+    await tester.ensureVisible(start);
+    await tester.pump();
+    await tester.tap(start);
     await settle(tester);
     final c = ProviderScope.containerOf(tester.element(find.byType(NyayaApp)));
     for (var i = 0; i < 6; i++) {
@@ -120,7 +123,7 @@ void main() {
     testWidgets('quiz ($theme) meets accessibility guidelines', (tester) async {
       final handle = tester.ensureSemantics();
       await pumpApp(tester, theme: theme);
-      await tester.tap(find.text('Explore').first);
+      await tester.tap(find.text('Start learning').first);
       await settle(tester);
       await expectGuidelines(tester);
       handle.dispose();
@@ -129,7 +132,7 @@ void main() {
     testWidgets('quiz after a wrong answer ($theme) meets accessibility guidelines', (tester) async {
       final handle = tester.ensureSemantics();
       final c = await pumpApp(tester, theme: theme);
-      await tester.tap(find.text('Explore').first);
+      await tester.tap(find.text('Start learning').first);
       await settle(tester);
       final question = c.read(quizControllerProvider(const QuizRequest(QuizMode.casePath, levelId: 'constitution_1'))).current;
       await tester.tap(find.text(api.wrongTextFor(question.id)).first);
@@ -230,6 +233,26 @@ void main() {
     }
   }
 
+  // A 320-point phone, the smallest in use, and a phone turned sideways.
+  for (final (name, size) in [('a 320-point phone', const Size(960, 1704)), ('landscape', const Size(2532, 1170))]) {
+    for (final language in AppLanguage.values) {
+      for (final textScale in [1.0, 3.0]) {
+        testWidgets('Home in ${language.englishName} on $name lays out at text size $textScale', (tester) async {
+          await pumpApp(tester, theme: 'light', textScale: textScale, language: language);
+          tester.view.physicalSize = size;
+          await settle(tester);
+          // Every section, top to bottom, a screen at a time.
+          for (var i = 0; i < 25; i++) {
+            await tester.drag(find.byType(Scrollable).first, const Offset(0, -500));
+            await tester.pump();
+            expect(tester.takeException(), isNull, reason: 'at step $i');
+          }
+          await settle(tester);
+        });
+      }
+    }
+  }
+
   testWidgets('quiz result lays out at the largest text size', (tester) async {
     await pumpApp(tester, theme: 'light', textScale: 3);
     await finishLevel(tester);
@@ -286,7 +309,7 @@ void main() {
   testWidgets('quiz lays out at the largest text size', (tester) async {
     await pumpApp(tester, theme: 'light', textScale: 3);
     tester.takeException();
-    await tester.tap(find.text('Explore').first);
+    await tester.tap(find.text('Start learning').first);
     await settle(tester);
     expect(tester.takeException(), isNull);
   });
