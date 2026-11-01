@@ -780,6 +780,26 @@
   "authErrorRateLimited": "Too many attempts. Wait a few minutes and try again.",
   "authErrorInvalid": "Enter a valid email and a password of at least 8 characters.",
   "authErrorName": "Enter your name.",
+  "authForgot": "Forgot password?",
+  "authResetTitle": "Reset your password",
+  "authResetSubtitle": "Enter your account's email and we'll send you a 6-digit code.",
+  "authResetSend": "SEND CODE",
+  "authResetSentTo": "If an account uses {email}, we've sent it a 6-digit code. It works for 15 minutes. Check your spam folder if you don't see it.",
+  "@authResetSentTo": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "authResetCode": "6-digit code",
+  "authResetNewPassword": "New password",
+  "authResetSave": "SET NEW PASSWORD",
+  "authResetResend": "Send a new code",
+  "authResetErrorCode": "This code is wrong or has expired. Ask for a new one.",
+  "authResetUnavailable": "Password reset isn't available right now. Please try again later.",
+  "authResetErrorInvalid": "Enter the 6-digit code and a new password of at least 8 characters.",
+  "authResetDone": "Your password has been changed.",
   "settingsAccount": "Account",
   "settingsSignedInAs": "Signed in as {email}",
   "@settingsSignedInAs": {

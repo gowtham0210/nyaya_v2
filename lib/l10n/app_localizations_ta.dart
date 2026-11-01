@@ -1463,6 +1463,51 @@ class AppLocalizationsTa extends AppLocalizations {
   String get authErrorName => 'உங்கள் பெயரை உள்ளிடுங்கள்.';
 
   @override
+  String get authForgot => 'கடவுச்சொல் மறந்துவிட்டதா?';
+
+  @override
+  String get authResetTitle => 'கடவுச்சொல்லை மாற்றுங்கள்';
+
+  @override
+  String get authResetSubtitle =>
+      'உங்கள் கணக்கின் மின்னஞ்சலை உள்ளிடுங்கள். 6 இலக்கக் குறியீட்டை அனுப்புவோம்.';
+
+  @override
+  String get authResetSend => 'குறியீட்டை அனுப்பு';
+
+  @override
+  String authResetSentTo(String email) {
+    return '$email முகவரியில் கணக்கு இருந்தால், அதற்கு 6 இலக்கக் குறியீட்டை அனுப்பியுள்ளோம். இது 15 நிமிடங்கள் வேலை செய்யும். காணவில்லை என்றால் ஸ்பேம் கோப்புறையைப் பாருங்கள்.';
+  }
+
+  @override
+  String get authResetCode => '6 இலக்கக் குறியீடு';
+
+  @override
+  String get authResetNewPassword => 'புதிய கடவுச்சொல்';
+
+  @override
+  String get authResetSave => 'புதிய கடவுச்சொல்லை அமை';
+
+  @override
+  String get authResetResend => 'புதிய குறியீட்டை அனுப்பு';
+
+  @override
+  String get authResetErrorCode =>
+      'இந்தக் குறியீடு தவறு அல்லது காலாவதியானது. புதிய குறியீட்டைக் கேளுங்கள்.';
+
+  @override
+  String get authResetUnavailable =>
+      'கடவுச்சொல் மாற்றம் இப்போது கிடைக்கவில்லை. பின்னர் முயலுங்கள்.';
+
+  @override
+  String get authResetErrorInvalid =>
+      '6 இலக்கக் குறியீட்டையும் குறைந்தது 8 எழுத்துகள் கொண்ட புதிய கடவுச்சொல்லையும் உள்ளிடுங்கள்.';
+
+  @override
+  String get authResetDone => 'உங்கள் கடவுச்சொல் மாற்றப்பட்டது.';
+
+  @override
   String get settingsAccount => 'கணக்கு';
 
   @override

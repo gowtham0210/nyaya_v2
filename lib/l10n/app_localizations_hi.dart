@@ -1447,6 +1447,51 @@ class AppLocalizationsHi extends AppLocalizations {
   String get authErrorName => 'अपना नाम दर्ज करें।';
 
   @override
+  String get authForgot => 'पासवर्ड भूल गए?';
+
+  @override
+  String get authResetTitle => 'अपना पासवर्ड बदलें';
+
+  @override
+  String get authResetSubtitle =>
+      'अपने खाते का ईमेल डालें, हम आपको 6 अंकों का कोड भेजेंगे।';
+
+  @override
+  String get authResetSend => 'कोड भेजें';
+
+  @override
+  String authResetSentTo(String email) {
+    return 'अगर $email से कोई खाता है, तो हमने उस पर 6 अंकों का कोड भेजा है। यह 15 मिनट तक काम करेगा। न दिखे तो स्पैम फ़ोल्डर देखें।';
+  }
+
+  @override
+  String get authResetCode => '6 अंकों का कोड';
+
+  @override
+  String get authResetNewPassword => 'नया पासवर्ड';
+
+  @override
+  String get authResetSave => 'नया पासवर्ड सेट करें';
+
+  @override
+  String get authResetResend => 'नया कोड भेजें';
+
+  @override
+  String get authResetErrorCode =>
+      'यह कोड गलत है या इसकी समय-सीमा खत्म हो गई है। नया कोड मँगाएँ।';
+
+  @override
+  String get authResetUnavailable =>
+      'पासवर्ड बदलना अभी उपलब्ध नहीं है। कृपया बाद में कोशिश करें।';
+
+  @override
+  String get authResetErrorInvalid =>
+      '6 अंकों का कोड और कम से कम 8 अक्षरों का नया पासवर्ड डालें।';
+
+  @override
+  String get authResetDone => 'आपका पासवर्ड बदल दिया गया है।';
+
+  @override
   String get settingsAccount => 'खाता';
 
   @override

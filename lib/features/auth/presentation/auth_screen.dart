@@ -8,6 +8,7 @@ import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/chunky_button.dart';
+import '../../../app/router.dart';
 import '../../profile/application/profile_controller.dart';
 import '../application/auth_controller.dart';
 
@@ -81,6 +82,12 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     }
   }
 
+  /// Signed in with a new password: done here too.
+  Future<void> _forgotPassword() async {
+    final signedIn = await context.push<bool>(Routes.resetPassword, extra: _email.text.trim());
+    if (signedIn == true && mounted) context.pop(true);
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
@@ -148,6 +155,11 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                   ),
                 ),
               ),
+              if (_signIn)
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: TextButton(onPressed: _busy ? null : _forgotPassword, child: Text(l.authForgot)),
+                ),
               if (_error != null) ...[
                 const SizedBox(height: AppSpacing.md),
                 Text(

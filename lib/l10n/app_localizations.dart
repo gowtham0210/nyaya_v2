@@ -2572,6 +2572,84 @@ abstract class AppLocalizations {
   /// **'Enter your name.'**
   String get authErrorName;
 
+  /// No description provided for @authForgot.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get authForgot;
+
+  /// No description provided for @authResetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset your password'**
+  String get authResetTitle;
+
+  /// No description provided for @authResetSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your account\'s email and we\'ll send you a 6-digit code.'**
+  String get authResetSubtitle;
+
+  /// No description provided for @authResetSend.
+  ///
+  /// In en, this message translates to:
+  /// **'SEND CODE'**
+  String get authResetSend;
+
+  /// No description provided for @authResetSentTo.
+  ///
+  /// In en, this message translates to:
+  /// **'If an account uses {email}, we\'ve sent it a 6-digit code. It works for 15 minutes. Check your spam folder if you don\'t see it.'**
+  String authResetSentTo(String email);
+
+  /// No description provided for @authResetCode.
+  ///
+  /// In en, this message translates to:
+  /// **'6-digit code'**
+  String get authResetCode;
+
+  /// No description provided for @authResetNewPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'New password'**
+  String get authResetNewPassword;
+
+  /// No description provided for @authResetSave.
+  ///
+  /// In en, this message translates to:
+  /// **'SET NEW PASSWORD'**
+  String get authResetSave;
+
+  /// No description provided for @authResetResend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a new code'**
+  String get authResetResend;
+
+  /// No description provided for @authResetErrorCode.
+  ///
+  /// In en, this message translates to:
+  /// **'This code is wrong or has expired. Ask for a new one.'**
+  String get authResetErrorCode;
+
+  /// No description provided for @authResetUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset isn\'t available right now. Please try again later.'**
+  String get authResetUnavailable;
+
+  /// No description provided for @authResetErrorInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the 6-digit code and a new password of at least 8 characters.'**
+  String get authResetErrorInvalid;
+
+  /// No description provided for @authResetDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Your password has been changed.'**
+  String get authResetDone;
+
   /// No description provided for @settingsAccount.
   ///
   /// In en, this message translates to:

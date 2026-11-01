@@ -1458,6 +1458,51 @@ class AppLocalizationsKn extends AppLocalizations {
   String get authErrorName => 'ನಿಮ್ಮ ಹೆಸರನ್ನು ನಮೂದಿಸಿ.';
 
   @override
+  String get authForgot => 'ಪಾಸ್‌ವರ್ಡ್ ಮರೆತಿರಾ?';
+
+  @override
+  String get authResetTitle => 'ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ಬದಲಿಸಿ';
+
+  @override
+  String get authResetSubtitle =>
+      'ನಿಮ್ಮ ಖಾತೆಯ ಇಮೇಲ್ ನಮೂದಿಸಿ. ನಾವು 6 ಅಂಕಿಯ ಕೋಡ್ ಕಳುಹಿಸುತ್ತೇವೆ.';
+
+  @override
+  String get authResetSend => 'ಕೋಡ್ ಕಳುಹಿಸಿ';
+
+  @override
+  String authResetSentTo(String email) {
+    return '$email ಗೆ ಖಾತೆ ಇದ್ದರೆ, ಅದಕ್ಕೆ 6 ಅಂಕಿಯ ಕೋಡ್ ಕಳುಹಿಸಿದ್ದೇವೆ. ಇದು 15 ನಿಮಿಷ ಕೆಲಸ ಮಾಡುತ್ತದೆ. ಕಾಣದಿದ್ದರೆ ಸ್ಪ್ಯಾಮ್ ಫೋಲ್ಡರ್ ನೋಡಿ.';
+  }
+
+  @override
+  String get authResetCode => '6 ಅಂಕಿಯ ಕೋಡ್';
+
+  @override
+  String get authResetNewPassword => 'ಹೊಸ ಪಾಸ್‌ವರ್ಡ್';
+
+  @override
+  String get authResetSave => 'ಹೊಸ ಪಾಸ್‌ವರ್ಡ್ ಹೊಂದಿಸಿ';
+
+  @override
+  String get authResetResend => 'ಹೊಸ ಕೋಡ್ ಕಳುಹಿಸಿ';
+
+  @override
+  String get authResetErrorCode =>
+      'ಈ ಕೋಡ್ ತಪ್ಪಾಗಿದೆ ಅಥವಾ ಅವಧಿ ಮುಗಿದಿದೆ. ಹೊಸ ಕೋಡ್ ಕೇಳಿ.';
+
+  @override
+  String get authResetUnavailable =>
+      'ಪಾಸ್‌ವರ್ಡ್ ಬದಲಾವಣೆ ಈಗ ಲಭ್ಯವಿಲ್ಲ. ದಯವಿಟ್ಟು ನಂತರ ಪ್ರಯತ್ನಿಸಿ.';
+
+  @override
+  String get authResetErrorInvalid =>
+      '6 ಅಂಕಿಯ ಕೋಡ್ ಮತ್ತು ಕನಿಷ್ಠ 8 ಅಕ್ಷರಗಳ ಹೊಸ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ.';
+
+  @override
+  String get authResetDone => 'ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ಬದಲಾಗಿದೆ.';
+
+  @override
   String get settingsAccount => 'ಖಾತೆ';
 
   @override

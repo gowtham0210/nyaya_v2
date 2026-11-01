@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-11-01 (honest paywall benefits, Claude Opus 5.5)
+> Last updated: 2026-11-01 (forgot password, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -763,6 +763,19 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       day"; the chat limit message no longer says "unlimited AI". All 6 languages. The app's own premium AI count now
       stops at 50 like the server (was "unlimited"). Paywall checked on the simulator. If premium should feel bigger,
       real perks are a product choice (e.g. free monthly streak freezes, a premium-only mode).
+- [x] 2026-11-01: **Forgot password for learners** (there was none: a forgotten password meant a lost account).
+      API: `POST /v1/auth/password-reset {email}` → always 204 (same answer for unknown emails and staff, who are
+      reset by an admin) and emails a 6-digit code, valid 15 minutes, at most 3 mails per address per 15 minutes;
+      `POST /v1/auth/password-reset/confirm {email, code, new_password}` → new password, every other session
+      signed out, audit `auth.password_reset`, returns a session. 5 wrong tries end a code. Table
+      `password_reset_codes` (migration 0016, hash only). Mail: new `Mailer` (`src/core/mailer.ts`, nodemailer
+      10.1.7) over SMTP — env `SMTP_HOST`, `SMTP_PORT` (587), `SMTP_USER`, `SMTP_PASSWORD`, `MAIL_FROM`; passed
+      through in `deploy/staging/docker-compose.yml`. Without SMTP: dev writes the mail to the log, production
+      answers 503 `password_reset_unavailable`. **SMTP is not set up on staging yet**, so reset is off there.
+      The email is English only. App: "Forgot password?" on the sign-in screen → `ResetPasswordScreen`
+      (`/reset-password`): email (carried over), then code + new password; signs in and carries on (e.g. the
+      quiz that asked for sign-in). Text in all 6 languages. Tests: API 75 unit + 141 e2e (9 new), app 113.
+      Not tried on the simulator.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

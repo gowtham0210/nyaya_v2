@@ -1,5 +1,10 @@
-import { createHash, randomBytes } from 'node:crypto';
-import { HttpStatus, Inject, Injectable } from '@nestjs/common';
+import {
+  createHash,
+  randomBytes,
+  randomInt,
+  timingSafeEqual,
+} from 'node:crypto';
+import { HttpStatus, Inject, Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { and, eq, inArray, isNull, or } from 'drizzle-orm';
 import { AuditService } from '../core/audit.service.js';
@@ -7,11 +12,13 @@ import { APP_CONFIG, type AppConfig } from '../core/config.js';
 import { DB, type Db, type Tx } from '../core/db.js';
 import { ApiError, isUniqueViolation } from '../core/errors.js';
 import { newId } from '../core/ids.js';
+import { Mailer } from '../core/mailer.js';
 import { RateLimitStore } from '../core/rate-limits.js';
 import {
   auditLog,
   contentReports,
   duelMatches,
+  passwordResetCodes,
   quizSessions,
   refreshTokens,
   users,
@@ -24,8 +31,27 @@ type UserRow = typeof users.$inferSelect;
 const REUSE_GRACE_MS = 30_000;
 /** Window for the per-account password limit. */
 const PASSWORD_WINDOW_MS = 15 * 60_000;
+/** How long an emailed reset code works. */
+const RESET_CODE_TTL_MS = 15 * 60_000;
+/** Wrong tries before a reset code stops working. */
+const RESET_CODE_MAX_WRONG = 5;
+/** Reset emails per address in [RESET_CODE_TTL_MS]; more are quietly not sent. */
+const RESET_MAILS_PER_WINDOW = 3;
 
 const sha256 = (s: string) => createHash('sha256').update(s).digest('hex');
+const invalidResetCode = () =>
+  new ApiError(
+    HttpStatus.BAD_REQUEST,
+    'invalid_reset_code',
+    'This code is wrong or has expired. Ask for a new one.',
+  );
+const sameHash = (a: string, b: string) =>
+  a.length === b.length && timingSafeEqual(Buffer.from(a), Buffer.from(b));
+const resetCodeHash = (userId: string, code: string) =>
+  sha256(`${userId}:${code}`);
+const isLearner = (u: UserRow) =>
+  u.isActive && u.roles.every((r) => r === 'learner');
+
 const invalidRefresh = () =>
   new ApiError(
     HttpStatus.UNAUTHORIZED,
@@ -42,12 +68,15 @@ export const toMe = (u: UserRow): MeDto => ({
 
 @Injectable()
 export class AuthService {
+  private readonly logger = new Logger('Auth');
+
   constructor(
     @Inject(DB) private readonly db: Db,
     @Inject(APP_CONFIG) private readonly config: AppConfig,
     private readonly jwt: JwtService,
     private readonly audit: AuditService,
     private readonly limits: RateLimitStore,
+    private readonly mailer: Mailer,
   ) {}
 
   /**
@@ -138,6 +167,126 @@ export class AuthService {
       }
       throw e;
     }
+  }
+
+  /**
+   * Emails a learner a code to choose a new password. Nothing tells the
+   * caller whether the email has an account: unknown emails, staff accounts
+   * (an admin resets those) and too many requests all end the same way.
+   */
+  async requestPasswordReset(email: string): Promise<void> {
+    if (!this.mailer.available)
+      throw new ApiError(
+        HttpStatus.SERVICE_UNAVAILABLE,
+        'password_reset_unavailable',
+        'Password reset is not available right now',
+      );
+    const normalized = email.trim().toLowerCase();
+    const { hits } = await this.limits.hit(
+      `reset-mail:${normalized}`,
+      RESET_CODE_TTL_MS,
+    );
+    if (hits > RESET_MAILS_PER_WINDOW) return;
+    const [user] = await this.db
+      .select()
+      .from(users)
+      .where(eq(users.email, normalized))
+      .limit(1);
+    if (!user || !isLearner(user)) return;
+    const code = randomInt(0, 1_000_000).toString().padStart(6, '0');
+    const row = {
+      codeHash: resetCodeHash(user.id, code),
+      wrongTries: 0,
+      expiresAt: new Date(Date.now() + RESET_CODE_TTL_MS),
+    };
+    await this.db
+      .insert(passwordResetCodes)
+      .values({ userId: user.id, ...row })
+      .onConflictDoUpdate({ target: passwordResetCodes.userId, set: row });
+    try {
+      await this.mailer.send({
+        to: user.email,
+        subject: 'Your Nyaya password reset code',
+        text:
+          `Your code is ${code}. It works for 15 minutes.\n\n` +
+          "If you didn't ask to reset your Nyaya password, ignore this email. " +
+          'Your password stays the same.',
+      });
+    } catch (e) {
+      // Logged, not shown: an error here would tell the caller the account exists.
+      this.logger.error(`Reset mail failed: ${(e as Error).message}`);
+    }
+  }
+
+  /**
+   * Sets a new password with the emailed code, signs the account out
+   * everywhere and signs it in here.
+   */
+  async confirmPasswordReset(
+    email: string,
+    code: string,
+    newPassword: string,
+    requestId: string,
+  ): Promise<SessionDto> {
+    const normalized = email.trim().toLowerCase();
+    const [found] = await this.db
+      .select({ user: users, reset: passwordResetCodes })
+      .from(passwordResetCodes)
+      .innerJoin(users, eq(users.id, passwordResetCodes.userId))
+      .where(eq(users.email, normalized))
+      .limit(1);
+    if (!found || !isLearner(found.user) || found.reset.expiresAt < new Date())
+      throw invalidResetCode();
+    const { user, reset } = found;
+    if (!sameHash(resetCodeHash(user.id, code), reset.codeHash)) {
+      if (reset.wrongTries + 1 >= RESET_CODE_MAX_WRONG)
+        await this.db
+          .delete(passwordResetCodes)
+          .where(eq(passwordResetCodes.userId, user.id));
+      else
+        await this.db
+          .update(passwordResetCodes)
+          .set({ wrongTries: reset.wrongTries + 1 })
+          .where(eq(passwordResetCodes.userId, user.id));
+      throw invalidResetCode();
+    }
+    const passwordHash = await hashPassword(newPassword);
+    const session = await this.db.transaction(async (tx) => {
+      // Deleting first means two requests with the same code can't both win.
+      const used = await tx
+        .delete(passwordResetCodes)
+        .where(eq(passwordResetCodes.userId, user.id))
+        .returning({ userId: passwordResetCodes.userId });
+      if (used.length === 0) return null;
+      const [updated] = await tx
+        .update(users)
+        .set({ passwordHash, updatedAt: new Date() })
+        .where(eq(users.id, user.id))
+        .returning();
+      await tx
+        .update(refreshTokens)
+        .set({ revokedAt: new Date() })
+        .where(
+          and(
+            eq(refreshTokens.userId, user.id),
+            isNull(refreshTokens.revokedAt),
+          ),
+        );
+      await this.audit.record(
+        tx,
+        { id: user.id, requestId },
+        {
+          action: 'auth.password_reset',
+          entityType: 'user',
+          entityId: user.id,
+        },
+      );
+      return this.issue(tx, updated);
+    });
+    if (!session) throw invalidResetCode();
+    // Earlier wrong passwords no longer lock the new one out.
+    await this.limits.clear(`password:${normalized}`);
+    return session;
   }
 
   /** Rotates the refresh token. Presenting a used token revokes all of that user's sessions. */

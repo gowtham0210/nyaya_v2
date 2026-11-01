@@ -9,6 +9,7 @@ import 'package:nyaya/core/api/token_store.dart';
 import 'package:nyaya/core/config/features.dart';
 import 'package:nyaya/core/services/sounds.dart';
 import 'package:nyaya/core/storage/local_store.dart';
+import 'package:nyaya/features/auth/application/auth_controller.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
 import 'package:nyaya/features/journey/application/journey_controller.dart';
@@ -295,6 +296,38 @@ void main() {
     expect(api.settings?.name, 'Asha');
     expect(api.settings?.persona, 'citizen');
     expect(api.settings?.onboarded, isTrue);
+  });
+
+  testWidgets('a learner who forgot their password resets it with the emailed code and plays', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Asha', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, signedIn: false);
+    await settle(tester);
+
+    await tester.tap(find.text('Explore').first);
+    await settle(tester);
+    await tester.tap(find.text('I already have an account'));
+    await settle(tester);
+    await tester.enterText(find.widgetWithText(TextField, 'Email'), 'asha@test.local');
+    await tester.tap(find.text('Forgot password?'));
+    await settle(tester);
+
+    expect(find.text('Reset your password'), findsOneWidget);
+    await tester.tap(find.text('SEND CODE'));
+    await settle(tester);
+    expect(authApi.resetRequested, ['asha@test.local'], reason: 'the email typed on sign-in carries over');
+    expect(find.textContaining("we've sent it a 6-digit code"), findsOneWidget);
+
+    await tester.enterText(find.widgetWithText(TextField, '6-digit code'), '000000');
+    await tester.enterText(find.widgetWithText(TextField, 'New password'), 'a new password');
+    await tester.tap(find.text('SET NEW PASSWORD'));
+    await settle(tester);
+    expect(find.text('This code is wrong or has expired. Ask for a new one.'), findsOneWidget);
+
+    await tester.enterText(find.widgetWithText(TextField, '6-digit code'), FakeAuthApi.resetCode);
+    await tester.tap(find.text('SET NEW PASSWORD'));
+    await settle(tester);
+    expect(c.read(authProvider)?.email, 'asha@test.local');
+    expect(find.textContaining('Question 1 of'), findsOneWidget, reason: 'the quiz that asked for sign-in starts');
   });
 
   testWidgets('Journey tab shows the Case Path map and opens a level from its chapter card', (tester) async {

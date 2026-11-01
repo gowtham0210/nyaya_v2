@@ -8,11 +8,12 @@ import {
 import { AuditService } from './audit.service.js';
 import { APP_CONFIG, type AppConfig } from './config.js';
 import { DB, openDb, type DbHandle } from './db.js';
+import { Mailer } from './mailer.js';
 import { RateLimitStore } from './rate-limits.js';
 
 const DB_HANDLE = Symbol('DB_HANDLE');
 
-/** Config, database, audit log and attempt counters, available everywhere. */
+/** Config, database, audit log, attempt counters and mail, available everywhere. */
 @Global()
 @Module({})
 export class CoreModule implements OnApplicationShutdown {
@@ -27,8 +28,9 @@ export class CoreModule implements OnApplicationShutdown {
         { provide: DB, useFactory: (h: DbHandle) => h.db, inject: [DB_HANDLE] },
         AuditService,
         RateLimitStore,
+        Mailer,
       ],
-      exports: [APP_CONFIG, DB, AuditService, RateLimitStore],
+      exports: [APP_CONFIG, DB, AuditService, RateLimitStore, Mailer],
     };
   }
 

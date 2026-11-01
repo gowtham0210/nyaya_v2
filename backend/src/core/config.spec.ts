@@ -94,4 +94,30 @@ describe('loadConfig', () => {
     expect(loadConfig({ SENTRY_DSN: dsn }).sentryDsn).toBe(dsn);
     expect(() => loadConfig({ SENTRY_DSN: 'not a key' })).toThrow(/SENTRY_DSN/);
   });
+
+  it('sends mail only with SMTP_HOST, which needs MAIL_FROM', () => {
+    expect(loadConfig({}).smtp).toBeUndefined();
+    expect(() => loadConfig({ SMTP_HOST: 'smtp.example.com' })).toThrow(
+      /MAIL_FROM/,
+    );
+    expect(
+      loadConfig({
+        SMTP_HOST: 'smtp.example.com',
+        SMTP_PORT: '465',
+        SMTP_USER: 'u',
+        SMTP_PASSWORD: 'p',
+        MAIL_FROM: 'Nyaya <no-reply@example.com>',
+      }).smtp,
+    ).toEqual({
+      host: 'smtp.example.com',
+      port: 465,
+      user: 'u',
+      password: 'p',
+      from: 'Nyaya <no-reply@example.com>',
+    });
+    expect(
+      loadConfig({ SMTP_HOST: 'smtp.example.com', MAIL_FROM: 'a@b.c' }).smtp
+        ?.port,
+    ).toBe(587);
+  });
 });

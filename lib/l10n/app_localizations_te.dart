@@ -1456,6 +1456,51 @@ class AppLocalizationsTe extends AppLocalizations {
   String get authErrorName => 'మీ పేరు ఇవ్వండి.';
 
   @override
+  String get authForgot => 'పాస్‌వర్డ్ మర్చిపోయారా?';
+
+  @override
+  String get authResetTitle => 'మీ పాస్‌వర్డ్ మార్చండి';
+
+  @override
+  String get authResetSubtitle =>
+      'మీ ఖాతా ఈమెయిల్ ఇవ్వండి. మేము 6 అంకెల కోడ్ పంపుతాము.';
+
+  @override
+  String get authResetSend => 'కోడ్ పంపండి';
+
+  @override
+  String authResetSentTo(String email) {
+    return '$emailతో ఖాతా ఉంటే, దానికి 6 అంకెల కోడ్ పంపాము. ఇది 15 నిమిషాలు పనిచేస్తుంది. కనిపించకపోతే స్పామ్ ఫోల్డర్ చూడండి.';
+  }
+
+  @override
+  String get authResetCode => '6 అంకెల కోడ్';
+
+  @override
+  String get authResetNewPassword => 'కొత్త పాస్‌వర్డ్';
+
+  @override
+  String get authResetSave => 'కొత్త పాస్‌వర్డ్ సెట్ చేయండి';
+
+  @override
+  String get authResetResend => 'కొత్త కోడ్ పంపండి';
+
+  @override
+  String get authResetErrorCode =>
+      'ఈ కోడ్ తప్పు లేదా గడువు ముగిసింది. కొత్త కోడ్ అడగండి.';
+
+  @override
+  String get authResetUnavailable =>
+      'పాస్‌వర్డ్ మార్చడం ఇప్పుడు అందుబాటులో లేదు. దయచేసి తర్వాత ప్రయత్నించండి.';
+
+  @override
+  String get authResetErrorInvalid =>
+      '6 అంకెల కోడ్ మరియు కనీసం 8 అక్షరాల కొత్త పాస్‌వర్డ్ ఇవ్వండి.';
+
+  @override
+  String get authResetDone => 'మీ పాస్‌వర్డ్ మార్చబడింది.';
+
+  @override
   String get settingsAccount => 'ఖాతా';
 
   @override

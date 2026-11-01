@@ -1459,6 +1459,51 @@ class AppLocalizationsMl extends AppLocalizations {
   String get authErrorName => 'നിങ്ങളുടെ പേര് നൽകുക.';
 
   @override
+  String get authForgot => 'പാസ്‌വേഡ് മറന്നോ?';
+
+  @override
+  String get authResetTitle => 'പാസ്‌വേഡ് മാറ്റൂ';
+
+  @override
+  String get authResetSubtitle =>
+      'നിങ്ങളുടെ അക്കൗണ്ടിന്റെ ഇമെയിൽ നൽകൂ. ഞങ്ങൾ 6 അക്ക കോഡ് അയയ്ക്കും.';
+
+  @override
+  String get authResetSend => 'കോഡ് അയയ്ക്കൂ';
+
+  @override
+  String authResetSentTo(String email) {
+    return '$email എന്ന വിലാസത്തിൽ അക്കൗണ്ട് ഉണ്ടെങ്കിൽ, അതിലേക്ക് 6 അക്ക കോഡ് അയച്ചിട്ടുണ്ട്. ഇത് 15 മിനിറ്റ് പ്രവർത്തിക്കും. കാണുന്നില്ലെങ്കിൽ സ്പാം ഫോൾഡർ നോക്കൂ.';
+  }
+
+  @override
+  String get authResetCode => '6 അക്ക കോഡ്';
+
+  @override
+  String get authResetNewPassword => 'പുതിയ പാസ്‌വേഡ്';
+
+  @override
+  String get authResetSave => 'പുതിയ പാസ്‌വേഡ് സജ്ജമാക്കൂ';
+
+  @override
+  String get authResetResend => 'പുതിയ കോഡ് അയയ്ക്കൂ';
+
+  @override
+  String get authResetErrorCode =>
+      'ഈ കോഡ് തെറ്റാണ് അല്ലെങ്കിൽ കാലാവധി കഴിഞ്ഞു. പുതിയ കോഡ് ചോദിക്കൂ.';
+
+  @override
+  String get authResetUnavailable =>
+      'പാസ്‌വേഡ് മാറ്റൽ ഇപ്പോൾ ലഭ്യമല്ല. ദയവായി പിന്നീട് ശ്രമിക്കൂ.';
+
+  @override
+  String get authResetErrorInvalid =>
+      '6 അക്ക കോഡും കുറഞ്ഞത് 8 അക്ഷരമുള്ള പുതിയ പാസ്‌വേഡും നൽകൂ.';
+
+  @override
+  String get authResetDone => 'നിങ്ങളുടെ പാസ്‌വേഡ് മാറ്റി.';
+
+  @override
   String get settingsAccount => 'അക്കൗണ്ട്';
 
   @override

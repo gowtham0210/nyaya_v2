@@ -1449,6 +1449,51 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authErrorName => 'Enter your name.';
 
   @override
+  String get authForgot => 'Forgot password?';
+
+  @override
+  String get authResetTitle => 'Reset your password';
+
+  @override
+  String get authResetSubtitle =>
+      'Enter your account\'s email and we\'ll send you a 6-digit code.';
+
+  @override
+  String get authResetSend => 'SEND CODE';
+
+  @override
+  String authResetSentTo(String email) {
+    return 'If an account uses $email, we\'ve sent it a 6-digit code. It works for 15 minutes. Check your spam folder if you don\'t see it.';
+  }
+
+  @override
+  String get authResetCode => '6-digit code';
+
+  @override
+  String get authResetNewPassword => 'New password';
+
+  @override
+  String get authResetSave => 'SET NEW PASSWORD';
+
+  @override
+  String get authResetResend => 'Send a new code';
+
+  @override
+  String get authResetErrorCode =>
+      'This code is wrong or has expired. Ask for a new one.';
+
+  @override
+  String get authResetUnavailable =>
+      'Password reset isn\'t available right now. Please try again later.';
+
+  @override
+  String get authResetErrorInvalid =>
+      'Enter the 6-digit code and a new password of at least 8 characters.';
+
+  @override
+  String get authResetDone => 'Your password has been changed.';
+
+  @override
   String get settingsAccount => 'Account';
 
   @override

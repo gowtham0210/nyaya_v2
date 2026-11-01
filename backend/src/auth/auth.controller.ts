@@ -20,6 +20,8 @@ import { AuthThrottlerGuard } from './auth-throttler.guard.js';
 import {
   DeleteAccountDto,
   MeDto,
+  PasswordResetConfirmDto,
+  PasswordResetRequestDto,
   RefreshDto,
   RegisterDto,
   SessionDto,
@@ -53,6 +55,38 @@ export class AuthController {
       body.email,
       body.password,
       body.display_name,
+      req.id,
+    );
+  }
+
+  @Public()
+  @Post('password-reset')
+  @HttpCode(204)
+  @ApiOperation({
+    summary:
+      'Email a learner a 6-digit code to choose a new password. The answer is the same whether or not the email has an account.',
+  })
+  @ApiNoContentResponse()
+  async requestPasswordReset(@Body() body: PasswordResetRequestDto) {
+    await this.auth.requestPasswordReset(body.email);
+  }
+
+  @Public()
+  @Post('password-reset/confirm')
+  @HttpCode(200)
+  @ApiOperation({
+    summary:
+      'Set a new password with the emailed code; signs out every other session and signs in',
+  })
+  @ApiOkResponse({ type: SessionDto })
+  confirmPasswordReset(
+    @Body() body: PasswordResetConfirmDto,
+    @Req() req: Request,
+  ) {
+    return this.auth.confirmPasswordReset(
+      body.email,
+      body.code,
+      body.new_password,
       req.id,
     );
   }

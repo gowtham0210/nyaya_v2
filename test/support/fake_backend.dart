@@ -473,6 +473,21 @@ class FakeAuthApi implements AuthApi {
   @override
   Future<void> signOut() => tokens.clear();
 
+  /// Emails a reset code was asked for; [resetCode] is the right code.
+  final resetRequested = <String>[];
+  static const resetCode = '123456';
+
+  @override
+  Future<void> requestPasswordReset({required String email}) async => resetRequested.add(email);
+
+  @override
+  Future<Account> resetPassword({required String email, required String code, required String newPassword}) {
+    if (code != resetCode) {
+      throw const ApiException(400, 'invalid_reset_code', 'This code is wrong or has expired. Ask for a new one.');
+    }
+    return _session(email, 'Learner');
+  }
+
   @override
   Future<void> deleteAccount({required String password}) async {
     if (wrongPassword) throw const ApiException(403, 'wrong_password', 'The password is not right');

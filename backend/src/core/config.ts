@@ -43,6 +43,20 @@ export interface AppConfig {
   appUpdateUrl?: string;
   /** Sentry project key for crash reports (errors only). Unset: nothing is reported. */
   sentryDsn?: string;
+  /**
+   * Outgoing mail (password reset codes). Unset: in development the mail is
+   * written to the log; in production password reset is unavailable.
+   */
+  smtp?: SmtpConfig;
+}
+
+export interface SmtpConfig {
+  host: string;
+  port: number;
+  user?: string;
+  password?: string;
+  /** The sender, like `Nyaya <no-reply@example.com>`. */
+  from: string;
 }
 
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
@@ -94,6 +108,21 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
     minAppVersion: appVersion(env.MIN_APP_VERSION),
     appUpdateUrl: httpsUrl(env.APP_UPDATE_URL, 'APP_UPDATE_URL'),
     sentryDsn: httpsUrl(env.SENTRY_DSN, 'SENTRY_DSN'),
+    smtp: smtp(env),
+  };
+}
+
+/** Unset SMTP_HOST means no mail; a host without MAIL_FROM stops startup. */
+function smtp(env: NodeJS.ProcessEnv): SmtpConfig | undefined {
+  if (!env.SMTP_HOST) return undefined;
+  if (!env.MAIL_FROM)
+    throw new Error('MAIL_FROM must be set when SMTP_HOST is set');
+  return {
+    host: env.SMTP_HOST,
+    port: positiveInt(env.SMTP_PORT, 'SMTP_PORT', 587),
+    user: env.SMTP_USER || undefined,
+    password: env.SMTP_PASSWORD || undefined,
+    from: env.MAIL_FROM,
   };
 }
 

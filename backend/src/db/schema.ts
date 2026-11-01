@@ -91,6 +91,21 @@ export const staffSetupTokens = pgTable(
   (t) => [index('staff_setup_tokens_user_idx').on(t.userId)],
 );
 
+/**
+ * The emailed code for a learner who forgot their password. One per account:
+ * a new request replaces it. Only a SHA-256 hash is stored; it works until it
+ * expires or after too many wrong tries.
+ */
+export const passwordResetCodes = pgTable('password_reset_codes', {
+  userId: uuid('user_id')
+    .primaryKey()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  codeHash: text('code_hash').notNull(),
+  wrongTries: integer('wrong_tries').notNull().default(0),
+  expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+  createdAt: createdAt(),
+});
+
 // ---------------------------------------------------------------- taxonomy
 
 export const subjects = pgTable('subjects', {

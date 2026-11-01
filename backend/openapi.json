@@ -64,6 +64,63 @@
         ]
       }
     },
+    "/v1/auth/password-reset": {
+      "post": {
+        "operationId": "AuthController_requestPasswordReset",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordResetRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "summary": "Email a learner a 6-digit code to choose a new password. The answer is the same whether or not the email has an account.",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/password-reset/confirm": {
+      "post": {
+        "operationId": "AuthController_confirmPasswordReset",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordResetConfirmDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Set a new password with the emailed code; signs out every other session and signs in",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
     "/v1/auth/refresh": {
       "post": {
         "operationId": "AuthController_refresh",
@@ -2942,6 +2999,42 @@
           "email",
           "password",
           "display_name"
+        ]
+      },
+      "PasswordResetRequestDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "asha@example.com"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      },
+      "PasswordResetConfirmDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "asha@example.com"
+          },
+          "code": {
+            "type": "string",
+            "example": "123456",
+            "description": "The 6-digit code from the email"
+          },
+          "new_password": {
+            "type": "string",
+            "format": "password",
+            "minLength": 8
+          }
+        },
+        "required": [
+          "email",
+          "code",
+          "new_password"
         ]
       },
       "RefreshDto": {
