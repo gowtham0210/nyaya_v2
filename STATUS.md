@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-11-01 (screenshots, emoji + edit-name fixes, Claude Opus 5.5)
+> Last updated: 2026-11-01 (shorter onboarding, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -740,6 +740,14 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       emoji (other apps draw them). **Rule: don't put emoji in on-screen text.** Flutter tests: 112. Still seen and
       not fixed: the Daily Docket timer keeps running behind "Leave this quiz?"; Premium screen status bar text is
       dark on dark.
+- [x] 2026-11-01: **Shorter onboarding** (from an outside UX review: too many steps before the first quiz).
+      Now language → 3 intro slides (Skip already there) → "Who are you learning as?" → Home; that last step's button
+      is "Get Started". The daily goal and name steps are gone: the goal keeps its default (3 a day) and the name stays
+      empty (Home shows the app name, leaderboard/map show "You", the account gets "Learner"); both change in Settings,
+      whose header shows "Your name" when empty. The role step stays because it sets quiz difficulty, negative
+      marking and the AI chat's style. Unused strings `onbDailyGoal*`, `onbYourName*`, `onbCommit` are still in the
+      .arb files. Screenshots `docs/screenshots/01-onboarding/06-daily-goal.png` and `07-your-name.png` are now out of
+      date. Checked on the simulator. Flutter tests: 112.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
@@ -794,7 +802,7 @@ lib/
     widgets/                     # ChunkyButton (3D), Pressable, StatPill, NyayaCard, ProgressRing,
                                  # GlossyProgressBar, StarRow, InitialsAvatar, TickingBuilder
   features/
-    onboarding/   language → 3 slides → persona → daily goal → name → soft paywall → home
+    onboarding/   language → 3 slides → persona → soft paywall → home
     home/         Explore Law home (explore_sections.dart, law_illustration.dart); older game widgets kept unused:
                   header (stats + leaderboard + settings icons), hero "continue", goal+streak week strip,
                   Daily Docket card, 4 modes grid, league card, premium banner, fact of the day, updates

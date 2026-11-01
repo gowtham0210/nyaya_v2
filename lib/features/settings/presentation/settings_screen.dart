@@ -52,7 +52,8 @@ class SettingsScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(p.name, style: context.text.titleLarge?.copyWith(color: Colors.white)),
+                      Text(p.name.isEmpty ? l.onbNameHint : p.name,
+                          style: context.text.titleLarge?.copyWith(color: Colors.white)),
                       Text(l.personaName(p.persona), style: context.text.bodyMedium?.copyWith(color: Colors.white70)),
                       if (p.isPremium)
                         Padding(

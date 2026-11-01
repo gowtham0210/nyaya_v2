@@ -19,8 +19,9 @@ import '../../progress/application/progress_sync.dart';
 import '../../profile/domain/user_profile.dart';
 import 'intro_slides.dart';
 
-/// Language → 3 intro slides → persona → daily goal → name.
-/// Target: under 60 seconds to the first quiz.
+/// Language → 3 intro slides → persona. The daily goal keeps its default and
+/// the name stays empty; both can be changed later in Settings.
+/// Target: under 30 seconds to the first quiz.
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -29,13 +30,11 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 }
 
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
-  static const _steps = 5;
+  static const _steps = 3;
   static const _introStep = 1;
   final _page = PageController();
-  final _name = TextEditingController();
   int _step = 0;
   Persona? _persona;
-  int _goal = 3;
 
   /// The intro slides are designed on Warm Cream with painted artwork, so they
   /// always render in the light theme.
@@ -44,7 +43,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   @override
   void dispose() {
     _page.dispose();
-    _name.dispose();
     super.dispose();
   }
 
@@ -57,17 +55,16 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
   bool get _canContinue => switch (_step) {
         2 => _persona != null,
-        4 => _name.text.trim().isNotEmpty,
         _ => true,
       };
 
   void _finish() {
     final p = ref.read(profileProvider);
     ref.read(profileProvider.notifier).completeOnboarding(
-          name: _name.text,
+          name: p.name,
           persona: _persona ?? Persona.citizen,
           language: p.language,
-          dailyGoal: _goal,
+          dailyGoal: p.dailyGoal,
         );
     // Signed in already (e.g. after a reset): save to the account now.
     // Otherwise the first sign-in uploads these settings.
@@ -124,14 +121,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       setState(() => _persona = p);
                     },
                   ),
-                  _GoalStep(
-                    goal: _goal,
-                    onSelect: (g) {
-                      ref.read(feedbackProvider).play(Haptic.select);
-                      setState(() => _goal = g);
-                    },
-                  ),
-                  _NameStep(controller: _name, onChanged: () => setState(() {}), onSubmit: _finish),
                 ],
               ),
             ),
@@ -139,7 +128,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(AppSpacing.page, 8, AppSpacing.page, AppSpacing.md),
                 child: ChunkyButton(
-                  label: _step == _steps - 1 ? l.onbCommit : l.commonContinue,
+                  label: _step == _steps - 1 ? l.onbGetStarted : l.commonContinue,
                   onPressed: _canContinue ? (_step == _steps - 1 ? _finish : () => _go(_step + 1)) : null,
                 ),
               ),
@@ -254,76 +243,6 @@ class _PersonaStep extends StatelessWidget {
               ).animate().fadeIn(delay: (60 * i).ms).slideX(begin: 0.08),
             ),
         ],
-      ),
-    );
-  }
-}
-
-class _GoalStep extends StatelessWidget {
-  const _GoalStep({required this.goal, required this.onSelect});
-
-  final int goal;
-  final ValueChanged<int> onSelect;
-
-  @override
-  Widget build(BuildContext context) {
-    final l = context.l10n;
-    final options = [
-      (1, l.goalCasual, Icons.eco_rounded),
-      (3, l.goalRegular, Icons.local_fire_department_rounded),
-      (5, l.goalSerious, Icons.balance_rounded),
-    ];
-    return _StepScaffold(
-      title: l.onbDailyGoal,
-      subtitle: l.onbDailyGoalSub,
-      child: Column(
-        children: [
-          for (final (i, (count, name, icon)) in options.indexed)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: _ChoiceTile(
-                selected: goal == count,
-                leading: Icon(icon, size: 30, color: context.colors.primary),
-                title: name,
-                subtitle: l.goalQuizzesPerDay(count),
-                onTap: () => onSelect(count),
-              ).animate().fadeIn(delay: (60 * i).ms).slideX(begin: 0.08),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-class _NameStep extends StatelessWidget {
-  const _NameStep({required this.controller, required this.onChanged, required this.onSubmit});
-
-  final TextEditingController controller;
-  final VoidCallback onChanged;
-  final VoidCallback onSubmit;
-
-  @override
-  Widget build(BuildContext context) {
-    final l = context.l10n;
-    return _StepScaffold(
-      title: l.onbYourName,
-      subtitle: l.onbYourNameSub,
-      child: TextField(
-        controller: controller,
-        autofocus: false,
-        maxLength: 24,
-        textCapitalization: TextCapitalization.words,
-        textInputAction: TextInputAction.done,
-        style: context.text.titleLarge,
-        decoration: InputDecoration(
-          hintText: l.onbNameHint,
-          prefixIcon: const Icon(Icons.person_rounded),
-          counterText: '',
-        ),
-        onChanged: (_) => onChanged(),
-        onSubmitted: (v) {
-          if (v.trim().isNotEmpty) onSubmit();
-        },
       ),
     );
   }

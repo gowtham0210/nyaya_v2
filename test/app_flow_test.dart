@@ -14,6 +14,7 @@ import 'package:nyaya/features/journey/application/journey_controller.dart';
 import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
 import 'package:nyaya/features/reminders/data/reminder_notifications.dart';
 import 'package:nyaya/features/profile/application/profile_controller.dart';
+import 'package:nyaya/features/profile/domain/user_profile.dart';
 import 'package:nyaya/features/leaderboard/data/league_api.dart';
 import 'package:nyaya/features/progress/application/progress_sync.dart';
 import 'package:nyaya/features/progress/data/progress_api.dart';
@@ -87,18 +88,15 @@ void main() {
     await settle(tester);
     await tester.tap(find.text('Law aspirant'));
     await settle(tester);
-    await tester.tap(find.text('CONTINUE'));
-    await settle(tester);
-    await tester.tap(find.text('CONTINUE')); // keep default goal
-    await settle(tester);
-    await tester.enterText(find.byType(TextField), 'Asha');
-    await settle(tester);
-    await tester.tap(find.text('COMMIT TO MY GOAL'));
+    await tester.tap(find.text('GET STARTED'));
     await settle(tester);
 
     final p = c.read(profileProvider);
     expect(p.onboarded, isTrue);
-    expect(p.name, 'Asha');
+    expect(p.persona, Persona.aspirant);
+    // No name or goal questions: the name stays empty, the goal keeps its default.
+    expect(p.name, isEmpty);
+    expect(p.dailyGoal, 3);
     expect(p.energy, 5);
     // Premium is hidden in the beta: no paywall after onboarding, straight to Home.
     await tester.pump(const Duration(milliseconds: 600));
