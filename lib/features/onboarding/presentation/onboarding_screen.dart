@@ -268,18 +268,22 @@ class _GoalStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
-    final options = [(1, l.goalCasual, '🌱'), (3, l.goalRegular, '🔥'), (5, l.goalSerious, '⚖️')];
+    final options = [
+      (1, l.goalCasual, Icons.eco_rounded),
+      (3, l.goalRegular, Icons.local_fire_department_rounded),
+      (5, l.goalSerious, Icons.balance_rounded),
+    ];
     return _StepScaffold(
       title: l.onbDailyGoal,
       subtitle: l.onbDailyGoalSub,
       child: Column(
         children: [
-          for (final (i, (count, name, emoji)) in options.indexed)
+          for (final (i, (count, name, icon)) in options.indexed)
             Padding(
               padding: const EdgeInsets.only(bottom: 12),
               child: _ChoiceTile(
                 selected: goal == count,
-                leading: Text(emoji, style: const TextStyle(fontSize: 28)),
+                leading: Icon(icon, size: 30, color: context.colors.primary),
                 title: name,
                 subtitle: l.goalQuizzesPerDay(count),
                 onTap: () => onSelect(count),

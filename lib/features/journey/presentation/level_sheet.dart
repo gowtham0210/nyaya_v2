@@ -83,10 +83,19 @@ class _LevelSheet extends ConsumerWidget {
             if (node.isLandmark)
               Padding(
                 padding: const EdgeInsets.only(top: 4),
-                child: Text(
-                  '👑 ${l.journeyLandmark}',
-                  textAlign: TextAlign.center,
-                  style: context.text.labelLarge?.copyWith(color: AppPalette.ochreText),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.workspace_premium_rounded, size: 18, color: AppPalette.ochreText),
+                    const SizedBox(width: 4),
+                    Flexible(
+                      child: Text(
+                        l.journeyLandmark,
+                        textAlign: TextAlign.center,
+                        style: context.text.labelLarge?.copyWith(color: AppPalette.ochreText),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             const SizedBox(height: AppSpacing.md),
@@ -102,7 +111,11 @@ class _LevelSheet extends ConsumerWidget {
                 children: [
                   _Fact(icon: Icons.help_outline_rounded, text: l.journeyQuestions(count)),
                   const SizedBox(width: 12),
-                  _Fact(icon: Icons.bolt_rounded, text: l.modeEnergyCost(QuizMode.casePath.energyCost)),
+                  _Fact(
+                    icon: Icons.bolt_rounded,
+                    text: '${QuizMode.casePath.energyCost}',
+                    semanticLabel: l.modeEnergyCost(QuizMode.casePath.energyCost),
+                  ),
                 ],
               ),
               if (stars > 0) ...[
@@ -141,26 +154,33 @@ class _LevelSheet extends ConsumerWidget {
 }
 
 class _Fact extends StatelessWidget {
-  const _Fact({required this.icon, required this.text});
+  const _Fact({required this.icon, required this.text, this.semanticLabel});
 
   final IconData icon;
   final String text;
 
+  /// Read out instead of [text] when the icon carries part of the meaning.
+  final String? semanticLabel;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: context.colors.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(AppRadius.xl),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 18, color: context.nyaya.textSecondary),
-          const SizedBox(width: 6),
-          Text(text, style: context.text.labelLarge),
-        ],
+    return Semantics(
+      label: semanticLabel,
+      excludeSemantics: semanticLabel != null,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: context.colors.surfaceContainerLow,
+          borderRadius: BorderRadius.circular(AppRadius.xl),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 18, color: context.nyaya.textSecondary),
+            const SizedBox(width: 6),
+            Text(text, style: context.text.labelLarge),
+          ],
+        ),
       ),
     );
   }

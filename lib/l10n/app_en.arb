@@ -193,7 +193,7 @@
   "modeExamDesc": "20 questions · 20 min · negative marking",
   "modeExamDescCitizen": "20 questions · 20 min · know your rights",
   "modeFree": "Free",
-  "modeEnergyCost": "{count} ⚡",
+  "modeEnergyCost": "{count} energy",
   "@modeEnergyCost": {
     "placeholders": {
       "count": {
@@ -229,7 +229,7 @@
       }
     }
   },
-  "energyRefillCoins": "Refill 1 ⚡ for {coins} coins",
+  "energyRefillCoins": "Refill 1 energy for {coins} coins",
   "@energyRefillCoins": {
     "placeholders": {
       "coins": {
@@ -408,7 +408,7 @@
     }
   },
   "resultGoalReached": "Daily goal reached!",
-  "resultEnergyBonus": "3-star bonus: +{count} ⚡",
+  "resultEnergyBonus": "3-star bonus: +{count} energy",
   "@resultEnergyBonus": {
     "placeholders": {
       "count": {

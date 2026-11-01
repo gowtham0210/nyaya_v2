@@ -346,10 +346,27 @@ class _Hero extends StatelessWidget {
               color: AppPalette.burntClay,
             ).animate().scale(begin: const Offset(0.4, 0.4), curve: Curves.elasticOut, duration: 800.ms),
             const SizedBox(height: 8),
-            Text(
-              result.answers.map((a) => a.isCorrect ? '🟩' : '🟥').join(' '),
-              style: const TextStyle(fontSize: 22),
-              semanticsLabel: l.resultScore(result.correct, result.total),
+            // Squares drawn as boxes, not 🟩/🟥: emoji show as "?" boxes on iOS.
+            Semantics(
+              label: l.resultScore(result.correct, result.total),
+              child: ExcludeSemantics(
+                child: Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  alignment: WrapAlignment.center,
+                  children: [
+                    for (final a in result.answers)
+                      Container(
+                        width: 22,
+                        height: 22,
+                        decoration: BoxDecoration(
+                          color: a.isCorrect ? context.nyaya.success : context.nyaya.error,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
             ),
           ],
         );

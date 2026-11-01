@@ -22,6 +22,7 @@ import '../../progress/application/progress_sync.dart';
 import '../../reminders/application/reminder_sync.dart';
 import '../../profile/domain/user_profile.dart';
 import 'delete_account_dialog.dart';
+import 'edit_name_dialog.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -331,26 +332,7 @@ class SettingsScreen extends ConsumerWidget {
   }
 
   Future<void> _editName(BuildContext context, WidgetRef ref, String current) async {
-    final l = context.l10n;
-    final controller = TextEditingController(text: current);
-    final name = await showDialog<String>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l.settingsEditName),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          maxLength: 24,
-          textCapitalization: TextCapitalization.words,
-          decoration: InputDecoration(hintText: l.onbNameHint),
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: Text(l.commonCancel)),
-          FilledButton(onPressed: () => Navigator.pop(context, controller.text), child: Text(l.commonDone)),
-        ],
-      ),
-    );
-    controller.dispose();
+    final name = await showDialog<String>(context: context, builder: (_) => EditNameDialog(current: current));
     if (name != null && name.trim().isNotEmpty) {
       ref.read(profileProvider.notifier).setName(name);
       unawaited(ref.read(progressSyncProvider.notifier).pushSettings());

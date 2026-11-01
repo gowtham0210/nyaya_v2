@@ -907,7 +907,7 @@ abstract class AppLocalizations {
   /// No description provided for @modeEnergyCost.
   ///
   /// In en, this message translates to:
-  /// **'{count} ⚡'**
+  /// **'{count} energy'**
   String modeEnergyCost(int count);
 
   /// No description provided for @docketDoneToday.
@@ -955,7 +955,7 @@ abstract class AppLocalizations {
   /// No description provided for @energyRefillCoins.
   ///
   /// In en, this message translates to:
-  /// **'Refill 1 ⚡ for {coins} coins'**
+  /// **'Refill 1 energy for {coins} coins'**
   String energyRefillCoins(int coins);
 
   /// No description provided for @energyGoUnlimited.
@@ -1363,7 +1363,7 @@ abstract class AppLocalizations {
   /// No description provided for @resultEnergyBonus.
   ///
   /// In en, this message translates to:
-  /// **'3-star bonus: +{count} ⚡'**
+  /// **'3-star bonus: +{count} energy'**
   String resultEnergyBonus(int count);
 
   /// No description provided for @resultLeagueUp.

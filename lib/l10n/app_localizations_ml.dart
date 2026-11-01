@@ -479,7 +479,7 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String modeEnergyCost(int count) {
-    return '$count ⚡';
+    return '$count എനർജി';
   }
 
   @override
@@ -518,7 +518,7 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String energyRefillCoins(int coins) {
-    return '$coins നാണയങ്ങൾക്ക് 1 ⚡ നിറയ്ക്കുക';
+    return '$coins നാണയങ്ങൾക്ക് 1 എനർജി നിറയ്ക്കുക';
   }
 
   @override
@@ -763,7 +763,7 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String resultEnergyBonus(int count) {
-    return '3 നക്ഷത്ര ബോണസ്: +$count ⚡';
+    return '3 നക്ഷത്ര ബോണസ്: +$count എനർജി';
   }
 
   @override

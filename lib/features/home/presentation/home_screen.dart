@@ -8,6 +8,7 @@ import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../gamification/domain/league.dart';
+import '../../gamification/presentation/league_emblem.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../progress/application/progress_sync.dart';
 import '../../review/presentation/review_screen.dart';
@@ -103,7 +104,7 @@ class LeagueOutcomeDialog extends StatelessWidget {
         ? l.leagueOutcomePromoted(name)
         : (outcome.demoted ? l.leagueOutcomeDemoted(name) : l.leagueOutcomeStayed(name));
     return AlertDialog(
-      icon: Text(to.emblem, style: const TextStyle(fontSize: 48)),
+      icon: LeagueEmblem(to, size: 48),
       title: Text(title, textAlign: TextAlign.center),
       content: Text(l.leagueOutcomeRank(outcome.rank), textAlign: TextAlign.center),
       actions: [

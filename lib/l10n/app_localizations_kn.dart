@@ -477,7 +477,7 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String modeEnergyCost(int count) {
-    return '$count ⚡';
+    return '$count ಶಕ್ತಿ';
   }
 
   @override
@@ -516,7 +516,7 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String energyRefillCoins(int coins) {
-    return '$coins ನಾಣ್ಯಗಳಿಗೆ 1 ⚡ ಮರುಭರ್ತಿ';
+    return '$coins ನಾಣ್ಯಗಳಿಗೆ 1 ಶಕ್ತಿ ಮರುಭರ್ತಿ';
   }
 
   @override
@@ -762,7 +762,7 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String resultEnergyBonus(int count) {
-    return '3-ನಕ್ಷತ್ರ ಬೋನಸ್: +$count ⚡';
+    return '3-ನಕ್ಷತ್ರ ಬೋನಸ್: +$count ಶಕ್ತಿ';
   }
 
   @override

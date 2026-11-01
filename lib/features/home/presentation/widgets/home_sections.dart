@@ -14,6 +14,7 @@ import '../../../../core/widgets/common.dart';
 import '../../../../core/widgets/pressable.dart';
 import '../../../../core/widgets/ticking_builder.dart';
 import '../../../gamification/domain/league.dart';
+import '../../../gamification/presentation/league_emblem.dart';
 import '../../../journey/application/journey_controller.dart';
 import '../../../journey/domain/journey.dart';
 import '../../../profile/application/profile_controller.dart';
@@ -431,7 +432,7 @@ class LeagueCard extends ConsumerWidget {
               color: context.colors.secondaryContainer,
               border: Border.all(color: AppPalette.ochre, width: 2),
             ),
-            child: Text(tier.emblem, style: const TextStyle(fontSize: 26)),
+            child: LeagueEmblem(tier, size: 28),
           ),
           const SizedBox(width: AppSpacing.md),
           Expanded(

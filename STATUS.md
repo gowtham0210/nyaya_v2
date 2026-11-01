@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-31 (sound effects, Claude Opus 5.5)
+> Last updated: 2026-11-01 (screenshots, emoji + edit-name fixes, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -726,6 +726,20 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       complete, a failed level, duel won, sound off, and the 5 ticks. Flutter 110 tests pass. On the simulator the
       app starts and the audio players load with no errors; **not listened to yet** (Claude can't hear the
       simulator, and a quiz needs a sign-in) — the user should listen on the iPhone.
+
+- [x] 2026-11-01: **Screenshots of every screen + two fixes.** 56 screenshots in `docs/screenshots/` (13 folders,
+      index in its README), iPhone 17 Pro Max simulator against the local API with a throwaway local account.
+      Fixed: (1) Settings → Edit name → Cancel showed a red error screen (controller disposed while the dialog was still
+      closing); the dialog is now `EditNameDialog` and owns its controller; `test/edit_name_dialog_test.dart`.
+      (2) **Emoji draw as "?" boxes on iOS** — even with `fontFamily: 'Apple Color Emoji'` named directly, so a font
+      fallback does not help (Impeller, which can't be turned off on iOS). All on-screen emoji are now icons:
+      league badges (`LeagueEmblem`, `lib/features/gamification/presentation/league_emblem.dart`; the domain
+      `LeagueTier.emblem` field is gone), top-3 medals (`RankMedal`), onboarding goal icons, the level sheet's
+      landmark crown, the Daily Docket result squares; `modeEnergyCost`, `energyRefillCoins` and `resultEnergyBonus`
+      say "energy" in words (each language's word from `energyLeft`). Share text copied to the clipboard keeps its
+      emoji (other apps draw them). **Rule: don't put emoji in on-screen text.** Flutter tests: 112. Still seen and
+      not fixed: the Daily Docket timer keeps running behind "Leave this quiz?"; Premium screen status bar text is
+      dark on dark.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
