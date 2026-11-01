@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../app/router.dart';
-import '../../../core/config/features.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/services/feedback.dart';
 import '../../../core/theme/app_colors.dart';
@@ -70,16 +69,10 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     // Otherwise the first sign-in uploads these settings.
     unawaited(ref.read(progressSyncProvider.notifier).pushSettings());
     ref.read(feedbackProvider).play(Haptic.celebrate);
+    // No paywall here: premium is offered after the first quiz (ResultView),
+    // once the learner has seen what Nyaya is like.
     context.go(Routes.home);
-    if (!Features.premium) return;
-    // Soft, skippable paywall right after onboarding converts best.
-    Future.delayed(const Duration(milliseconds: 450), () {
-      final ctx = _rootContext;
-      if (ctx != null && ctx.mounted) GoRouter.of(ctx).push(Routes.premium);
-    });
   }
-
-  BuildContext? get _rootContext => GoRouter.of(context).routerDelegate.navigatorKey.currentContext;
 
   @override
   Widget build(BuildContext context) {

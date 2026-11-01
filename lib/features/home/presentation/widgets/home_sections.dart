@@ -11,7 +11,6 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/utils/day.dart';
 import '../../../../core/widgets/chunky_button.dart';
 import '../../../../core/widgets/common.dart';
-import '../../../../core/widgets/pressable.dart';
 import '../../../../core/widgets/ticking_builder.dart';
 import '../../../gamification/domain/league.dart';
 import '../../../gamification/presentation/league_emblem.dart';
@@ -455,38 +454,6 @@ class LeagueCard extends ConsumerWidget {
           ),
           Icon(Icons.chevron_right_rounded, color: context.nyaya.textSecondary),
         ],
-      ),
-    );
-  }
-}
-
-class PremiumBanner extends StatelessWidget {
-  const PremiumBanner({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final l = context.l10n;
-    return Pressable(
-      onTap: () => context.push(Routes.premium),
-      child: Container(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(AppRadius.lg), color: AppPalette.sand),
-        child: Row(
-          children: [
-            const Icon(Icons.workspace_premium_rounded, size: 36, color: AppPalette.deepEarth),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(l.homeGoPremium, style: context.text.titleMedium?.copyWith(color: AppPalette.deepEarth)),
-                  Text(l.homeGoPremiumSub, style: context.text.bodySmall?.copyWith(color: AppPalette.deepEarth)),
-                ],
-              ),
-            ),
-            const Icon(Icons.arrow_forward_rounded, color: AppPalette.deepEarth),
-          ],
-        ),
       ),
     );
   }

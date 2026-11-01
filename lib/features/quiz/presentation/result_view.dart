@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../app/router.dart';
+import '../../../core/config/features.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/services/feedback.dart';
 import '../../../core/services/sounds.dart';
@@ -17,6 +18,8 @@ import '../../../core/widgets/chunky_button.dart';
 import '../../../core/widgets/common.dart';
 import '../../journey/application/journey_controller.dart';
 import '../../journey/domain/journey.dart';
+import '../../premium/presentation/premium_banner.dart';
+import '../../profile/application/profile_controller.dart';
 import '../application/quiz_controller.dart';
 import '../domain/quiz_models.dart';
 import '../../review/presentation/question_actions.dart';
@@ -33,8 +36,10 @@ class ResultView extends ConsumerStatefulWidget {
 }
 
 class _ResultViewState extends ConsumerState<ResultView> {
+  static const _premiumOfferKey = 'premium_offer_v1';
   final _confetti = ConfettiController(duration: const Duration(milliseconds: 1500));
   bool _showReview = false;
+  late final bool _offerPremium;
 
   QuizResult get r => widget.state.result!;
 
@@ -58,6 +63,7 @@ class _ResultViewState extends ConsumerState<ResultView> {
   @override
   void initState() {
     super.initState();
+    _offerPremium = _takePremiumOffer();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       if (_celebrate) {
@@ -67,6 +73,16 @@ class _ResultViewState extends ConsumerState<ResultView> {
       final sound = _sound;
       if (sound != null) ref.read(soundsProvider).play(sound);
     });
+  }
+
+  /// Premium is offered once, softly, on the first result screen: after the
+  /// learner has finished a quiz, not before they have tried anything.
+  bool _takePremiumOffer() {
+    if (!Features.premium || ref.read(profileProvider).isPremium) return false;
+    final store = ref.read(localStoreProvider);
+    if (store.readJson(_premiumOfferKey) != null) return false;
+    store.writeJson(_premiumOfferKey, {'shown': true});
+    return true;
   }
 
   @override
@@ -200,6 +216,10 @@ class _ResultViewState extends ConsumerState<ResultView> {
                               ),
                             ).animate().fadeIn(delay: (650 + 120 * i).ms).slideX(begin: 0.1),
                           ),
+                      ],
+                      if (_offerPremium) ...[
+                        const SizedBox(height: AppSpacing.sm),
+                        const PremiumBanner().animate().fadeIn(delay: 900.ms),
                       ],
                       const SizedBox(height: AppSpacing.sm),
                       TextButton.icon(

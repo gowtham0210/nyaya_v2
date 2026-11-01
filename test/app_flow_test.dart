@@ -6,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:nyaya/app/app.dart';
 import 'package:nyaya/app/router.dart';
 import 'package:nyaya/core/api/token_store.dart';
+import 'package:nyaya/core/config/features.dart';
 import 'package:nyaya/core/services/sounds.dart';
 import 'package:nyaya/core/storage/local_store.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
@@ -98,7 +99,7 @@ void main() {
     expect(p.name, isEmpty);
     expect(p.dailyGoal, 3);
     expect(p.energy, 5);
-    // Premium is hidden in the beta: no paywall after onboarding, straight to Home.
+    // No paywall after onboarding (premium is offered after the first quiz): straight to Home.
     await tester.pump(const Duration(milliseconds: 600));
     await settle(tester);
     expect(find.text('Maybe later'), findsNothing);
@@ -136,6 +137,40 @@ void main() {
     expect(p.energy, 5, reason: '3-star bonus refunds 1 energy');
     expect(find.text('NEXT LEVEL'), findsOneWidget);
   });
+
+  // Premium is hidden in the beta; run with --dart-define=NYAYA_PREMIUM=true.
+  Future<void> finishFirstLevel(WidgetTester tester, ProviderContainer c) async {
+    await settle(tester);
+    await tester.tap(find.text('Explore').first);
+    await settle(tester);
+    for (var i = 0; i < 6; i++) {
+      await tester.tap(find.text(api.correctTextFor(_current(c).id)).first);
+      await settle(tester);
+      await tester.tap(find.text(i == 5 ? 'FINISH' : 'NEXT'));
+      await settle(tester);
+    }
+  }
+
+  testWidgets('premium is offered once, on the first quiz result', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await finishFirstLevel(tester, c);
+
+    expect(find.text('Unlock unlimited energy'), findsOneWidget);
+    expect(c.read(localStoreProvider).readJson('premium_offer_v1'), isNotNull);
+  }, skip: !Features.premium);
+
+  testWidgets('premium is not offered again after it was shown', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {
+      'profile_v1': onboarded,
+      'premium_offer_v1': jsonEncode({'shown': true}),
+    });
+    await finishFirstLevel(tester, c);
+
+    expect(find.text('Perfect case!'), findsOneWidget);
+    expect(find.text('Unlock unlimited energy'), findsNothing);
+  }, skip: !Features.premium);
 
   testWidgets('Play again after a failed level starts a fresh attempt', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
