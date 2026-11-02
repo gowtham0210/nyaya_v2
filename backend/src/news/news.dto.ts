@@ -127,6 +127,13 @@ export class PublicNewsDto {
   @ApiProperty({ type: String, nullable: true }) source_url: string | null;
   @ApiProperty({ format: 'date' }) date: string;
   @ApiProperty() read_minutes: number;
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    description:
+      "The card picture's path on this API (WebP); null when the article has none",
+  })
+  image_url: string | null;
 }
 
 export class PublicNewsListDto {
@@ -146,6 +153,15 @@ export class NewsListItemDto {
 export class NewsPageDto {
   @ApiProperty({ type: [NewsListItemDto] }) items: NewsListItemDto[];
   @ApiProperty({ type: String, nullable: true }) next_cursor: string | null;
+}
+
+export class NewsPictureDto {
+  @ApiProperty({
+    description: 'Path on this API (staff only); changes when the picture does',
+  })
+  url: string;
+  @ApiProperty() width: number;
+  @ApiProperty() height: number;
 }
 
 export class NewsDetailDto extends NewsListItemDto {
@@ -175,4 +191,10 @@ export class NewsDetailDto extends NewsListItemDto {
     description: 'Why changes were last requested, while they still are',
   })
   changes_reason: string | null;
+  @ApiProperty({
+    type: NewsPictureDto,
+    nullable: true,
+    description: 'The card picture, if one was uploaded',
+  })
+  image: NewsPictureDto | null;
 }

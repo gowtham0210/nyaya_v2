@@ -93,3 +93,39 @@ export async function runNewsAction(id: string, action: NewsAction, _: ActionSta
   refresh();
   return { ok: true, message: DONE[action] };
 }
+
+export interface PictureState {
+  error?: string;
+}
+
+/** Sets or replaces the card picture. The API checks and shrinks it. */
+export async function uploadNewsPicture(id: string, form: FormData): Promise<PictureState> {
+  const file = form.get('file');
+  if (!(file instanceof File) || file.size === 0) return { error: 'Choose a picture first.' };
+  const body = new FormData();
+  body.set('file', file, file.name);
+  const client = await api();
+  const { data, error, response } = await client.PUT('/v1/editor/news/{id}/image', {
+    params: { path: { id } },
+    body: body as never,
+    bodySerializer: (b) => b as unknown as FormData,
+  });
+  if (!data) {
+    if (response.status === 401) redirect(SESSION_ENDED_URL);
+    if (response.status === 413) return { error: 'The picture is larger than 5 MB.' };
+    return { error: asApiError(error, response.status).message };
+  }
+  refresh();
+  return {};
+}
+
+export async function removeNewsPicture(id: string): Promise<PictureState> {
+  const client = await api();
+  const { data, error, response } = await client.DELETE('/v1/editor/news/{id}/image', { params: { path: { id } } });
+  if (!data) {
+    if (response.status === 401) redirect(SESSION_ENDED_URL);
+    return { error: asApiError(error, response.status).message };
+  }
+  refresh();
+  return {};
+}

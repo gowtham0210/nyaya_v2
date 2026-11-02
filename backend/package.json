@@ -41,6 +41,7 @@
     "read-excel-file": "9.3.12",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
+    "sharp": "0.35.5",
     "uuid": "^14.0.3",
     "write-excel-file": "4.1.1"
   },

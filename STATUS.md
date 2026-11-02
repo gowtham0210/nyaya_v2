@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-11-01 (clearer quiz screens, Claude Opus 5.5)
+> Last updated: 2026-11-02 (news pictures from the portal, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -840,6 +840,22 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       wrong-answer feedback, exit dialogs, report sheet, Daily Docket timer, background time-out. Not changed (server):
       a quiz start whose reply is lost can still charge energy twice; duels race a recorded run, so there is no live
       "waiting / disconnected" opponent state to show.
+- [x] 2026-11-02: **News card pictures are uploaded in the portal** (user's choice: stored in the database). The
+      app's bundled `update_<id>.webp` files never existed, so every card showed the category fallback.
+      DB: `news_images` (migration 0017; bytea, width, height, version, uploaded_by; cascade with the article).
+      API: `PUT/DELETE /v1/editor/news/:id/image` (content editors, only while the article is draft / changes
+      requested, audited as an edit, so the reviewer sees it); `GET /v1/editor/news/:id/image` (staff, any status);
+      public `GET /v1/news/:id/image` (published only, `Cache-Control: public, max-age=31536000, immutable`, the
+      address carries `?v=<version>`). Uploads: JPEG/PNG/WebP, ≤ 5 MB, ≥ 480 px wide; re-encoded with sharp 0.35.5
+      to WebP ≤ 1200 px (strips camera data/location). `image_url` on `/v1/news` items, `image` on the editor detail.
+      Portal: "Card picture" card on the article page with Home and list crops, upload / replace / remove, help
+      text; `/news/[id]/picture` route fetches drafts' pictures as the signed-in user; server action limit 6 MB.
+      App: `LegalUpdate.imageUrl` (resolved against `NYAYA_API_URL`), `UpdatePicture` with `cached_network_image`
+      (kept on the phone for offline), category painting while loading / offline / when none.
+      `docs/UPDATES_ART.md` now describes the upload. Tests: backend 75 unit + 145 e2e (4 new), app 214.
+      Checked locally end to end: seed editor uploaded, reviewer approved, publisher published, picture on the Home
+      card and the Updates list on the simulator (test article retired afterwards). **Staging needs a deploy**
+      (migration 0017 + new API + portal) before editors can upload there, and the iPhone needs a new build.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

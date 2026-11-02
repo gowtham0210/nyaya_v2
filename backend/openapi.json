@@ -2373,6 +2373,38 @@
         ]
       }
     },
+    "/v1/news/{id}/image": {
+      "get": {
+        "operationId": "NewsController_image",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "image/webp": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "summary": "A published article's card picture (WebP)",
+        "tags": [
+          "news"
+        ]
+      }
+    },
     "/v1/editor/news": {
       "get": {
         "operationId": "EditorNewsController_list",
@@ -2553,6 +2585,131 @@
           }
         ],
         "summary": "Edit a draft, or one with changes requested",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/news/{id}/image": {
+      "get": {
+        "operationId": "EditorNewsController_image",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "image/webp": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "The article's card picture (WebP), whatever its status",
+        "tags": [
+          "editor"
+        ]
+      },
+      "put": {
+        "operationId": "EditorNewsController_setImage",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "JPEG, PNG or WebP, at most 5 MB and at least 480 pixels wide; stored as WebP, at most 1200 pixels"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewsDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Set the card picture of a draft, or one with changes requested",
+        "tags": [
+          "editor"
+        ]
+      },
+      "delete": {
+        "operationId": "EditorNewsController_removeImage",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewsDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Remove the card picture of a draft, or one with changes requested",
         "tags": [
           "editor"
         ]
@@ -6505,6 +6662,11 @@
           },
           "read_minutes": {
             "type": "number"
+          },
+          "image_url": {
+            "type": "string",
+            "nullable": true,
+            "description": "The card picture's path on this API (WebP); null when the article has none"
           }
         },
         "required": [
@@ -6517,7 +6679,8 @@
           "source",
           "source_url",
           "date",
-          "read_minutes"
+          "read_minutes",
+          "image_url"
         ]
       },
       "PublicNewsListDto": {
@@ -6600,6 +6763,26 @@
         "required": [
           "items",
           "next_cursor"
+        ]
+      },
+      "NewsPictureDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "Path on this API (staff only); changes when the picture does"
+          },
+          "width": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "url",
+          "width",
+          "height"
         ]
       },
       "NewsDetailDto": {
@@ -6705,6 +6888,16 @@
             "type": "string",
             "nullable": true,
             "description": "Why changes were last requested, while they still are"
+          },
+          "image": {
+            "nullable": true,
+            "description": "The card picture, if one was uploaded",
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NewsPictureDto"
+              }
+            ]
           }
         },
         "required": [
@@ -6728,7 +6921,8 @@
           "published_at",
           "retired_at",
           "created_at",
-          "changes_reason"
+          "changes_reason",
+          "image"
         ]
       },
       "CreateNewsDto": {

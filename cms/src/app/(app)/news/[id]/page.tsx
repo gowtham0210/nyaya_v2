@@ -9,6 +9,7 @@ import { NEWS_CATEGORY_LABEL, canEditNews, newsActions } from '@/lib/workflow';
 import { saveNews } from '../actions';
 import type { NewsInput } from '../form-state';
 import { NewsForm } from '../news-form';
+import { PictureCard } from './picture-card';
 import { NewsWorkflowPanel } from './workflow-panel';
 
 export const metadata: Metadata = { title: 'Article' };
@@ -72,6 +73,11 @@ async function ArticleDetail({ params }: { params: PageProps<'/news/[id]'>['para
             <p className="mt-1 whitespace-pre-wrap">{a.changes_reason}</p>
           </div>
         )}
+
+        <Card>
+          <h2 className="mb-3 font-serif text-xl">Card picture</h2>
+          <PictureCard articleId={a.id} picture={a.image} editable={canEditNews(me, a.status)} />
+        </Card>
 
         {canEditNews(me, a.status) ? (
           // Keyed by status: a save keeps the form (and its "Saved" message); a new step starts fresh.

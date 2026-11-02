@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
@@ -14,6 +15,7 @@ import 'package:nyaya/features/auth/data/auth_api.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
 import 'package:nyaya/features/journey/application/journey_controller.dart';
 import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
+import 'package:nyaya/features/legal_updates/presentation/updates_screen.dart';
 import 'package:nyaya/features/reminders/data/reminder_notifications.dart';
 import 'package:nyaya/features/profile/application/profile_controller.dart';
 import 'package:nyaya/features/profile/domain/user_profile.dart';
@@ -961,6 +963,34 @@ void main() {
     expect(find.text('Hide answers'), findsOneWidget);
     expect(find.text('Your answer: $wrong'), findsOneWidget);
     expect(find.text('Correct answer: ${api.correctTextFor(first.id)}'), findsOneWidget);
+  });
+
+  testWidgets('an update card shows its uploaded picture, or the category painting without one', (tester) async {
+    LegalUpdate update({String? imageUrl}) => LegalUpdate(
+      id: 'u',
+      category: UpdateCategory.supremeCourt,
+      title: 'T',
+      summary: 'S',
+      keyPoints: const ['K'],
+      whyItMatters: 'W',
+      source: 'Src',
+      date: DateTime(2026, 1, 1),
+      readMinutes: 2,
+      imageUrl: imageUrl,
+    );
+    Future<void> show(LegalUpdate u) => tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light(),
+        home: SizedBox(width: 248, height: 124, child: UpdatePicture(update: u)),
+      ),
+    );
+
+    await show(update());
+    expect(find.byType(UpdateFallbackArt), findsOneWidget);
+    expect(find.byType(CachedNetworkImage), findsNothing);
+
+    await show(update(imageUrl: 'https://api.test/v1/news/u/image?v=1'));
+    expect(find.byType(CachedNetworkImage), findsOneWidget);
   });
 }
 

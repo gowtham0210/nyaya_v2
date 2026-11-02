@@ -37,6 +37,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/auth/password-reset": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Email a learner a 6-digit code to choose a new password. The answer is the same whether or not the email has an account. */
+        post: operations["AuthController_requestPasswordReset"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/auth/password-reset/confirm": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Set a new password with the emailed code; signs out every other session and signs in */
+        post: operations["AuthController_confirmPasswordReset"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/auth/refresh": {
         parameters: {
             query?: never;
@@ -965,6 +999,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/news/{id}/image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** A published article's card picture (WebP) */
+        get: operations["NewsController_image"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/editor/news": {
         parameters: {
             query?: never;
@@ -997,6 +1048,25 @@ export interface paths {
         head?: never;
         /** Edit a draft, or one with changes requested */
         patch: operations["EditorNewsController_update"];
+        trace?: never;
+    };
+    "/v1/editor/news/{id}/image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The article's card picture (WebP), whatever its status */
+        get: operations["EditorNewsController_image"];
+        /** Set the card picture of a draft, or one with changes requested */
+        put: operations["EditorNewsController_setImage"];
+        post?: never;
+        /** Remove the card picture of a draft, or one with changes requested */
+        delete: operations["EditorNewsController_removeImage"];
+        options?: never;
+        head?: never;
+        patch?: never;
         trace?: never;
     };
     "/v1/editor/news/{id}/submit": {
@@ -1154,6 +1224,21 @@ export interface components {
             password: string;
             /** @example Asha */
             display_name: string;
+        };
+        PasswordResetRequestDto: {
+            /** @example asha@example.com */
+            email: string;
+        };
+        PasswordResetConfirmDto: {
+            /** @example asha@example.com */
+            email: string;
+            /**
+             * @description The 6-digit code from the email
+             * @example 123456
+             */
+            code: string;
+            /** Format: password */
+            new_password: string;
         };
         RefreshDto: {
             refresh_token: string;
@@ -2205,6 +2290,8 @@ export interface components {
             /** Format: date */
             date: string;
             read_minutes: number;
+            /** @description The card picture's path on this API (WebP); null when the article has none */
+            image_url: string | null;
         };
         PublicNewsListDto: {
             items: components["schemas"]["PublicNewsDto"][];
@@ -2225,6 +2312,12 @@ export interface components {
         NewsPageDto: {
             items: components["schemas"]["NewsListItemDto"][];
             next_cursor: string | null;
+        };
+        NewsPictureDto: {
+            /** @description Path on this API (staff only); changes when the picture does */
+            url: string;
+            width: number;
+            height: number;
         };
         NewsDetailDto: {
             /** Format: uuid */
@@ -2261,6 +2354,8 @@ export interface components {
             created_at: string;
             /** @description Why changes were last requested, while they still are */
             changes_reason: string | null;
+            /** @description The card picture, if one was uploaded */
+            image: components["schemas"]["NewsPictureDto"] | null;
         };
         CreateNewsDto: {
             /** @enum {string} */
@@ -2341,6 +2436,50 @@ export interface operations {
         };
         responses: {
             201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SessionDto"];
+                };
+            };
+        };
+    };
+    AuthController_requestPasswordReset: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PasswordResetRequestDto"];
+            };
+        };
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AuthController_confirmPasswordReset: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PasswordResetConfirmDto"];
+            };
+        };
+        responses: {
+            200: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -3709,6 +3848,27 @@ export interface operations {
             };
         };
     };
+    NewsController_image: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/webp": string;
+                };
+            };
+        };
+    };
     EditorNewsController_list: {
         parameters: {
             query?: {
@@ -3792,6 +3952,79 @@ export interface operations {
                 "application/json": components["schemas"]["UpdateNewsDto"];
             };
         };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NewsDetailDto"];
+                };
+            };
+        };
+    };
+    EditorNewsController_image: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/webp": string;
+                };
+            };
+        };
+    };
+    EditorNewsController_setImage: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    /**
+                     * Format: binary
+                     * @description JPEG, PNG or WebP, at most 5 MB and at least 480 pixels wide; stored as WebP, at most 1200 pixels
+                     */
+                    file: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NewsDetailDto"];
+                };
+            };
+        };
+    };
+    EditorNewsController_removeImage: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
         responses: {
             200: {
                 headers: {

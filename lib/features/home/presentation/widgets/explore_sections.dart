@@ -607,12 +607,7 @@ class _UpdateCard extends StatelessWidget {
               SizedBox(
                 height: 124,
                 width: double.infinity,
-                child: Image.asset(
-                  update.image,
-                  fit: BoxFit.cover,
-                  excludeFromSemantics: true,
-                  errorBuilder: (_, _, _) => UpdateFallbackArt(category: c),
-                ),
+                child: UpdatePicture(update: update),
               ),
               Expanded(
                 child: Padding(

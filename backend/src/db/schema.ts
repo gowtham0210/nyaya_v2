@@ -2,6 +2,7 @@ import { sql } from 'drizzle-orm';
 import {
   boolean,
   check,
+  customType,
   date,
   foreignKey,
   index,
@@ -695,6 +696,30 @@ export const newsArticles = pgTable(
     check('read_minutes_range', sql`${t.readMinutes} between 1 and 30`),
   ],
 );
+
+/** Raw bytes (Postgres bytea), read and written as a Node Buffer. */
+const bytea = customType<{ data: Buffer; driverData: Buffer }>({
+  dataType: () => 'bytea',
+});
+
+/**
+ * The picture shown on a news article's card in the app, uploaded in the
+ * portal. Kept here (not in a file store) so it is in the database backups.
+ * The API re-encodes every upload as WebP, so only safe, small images are
+ * stored. [version] changes with the bytes and goes into the picture's
+ * address, so the app can cache it for good.
+ */
+export const newsImages = pgTable('news_images', {
+  articleId: uuid('article_id')
+    .primaryKey()
+    .references(() => newsArticles.id, { onDelete: 'cascade' }),
+  data: bytea('data').notNull(),
+  width: integer('width').notNull(),
+  height: integer('height').notNull(),
+  version: text('version').notNull(),
+  uploadedBy: uuid('uploaded_by').references(() => users.id),
+  createdAt: createdAt(),
+});
 
 // ---------------------------------------------------------------- review & reports
 

@@ -5,7 +5,8 @@ import { DB, type Db, type Tx } from '../core/db.js';
 import { ApiError } from '../core/errors.js';
 import { newId } from '../core/ids.js';
 import { decodeCursor, toPage, type Page } from '../core/pagination.js';
-import { auditLog, newsArticles } from '../db/schema.js';
+import { auditLog, newsArticles, newsImages } from '../db/schema.js';
+import { toCardPicture } from './card-picture.js';
 import type {
   CreateNewsDto,
   ListNewsQuery,
@@ -20,6 +21,10 @@ type ArticleRow = typeof newsArticles.$inferSelect;
 type ArticlePatch = Partial<typeof newsArticles.$inferInsert>;
 
 const iso = (d: Date | null) => (d ? d.toISOString() : null);
+
+/** Where the app loads a published article's picture; [version] lets it cache for good. */
+const publicPictureUrl = (id: string, version: string) =>
+  `/v1/news/${id}/image?v=${version}`;
 
 const AUDIT_ACTIONS: Record<NewsAction, string> = {
   edit: 'news.updated',
@@ -97,13 +102,14 @@ export class NewsService {
   /** Published articles, newest first, for the app. */
   async published(): Promise<PublicNewsListDto> {
     const rows = await this.db
-      .select()
+      .select({ a: newsArticles, picture: newsImages.version })
       .from(newsArticles)
+      .leftJoin(newsImages, eq(newsImages.articleId, newsArticles.id))
       .where(eq(newsArticles.status, 'published'))
       .orderBy(desc(newsArticles.eventDate), desc(newsArticles.publishedAt))
       .limit(PUBLIC_LIMIT);
     return {
-      items: rows.map((a) => ({
+      items: rows.map(({ a, picture }) => ({
         id: a.id,
         category: a.category,
         title: a.title,
@@ -114,6 +120,7 @@ export class NewsService {
         source_url: a.sourceUrl,
         date: a.eventDate!,
         read_minutes: a.readMinutes,
+        image_url: picture ? publicPictureUrl(a.id, picture) : null,
       })),
     };
   }
@@ -144,6 +151,15 @@ export class NewsService {
       .where(eq(newsArticles.id, id))
       .limit(1);
     if (!a) throw ApiError.notFound('Article');
+    const [picture] = await tx
+      .select({
+        version: newsImages.version,
+        width: newsImages.width,
+        height: newsImages.height,
+      })
+      .from(newsImages)
+      .where(eq(newsImages.articleId, id))
+      .limit(1);
     let changesReason: string | null = null;
     if (a.status === 'changes_requested') {
       const [last] = await tx
@@ -177,6 +193,13 @@ export class NewsService {
       retired_at: iso(a.retiredAt),
       created_at: a.createdAt.toISOString(),
       changes_reason: changesReason,
+      image: picture
+        ? {
+            url: `/v1/editor/news/${id}/image?v=${picture.version}`,
+            width: picture.width,
+            height: picture.height,
+          }
+        : null,
     };
   }
 
@@ -210,6 +233,66 @@ export class NewsService {
         .where(eq(newsArticles.id, id));
       return { fields: Object.keys(dto) };
     });
+  }
+
+  /**
+   * Sets the card picture. It is part of the article, so it changes only
+   * while the article can be edited, and a reviewer sees it before it is
+   * published.
+   */
+  async setPicture(actor: Actor, id: string, upload: Buffer | undefined) {
+    if (!upload?.length)
+      throw new ApiError(
+        HttpStatus.BAD_REQUEST,
+        'validation_failed',
+        'Choose a picture to upload',
+        [{ field: 'file', reason: 'Required' }],
+      );
+    // Outside the transaction: decoding can take a moment.
+    const picture = await toCardPicture(upload);
+    return this.act(actor, id, 'edit', async (tx) => {
+      await tx
+        .insert(newsImages)
+        .values({ articleId: id, ...picture, uploadedBy: actor.id })
+        .onConflictDoUpdate({
+          target: newsImages.articleId,
+          set: { ...picture, uploadedBy: actor.id, createdAt: new Date() },
+        });
+      await this.touch(tx, actor, id);
+      return {
+        fields: ['image'],
+        width: picture.width,
+        height: picture.height,
+      };
+    });
+  }
+
+  removePicture(actor: Actor, id: string) {
+    return this.act(actor, id, 'edit', async (tx) => {
+      await tx.delete(newsImages).where(eq(newsImages.articleId, id));
+      await this.touch(tx, actor, id);
+      return { fields: ['image'], removed: true };
+    });
+  }
+
+  /**
+   * The picture's bytes. The app may only see published articles' pictures;
+   * staff see any.
+   */
+  async picture(id: string, opts: { publishedOnly: boolean }) {
+    const [row] = await this.db
+      .select({
+        data: newsImages.data,
+        version: newsImages.version,
+        status: newsArticles.status,
+      })
+      .from(newsImages)
+      .innerJoin(newsArticles, eq(newsArticles.id, newsImages.articleId))
+      .where(eq(newsImages.articleId, id))
+      .limit(1);
+    if (!row || (opts.publishedOnly && row.status !== 'published'))
+      throw ApiError.notFound('Picture');
+    return { data: row.data, version: row.version };
   }
 
   submit(actor: Actor, id: string) {
@@ -311,6 +394,14 @@ export class NewsService {
       });
       return this.get(id, tx);
     });
+  }
+
+  /** Records who changed the article and when. */
+  private async touch(tx: Tx, actor: Actor, id: string) {
+    await tx
+      .update(newsArticles)
+      .set({ updatedBy: actor.id, updatedAt: new Date() })
+      .where(eq(newsArticles.id, id));
   }
 
   /** Whether [actor] edited the article since it last went back to draft. */
