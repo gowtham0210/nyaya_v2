@@ -893,9 +893,9 @@
       }
     }
   },
-  "settingsReset": "Reset progress",
-  "settingsResetConfirm": "This erases coins, energy and settings on this device. XP, stars and streaks are saved to your account and stay. This cannot be undone.",
-  "settingsResetAction": "Erase everything",
+  "settingsReset": "Reset this phone",
+  "settingsResetConfirm": "This takes you through the welcome steps again and clears this phone's settings. Your XP, stars, coins and streak are saved to your account and stay.",
+  "settingsResetAction": "Reset",
   "premiumTitle": "Nyaya Premium",
   "premiumHeadline": "Learn more, every day",
   "premiumBenefitEnergy": "Unlimited energy",

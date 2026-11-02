@@ -1416,14 +1416,14 @@ class AppLocalizationsKn extends AppLocalizations {
   }
 
   @override
-  String get settingsReset => 'ಪ್ರಗತಿ ಮರುಹೊಂದಿಸಿ';
+  String get settingsReset => 'ಈ ಫೋನ್ ಮರುಹೊಂದಿಸಿ';
 
   @override
   String get settingsResetConfirm =>
-      'ಇದು ಈ ಸಾಧನದಲ್ಲಿನ ಎಲ್ಲಾ XP, ನಕ್ಷತ್ರಗಳು, ಸ್ಟ್ರೀಕ್‌ಗಳು ಮತ್ತು ನಾಣ್ಯಗಳನ್ನು ಅಳಿಸುತ್ತದೆ. ಇದನ್ನು ಹಿಂಪಡೆಯಲು ಸಾಧ್ಯವಿಲ್ಲ.';
+      'ಇದು ಸ್ವಾಗತ ಹಂತಗಳನ್ನು ಮತ್ತೆ ತೋರಿಸಿ, ಈ ಫೋನ್‌ನ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಅಳಿಸುತ್ತದೆ. ನಿಮ್ಮ XP, ನಕ್ಷತ್ರಗಳು, ನಾಣ್ಯಗಳು ಮತ್ತು ಸ್ಟ್ರೀಕ್ ನಿಮ್ಮ ಖಾತೆಯಲ್ಲಿ ಸುರಕ್ಷಿತವಾಗಿರುತ್ತವೆ.';
 
   @override
-  String get settingsResetAction => 'ಎಲ್ಲವನ್ನೂ ಅಳಿಸಿ';
+  String get settingsResetAction => 'ಮರುಹೊಂದಿಸಿ';
 
   @override
   String get premiumTitle => 'Nyaya ಪ್ರೀಮಿಯಂ';

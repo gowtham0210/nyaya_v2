@@ -1421,14 +1421,14 @@ class AppLocalizationsTa extends AppLocalizations {
   }
 
   @override
-  String get settingsReset => 'முன்னேற்றத்தை மீட்டமை';
+  String get settingsReset => 'இந்தத் தொலைபேசியை மீட்டமை';
 
   @override
   String get settingsResetConfirm =>
-      'இது இந்தச் சாதனத்தில் உள்ள அனைத்து XP, நட்சத்திரங்கள், தொடர்கள், நாணயங்களையும் அழிக்கும். இதைத் திரும்பப் பெற முடியாது.';
+      'இது வரவேற்புப் படிகளை மீண்டும் காட்டி, இந்தத் தொலைபேசியின் அமைப்புகளை அழிக்கும். உங்கள் XP, நட்சத்திரங்கள், நாணயங்கள், தொடர் ஆகியவை உங்கள் கணக்கில் பாதுகாப்பாக இருக்கும்.';
 
   @override
-  String get settingsResetAction => 'அனைத்தையும் அழி';
+  String get settingsResetAction => 'மீட்டமை';
 
   @override
   String get premiumTitle => 'Nyaya Premium';

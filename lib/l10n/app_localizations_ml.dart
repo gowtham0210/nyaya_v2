@@ -1417,14 +1417,14 @@ class AppLocalizationsMl extends AppLocalizations {
   }
 
   @override
-  String get settingsReset => 'പുരോഗതി പുനഃസജ്ജമാക്കുക';
+  String get settingsReset => 'ഈ ഫോൺ റീസെറ്റ് ചെയ്യുക';
 
   @override
   String get settingsResetConfirm =>
-      'ഈ ഉപകരണത്തിലെ എല്ലാ XP, നക്ഷത്രങ്ങൾ, സ്ട്രീക്കുകൾ, നാണയങ്ങൾ എന്നിവ മായ്ക്കും. ഇത് പഴയപടിയാക്കാനാവില്ല.';
+      'ഇത് സ്വാഗത ഘട്ടങ്ങൾ വീണ്ടും കാണിക്കുകയും ഈ ഫോണിലെ ക്രമീകരണങ്ങൾ മായ്ക്കുകയും ചെയ്യും. നിങ്ങളുടെ XP, നക്ഷത്രങ്ങൾ, നാണയങ്ങൾ, സ്ട്രീക്ക് എന്നിവ നിങ്ങളുടെ അക്കൗണ്ടിൽ സുരക്ഷിതമായിരിക്കും.';
 
   @override
-  String get settingsResetAction => 'എല്ലാം മായ്ക്കുക';
+  String get settingsResetAction => 'റീസെറ്റ് ചെയ്യുക';
 
   @override
   String get premiumTitle => 'Nyaya Premium';

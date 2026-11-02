@@ -202,12 +202,20 @@ class ProfileController extends Notifier<UserProfile> {
 
   int get quizzesTodayCount => state.quizzesTodayDay == Day.key(_now()) ? state.quizzesToday : 0;
 
-  /// Wipes progress but keeps language/theme so the restart feels familiar.
-  Future<void> resetAll() async {
+  /// Wipes what the phone kept but keeps language/theme so the restart feels
+  /// familiar. With [sameAccount] (Settings → Reset, still signed in) the
+  /// name and the league week already seen stay too: onboarding no longer
+  /// asks for a name, and last week's result was already shown.
+  Future<void> resetAll({bool sameAccount = false}) async {
     final keep = state;
     await ref.read(localStoreProvider).clear();
     _set(DailyPolicy.rollover(
-      UserProfile(language: keep.language, themeMode: keep.themeMode),
+      UserProfile(
+        language: keep.language,
+        themeMode: keep.themeMode,
+        name: sameAccount ? keep.name : '',
+        leagueResultSeen: sameAccount ? keep.leagueResultSeen : '',
+      ),
       _now(),
     ));
   }

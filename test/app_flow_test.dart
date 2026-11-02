@@ -22,6 +22,8 @@ import 'package:nyaya/features/profile/domain/user_profile.dart';
 import 'package:nyaya/features/leaderboard/data/league_api.dart';
 import 'package:nyaya/features/progress/application/progress_sync.dart';
 import 'package:nyaya/features/progress/data/progress_api.dart';
+import 'package:nyaya/features/progress/domain/server_progress.dart';
+import 'package:nyaya/features/settings/presentation/settings_screen.dart';
 import 'package:nyaya/features/review/data/review_api.dart';
 import 'package:nyaya/features/quiz/application/quiz_controller.dart';
 import 'package:nyaya/features/quiz/data/quiz_api.dart';
@@ -578,6 +580,41 @@ void main() {
     expect(find.text("Play today's Daily Docket (free)"), findsOneWidget);
     expect(find.text('Ask the AI a legal question'), findsOneWidget);
     expect(find.text('Get unlimited energy'), findsNothing, reason: 'premium is hidden in the beta');
+  });
+
+  testWidgets('Reset this phone brings back onboarding, keeps the name, and does not repeat the league result', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen', 'leagueResultSeen': '2026-W43'});
+    final c = await pumpApp(
+      tester,
+      prefs: {'profile_v1': onboarded},
+      server: (s) => s
+        ..settings = const ServerSettings(name: 'Ravi', persona: 'citizen', language: 'en', dailyGoal: 3, onboarded: true)
+        ..quizzesCompleted = 1
+        ..lastResult = const LeagueResult(weekId: '2026-W43', rank: 1, fromTier: 1, toTier: 2, bonusCoins: 50),
+    );
+    await settle(tester);
+    expect(find.text('Leaderboard'), findsNothing, reason: 'last week was already seen');
+
+    c.read(routerProvider).push(Routes.settings);
+    await settle(tester);
+    // Settings is on top of the tabs: scroll its list, not Home's.
+    final reset = find.text('Reset this phone');
+    await tester.scrollUntilVisible(
+      reset,
+      300,
+      scrollable: find.descendant(of: find.byType(SettingsScreen), matching: find.byType(Scrollable)).first,
+    );
+    await tester.pump();
+    await tester.tap(reset);
+    await settle(tester);
+    expect(find.textContaining('Your XP, stars, coins and streak are saved to your account'), findsOneWidget);
+    await tester.tap(find.text('Reset'));
+    await settle(tester);
+
+    expect(find.text('Choose your language'), findsOneWidget);
+    expect(api.settings!.onboarded, isFalse, reason: 'the account starts over too');
+    expect(c.read(profileProvider).name, 'Ravi');
+    expect(find.text('Leaderboard'), findsNothing, reason: 'no league result again');
   });
 
   testWidgets('leaving Home while the league result is open still marks it seen', (tester) async {

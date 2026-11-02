@@ -1411,14 +1411,14 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get settingsReset => 'Reset progress';
+  String get settingsReset => 'Reset this phone';
 
   @override
   String get settingsResetConfirm =>
-      'This erases coins, energy and settings on this device. XP, stars and streaks are saved to your account and stay. This cannot be undone.';
+      'This takes you through the welcome steps again and clears this phone\'s settings. Your XP, stars, coins and streak are saved to your account and stay.';
 
   @override
-  String get settingsResetAction => 'Erase everything';
+  String get settingsResetAction => 'Reset';
 
   @override
   String get premiumTitle => 'Nyaya Premium';

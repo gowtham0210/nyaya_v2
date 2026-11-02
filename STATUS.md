@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-11-02 (Sentry FLUTTER-4 fix, Claude Opus 5.5)
+> Last updated: 2026-11-02 (reset reopens onboarding, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -272,7 +272,7 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       back on; coins shown on the Journey header and in Settings → Store (they had no place since the Home redesign).
       Also fixed: "Play again" reopened the finished quiz (state is per quiz request; now invalidated first).
       Tests: backend 33 unit + 56 API, Flutter 39. Staging migrated (backup `nyaya-2026-10-29-0813.sql.gz`); user
-      checked Part 2 on the iPhone. Known: Settings → Reset may not reopen onboarding (account settings come back);
+      checked Part 2 on the iPhone. Known (fixed 2026-11-02): Settings → Reset may not reopen onboarding (account settings come back);
       premium chat stops at the server's 50/day while the app shows unlimited. Next: Part 3 (real leagues).
 
 - [x] 2026-10-29: **Real weekly leagues on the server (Part 3 of 3).** User's choices: small groups are topped up to 30
@@ -860,6 +860,15 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       `ref` after closing, when Home could already be gone ("Using ref when a widget is about to or has been
       unmounted"). The profile notifier is now taken before the dialog opens. A widget test checks that leaving
       Home with the dialog open still marks the result as seen; it could not recreate the exact order of the crash.
+- [x] 2026-11-02: **Settings → Reset reopens onboarding** (reported by the user on the iPhone). It cleared the phone and
+      opened onboarding, but the refresh right after copied the account's `onboarded: true` back, so the router sent
+      the learner to Home; it also wiped `leagueResultSeen`, so last week's league result popped up again. Now
+      Reset saves `onboarded: false` to the account before refreshing (the server already accepts it), and keeps the
+      name (onboarding no longer asks for it) and the league week already seen (`resetAll(sameAccount: true)`;
+      account deletion still clears everything). The row and dialog now say what really happens, in all 6
+      languages: "Reset this phone" / "Reset", and XP, stars, coins and streak stay on the account (the other
+      languages wrongly said they were erased). Test fails on the old code and passes now; app tests 216. Checked on
+      the simulator against the local API: reset → onboarding stays → Home with progress, no league popup.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

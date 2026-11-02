@@ -413,11 +413,15 @@ class SettingsScreen extends ConsumerWidget {
       ),
     );
     if (ok != true || !context.mounted) return;
-    await ref.read(profileProvider.notifier).resetAll();
+    final sync = ref.read(progressSyncProvider.notifier);
+    await ref.read(profileProvider.notifier).resetAll(sameAccount: true);
     ref.read(journeyProvider.notifier).reset();
     ref.read(chatControllerProvider.notifier).clear();
+    // The account says it finished onboarding; tell it to start over first,
+    // or the refresh below would skip onboarding again.
+    await sync.pushSettings();
     // XP, stars and streaks belong to the account, so they come back.
-    unawaited(ref.read(progressSyncProvider.notifier).refresh());
+    unawaited(sync.refresh());
     if (context.mounted) context.go(Routes.onboarding);
   }
 }

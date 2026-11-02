@@ -1414,14 +1414,14 @@ class AppLocalizationsTe extends AppLocalizations {
   }
 
   @override
-  String get settingsReset => 'పురోగతి రీసెట్ చేయండి';
+  String get settingsReset => 'ఈ ఫోన్‌ను రీసెట్ చేయండి';
 
   @override
   String get settingsResetConfirm =>
-      'ఇది ఈ పరికరంలోని XP, స్టార్లు, స్ట్రీక్‌లు, కాయిన్‌లు అన్నింటినీ తొలగిస్తుంది. దీన్ని తిరిగి పొందలేరు.';
+      'ఇది స్వాగత దశలను మళ్లీ చూపించి, ఈ ఫోన్ సెట్టింగ్‌లను తొలగిస్తుంది. మీ XP, స్టార్లు, కాయిన్‌లు, స్ట్రీక్ మీ ఖాతాలో సురక్షితంగా ఉంటాయి.';
 
   @override
-  String get settingsResetAction => 'అన్నీ తొలగించు';
+  String get settingsResetAction => 'రీసెట్ చేయండి';
 
   @override
   String get premiumTitle => 'Nyaya Premium';

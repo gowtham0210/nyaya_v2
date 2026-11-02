@@ -2437,19 +2437,19 @@ abstract class AppLocalizations {
   /// No description provided for @settingsReset.
   ///
   /// In en, this message translates to:
-  /// **'Reset progress'**
+  /// **'Reset this phone'**
   String get settingsReset;
 
   /// No description provided for @settingsResetConfirm.
   ///
   /// In en, this message translates to:
-  /// **'This erases coins, energy and settings on this device. XP, stars and streaks are saved to your account and stay. This cannot be undone.'**
+  /// **'This takes you through the welcome steps again and clears this phone\'s settings. Your XP, stars, coins and streak are saved to your account and stay.'**
   String get settingsResetConfirm;
 
   /// No description provided for @settingsResetAction.
   ///
   /// In en, this message translates to:
-  /// **'Erase everything'**
+  /// **'Reset'**
   String get settingsResetAction;
 
   /// No description provided for @premiumTitle.

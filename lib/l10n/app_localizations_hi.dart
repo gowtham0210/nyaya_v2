@@ -1408,14 +1408,14 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get settingsReset => 'प्रगति रीसेट करें';
+  String get settingsReset => 'इस फ़ोन को रीसेट करें';
 
   @override
   String get settingsResetConfirm =>
-      'इससे इस डिवाइस के सभी XP, स्टार, स्ट्रीक और सिक्के मिट जाएँगे। इसे वापस नहीं लाया जा सकता।';
+      'इससे स्वागत के चरण फिर से शुरू होंगे और इस फ़ोन की सेटिंग्स साफ़ हो जाएँगी। आपके XP, स्टार, सिक्के और स्ट्रीक आपके खाते में सुरक्षित रहते हैं।';
 
   @override
-  String get settingsResetAction => 'सब मिटाएँ';
+  String get settingsResetAction => 'रीसेट करें';
 
   @override
   String get premiumTitle => 'Nyaya प्रीमियम';
