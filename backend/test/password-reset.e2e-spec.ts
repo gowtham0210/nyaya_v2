@@ -94,6 +94,25 @@ describe('password reset', () => {
     await confirm(s.email, code).expect(400);
   });
 
+  // The test database runs one statement at a time, so this can't race; the
+  // single-statement try counter is what keeps real Postgres safe.
+  it('stops a code when many wrong guesses arrive together', async () => {
+    const s = await t.signInAs('learner');
+    await request(s.email).expect(204);
+    const code = codeFor(s.email)!;
+    const wrong = code === '000000' ? '111111' : '000000';
+    const answers = await Promise.all(
+      Array.from({ length: 20 }, () => confirm(s.email, wrong)),
+    );
+    expect(answers.every((r) => r.status === 400)).toBe(true);
+    const rows = await t.db
+      .select()
+      .from(passwordResetCodes)
+      .where(eq(passwordResetCodes.userId, s.id));
+    expect(rows).toHaveLength(0);
+    await confirm(s.email, code).expect(400);
+  });
+
   it('refuses an expired code', async () => {
     const s = await t.signInAs('learner');
     await request(s.email).expect(204);

@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-11-02 (app name and icon, Claude Opus 5.5)
+> Last updated: 2026-11-02 (review fixes, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -886,6 +886,15 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       `dart run flutter_launcher_icons`). Android adaptive icon: symbol on #873F2B, inset 0 (checked in circle and
       rounded-square shapes). The tool wrongly changes `ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS`
       in `project.pbxproj`: undo that after each run. Checked on the iPhone simulator home screen.
+- [x] 2026-11-02: **OpenQodex review fixes (password reset).** (1) Major: parallel wrong guesses could share one try.
+      Each guess now uses up a try before it is checked, in one `UPDATE … wrong_tries + 1 … RETURNING` that only
+      matches while tries < 5 and the code is unexpired; at most 5 guesses are ever compared. (2) Minor: a learner's
+      reset request answered slower than an unknown email's (it waited for SMTP); the mail is now sent without
+      waiting, failures logged. PGlite runs one statement at a time, so no test can recreate the race; a test checks
+      20 wrong guesses sent together still end the code. The review itself never completes on this branch (187
+      files, ~15,800 added lines; it leaves ~405 changed ranges unread, mostly Flutter screens): split future work
+      into smaller pushes. Server e2e tests time out while starting when the Mac is under load: run
+      `npx vitest run --config ./vitest.config.e2e.ts --maxWorkers=3`. **These two fixes are not on staging yet.**
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

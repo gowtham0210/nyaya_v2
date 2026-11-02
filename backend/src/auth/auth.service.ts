@@ -6,7 +6,7 @@ import {
 } from 'node:crypto';
 import { HttpStatus, Inject, Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { and, eq, inArray, isNull, or } from 'drizzle-orm';
+import { and, eq, gt, inArray, isNull, lt, or, sql } from 'drizzle-orm';
 import { AuditService } from '../core/audit.service.js';
 import { APP_CONFIG, type AppConfig } from '../core/config.js';
 import { DB, type Db, type Tx } from '../core/db.js';
@@ -33,7 +33,7 @@ const REUSE_GRACE_MS = 30_000;
 const PASSWORD_WINDOW_MS = 15 * 60_000;
 /** How long an emailed reset code works. */
 const RESET_CODE_TTL_MS = 15 * 60_000;
-/** Wrong tries before a reset code stops working. */
+/** Tries a reset code allows; it stops working after this many wrong ones. */
 const RESET_CODE_MAX_WRONG = 5;
 /** Reset emails per address in [RESET_CODE_TTL_MS]; more are quietly not sent. */
 const RESET_MAILS_PER_WINDOW = 3;
@@ -203,19 +203,21 @@ export class AuthService {
       .insert(passwordResetCodes)
       .values({ userId: user.id, ...row })
       .onConflictDoUpdate({ target: passwordResetCodes.userId, set: row });
-    try {
-      await this.mailer.send({
+    // Not awaited: waiting for the mail server would make a real account's
+    // answer slower than an unknown email's, and so give it away. A failure
+    // is logged, not shown, for the same reason.
+    void this.mailer
+      .send({
         to: user.email,
         subject: 'Your Nyaya password reset code',
         text:
           `Your code is ${code}. It works for 15 minutes.\n\n` +
           "If you didn't ask to reset your Nyaya password, ignore this email. " +
           'Your password stays the same.',
-      });
-    } catch (e) {
-      // Logged, not shown: an error here would tell the caller the account exists.
-      this.logger.error(`Reset mail failed: ${(e as Error).message}`);
-    }
+      })
+      .catch((e: unknown) =>
+        this.logger.error(`Reset mail failed: ${(e as Error).message}`),
+      );
   }
 
   /**
@@ -235,18 +237,30 @@ export class AuthService {
       .innerJoin(users, eq(users.id, passwordResetCodes.userId))
       .where(eq(users.email, normalized))
       .limit(1);
-    if (!found || !isLearner(found.user) || found.reset.expiresAt < new Date())
-      throw invalidResetCode();
-    const { user, reset } = found;
-    if (!sameHash(resetCodeHash(user.id, code), reset.codeHash)) {
-      if (reset.wrongTries + 1 >= RESET_CODE_MAX_WRONG)
+    if (!found || !isLearner(found.user)) throw invalidResetCode();
+    const { user } = found;
+    // Every guess uses up a try before it is checked, in one statement, so
+    // guesses sent at the same moment can't share a try: at most
+    // RESET_CODE_MAX_WRONG are ever compared with the code.
+    const [attempt] = await this.db
+      .update(passwordResetCodes)
+      .set({ wrongTries: sql`${passwordResetCodes.wrongTries} + 1` })
+      .where(
+        and(
+          eq(passwordResetCodes.userId, user.id),
+          lt(passwordResetCodes.wrongTries, RESET_CODE_MAX_WRONG),
+          gt(passwordResetCodes.expiresAt, new Date()),
+        ),
+      )
+      .returning({
+        codeHash: passwordResetCodes.codeHash,
+        tries: passwordResetCodes.wrongTries,
+      });
+    if (!attempt) throw invalidResetCode();
+    if (!sameHash(resetCodeHash(user.id, code), attempt.codeHash)) {
+      if (attempt.tries >= RESET_CODE_MAX_WRONG)
         await this.db
           .delete(passwordResetCodes)
-          .where(eq(passwordResetCodes.userId, user.id));
-      else
-        await this.db
-          .update(passwordResetCodes)
-          .set({ wrongTries: reset.wrongTries + 1 })
           .where(eq(passwordResetCodes.userId, user.id));
       throw invalidResetCode();
     }

@@ -102,6 +102,7 @@ export const passwordResetCodes = pgTable('password_reset_codes', {
     .primaryKey()
     .references(() => users.id, { onDelete: 'cascade' }),
   codeHash: text('code_hash').notNull(),
+  /** Tries used so far, taken before each guess is checked (so a right guess counts too). */
   wrongTries: integer('wrong_tries').notNull().default(0),
   expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
   createdAt: createdAt(),
