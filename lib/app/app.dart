@@ -58,7 +58,7 @@ class _NyayaAppState extends ConsumerState<NyayaApp> {
     ref.watch(reminderSyncProvider);
     final update = ref.watch(updateCheckProvider);
     return MaterialApp.router(
-      title: 'Nyaya',
+      title: 'Nyaya Kural',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),

@@ -2,4 +2,5 @@
 <resources>
     <!-- Nyaya Warm Cream: launch background, matches the Flutter scaffold. -->
     <color name="nyaya_cream">#F5EBDD</color>
+    <color name="ic_launcher_background">#873F2B</color>
 </resources>
