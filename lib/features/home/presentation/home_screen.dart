@@ -35,12 +35,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   void _maybeShowLeagueOutcome() {
+    if (!mounted) return;
     final outcome = ref.read(profileProvider).pendingLeagueOutcome;
-    if (outcome == null || !mounted) return;
+    if (outcome == null) return;
+    // Taken now: Home may be gone by the time the dialog closes (a sign-out,
+    // or leaving for a screen outside the tabs), and its ref with it.
+    final profile = ref.read(profileProvider.notifier);
     showDialog<void>(
       context: context,
       builder: (context) => LeagueOutcomeDialog(outcome: outcome),
-    ).then((_) => ref.read(profileProvider.notifier).acknowledgeLeagueOutcome());
+    ).then((_) => profile.acknowledgeLeagueOutcome());
   }
 
   @override

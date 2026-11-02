@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-11-02 (news pictures from the portal, Claude Opus 5.5)
+> Last updated: 2026-11-02 (Sentry FLUTTER-4 fix, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -856,6 +856,10 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       Checked locally end to end: seed editor uploaded, reviewer approved, publisher published, picture on the Home
       card and the Updates list on the simulator (test article retired afterwards). **Staging needs a deploy**
       (migration 0017 + new API + portal) before editors can upload there, and the iPhone needs a new build.
+- [x] 2026-11-02: **Fixed Sentry FLUTTER-4** (crash on the iPhone, release build): Home's league-result dialog read
+      `ref` after closing, when Home could already be gone ("Using ref when a widget is about to or has been
+      unmounted"). The profile notifier is now taken before the dialog opens. A widget test checks that leaving
+      Home with the dialog open still marks the result as seen; it could not recreate the exact order of the crash.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):

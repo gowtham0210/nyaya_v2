@@ -580,6 +580,24 @@ void main() {
     expect(find.text('Get unlimited energy'), findsNothing, reason: 'premium is hidden in the beta');
   });
 
+  testWidgets('leaving Home while the league result is open still marks it seen', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(
+      tester,
+      prefs: {'profile_v1': onboarded},
+      server: (s) => s
+        ..quizzesCompleted = 1
+        ..lastResult = const LeagueResult(weekId: '2026-W43', rank: 2, fromTier: 1, toTier: 2, bonusCoins: 50),
+    );
+    await settle(tester);
+    expect(find.text('Leaderboard'), findsOneWidget, reason: 'the result dialog is open');
+    // A screen outside the tabs replaces Home (as a sign-out does) and closes the dialog.
+    c.read(routerProvider).go(Routes.signIn);
+    await settle(tester);
+    expect(tester.takeException(), isNull);
+    expect(c.read(profileProvider).pendingLeagueOutcome, isNull, reason: 'still marked as seen');
+  });
+
   testWidgets('the league shows the server group, you, practice players and last week', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     final c = await pumpApp(
