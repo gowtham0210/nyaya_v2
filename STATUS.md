@@ -894,7 +894,9 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       20 wrong guesses sent together still end the code. The review itself never completes on this branch (187
       files, ~15,800 added lines; it leaves ~405 changed ranges unread, mostly Flutter screens): split future work
       into smaller pushes. Server e2e tests time out while starting when the Mac is under load: run
-      `npx vitest run --config ./vitest.config.e2e.ts --maxWorkers=3`. **These two fixes are not on staging yet.**
+      `npx vitest run --config ./vitest.config.e2e.ts --maxWorkers=3`. Deployed to staging on 2026-11-03 (backup
+      `nyaya-2026-11-03-0414.sql.gz` first, no migration); both fixes checked in the running API. Pushed as PR
+      gowtham0210/nyaya_v2#1 (CI watched by Auto-fix).
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
