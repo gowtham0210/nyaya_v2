@@ -4,13 +4,17 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../app/router.dart';
+import '../../../core/config/game_rules.dart';
 import '../../../core/l10n/l10n.dart';
+import '../../../core/storage/local_store.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/day.dart';
 import '../../../core/widgets/common.dart';
 import '../../../core/widgets/pressable.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../profile/domain/user_profile.dart';
+import '../../quiz/domain/quiz_models.dart';
 import '../application/journey_controller.dart';
 import '../domain/journey.dart';
 import 'journey_layout.dart';
@@ -53,9 +57,15 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
     }
   }
 
+  void _openSheet(JourneyNode node) => showNodeSheet(context, ref, node, onShowNext: _scrollToCurrent);
+
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
+    // After a level or chest, bring the new next step into view.
+    ref.listen(journeyProvider.select((p) => p.current?.id), (before, now) {
+      if (before != now) WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToCurrent());
+    });
     final progress = ref.watch(journeyProvider);
     final profile = ref.watch(profileProvider);
     final nodes = JourneyCatalog.nodes;
@@ -67,9 +77,10 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
         children: [
           LayoutBuilder(
             builder: (context, box) {
-              final layout = _layout?.width == box.maxWidth
+              final scale = MediaQuery.textScalerOf(context).scale(1);
+              final layout = _layout?.width == box.maxWidth && _layout?.textScale == scale
                   ? _layout!
-                  : JourneyLayout(width: box.maxWidth, nodes: nodes);
+                  : JourneyLayout(width: box.maxWidth, nodes: nodes, textScale: scale);
               _layout = layout;
               _viewport = box.maxHeight;
               if (!_didInitialScroll) {
@@ -114,7 +125,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                         Positioned(
                           left: AppSpacing.page,
                           right: AppSpacing.page,
-                          top: layout.bannerTop(c) + 30,
+                          top: layout.bannerTop(c) + 20,
                           child: ChapterBanner(
                             number: c + 1,
                             title: l.chapterTitle(chapter.id),
@@ -122,7 +133,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                             chapter: chapter,
                             done: progress.completedLevelsIn(chapter.id),
                             active: (current?.chapterIndex ?? -1) == c,
-                            onTap: () => showNodeSheet(context, ref, _chapterFocus(progress, c)),
+                            onTap: () => _openSheet(_chapterFocus(progress, c)),
                           ),
                         ),
                       for (final node in nodes)
@@ -132,7 +143,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                           status: progress.status(node),
                           stars: progress.stars[node.id] ?? 0,
                           userName: profile.name,
-                          onTap: () => showNodeSheet(context, ref, node),
+                          onTap: () => _openSheet(node),
                         ),
                     ],
                   ),
@@ -142,6 +153,19 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
           ),
           // Floating header.
           Positioned(top: 0, left: 0, right: 0, child: _MapHeader(totalStars: progress.totalStars)),
+          Positioned(
+            right: AppSpacing.page,
+            bottom: AppSpacing.md + 56 + AppSpacing.sm,
+            child: FloatingActionButton.small(
+              heroTag: 'list',
+              tooltip: l.journeyListView,
+              elevation: 3,
+              backgroundColor: context.colors.surface,
+              foregroundColor: context.colors.primary,
+              onPressed: () => _LevelList.show(context, onOpen: _openSheet),
+              child: const Icon(Icons.format_list_bulleted_rounded),
+            ),
+          ),
           Positioned(
             right: AppSpacing.page,
             bottom: AppSpacing.md,
@@ -231,27 +255,29 @@ class _MapHeader extends ConsumerWidget {
                   padding: const EdgeInsets.only(top: 6),
                   child: Row(
                     children: [
+                      // Each chip opens a short note on what it counts and how it changes.
                       StatPill(
                         icon: Icons.star_rounded,
                         value: '$totalStars',
                         color: AppPalette.ochre,
-                        semanticLabel: '$totalStars ${context.l10n.statStars}',
+                        semanticLabel: '$totalStars ${l.statStars}',
+                        onTap: () => _ResourceSheet.show(context, _Resource.stars),
                       ),
-                      const SizedBox(width: 8),
+                      const SizedBox(width: 4),
                       StatPill(
                         icon: Icons.bolt_rounded,
                         value: p.isPremium ? '∞' : '${p.energy}',
                         color: context.nyaya.energy,
-                        semanticLabel: p.isPremium ? context.l10n.energyUnlimited : context.l10n.energyLeft(p.energy),
+                        semanticLabel: p.isPremium ? l.energyUnlimited : l.energyLeft(p.energy),
+                        onTap: () => _ResourceSheet.show(context, _Resource.energy),
                       ),
-                      const SizedBox(width: 8),
-                      // Coins are spent in Settings → Store (energy refills, streak freezes).
+                      const SizedBox(width: 4),
                       StatPill(
                         icon: Icons.monetization_on_rounded,
                         value: '${p.coins}',
                         color: AppPalette.ochre,
-                        semanticLabel: '${p.coins} ${context.l10n.statCoins}',
-                        onTap: () => context.push(Routes.settings),
+                        semanticLabel: '${p.coins} ${l.statCoins}',
+                        onTap: () => _ResourceSheet.show(context, _Resource.coins),
                       ),
                     ],
                   ),
@@ -303,6 +329,10 @@ class ChapterBanner extends StatelessWidget {
     return Center(
       child: Semantics(
         button: true,
+        label: [l.journeyChapter(number), title, l.homeLevelsDone(done, chapter.levels), subtitle]
+            .where((s) => s.isNotEmpty)
+            .join(', '),
+        excludeSemantics: true,
         child: Pressable(
           onTap: onTap,
           scale: 0.97,
@@ -339,7 +369,7 @@ class ChapterBanner extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        '${l.journeyChapter(number).toUpperCase()} · $done/${chapter.levels}',
+                        l.journeyChapterProgress(number, done, chapter.levels).toUpperCase(),
                         style: context.text.labelSmall?.copyWith(
                           color: accent,
                           fontWeight: FontWeight.w600,
@@ -349,7 +379,7 @@ class ChapterBanner extends StatelessWidget {
                       const SizedBox(height: 2),
                       Text(
                         title,
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: AppTheme.serif(TextStyle(fontSize: 22, height: 1.2, color: ink), display: false),
                       ),
@@ -370,5 +400,236 @@ class ChapterBanner extends StatelessWidget {
         ),
       ),
     ).animate().fadeIn(duration: 400.ms);
+  }
+}
+
+enum _Resource { stars, energy, coins }
+
+/// What a header chip counts, how it is earned and what it is for — only the
+/// rules the app and server really apply.
+class _ResourceSheet extends ConsumerWidget {
+  const _ResourceSheet(this.resource);
+
+  final _Resource resource;
+
+  static Future<void> show(BuildContext context, _Resource resource) => showModalBottomSheet(
+    context: context,
+    useRootNavigator: true,
+    isScrollControlled: true,
+    builder: (_) => _ResourceSheet(resource),
+  );
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = context.l10n;
+    final p = ref.watch(profileProvider);
+    final stars = ref.watch(journeyProvider).totalStars;
+    final maxStars = JourneyCatalog.nodes.where((n) => n.kind == NodeKind.level).length * 3;
+    final now = ref.read(clockProvider)();
+    final (icon, color, title, value, body) = switch (resource) {
+      _Resource.stars => (
+        Icons.star_rounded,
+        AppPalette.ochre,
+        l.statStars,
+        l.journeyStarsOf(stars, maxStars),
+        l.journeyStarsInfo((GameRules.oneStarAccuracy * 100).round(), (GameRules.twoStarAccuracy * 100).round()),
+      ),
+      _Resource.energy => (
+        Icons.bolt_rounded,
+        context.nyaya.energy,
+        l.statEnergy,
+        p.isPremium ? l.energyUnlimited : l.energyLeft(p.energy),
+        l.journeyEnergyInfo(
+          QuizMode.casePath.energyCost,
+          GameRules.freeDailyEnergy,
+          formatCountdown(Day.untilMidnight(now)),
+        ),
+      ),
+      _Resource.coins => (
+        Icons.monetization_on_rounded,
+        AppPalette.ochre,
+        l.statCoins,
+        '${p.coins} ${l.statCoins}',
+        l.journeyCoinsInfo,
+      ),
+    };
+
+    return SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(AppSpacing.page, 0, AppSpacing.page, AppSpacing.md),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Container(
+                width: 64,
+                height: 64,
+                decoration: BoxDecoration(shape: BoxShape.circle, color: color.withValues(alpha: 0.15)),
+                child: Icon(icon, size: 36, color: color),
+              ),
+            ),
+            const SizedBox(height: 12),
+            Semantics(
+              header: true,
+              child: Text(title, textAlign: TextAlign.center, style: context.text.headlineSmall),
+            ),
+            const SizedBox(height: 4),
+            Text(value, textAlign: TextAlign.center, style: context.text.titleMedium),
+            const SizedBox(height: AppSpacing.md),
+            Text(
+              body,
+              textAlign: TextAlign.center,
+              style: context.text.bodyLarge?.copyWith(color: context.nyaya.textSecondary),
+            ),
+            const SizedBox(height: AppSpacing.lg),
+            if (resource == _Resource.coins)
+              FilledButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  context.push(Routes.settings);
+                },
+                child: Text(l.journeyOpenStore),
+              )
+            else
+              OutlinedButton(onPressed: () => Navigator.pop(context), child: Text(l.commonOk)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// The whole road as a plain list: the same stops and states as the map, for
+/// screen readers and anyone who finds the painted map hard to follow.
+class _LevelList extends ConsumerWidget {
+  const _LevelList({required this.onOpen});
+
+  final void Function(JourneyNode node) onOpen;
+
+  static Future<void> show(BuildContext context, {required void Function(JourneyNode node) onOpen}) =>
+      showModalBottomSheet(
+        context: context,
+        useRootNavigator: true,
+        isScrollControlled: true,
+        builder: (_) => _LevelList(onOpen: onOpen),
+      );
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = context.l10n;
+    final progress = ref.watch(journeyProvider);
+
+    return DraggableScrollableSheet(
+      expand: false,
+      initialChildSize: 0.75,
+      maxChildSize: 0.95,
+      // Only 24 rows: build them all so every one is in the reading order.
+      builder: (context, scroll) => SingleChildScrollView(
+        controller: scroll,
+        padding: const EdgeInsets.fromLTRB(AppSpacing.page, 0, AppSpacing.page, AppSpacing.lg),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+          Semantics(header: true, child: Text(l.journeyAllLevels, style: context.text.headlineSmall)),
+          for (final (c, chapter) in JourneyCatalog.chapters.indexed) ...[
+            const SizedBox(height: AppSpacing.md),
+            Semantics(
+              header: true,
+              child: Text(
+                '${l.journeyChapter(c + 1)} · ${l.chapterTitle(chapter.id)}',
+                style: context.text.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+              ),
+            ),
+            Text(
+              l.homeLevelsDone(progress.completedLevelsIn(chapter.id), chapter.levels),
+              style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary),
+            ),
+            for (final node in JourneyCatalog.nodes.where((n) => n.chapterIndex == c))
+              _LevelListRow(
+                node: node,
+                status: progress.status(node),
+                stars: progress.stars[node.id] ?? 0,
+                onTap: () {
+                  Navigator.pop(context);
+                  onOpen(node);
+                },
+              ),
+          ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _LevelListRow extends StatelessWidget {
+  const _LevelListRow({required this.node, required this.status, required this.stars, required this.onTap});
+
+  final JourneyNode node;
+  final NodeStatus status;
+  final int stars;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final chest = node.kind == NodeKind.chest;
+    final title = chest ? l.journeyChest : l.journeyLevel(node.level);
+    final state = switch (status) {
+      NodeStatus.locked => l.journeyLocked,
+      NodeStatus.current => chest ? l.journeyChestReadyTitle : l.journeyNext,
+      NodeStatus.completed => chest ? l.journeyChestCollectedTitle : l.journeyDone,
+    };
+    final icon = switch (status) {
+      NodeStatus.locked => Icons.lock_rounded,
+      NodeStatus.current => Icons.play_arrow_rounded,
+      NodeStatus.completed => Icons.check_rounded,
+    };
+    final active = status != NodeStatus.locked;
+
+    return Semantics(
+      button: true,
+      label: [title, state, if (!chest && stars > 0) l.journeyStarsOf(stars, 3)].join(', '),
+      excludeSemantics: true,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(AppRadius.md),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: 56),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Row(
+              children: [
+                Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: active ? context.colors.primary : context.colors.surfaceContainerHigh,
+                  ),
+                  child: Icon(
+                    chest ? Icons.redeem_rounded : icon,
+                    size: 20,
+                    color: active ? context.colors.onPrimary : context.nyaya.textSecondary,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(title, style: context.text.titleSmall),
+                      Text(state, style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary)),
+                    ],
+                  ),
+                ),
+                if (!chest && stars > 0) StarRow(stars: stars, size: 16),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

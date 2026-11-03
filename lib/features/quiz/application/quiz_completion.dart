@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/api/api_client.dart';
@@ -88,15 +90,17 @@ class QuizCompletionService {
   }
 
   /// Opens a chapter chest on the map through the server. Returns the coins
-  /// won, or 0 when the server refused (locked, already open or offline).
-  static Future<int> openChest(WidgetRef ref, JourneyNode chest) async {
+  /// won, or null when the server refused (locked, already open or offline);
+  /// then the server's figures are fetched again so the map shows its state.
+  static Future<int?> openChest(WidgetRef ref, JourneyNode chest) async {
     final coinsBefore = ref.read(profileProvider).coins;
     try {
       final progress = await ref.read(progressApiProvider).openChest(chest.id);
       ref.read(progressSyncProvider.notifier).apply(progress);
       return (progress.coins - coinsBefore).clamp(0, GameRules.coinsPerChest);
     } on ApiException {
-      return 0;
+      unawaited(ref.read(progressSyncProvider.notifier).refresh());
+      return null;
     }
   }
 }

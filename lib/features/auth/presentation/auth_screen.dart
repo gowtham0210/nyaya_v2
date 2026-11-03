@@ -8,6 +8,7 @@ import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/chunky_button.dart';
+import '../../../app/router.dart';
 import '../../profile/application/profile_controller.dart';
 import '../application/auth_controller.dart';
 
@@ -81,6 +82,12 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     }
   }
 
+  /// Signed in with a new password: done here too.
+  Future<void> _forgotPassword() async {
+    final signedIn = await context.push<bool>(Routes.resetPassword, extra: _email.text.trim());
+    if (signedIn == true && mounted) context.pop(true);
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
@@ -98,9 +105,12 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
           child: ListView(
             padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.sm, AppSpacing.page, AppSpacing.xl),
             children: [
-              Text(
-                _signIn ? l.authSignInTitle : l.authCreateTitle,
-                style: AppTheme.serif(TextStyle(fontSize: 34, height: 1.1, color: context.colors.onSurface)),
+              Semantics(
+                header: true,
+                child: Text(
+                  _signIn ? l.authSignInTitle : l.authCreateTitle,
+                  style: AppTheme.serif(TextStyle(fontSize: 34, height: 1.1, color: context.colors.onSurface)),
+                ),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
@@ -148,12 +158,17 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                   ),
                 ),
               ),
+              if (_signIn)
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: TextButton(onPressed: _busy ? null : _forgotPassword, child: Text(l.authForgot)),
+                ),
               if (_error != null) ...[
                 const SizedBox(height: AppSpacing.md),
-                Text(
-                  _error!,
-                  style: context.text.bodyMedium?.copyWith(color: n.error),
-                  semanticsLabel: _error,
+                // Read out as soon as it appears.
+                Semantics(
+                  liveRegion: true,
+                  child: Text(_error!, style: context.text.bodyMedium?.copyWith(color: n.error)),
                 ),
               ],
               const SizedBox(height: AppSpacing.lg),

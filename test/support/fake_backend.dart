@@ -212,6 +212,7 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
 
   @override
   Future<void> abandon(String sessionId) async {
+    if (abandonOffline) throw const ApiException(0, 'network', 'offline');
     final s = _sessions.remove(sessionId);
     if (s != null) energy += s.cost;
   }
@@ -261,6 +262,7 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
 
   @override
   Future<void> report({required String questionVersionId, required ReportReason reason, String? comment}) async {
+    if (reportOffline) throw const ApiException(0, 'network', 'offline');
     if (reports.any((r) => r.versionId == questionVersionId)) {
       throw const ApiException(409, 'already_reported', 'none');
     }
@@ -276,6 +278,13 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
 
   final stars = <String, int>{};
   final openedChests = <String>{};
+
+  /// Opening a chest fails as if the phone were offline.
+  bool chestOffline = false;
+
+  /// Leaving a quiz, or reporting a question, fails as if offline.
+  bool abandonOffline = false;
+  bool reportOffline = false;
   int totalXp = 0;
   int quizzesCompleted = 0;
   bool docketDone = false;
@@ -348,6 +357,7 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
 
   @override
   Future<ServerProgress> openChest(String chestId) async {
+    if (chestOffline) throw const ApiException(0, 'network', 'offline');
     if (openedChests.add(chestId)) coins += 30;
     return _progress();
   }
@@ -472,6 +482,21 @@ class FakeAuthApi implements AuthApi {
 
   @override
   Future<void> signOut() => tokens.clear();
+
+  /// Emails a reset code was asked for; [resetCode] is the right code.
+  final resetRequested = <String>[];
+  static const resetCode = '123456';
+
+  @override
+  Future<void> requestPasswordReset({required String email}) async => resetRequested.add(email);
+
+  @override
+  Future<Account> resetPassword({required String email, required String code, required String newPassword}) {
+    if (code != resetCode) {
+      throw const ApiException(400, 'invalid_reset_code', 'This code is wrong or has expired. Ask for a new one.');
+    }
+    return _session(email, 'Learner');
+  }
 
   @override
   Future<void> deleteAccount({required String password}) async {

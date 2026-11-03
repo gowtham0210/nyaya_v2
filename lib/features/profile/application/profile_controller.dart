@@ -98,9 +98,10 @@ class ProfileController extends Notifier<UserProfile> {
 
   // ── AI assistant quota ────────────────────────────────────────────────────
 
-  int get aiMessagesLeft => state.isPremium
-      ? 1 << 30
-      : (GameRules.freeDailyAiMessages - state.aiMessagesToday).clamp(0, GameRules.freeDailyAiMessages);
+  int get aiMessagesLeft {
+    final limit = state.isPremium ? GameRules.premiumDailyAiMessages : GameRules.freeDailyAiMessages;
+    return (limit - state.aiMessagesToday).clamp(0, limit);
+  }
 
   bool consumeAiMessage() {
     if (state.isPremium) return true;
@@ -201,12 +202,20 @@ class ProfileController extends Notifier<UserProfile> {
 
   int get quizzesTodayCount => state.quizzesTodayDay == Day.key(_now()) ? state.quizzesToday : 0;
 
-  /// Wipes progress but keeps language/theme so the restart feels familiar.
-  Future<void> resetAll() async {
+  /// Wipes what the phone kept but keeps language/theme so the restart feels
+  /// familiar. With [sameAccount] (Settings → Reset, still signed in) the
+  /// name and the league week already seen stay too: onboarding no longer
+  /// asks for a name, and last week's result was already shown.
+  Future<void> resetAll({bool sameAccount = false}) async {
     final keep = state;
     await ref.read(localStoreProvider).clear();
     _set(DailyPolicy.rollover(
-      UserProfile(language: keep.language, themeMode: keep.themeMode),
+      UserProfile(
+        language: keep.language,
+        themeMode: keep.themeMode,
+        name: sameAccount ? keep.name : '',
+        leagueResultSeen: sameAccount ? keep.leagueResultSeen : '',
+      ),
       _now(),
     ));
   }

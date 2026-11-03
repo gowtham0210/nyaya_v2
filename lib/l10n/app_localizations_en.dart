@@ -203,6 +203,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onbSkip => 'Skip';
 
   @override
+  String onbSlidePosition(int current, int total) {
+    return 'Slide $current of $total';
+  }
+
+  @override
   String get onbGetStarted => 'Get Started';
 
   @override
@@ -367,6 +372,43 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeContinueLeftOff => 'Continue where you left off';
 
   @override
+  String get homeStartTitle => 'Start your learning journey';
+
+  @override
+  String get homeStartBody =>
+      'Build your understanding of Indian law, one concept at a time.';
+
+  @override
+  String get homeStartRecommended => 'Recommended start';
+
+  @override
+  String get homeStartLawDesc =>
+      'Understand fundamental rights, duties and constitutional principles.';
+
+  @override
+  String get homeStartLearning => 'Start learning';
+
+  @override
+  String homeLevelsDone(int done, int total) {
+    return '$done of $total levels done';
+  }
+
+  @override
+  String get homeFeatured => 'Featured';
+
+  @override
+  String get homeViewOnMap => 'View on map';
+
+  @override
+  String get homeReviewMistakes => 'Review your mistakes';
+
+  @override
+  String get homeReviewSaved => 'Your saved questions';
+
+  @override
+  String get homeReviewNow => 'Review now';
+
+  @override
   String homeChapterLevel(int chapter, int level) {
     return 'Chapter $chapter · Level $level';
   }
@@ -470,7 +512,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String modeEnergyCost(int count) {
-    return '$count ⚡';
+    return '$count energy';
   }
 
   @override
@@ -509,7 +551,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String energyRefillCoins(int coins) {
-    return 'Refill 1 ⚡ for $coins coins';
+    return 'Refill 1 energy for $coins coins';
   }
 
   @override
@@ -569,10 +611,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get journeyLocked => 'Locked';
 
   @override
-  String get journeyLockedBody =>
-      'Clear the previous level to unlock this one.';
-
-  @override
   String journeyQuestions(int count) {
     return '$count questions';
   }
@@ -587,20 +625,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get journeyChest => 'Chapter chest';
 
   @override
-  String get journeyChestBody =>
-      'You finished the chapter! Open the chest for bonus coins.';
-
-  @override
   String get journeyOpenChest => 'Open chest';
-
-  @override
-  String journeyChestOpened(int coins) {
-    return '+$coins coins!';
-  }
-
-  @override
-  String get journeyChestLocked =>
-      'Finish every level in this chapter to open the chest.';
 
   @override
   String get journeyJumpToCurrent => 'Jump to current level';
@@ -609,8 +634,138 @@ class AppLocalizationsEn extends AppLocalizations {
   String get journeyYou => 'You';
 
   @override
-  String get journeyPassHint =>
-      'Score 50% to pass · 80% for 2 stars · 100% for 3 stars';
+  String get journeyNext => 'Next step';
+
+  @override
+  String get journeyDone => 'Completed';
+
+  @override
+  String journeyStarsOf(int count, int total) {
+    return '$count of $total stars';
+  }
+
+  @override
+  String journeyLockedNext(String step) {
+    return 'Levels open in order. Your next step is $step.';
+  }
+
+  @override
+  String get journeyGoToNext => 'Show my next step';
+
+  @override
+  String journeyStartCost(int count) {
+    return 'Start · $count energy';
+  }
+
+  @override
+  String journeyReplayCost(int count) {
+    return 'Replay · $count energy';
+  }
+
+  @override
+  String get journeyNoTimer => 'No time limit';
+
+  @override
+  String get journeyStarsTitle => 'Stars you can earn';
+
+  @override
+  String journeyPassMark(int percent) {
+    return '$percent% · pass';
+  }
+
+  @override
+  String journeyStarMark(int percent) {
+    return '$percent%';
+  }
+
+  @override
+  String get journeyHowScoring => 'How scoring works';
+
+  @override
+  String journeyRuleEnergy(int count) {
+    return 'Each try costs $count energy. If you leave before your first answer, you get it back.';
+  }
+
+  @override
+  String get journeyRuleRetry =>
+      'Didn\'t pass? You can try again as many times as you like.';
+
+  @override
+  String get journeyRuleBest =>
+      'Your best score is kept. A lower score never takes away stars.';
+
+  @override
+  String get journeyRuleNoMinus => 'Wrong answers don\'t take away marks.';
+
+  @override
+  String journeyRuleBonus(int count, int coins) {
+    return 'Your first 3-star score on a level gives $count energy back. Each new star earns $coins coins.';
+  }
+
+  @override
+  String get journeyChestLockedTitle => 'Chapter chest locked';
+
+  @override
+  String get journeyChestLockedText =>
+      'Complete all levels in this chapter to unlock your reward.';
+
+  @override
+  String get journeyChestReadyTitle => 'Your chapter reward is ready';
+
+  @override
+  String get journeyChestReadyText =>
+      'Well done! You\'ve completed this chapter.';
+
+  @override
+  String journeyChestReward(int coins) {
+    return 'Reward: $coins coins';
+  }
+
+  @override
+  String get journeyChestCollectedTitle => 'Chapter reward collected';
+
+  @override
+  String journeyChestCollectedText(int coins) {
+    return 'You received $coins coins.';
+  }
+
+  @override
+  String get journeyChestFailed =>
+      'Couldn\'t open the chest. Check your connection and try again. Your reward is still waiting.';
+
+  @override
+  String get journeyContinueLearning => 'Continue learning';
+
+  @override
+  String get journeyBackToMap => 'Back to the map';
+
+  @override
+  String journeyChapterProgress(int number, int done, int total) {
+    return 'Chapter $number · $done/$total completed';
+  }
+
+  @override
+  String journeyStarsInfo(int one, int two) {
+    return 'Earn up to 3 stars on each level: $one% for 1 star, $two% for 2 and 100% for 3. Your best score on each level counts.';
+  }
+
+  @override
+  String journeyEnergyInfo(int cost, int free, String time) {
+    return 'Each Case Path level costs $cost energy. You get $free free energy every day. It refills at midnight — in $time.';
+  }
+
+  @override
+  String get journeyCoinsInfo =>
+      'Earn coins from new stars, chapter chests, the Daily Docket, your daily goal and streak milestones. Spend them in the Store on energy refills and streak freezes.';
+
+  @override
+  String get journeyOpenStore => 'Open the Store';
+
+  @override
+  String get journeyListView => 'Show levels as a list';
+
+  @override
+  String get journeyAllLevels => 'All levels';
 
   @override
   String quizQuestionOf(int current, int total) {
@@ -664,17 +819,90 @@ class AppLocalizationsEn extends AppLocalizations {
   String get quizQuitTitle => 'Leave this quiz?';
 
   @override
-  String get quizQuitBody => 'Your progress in this quiz will be lost.';
-
-  @override
-  String get quizQuitBodyRefund =>
-      'You haven\'t answered yet, so your energy will be refunded.';
-
-  @override
   String get quizQuitStay => 'Keep playing';
 
   @override
   String get quizQuitLeave => 'Leave';
+
+  @override
+  String get quizTapToCheck => 'Tap an answer to check it.';
+
+  @override
+  String get quizChecking => 'Checking your answer…';
+
+  @override
+  String quizTimedHint(int seconds) {
+    return 'Answer within $seconds seconds. No answer in time counts as wrong.';
+  }
+
+  @override
+  String get quizDuelHint =>
+      'A right answer scores up to 1,000 points, more the faster you answer. A wrong answer scores 0.';
+
+  @override
+  String get quizExamHint =>
+      'Pick an answer, then move on. You can\'t go back to a question.';
+
+  @override
+  String quizSecondsLeft(int seconds) {
+    return '$seconds seconds left';
+  }
+
+  @override
+  String quizTimeLeft(String time) {
+    return 'Time left: $time';
+  }
+
+  @override
+  String get quizNoExplanation =>
+      'No explanation is available for this question yet.';
+
+  @override
+  String quizQuitRefund(int count) {
+    return 'You haven\'t answered yet, so you\'ll get your $count energy back.';
+  }
+
+  @override
+  String get quizQuitFree =>
+      'You haven\'t answered yet, so nothing is lost. You can start again later.';
+
+  @override
+  String get quizQuitAnswered =>
+      'This attempt will end and can\'t be continued later. Your answers so far won\'t count.';
+
+  @override
+  String quizQuitAnsweredEnergy(int count) {
+    return 'This attempt will end and can\'t be continued later. Your answers so far won\'t count, and the $count energy isn\'t given back.';
+  }
+
+  @override
+  String get quizRefundFailed =>
+      'Couldn\'t reach Nyaya, so your energy wasn\'t given back.';
+
+  @override
+  String get quizOptionCorrect => 'correct answer';
+
+  @override
+  String get quizOptionWrong => 'your answer, wrong';
+
+  @override
+  String get quizOptionSelected => 'selected';
+
+  @override
+  String get quizOptionChecking => 'checking';
+
+  @override
+  String get resultNoAnswer => 'No answer';
+
+  @override
+  String get resultHideReview => 'Hide answers';
+
+  @override
+  String get reportSending => 'Sending…';
+
+  @override
+  String get reportFailed =>
+      'Couldn\'t send your report. Your text is kept, so you can try again.';
 
   @override
   String get quizLoading => 'Preparing your case…';
@@ -755,7 +983,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String resultEnergyBonus(int count) {
-    return '3-star bonus: +$count ⚡';
+    return '3-star bonus: +$count energy';
   }
 
   @override
@@ -965,7 +1193,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatLimitReached =>
-      'You\'ve used today\'s free questions. Come back tomorrow or go Premium for unlimited AI.';
+      'You\'ve used today\'s free questions. Come back tomorrow or go Premium for more AI questions.';
 
   @override
   String get chatLimitReachedToday =>
@@ -1183,44 +1411,36 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get settingsReset => 'Reset progress';
+  String get settingsReset => 'Reset this phone';
 
   @override
   String get settingsResetConfirm =>
-      'This erases coins, energy and settings on this device. XP, stars and streaks are saved to your account and stay. This cannot be undone.';
+      'This takes you through the welcome steps again and clears this phone\'s settings. Your XP, stars, coins and streak are saved to your account and stay.';
 
   @override
-  String get settingsResetAction => 'Erase everything';
+  String get settingsResetAction => 'Reset';
 
   @override
   String get premiumTitle => 'Nyaya Premium';
 
   @override
-  String get premiumHeadline => 'Learn without limits';
+  String get premiumHeadline => 'Learn more, every day';
 
   @override
   String get premiumBenefitEnergy => 'Unlimited energy';
 
   @override
-  String get premiumBenefitEnergySub => 'Play as many quizzes as you like';
+  String premiumBenefitEnergySub(int free) {
+    return 'Free: $free energy a day. Premium: play as many quizzes as you like.';
+  }
 
   @override
-  String get premiumBenefitAi => 'Unlimited Nyaya AI';
+  String get premiumBenefitAi => 'More Nyaya AI';
 
   @override
-  String get premiumBenefitAiSub => 'Ask every legal question you have';
-
-  @override
-  String get premiumBenefitFreeze => 'Streak freezes included';
-
-  @override
-  String get premiumBenefitFreezeSub => 'Never lose your streak to a busy day';
-
-  @override
-  String get premiumBenefitExam => 'Full mock exams';
-
-  @override
-  String get premiumBenefitExamSub => 'CLAT, AIBE & judiciary-style practice';
+  String premiumBenefitAiSub(int free, int premium) {
+    return 'Free: $free questions a day. Premium: $premium a day.';
+  }
 
   @override
   String get premiumFair => 'Fair play: Premium never boosts league XP.';
@@ -1358,7 +1578,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lawLegacyTitle => 'IPC & CrPC (Legacy)';
 
   @override
-  String get lawLegacyDesc => 'Older laws for reference';
+  String get lawLegacyDesc =>
+      'Replaced in July 2024. Kept for reference and comparison.';
 
   @override
   String get chapterConstitutionTitle => 'Constitution Basics';
@@ -1455,6 +1676,51 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authErrorName => 'Enter your name.';
+
+  @override
+  String get authForgot => 'Forgot password?';
+
+  @override
+  String get authResetTitle => 'Reset your password';
+
+  @override
+  String get authResetSubtitle =>
+      'Enter your account\'s email and we\'ll send you a 6-digit code.';
+
+  @override
+  String get authResetSend => 'SEND CODE';
+
+  @override
+  String authResetSentTo(String email) {
+    return 'If an account uses $email, we\'ve sent it a 6-digit code. It works for 15 minutes. Check your spam folder if you don\'t see it.';
+  }
+
+  @override
+  String get authResetCode => '6-digit code';
+
+  @override
+  String get authResetNewPassword => 'New password';
+
+  @override
+  String get authResetSave => 'SET NEW PASSWORD';
+
+  @override
+  String get authResetResend => 'Send a new code';
+
+  @override
+  String get authResetErrorCode =>
+      'This code is wrong or has expired. Ask for a new one.';
+
+  @override
+  String get authResetUnavailable =>
+      'Password reset isn\'t available right now. Please try again later.';
+
+  @override
+  String get authResetErrorInvalid =>
+      'Enter the 6-digit code and a new password of at least 8 characters.';
+
+  @override
+  String get authResetDone => 'Your password has been changed.';
 
   @override
   String get settingsAccount => 'Account';

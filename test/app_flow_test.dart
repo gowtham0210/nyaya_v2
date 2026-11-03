@@ -1,22 +1,29 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:nyaya/app/app.dart';
 import 'package:nyaya/app/router.dart';
 import 'package:nyaya/core/api/token_store.dart';
+import 'package:nyaya/core/config/features.dart';
 import 'package:nyaya/core/services/sounds.dart';
 import 'package:nyaya/core/storage/local_store.dart';
+import 'package:nyaya/features/auth/application/auth_controller.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
 import 'package:nyaya/features/journey/application/journey_controller.dart';
 import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
+import 'package:nyaya/features/legal_updates/presentation/updates_screen.dart';
 import 'package:nyaya/features/reminders/data/reminder_notifications.dart';
 import 'package:nyaya/features/profile/application/profile_controller.dart';
+import 'package:nyaya/features/profile/domain/user_profile.dart';
 import 'package:nyaya/features/leaderboard/data/league_api.dart';
 import 'package:nyaya/features/progress/application/progress_sync.dart';
 import 'package:nyaya/features/progress/data/progress_api.dart';
+import 'package:nyaya/features/progress/domain/server_progress.dart';
+import 'package:nyaya/features/settings/presentation/settings_screen.dart';
 import 'package:nyaya/features/review/data/review_api.dart';
 import 'package:nyaya/features/quiz/application/quiz_controller.dart';
 import 'package:nyaya/features/quiz/data/quiz_api.dart';
@@ -87,20 +94,17 @@ void main() {
     await settle(tester);
     await tester.tap(find.text('Law aspirant'));
     await settle(tester);
-    await tester.tap(find.text('CONTINUE'));
-    await settle(tester);
-    await tester.tap(find.text('CONTINUE')); // keep default goal
-    await settle(tester);
-    await tester.enterText(find.byType(TextField), 'Asha');
-    await settle(tester);
-    await tester.tap(find.text('COMMIT TO MY GOAL'));
+    await tester.tap(find.text('GET STARTED'));
     await settle(tester);
 
     final p = c.read(profileProvider);
     expect(p.onboarded, isTrue);
-    expect(p.name, 'Asha');
+    expect(p.persona, Persona.aspirant);
+    // No name or goal questions: the name stays empty, the goal keeps its default.
+    expect(p.name, isEmpty);
+    expect(p.dailyGoal, 3);
     expect(p.energy, 5);
-    // Premium is hidden in the beta: no paywall after onboarding, straight to Home.
+    // No paywall after onboarding (premium is offered after the first quiz): straight to Home.
     await tester.pump(const Duration(milliseconds: 600));
     await settle(tester);
     expect(find.text('Maybe later'), findsNothing);
@@ -113,7 +117,7 @@ void main() {
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
     await settle(tester);
 
-    await tester.tap(find.text('Explore').first); // Constitution "Start here" card
+    await tester.tap(find.text('Start learning').first); // "Start your learning journey" card
     await settle(tester);
     expect(c.read(profileProvider).energy, 4, reason: 'energy is charged at start');
 
@@ -139,12 +143,46 @@ void main() {
     expect(find.text('NEXT LEVEL'), findsOneWidget);
   });
 
+  // Premium is hidden in the beta; run with --dart-define=NYAYA_PREMIUM=true.
+  Future<void> finishFirstLevel(WidgetTester tester, ProviderContainer c) async {
+    await settle(tester);
+    await tester.tap(find.text('Start learning').first);
+    await settle(tester);
+    for (var i = 0; i < 6; i++) {
+      await tester.tap(find.text(api.correctTextFor(_current(c).id)).first);
+      await settle(tester);
+      await tester.tap(find.text(i == 5 ? 'FINISH' : 'NEXT'));
+      await settle(tester);
+    }
+  }
+
+  testWidgets('premium is offered once, on the first quiz result', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await finishFirstLevel(tester, c);
+
+    expect(find.text('Unlock unlimited energy'), findsOneWidget);
+    expect(c.read(localStoreProvider).readJson('premium_offer_v1'), isNotNull);
+  }, skip: !Features.premium);
+
+  testWidgets('premium is not offered again after it was shown', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {
+      'profile_v1': onboarded,
+      'premium_offer_v1': jsonEncode({'shown': true}),
+    });
+    await finishFirstLevel(tester, c);
+
+    expect(find.text('Perfect case!'), findsOneWidget);
+    expect(find.text('Unlock unlimited energy'), findsNothing);
+  }, skip: !Features.premium);
+
   testWidgets('Play again after a failed level starts a fresh attempt', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
     await settle(tester);
 
-    await tester.tap(find.text('Explore').first);
+    await tester.tap(find.text('Start learning').first);
     await settle(tester);
     // Every answer wrong, so the level fails and offers Play again.
     for (var i = 0; i < 6; i++) {
@@ -168,7 +206,7 @@ void main() {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
     await settle(tester);
-    await tester.tap(find.text('Explore').first);
+    await tester.tap(find.text('Start learning').first);
     await settle(tester);
 
     final q = _current(c);
@@ -241,7 +279,7 @@ void main() {
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, signedIn: false);
     await settle(tester);
 
-    await tester.tap(find.text('Explore').first);
+    await tester.tap(find.text('Start learning').first);
     await settle(tester);
     expect(find.text('Create your free account'), findsOneWidget);
     expect(c.read(profileProvider).energy, 5, reason: 'no energy spent before signing in');
@@ -264,6 +302,38 @@ void main() {
     expect(api.settings?.onboarded, isTrue);
   });
 
+  testWidgets('a learner who forgot their password resets it with the emailed code and plays', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Asha', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, signedIn: false);
+    await settle(tester);
+
+    await tester.tap(find.text('Start learning').first);
+    await settle(tester);
+    await tester.tap(find.text('I already have an account'));
+    await settle(tester);
+    await tester.enterText(find.widgetWithText(TextField, 'Email'), 'asha@test.local');
+    await tester.tap(find.text('Forgot password?'));
+    await settle(tester);
+
+    expect(find.text('Reset your password'), findsOneWidget);
+    await tester.tap(find.text('SEND CODE'));
+    await settle(tester);
+    expect(authApi.resetRequested, ['asha@test.local'], reason: 'the email typed on sign-in carries over');
+    expect(find.textContaining("we've sent it a 6-digit code"), findsOneWidget);
+
+    await tester.enterText(find.widgetWithText(TextField, '6-digit code'), '000000');
+    await tester.enterText(find.widgetWithText(TextField, 'New password'), 'a new password');
+    await tester.tap(find.text('SET NEW PASSWORD'));
+    await settle(tester);
+    expect(find.text('This code is wrong or has expired. Ask for a new one.'), findsOneWidget);
+
+    await tester.enterText(find.widgetWithText(TextField, '6-digit code'), FakeAuthApi.resetCode);
+    await tester.tap(find.text('SET NEW PASSWORD'));
+    await settle(tester);
+    expect(c.read(authProvider)?.email, 'asha@test.local');
+    expect(find.textContaining('Question 1 of'), findsOneWidget, reason: 'the quiz that asked for sign-in starts');
+  });
+
   testWidgets('Journey tab shows the Case Path map and opens a level from its chapter card', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     await pumpApp(tester, prefs: {'profile_v1': onboarded});
@@ -273,14 +343,130 @@ void main() {
     await settle(tester);
     expect(find.text('Case Path'), findsOneWidget);
     expect(find.text('Your journey through Indian law'), findsOneWidget);
-    expect(find.text('CHAPTER 1 · 0/3'), findsOneWidget);
+    expect(find.text('CHAPTER 1 · 0/3 COMPLETED'), findsOneWidget);
     expect(find.text('You'), findsOneWidget);
     expect(tester.takeException(), isNull, reason: 'missing paintings fall back quietly');
 
-    await tester.tap(find.text('CHAPTER 1 · 0/3'));
+    await tester.tap(find.text('CHAPTER 1 · 0/3 COMPLETED'));
     await settle(tester);
     expect(find.text('Level 1'), findsOneWidget);
-    expect(find.text('START'), findsOneWidget);
+    // What a try costs and what each star needs, before starting.
+    expect(find.text('6 questions'), findsOneWidget);
+    expect(find.text('1 energy'), findsOneWidget);
+    expect(find.text('No time limit'), findsOneWidget);
+    expect(find.text('50% · pass'), findsOneWidget);
+    expect(find.text('80%'), findsOneWidget);
+    expect(find.text('100%'), findsOneWidget);
+    expect(find.text('START · 1 ENERGY'), findsOneWidget);
+
+    await tester.tap(find.text('How scoring works'));
+    await settle(tester);
+    expect(find.text('Your best score is kept. A lower score never takes away stars.'), findsOneWidget);
+    expect(find.text("Wrong answers don't take away marks."), findsOneWidget);
+  });
+
+  testWidgets('a locked level says what to do next and the list shows every state', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, server: (s) => s..stars['constitution_1'] = 2);
+    await settle(tester);
+    await tester.tap(find.text('Journey'));
+    await settle(tester);
+
+    await tester.tap(find.byTooltip('Show levels as a list'));
+    await settle(tester);
+    expect(find.text('All levels'), findsOneWidget);
+    expect(find.text('Completed'), findsOneWidget);
+    expect(find.text('Next step'), findsOneWidget);
+    expect(find.text('1 of 3 levels done'), findsOneWidget);
+
+    // Level 3 of the first chapter is locked.
+    await tester.tap(find.text('Level 3').first);
+    await settle(tester);
+    expect(find.text('Level 3 · Locked'), findsOneWidget);
+    expect(
+      find.text('Levels open in order. Your next step is Level 2 · Constitution Basics.'),
+      findsOneWidget,
+    );
+    expect(find.textContaining('ENERGY'), findsNothing, reason: 'a locked level has no start button');
+    await tester.tap(find.text('Show my next step'));
+    await settle(tester);
+    expect(find.text('Level 3 · Locked'), findsNothing);
+    expect(c.read(journeyProvider).current?.id, 'constitution_2');
+  });
+
+  testWidgets('a chapter chest goes from locked to ready to collected, once', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen', 'coins': 60});
+    final c = await pumpApp(
+      tester,
+      prefs: {'profile_v1': onboarded},
+      server: (s) => s
+        ..stars.addAll({'constitution_1': 3, 'constitution_2': 2, 'constitution_3': 1})
+        ..chestOffline = true,
+    );
+    await settle(tester);
+    await tester.tap(find.text('Journey'));
+    await settle(tester);
+
+    // The second chapter's chest is still locked.
+    await tester.tap(find.byTooltip('Show levels as a list'));
+    await settle(tester);
+    final locked = find.text('Chapter chest').at(1);
+    await tester.ensureVisible(locked);
+    await tester.pump();
+    await tester.tap(locked);
+    await settle(tester);
+    expect(find.text('Complete all levels in this chapter to unlock your reward.'), findsOneWidget);
+    expect(find.text('0 of 3 levels done'), findsOneWidget);
+    expect(find.text('CONTINUE LEARNING'), findsOneWidget);
+    expect(find.text('OPEN CHEST'), findsNothing);
+    await tester.tap(find.text('CONTINUE LEARNING'));
+    await settle(tester);
+
+    await tester.tap(find.byTooltip('Show levels as a list'));
+    await settle(tester);
+    await tester.tap(find.text('Your chapter reward is ready'));
+    await settle(tester);
+    expect(find.text('Reward: 30 coins'), findsOneWidget);
+
+    // Offline: no reward is shown and the chest can still be opened.
+    await tester.tap(find.text('OPEN CHEST'));
+    await settle(tester);
+    expect(find.textContaining("Couldn't open the chest"), findsOneWidget);
+    expect(find.text('OPEN CHEST'), findsOneWidget);
+    expect(c.read(journeyProvider).openedChests, isEmpty);
+
+    api.chestOffline = false;
+    await tester.tap(find.text('OPEN CHEST'));
+    await tester.tap(find.text('OPEN CHEST'), warnIfMissed: false); // a second tap while claiming
+    await settle(tester);
+    expect(find.text('Chapter reward collected'), findsOneWidget);
+    expect(find.text('You received 30 coins.'), findsOneWidget);
+    expect(find.text('OPEN CHEST'), findsNothing);
+    expect(api.openedChests, {'constitution_chest'});
+    expect(c.read(profileProvider).coins, 90, reason: 'paid once');
+    expect(c.read(journeyProvider).openedChests, {'constitution_chest'});
+  });
+
+  testWidgets('resource chips explain stars, energy and coins', (tester) async {
+    final semantics = tester.ensureSemantics();
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    await tester.tap(find.text('Journey'));
+    await settle(tester);
+
+    for (final (label, text) in [
+      ('0 Stars', 'Earn up to 3 stars on each level'),
+      ('5 energy left', 'Each Case Path level costs 1 energy. You get 5 free energy every day.'),
+      ('60 Coins', 'Spend them in the Store on energy refills and streak freezes.'),
+    ]) {
+      await tester.tap(find.bySemanticsLabel(label));
+      await settle(tester);
+      expect(find.textContaining(text), findsOneWidget, reason: label);
+      await tester.tapAt(const Offset(20, 20)); // outside the sheet
+      await settle(tester);
+    }
+    semantics.dispose();
   });
 
   testWidgets('Home continue card resumes the next Case Path level', (tester) async {
@@ -297,11 +483,45 @@ void main() {
 
     expect(find.text('CONTINUE WHERE YOU LEFT OFF'), findsOneWidget);
     expect(find.text('Chapter 1 · Level 2'), findsOneWidget);
-    expect(find.text('1/3'), findsOneWidget);
+    expect(find.text('1 of 3 levels done'), findsOneWidget);
 
     await tester.tap(find.text('Continue'));
     await settle(tester);
     expect(find.textContaining('Question 1 of'), findsOneWidget);
+  });
+
+  double top(WidgetTester tester, String text) => tester.getTopLeft(find.text(text).first).dy;
+
+  /// A screen tall enough to build every Home section at once.
+  Future<void> tallScreen(WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1170, 12000);
+    await settle(tester);
+  }
+
+  testWidgets('a new learner sees where to start before the quiz modes, and featured laws last', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await tallScreen(tester);
+
+    expect(find.text('Start your learning journey'), findsOneWidget);
+    expect(find.text('RECOMMENDED START'), findsOneWidget);
+    expect(find.text('CONTINUE WHERE YOU LEFT OFF'), findsNothing);
+    expect(top(tester, 'Start your learning journey'), lessThan(top(tester, 'Quiz modes')));
+    expect(top(tester, 'Core Laws'), lessThan(top(tester, 'FEATURED')), reason: 'featured laws come last');
+    // Energy in words: Case Path and Duel cost 1, Exam 2, the Daily Docket is free.
+    expect(find.text('1 energy'), findsNWidgets(2));
+    expect(find.text('2 energy'), findsOneWidget);
+    expect(find.text('Free'), findsOneWidget);
+  });
+
+  testWidgets('a returning learner sees Continue first, before the quiz modes', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    await pumpApp(tester, prefs: {'profile_v1': onboarded}, server: (s) => s..stars['constitution_1'] = 3);
+    await tallScreen(tester);
+
+    expect(find.text('Start your learning journey'), findsNothing);
+    expect(top(tester, 'CONTINUE WHERE YOU LEFT OFF'), lessThan(top(tester, 'Quiz modes')));
+    expect(top(tester, 'Quiz modes'), lessThan(top(tester, 'FEATURED')), reason: 'no promotion above the learning');
   });
 
   testWidgets('Home shows latest updates and opens one', (tester) async {
@@ -354,12 +574,65 @@ void main() {
     await pumpApp(tester, prefs: {'profile_v1': profile}, server: (s) => s.energy = 0);
     await settle(tester);
 
-    await tester.tap(find.text('Explore').first); // Constitution "Start here" card
+    await tester.tap(find.text('Start learning').first); // "Start your learning journey" card
     await settle(tester);
     expect(find.text("You're out of energy"), findsOneWidget);
     expect(find.text("Play today's Daily Docket (free)"), findsOneWidget);
     expect(find.text('Ask the AI a legal question'), findsOneWidget);
     expect(find.text('Get unlimited energy'), findsNothing, reason: 'premium is hidden in the beta');
+  });
+
+  testWidgets('Reset this phone brings back onboarding, keeps the name, and does not repeat the league result', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen', 'leagueResultSeen': '2026-W43'});
+    final c = await pumpApp(
+      tester,
+      prefs: {'profile_v1': onboarded},
+      server: (s) => s
+        ..settings = const ServerSettings(name: 'Ravi', persona: 'citizen', language: 'en', dailyGoal: 3, onboarded: true)
+        ..quizzesCompleted = 1
+        ..lastResult = const LeagueResult(weekId: '2026-W43', rank: 1, fromTier: 1, toTier: 2, bonusCoins: 50),
+    );
+    await settle(tester);
+    expect(find.text('Leaderboard'), findsNothing, reason: 'last week was already seen');
+
+    c.read(routerProvider).push(Routes.settings);
+    await settle(tester);
+    // Settings is on top of the tabs: scroll its list, not Home's.
+    final reset = find.text('Reset this phone');
+    await tester.scrollUntilVisible(
+      reset,
+      300,
+      scrollable: find.descendant(of: find.byType(SettingsScreen), matching: find.byType(Scrollable)).first,
+    );
+    await tester.pump();
+    await tester.tap(reset);
+    await settle(tester);
+    expect(find.textContaining('Your XP, stars, coins and streak are saved to your account'), findsOneWidget);
+    await tester.tap(find.text('Reset'));
+    await settle(tester);
+
+    expect(find.text('Choose your language'), findsOneWidget);
+    expect(api.settings!.onboarded, isFalse, reason: 'the account starts over too');
+    expect(c.read(profileProvider).name, 'Ravi');
+    expect(find.text('Leaderboard'), findsNothing, reason: 'no league result again');
+  });
+
+  testWidgets('leaving Home while the league result is open still marks it seen', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(
+      tester,
+      prefs: {'profile_v1': onboarded},
+      server: (s) => s
+        ..quizzesCompleted = 1
+        ..lastResult = const LeagueResult(weekId: '2026-W43', rank: 2, fromTier: 1, toTier: 2, bonusCoins: 50),
+    );
+    await settle(tester);
+    expect(find.text('Leaderboard'), findsOneWidget, reason: 'the result dialog is open');
+    // A screen outside the tabs replaces Home (as a sign-out does) and closes the dialog.
+    c.read(routerProvider).go(Routes.signIn);
+    await settle(tester);
+    expect(tester.takeException(), isNull);
+    expect(c.read(profileProvider).pendingLeagueOutcome, isNull, reason: 'still marked as seen');
   });
 
   testWidgets('the league shows the server group, you, practice players and last week', (tester) async {
@@ -440,8 +713,7 @@ void main() {
     // Home's quiz modes section opens it.
     final tile = find.text('Moot Court Duel');
     await tester.scrollUntilVisible(tile, 200, scrollable: find.byType(Scrollable).first);
-    // Clear of the bottom navigation bar.
-    await tester.drag(find.byType(Scrollable).first, const Offset(0, -300));
+    await tester.ensureVisible(tile);
     await settle(tester);
     await tester.tap(tile);
     await settle(tester);
@@ -470,7 +742,7 @@ void main() {
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
     await settle(tester);
     expect(sounds.warmedUp, isFalse);
-    await tester.tap(find.text('Explore').first);
+    await tester.tap(find.text('Start learning').first);
     await settle(tester);
     await tester.tap(find.text(api.correctTextFor(_current(c).id)).first);
     await settle(tester);
@@ -517,7 +789,7 @@ void main() {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
     await settle(tester);
-    await tester.tap(find.text('Explore').first);
+    await tester.tap(find.text('Start learning').first);
     await settle(tester);
 
     // Wrong on the first question: the explanation offers Save and Report.
@@ -563,11 +835,217 @@ void main() {
     await settle(tester);
     final card = find.text('1 mistake · 1 saved');
     await tester.scrollUntilVisible(card, 200, scrollable: find.byType(Scrollable).first);
+    expect(find.text('Review your mistakes'), findsOneWidget);
+    expect(find.text('Review now'), findsOneWidget);
     await tester.tap(card);
     await settle(tester);
     expect(find.text('Question text ${first.id}'), findsOneWidget);
     expect(find.text('Wrong once'), findsOneWidget);
     expect(find.text('PRACTISE MISTAKES'), findsOneWidget);
+  });
+
+  testWidgets('before an answer there is no dead Next button, and answers say their state', (tester) async {
+    final semantics = tester.ensureSemantics();
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    await tester.tap(find.text('Start learning').first);
+    await settle(tester);
+
+    expect(find.text('Tap an answer to check it.'), findsOneWidget);
+    expect(find.text('NEXT'), findsNothing);
+    expect(find.text('Select an answer'), findsNothing);
+    expect(find.text('1/6'), findsNothing, reason: '"Question 1 of 6" is enough');
+
+    final q = _current(c);
+    final wrong = api.wrongTextFor(q.id);
+    await tester.tap(find.text(wrong).first);
+    await settle(tester);
+    expect(find.text('Not quite'), findsOneWidget);
+    expect(find.bySemanticsLabel(RegExp(', your answer, wrong\$')), findsOneWidget);
+    expect(find.bySemanticsLabel(RegExp(', correct answer\$')), findsOneWidget);
+    expect(find.text('NEXT'), findsOneWidget);
+
+    // A second tap on another option sends nothing.
+    await tester.tap(find.text(api.correctTextFor(q.id)).first, warnIfMissed: false);
+    await settle(tester);
+    expect(c.read(quizControllerProvider(const QuizRequest(QuizMode.casePath, levelId: 'constitution_1'))).answers, hasLength(1));
+    semantics.dispose();
+  });
+
+  testWidgets('leaving says exactly what happens to the energy', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    await tester.tap(find.text('Start learning').first);
+    await settle(tester);
+
+    await tester.tap(find.byTooltip('Close'));
+    await settle(tester);
+    expect(find.text("You haven't answered yet, so you'll get your 1 energy back."), findsOneWidget);
+    await tester.tap(find.text('Keep playing'));
+    await settle(tester);
+
+    await tester.tap(find.text(api.correctTextFor(_current(c).id)).first);
+    await settle(tester);
+    await tester.tap(find.byTooltip('Close'));
+    await settle(tester);
+    expect(
+      find.text(
+        "This attempt will end and can't be continued later. Your answers so far won't count, "
+        "and the 1 energy isn't given back.",
+      ),
+      findsOneWidget,
+    );
+    await tester.tap(find.text('Leave'));
+    await settle(tester);
+    expect(c.read(profileProvider).energy, 4, reason: 'an answered attempt keeps its charge');
+  });
+
+  testWidgets('leaving offline before answering says the energy was not given back', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    await pumpApp(tester, prefs: {'profile_v1': onboarded}, server: (s) => s.abandonOffline = true);
+    await settle(tester);
+    await tester.tap(find.text('Start learning').first);
+    await settle(tester);
+    await tester.tap(find.byTooltip('Close'));
+    await settle(tester);
+    await tester.tap(find.text('Leave'));
+    await settle(tester);
+    expect(find.text("Couldn't reach Nyaya, so your energy wasn't given back."), findsOneWidget);
+  });
+
+  testWidgets('the free Daily Docket promises no refund when you leave', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    c.read(routerProvider).push(Routes.quiz, extra: const QuizRequest(QuizMode.dailyDocket));
+    await settle(tester);
+    expect(find.text('Answer within 30 seconds. No answer in time counts as wrong.'), findsOneWidget);
+    await tester.tap(find.byTooltip('Close'));
+    await settle(tester);
+    expect(find.text("You haven't answered yet, so nothing is lost. You can start again later."), findsOneWidget);
+    await tester.tap(find.text('Leave'));
+    await settle(tester);
+  });
+
+  testWidgets('time away from the app comes off a running timer', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    const duel = QuizRequest(QuizMode.duel);
+    c.read(routerProvider).push(Routes.quiz, extra: duel);
+    await settle(tester);
+    expect(find.textContaining('A right answer scores up to 1,000 points'), findsOneWidget);
+    final ctl = c.read(quizControllerProvider(duel).notifier);
+    final before = c.read(quizControllerProvider(duel)).secondsLeft!;
+    ctl.catchUp(const Duration(seconds: 3));
+    expect(c.read(quizControllerProvider(duel)).secondsLeft, before - 3);
+    ctl.catchUp(const Duration(minutes: 5));
+    await settle(tester);
+    expect(c.read(quizControllerProvider(duel)).answers.single.isSkipped, isTrue);
+    expect(find.text("Time's up"), findsOneWidget);
+    c.read(routerProvider).go(Routes.home);
+    await settle(tester);
+  });
+
+  testWidgets('the exam counts answered questions, not skipped ones', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    const exam = QuizRequest(QuizMode.exam);
+    c.read(routerProvider).push(Routes.quiz, extra: exam);
+    await settle(tester);
+    final total = c.read(quizControllerProvider(exam)).questions.length;
+    expect(find.text('0 of $total answered'), findsOneWidget);
+    expect(find.text("Pick an answer, then move on. You can't go back to a question."), findsOneWidget);
+
+    await tester.tap(find.text('SKIP'));
+    await settle(tester);
+    expect(find.text('0 of $total answered'), findsOneWidget, reason: 'a skip is not an answer');
+    final q = c.read(quizControllerProvider(exam)).current;
+    await tester.tap(find.text(api.correctTextFor(q.id)).first);
+    await settle(tester);
+    expect(find.text('1 of $total answered'), findsOneWidget);
+    c.read(routerProvider).go(Routes.home);
+    await settle(tester);
+  });
+
+  testWidgets('a failed report says so in the sheet and keeps the text', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, server: (s) => s.reportOffline = true);
+    await settle(tester);
+    await tester.tap(find.text('Start learning').first);
+    await settle(tester);
+    await tester.tap(find.text(api.wrongTextFor(_current(c).id)).first);
+    await settle(tester);
+    await tester.ensureVisible(find.text('Report'));
+    await settle(tester);
+    await tester.tap(find.text('Report'));
+    await settle(tester);
+    await tester.tap(find.text('Typo or wording'));
+    await tester.enterText(find.byType(TextField), 'Article number looks off');
+    await tester.tap(find.text('Send report'));
+    await settle(tester);
+    expect(find.text("Couldn't send your report. Your text is kept, so you can try again."), findsOneWidget);
+    expect(find.text('Article number looks off'), findsOneWidget);
+    expect(api.reports, isEmpty);
+
+    api.reportOffline = false;
+    await tester.tap(find.text('Try again'));
+    await settle(tester);
+    expect(api.reports.single.comment, 'Article number looks off');
+    expect(find.text('Thanks. Our legal team will check this question.'), findsOneWidget);
+  });
+
+  testWidgets('answer review shows your answer and the right one', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    await tester.tap(find.text('Start learning').first);
+    await settle(tester);
+    final first = _current(c);
+    final wrong = api.wrongTextFor(first.id);
+    for (var i = 0; i < 6; i++) {
+      await tester.tap(find.text(i == 0 ? wrong : api.correctTextFor(_current(c).id)).first);
+      await settle(tester);
+      await tester.tap(find.text(i == 5 ? 'FINISH' : 'NEXT'));
+      await settle(tester);
+    }
+    expect(find.text('5/6 correct'), findsOneWidget);
+    await tester.tap(find.text('Review answers'));
+    await settle(tester);
+    expect(find.text('Hide answers'), findsOneWidget);
+    expect(find.text('Your answer: $wrong'), findsOneWidget);
+    expect(find.text('Correct answer: ${api.correctTextFor(first.id)}'), findsOneWidget);
+  });
+
+  testWidgets('an update card shows its uploaded picture, or the category painting without one', (tester) async {
+    LegalUpdate update({String? imageUrl}) => LegalUpdate(
+      id: 'u',
+      category: UpdateCategory.supremeCourt,
+      title: 'T',
+      summary: 'S',
+      keyPoints: const ['K'],
+      whyItMatters: 'W',
+      source: 'Src',
+      date: DateTime(2026, 1, 1),
+      readMinutes: 2,
+      imageUrl: imageUrl,
+    );
+    Future<void> show(LegalUpdate u) => tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light(),
+        home: SizedBox(width: 248, height: 124, child: UpdatePicture(update: u)),
+      ),
+    );
+
+    await show(update());
+    expect(find.byType(UpdateFallbackArt), findsOneWidget);
+    expect(find.byType(CachedNetworkImage), findsNothing);
+
+    await show(update(imageUrl: 'https://api.test/v1/news/u/image?v=1'));
+    expect(find.byType(CachedNetworkImage), findsOneWidget);
   });
 }
 

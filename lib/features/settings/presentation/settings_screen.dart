@@ -22,6 +22,7 @@ import '../../progress/application/progress_sync.dart';
 import '../../reminders/application/reminder_sync.dart';
 import '../../profile/domain/user_profile.dart';
 import 'delete_account_dialog.dart';
+import 'edit_name_dialog.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -51,7 +52,8 @@ class SettingsScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(p.name, style: context.text.titleLarge?.copyWith(color: Colors.white)),
+                      Text(p.name.isEmpty ? l.onbNameHint : p.name,
+                          style: context.text.titleLarge?.copyWith(color: Colors.white)),
                       Text(l.personaName(p.persona), style: context.text.bodyMedium?.copyWith(color: Colors.white70)),
                       if (p.isPremium)
                         Padding(
@@ -331,26 +333,7 @@ class SettingsScreen extends ConsumerWidget {
   }
 
   Future<void> _editName(BuildContext context, WidgetRef ref, String current) async {
-    final l = context.l10n;
-    final controller = TextEditingController(text: current);
-    final name = await showDialog<String>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l.settingsEditName),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          maxLength: 24,
-          textCapitalization: TextCapitalization.words,
-          decoration: InputDecoration(hintText: l.onbNameHint),
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: Text(l.commonCancel)),
-          FilledButton(onPressed: () => Navigator.pop(context, controller.text), child: Text(l.commonDone)),
-        ],
-      ),
-    );
-    controller.dispose();
+    final name = await showDialog<String>(context: context, builder: (_) => EditNameDialog(current: current));
     if (name != null && name.trim().isNotEmpty) {
       ref.read(profileProvider.notifier).setName(name);
       unawaited(ref.read(progressSyncProvider.notifier).pushSettings());
@@ -430,11 +413,15 @@ class SettingsScreen extends ConsumerWidget {
       ),
     );
     if (ok != true || !context.mounted) return;
-    await ref.read(profileProvider.notifier).resetAll();
+    final sync = ref.read(progressSyncProvider.notifier);
+    await ref.read(profileProvider.notifier).resetAll(sameAccount: true);
     ref.read(journeyProvider.notifier).reset();
     ref.read(chatControllerProvider.notifier).clear();
+    // The account says it finished onboarding; tell it to start over first,
+    // or the refresh below would skip onboarding again.
+    await sync.pushSettings();
     // XP, stars and streaks belong to the account, so they come back.
-    unawaited(ref.read(progressSyncProvider.notifier).refresh());
+    unawaited(sync.refresh());
     if (context.mounted) context.go(Routes.onboarding);
   }
 }
@@ -448,9 +435,12 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(4, AppSpacing.lg, 4, AppSpacing.sm),
-      child: Text(
-        text.toUpperCase(),
-        style: context.text.labelMedium?.copyWith(color: context.nyaya.textSecondary, letterSpacing: context.tracking(1.1)),
+      child: Semantics(
+        header: true,
+        child: Text(
+          text.toUpperCase(),
+          style: context.text.labelMedium?.copyWith(color: context.nyaya.textSecondary, letterSpacing: context.tracking(1.1)),
+        ),
       ),
     );
   }

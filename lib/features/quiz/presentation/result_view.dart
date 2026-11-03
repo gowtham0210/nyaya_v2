@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../app/router.dart';
+import '../../../core/config/features.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/services/feedback.dart';
 import '../../../core/services/sounds.dart';
@@ -17,6 +18,8 @@ import '../../../core/widgets/chunky_button.dart';
 import '../../../core/widgets/common.dart';
 import '../../journey/application/journey_controller.dart';
 import '../../journey/domain/journey.dart';
+import '../../premium/presentation/premium_banner.dart';
+import '../../profile/application/profile_controller.dart';
 import '../application/quiz_controller.dart';
 import '../domain/quiz_models.dart';
 import '../../review/presentation/question_actions.dart';
@@ -33,8 +36,10 @@ class ResultView extends ConsumerStatefulWidget {
 }
 
 class _ResultViewState extends ConsumerState<ResultView> {
+  static const _premiumOfferKey = 'premium_offer_v1';
   final _confetti = ConfettiController(duration: const Duration(milliseconds: 1500));
   bool _showReview = false;
+  late final bool _offerPremium;
 
   QuizResult get r => widget.state.result!;
 
@@ -58,6 +63,7 @@ class _ResultViewState extends ConsumerState<ResultView> {
   @override
   void initState() {
     super.initState();
+    _offerPremium = _takePremiumOffer();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       if (_celebrate) {
@@ -67,6 +73,16 @@ class _ResultViewState extends ConsumerState<ResultView> {
       final sound = _sound;
       if (sound != null) ref.read(soundsProvider).play(sound);
     });
+  }
+
+  /// Premium is offered once, softly, on the first result screen: after the
+  /// learner has finished a quiz, not before they have tried anything.
+  bool _takePremiumOffer() {
+    if (!Features.premium || ref.read(profileProvider).isPremium) return false;
+    final store = ref.read(localStoreProvider);
+    if (store.readJson(_premiumOfferKey) != null) return false;
+    store.writeJson(_premiumOfferKey, {'shown': true});
+    return true;
   }
 
   @override
@@ -135,10 +151,13 @@ class _ResultViewState extends ConsumerState<ResultView> {
                     children: [
                       _Hero(result: r),
                       const SizedBox(height: AppSpacing.md),
-                      Text(
-                        _headline(l),
-                        textAlign: TextAlign.center,
-                        style: context.text.headlineLarge,
+                      Semantics(
+                        header: true,
+                        child: Text(
+                          _headline(l),
+                          textAlign: TextAlign.center,
+                          style: context.text.headlineLarge,
+                        ),
                       ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.2),
                       const SizedBox(height: 6),
                       Text(
@@ -201,14 +220,20 @@ class _ResultViewState extends ConsumerState<ResultView> {
                             ).animate().fadeIn(delay: (650 + 120 * i).ms).slideX(begin: 0.1),
                           ),
                       ],
-                      const SizedBox(height: AppSpacing.sm),
-                      TextButton.icon(
+                      if (_offerPremium) ...[
+                        const SizedBox(height: AppSpacing.sm),
+                        const PremiumBanner().animate().fadeIn(delay: 900.ms),
+                      ],
+                      const SizedBox(height: AppSpacing.md),
+                      OutlinedButton.icon(
                         onPressed: () => setState(() => _showReview = !_showReview),
                         icon: Icon(_showReview ? Icons.expand_less_rounded : Icons.fact_check_rounded),
-                        label: Text(l.resultReview),
+                        label: Text(_showReview ? l.resultHideReview : l.resultReview),
                       ),
                       if (_showReview) ...[
-                        for (final (i, a) in r.answers.indexed) _ReviewItem(index: i + 1, answer: a),
+                        const SizedBox(height: AppSpacing.md),
+                        for (final (i, a) in r.answers.indexed)
+                          _ReviewItem(index: i + 1, answer: a, exam: mode == QuizMode.exam),
                       ],
                     ],
                   ),
@@ -288,7 +313,10 @@ class _Hero extends StatelessWidget {
     final l = context.l10n;
     switch (result.request.mode) {
       case QuizMode.casePath:
-        return Row(
+        return Semantics(
+          label: l.journeyStarsOf(result.stars, 3),
+          excludeSemantics: true,
+          child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
@@ -311,6 +339,7 @@ class _Hero extends StatelessWidget {
                         .rotate(begin: -0.2, delay: (250 * i).ms),
               ),
           ],
+        ),
         );
       case QuizMode.duel:
         final won = result.duelWon == true;
@@ -346,10 +375,27 @@ class _Hero extends StatelessWidget {
               color: AppPalette.burntClay,
             ).animate().scale(begin: const Offset(0.4, 0.4), curve: Curves.elasticOut, duration: 800.ms),
             const SizedBox(height: 8),
-            Text(
-              result.answers.map((a) => a.isCorrect ? '🟩' : '🟥').join(' '),
-              style: const TextStyle(fontSize: 22),
-              semanticsLabel: l.resultScore(result.correct, result.total),
+            // Squares drawn as boxes, not 🟩/🟥: emoji show as "?" boxes on iOS.
+            Semantics(
+              label: l.resultScore(result.correct, result.total),
+              child: ExcludeSemantics(
+                child: Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  alignment: WrapAlignment.center,
+                  children: [
+                    for (final a in result.answers)
+                      Container(
+                        width: 22,
+                        height: 22,
+                        decoration: BoxDecoration(
+                          color: a.isCorrect ? context.nyaya.success : context.nyaya.error,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
             ),
           ],
         );
@@ -405,11 +451,16 @@ class _StatTile extends StatelessWidget {
   }
 }
 
+/// One answered question, read-only: what you chose, the right answer and
+/// why. Nothing here sends an answer.
 class _ReviewItem extends StatelessWidget {
-  const _ReviewItem({required this.index, required this.answer});
+  const _ReviewItem({required this.index, required this.answer, required this.exam});
 
   final int index;
   final AnswerRecord answer;
+
+  /// Exams skip questions; timed modes run out of time. Both leave no answer.
+  final bool exam;
 
   @override
   Widget build(BuildContext context) {
@@ -426,25 +477,30 @@ class _ReviewItem extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(ok ? Icons.check_circle_rounded : Icons.cancel_rounded, color: color, size: 22),
+                Icon(
+                  ok ? Icons.check_circle_rounded : Icons.cancel_rounded,
+                  color: color,
+                  size: 22,
+                  semanticLabel: ok ? l.quizCorrect : l.quizWrong,
+                ),
                 const SizedBox(width: 8),
                 Expanded(child: Text('$index. ${q.text}', style: context.text.titleSmall)),
               ],
             ),
             const SizedBox(height: 8),
+            Text(
+              '${l.resultYourAnswer}: ${answer.isSkipped ? (exam ? l.resultSkipped : l.resultNoAnswer) : q.options[answer.selectedIndex!]}',
+              style: context.text.bodySmall?.copyWith(color: color, fontWeight: FontWeight.w600),
+            ),
             if (!ok)
-              Text(
-                '${l.resultYourAnswer}: ${answer.isSkipped ? l.resultSkipped : q.options[answer.selectedIndex!]}',
-                style: context.text.bodySmall?.copyWith(color: context.nyaya.error),
-              ),
-            if (answer.reveal?.correctIndex case final correct?)
-              Text(
-                '${l.resultCorrectAnswer}: ${q.options[correct]}',
-                style: context.text.bodySmall?.copyWith(color: context.nyaya.success, fontWeight: FontWeight.w700),
-              ),
+              if (answer.reveal?.correctIndex case final correct?)
+                Text(
+                  '${l.resultCorrectAnswer}: ${q.options[correct]}',
+                  style: context.text.bodySmall?.copyWith(color: context.nyaya.success, fontWeight: FontWeight.w700),
+                ),
             const SizedBox(height: 6),
             Text(
-              answer.reveal?.explanation ?? '',
+              (answer.reveal?.explanation ?? '').trim().isEmpty ? l.quizNoExplanation : answer.reveal!.explanation,
               style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary, height: 1.4),
             ),
             if (answer.reveal case final reveal?) ...[

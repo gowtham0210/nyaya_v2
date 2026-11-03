@@ -1,3 +1,4 @@
+import 'package:flutter/rendering.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -96,7 +97,7 @@ class _IntroSlidesState extends State<IntroSlides> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(l.onbGetStarted),
+                              Flexible(child: Text(l.onbGetStarted, textAlign: TextAlign.center)),
                               const SizedBox(width: 12),
                               const Icon(Icons.arrow_forward_rounded, size: 22),
                             ],
@@ -135,21 +136,26 @@ class _Dots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        for (var i = 0; i < count; i++)
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 250),
-            margin: const EdgeInsets.symmetric(horizontal: 8),
-            width: 10,
-            height: 10,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: i == page ? context.colors.primary : context.colors.outlineVariant,
+    // Read out as "Slide 2 of 3", again each time the slide changes.
+    return Semantics(
+      label: context.l10n.onbSlidePosition(page + 1, count),
+      liveRegion: true,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          for (var i = 0; i < count; i++)
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 250),
+              margin: const EdgeInsets.symmetric(horizontal: 8),
+              width: 10,
+              height: 10,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: i == page ? context.colors.primary : context.colors.outlineVariant,
+              ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -236,7 +242,10 @@ class _SlideText extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (eyebrow != null) ...[_Eyebrow(eyebrow!), const SizedBox(height: 12)],
-          Text(title, style: _serif(context, 40)).animate().fadeIn(duration: 350.ms).slideY(begin: 0.08),
+          Semantics(header: true, child: Text(title, style: _serif(context, 40)))
+              .animate()
+              .fadeIn(duration: 350.ms)
+              .slideY(begin: 0.08),
           const SizedBox(height: AppSpacing.md),
           Text(
             body,
@@ -248,6 +257,45 @@ class _SlideText extends StatelessWidget {
   }
 }
 
+/// A slide that fills the page. When large text leaves too little room, it
+/// scrolls instead of cutting the words off; the artwork ([_ArtRoom]) then
+/// keeps only its minimum height.
+class _SlidePage extends StatelessWidget {
+  const _SlidePage({required this.children});
+
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) => CustomScrollView(
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: children),
+          ),
+        ],
+      );
+}
+
+/// Room for slide artwork: it takes whatever height the slide leaves, but
+/// asks for only a small minimum when the slide measures itself, so large
+/// text makes the slide scroll rather than squeezing the text.
+class _ArtRoom extends SingleChildRenderObjectWidget {
+  const _ArtRoom({required Widget super.child});
+
+  @override
+  RenderObject createRenderObject(BuildContext context) => _RenderArtRoom();
+}
+
+class _RenderArtRoom extends RenderProxyBox {
+  static const _min = 120.0;
+
+  @override
+  double computeMinIntrinsicHeight(double width) => _min;
+
+  @override
+  double computeMaxIntrinsicHeight(double width) => _min;
+}
+
 // ── Slide 1: brand, hero artwork, promise ──────────────────────────────────
 
 class _BrandSlide extends StatelessWidget {
@@ -256,8 +304,7 @@ class _BrandSlide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return _SlidePage(
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.page + 4),
@@ -274,12 +321,14 @@ class _BrandSlide extends StatelessWidget {
         const SizedBox(height: AppSpacing.md),
         // Square, pinned to the right edge, so the fade mask matches the image.
         Expanded(
-          child: LayoutBuilder(
-            builder: (context, box) => Align(
-              alignment: Alignment.centerRight,
-              child: SizedBox.square(
-                dimension: box.maxWidth < box.maxHeight ? box.maxWidth : box.maxHeight,
-                child: const _Art(asset: IntroArt.hero, fade: _Fade.exceptRight, fallback: _HeroFallback()),
+          child: _ArtRoom(
+            child: LayoutBuilder(
+              builder: (context, box) => Align(
+                alignment: Alignment.centerRight,
+                child: SizedBox.square(
+                  dimension: box.maxWidth < box.maxHeight ? box.maxWidth : box.maxHeight,
+                  child: const _Art(asset: IntroArt.hero, fade: _Fade.exceptRight, fallback: _HeroFallback()),
+                ),
               ),
             ),
           ),
@@ -328,32 +377,33 @@ class _LessonsSlide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return _SlidePage(
       children: [
         const SizedBox(height: AppSpacing.md),
         _SlideText(eyebrow: l.onbIntro2Label, title: l.onbIntro2Title, body: l.onbIntro2Body),
         const SizedBox(height: AppSpacing.md),
         Expanded(
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              const _Art(
-                asset: IntroArt.lessons,
-                fit: BoxFit.cover,
-                alignment: Alignment.centerRight,
-                fade: _Fade.vertical,
-                fallback: _ArchesFallback(warm: false),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(AppSpacing.page + 20, AppSpacing.md, AppSpacing.page + 20, 0),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  alignment: Alignment.topCenter,
-                  child: Transform.rotate(angle: -0.035, child: const _LessonCardMock()),
+          child: _ArtRoom(
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                const _Art(
+                  asset: IntroArt.lessons,
+                  fit: BoxFit.cover,
+                  alignment: Alignment.centerRight,
+                  fade: _Fade.vertical,
+                  fallback: _ArchesFallback(warm: false),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(AppSpacing.page + 20, AppSpacing.md, AppSpacing.page + 20, 0),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.topCenter,
+                    child: Transform.rotate(angle: -0.035, child: const _LessonCardMock()),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ],
@@ -482,67 +532,68 @@ class _PracticeSlide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return _SlidePage(
       children: [
         const SizedBox(height: AppSpacing.md),
         _SlideText(eyebrow: l.onbIntro3Label, title: l.onbIntro3Title, body: l.onbIntro3Body),
         const SizedBox(height: AppSpacing.md),
         Expanded(
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              const _Art(
-                asset: IntroArt.practice,
-                fit: BoxFit.cover,
-                alignment: Alignment.center,
-                fade: _Fade.vertical,
-                fallback: _ArchesFallback(warm: true),
-              ),
-              FittedBox(
-                fit: BoxFit.scaleDown,
-                alignment: Alignment.topCenter,
-                child: SizedBox(
-                  width: 390,
-                  height: 380,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 24,
-                        top: 8,
-                        width: 280,
-                        child: _FeatureMock(
-                          icon: Icons.edit_note_rounded,
-                          title: l.onbDemoQuiz,
-                          sub: l.onbDemoQuizSub,
-                          progress: 0.6,
+          child: _ArtRoom(
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                const _Art(
+                  asset: IntroArt.practice,
+                  fit: BoxFit.cover,
+                  alignment: Alignment.center,
+                  fade: _Fade.vertical,
+                  fallback: _ArchesFallback(warm: true),
+                ),
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.topCenter,
+                  child: SizedBox(
+                    width: 390,
+                    height: 380,
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          left: 24,
+                          top: 8,
+                          width: 280,
+                          child: _FeatureMock(
+                            icon: Icons.edit_note_rounded,
+                            title: l.onbDemoQuiz,
+                            sub: l.onbDemoQuizSub,
+                            progress: 0.6,
+                          ),
                         ),
-                      ),
-                      Positioned(
-                        right: 16,
-                        top: 132,
-                        width: 270,
-                        child: _FeatureMock(
-                          icon: Icons.newspaper_rounded,
-                          title: l.onbDemoUpdates,
-                          sub: l.onbDemoUpdatesSub,
+                        Positioned(
+                          right: 16,
+                          top: 132,
+                          width: 270,
+                          child: _FeatureMock(
+                            icon: Icons.newspaper_rounded,
+                            title: l.onbDemoUpdates,
+                            sub: l.onbDemoUpdatesSub,
+                          ),
                         ),
-                      ),
-                      Positioned(
-                        left: 44,
-                        top: 254,
-                        width: 300,
-                        child: _FeatureMock(
-                          icon: Icons.lightbulb_outline_rounded,
-                          title: l.onbDemoScenarios,
-                          sub: l.onbDemoScenariosSub,
+                        Positioned(
+                          left: 44,
+                          top: 254,
+                          width: 300,
+                          child: _FeatureMock(
+                            icon: Icons.lightbulb_outline_rounded,
+                            title: l.onbDemoScenarios,
+                            sub: l.onbDemoScenariosSub,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],

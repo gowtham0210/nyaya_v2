@@ -29,6 +29,14 @@ abstract interface class AuthApi {
   Future<Account> register({required String name, required String email, required String password});
   Future<void> signOut();
 
+  /// Emails a 6-digit code to choose a new password. Answers the same whether
+  /// or not the email has an account.
+  Future<void> requestPasswordReset({required String email});
+
+  /// Sets a new password with the emailed code and signs in. Throws an
+  /// [ApiException] with code `invalid_reset_code` for a wrong or old code.
+  Future<Account> resetPassword({required String email, required String code, required String newPassword});
+
   /// Deletes the account and everything on it; the session ends with it.
   /// Throws an [ApiException] with code `wrong_password` when the password is wrong.
   Future<void> deleteAccount({required String password});
@@ -49,6 +57,21 @@ class HttpAuthApi implements AuthApi {
         _client.post(
           '/v1/auth/register',
           body: {'display_name': name, 'email': email, 'password': password},
+          auth: false,
+        ),
+      );
+
+  @override
+  Future<void> requestPasswordReset({required String email}) async {
+    await _client.post('/v1/auth/password-reset', body: {'email': email}, auth: false);
+  }
+
+  @override
+  Future<Account> resetPassword({required String email, required String code, required String newPassword}) =>
+      _store(
+        _client.post(
+          '/v1/auth/password-reset/confirm',
+          body: {'email': email, 'code': code, 'new_password': newPassword},
           auth: false,
         ),
       );

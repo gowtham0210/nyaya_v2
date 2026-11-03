@@ -1,0 +1,14 @@
+# App icon for iOS and Android: `dart run flutter_launcher_icons`.
+# Sources are in assets/icon (made from the ChatGPT design, 2026-11-02).
+flutter_launcher_icons:
+  image_path: "assets/icon/app_icon.png"
+  ios: true
+  # The App Store refuses icons with transparency.
+  remove_alpha_ios: true
+  android: "ic_launcher"
+  min_sdk_android: 26
+  # Android shapes the icon itself (circle, squircle…): the symbol on the brand terracotta.
+  adaptive_icon_background: "#873F2B"
+  adaptive_icon_foreground: "assets/icon/app_icon_foreground.png"
+  # The foreground PNG already keeps the symbol inside the always-visible circle.
+  adaptive_icon_foreground_inset: 0

@@ -206,6 +206,11 @@ class AppLocalizationsTe extends AppLocalizations {
   String get onbSkip => 'దాటవేయి';
 
   @override
+  String onbSlidePosition(int current, int total) {
+    return 'స్లైడ్ $current / $total';
+  }
+
+  @override
   String get onbGetStarted => 'ప్రారంభించండి';
 
   @override
@@ -371,6 +376,42 @@ class AppLocalizationsTe extends AppLocalizations {
   String get homeContinueLeftOff => 'ఆపిన చోటు నుండి కొనసాగించండి';
 
   @override
+  String get homeStartTitle => 'మీ అభ్యాస ప్రయాణం ప్రారంభించండి';
+
+  @override
+  String get homeStartBody => 'భారతీయ చట్టాన్ని ఒక్కో భావనగా అర్థం చేసుకోండి.';
+
+  @override
+  String get homeStartRecommended => 'ప్రారంభానికి సూచన';
+
+  @override
+  String get homeStartLawDesc =>
+      'ప్రాథమిక హక్కులు, విధులు మరియు రాజ్యాంగ సూత్రాలను అర్థం చేసుకోండి.';
+
+  @override
+  String get homeStartLearning => 'నేర్చుకోవడం ప్రారంభించండి';
+
+  @override
+  String homeLevelsDone(int done, int total) {
+    return '$total స్థాయిలలో $done పూర్తయ్యాయి';
+  }
+
+  @override
+  String get homeFeatured => 'ప్రత్యేకం';
+
+  @override
+  String get homeViewOnMap => 'మ్యాప్‌లో చూడండి';
+
+  @override
+  String get homeReviewMistakes => 'మీ తప్పులను మళ్లీ చూడండి';
+
+  @override
+  String get homeReviewSaved => 'మీరు సేవ్ చేసిన ప్రశ్నలు';
+
+  @override
+  String get homeReviewNow => 'ఇప్పుడు చూడండి';
+
+  @override
   String homeChapterLevel(int chapter, int level) {
     return 'అధ్యాయం $chapter · లెవెల్ $level';
   }
@@ -476,7 +517,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String modeEnergyCost(int count) {
-    return '$count ⚡';
+    return '$count ఎనర్జీ';
   }
 
   @override
@@ -515,7 +556,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String energyRefillCoins(int coins) {
-    return '$coins కాయిన్‌లతో 1 ⚡ నింపండి';
+    return '$coins కాయిన్‌లతో 1 ఎనర్జీ నింపండి';
   }
 
   @override
@@ -575,10 +616,6 @@ class AppLocalizationsTe extends AppLocalizations {
   String get journeyLocked => 'లాక్ అయింది';
 
   @override
-  String get journeyLockedBody =>
-      'దీన్ని అన్‌లాక్ చేయడానికి ముందు లెవెల్ పూర్తి చేయండి.';
-
-  @override
   String journeyQuestions(int count) {
     return '$count ప్రశ్నలు';
   }
@@ -593,20 +630,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get journeyChest => 'అధ్యాయ చెస్ట్';
 
   @override
-  String get journeyChestBody =>
-      'మీరు అధ్యాయం పూర్తి చేశారు! బోనస్ కాయిన్‌ల కోసం చెస్ట్ తెరవండి.';
-
-  @override
   String get journeyOpenChest => 'చెస్ట్ తెరవండి';
-
-  @override
-  String journeyChestOpened(int coins) {
-    return '+$coins కాయిన్‌లు!';
-  }
-
-  @override
-  String get journeyChestLocked =>
-      'చెస్ట్ తెరవడానికి ఈ అధ్యాయంలోని అన్ని లెవెల్‌లు పూర్తి చేయండి.';
 
   @override
   String get journeyJumpToCurrent => 'ప్రస్తుత లెవెల్‌కు వెళ్లండి';
@@ -615,8 +639,138 @@ class AppLocalizationsTe extends AppLocalizations {
   String get journeyYou => 'మీరు';
 
   @override
-  String get journeyPassHint =>
-      'పాస్ కావడానికి 50% · 2 స్టార్లకు 80% · 3 స్టార్లకు 100%';
+  String get journeyNext => 'తదుపరి అడుగు';
+
+  @override
+  String get journeyDone => 'పూర్తయింది';
+
+  @override
+  String journeyStarsOf(int count, int total) {
+    return '$totalలో $count స్టార్లు';
+  }
+
+  @override
+  String journeyLockedNext(String step) {
+    return 'లెవెల్స్ వరుసగా తెరుచుకుంటాయి. మీ తదుపరి అడుగు $step.';
+  }
+
+  @override
+  String get journeyGoToNext => 'నా తదుపరి అడుగు చూపించు';
+
+  @override
+  String journeyStartCost(int count) {
+    return 'ప్రారంభించండి · $count ఎనర్జీ';
+  }
+
+  @override
+  String journeyReplayCost(int count) {
+    return 'మళ్లీ ఆడండి · $count ఎనర్జీ';
+  }
+
+  @override
+  String get journeyNoTimer => 'సమయ పరిమితి లేదు';
+
+  @override
+  String get journeyStarsTitle => 'మీరు పొందగల స్టార్లు';
+
+  @override
+  String journeyPassMark(int percent) {
+    return '$percent% · పాస్';
+  }
+
+  @override
+  String journeyStarMark(int percent) {
+    return '$percent%';
+  }
+
+  @override
+  String get journeyHowScoring => 'స్కోర్ ఎలా లెక్కిస్తారు';
+
+  @override
+  String journeyRuleEnergy(int count) {
+    return 'ప్రతి ప్రయత్నానికి $count ఎనర్జీ ఖర్చవుతుంది. మొదటి జవాబుకు ముందే వదిలేస్తే అది తిరిగి వస్తుంది.';
+  }
+
+  @override
+  String get journeyRuleRetry =>
+      'పాస్ కాలేదా? ఎన్నిసార్లైనా మళ్లీ ప్రయత్నించవచ్చు.';
+
+  @override
+  String get journeyRuleBest =>
+      'మీ ఉత్తమ స్కోర్ ఉంచబడుతుంది. తక్కువ స్కోర్ స్టార్లను ఎప్పుడూ తగ్గించదు.';
+
+  @override
+  String get journeyRuleNoMinus => 'తప్పు జవాబులకు మార్కులు తగ్గవు.';
+
+  @override
+  String journeyRuleBonus(int count, int coins) {
+    return 'ఒక లెవెల్‌లో మొదటిసారి 3 స్టార్లు పొందితే $count ఎనర్జీ తిరిగి వస్తుంది. ప్రతి కొత్త స్టార్‌కు $coins కాయిన్‌లు.';
+  }
+
+  @override
+  String get journeyChestLockedTitle => 'అధ్యాయ చెస్ట్ లాక్ అయి ఉంది';
+
+  @override
+  String get journeyChestLockedText =>
+      'మీ బహుమతి తెరవడానికి ఈ అధ్యాయంలోని అన్ని లెవెల్స్ పూర్తి చేయండి.';
+
+  @override
+  String get journeyChestReadyTitle => 'మీ అధ్యాయ బహుమతి సిద్ధంగా ఉంది';
+
+  @override
+  String get journeyChestReadyText =>
+      'చాలా బాగుంది! మీరు ఈ అధ్యాయం పూర్తి చేశారు.';
+
+  @override
+  String journeyChestReward(int coins) {
+    return 'బహుమతి: $coins కాయిన్‌లు';
+  }
+
+  @override
+  String get journeyChestCollectedTitle => 'అధ్యాయ బహుమతి అందుకున్నారు';
+
+  @override
+  String journeyChestCollectedText(int coins) {
+    return 'మీకు $coins కాయిన్‌లు వచ్చాయి.';
+  }
+
+  @override
+  String get journeyChestFailed =>
+      'చెస్ట్ తెరవలేకపోయాం. మీ కనెక్షన్ చూసి మళ్లీ ప్రయత్నించండి. మీ బహుమతి వేచి ఉంది.';
+
+  @override
+  String get journeyContinueLearning => 'నేర్చుకోవడం కొనసాగించండి';
+
+  @override
+  String get journeyBackToMap => 'మ్యాప్‌కు తిరిగి';
+
+  @override
+  String journeyChapterProgress(int number, int done, int total) {
+    return 'అధ్యాయం $number · $done/$total పూర్తి';
+  }
+
+  @override
+  String journeyStarsInfo(int one, int two) {
+    return 'ప్రతి లెవెల్‌లో 3 స్టార్ల వరకు పొందండి: 1 స్టార్‌కు $one%, 2కు $two%, 3కు 100%. ప్రతి లెవెల్‌లో మీ ఉత్తమ స్కోర్ లెక్కలోకి వస్తుంది.';
+  }
+
+  @override
+  String journeyEnergyInfo(int cost, int free, String time) {
+    return 'కేస్ పాత్‌లో ప్రతి లెవెల్‌కు $cost ఎనర్జీ ఖర్చవుతుంది. ప్రతిరోజూ $free ఎనర్జీ ఉచితం. అర్ధరాత్రి తిరిగి నిండుతుంది — $timeలో.';
+  }
+
+  @override
+  String get journeyCoinsInfo =>
+      'కొత్త స్టార్లు, అధ్యాయ చెస్ట్‌లు, డైలీ డాకెట్, రోజువారీ లక్ష్యం, స్ట్రీక్ మైలురాళ్ల నుంచి కాయిన్‌లు సంపాదించండి. వాటిని స్టోర్‌లో ఎనర్జీ నింపడానికి, స్ట్రీక్ ఫ్రీజ్‌లకు ఖర్చు చేయండి.';
+
+  @override
+  String get journeyOpenStore => 'స్టోర్ తెరవండి';
+
+  @override
+  String get journeyListView => 'లెవెల్స్‌ను జాబితాగా చూపించు';
+
+  @override
+  String get journeyAllLevels => 'అన్ని లెవెల్స్';
 
   @override
   String quizQuestionOf(int current, int total) {
@@ -670,17 +824,89 @@ class AppLocalizationsTe extends AppLocalizations {
   String get quizQuitTitle => 'ఈ క్విజ్ నుండి బయటకు వెళ్లాలా?';
 
   @override
-  String get quizQuitBody => 'ఈ క్విజ్‌లో మీ పురోగతి పోతుంది.';
-
-  @override
-  String get quizQuitBodyRefund =>
-      'మీరు ఇంకా జవాబు ఇవ్వలేదు, కాబట్టి మీ ఎనర్జీ తిరిగి వస్తుంది.';
-
-  @override
   String get quizQuitStay => 'ఆడుతూ ఉండండి';
 
   @override
   String get quizQuitLeave => 'బయటకు వెళ్లు';
+
+  @override
+  String get quizTapToCheck => 'తనిఖీ చేయడానికి ఒక జవాబును నొక్కండి.';
+
+  @override
+  String get quizChecking => 'మీ జవాబు తనిఖీ అవుతోంది…';
+
+  @override
+  String quizTimedHint(int seconds) {
+    return '$seconds సెకన్లలో జవాబు ఇవ్వండి. సమయానికి జవాబు ఇవ్వకపోతే తప్పుగా లెక్కిస్తారు.';
+  }
+
+  @override
+  String get quizDuelHint =>
+      'సరైన జవాబుకు 1,000 పాయింట్ల వరకు — ఎంత వేగంగా ఇస్తే అంత ఎక్కువ. తప్పు జవాబుకు 0.';
+
+  @override
+  String get quizExamHint =>
+      'ఒక జవాబు ఎంచుకుని ముందుకు వెళ్లండి. వెనక్కి వెళ్లి ప్రశ్న మార్చలేరు.';
+
+  @override
+  String quizSecondsLeft(int seconds) {
+    return '$seconds సెకన్లు మిగిలాయి';
+  }
+
+  @override
+  String quizTimeLeft(String time) {
+    return 'మిగిలిన సమయం: $time';
+  }
+
+  @override
+  String get quizNoExplanation => 'ఈ ప్రశ్నకు వివరణ ఇంకా అందుబాటులో లేదు.';
+
+  @override
+  String quizQuitRefund(int count) {
+    return 'మీరు ఇంకా జవాబు ఇవ్వలేదు, కాబట్టి మీ $count ఎనర్జీ తిరిగి వస్తుంది.';
+  }
+
+  @override
+  String get quizQuitFree =>
+      'మీరు ఇంకా జవాబు ఇవ్వలేదు, కాబట్టి ఏమీ కోల్పోలేదు. తర్వాత మళ్లీ ప్రారంభించవచ్చు.';
+
+  @override
+  String get quizQuitAnswered =>
+      'ఈ ప్రయత్నం ముగుస్తుంది, తర్వాత కొనసాగించలేరు. ఇప్పటివరకు ఇచ్చిన జవాబులు లెక్కలోకి రావు.';
+
+  @override
+  String quizQuitAnsweredEnergy(int count) {
+    return 'ఈ ప్రయత్నం ముగుస్తుంది, తర్వాత కొనసాగించలేరు. ఇప్పటివరకు ఇచ్చిన జవాబులు లెక్కలోకి రావు, $count ఎనర్జీ తిరిగి రాదు.';
+  }
+
+  @override
+  String get quizRefundFailed =>
+      'Nyayaని చేరలేకపోయాం, కాబట్టి మీ ఎనర్జీ తిరిగి రాలేదు.';
+
+  @override
+  String get quizOptionCorrect => 'సరైన జవాబు';
+
+  @override
+  String get quizOptionWrong => 'మీ జవాబు, తప్పు';
+
+  @override
+  String get quizOptionSelected => 'ఎంచుకున్నారు';
+
+  @override
+  String get quizOptionChecking => 'తనిఖీ అవుతోంది';
+
+  @override
+  String get resultNoAnswer => 'జవాబు లేదు';
+
+  @override
+  String get resultHideReview => 'జవాబులు దాచు';
+
+  @override
+  String get reportSending => 'పంపుతోంది…';
+
+  @override
+  String get reportFailed =>
+      'రిపోర్ట్ పంపలేకపోయాం. మీరు రాసింది ఉంది, మళ్లీ ప్రయత్నించండి.';
 
   @override
   String get quizLoading => 'మీ కేసును సిద్ధం చేస్తున్నాం…';
@@ -761,7 +987,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String resultEnergyBonus(int count) {
-    return '3 స్టార్ల బోనస్: +$count ⚡';
+    return '3 స్టార్ల బోనస్: +$count ఎనర్జీ';
   }
 
   @override
@@ -971,7 +1197,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get chatLimitReached =>
-      'ఈరోజు ఉచిత ప్రశ్నలు అయిపోయాయి. రేపు రండి లేదా అపరిమిత AI కోసం Premium తీసుకోండి.';
+      'ఈరోజు ఉచిత ప్రశ్నలు అయిపోయాయి. రేపు రండి లేదా మరిన్ని AI ప్రశ్నల కోసం Premium తీసుకోండి.';
 
   @override
   String get chatLimitReachedToday =>
@@ -1188,46 +1414,36 @@ class AppLocalizationsTe extends AppLocalizations {
   }
 
   @override
-  String get settingsReset => 'పురోగతి రీసెట్ చేయండి';
+  String get settingsReset => 'ఈ ఫోన్‌ను రీసెట్ చేయండి';
 
   @override
   String get settingsResetConfirm =>
-      'ఇది ఈ పరికరంలోని XP, స్టార్లు, స్ట్రీక్‌లు, కాయిన్‌లు అన్నింటినీ తొలగిస్తుంది. దీన్ని తిరిగి పొందలేరు.';
+      'ఇది స్వాగత దశలను మళ్లీ చూపించి, ఈ ఫోన్ సెట్టింగ్‌లను తొలగిస్తుంది. మీ XP, స్టార్లు, కాయిన్‌లు, స్ట్రీక్ మీ ఖాతాలో సురక్షితంగా ఉంటాయి.';
 
   @override
-  String get settingsResetAction => 'అన్నీ తొలగించు';
+  String get settingsResetAction => 'రీసెట్ చేయండి';
 
   @override
   String get premiumTitle => 'Nyaya Premium';
 
   @override
-  String get premiumHeadline => 'పరిమితులు లేకుండా నేర్చుకోండి';
+  String get premiumHeadline => 'ప్రతిరోజూ మరింత నేర్చుకోండి';
 
   @override
   String get premiumBenefitEnergy => 'అపరిమిత ఎనర్జీ';
 
   @override
-  String get premiumBenefitEnergySub => 'మీకు నచ్చినన్ని క్విజ్‌లు ఆడండి';
+  String premiumBenefitEnergySub(int free) {
+    return 'ఉచితం: రోజుకు $free ఎనర్జీ. Premium: మీకు నచ్చినన్ని క్విజ్‌లు ఆడండి.';
+  }
 
   @override
-  String get premiumBenefitAi => 'అపరిమిత Nyaya AI';
+  String get premiumBenefitAi => 'మరింత Nyaya AI';
 
   @override
-  String get premiumBenefitAiSub => 'మీ ప్రతి న్యాయ సందేహాన్ని అడగండి';
-
-  @override
-  String get premiumBenefitFreeze => 'స్ట్రీక్ ఫ్రీజ్‌లు చేర్చబడ్డాయి';
-
-  @override
-  String get premiumBenefitFreezeSub =>
-      'బిజీ రోజు వల్ల మీ స్ట్రీక్ ఎప్పటికీ కోల్పోరు';
-
-  @override
-  String get premiumBenefitExam => 'పూర్తి మాక్ పరీక్షలు';
-
-  @override
-  String get premiumBenefitExamSub =>
-      'CLAT, AIBE & జ్యుడీషియరీ తరహా ప్రాక్టీస్';
+  String premiumBenefitAiSub(int free, int premium) {
+    return 'ఉచితం: రోజుకు $free ప్రశ్నలు. Premium: రోజుకు $premium.';
+  }
 
   @override
   String get premiumFair => 'న్యాయమైన ఆట: Premium ఎప్పుడూ లీగ్ XPను పెంచదు.';
@@ -1364,7 +1580,8 @@ class AppLocalizationsTe extends AppLocalizations {
   String get lawLegacyTitle => 'IPC & CrPC (పాత చట్టాలు)';
 
   @override
-  String get lawLegacyDesc => 'సూచన కోసం పాత చట్టాలు';
+  String get lawLegacyDesc =>
+      'జూలై 2024లో మార్చబడ్డాయి. సూచన మరియు పోలిక కోసం ఉంచబడ్డాయి.';
 
   @override
   String get chapterConstitutionTitle => 'రాజ్యాంగ ప్రాథమికాంశాలు';
@@ -1464,6 +1681,51 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get authErrorName => 'మీ పేరు ఇవ్వండి.';
+
+  @override
+  String get authForgot => 'పాస్‌వర్డ్ మర్చిపోయారా?';
+
+  @override
+  String get authResetTitle => 'మీ పాస్‌వర్డ్ మార్చండి';
+
+  @override
+  String get authResetSubtitle =>
+      'మీ ఖాతా ఈమెయిల్ ఇవ్వండి. మేము 6 అంకెల కోడ్ పంపుతాము.';
+
+  @override
+  String get authResetSend => 'కోడ్ పంపండి';
+
+  @override
+  String authResetSentTo(String email) {
+    return '$emailతో ఖాతా ఉంటే, దానికి 6 అంకెల కోడ్ పంపాము. ఇది 15 నిమిషాలు పనిచేస్తుంది. కనిపించకపోతే స్పామ్ ఫోల్డర్ చూడండి.';
+  }
+
+  @override
+  String get authResetCode => '6 అంకెల కోడ్';
+
+  @override
+  String get authResetNewPassword => 'కొత్త పాస్‌వర్డ్';
+
+  @override
+  String get authResetSave => 'కొత్త పాస్‌వర్డ్ సెట్ చేయండి';
+
+  @override
+  String get authResetResend => 'కొత్త కోడ్ పంపండి';
+
+  @override
+  String get authResetErrorCode =>
+      'ఈ కోడ్ తప్పు లేదా గడువు ముగిసింది. కొత్త కోడ్ అడగండి.';
+
+  @override
+  String get authResetUnavailable =>
+      'పాస్‌వర్డ్ మార్చడం ఇప్పుడు అందుబాటులో లేదు. దయచేసి తర్వాత ప్రయత్నించండి.';
+
+  @override
+  String get authResetErrorInvalid =>
+      '6 అంకెల కోడ్ మరియు కనీసం 8 అక్షరాల కొత్త పాస్‌వర్డ్ ఇవ్వండి.';
+
+  @override
+  String get authResetDone => 'మీ పాస్‌వర్డ్ మార్చబడింది.';
 
   @override
   String get settingsAccount => 'ఖాతా';

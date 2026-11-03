@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsString, MaxLength, MinLength } from 'class-validator';
+import {
+  IsEmail,
+  IsString,
+  Matches,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 import { ROLES, type Role } from '../db/schema.js';
 
 export class SignInDto {
@@ -33,6 +39,35 @@ export class RegisterDto {
   @MinLength(1)
   @MaxLength(80)
   display_name: string;
+}
+
+/** Asks for a password reset code by email. */
+export class PasswordResetRequestDto {
+  @ApiProperty({ example: 'asha@example.com' })
+  @IsEmail()
+  @MaxLength(254)
+  email: string;
+}
+
+/** Sets a new password with the emailed code. */
+export class PasswordResetConfirmDto {
+  @ApiProperty({ example: 'asha@example.com' })
+  @IsEmail()
+  @MaxLength(254)
+  email: string;
+
+  @ApiProperty({
+    example: '123456',
+    description: 'The 6-digit code from the email',
+  })
+  @Matches(/^\d{6}$/, { message: 'code must be 6 digits' })
+  code: string;
+
+  @ApiProperty({ format: 'password', minLength: 8 })
+  @IsString()
+  @MinLength(8)
+  @MaxLength(200)
+  new_password: string;
 }
 
 export class RefreshDto {

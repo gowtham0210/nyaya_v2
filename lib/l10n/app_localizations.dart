@@ -442,6 +442,12 @@ abstract class AppLocalizations {
   /// **'Skip'**
   String get onbSkip;
 
+  /// No description provided for @onbSlidePosition.
+  ///
+  /// In en, this message translates to:
+  /// **'Slide {current} of {total}'**
+  String onbSlidePosition(int current, int total);
+
   /// No description provided for @onbGetStarted.
   ///
   /// In en, this message translates to:
@@ -736,6 +742,72 @@ abstract class AppLocalizations {
   /// **'Continue where you left off'**
   String get homeContinueLeftOff;
 
+  /// No description provided for @homeStartTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start your learning journey'**
+  String get homeStartTitle;
+
+  /// No description provided for @homeStartBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Build your understanding of Indian law, one concept at a time.'**
+  String get homeStartBody;
+
+  /// No description provided for @homeStartRecommended.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended start'**
+  String get homeStartRecommended;
+
+  /// No description provided for @homeStartLawDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Understand fundamental rights, duties and constitutional principles.'**
+  String get homeStartLawDesc;
+
+  /// No description provided for @homeStartLearning.
+  ///
+  /// In en, this message translates to:
+  /// **'Start learning'**
+  String get homeStartLearning;
+
+  /// No description provided for @homeLevelsDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{done} of {total} levels done'**
+  String homeLevelsDone(int done, int total);
+
+  /// No description provided for @homeFeatured.
+  ///
+  /// In en, this message translates to:
+  /// **'Featured'**
+  String get homeFeatured;
+
+  /// No description provided for @homeViewOnMap.
+  ///
+  /// In en, this message translates to:
+  /// **'View on map'**
+  String get homeViewOnMap;
+
+  /// No description provided for @homeReviewMistakes.
+  ///
+  /// In en, this message translates to:
+  /// **'Review your mistakes'**
+  String get homeReviewMistakes;
+
+  /// No description provided for @homeReviewSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Your saved questions'**
+  String get homeReviewSaved;
+
+  /// No description provided for @homeReviewNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Review now'**
+  String get homeReviewNow;
+
   /// No description provided for @homeChapterLevel.
   ///
   /// In en, this message translates to:
@@ -907,7 +979,7 @@ abstract class AppLocalizations {
   /// No description provided for @modeEnergyCost.
   ///
   /// In en, this message translates to:
-  /// **'{count} ⚡'**
+  /// **'{count} energy'**
   String modeEnergyCost(int count);
 
   /// No description provided for @docketDoneToday.
@@ -955,7 +1027,7 @@ abstract class AppLocalizations {
   /// No description provided for @energyRefillCoins.
   ///
   /// In en, this message translates to:
-  /// **'Refill 1 ⚡ for {coins} coins'**
+  /// **'Refill 1 energy for {coins} coins'**
   String energyRefillCoins(int coins);
 
   /// No description provided for @energyGoUnlimited.
@@ -1054,12 +1126,6 @@ abstract class AppLocalizations {
   /// **'Locked'**
   String get journeyLocked;
 
-  /// No description provided for @journeyLockedBody.
-  ///
-  /// In en, this message translates to:
-  /// **'Clear the previous level to unlock this one.'**
-  String get journeyLockedBody;
-
   /// No description provided for @journeyQuestions.
   ///
   /// In en, this message translates to:
@@ -1084,29 +1150,11 @@ abstract class AppLocalizations {
   /// **'Chapter chest'**
   String get journeyChest;
 
-  /// No description provided for @journeyChestBody.
-  ///
-  /// In en, this message translates to:
-  /// **'You finished the chapter! Open the chest for bonus coins.'**
-  String get journeyChestBody;
-
   /// No description provided for @journeyOpenChest.
   ///
   /// In en, this message translates to:
   /// **'Open chest'**
   String get journeyOpenChest;
-
-  /// No description provided for @journeyChestOpened.
-  ///
-  /// In en, this message translates to:
-  /// **'+{coins} coins!'**
-  String journeyChestOpened(int coins);
-
-  /// No description provided for @journeyChestLocked.
-  ///
-  /// In en, this message translates to:
-  /// **'Finish every level in this chapter to open the chest.'**
-  String get journeyChestLocked;
 
   /// No description provided for @journeyJumpToCurrent.
   ///
@@ -1120,11 +1168,209 @@ abstract class AppLocalizations {
   /// **'You'**
   String get journeyYou;
 
-  /// No description provided for @journeyPassHint.
+  /// No description provided for @journeyNext.
   ///
   /// In en, this message translates to:
-  /// **'Score 50% to pass · 80% for 2 stars · 100% for 3 stars'**
-  String get journeyPassHint;
+  /// **'Next step'**
+  String get journeyNext;
+
+  /// No description provided for @journeyDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get journeyDone;
+
+  /// No description provided for @journeyStarsOf.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} of {total} stars'**
+  String journeyStarsOf(int count, int total);
+
+  /// No description provided for @journeyLockedNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Levels open in order. Your next step is {step}.'**
+  String journeyLockedNext(String step);
+
+  /// No description provided for @journeyGoToNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Show my next step'**
+  String get journeyGoToNext;
+
+  /// No description provided for @journeyStartCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Start · {count} energy'**
+  String journeyStartCost(int count);
+
+  /// No description provided for @journeyReplayCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Replay · {count} energy'**
+  String journeyReplayCost(int count);
+
+  /// No description provided for @journeyNoTimer.
+  ///
+  /// In en, this message translates to:
+  /// **'No time limit'**
+  String get journeyNoTimer;
+
+  /// No description provided for @journeyStarsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stars you can earn'**
+  String get journeyStarsTitle;
+
+  /// No description provided for @journeyPassMark.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}% · pass'**
+  String journeyPassMark(int percent);
+
+  /// No description provided for @journeyStarMark.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}%'**
+  String journeyStarMark(int percent);
+
+  /// No description provided for @journeyHowScoring.
+  ///
+  /// In en, this message translates to:
+  /// **'How scoring works'**
+  String get journeyHowScoring;
+
+  /// No description provided for @journeyRuleEnergy.
+  ///
+  /// In en, this message translates to:
+  /// **'Each try costs {count} energy. If you leave before your first answer, you get it back.'**
+  String journeyRuleEnergy(int count);
+
+  /// No description provided for @journeyRuleRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Didn\'t pass? You can try again as many times as you like.'**
+  String get journeyRuleRetry;
+
+  /// No description provided for @journeyRuleBest.
+  ///
+  /// In en, this message translates to:
+  /// **'Your best score is kept. A lower score never takes away stars.'**
+  String get journeyRuleBest;
+
+  /// No description provided for @journeyRuleNoMinus.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong answers don\'t take away marks.'**
+  String get journeyRuleNoMinus;
+
+  /// No description provided for @journeyRuleBonus.
+  ///
+  /// In en, this message translates to:
+  /// **'Your first 3-star score on a level gives {count} energy back. Each new star earns {coins} coins.'**
+  String journeyRuleBonus(int count, int coins);
+
+  /// No description provided for @journeyChestLockedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Chapter chest locked'**
+  String get journeyChestLockedTitle;
+
+  /// No description provided for @journeyChestLockedText.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete all levels in this chapter to unlock your reward.'**
+  String get journeyChestLockedText;
+
+  /// No description provided for @journeyChestReadyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your chapter reward is ready'**
+  String get journeyChestReadyTitle;
+
+  /// No description provided for @journeyChestReadyText.
+  ///
+  /// In en, this message translates to:
+  /// **'Well done! You\'ve completed this chapter.'**
+  String get journeyChestReadyText;
+
+  /// No description provided for @journeyChestReward.
+  ///
+  /// In en, this message translates to:
+  /// **'Reward: {coins} coins'**
+  String journeyChestReward(int coins);
+
+  /// No description provided for @journeyChestCollectedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Chapter reward collected'**
+  String get journeyChestCollectedTitle;
+
+  /// No description provided for @journeyChestCollectedText.
+  ///
+  /// In en, this message translates to:
+  /// **'You received {coins} coins.'**
+  String journeyChestCollectedText(int coins);
+
+  /// No description provided for @journeyChestFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t open the chest. Check your connection and try again. Your reward is still waiting.'**
+  String get journeyChestFailed;
+
+  /// No description provided for @journeyContinueLearning.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue learning'**
+  String get journeyContinueLearning;
+
+  /// No description provided for @journeyBackToMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to the map'**
+  String get journeyBackToMap;
+
+  /// No description provided for @journeyChapterProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Chapter {number} · {done}/{total} completed'**
+  String journeyChapterProgress(int number, int done, int total);
+
+  /// No description provided for @journeyStarsInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn up to 3 stars on each level: {one}% for 1 star, {two}% for 2 and 100% for 3. Your best score on each level counts.'**
+  String journeyStarsInfo(int one, int two);
+
+  /// No description provided for @journeyEnergyInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Each Case Path level costs {cost} energy. You get {free} free energy every day. It refills at midnight — in {time}.'**
+  String journeyEnergyInfo(int cost, int free, String time);
+
+  /// No description provided for @journeyCoinsInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn coins from new stars, chapter chests, the Daily Docket, your daily goal and streak milestones. Spend them in the Store on energy refills and streak freezes.'**
+  String get journeyCoinsInfo;
+
+  /// No description provided for @journeyOpenStore.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the Store'**
+  String get journeyOpenStore;
+
+  /// No description provided for @journeyListView.
+  ///
+  /// In en, this message translates to:
+  /// **'Show levels as a list'**
+  String get journeyListView;
+
+  /// No description provided for @journeyAllLevels.
+  ///
+  /// In en, this message translates to:
+  /// **'All levels'**
+  String get journeyAllLevels;
 
   /// No description provided for @quizQuestionOf.
   ///
@@ -1216,18 +1462,6 @@ abstract class AppLocalizations {
   /// **'Leave this quiz?'**
   String get quizQuitTitle;
 
-  /// No description provided for @quizQuitBody.
-  ///
-  /// In en, this message translates to:
-  /// **'Your progress in this quiz will be lost.'**
-  String get quizQuitBody;
-
-  /// No description provided for @quizQuitBodyRefund.
-  ///
-  /// In en, this message translates to:
-  /// **'You haven\'t answered yet, so your energy will be refunded.'**
-  String get quizQuitBodyRefund;
-
   /// No description provided for @quizQuitStay.
   ///
   /// In en, this message translates to:
@@ -1239,6 +1473,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Leave'**
   String get quizQuitLeave;
+
+  /// No description provided for @quizTapToCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap an answer to check it.'**
+  String get quizTapToCheck;
+
+  /// No description provided for @quizChecking.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking your answer…'**
+  String get quizChecking;
+
+  /// No description provided for @quizTimedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Answer within {seconds} seconds. No answer in time counts as wrong.'**
+  String quizTimedHint(int seconds);
+
+  /// No description provided for @quizDuelHint.
+  ///
+  /// In en, this message translates to:
+  /// **'A right answer scores up to 1,000 points, more the faster you answer. A wrong answer scores 0.'**
+  String get quizDuelHint;
+
+  /// No description provided for @quizExamHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick an answer, then move on. You can\'t go back to a question.'**
+  String get quizExamHint;
+
+  /// No description provided for @quizSecondsLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{seconds} seconds left'**
+  String quizSecondsLeft(int seconds);
+
+  /// No description provided for @quizTimeLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Time left: {time}'**
+  String quizTimeLeft(String time);
+
+  /// No description provided for @quizNoExplanation.
+  ///
+  /// In en, this message translates to:
+  /// **'No explanation is available for this question yet.'**
+  String get quizNoExplanation;
+
+  /// No description provided for @quizQuitRefund.
+  ///
+  /// In en, this message translates to:
+  /// **'You haven\'t answered yet, so you\'ll get your {count} energy back.'**
+  String quizQuitRefund(int count);
+
+  /// No description provided for @quizQuitFree.
+  ///
+  /// In en, this message translates to:
+  /// **'You haven\'t answered yet, so nothing is lost. You can start again later.'**
+  String get quizQuitFree;
+
+  /// No description provided for @quizQuitAnswered.
+  ///
+  /// In en, this message translates to:
+  /// **'This attempt will end and can\'t be continued later. Your answers so far won\'t count.'**
+  String get quizQuitAnswered;
+
+  /// No description provided for @quizQuitAnsweredEnergy.
+  ///
+  /// In en, this message translates to:
+  /// **'This attempt will end and can\'t be continued later. Your answers so far won\'t count, and the {count} energy isn\'t given back.'**
+  String quizQuitAnsweredEnergy(int count);
+
+  /// No description provided for @quizRefundFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t reach Nyaya, so your energy wasn\'t given back.'**
+  String get quizRefundFailed;
+
+  /// No description provided for @quizOptionCorrect.
+  ///
+  /// In en, this message translates to:
+  /// **'correct answer'**
+  String get quizOptionCorrect;
+
+  /// No description provided for @quizOptionWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'your answer, wrong'**
+  String get quizOptionWrong;
+
+  /// No description provided for @quizOptionSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'selected'**
+  String get quizOptionSelected;
+
+  /// No description provided for @quizOptionChecking.
+  ///
+  /// In en, this message translates to:
+  /// **'checking'**
+  String get quizOptionChecking;
+
+  /// No description provided for @resultNoAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'No answer'**
+  String get resultNoAnswer;
+
+  /// No description provided for @resultHideReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide answers'**
+  String get resultHideReview;
+
+  /// No description provided for @reportSending.
+  ///
+  /// In en, this message translates to:
+  /// **'Sending…'**
+  String get reportSending;
+
+  /// No description provided for @reportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t send your report. Your text is kept, so you can try again.'**
+  String get reportFailed;
 
   /// No description provided for @quizLoading.
   ///
@@ -1363,7 +1723,7 @@ abstract class AppLocalizations {
   /// No description provided for @resultEnergyBonus.
   ///
   /// In en, this message translates to:
-  /// **'3-star bonus: +{count} ⚡'**
+  /// **'3-star bonus: +{count} energy'**
   String resultEnergyBonus(int count);
 
   /// No description provided for @resultLeagueUp.
@@ -1693,7 +2053,7 @@ abstract class AppLocalizations {
   /// No description provided for @chatLimitReached.
   ///
   /// In en, this message translates to:
-  /// **'You\'ve used today\'s free questions. Come back tomorrow or go Premium for unlimited AI.'**
+  /// **'You\'ve used today\'s free questions. Come back tomorrow or go Premium for more AI questions.'**
   String get chatLimitReached;
 
   /// No description provided for @chatLimitReachedToday.
@@ -2077,19 +2437,19 @@ abstract class AppLocalizations {
   /// No description provided for @settingsReset.
   ///
   /// In en, this message translates to:
-  /// **'Reset progress'**
+  /// **'Reset this phone'**
   String get settingsReset;
 
   /// No description provided for @settingsResetConfirm.
   ///
   /// In en, this message translates to:
-  /// **'This erases coins, energy and settings on this device. XP, stars and streaks are saved to your account and stay. This cannot be undone.'**
+  /// **'This takes you through the welcome steps again and clears this phone\'s settings. Your XP, stars, coins and streak are saved to your account and stay.'**
   String get settingsResetConfirm;
 
   /// No description provided for @settingsResetAction.
   ///
   /// In en, this message translates to:
-  /// **'Erase everything'**
+  /// **'Reset'**
   String get settingsResetAction;
 
   /// No description provided for @premiumTitle.
@@ -2101,7 +2461,7 @@ abstract class AppLocalizations {
   /// No description provided for @premiumHeadline.
   ///
   /// In en, this message translates to:
-  /// **'Learn without limits'**
+  /// **'Learn more, every day'**
   String get premiumHeadline;
 
   /// No description provided for @premiumBenefitEnergy.
@@ -2113,44 +2473,20 @@ abstract class AppLocalizations {
   /// No description provided for @premiumBenefitEnergySub.
   ///
   /// In en, this message translates to:
-  /// **'Play as many quizzes as you like'**
-  String get premiumBenefitEnergySub;
+  /// **'Free: {free} energy a day. Premium: play as many quizzes as you like.'**
+  String premiumBenefitEnergySub(int free);
 
   /// No description provided for @premiumBenefitAi.
   ///
   /// In en, this message translates to:
-  /// **'Unlimited Nyaya AI'**
+  /// **'More Nyaya AI'**
   String get premiumBenefitAi;
 
   /// No description provided for @premiumBenefitAiSub.
   ///
   /// In en, this message translates to:
-  /// **'Ask every legal question you have'**
-  String get premiumBenefitAiSub;
-
-  /// No description provided for @premiumBenefitFreeze.
-  ///
-  /// In en, this message translates to:
-  /// **'Streak freezes included'**
-  String get premiumBenefitFreeze;
-
-  /// No description provided for @premiumBenefitFreezeSub.
-  ///
-  /// In en, this message translates to:
-  /// **'Never lose your streak to a busy day'**
-  String get premiumBenefitFreezeSub;
-
-  /// No description provided for @premiumBenefitExam.
-  ///
-  /// In en, this message translates to:
-  /// **'Full mock exams'**
-  String get premiumBenefitExam;
-
-  /// No description provided for @premiumBenefitExamSub.
-  ///
-  /// In en, this message translates to:
-  /// **'CLAT, AIBE & judiciary-style practice'**
-  String get premiumBenefitExamSub;
+  /// **'Free: {free} questions a day. Premium: {premium} a day.'**
+  String premiumBenefitAiSub(int free, int premium);
 
   /// No description provided for @premiumFair.
   ///
@@ -2413,7 +2749,7 @@ abstract class AppLocalizations {
   /// No description provided for @lawLegacyDesc.
   ///
   /// In en, this message translates to:
-  /// **'Older laws for reference'**
+  /// **'Replaced in July 2024. Kept for reference and comparison.'**
   String get lawLegacyDesc;
 
   /// No description provided for @chapterConstitutionTitle.
@@ -2595,6 +2931,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter your name.'**
   String get authErrorName;
+
+  /// No description provided for @authForgot.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get authForgot;
+
+  /// No description provided for @authResetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset your password'**
+  String get authResetTitle;
+
+  /// No description provided for @authResetSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your account\'s email and we\'ll send you a 6-digit code.'**
+  String get authResetSubtitle;
+
+  /// No description provided for @authResetSend.
+  ///
+  /// In en, this message translates to:
+  /// **'SEND CODE'**
+  String get authResetSend;
+
+  /// No description provided for @authResetSentTo.
+  ///
+  /// In en, this message translates to:
+  /// **'If an account uses {email}, we\'ve sent it a 6-digit code. It works for 15 minutes. Check your spam folder if you don\'t see it.'**
+  String authResetSentTo(String email);
+
+  /// No description provided for @authResetCode.
+  ///
+  /// In en, this message translates to:
+  /// **'6-digit code'**
+  String get authResetCode;
+
+  /// No description provided for @authResetNewPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'New password'**
+  String get authResetNewPassword;
+
+  /// No description provided for @authResetSave.
+  ///
+  /// In en, this message translates to:
+  /// **'SET NEW PASSWORD'**
+  String get authResetSave;
+
+  /// No description provided for @authResetResend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a new code'**
+  String get authResetResend;
+
+  /// No description provided for @authResetErrorCode.
+  ///
+  /// In en, this message translates to:
+  /// **'This code is wrong or has expired. Ask for a new one.'**
+  String get authResetErrorCode;
+
+  /// No description provided for @authResetUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset isn\'t available right now. Please try again later.'**
+  String get authResetUnavailable;
+
+  /// No description provided for @authResetErrorInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the 6-digit code and a new password of at least 8 characters.'**
+  String get authResetErrorInvalid;
+
+  /// No description provided for @authResetDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Your password has been changed.'**
+  String get authResetDone;
 
   /// No description provided for @settingsAccount.
   ///

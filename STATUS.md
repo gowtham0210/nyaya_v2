@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-10-31 (sound effects, Claude Opus 5.5)
+> Last updated: 2026-11-02 (review fixes, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -272,7 +272,7 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       back on; coins shown on the Journey header and in Settings → Store (they had no place since the Home redesign).
       Also fixed: "Play again" reopened the finished quiz (state is per quiz request; now invalidated first).
       Tests: backend 33 unit + 56 API, Flutter 39. Staging migrated (backup `nyaya-2026-10-29-0813.sql.gz`); user
-      checked Part 2 on the iPhone. Known: Settings → Reset may not reopen onboarding (account settings come back);
+      checked Part 2 on the iPhone. Known (fixed 2026-11-02): Settings → Reset may not reopen onboarding (account settings come back);
       premium chat stops at the server's 50/day while the app shows unlimited. Next: Part 3 (real leagues).
 
 - [x] 2026-10-29: **Real weekly leagues on the server (Part 3 of 3).** User's choices: small groups are topped up to 30
@@ -727,6 +727,175 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       app starts and the audio players load with no errors; **not listened to yet** (Claude can't hear the
       simulator, and a quiz needs a sign-in) — the user should listen on the iPhone.
 
+- [x] 2026-11-01: **Screenshots of every screen + two fixes.** 56 screenshots in `docs/screenshots/` (13 folders,
+      index in its README), iPhone 17 Pro Max simulator against the local API with a throwaway local account.
+      Fixed: (1) Settings → Edit name → Cancel showed a red error screen (controller disposed while the dialog was still
+      closing); the dialog is now `EditNameDialog` and owns its controller; `test/edit_name_dialog_test.dart`.
+      (2) **Emoji draw as "?" boxes on iOS** — even with `fontFamily: 'Apple Color Emoji'` named directly, so a font
+      fallback does not help (Impeller, which can't be turned off on iOS). All on-screen emoji are now icons:
+      league badges (`LeagueEmblem`, `lib/features/gamification/presentation/league_emblem.dart`; the domain
+      `LeagueTier.emblem` field is gone), top-3 medals (`RankMedal`), onboarding goal icons, the level sheet's
+      landmark crown, the Daily Docket result squares; `modeEnergyCost`, `energyRefillCoins` and `resultEnergyBonus`
+      say "energy" in words (each language's word from `energyLeft`). Share text copied to the clipboard keeps its
+      emoji (other apps draw them). **Rule: don't put emoji in on-screen text.** Flutter tests: 112. Still seen and
+      not fixed: the Daily Docket timer keeps running behind "Leave this quiz?"; Premium screen status bar text is
+      dark on dark.
+- [x] 2026-11-01: **Shorter onboarding** (from an outside UX review: too many steps before the first quiz).
+      Now language → 3 intro slides (Skip already there) → "Who are you learning as?" → Home; that last step's button
+      is "Get Started". The daily goal and name steps are gone: the goal keeps its default (3 a day) and the name stays
+      empty (Home shows the app name, leaderboard/map show "You", the account gets "Learner"); both change in Settings,
+      whose header shows "Your name" when empty. The role step stays because it sets quiz difficulty, negative
+      marking and the AI chat's style. Unused strings `onbDailyGoal*`, `onbYourName*`, `onbCommit` are still in the
+      .arb files. Screenshots `docs/screenshots/01-onboarding/06-daily-goal.png` and `07-your-name.png` are now out of
+      date. Checked on the simulator. Flutter tests: 112.
+- [x] 2026-11-01: **Premium offer moved after the first quiz** (outside UX review: paywall before any value).
+      Onboarding no longer opens the paywall. When premium is on, the first quiz result screen shows the
+      `PremiumBanner` once ("Unlock unlimited energy", tap → paywall); local key `premium_offer_v1` stops it showing
+      again (a reset clears it). The banner moved from `home_sections.dart` (it was unused there) to
+      `lib/features/premium/presentation/premium_banner.dart`. Other entry points unchanged: Settings, out-of-energy
+      sheet, AI chat limit. Two tests in `app_flow_test.dart` run only with `--dart-define=NYAYA_PREMIUM=true`
+      (both pass); normal run: 112 pass, 2 skipped. Not checked on the simulator.
+- [x] 2026-11-01: **Paywall promises only what premium really gives.** Three of four benefits were not true:
+      "Unlimited Nyaya AI" (the API caps premium at 50 a day, `CHAT_DAILY_LIMIT`), "Streak freezes included" (premium
+      gives none) and "Full mock exams" (Exam Chamber is free). Now two benefits, each with the free limit beside it:
+      "Unlimited energy — Free: 5 energy a day…" and "More Nyaya AI — Free: 5 questions a day. Premium: 50 a day."
+      (numbers from `GameRules`; new `premiumDailyAiMessages = 50` must match the API). Headline "Learn more, every
+      day"; the chat limit message no longer says "unlimited AI". All 6 languages. The app's own premium AI count now
+      stops at 50 like the server (was "unlimited"). Paywall checked on the simulator. If premium should feel bigger,
+      real perks are a product choice (e.g. free monthly streak freezes, a premium-only mode).
+- [x] 2026-11-01: **Forgot password for learners** (there was none: a forgotten password meant a lost account).
+      API: `POST /v1/auth/password-reset {email}` → always 204 (same answer for unknown emails and staff, who are
+      reset by an admin) and emails a 6-digit code, valid 15 minutes, at most 3 mails per address per 15 minutes;
+      `POST /v1/auth/password-reset/confirm {email, code, new_password}` → new password, every other session
+      signed out, audit `auth.password_reset`, returns a session. 5 wrong tries end a code. Table
+      `password_reset_codes` (migration 0016, hash only). Mail: new `Mailer` (`src/core/mailer.ts`, nodemailer
+      10.1.7) over SMTP — env `SMTP_HOST`, `SMTP_PORT` (587), `SMTP_USER`, `SMTP_PASSWORD`, `MAIL_FROM`; passed
+      through in `deploy/staging/docker-compose.yml`. Without SMTP: dev writes the mail to the log, production
+      answers 503 `password_reset_unavailable`. **SMTP is not set up on staging yet**, so reset is off there.
+      The email is English only. App: "Forgot password?" on the sign-in screen → `ResetPasswordScreen`
+      (`/reset-password`): email (carried over), then code + new password; signs in and carries on (e.g. the
+      quiz that asked for sign-in). Text in all 6 languages. Tests: API 75 unit + 141 e2e (9 new), app 113.
+      Not tried on the simulator.
+- [x] 2026-11-01: **Accessibility fixes** (from an outside audit, checked with Flutter's guideline tests and
+      measured contrast: text 5.5:1 light / 7:1 paywall, tap targets all pass). Fixed: (1) intro slides overflowed by
+      up to 306 px at the largest text (1.5×, `maxTextScale`) — slides now scroll (`_SlidePage` + `_ArtRoom`, which
+      reports a small intrinsic height so normal text looks the same); "Get Started" text can wrap. (2) Home overflowed
+      sideways in hi/ta/te/ml at large text — quiz-mode badge scales down, Explore card grows 180 px per 1.0 of text
+      scale, its 30 pt title grows at most 1.2× (it broke "Constitution" mid-word). (3) `Pressable` (choice cards,
+      plan cards, Explore cards...) now takes keyboard focus, shows a ring and presses on Enter/Space. (4) Screen
+      readers: headings marked (step, slide, screen and section titles), intro dots say "Slide 2 of 3" (new
+      `onbSlidePosition`, 6 languages), sign-in and reset errors are read out (live region). (5) Paywall plan badge
+      wraps instead of overflowing. Tests: `accessibility_test.dart` now covers every onboarding step, reset
+      password, quiz result and paywall (premium build) in light/dark, onboarding/Home/reset in all 6 languages at the
+      largest text, heading + slide-position semantics and keyboard use; 138 app tests pass (paywall ones run with
+      `--dart-define=NYAYA_PREMIUM=true`). Home checked on the simulator at the largest iOS text size. Still open:
+      some 2-line descriptions end in "…" at the largest text; text is capped at 1.5× (WCAG asks 2×).
+- [x] 2026-11-01: **Home is learning-first** (outside UX brief). New order: header → Continue / getting started →
+      Review → Quiz modes → Latest legal updates → Core Laws → Featured carousel (was first). New learners (no Case
+      Path stars) get "Start your learning journey" + a "Recommended start: Constitution of India" card ("Start
+      learning" → first Case Path level); returning learners get "Continue where you left off" with "1 of 3 levels
+      done". Both use one `_LearningCard` (explore_sections.dart). Quiz modes: `_ModeTile`, equal-height rows that fit
+      their text (no empty middle), one column under 300 pt of width, badges say "1 energy" / "2 energy" / "Free".
+      Review card: "Review your mistakes" (or "Your saved questions") + "Review now". Legacy row: badge above the title,
+      text "Replaced in July 2024. Kept for reference and comparison." Carousel: label "Featured", button says where it
+      goes ("Start learning" / "View on map"), dots read "Slide x of 3". Updates strip grows with text size. "View All"
+      can wrap. Only the first sections fade in (later ones looked blank while scrolling). Intro slide art minimum
+      180 → 120 pt (text was cut on a 375×667 phone). 11 new strings in 6 languages. Tests: new/returning order and
+      energy labels (`app_flow_test`), Home on a 320-pt phone and in landscape in all 6 languages at normal and largest
+      text (`accessibility_test`); 164 pass. Simulator: new learner on a temporary iPhone SE (375×667, deleted after),
+      returning learner on iPhone 17 Pro Max. With the API down, updates show from the phone's copy (or hide on a
+      fresh install) and the Review card hides; quizzes still start. Not done: separate loading/error placeholders
+      per section (sections just hide), "Old articles" filtering, the legacy title still says "(Legacy)" next to the
+      badge.
+- [x] 2026-11-01: **Case Path is clearer** (outside UX brief). Every stop says its state in words for screen
+      readers ("Level 1, Completed, 2 of 3 stars" / "Next step" / "Locked"); chests get a lock or tick badge and
+      three sheets: "Chapter chest locked" (levels done + "Continue learning"), "Your chapter reward is ready"
+      ("Reward: 30 coins", Open chest), "Chapter reward collected". A failed claim keeps the chest openable and says
+      so (`openChest` returns null and refreshes); the button is off while claiming. Level sheet: chapter eyebrow,
+      "6 questions · 1 energy · No time limit", star table from GameRules, folded "How scoring works" (rules checked
+      against the server: retry costs energy, leave before 1st answer = refund, best kept, no minus marks, first 3★
+      gives 1 energy back, 5 coins per new star), button "Start · 1 energy". Locked level: "Levels open in order.
+      Your next step is …" + "Show my next step" (scrolls the map). Header chips open notes on stars, energy, coins
+      (coins → Store). Banner: "CHAPTER 1 · 1/3 COMPLETED", 2-line title, band grows with text size
+      (`JourneyLayout.textScale`). New list button shows every stop as a list. Map scrolls to the new next step after
+      a level or chest. 192 app tests pass (24 new map layouts: 320 pt / landscape × 6 languages × 2 text sizes).
+      Checked on the simulator: returning learner (iPhone 17 Pro Max) and new learner (temporary iPhone SE, deleted).
+      Not checked on the simulator: opening a ready chest. Known risk (server): a quiz start whose reply is lost can
+      charge energy again on retry — `POST /v1/quiz-sessions` has no Idempotency-Key.
+- [x] 2026-11-01: **Quiz screens are clearer and more honest** (outside UX brief). Before an answer the bar says
+      "Tap an answer to check it." (no dead NEXT); timed modes add "Answer within 30 seconds. No answer in time counts
+      as wrong."; duels add the scoring rule (up to 1,000 points, faster = more, wrong = 0, from
+      `XpCalculator.duelPoints`). While an answer is checked the chosen option shows a spinner and the others lock.
+      Options say their state to screen readers ("correct answer" / "your answer, wrong"). After an answer the
+      explanation scrolls into view; empty explanations get a fallback line. "1/6" next to the bar removed (the bar
+      reads "Question 1 of 6"). Timers catch up after the app was in the background (`QuizController.catchUp`, from
+      an `AppLifecycleListener` in QuizView). Exam: "answered" no longer counts skipped questions; hint "You can't go
+      back to a question" (the app can't). Exit dialog says what really happens (server: refund only before the first
+      answer): 4 texts (refund n energy / free mode nothing lost / answered: attempt ends, answers don't count, energy
+      kept). An offline leave says the energy wasn't given back (`abandon()` returns false). Report sheet: spinner,
+      error inside the sheet (was a snackbar hidden behind it), text kept, "Try again". Results: stars spoken, Review
+      answers is a full button ("Hide answers"), review shows "Your answer" for every question ("No answer" /
+      "Skipped"). Save/Report and the "Why" title wrap at large text (overflowed before). 212 app tests pass (12 new
+      quiz layouts: 320 pt / landscape × 6 languages at the largest text). Checked on the simulator: question,
+      wrong-answer feedback, exit dialogs, report sheet, Daily Docket timer, background time-out. Not changed (server):
+      a quiz start whose reply is lost can still charge energy twice; duels race a recorded run, so there is no live
+      "waiting / disconnected" opponent state to show.
+- [x] 2026-11-02: **News card pictures are uploaded in the portal** (user's choice: stored in the database). The
+      app's bundled `update_<id>.webp` files never existed, so every card showed the category fallback.
+      DB: `news_images` (migration 0017; bytea, width, height, version, uploaded_by; cascade with the article).
+      API: `PUT/DELETE /v1/editor/news/:id/image` (content editors, only while the article is draft / changes
+      requested, audited as an edit, so the reviewer sees it); `GET /v1/editor/news/:id/image` (staff, any status);
+      public `GET /v1/news/:id/image` (published only, `Cache-Control: public, max-age=31536000, immutable`, the
+      address carries `?v=<version>`). Uploads: JPEG/PNG/WebP, ≤ 5 MB, ≥ 480 px wide; re-encoded with sharp 0.35.5
+      to WebP ≤ 1200 px (strips camera data/location). `image_url` on `/v1/news` items, `image` on the editor detail.
+      Portal: "Card picture" card on the article page with Home and list crops, upload / replace / remove, help
+      text; `/news/[id]/picture` route fetches drafts' pictures as the signed-in user; server action limit 6 MB.
+      App: `LegalUpdate.imageUrl` (resolved against `NYAYA_API_URL`), `UpdatePicture` with `cached_network_image`
+      (kept on the phone for offline), category painting while loading / offline / when none.
+      `docs/UPDATES_ART.md` now describes the upload. Tests: backend 75 unit + 145 e2e (4 new), app 214.
+      Checked locally end to end: seed editor uploaded, reviewer approved, publisher published, picture on the Home
+      card and the Updates list on the simulator (test article retired afterwards). **Staging needs a deploy**
+      (migration 0017 + new API + portal) before editors can upload there, and the iPhone needs a new build.
+- [x] 2026-11-02: **Fixed Sentry FLUTTER-4** (crash on the iPhone, release build): Home's league-result dialog read
+      `ref` after closing, when Home could already be gone ("Using ref when a widget is about to or has been
+      unmounted"). The profile notifier is now taken before the dialog opens. A widget test checks that leaving
+      Home with the dialog open still marks the result as seen; it could not recreate the exact order of the crash.
+- [x] 2026-11-02: **Settings → Reset reopens onboarding** (reported by the user on the iPhone). It cleared the phone and
+      opened onboarding, but the refresh right after copied the account's `onboarded: true` back, so the router sent
+      the learner to Home; it also wiped `leagueResultSeen`, so last week's league result popped up again. Now
+      Reset saves `onboarded: false` to the account before refreshing (the server already accepts it), and keeps the
+      name (onboarding no longer asks for it) and the league week already seen (`resetAll(sameAccount: true)`;
+      account deletion still clears everything). The row and dialog now say what really happens, in all 6
+      languages: "Reset this phone" / "Reset", and XP, stars, coins and streak stay on the account (the other
+      languages wrongly said they were erased). Test fails on the old code and passes now; app tests 216. Checked on
+      the simulator against the local API: reset → onboarding stays → Home with progress, no league popup.
+- [x] 2026-11-02: **Staging deployed** with the 12 unpushed commits (onboarding/paywall changes, password reset,
+      accessibility, Home, Case Path, quiz, news pictures, FLUTTER-4 and reset fixes): backup
+      `nyaya-2026-11-02-0944.sql.gz` first; migrations 0016 (`password_reset_codes`) and 0017 (`news_images`)
+      applied; `/v1/news` (now with `image_url`) and the portal login answer 200. **Not pushed yet** (openqodex review
+      first). Staging has no SMTP settings, so "Forgot password" answers 503 there until they are added.
+- [x] 2026-11-02: **Android release APK** against staging (`flutter build apk --release` with
+      `--dart-define-from-file=.dart-defines.local.json --dart-define=NYAYA_API_URL=https://staging-api.deepwebstudio.dev`),
+      at `build/app/outputs/flutter-apk/app-release.apk` (~70 MB). Signed with the **debug key** (no release
+      keystore yet): fine for test phones, not for the Play Store. Not yet tried on an Android phone.
+- [x] 2026-11-02: **App renamed "Nyaya Kural" and given its icon.** Home-screen name: iOS `CFBundleDisplayName`,
+      Android `android:label`, `MaterialApp.title`. Inside the app it is still "Nyaya" (welcome wordmark, Nyaya AI,
+      Nyaya Premium, messages) until the user decides. Icon from the user's ChatGPT design: sources in
+      `assets/icon/` (full icon 1024, and the symbol on transparent at 88% for Android), generated by
+      `flutter_launcher_icons` (dev dependency, config `flutter_launcher_icons.yaml`; run
+      `dart run flutter_launcher_icons`). Android adaptive icon: symbol on #873F2B, inset 0 (checked in circle and
+      rounded-square shapes). The tool wrongly changes `ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS`
+      in `project.pbxproj`: undo that after each run. Checked on the iPhone simulator home screen.
+- [x] 2026-11-02: **OpenQodex review fixes (password reset).** (1) Major: parallel wrong guesses could share one try.
+      Each guess now uses up a try before it is checked, in one `UPDATE … wrong_tries + 1 … RETURNING` that only
+      matches while tries < 5 and the code is unexpired; at most 5 guesses are ever compared. (2) Minor: a learner's
+      reset request answered slower than an unknown email's (it waited for SMTP); the mail is now sent without
+      waiting, failures logged. PGlite runs one statement at a time, so no test can recreate the race; a test checks
+      20 wrong guesses sent together still end the code. The review itself never completes on this branch (187
+      files, ~15,800 added lines; it leaves ~405 changed ranges unread, mostly Flutter screens): split future work
+      into smaller pushes. Server e2e tests time out while starting when the Mac is under load: run
+      `npx vitest run --config ./vitest.config.e2e.ts --maxWorkers=3`. **These two fixes are not on staging yet.**
+
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
@@ -780,7 +949,7 @@ lib/
     widgets/                     # ChunkyButton (3D), Pressable, StatPill, NyayaCard, ProgressRing,
                                  # GlossyProgressBar, StarRow, InitialsAvatar, TickingBuilder
   features/
-    onboarding/   language → 3 slides → persona → daily goal → name → soft paywall → home
+    onboarding/   language → 3 slides → persona → home (premium is offered after the first quiz)
     home/         Explore Law home (explore_sections.dart, law_illustration.dart); older game widgets kept unused:
                   header (stats + leaderboard + settings icons), hero "continue", goal+streak week strip,
                   Daily Docket card, 4 modes grid, league card, premium banner, fact of the day, updates

@@ -1,13 +1,13 @@
 # Legal Updates thumbnails — ChatGPT prompts
 
-Each card on the Updates tab shows a thumbnail on the right
-(`lib/features/legal_updates/presentation/updates_screen.dart`). Until a file exists, the card
-shows its category's Journey painting on a sand tile, so thumbnails can arrive one by one.
-The header reuses `journey_constitution_landmark.webp` and needs no new art.
+Each news article's card picture is **uploaded in the content portal** (News → article → *Card
+picture*) and served by the API; it is no longer bundled in the app. Without one, the card shows
+its category's Journey painting. The prompts below are a starting point for editors.
 
-**Deliver:** square PNG, 1024×1024, **opaque** (full-bleed, no transparency, no border). The card
-crops it to about 8:7 with the centre kept, so keep the subject centred with some room on every
-side. Send the PNGs; they get converted to `.webp` and saved as `assets/images/<file name>.webp`.
+**Upload:** JPEG, PNG or WebP, up to 5 MB and at least 480 pixels wide. A landscape picture of
+about 1536×1024 works best. The API re-saves it as WebP, at most 1200 pixels. The Home card
+crops it to 2:1 and the Updates list to about 8:7, both centred, and the list's top-right corner
+holds the save button: keep the subject centred and the edges quiet.
 
 ## Shared style (paste before every prompt)
 

@@ -1,21 +1,32 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   Param,
   ParseUUIDPipe,
   Patch,
   Post,
+  Put,
   Query,
+  Res,
+  StreamableFile,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
   ApiCreatedResponse,
   ApiOkResponse,
   ApiOperation,
+  ApiProduces,
   ApiTags,
 } from '@nestjs/swagger';
+import type { Response } from 'express';
 import { CurrentActor, Public, Roles } from '../auth/decorators.js';
 import type { Actor } from '../core/audit.service.js';
 import {
@@ -28,6 +39,7 @@ import {
   UpdateNewsDto,
 } from './news.dto.js';
 import { NewsService } from './news.service.js';
+import { MAX_PICTURE_BYTES } from './card-picture.js';
 import { NEWS_ACTIONS, NEWS_READ_ROLES } from './workflow.js';
 
 const Id = () => Param('id', new ParseUUIDPipe());
@@ -44,6 +56,19 @@ export class NewsController {
   @ApiOkResponse({ type: PublicNewsListDto })
   list() {
     return this.news.published();
+  }
+
+  @Public()
+  @Get(':id/image')
+  @ApiOperation({ summary: "A published article's card picture (WebP)" })
+  @ApiProduces('image/webp')
+  @ApiOkResponse({ schema: { type: 'string', format: 'binary' } })
+  async image(@Id() id: string, @Res({ passthrough: true }) res: Response) {
+    const p = await this.news.picture(id, { publishedOnly: true });
+    // The address carries the version, so a cached copy never goes stale.
+    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    res.setHeader('ETag', `"${p.version}"`);
+    return new StreamableFile(p.data, { type: 'image/webp' });
   }
 }
 
@@ -85,6 +110,65 @@ export class EditorNewsController {
     @Body() body: UpdateNewsDto,
   ) {
     return this.news.update(actor, id, body);
+  }
+
+  @Get(':id/image')
+  @Roles(...NEWS_READ_ROLES)
+  @ApiOperation({
+    summary: "The article's card picture (WebP), whatever its status",
+  })
+  @ApiProduces('image/webp')
+  @ApiOkResponse({ schema: { type: 'string', format: 'binary' } })
+  async image(@Id() id: string, @Res({ passthrough: true }) res: Response) {
+    const p = await this.news.picture(id, { publishedOnly: false });
+    res.setHeader('Cache-Control', 'private, max-age=3600');
+    res.setHeader('ETag', `"${p.version}"`);
+    return new StreamableFile(p.data, { type: 'image/webp' });
+  }
+
+  @Put(':id/image')
+  @Roles(...NEWS_ACTIONS.edit.roles)
+  @UseInterceptors(
+    FileInterceptor('file', {
+      limits: { fileSize: MAX_PICTURE_BYTES, files: 1 },
+    }),
+  )
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      required: ['file'],
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+          description:
+            'JPEG, PNG or WebP, at most 5 MB and at least 480 pixels wide; stored as WebP, at most 1200 pixels',
+        },
+      },
+    },
+  })
+  @ApiOperation({
+    summary: 'Set the card picture of a draft, or one with changes requested',
+  })
+  @ApiOkResponse({ type: NewsDetailDto })
+  setImage(
+    @CurrentActor() actor: Actor,
+    @Id() id: string,
+    @UploadedFile() file: { buffer: Buffer } | undefined,
+  ) {
+    return this.news.setPicture(actor, id, file?.buffer);
+  }
+
+  @Delete(':id/image')
+  @Roles(...NEWS_ACTIONS.edit.roles)
+  @ApiOperation({
+    summary:
+      'Remove the card picture of a draft, or one with changes requested',
+  })
+  @ApiOkResponse({ type: NewsDetailDto })
+  removeImage(@CurrentActor() actor: Actor, @Id() id: string) {
+    return this.news.removePicture(actor, id);
   }
 
   @Post(':id/submit')

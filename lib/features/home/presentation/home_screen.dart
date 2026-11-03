@@ -8,6 +8,7 @@ import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../gamification/domain/league.dart';
+import '../../gamification/presentation/league_emblem.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../progress/application/progress_sync.dart';
 import '../../review/presentation/review_screen.dart';
@@ -34,19 +35,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   void _maybeShowLeagueOutcome() {
+    if (!mounted) return;
     final outcome = ref.read(profileProvider).pendingLeagueOutcome;
-    if (outcome == null || !mounted) return;
+    if (outcome == null) return;
+    // Taken now: Home may be gone by the time the dialog closes (a sign-out,
+    // or leaving for a screen outside the tabs), and its ref with it.
+    final profile = ref.read(profileProvider.notifier);
     showDialog<void>(
       context: context,
       builder: (context) => LeagueOutcomeDialog(outcome: outcome),
-    ).then((_) => ref.read(profileProvider.notifier).acknowledgeLeagueOutcome());
+    ).then((_) => profile.acknowledgeLeagueOutcome());
   }
 
   @override
   Widget build(BuildContext context) {
     const page = EdgeInsets.symmetric(horizontal: AppSpacing.page);
+    // Learning first: where to continue (or start), then what to review,
+    // then other ways to practise; reading and featured laws come after.
     const sections = <Widget>[
-      Padding(padding: page, child: FeaturedLawsCarousel()),
       Padding(padding: page, child: ContinueLearningCard()),
       Padding(padding: page, child: ReviewCard()),
       // Duel, Exam and Daily Docket start here; Case Path opens the Journey tab.
@@ -56,6 +62,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       // Scrolls edge to edge, so it pads itself.
       LatestUpdatesSection(),
       Padding(padding: page, child: CoreLawsSection()),
+      SizedBox(height: AppSpacing.xl),
+      Padding(padding: page, child: FeaturedLawsCarousel()),
     ];
 
     return Scaffold(
@@ -75,8 +83,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 padding: const EdgeInsets.only(top: AppSpacing.sm, bottom: AppSpacing.xl),
                 sliver: SliverList.list(
                   children: [
+                    // Only what shows on opening fades in; sections further down
+                    // are built while scrolling and would look blank for a moment.
                     for (final (i, s) in sections.indexed)
-                      s is SizedBox ? s : s.animate().fadeIn(delay: (40 * i).ms, duration: 350.ms).slideY(begin: 0.06),
+                      s is SizedBox || i > 3
+                          ? s
+                          : s.animate().fadeIn(delay: (40 * i).ms, duration: 350.ms).slideY(begin: 0.06),
                   ],
                 ),
               ),
@@ -103,7 +115,7 @@ class LeagueOutcomeDialog extends StatelessWidget {
         ? l.leagueOutcomePromoted(name)
         : (outcome.demoted ? l.leagueOutcomeDemoted(name) : l.leagueOutcomeStayed(name));
     return AlertDialog(
-      icon: Text(to.emblem, style: const TextStyle(fontSize: 48)),
+      icon: LeagueEmblem(to, size: 48),
       title: Text(title, textAlign: TextAlign.center),
       content: Text(l.leagueOutcomeRank(outcome.rank), textAlign: TextAlign.center),
       actions: [

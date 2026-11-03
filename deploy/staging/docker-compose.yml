@@ -53,6 +53,12 @@ services:
       APP_UPDATE_URL: ${APP_UPDATE_URL:-}
       # Crash reports (errors only). Empty: nothing is reported.
       SENTRY_DSN: ${API_SENTRY_DSN:-}
+      # Mail for "Forgot password" codes. Without SMTP_HOST, password reset answers 503.
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      MAIL_FROM: ${MAIL_FROM:-}
     networks: [default, edge]
 
   cms:

@@ -230,7 +230,10 @@ class ReviewCard extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(l.reviewTitle, style: context.text.titleMedium),
+                  Text(
+                    s.mistakes.isNotEmpty ? l.homeReviewMistakes : l.homeReviewSaved,
+                    style: context.text.titleMedium,
+                  ),
                   Text(
                     l.reviewCardBody(s.mistakes.length, s.saved.length),
                     style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary),
@@ -238,7 +241,15 @@ class ReviewCard extends ConsumerWidget {
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right_rounded),
+            const SizedBox(width: 8),
+            // The whole card opens Review; this names the action.
+            ExcludeSemantics(
+              child: Text(
+                l.homeReviewNow,
+                style: context.text.labelLarge?.copyWith(color: context.colors.primary, fontWeight: FontWeight.w600),
+              ),
+            ),
+            Icon(Icons.chevron_right_rounded, color: context.colors.primary),
           ],
         ),
       ),

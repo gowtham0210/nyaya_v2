@@ -6,8 +6,9 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   experimental: {
-    // Question files go to the API as uploads of up to 2 MB, plus form overhead.
-    serverActions: { bodySizeLimit: '3mb' },
+    // Uploads go to the API through server actions: question files (up to 2 MB)
+    // and news pictures (up to 5 MB), plus form overhead.
+    serverActions: { bodySizeLimit: '6mb' },
   },
   turbopack: {
     rules: {

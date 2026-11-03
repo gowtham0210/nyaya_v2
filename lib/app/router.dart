@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../core/config/features.dart';
 import '../features/auth/presentation/auth_screen.dart';
+import '../features/auth/presentation/reset_password_screen.dart';
 import '../features/chat/presentation/chat_screen.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/journey/presentation/journey_screen.dart';
@@ -31,6 +32,7 @@ abstract final class Routes {
   static const settings = '/settings';
   static const premium = '/premium';
   static const signIn = '/sign-in';
+  static const resetPassword = '/reset-password';
   static String update(String id) => '/updates/$id';
 }
 
@@ -110,6 +112,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: Routes.signIn,
         parentNavigatorKey: _rootKey,
         pageBuilder: (context, state) => const MaterialPage(fullscreenDialog: true, child: AuthScreen()),
+      ),
+      GoRoute(
+        path: Routes.resetPassword,
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => ResetPasswordScreen(email: state.extra as String? ?? ''),
       ),
       GoRoute(
         path: Routes.premium,

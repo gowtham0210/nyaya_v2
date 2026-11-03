@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/api/api_client.dart';
+import '../../../core/api/api_config.dart';
 import '../../../core/storage/local_store.dart';
 
 enum UpdateCategory {
@@ -29,6 +30,7 @@ class LegalUpdate {
     this.sourceUrl,
     required this.date,
     required this.readMinutes,
+    this.imageUrl,
   });
 
   final String id;
@@ -44,9 +46,9 @@ class LegalUpdate {
   final DateTime date;
   final int readMinutes;
 
-  /// Card thumbnail; until it exists the card shows its category's painting.
-  /// Prompts are in docs/UPDATES_ART.md.
-  String get image => 'assets/images/update_${id.replaceAll('-', '_')}.webp';
+  /// The card picture uploaded in the content portal, as a full address;
+  /// null when there is none (the card then shows its category's painting).
+  final String? imageUrl;
 
   /// Reads the API's (and the cache's) shape; null when it is not one we know.
   static LegalUpdate? fromJson(Map<String, dynamic> j) {
@@ -64,6 +66,11 @@ class LegalUpdate {
       sourceUrl: j['source_url'] as String?,
       date: date,
       readMinutes: j['read_minutes'] as int,
+      // The API gives a path on itself.
+      imageUrl: switch (j['image_url']) {
+        final String path when path.isNotEmpty => Uri.parse(ApiConfig.baseUrl).resolve(path).toString(),
+        _ => null,
+      },
     );
   }
 }

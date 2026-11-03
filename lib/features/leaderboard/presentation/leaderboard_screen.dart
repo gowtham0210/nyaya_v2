@@ -11,6 +11,7 @@ import '../../../core/utils/day.dart';
 import '../../../core/widgets/common.dart';
 import '../../../core/widgets/ticking_builder.dart';
 import '../../gamification/domain/league.dart';
+import '../../gamification/presentation/league_emblem.dart';
 import '../data/league_api.dart';
 
 class LeaderboardScreen extends ConsumerWidget {
@@ -206,7 +207,7 @@ class _TierStrip extends StatelessWidget {
                   child: ExcludeSemantics(
                     child: Opacity(
                       opacity: t.level <= current ? 1 : 0.35,
-                      child: Text(t.emblem, style: TextStyle(fontSize: t.level == current ? 28 : 20)),
+                      child: LeagueEmblem(t, size: t.level == current ? 30 : 22),
                     ),
                   ),
                 ),
@@ -258,7 +259,6 @@ class _LeagueRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
-    final medal = switch (rank) { 1 => '🥇', 2 => '🥈', 3 => '🥉', _ => null };
     return Container(
       margin: const EdgeInsets.only(bottom: 6),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -271,8 +271,8 @@ class _LeagueRow extends StatelessWidget {
         children: [
           SizedBox(
             width: 32,
-            child: medal != null
-                ? Text(medal, style: const TextStyle(fontSize: 22))
+            child: rank <= 3
+                ? Align(alignment: Alignment.centerLeft, child: RankMedal(rank))
                 : Text('$rank', style: context.text.titleSmall?.copyWith(color: context.nyaya.textSecondary)),
           ),
           InitialsAvatar(name: entry.name, seed: entry.isUser ? 0 : entry.avatarSeed, size: 38),

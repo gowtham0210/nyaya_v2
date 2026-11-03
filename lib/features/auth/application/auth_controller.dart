@@ -26,6 +26,15 @@ class AuthController extends Notifier<Account?> {
     state = await ref.read(authApiProvider).register(name: name.trim(), email: email.trim(), password: password);
   }
 
+  Future<void> requestPasswordReset({required String email}) =>
+      ref.read(authApiProvider).requestPasswordReset(email: email.trim());
+
+  Future<void> resetPassword({required String email, required String code, required String newPassword}) async {
+    state = await ref
+        .read(authApiProvider)
+        .resetPassword(email: email.trim(), code: code.trim(), newPassword: newPassword);
+  }
+
   Future<void> signOut() async {
     await ref.read(authApiProvider).signOut();
     state = null;

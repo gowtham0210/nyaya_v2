@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../app/router.dart';
+import '../../../core/config/game_rules.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/services/feedback.dart';
 import '../../../core/theme/app_colors.dart';
@@ -67,11 +68,20 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
   Widget build(BuildContext context) {
     final l = context.l10n;
     final isPremium = ref.watch(profileProvider.select((p) => p.isPremium));
+    // Only what premium really changes, each with the free limit beside it.
     final benefits = [
-      (Icons.bolt_rounded, l.premiumBenefitEnergy, l.premiumBenefitEnergySub, AppPalette.ochre),
-      (Icons.auto_awesome, l.premiumBenefitAi, l.premiumBenefitAiSub, AppPalette.sand),
-      (Icons.ac_unit_rounded, l.premiumBenefitFreeze, l.premiumBenefitFreezeSub, AppPalette.frost),
-      (Icons.assignment_rounded, l.premiumBenefitExam, l.premiumBenefitExamSub, AppPalette.mossLight),
+      (
+        Icons.bolt_rounded,
+        l.premiumBenefitEnergy,
+        l.premiumBenefitEnergySub(GameRules.freeDailyEnergy),
+        AppPalette.ochre,
+      ),
+      (
+        Icons.auto_awesome,
+        l.premiumBenefitAi,
+        l.premiumBenefitAiSub(GameRules.freeDailyAiMessages, GameRules.premiumDailyAiMessages),
+        AppPalette.sand,
+      ),
     ];
 
     return Scaffold(
@@ -103,10 +113,13 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                       style: context.text.labelLarge?.copyWith(color: AppPalette.ochre, letterSpacing: context.tracking(2)),
                     ),
                     const SizedBox(height: 6),
-                    Text(
-                      l.premiumHeadline,
-                      textAlign: TextAlign.center,
-                      style: context.text.headlineLarge?.copyWith(color: Colors.white),
+                    Semantics(
+                      header: true,
+                      child: Text(
+                        l.premiumHeadline,
+                        textAlign: TextAlign.center,
+                        style: context.text.headlineLarge?.copyWith(color: Colors.white),
+                      ),
                     ),
                     const SizedBox(height: AppSpacing.lg),
                     for (final (i, (icon, title, sub, color)) in benefits.indexed)
@@ -255,17 +268,14 @@ class _PlanCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    // The badge moves to its own line when both don't fit.
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 4,
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
-                        Flexible(
-                          child: Text(
-                            title,
-                            overflow: TextOverflow.ellipsis,
-                            style: context.text.titleMedium?.copyWith(color: Colors.white),
-                          ),
-                        ),
-                        if (badge != null) ...[
-                          const SizedBox(width: 8),
+                        Text(title, style: context.text.titleMedium?.copyWith(color: Colors.white)),
+                        if (badge != null)
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                             decoration: BoxDecoration(
@@ -277,7 +287,6 @@ class _PlanCard extends StatelessWidget {
                               style: context.text.labelSmall?.copyWith(color: AppPalette.deepEarth, fontWeight: FontWeight.w800),
                             ),
                           ),
-                        ],
                       ],
                     ),
                     if (sub != null)

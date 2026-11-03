@@ -6,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../profile/application/profile_controller.dart';
 import '../application/quiz_controller.dart';
 import '../data/quiz_api.dart';
 import '../domain/quiz_models.dart';
@@ -49,13 +50,23 @@ class _QuizSession extends ConsumerWidget {
 
   Future<bool> _confirmQuit(BuildContext context, WidgetRef ref) async {
     final l = context.l10n;
+    final messenger = ScaffoldMessenger.of(context);
     final state = ref.read(quizControllerProvider(request));
     final refund = !state.hasStarted;
+    // Say exactly what leaving costs: the server gives energy back only
+    // before the first answer, and an attempt can't be picked up again.
+    final cost = ref.read(profileProvider).isPremium ? 0 : request.mode.energyCost;
+    final body = switch ((refund, cost > 0)) {
+      (true, true) => l.quizQuitRefund(cost),
+      (true, false) => l.quizQuitFree,
+      (false, true) => l.quizQuitAnsweredEnergy(cost),
+      (false, false) => l.quizQuitAnswered,
+    };
     final leave = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(l.quizQuitTitle),
-        content: Text(refund ? l.quizQuitBodyRefund : l.quizQuitBody),
+        content: Text(body),
         actions: [
           TextButton(onPressed: () => Navigator.pop(context, true), child: Text(l.quizQuitLeave)),
           FilledButton(onPressed: () => Navigator.pop(context, false), child: Text(l.quizQuitStay)),
@@ -63,7 +74,12 @@ class _QuizSession extends ConsumerWidget {
       ),
     );
     if (leave == true && refund) {
-      unawaited(ref.read(quizControllerProvider(request).notifier).abandon());
+      final refundFailed = cost > 0 ? l.quizRefundFailed : null;
+      unawaited(
+        ref.read(quizControllerProvider(request).notifier).abandon().then((ok) {
+          if (!ok && refundFailed != null) messenger.showSnackBar(SnackBar(content: Text(refundFailed)));
+        }),
+      );
     }
     return leave == true;
   }

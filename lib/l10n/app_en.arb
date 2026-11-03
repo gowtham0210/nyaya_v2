@@ -58,6 +58,17 @@
   "onbSlide3Title": "Build a daily habit",
   "onbSlide3Body": "Keep your streak alive, climb weekly court leagues and ask our AI anything legal.",
   "onbSkip": "Skip",
+  "onbSlidePosition": "Slide {current} of {total}",
+  "@onbSlidePosition": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "onbGetStarted": "Get Started",
   "onbBrandTagline": "Learn Law. Live It.",
   "onbIntro1Title": "Your Guide to Indian Law",
@@ -121,6 +132,27 @@
   "greetingEvening": "Good evening",
   "homeContinueJourney": "Continue your Case Path",
   "homeContinueLeftOff": "Continue where you left off",
+  "homeStartTitle": "Start your learning journey",
+  "homeStartBody": "Build your understanding of Indian law, one concept at a time.",
+  "homeStartRecommended": "Recommended start",
+  "homeStartLawDesc": "Understand fundamental rights, duties and constitutional principles.",
+  "homeStartLearning": "Start learning",
+  "homeLevelsDone": "{done} of {total} levels done",
+  "@homeLevelsDone": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "homeFeatured": "Featured",
+  "homeViewOnMap": "View on map",
+  "homeReviewMistakes": "Review your mistakes",
+  "homeReviewSaved": "Your saved questions",
+  "homeReviewNow": "Review now",
   "homeChapterLevel": "Chapter {chapter} · Level {level}",
   "@homeChapterLevel": {
     "placeholders": {
@@ -193,7 +225,7 @@
   "modeExamDesc": "20 questions · 20 min · negative marking",
   "modeExamDescCitizen": "20 questions · 20 min · know your rights",
   "modeFree": "Free",
-  "modeEnergyCost": "{count} ⚡",
+  "modeEnergyCost": "{count} energy",
   "@modeEnergyCost": {
     "placeholders": {
       "count": {
@@ -229,7 +261,7 @@
       }
     }
   },
-  "energyRefillCoins": "Refill 1 ⚡ for {coins} coins",
+  "energyRefillCoins": "Refill 1 energy for {coins} coins",
   "@energyRefillCoins": {
     "placeholders": {
       "coins": {
@@ -275,7 +307,6 @@
   },
   "journeyLandmark": "Landmark level",
   "journeyLocked": "Locked",
-  "journeyLockedBody": "Clear the previous level to unlock this one.",
   "journeyQuestions": "{count} questions",
   "@journeyQuestions": {
     "placeholders": {
@@ -287,20 +318,155 @@
   "journeyBestStars": "Your best",
   "journeyReplay": "Replay",
   "journeyChest": "Chapter chest",
-  "journeyChestBody": "You finished the chapter! Open the chest for bonus coins.",
   "journeyOpenChest": "Open chest",
-  "journeyChestOpened": "+{coins} coins!",
-  "@journeyChestOpened": {
+  "journeyJumpToCurrent": "Jump to current level",
+  "journeyYou": "You",
+  "journeyNext": "Next step",
+  "journeyDone": "Completed",
+  "journeyStarsOf": "{count} of {total} stars",
+  "@journeyStarsOf": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyLockedNext": "Levels open in order. Your next step is {step}.",
+  "@journeyLockedNext": {
+    "placeholders": {
+      "step": {
+        "type": "String"
+      }
+    }
+  },
+  "journeyGoToNext": "Show my next step",
+  "journeyStartCost": "Start · {count} energy",
+  "@journeyStartCost": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyReplayCost": "Replay · {count} energy",
+  "@journeyReplayCost": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyNoTimer": "No time limit",
+  "journeyStarsTitle": "Stars you can earn",
+  "journeyPassMark": "{percent}% · pass",
+  "@journeyPassMark": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyStarMark": "{percent}%",
+  "@journeyStarMark": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyHowScoring": "How scoring works",
+  "journeyRuleEnergy": "Each try costs {count} energy. If you leave before your first answer, you get it back.",
+  "@journeyRuleEnergy": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyRuleRetry": "Didn't pass? You can try again as many times as you like.",
+  "journeyRuleBest": "Your best score is kept. A lower score never takes away stars.",
+  "journeyRuleNoMinus": "Wrong answers don't take away marks.",
+  "journeyRuleBonus": "Your first 3-star score on a level gives {count} energy back. Each new star earns {coins} coins.",
+  "@journeyRuleBonus": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyChestLockedTitle": "Chapter chest locked",
+  "journeyChestLockedText": "Complete all levels in this chapter to unlock your reward.",
+  "journeyChestReadyTitle": "Your chapter reward is ready",
+  "journeyChestReadyText": "Well done! You've completed this chapter.",
+  "journeyChestReward": "Reward: {coins} coins",
+  "@journeyChestReward": {
     "placeholders": {
       "coins": {
         "type": "int"
       }
     }
   },
-  "journeyChestLocked": "Finish every level in this chapter to open the chest.",
-  "journeyJumpToCurrent": "Jump to current level",
-  "journeyYou": "You",
-  "journeyPassHint": "Score 50% to pass · 80% for 2 stars · 100% for 3 stars",
+  "journeyChestCollectedTitle": "Chapter reward collected",
+  "journeyChestCollectedText": "You received {coins} coins.",
+  "@journeyChestCollectedText": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyChestFailed": "Couldn't open the chest. Check your connection and try again. Your reward is still waiting.",
+  "journeyContinueLearning": "Continue learning",
+  "journeyBackToMap": "Back to the map",
+  "journeyChapterProgress": "Chapter {number} · {done}/{total} completed",
+  "@journeyChapterProgress": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyStarsInfo": "Earn up to 3 stars on each level: {one}% for 1 star, {two}% for 2 and 100% for 3. Your best score on each level counts.",
+  "@journeyStarsInfo": {
+    "placeholders": {
+      "one": {
+        "type": "int"
+      },
+      "two": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyEnergyInfo": "Each Case Path level costs {cost} energy. You get {free} free energy every day. It refills at midnight — in {time}.",
+  "@journeyEnergyInfo": {
+    "placeholders": {
+      "cost": {
+        "type": "int"
+      },
+      "free": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "journeyCoinsInfo": "Earn coins from new stars, chapter chests, the Daily Docket, your daily goal and streak milestones. Spend them in the Store on energy refills and streak freezes.",
+  "journeyOpenStore": "Open the Store",
+  "journeyListView": "Show levels as a list",
+  "journeyAllLevels": "All levels",
   "quizQuestionOf": "Question {current} of {total}",
   "@quizQuestionOf": {
     "placeholders": {
@@ -340,10 +506,64 @@
   "quizSkipQuestion": "Skip",
   "quizSelectAnswer": "Select an answer",
   "quizQuitTitle": "Leave this quiz?",
-  "quizQuitBody": "Your progress in this quiz will be lost.",
-  "quizQuitBodyRefund": "You haven't answered yet, so your energy will be refunded.",
   "quizQuitStay": "Keep playing",
   "quizQuitLeave": "Leave",
+  "quizTapToCheck": "Tap an answer to check it.",
+  "quizChecking": "Checking your answer…",
+  "quizTimedHint": "Answer within {seconds} seconds. No answer in time counts as wrong.",
+  "@quizTimedHint": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "quizDuelHint": "A right answer scores up to 1,000 points, more the faster you answer. A wrong answer scores 0.",
+  "quizExamHint": "Pick an answer, then move on. You can't go back to a question.",
+  "quizSecondsLeft": "{seconds} seconds left",
+  "@quizSecondsLeft": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "quizTimeLeft": "Time left: {time}",
+  "@quizTimeLeft": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "quizNoExplanation": "No explanation is available for this question yet.",
+  "quizQuitRefund": "You haven't answered yet, so you'll get your {count} energy back.",
+  "@quizQuitRefund": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizQuitFree": "You haven't answered yet, so nothing is lost. You can start again later.",
+  "quizQuitAnswered": "This attempt will end and can't be continued later. Your answers so far won't count.",
+  "quizQuitAnsweredEnergy": "This attempt will end and can't be continued later. Your answers so far won't count, and the {count} energy isn't given back.",
+  "@quizQuitAnsweredEnergy": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizRefundFailed": "Couldn't reach Nyaya, so your energy wasn't given back.",
+  "quizOptionCorrect": "correct answer",
+  "quizOptionWrong": "your answer, wrong",
+  "quizOptionSelected": "selected",
+  "quizOptionChecking": "checking",
+  "resultNoAnswer": "No answer",
+  "resultHideReview": "Hide answers",
+  "reportSending": "Sending…",
+  "reportFailed": "Couldn't send your report. Your text is kept, so you can try again.",
   "quizLoading": "Preparing your case…",
   "quizEmpty": "No questions available here yet.",
   "quizOpponent": "Opponent",
@@ -408,7 +628,7 @@
     }
   },
   "resultGoalReached": "Daily goal reached!",
-  "resultEnergyBonus": "3-star bonus: +{count} ⚡",
+  "resultEnergyBonus": "3-star bonus: +{count} energy",
   "@resultEnergyBonus": {
     "placeholders": {
       "count": {
@@ -577,7 +797,7 @@
       }
     }
   },
-  "chatLimitReached": "You've used today's free questions. Come back tomorrow or go Premium for unlimited AI.",
+  "chatLimitReached": "You've used today's free questions. Come back tomorrow or go Premium for more AI questions.",
   "chatLimitReachedToday": "You've used today's questions. You can ask more tomorrow.",
   "chatError": "I couldn't reach the AI right now. Please check your connection and try again.",
   "chatOfflineNote": "Offline mode — connect an AI key for full answers.",
@@ -673,19 +893,32 @@
       }
     }
   },
-  "settingsReset": "Reset progress",
-  "settingsResetConfirm": "This erases coins, energy and settings on this device. XP, stars and streaks are saved to your account and stay. This cannot be undone.",
-  "settingsResetAction": "Erase everything",
+  "settingsReset": "Reset this phone",
+  "settingsResetConfirm": "This takes you through the welcome steps again and clears this phone's settings. Your XP, stars, coins and streak are saved to your account and stay.",
+  "settingsResetAction": "Reset",
   "premiumTitle": "Nyaya Premium",
-  "premiumHeadline": "Learn without limits",
+  "premiumHeadline": "Learn more, every day",
   "premiumBenefitEnergy": "Unlimited energy",
-  "premiumBenefitEnergySub": "Play as many quizzes as you like",
-  "premiumBenefitAi": "Unlimited Nyaya AI",
-  "premiumBenefitAiSub": "Ask every legal question you have",
-  "premiumBenefitFreeze": "Streak freezes included",
-  "premiumBenefitFreezeSub": "Never lose your streak to a busy day",
-  "premiumBenefitExam": "Full mock exams",
-  "premiumBenefitExamSub": "CLAT, AIBE & judiciary-style practice",
+  "premiumBenefitEnergySub": "Free: {free} energy a day. Premium: play as many quizzes as you like.",
+  "@premiumBenefitEnergySub": {
+    "placeholders": {
+      "free": {
+        "type": "int"
+      }
+    }
+  },
+  "premiumBenefitAi": "More Nyaya AI",
+  "premiumBenefitAiSub": "Free: {free} questions a day. Premium: {premium} a day.",
+  "@premiumBenefitAiSub": {
+    "placeholders": {
+      "free": {
+        "type": "int"
+      },
+      "premium": {
+        "type": "int"
+      }
+    }
+  },
   "premiumFair": "Fair play: Premium never boosts league XP.",
   "premiumYearly": "Yearly",
   "premiumMonthly": "Monthly",
@@ -736,7 +969,7 @@
   "lawEverydayDesc": "Know your rights in daily life",
   "lawEverydayFeatured": "Consumer, tenancy, workplace and family rights, explained simply.",
   "lawLegacyTitle": "IPC & CrPC (Legacy)",
-  "lawLegacyDesc": "Older laws for reference",
+  "lawLegacyDesc": "Replaced in July 2024. Kept for reference and comparison.",
   "chapterConstitutionTitle": "Constitution Basics",
   "chapterConstitutionSubtitle": "Preamble, Parliament, courts, amendments",
   "chapterRightsTitle": "Rights & Duties",
@@ -767,6 +1000,26 @@
   "authErrorRateLimited": "Too many attempts. Wait a few minutes and try again.",
   "authErrorInvalid": "Enter a valid email and a password of at least 8 characters.",
   "authErrorName": "Enter your name.",
+  "authForgot": "Forgot password?",
+  "authResetTitle": "Reset your password",
+  "authResetSubtitle": "Enter your account's email and we'll send you a 6-digit code.",
+  "authResetSend": "SEND CODE",
+  "authResetSentTo": "If an account uses {email}, we've sent it a 6-digit code. It works for 15 minutes. Check your spam folder if you don't see it.",
+  "@authResetSentTo": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "authResetCode": "6-digit code",
+  "authResetNewPassword": "New password",
+  "authResetSave": "SET NEW PASSWORD",
+  "authResetResend": "Send a new code",
+  "authResetErrorCode": "This code is wrong or has expired. Ask for a new one.",
+  "authResetUnavailable": "Password reset isn't available right now. Please try again later.",
+  "authResetErrorInvalid": "Enter the 6-digit code and a new password of at least 8 characters.",
+  "authResetDone": "Your password has been changed.",
   "settingsAccount": "Account",
   "settingsSignedInAs": "Signed in as {email}",
   "@settingsSignedInAs": {

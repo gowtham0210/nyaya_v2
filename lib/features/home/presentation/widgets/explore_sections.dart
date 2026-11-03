@@ -84,32 +84,91 @@ class ExploreHeader extends StatelessWidget {
   }
 }
 
-/// "Continue where you left off", below the "Start here" carousel: the next
-/// Case Path level, with its chapter's painting. Hidden until the first level is finished, since the
-/// "Start here" carousel covers new users.
+/// The first card on Home. Returning learners see where they stopped on the
+/// Case Path and continue in one tap; learners with no stars yet get a clear
+/// place to start instead (the first Constitution level).
 class ContinueLearningCard extends ConsumerWidget {
   const ContinueLearningCard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final journey = ref.watch(journeyProvider);
-    if (journey.stars.isEmpty) return const SizedBox.shrink();
-
     final l = context.l10n;
+    final journey = ref.watch(journeyProvider);
+
+    if (journey.stars.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.only(top: AppSpacing.md),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Semantics(header: true, child: Text(l.homeStartTitle, style: _serif(context, 26))),
+            const SizedBox(height: 4),
+            Text(l.homeStartBody, style: context.text.bodyMedium?.copyWith(color: context.nyaya.textSecondary)),
+            const SizedBox(height: AppSpacing.md),
+            _LearningCard(
+              eyebrow: l.homeStartRecommended,
+              title: l.lawConstitutionTitle,
+              subtitle: l.homeStartLawDesc,
+              chapter: JourneyCatalog.chapters.first,
+              action: l.homeStartLearning,
+              onAction: () => _exploreChapter(context, ref, JourneyCatalog.chapters.first.id),
+            ),
+          ],
+        ),
+      );
+    }
+
     final node = journey.current;
     final chapter = node?.chapter ?? JourneyCatalog.chapters.last;
-    final done = journey.completedLevelsIn(chapter.id);
     final subtitle = switch (node) {
       null => l.homeAllDone,
       JourneyNode(kind: NodeKind.chest) => l.homeChestReady,
       _ => l.homeChapterLevel(node.chapterIndex + 1, node.level),
     };
-    void onContinue() => node != null && node.kind == NodeKind.level
-        ? QuizLauncher.start(context, ref, QuizRequest(QuizMode.casePath, levelId: node.id))
-        : context.go(Routes.journey);
+    return Padding(
+      padding: const EdgeInsets.only(top: AppSpacing.md),
+      child: _LearningCard(
+        eyebrow: l.homeContinueLeftOff,
+        title: l.chapterTitle(chapter.id),
+        subtitle: subtitle,
+        chapter: chapter,
+        done: journey.completedLevelsIn(chapter.id),
+        action: l.commonContinue,
+        onAction: () => node != null && node.kind == NodeKind.level
+            ? QuizLauncher.start(context, ref, QuizRequest(QuizMode.casePath, levelId: node.id))
+            : context.go(Routes.journey),
+      ),
+    );
+  }
+}
 
+/// A chapter card with its landmark painting on the right: label, serif
+/// title, a line of detail, the chapter's progress when [done] is given, and
+/// one clear action.
+class _LearningCard extends StatelessWidget {
+  const _LearningCard({
+    required this.eyebrow,
+    required this.title,
+    required this.subtitle,
+    required this.chapter,
+    required this.action,
+    required this.onAction,
+    this.done,
+  });
+
+  final String eyebrow;
+  final String title;
+  final String subtitle;
+  final ChapterMeta chapter;
+  final int? done;
+  final String action;
+  final VoidCallback onAction;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final done = this.done;
     return Container(
-      margin: const EdgeInsets.only(top: AppSpacing.lg),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: context.colors.surface,
@@ -156,8 +215,8 @@ class ContinueLearningCard extends ConsumerWidget {
               children: [
                 // The label sits above the painting, so it may span the card.
                 Text(
-                  l.homeContinueLeftOff.toUpperCase(),
-                  maxLines: 1,
+                  eyebrow.toUpperCase(),
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: context.text.labelMedium?.copyWith(
                     color: context.colors.primary,
@@ -172,42 +231,48 @@ class ContinueLearningCard extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(l.chapterTitle(chapter.id), style: _serif(context, 24)),
+                      Text(title, style: _serif(context, 26)),
                       const SizedBox(height: 4),
                       Text(subtitle, style: context.text.bodyMedium?.copyWith(color: context.nyaya.textSecondary)),
-                      const SizedBox(height: AppSpacing.md),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: GlossyProgressBar(
-                              value: done / chapter.levels,
-                              color: context.colors.primary,
-                              track: context.colors.surfaceContainerHigh,
-                              height: 6,
-                            ),
+                      if (done != null) ...[
+                        const SizedBox(height: AppSpacing.md),
+                        // One reading for screen readers instead of a bar and a fraction.
+                        Semantics(
+                          label: l.homeLevelsDone(done, chapter.levels),
+                          excludeSemantics: true,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              GlossyProgressBar(
+                                value: done / chapter.levels,
+                                color: context.colors.primary,
+                                track: context.colors.surfaceContainerHigh,
+                                height: 8,
+                              ),
+                              const SizedBox(height: 6),
+                              Text(l.homeLevelsDone(done, chapter.levels), style: context.text.labelMedium),
+                            ],
                           ),
-                          const SizedBox(width: 10),
-                          Text('$done/${chapter.levels}', style: context.text.labelMedium),
-                        ],
-                      ),
-                      const SizedBox(height: AppSpacing.md),
-                      FilledButton(
-                        onPressed: onContinue,
-                        style: FilledButton.styleFrom(
-                          minimumSize: const Size(0, 44),
-                          padding: const EdgeInsets.symmetric(horizontal: 22),
-                          shape: const StadiumBorder(),
-                          textStyle: context.text.labelLarge?.copyWith(fontWeight: FontWeight.w600, fontSize: 15),
                         ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(l.commonContinue),
-                            const SizedBox(width: AppSpacing.sm),
-                            const Icon(Icons.arrow_forward_rounded, size: 18),
-                          ],
-                        ),
-                      ),
+                      ],
+                    ],
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.md),
+                FilledButton(
+                  onPressed: onAction,
+                  style: FilledButton.styleFrom(
+                    minimumSize: const Size(0, 48),
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    shape: const StadiumBorder(),
+                    textStyle: context.text.labelLarge?.copyWith(fontWeight: FontWeight.w600, fontSize: 16),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Flexible(child: Text(action, overflow: TextOverflow.ellipsis)),
+                      const SizedBox(width: AppSpacing.sm),
+                      const Icon(Icons.arrow_forward_rounded, size: 18),
                     ],
                   ),
                 ),
@@ -220,7 +285,7 @@ class ContinueLearningCard extends ConsumerWidget {
   }
 }
 
-/// "Start here" carousel of featured laws with a dash page indicator.
+/// Carousel of featured laws with a dash page indicator, last on Home.
 class FeaturedLawsCarousel extends ConsumerStatefulWidget {
   const FeaturedLawsCarousel({super.key});
 
@@ -241,6 +306,11 @@ class _FeaturedLawsCarouselState extends ConsumerState<FeaturedLawsCarousel> {
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
+    final next = ref.watch(journeyProvider).current;
+    // Says where the button goes: the chapter's next level, or the map when
+    // that chapter is not the one being played.
+    String actionFor(String chapterId) =>
+        next != null && next.kind == NodeKind.level && next.chapter.id == chapterId ? l.homeStartLearning : l.homeViewOnMap;
     final slides = [
       (l.lawConstitutionTitle, l.lawConstitutionDesc, LawArt.court, 'constitution', _FeaturedImage.constitution),
       (l.lawBnsShort, l.lawBnsFeatured, LawArt.scales, 'criminal', _FeaturedImage.bns),
@@ -251,7 +321,7 @@ class _FeaturedLawsCarouselState extends ConsumerState<FeaturedLawsCarousel> {
       children: [
         SizedBox(
           // Grows with the text size so the title, text and button still fit.
-          height: 268 + (MediaQuery.textScalerOf(context).scale(1) - 1) * 140,
+          height: 268 + (MediaQuery.textScalerOf(context).scale(1) - 1) * 180,
           child: PageView(
             controller: _controller,
             onPageChanged: (i) => setState(() => _page = i),
@@ -262,27 +332,33 @@ class _FeaturedLawsCarouselState extends ConsumerState<FeaturedLawsCarousel> {
                   desc: desc,
                   art: art,
                   image: image,
+                  action: actionFor(chapter),
                   onExplore: () => _exploreChapter(context, ref, chapter),
                 ),
             ],
           ),
         ),
         const SizedBox(height: AppSpacing.md),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            for (var i = 0; i < slides.length; i++)
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 250),
-                margin: const EdgeInsets.symmetric(horizontal: 3),
-                width: 36,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: i == _page ? context.colors.primary : context.colors.outlineVariant,
-                  borderRadius: BorderRadius.circular(2),
+        // Read out as "Slide 2 of 3", again each time it changes.
+        Semantics(
+          label: l.onbSlidePosition(_page + 1, slides.length),
+          liveRegion: true,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              for (var i = 0; i < slides.length; i++)
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 250),
+                  margin: const EdgeInsets.symmetric(horizontal: 3),
+                  width: 36,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: i == _page ? context.colors.primary : context.colors.outlineVariant,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ],
     );
@@ -307,6 +383,7 @@ class _FeaturedCard extends StatelessWidget {
     required this.title,
     required this.desc,
     required this.art,
+    required this.action,
     required this.onExplore,
     this.image,
   });
@@ -315,6 +392,7 @@ class _FeaturedCard extends StatelessWidget {
   final String desc;
   final LawArt art;
   final _FeaturedImage? image;
+  final String action;
   final VoidCallback onExplore;
 
   @override
@@ -371,7 +449,7 @@ class _FeaturedCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    l.exploreStartHere.toUpperCase(),
+                    l.homeFeatured.toUpperCase(),
                     style: context.text.labelMedium?.copyWith(
                       color: context.colors.primary,
                       fontWeight: FontWeight.w700,
@@ -379,7 +457,14 @@ class _FeaturedCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: AppSpacing.sm),
-                  Text(title, maxLines: 3, overflow: TextOverflow.ellipsis, style: _serif(context, 30)),
+                  // Already large: growing it further would break words in the narrow column.
+                  Text(
+                    title,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    textScaler: MediaQuery.textScalerOf(context).clamp(maxScaleFactor: 1.2),
+                    style: _serif(context, 30),
+                  ),
                   const SizedBox(height: AppSpacing.sm),
                   Expanded(
                     child: Text(
@@ -399,7 +484,7 @@ class _FeaturedCard extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Flexible(child: Text(l.exploreButton, overflow: TextOverflow.ellipsis)),
+                        Flexible(child: Text(action, overflow: TextOverflow.ellipsis)),
                         const SizedBox(width: AppSpacing.sm),
                         const Icon(Icons.arrow_forward_rounded, size: 18),
                       ],
@@ -426,21 +511,28 @@ class _SectionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(child: Text(title, style: _serif(context, 26))),
-        TextButton(
-          onPressed: onViewAll,
-          style: TextButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            minimumSize: const Size(0, 36),
-            textStyle: context.text.labelLarge?.copyWith(fontWeight: FontWeight.w600),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(context.l10n.exploreViewAll),
-              const SizedBox(width: 4),
-              const Icon(Icons.arrow_forward_rounded, size: 16),
-            ],
+        Expanded(flex: 3, child: Semantics(header: true, child: Text(title, style: _serif(context, 26)))),
+        // May wrap on narrow screens with long words, but never overflows.
+        Flexible(
+          flex: 2,
+          child: Align(
+            alignment: AlignmentDirectional.centerEnd,
+            child: TextButton(
+              onPressed: onViewAll,
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                minimumSize: const Size(0, 36),
+                textStyle: context.text.labelLarge?.copyWith(fontWeight: FontWeight.w600),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(child: Text(context.l10n.exploreViewAll, textAlign: TextAlign.end)),
+                  const SizedBox(width: 4),
+                  const Icon(Icons.arrow_forward_rounded, size: 16),
+                ],
+              ),
+            ),
           ),
         ),
       ],
@@ -472,7 +564,8 @@ class LatestUpdatesSection extends ConsumerWidget {
           ),
           const SizedBox(height: AppSpacing.sm),
           SizedBox(
-            height: 292,
+            // Grows with the text size so headlines are not cut off.
+            height: 292 + (MediaQuery.textScalerOf(context).scale(1) - 1) * 160,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               // Room for the card shadow.
@@ -514,12 +607,7 @@ class _UpdateCard extends StatelessWidget {
               SizedBox(
                 height: 124,
                 width: double.infinity,
-                child: Image.asset(
-                  update.image,
-                  fit: BoxFit.cover,
-                  excludeFromSemantics: true,
-                  errorBuilder: (_, _, _) => UpdateFallbackArt(category: c),
-                ),
+                child: UpdatePicture(update: update),
               ),
               Expanded(
                 child: Padding(
@@ -656,23 +744,26 @@ class _LawRow extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Above the title, so a long title keeps the row's full width.
+                  if (badge != null) ...[
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: context.colors.surfaceContainerHigh,
+                        borderRadius: BorderRadius.circular(AppRadius.xl),
+                        border: Border.all(color: context.colors.outline),
+                      ),
+                      child: Text(badge!, style: context.text.labelMedium?.copyWith(color: context.nyaya.textSecondary)),
+                    ),
+                    const SizedBox(height: 6),
+                  ],
                   Text(title, style: _serif(context, 18, display: false)),
                   const SizedBox(height: 3),
                   Text(desc, style: context.text.bodyMedium?.copyWith(color: context.nyaya.textSecondary)),
                 ],
               ),
             ),
-            if (badge != null)
-              Container(
-                margin: const EdgeInsets.only(left: AppSpacing.sm),
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                decoration: BoxDecoration(
-                  color: context.colors.surfaceContainerHigh,
-                  borderRadius: BorderRadius.circular(AppRadius.xl),
-                  border: Border.all(color: context.colors.outline),
-                ),
-                child: Text(badge!, style: context.text.labelMedium?.copyWith(color: context.nyaya.textSecondary)),
-              ),
+            const SizedBox(width: AppSpacing.xs),
             Icon(Icons.chevron_right_rounded, color: context.colors.onSurface),
           ],
         ),

@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:nyaya/core/api/api_client.dart';
+import 'package:nyaya/core/api/api_config.dart';
 import 'package:nyaya/core/storage/local_store.dart';
 import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -68,5 +69,12 @@ void main() {
   test('fails when offline with nothing kept yet', () async {
     final offline = repoWith((_) => throw http.ClientException('offline'));
     await expectLater(offline.fetch(), throwsA(isA<ApiException>()));
+  });
+
+  test('turns the API picture path into a full address, and none into null', () {
+    final withPicture = LegalUpdate.fromJson({...article('p', '2025-04-08'), 'image_url': '/v1/news/p/image?v=abc'})!;
+    expect(withPicture.imageUrl, '${ApiConfig.baseUrl}/v1/news/p/image?v=abc');
+    expect(LegalUpdate.fromJson(article('q', '2025-04-08'))!.imageUrl, isNull);
+    expect(LegalUpdate.fromJson({...article('r', '2025-04-08'), 'image_url': null})!.imageUrl, isNull);
   });
 }

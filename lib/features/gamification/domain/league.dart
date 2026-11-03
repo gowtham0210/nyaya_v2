@@ -14,7 +14,6 @@ class LeagueTier {
     required this.key,
     required this.promote,
     required this.demote,
-    required this.emblem,
   });
 
   final int level;
@@ -23,21 +22,20 @@ class LeagueTier {
   final String key;
   final int promote;
   final int demote;
-  final String emblem;
 }
 
 abstract final class Leagues {
   static const cohortSize = 30;
 
   static const tiers = <LeagueTier>[
-    LeagueTier(level: 1, key: 'nyayaPanchayat', promote: 15, demote: 0, emblem: '🌿'),
-    LeagueTier(level: 2, key: 'gramNyayalaya', promote: 12, demote: 0, emblem: '🏡'),
-    LeagueTier(level: 3, key: 'munsiffCourt', promote: 10, demote: 5, emblem: '📜'),
-    LeagueTier(level: 4, key: 'magistrateCourt', promote: 10, demote: 5, emblem: '🔨'),
-    LeagueTier(level: 5, key: 'districtCourt', promote: 7, demote: 5, emblem: '🏛️'),
-    LeagueTier(level: 6, key: 'sessionsCourt', promote: 7, demote: 5, emblem: '⚖️'),
-    LeagueTier(level: 7, key: 'highCourt', promote: 5, demote: 5, emblem: '🦁'),
-    LeagueTier(level: 8, key: 'supremeCourt', promote: 0, demote: 5, emblem: '👑'),
+    LeagueTier(level: 1, key: 'nyayaPanchayat', promote: 15, demote: 0),
+    LeagueTier(level: 2, key: 'gramNyayalaya', promote: 12, demote: 0),
+    LeagueTier(level: 3, key: 'munsiffCourt', promote: 10, demote: 5),
+    LeagueTier(level: 4, key: 'magistrateCourt', promote: 10, demote: 5),
+    LeagueTier(level: 5, key: 'districtCourt', promote: 7, demote: 5),
+    LeagueTier(level: 6, key: 'sessionsCourt', promote: 7, demote: 5),
+    LeagueTier(level: 7, key: 'highCourt', promote: 5, demote: 5),
+    LeagueTier(level: 8, key: 'supremeCourt', promote: 0, demote: 5),
   ];
 
   static LeagueTier tier(int level) => tiers[(level - 1).clamp(0, tiers.length - 1)];

@@ -2,6 +2,7 @@ import { sql } from 'drizzle-orm';
 import {
   boolean,
   check,
+  customType,
   date,
   foreignKey,
   index,
@@ -90,6 +91,22 @@ export const staffSetupTokens = pgTable(
   },
   (t) => [index('staff_setup_tokens_user_idx').on(t.userId)],
 );
+
+/**
+ * The emailed code for a learner who forgot their password. One per account:
+ * a new request replaces it. Only a SHA-256 hash is stored; it works until it
+ * expires or after too many wrong tries.
+ */
+export const passwordResetCodes = pgTable('password_reset_codes', {
+  userId: uuid('user_id')
+    .primaryKey()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  codeHash: text('code_hash').notNull(),
+  /** Tries used so far, taken before each guess is checked (so a right guess counts too). */
+  wrongTries: integer('wrong_tries').notNull().default(0),
+  expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+  createdAt: createdAt(),
+});
 
 // ---------------------------------------------------------------- taxonomy
 
@@ -680,6 +697,30 @@ export const newsArticles = pgTable(
     check('read_minutes_range', sql`${t.readMinutes} between 1 and 30`),
   ],
 );
+
+/** Raw bytes (Postgres bytea), read and written as a Node Buffer. */
+const bytea = customType<{ data: Buffer; driverData: Buffer }>({
+  dataType: () => 'bytea',
+});
+
+/**
+ * The picture shown on a news article's card in the app, uploaded in the
+ * portal. Kept here (not in a file store) so it is in the database backups.
+ * The API re-encodes every upload as WebP, so only safe, small images are
+ * stored. [version] changes with the bytes and goes into the picture's
+ * address, so the app can cache it for good.
+ */
+export const newsImages = pgTable('news_images', {
+  articleId: uuid('article_id')
+    .primaryKey()
+    .references(() => newsArticles.id, { onDelete: 'cascade' }),
+  data: bytea('data').notNull(),
+  width: integer('width').notNull(),
+  height: integer('height').notNull(),
+  version: text('version').notNull(),
+  uploadedBy: uuid('uploaded_by').references(() => users.id),
+  createdAt: createdAt(),
+});
 
 // ---------------------------------------------------------------- review & reports
 

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -336,14 +337,7 @@ class _Thumbnail extends ConsumerWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(AppRadius.md),
-            child: Image.asset(
-              update.image,
-              width: width,
-              height: height,
-              fit: BoxFit.cover,
-              excludeFromSemantics: true,
-              errorBuilder: (_, _, _) => UpdateFallbackArt(category: update.category),
-            ),
+            child: SizedBox(width: width, height: height, child: UpdatePicture(update: update)),
           ),
           // Notch cut into the corner, holding the save button.
           Positioned(
@@ -392,6 +386,34 @@ class _Thumbnail extends ConsumerWidget {
 }
 
 /// The category's Journey painting on a sand tile.
+/// The card picture uploaded in the content portal, kept on the phone once
+/// loaded; the category's painting while it loads, offline or when there is none.
+class UpdatePicture extends StatelessWidget {
+  const UpdatePicture({super.key, required this.update});
+
+  final LegalUpdate update;
+
+  @override
+  Widget build(BuildContext context) {
+    final url = update.imageUrl;
+    final fallback = UpdateFallbackArt(category: update.category);
+    if (url == null) return fallback;
+    return LayoutBuilder(
+      builder: (context, box) => CachedNetworkImage(
+        imageUrl: url,
+        fit: BoxFit.cover,
+        // Decode at the size shown, not the stored 1200 pixels.
+        memCacheWidth: box.hasBoundedWidth
+            ? (box.maxWidth * MediaQuery.devicePixelRatioOf(context)).round()
+            : null,
+        fadeInDuration: const Duration(milliseconds: 200),
+        placeholder: (_, _) => ColoredBox(color: context.colors.surfaceContainerHigh),
+        errorWidget: (_, _, _) => fallback,
+      ),
+    );
+  }
+}
+
 class UpdateFallbackArt extends StatelessWidget {
   const UpdateFallbackArt({super.key, required this.category});
 
