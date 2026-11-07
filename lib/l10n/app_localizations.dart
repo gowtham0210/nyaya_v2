@@ -1666,6 +1666,18 @@ abstract class AppLocalizations {
   /// **'Almost there'**
   String get resultTryAgain;
 
+  /// No description provided for @resultKeepPractising.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep practising'**
+  String get resultKeepPractising;
+
+  /// No description provided for @resultNewExam.
+  ///
+  /// In en, this message translates to:
+  /// **'New exam'**
+  String get resultNewExam;
+
   /// No description provided for @resultTryAgainBody.
   ///
   /// In en, this message translates to:

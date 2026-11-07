@@ -201,6 +201,8 @@
   "resultGreat": "बहुत बढ़िया!",
   "resultGood": "लेवल पूरा!",
   "resultTryAgain": "बस थोड़ा और",
+  "resultKeepPractising": "अभ्यास जारी रखें",
+  "resultNewExam": "नई परीक्षा",
   "resultTryAgainBody": "यह लेवल पास करने के लिए कम से कम 50% अंक लाएँ। व्याख्याएँ देखें और फिर कोशिश करें।",
   "resultScore": "{total} में से {correct} सही",
   "resultAccuracy": "सटीकता",

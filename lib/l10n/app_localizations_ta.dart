@@ -952,6 +952,12 @@ class AppLocalizationsTa extends AppLocalizations {
   String get resultTryAgain => 'கிட்டத்தட்ட வந்துவிட்டீர்கள்';
 
   @override
+  String get resultKeepPractising => 'தொடர்ந்து பயிற்சி செய்யுங்கள்';
+
+  @override
+  String get resultNewExam => 'புதிய தேர்வு';
+
+  @override
   String get resultTryAgainBody =>
       'இந்த நிலையைக் கடக்கக் குறைந்தது 50% பெற வேண்டும். விளக்கங்களைப் படித்து மீண்டும் முயலுங்கள்.';
 

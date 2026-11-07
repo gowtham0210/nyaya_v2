@@ -948,6 +948,12 @@ class AppLocalizationsKn extends AppLocalizations {
   String get resultTryAgain => 'ಸ್ವಲ್ಪದರಲ್ಲೇ ತಪ್ಪಿತು';
 
   @override
+  String get resultKeepPractising => 'ಅಭ್ಯಾಸ ಮುಂದುವರಿಸಿ';
+
+  @override
+  String get resultNewExam => 'ಹೊಸ ಪರೀಕ್ಷೆ';
+
+  @override
   String get resultTryAgainBody =>
       'ಈ ಹಂತ ದಾಟಲು ಕನಿಷ್ಠ 50% ಅಂಕ ಗಳಿಸಿ. ವಿವರಣೆಗಳನ್ನು ಓದಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
 

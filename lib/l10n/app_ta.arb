@@ -201,6 +201,8 @@
   "resultGreat": "அருமையான பணி!",
   "resultGood": "நிலை முடிந்தது!",
   "resultTryAgain": "கிட்டத்தட்ட வந்துவிட்டீர்கள்",
+  "resultKeepPractising": "தொடர்ந்து பயிற்சி செய்யுங்கள்",
+  "resultNewExam": "புதிய தேர்வு",
   "resultTryAgainBody": "இந்த நிலையைக் கடக்கக் குறைந்தது 50% பெற வேண்டும். விளக்கங்களைப் படித்து மீண்டும் முயலுங்கள்.",
   "resultScore": "{correct}/{total} சரி",
   "resultAccuracy": "துல்லியம்",

@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../app/router.dart';
 import '../../../core/config/features.dart';
@@ -97,21 +98,34 @@ class _ResultViewState extends ConsumerState<ResultView> {
         if (r.duelDraw) return l.resultDuelDraw;
         return r.duelWon! ? l.resultDuelWon : l.resultDuelLost;
       case QuizMode.casePath:
-        if (!r.passed) return l.resultTryAgain;
+        if (!r.passed) return _missed(l);
         return r.isPerfect ? l.resultPerfect : (r.stars >= 2 ? l.resultGreat : l.resultGood);
       case QuizMode.dailyDocket:
       case QuizMode.exam:
       case QuizMode.mistakeReview:
         if (r.isPerfect) return l.resultPerfect;
-        return r.accuracy >= 0.5 ? l.resultGreat : l.resultTryAgain;
+        return r.accuracy >= 0.5 ? l.resultGreat : _missed(l);
     }
   }
 
-  void _shareDocket() {
+  /// "Almost there" only when it was close; a very low score is not.
+  String _missed(AppLocalizations l) => r.accuracy >= 0.3 ? l.resultTryAgain : l.resultKeepPractising;
+
+  /// Opens the phone's share sheet; copies the text if there is none.
+  Future<void> _shareDocket(BuildContext buttonContext) async {
+    final l = context.l10n;
     final now = ref.read(clockProvider)();
     final grid = r.answers.map((a) => a.isCorrect ? '🟩' : '🟥').join();
-    Clipboard.setData(ClipboardData(text: 'Nyaya Daily Docket ${Day.key(now)}\n$grid  ${r.correct}/${r.total} ⚖️'));
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.l10n.chatCopy)));
+    final text = '${l.appName} · ${l.modeDailyDocket} ${Day.key(now)}\n$grid  ${r.correct}/${r.total} ⚖️';
+    // iPads anchor the sheet to the button.
+    final box = buttonContext.findRenderObject() as RenderBox?;
+    final origin = box == null ? null : box.localToGlobal(Offset.zero) & box.size;
+    try {
+      await SharePlus.instance.share(ShareParams(text: text, sharePositionOrigin: origin));
+    } catch (_) {
+      await Clipboard.setData(ClipboardData(text: text));
+      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l.chatCopy)));
+    }
   }
 
   @override
@@ -261,21 +275,30 @@ class _ResultViewState extends ConsumerState<ResultView> {
                           onPressed: () => QuizLauncher.start(context, ref, r.request, replace: true),
                         )
                       else if (mode == QuizMode.dailyDocket)
-                        ChunkyButton(
-                          label: l.resultDocketShare,
-                          icon: Icons.ios_share_rounded,
-                          color: AppPalette.burntClay,
-                          onPressed: _shareDocket,
+                        Builder(
+                          builder: (buttonContext) => ChunkyButton(
+                            label: l.resultDocketShare,
+                            icon: Icons.ios_share_rounded,
+                            color: AppPalette.burntClay,
+                            onPressed: () => _shareDocket(buttonContext),
+                          ),
                         )
-                      else
-                        ChunkyButton(label: l.commonContinue, onPressed: () => context.pop()),
-                      const SizedBox(height: 10),
+                      else if (mode == QuizMode.exam)
+                        ChunkyButton(
+                          label: l.resultNewExam,
+                          icon: Icons.replay_rounded,
+                          onPressed: () => QuizLauncher.start(context, ref, r.request, replace: true),
+                        ),
+                      // Mistake review has nothing else to offer, so one button, not two that match.
+                      if (mode != QuizMode.mistakeReview) const SizedBox(height: 10),
                       SizedBox(
                         width: double.infinity,
-                        child: OutlinedButton(
-                          onPressed: () => mode == QuizMode.casePath ? context.go(Routes.journey) : context.pop(),
-                          child: Text(mode == QuizMode.casePath ? l.resultBackToMap : l.resultBackHome),
-                        ),
+                        child: mode == QuizMode.mistakeReview
+                            ? ChunkyButton(label: l.resultBackHome, onPressed: () => context.pop())
+                            : OutlinedButton(
+                                onPressed: () => mode == QuizMode.casePath ? context.go(Routes.journey) : context.pop(),
+                                child: Text(mode == QuizMode.casePath ? l.resultBackToMap : l.resultBackHome),
+                              ),
                       ),
                     ],
                   ),

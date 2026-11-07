@@ -201,6 +201,8 @@
   "resultGreat": "ಅತ್ಯುತ್ತಮ ಕೆಲಸ!",
   "resultGood": "ಹಂತ ಪೂರ್ಣಗೊಂಡಿದೆ!",
   "resultTryAgain": "ಸ್ವಲ್ಪದರಲ್ಲೇ ತಪ್ಪಿತು",
+  "resultKeepPractising": "ಅಭ್ಯಾಸ ಮುಂದುವರಿಸಿ",
+  "resultNewExam": "ಹೊಸ ಪರೀಕ್ಷೆ",
   "resultTryAgainBody": "ಈ ಹಂತ ದಾಟಲು ಕನಿಷ್ಠ 50% ಅಂಕ ಗಳಿಸಿ. ವಿವರಣೆಗಳನ್ನು ಓದಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
   "resultScore": "{correct}/{total} ಸರಿ",
   "resultAccuracy": "ನಿಖರತೆ",

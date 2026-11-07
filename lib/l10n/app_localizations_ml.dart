@@ -949,6 +949,12 @@ class AppLocalizationsMl extends AppLocalizations {
   String get resultTryAgain => 'ഏതാണ്ട് എത്തി';
 
   @override
+  String get resultKeepPractising => 'പരിശീലനം തുടരൂ';
+
+  @override
+  String get resultNewExam => 'പുതിയ പരീക്ഷ';
+
+  @override
   String get resultTryAgainBody =>
       'ഈ ലെവൽ ജയിക്കാൻ കുറഞ്ഞത് 50% നേടണം. വിശദീകരണങ്ങൾ വായിച്ച് വീണ്ടും ശ്രമിക്കൂ.';
 

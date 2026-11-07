@@ -942,6 +942,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resultTryAgain => 'Almost there';
 
   @override
+  String get resultKeepPractising => 'Keep practising';
+
+  @override
+  String get resultNewExam => 'New exam';
+
+  @override
   String get resultTryAgainBody =>
       'Score at least 50% to clear this level. Review the explanations and try again.';
 

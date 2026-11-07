@@ -941,6 +941,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get resultTryAgain => 'बस थोड़ा और';
 
   @override
+  String get resultKeepPractising => 'अभ्यास जारी रखें';
+
+  @override
+  String get resultNewExam => 'नई परीक्षा';
+
+  @override
   String get resultTryAgainBody =>
       'यह लेवल पास करने के लिए कम से कम 50% अंक लाएँ। व्याख्याएँ देखें और फिर कोशिश करें।';
 

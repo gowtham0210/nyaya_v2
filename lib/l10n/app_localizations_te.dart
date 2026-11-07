@@ -946,6 +946,12 @@ class AppLocalizationsTe extends AppLocalizations {
   String get resultTryAgain => 'దాదాపు చేరుకున్నారు';
 
   @override
+  String get resultKeepPractising => 'సాధన కొనసాగించండి';
+
+  @override
+  String get resultNewExam => 'కొత్త పరీక్ష';
+
+  @override
   String get resultTryAgainBody =>
       'ఈ లెవెల్ పూర్తి చేయడానికి కనీసం 50% స్కోర్ చేయండి. వివరణలు చూసి మళ్లీ ప్రయత్నించండి.';
 

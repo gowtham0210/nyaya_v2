@@ -595,6 +595,8 @@
   "resultGreat": "Excellent work!",
   "resultGood": "Level cleared!",
   "resultTryAgain": "Almost there",
+  "resultKeepPractising": "Keep practising",
+  "resultNewExam": "New exam",
   "resultTryAgainBody": "Score at least 50% to clear this level. Review the explanations and try again.",
   "resultScore": "{correct}/{total} correct",
   "@resultScore": {

@@ -201,6 +201,8 @@
   "resultGreat": "മികച്ച പ്രകടനം!",
   "resultGood": "ലെവൽ പൂർത്തിയായി!",
   "resultTryAgain": "ഏതാണ്ട് എത്തി",
+  "resultKeepPractising": "പരിശീലനം തുടരൂ",
+  "resultNewExam": "പുതിയ പരീക്ഷ",
   "resultTryAgainBody": "ഈ ലെവൽ ജയിക്കാൻ കുറഞ്ഞത് 50% നേടണം. വിശദീകരണങ്ങൾ വായിച്ച് വീണ്ടും ശ്രമിക്കൂ.",
   "resultScore": "{total}-ൽ {correct} ശരി",
   "resultAccuracy": "കൃത്യത",

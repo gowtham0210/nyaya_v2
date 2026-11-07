@@ -201,6 +201,8 @@
   "resultGreat": "అద్భుతం!",
   "resultGood": "లెవెల్ పూర్తయింది!",
   "resultTryAgain": "దాదాపు చేరుకున్నారు",
+  "resultKeepPractising": "సాధన కొనసాగించండి",
+  "resultNewExam": "కొత్త పరీక్ష",
   "resultTryAgainBody": "ఈ లెవెల్ పూర్తి చేయడానికి కనీసం 50% స్కోర్ చేయండి. వివరణలు చూసి మళ్లీ ప్రయత్నించండి.",
   "resultScore": "{total}లో {correct} సరైనవి",
   "resultAccuracy": "ఖచ్చితత్వం",
