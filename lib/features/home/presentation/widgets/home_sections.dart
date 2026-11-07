@@ -496,6 +496,8 @@ class QuizModesGrid extends ConsumerWidget {
         // very narrow screens.
         LayoutBuilder(
           builder: (context, box) {
+            final oneColumn = box.maxWidth < 300;
+            final tileWidth = oneColumn ? box.maxWidth : (box.maxWidth - 12) / 2;
             final tiles = [
               for (final (mode, name, desc, icon, color) in modes)
                 _ModeTile(
@@ -504,13 +506,15 @@ class QuizModesGrid extends ConsumerWidget {
                   desc: desc,
                   icon: icon,
                   color: color,
+                  // Tile padding (14 + 14) and the arrow (8 + 34) take the rest.
+                  nameWidth: tileWidth - 70,
                   onTap: () => mode == QuizMode.casePath
                       ? context.go(Routes.journey)
                       : QuizLauncher.start(context, ref, QuizRequest(mode)),
                 ),
             ];
             const gap = SizedBox(width: 12, height: 12);
-            if (box.maxWidth < 300) {
+            if (oneColumn) {
               return Column(
                 children: [
                   for (final (i, t) in tiles.indexed) ...[if (i > 0) gap, t],
@@ -554,9 +558,12 @@ class _ModeTile extends StatelessWidget {
     required this.desc,
     required this.icon,
     required this.color,
+    required this.nameWidth,
     required this.onTap,
   });
 
+  /// Room for the name beside the arrow; long words shrink to fit it.
+  final double nameWidth;
   final QuizMode mode;
   final String name;
   final String desc;
@@ -669,8 +676,9 @@ class _ModeTile extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            _WholeWordsText(
                               name,
+                              maxWidth: nameWidth,
                               style: AppTheme.serif(
                                 TextStyle(
                                   fontSize: 20,
@@ -819,5 +827,37 @@ class LeagueCard extends ConsumerWidget {
         ],
       ),
     );
+  }
+}
+
+/// Text that may wrap between words but never inside one: when the longest
+/// word is wider than [maxWidth] (narrow phones, long translations), the font
+/// shrinks until it fits, down to 70%. Takes the width from its parent because
+/// the tiles sit in an IntrinsicHeight, where LayoutBuilder cannot be used.
+class _WholeWordsText extends StatelessWidget {
+  const _WholeWordsText(this.text, {required this.style, required this.maxWidth});
+
+  final String text;
+  final TextStyle style;
+  final double maxWidth;
+
+  @override
+  Widget build(BuildContext context) {
+    final scaler = MediaQuery.textScalerOf(context);
+    final direction = Directionality.of(context);
+    var widest = 0.0;
+    for (final word in text.split(RegExp(r'\s+'))) {
+      final painter = TextPainter(
+        text: TextSpan(text: word, style: style),
+        textScaler: scaler,
+        textDirection: direction,
+        maxLines: 1,
+      )..layout();
+      widest = widest > painter.width ? widest : painter.width;
+      painter.dispose();
+    }
+    final size = style.fontSize ?? 14;
+    final fit = maxWidth > 0 && widest > maxWidth ? (maxWidth / widest).clamp(0.7, 1.0) : 1.0;
+    return Text(text, style: style.copyWith(fontSize: size * fit));
   }
 }

@@ -144,6 +144,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                           stars: progress.stars[node.id] ?? 0,
                           userName: profile.name,
                           onTap: () => _openSheet(node),
+                          mapWidth: layout.width,
                         ),
                     ],
                   ),
