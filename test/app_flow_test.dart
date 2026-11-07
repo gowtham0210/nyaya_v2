@@ -134,6 +134,13 @@ void main() {
       await settle(tester);
     }
 
+    // Clearing a level for the first time opens the next one: "Level up!" first.
+    expect(find.text('Level up!'), findsOneWidget);
+    expect(find.text('Level 1 cleared · Constitution Basics'), findsOneWidget);
+    expect(find.text('Level 2 is now open'), findsOneWidget);
+    await tester.tap(find.text('CONTINUE'));
+    await settle(tester);
+    expect(find.text('Level up!'), findsNothing);
     expect(find.text('Perfect case!'), findsOneWidget);
     expect(sounds.played, [...List.filled(6, Sfx.correct), Sfx.levelComplete]);
     expect(c.read(journeyProvider).stars['constitution_1'], 3);
@@ -922,6 +929,8 @@ void main() {
       await tester.tap(find.text(i == 5 ? 'FINISH' : 'NEXT'));
       await settle(tester);
     }
+    await tester.tap(find.text('CONTINUE')); // past "Level up!"
+    await settle(tester);
     await tester.tap(find.text('Back to map'));
     await settle(tester);
     await tester.tap(find.text('Home'));
@@ -1109,6 +1118,8 @@ void main() {
       await settle(tester);
     }
     expect(find.text('5/6 correct'), findsOneWidget);
+    await tester.tap(find.text('CONTINUE')); // past "Level up!"
+    await settle(tester);
     await tester.tap(find.text('Review answers'));
     await settle(tester);
     expect(find.text('Hide answers'), findsOneWidget);

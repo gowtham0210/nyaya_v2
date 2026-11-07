@@ -357,6 +357,14 @@ void main() {
   testWidgets('quiz result lays out at the largest text size', (tester) async {
     await pumpApp(tester, theme: 'light', textScale: 3);
     await finishLevel(tester);
+    expect(find.text('Level up!'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+    // The result under the "Level up!" moment must fit too.
+    final next = find.text('CONTINUE');
+    await tester.ensureVisible(next);
+    await tester.pump();
+    await tester.tap(next);
+    await tester.pump(const Duration(seconds: 1));
     expect(tester.takeException(), isNull);
   });
 

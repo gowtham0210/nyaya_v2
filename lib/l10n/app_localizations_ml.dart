@@ -954,6 +954,32 @@ class AppLocalizationsMl extends AppLocalizations {
   String get resultNewExam => 'പുതിയ പരീക്ഷ';
 
   @override
+  String get levelUpTitle => 'ലെവൽ അപ്പ്!';
+
+  @override
+  String levelUpCleared(int number) {
+    return 'ലെവൽ $number പൂർത്തിയായി';
+  }
+
+  @override
+  String levelUpNextLevel(int number) {
+    return 'ലെവൽ $number ഇപ്പോൾ തുറന്നു';
+  }
+
+  @override
+  String get levelUpChest => 'അധ്യായ പെട്ടി തുറക്കാൻ തയ്യാർ';
+
+  @override
+  String levelUpNewChapter(String chapter) {
+    return 'പുതിയ അധ്യായം: $chapter';
+  }
+
+  @override
+  String levelUpRank(int before, int after) {
+    return 'ലീഗ് റാങ്ക് #$before → #$after';
+  }
+
+  @override
   String get resultTryAgainBody =>
       'ഈ ലെവൽ ജയിക്കാൻ കുറഞ്ഞത് 50% നേടണം. വിശദീകരണങ്ങൾ വായിച്ച് വീണ്ടും ശ്രമിക്കൂ.';
 

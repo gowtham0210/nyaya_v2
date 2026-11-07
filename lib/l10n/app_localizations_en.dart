@@ -949,6 +949,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resultNewExam => 'New exam';
 
   @override
+  String get levelUpTitle => 'Level up!';
+
+  @override
+  String levelUpCleared(int number) {
+    return 'Level $number cleared';
+  }
+
+  @override
+  String levelUpNextLevel(int number) {
+    return 'Level $number is now open';
+  }
+
+  @override
+  String get levelUpChest => 'The chapter chest is ready to open';
+
+  @override
+  String levelUpNewChapter(String chapter) {
+    return 'New chapter: $chapter';
+  }
+
+  @override
+  String levelUpRank(int before, int after) {
+    return 'League rank #$before → #$after';
+  }
+
+  @override
   String get resultTryAgainBody =>
       'Score at least 50% to clear this level. Review the explanations and try again.';
 

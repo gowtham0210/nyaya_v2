@@ -954,6 +954,32 @@ class AppLocalizationsKn extends AppLocalizations {
   String get resultNewExam => 'ಹೊಸ ಪರೀಕ್ಷೆ';
 
   @override
+  String get levelUpTitle => 'ಹಂತ ಏರಿಕೆ!';
+
+  @override
+  String levelUpCleared(int number) {
+    return 'ಹಂತ $number ಪೂರ್ಣ';
+  }
+
+  @override
+  String levelUpNextLevel(int number) {
+    return 'ಹಂತ $number ಈಗ ತೆರೆದಿದೆ';
+  }
+
+  @override
+  String get levelUpChest => 'ಅಧ್ಯಾಯದ ಪೆಟ್ಟಿಗೆ ತೆರೆಯಲು ಸಿದ್ಧ';
+
+  @override
+  String levelUpNewChapter(String chapter) {
+    return 'ಹೊಸ ಅಧ್ಯಾಯ: $chapter';
+  }
+
+  @override
+  String levelUpRank(int before, int after) {
+    return 'ಲೀಗ್ ಶ್ರೇಣಿ #$before → #$after';
+  }
+
+  @override
   String get resultTryAgainBody =>
       'ಈ ಹಂತ ದಾಟಲು ಕನಿಷ್ಠ 50% ಅಂಕ ಗಳಿಸಿ. ವಿವರಣೆಗಳನ್ನು ಓದಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
 

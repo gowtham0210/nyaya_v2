@@ -1678,6 +1678,42 @@ abstract class AppLocalizations {
   /// **'New exam'**
   String get resultNewExam;
 
+  /// No description provided for @levelUpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Level up!'**
+  String get levelUpTitle;
+
+  /// No description provided for @levelUpCleared.
+  ///
+  /// In en, this message translates to:
+  /// **'Level {number} cleared'**
+  String levelUpCleared(int number);
+
+  /// No description provided for @levelUpNextLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Level {number} is now open'**
+  String levelUpNextLevel(int number);
+
+  /// No description provided for @levelUpChest.
+  ///
+  /// In en, this message translates to:
+  /// **'The chapter chest is ready to open'**
+  String get levelUpChest;
+
+  /// No description provided for @levelUpNewChapter.
+  ///
+  /// In en, this message translates to:
+  /// **'New chapter: {chapter}'**
+  String levelUpNewChapter(String chapter);
+
+  /// No description provided for @levelUpRank.
+  ///
+  /// In en, this message translates to:
+  /// **'League rank #{before} → #{after}'**
+  String levelUpRank(int before, int after);
+
   /// No description provided for @resultTryAgainBody.
   ///
   /// In en, this message translates to:

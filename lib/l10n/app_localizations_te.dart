@@ -952,6 +952,32 @@ class AppLocalizationsTe extends AppLocalizations {
   String get resultNewExam => 'కొత్త పరీక్ష';
 
   @override
+  String get levelUpTitle => 'లెవెల్ అప్!';
+
+  @override
+  String levelUpCleared(int number) {
+    return 'లెవెల్ $number పూర్తి';
+  }
+
+  @override
+  String levelUpNextLevel(int number) {
+    return 'లెవెల్ $number ఇప్పుడు తెరుచుకుంది';
+  }
+
+  @override
+  String get levelUpChest => 'అధ్యాయ చెస్ట్ తెరవడానికి సిద్ధం';
+
+  @override
+  String levelUpNewChapter(String chapter) {
+    return 'కొత్త అధ్యాయం: $chapter';
+  }
+
+  @override
+  String levelUpRank(int before, int after) {
+    return 'లీగ్ ర్యాంక్ #$before → #$after';
+  }
+
+  @override
   String get resultTryAgainBody =>
       'ఈ లెవెల్ పూర్తి చేయడానికి కనీసం 50% స్కోర్ చేయండి. వివరణలు చూసి మళ్లీ ప్రయత్నించండి.';
 

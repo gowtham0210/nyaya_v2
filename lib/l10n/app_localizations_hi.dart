@@ -947,6 +947,32 @@ class AppLocalizationsHi extends AppLocalizations {
   String get resultNewExam => 'नई परीक्षा';
 
   @override
+  String get levelUpTitle => 'लेवल अप!';
+
+  @override
+  String levelUpCleared(int number) {
+    return 'लेवल $number पूरा';
+  }
+
+  @override
+  String levelUpNextLevel(int number) {
+    return 'लेवल $number अब खुल गया';
+  }
+
+  @override
+  String get levelUpChest => 'अध्याय का संदूक खोलने के लिए तैयार है';
+
+  @override
+  String levelUpNewChapter(String chapter) {
+    return 'नया अध्याय: $chapter';
+  }
+
+  @override
+  String levelUpRank(int before, int after) {
+    return 'लीग रैंक #$before → #$after';
+  }
+
+  @override
   String get resultTryAgainBody =>
       'यह लेवल पास करने के लिए कम से कम 50% अंक लाएँ। व्याख्याएँ देखें और फिर कोशिश करें।';
 

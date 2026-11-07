@@ -24,6 +24,7 @@ import '../../profile/application/profile_controller.dart';
 import '../application/quiz_controller.dart';
 import '../domain/quiz_models.dart';
 import '../../review/presentation/question_actions.dart';
+import 'level_up_overlay.dart';
 import 'quiz_launcher.dart';
 import 'source_line.dart';
 
@@ -42,9 +43,19 @@ class _ResultViewState extends ConsumerState<ResultView> {
   bool _showReview = false;
   late final bool _offerPremium;
 
+  /// A Learning Path level that opened the next step gets its own
+  /// "Level up!" moment before the result.
+  late bool _showLevelUp = _levelUp && _clearedNode != null;
+
   QuizResult get r => widget.state.result!;
 
+  bool get _levelUp => r.request.mode == QuizMode.casePath && widget.state.rewards?.unlockedNext == true;
+
+  JourneyNode? get _clearedNode =>
+      JourneyCatalog.nodes.where((n) => n.id == r.request.levelId).firstOrNull;
+
   bool get _celebrate =>
+      _levelUp ||
       (r.request.mode == QuizMode.casePath && r.stars >= 2) ||
       r.duelWon == true ||
       r.isPerfect ||
@@ -306,6 +317,18 @@ class _ResultViewState extends ConsumerState<ResultView> {
               ],
             ),
           ),
+          if (_showLevelUp)
+            Positioned.fill(
+              child: LevelUpOverlay(
+                cleared: _clearedNode!,
+                next: next,
+                stars: r.stars,
+                xp: rewards?.xp.total ?? 0,
+                rankBefore: rewards?.leagueRankBefore ?? 0,
+                rankAfter: rewards?.leagueRankAfter ?? 0,
+                onContinue: () => setState(() => _showLevelUp = false),
+              ),
+            ),
           ConfettiWidget(
             confettiController: _confetti,
             blastDirectionality: BlastDirectionality.explosive,
