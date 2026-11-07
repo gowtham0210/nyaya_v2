@@ -482,7 +482,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get homeGoPremium => 'అపరిమిత ఎనర్జీ పొందండి';
 
   @override
-  String get homeGoPremiumSub => 'Nyaya Premium · 7 రోజుల ఉచిత ట్రయల్';
+  String get homeGoPremiumSub => 'Nyaya Kural Premium · 7 రోజుల ఉచిత ట్రయల్';
 
   @override
   String get modeCasePath => 'అభ్యాస మార్గం';
@@ -881,7 +881,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get quizRefundFailed =>
-      'Nyayaని చేరలేకపోయాం, కాబట్టి మీ ఎనర్జీ తిరిగి రాలేదు.';
+      'Nyaya Kuralని చేరలేకపోయాం, కాబట్టి మీ ఎనర్జీ తిరిగి రాలేదు.';
 
   @override
   String get quizOptionCorrect => 'సరైన జవాబు';
@@ -1185,7 +1185,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get tier_supremeCourt => 'సుప్రీంకోర్టు';
 
   @override
-  String get chatTitle => 'Nyaya AI';
+  String get chatTitle => 'Nyaya Kural AI';
 
   @override
   String get chatSubtitle => 'మీ న్యాయ సమాచార సహాయకుడు';
@@ -1378,7 +1378,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get settingsRemindersBlocked =>
-      'Nyayaకు నోటిఫికేషన్లు ఆఫ్‌లో ఉన్నాయి. రిమైండర్లు పొందడానికి ఫోన్ సెట్టింగ్స్‌లో వాటిని ఆన్ చేయండి.';
+      'Nyaya Kuralకు నోటిఫికేషన్లు ఆఫ్‌లో ఉన్నాయి. రిమైండర్లు పొందడానికి ఫోన్ సెట్టింగ్స్‌లో వాటిని ఆన్ చేయండి.';
 
   @override
   String get settingsStore => 'స్టోర్';
@@ -1404,7 +1404,7 @@ class AppLocalizationsTe extends AppLocalizations {
       'మీ దగ్గర ఇప్పటికే గరిష్ఠ సంఖ్యలో ఫ్రీజ్‌లు ఉన్నాయి.';
 
   @override
-  String get settingsPremium => 'Nyaya Premium';
+  String get settingsPremium => 'Nyaya Kural Premium';
 
   @override
   String get settingsPremiumActive => 'Premium యాక్టివ్‌గా ఉంది';
@@ -1428,7 +1428,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get settingsAccuracy => 'ఖచ్చితత్వం';
 
   @override
-  String get settingsDuelRecord => 'గెలిచిన క్విక్ క్విజ్‌లు';
+  String get settingsDuelRecord => 'విజయాలు';
 
   @override
   String get settingsAbout => 'గురించి';
@@ -1438,7 +1438,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get settingsDisclaimerBody =>
-      'Nyaya ఒక విద్యా యాప్. ప్రశ్నలు, వివరణలు, అప్‌డేట్‌లు, AI జవాబులు సాధారణ సమాచారం మాత్రమే, న్యాయ సలహా కాదు. చట్టాలు మారుతుంటాయి — ఎల్లప్పుడూ అధికారిక గెజిట్‌లో సరిచూసుకోండి లేదా న్యాయవాదిని సంప్రదించండి.';
+      'Nyaya Kural ఒక విద్యా యాప్. ప్రశ్నలు, వివరణలు, అప్‌డేట్‌లు, AI జవాబులు సాధారణ సమాచారం మాత్రమే, న్యాయ సలహా కాదు. చట్టాలు మారుతుంటాయి — ఎల్లప్పుడూ అధికారిక గెజిట్‌లో సరిచూసుకోండి లేదా న్యాయవాదిని సంప్రదించండి.';
 
   @override
   String get settingsPrivacy => 'గోప్యత';
@@ -1463,7 +1463,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get settingsResetAction => 'రీసెట్ చేయండి';
 
   @override
-  String get premiumTitle => 'Nyaya Premium';
+  String get premiumTitle => 'Nyaya Kural Premium';
 
   @override
   String get premiumHeadline => 'ప్రతిరోజూ మరింత నేర్చుకోండి';
@@ -1477,7 +1477,7 @@ class AppLocalizationsTe extends AppLocalizations {
   }
 
   @override
-  String get premiumBenefitAi => 'మరింత Nyaya AI';
+  String get premiumBenefitAi => 'మరింత Nyaya Kural AI';
 
   @override
   String premiumBenefitAiSub(int free, int premium) {
@@ -1519,7 +1519,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get premiumRestore => 'కొనుగోళ్లను పునరుద్ధరించండి';
 
   @override
-  String get premiumActivated => 'Nyaya Premiumకి స్వాగతం!';
+  String get premiumActivated => 'Nyaya Kural Premiumకి స్వాగతం!';
 
   @override
   String get premiumAlready => 'మీరు Premium సభ్యులు';
@@ -1691,7 +1691,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get authCreateSubtitle =>
-      'ప్రశ్నలు Nyaya సమీక్షించిన సేకరణ నుండి వస్తాయి, మీ ఫలితాలు మీ ఖాతాలో భద్రంగా ఉంటాయి.';
+      'ప్రశ్నలు Nyaya Kural సమీక్షించిన సేకరణ నుండి వస్తాయి, మీ ఫలితాలు మీ ఖాతాలో భద్రంగా ఉంటాయి.';
 
   @override
   String get authSignInTitle => 'మళ్లీ స్వాగతం';
@@ -1733,7 +1733,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get authErrorNetwork =>
-      'ఇప్పుడు Nyaya ను చేరుకోలేకపోతున్నాం. కనెక్షన్ చూసి మళ్లీ ప్రయత్నించండి.';
+      'ఇప్పుడు Nyaya Kural ను చేరుకోలేకపోతున్నాం. కనెక్షన్ చూసి మళ్లీ ప్రయత్నించండి.';
 
   @override
   String get authErrorRateLimited =>
@@ -1806,7 +1806,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get settingsSignOut => 'సైన్ అవుట్';
 
   @override
-  String get updateRequiredTitle => 'దయచేసి Nyaya ను అప్‌డేట్ చేయండి';
+  String get updateRequiredTitle => 'దయచేసి Nyaya Kural ను అప్‌డేట్ చేయండి';
 
   @override
   String get updateRequiredBody =>
@@ -1850,7 +1850,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get quizOffline =>
-      'Nyaya ను చేరుకోలేకపోతున్నాం. కనెక్షన్ చూసి మళ్లీ ప్రయత్నించండి.';
+      'Nyaya Kural ను చేరుకోలేకపోతున్నాం. కనెక్షన్ చూసి మళ్లీ ప్రయత్నించండి.';
 
   @override
   String get quizSignedOut =>

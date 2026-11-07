@@ -479,7 +479,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeGoPremium => 'Unlock unlimited energy';
 
   @override
-  String get homeGoPremiumSub => 'Nyaya Premium · 7-day free trial';
+  String get homeGoPremiumSub => 'Nyaya Kural Premium · 7-day free trial';
 
   @override
   String get modeCasePath => 'Learning Path';
@@ -878,7 +878,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get quizRefundFailed =>
-      'Couldn\'t reach Nyaya, so your energy wasn\'t given back.';
+      'Couldn\'t reach Nyaya Kural, so your energy wasn\'t given back.';
 
   @override
   String get quizOptionCorrect => 'correct answer';
@@ -1182,7 +1182,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tier_supremeCourt => 'Supreme Court';
 
   @override
-  String get chatTitle => 'Nyaya AI';
+  String get chatTitle => 'Nyaya Kural AI';
 
   @override
   String get chatSubtitle => 'Your legal information assistant';
@@ -1376,7 +1376,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsRemindersBlocked =>
-      'Notifications are off for Nyaya. Turn them on in your phone\'s Settings to get reminders.';
+      'Notifications are off for Nyaya Kural. Turn them on in your phone\'s Settings to get reminders.';
 
   @override
   String get settingsStore => 'Store';
@@ -1402,7 +1402,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'You already have the maximum freezes equipped.';
 
   @override
-  String get settingsPremium => 'Nyaya Premium';
+  String get settingsPremium => 'Nyaya Kural Premium';
 
   @override
   String get settingsPremiumActive => 'Premium active';
@@ -1426,7 +1426,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsAccuracy => 'Accuracy';
 
   @override
-  String get settingsDuelRecord => 'Quick Quizzes won';
+  String get settingsDuelRecord => 'Wins';
 
   @override
   String get settingsAbout => 'About';
@@ -1436,7 +1436,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsDisclaimerBody =>
-      'Nyaya is an educational app. Questions, explanations, updates and AI answers are general information and are not legal advice. Laws change — always verify with the official Gazette or consult an advocate.';
+      'Nyaya Kural is an educational app. Questions, explanations, updates and AI answers are general information and are not legal advice. Laws change — always verify with the official Gazette or consult an advocate.';
 
   @override
   String get settingsPrivacy => 'Privacy';
@@ -1461,7 +1461,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsResetAction => 'Reset';
 
   @override
-  String get premiumTitle => 'Nyaya Premium';
+  String get premiumTitle => 'Nyaya Kural Premium';
 
   @override
   String get premiumHeadline => 'Learn more, every day';
@@ -1475,7 +1475,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get premiumBenefitAi => 'More Nyaya AI';
+  String get premiumBenefitAi => 'More Nyaya Kural AI';
 
   @override
   String premiumBenefitAiSub(int free, int premium) {
@@ -1517,7 +1517,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get premiumRestore => 'Restore purchases';
 
   @override
-  String get premiumActivated => 'Welcome to Nyaya Premium!';
+  String get premiumActivated => 'Welcome to Nyaya Kural Premium!';
 
   @override
   String get premiumAlready => 'You\'re a Premium member';
@@ -1688,7 +1688,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authCreateSubtitle =>
-      'Questions come from Nyaya\'s reviewed library, and your results are saved to your account.';
+      'Questions come from Nyaya Kural\'s reviewed library, and your results are saved to your account.';
 
   @override
   String get authSignInTitle => 'Welcome back';
@@ -1729,7 +1729,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authErrorNetwork =>
-      'Can\'t reach Nyaya right now. Check your connection and try again.';
+      'Can\'t reach Nyaya Kural right now. Check your connection and try again.';
 
   @override
   String get authErrorRateLimited =>
@@ -1802,7 +1802,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsSignOut => 'Sign out';
 
   @override
-  String get updateRequiredTitle => 'Please update Nyaya';
+  String get updateRequiredTitle => 'Please update Nyaya Kural';
 
   @override
   String get updateRequiredBody =>
@@ -1847,7 +1847,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get quizOffline =>
-      'Can\'t reach Nyaya. Check your connection and try again.';
+      'Can\'t reach Nyaya Kural. Check your connection and try again.';
 
   @override
   String get quizSignedOut => 'Your session ended. Sign in again to play.';

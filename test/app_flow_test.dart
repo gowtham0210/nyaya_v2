@@ -1048,7 +1048,7 @@ void main() {
     await settle(tester);
     await tester.tap(find.text('Leave'));
     await settle(tester);
-    expect(find.text("Couldn't reach Nyaya, so your energy wasn't given back."), findsOneWidget);
+    expect(find.text("Couldn't reach Nyaya Kural, so your energy wasn't given back."), findsOneWidget);
   });
 
   testWidgets('the free Daily Docket promises no refund when you leave', (tester) async {

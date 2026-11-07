@@ -490,11 +490,7 @@ export class LearnService {
 
       const timedOut = selected.length === 0;
       if (timedOut && feedbackOf(s) !== 'immediate')
-        throw err(
-          HttpStatus.BAD_REQUEST,
-          'invalid_answer',
-          'Choose an option',
-        );
+        throw err(HttpStatus.BAD_REQUEST, 'invalid_answer', 'Choose an option');
       const ids = new Set(q.options.map((o) => o.id));
       if (
         new Set(selected).size !== selected.length ||

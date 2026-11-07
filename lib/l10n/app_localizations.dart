@@ -913,7 +913,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeGoPremiumSub.
   ///
   /// In en, this message translates to:
-  /// **'Nyaya Premium · 7-day free trial'**
+  /// **'Nyaya Kural Premium · 7-day free trial'**
   String get homeGoPremiumSub;
 
   /// No description provided for @modeCasePath.
@@ -1549,7 +1549,7 @@ abstract class AppLocalizations {
   /// No description provided for @quizRefundFailed.
   ///
   /// In en, this message translates to:
-  /// **'Couldn\'t reach Nyaya, so your energy wasn\'t given back.'**
+  /// **'Couldn\'t reach Nyaya Kural, so your energy wasn\'t given back.'**
   String get quizRefundFailed;
 
   /// No description provided for @quizOptionCorrect.
@@ -2035,7 +2035,7 @@ abstract class AppLocalizations {
   /// No description provided for @chatTitle.
   ///
   /// In en, this message translates to:
-  /// **'Nyaya AI'**
+  /// **'Nyaya Kural AI'**
   String get chatTitle;
 
   /// No description provided for @chatSubtitle.
@@ -2365,7 +2365,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsRemindersBlocked.
   ///
   /// In en, this message translates to:
-  /// **'Notifications are off for Nyaya. Turn them on in your phone\'s Settings to get reminders.'**
+  /// **'Notifications are off for Nyaya Kural. Turn them on in your phone\'s Settings to get reminders.'**
   String get settingsRemindersBlocked;
 
   /// No description provided for @settingsStore.
@@ -2407,7 +2407,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsPremium.
   ///
   /// In en, this message translates to:
-  /// **'Nyaya Premium'**
+  /// **'Nyaya Kural Premium'**
   String get settingsPremium;
 
   /// No description provided for @settingsPremiumActive.
@@ -2455,7 +2455,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsDuelRecord.
   ///
   /// In en, this message translates to:
-  /// **'Quick Quizzes won'**
+  /// **'Wins'**
   String get settingsDuelRecord;
 
   /// No description provided for @settingsAbout.
@@ -2473,7 +2473,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsDisclaimerBody.
   ///
   /// In en, this message translates to:
-  /// **'Nyaya is an educational app. Questions, explanations, updates and AI answers are general information and are not legal advice. Laws change — always verify with the official Gazette or consult an advocate.'**
+  /// **'Nyaya Kural is an educational app. Questions, explanations, updates and AI answers are general information and are not legal advice. Laws change — always verify with the official Gazette or consult an advocate.'**
   String get settingsDisclaimerBody;
 
   /// No description provided for @settingsPrivacy.
@@ -2515,7 +2515,7 @@ abstract class AppLocalizations {
   /// No description provided for @premiumTitle.
   ///
   /// In en, this message translates to:
-  /// **'Nyaya Premium'**
+  /// **'Nyaya Kural Premium'**
   String get premiumTitle;
 
   /// No description provided for @premiumHeadline.
@@ -2539,7 +2539,7 @@ abstract class AppLocalizations {
   /// No description provided for @premiumBenefitAi.
   ///
   /// In en, this message translates to:
-  /// **'More Nyaya AI'**
+  /// **'More Nyaya Kural AI'**
   String get premiumBenefitAi;
 
   /// No description provided for @premiumBenefitAiSub.
@@ -2617,7 +2617,7 @@ abstract class AppLocalizations {
   /// No description provided for @premiumActivated.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to Nyaya Premium!'**
+  /// **'Welcome to Nyaya Kural Premium!'**
   String get premiumActivated;
 
   /// No description provided for @premiumAlready.
@@ -2935,7 +2935,7 @@ abstract class AppLocalizations {
   /// No description provided for @authCreateSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Questions come from Nyaya\'s reviewed library, and your results are saved to your account.'**
+  /// **'Questions come from Nyaya Kural\'s reviewed library, and your results are saved to your account.'**
   String get authCreateSubtitle;
 
   /// No description provided for @authSignInTitle.
@@ -3013,7 +3013,7 @@ abstract class AppLocalizations {
   /// No description provided for @authErrorNetwork.
   ///
   /// In en, this message translates to:
-  /// **'Can\'t reach Nyaya right now. Check your connection and try again.'**
+  /// **'Can\'t reach Nyaya Kural right now. Check your connection and try again.'**
   String get authErrorNetwork;
 
   /// No description provided for @authErrorRateLimited.
@@ -3139,7 +3139,7 @@ abstract class AppLocalizations {
   /// No description provided for @updateRequiredTitle.
   ///
   /// In en, this message translates to:
-  /// **'Please update Nyaya'**
+  /// **'Please update Nyaya Kural'**
   String get updateRequiredTitle;
 
   /// No description provided for @updateRequiredBody.
@@ -3217,7 +3217,7 @@ abstract class AppLocalizations {
   /// No description provided for @quizOffline.
   ///
   /// In en, this message translates to:
-  /// **'Can\'t reach Nyaya. Check your connection and try again.'**
+  /// **'Can\'t reach Nyaya Kural. Check your connection and try again.'**
   String get quizOffline;
 
   /// No description provided for @quizSignedOut.
