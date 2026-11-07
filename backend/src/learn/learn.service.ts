@@ -488,6 +488,13 @@ export class LearnService {
           'Time is up for this quiz; submit it to see your result',
         );
 
+      const timedOut = selected.length === 0;
+      if (timedOut && feedbackOf(s) !== 'immediate')
+        throw err(
+          HttpStatus.BAD_REQUEST,
+          'invalid_answer',
+          'Choose an option',
+        );
       const ids = new Set(q.options.map((o) => o.id));
       if (
         new Set(selected).size !== selected.length ||
@@ -499,7 +506,11 @@ export class LearnService {
           'Choose from the options shown',
         );
       }
-      if (q.questionType === 'single_select' && selected.length !== 1) {
+      if (
+        !timedOut &&
+        q.questionType === 'single_select' &&
+        selected.length !== 1
+      ) {
         throw err(
           HttpStatus.BAD_REQUEST,
           'invalid_answer',

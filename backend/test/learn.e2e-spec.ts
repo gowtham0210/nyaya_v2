@@ -245,6 +245,45 @@ describe('learner quizzes', () => {
     });
   });
 
+  it('a question whose time ran out shows the answer and counts as unanswered', async () => {
+    const s = (await start(learner, { question_count: 2 }).expect(201)).body;
+    const url = `/v1/quiz-sessions/${s.id}`;
+
+    const timedOut = await as(learner)
+      .post(`${url}/answers`, { position: 1, selected_option_ids: [] })
+      .expect(200);
+    expect(timedOut.body.feedback).toMatchObject({
+      correct: false,
+      correct_option_ids: ['a'],
+    });
+    // A retry of the same timeout is fine; answering after it is not.
+    await as(learner)
+      .post(`${url}/answers`, { position: 1, selected_option_ids: [] })
+      .expect(200);
+    await as(learner)
+      .post(`${url}/answers`, { position: 1, selected_option_ids: ['a'] })
+      .expect(409);
+
+    await as(learner)
+      .post(`${url}/answers`, { position: 2, selected_option_ids: ['a'] })
+      .expect(200);
+    const result = (await as(learner).post(`${url}/submit`).expect(200)).body;
+    expect(result).toMatchObject({ correct_count: 1, answered_count: 1 });
+  });
+
+  it('an exam never takes an empty answer', async () => {
+    const s = (
+      await start(learner, { question_count: 1, mode: 'exam' }).expect(201)
+    ).body;
+    const res = await as(learner)
+      .post(`/v1/quiz-sessions/${s.id}/answers`, {
+        position: 1,
+        selected_option_ids: [],
+      })
+      .expect(400);
+    expect(res.body.code).toBe('invalid_answer');
+  });
+
   it('end mode: reveals nothing until submit, scores on the server, and submit is idempotent', async () => {
     const s = (
       await start(learner, {

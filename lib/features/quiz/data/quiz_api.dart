@@ -111,7 +111,7 @@ abstract interface class QuizApi {
     String sessionId, {
     required int position,
     required Question question,
-    required int option,
+    required int? option,
     int? elapsedMs,
   });
 
@@ -188,12 +188,13 @@ class HttpQuizApi implements QuizApi {
     String sessionId, {
     required int position,
     required Question question,
-    required int option,
+    required int? option,
     int? elapsedMs,
   }) async {
     final j = await _client.post('/v1/quiz-sessions/$sessionId/answers', body: {
       'position': position,
-      'selected_option_ids': [question.optionIds[option]],
+      // Empty when time ran out: the server records it and sends the answer back.
+      'selected_option_ids': [if (option != null) question.optionIds[option]],
       'elapsed_ms': ?elapsedMs,
     }) as Map<String, dynamic>;
     final feedback = j['feedback'] as Map<String, dynamic>?;

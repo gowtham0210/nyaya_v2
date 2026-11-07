@@ -120,7 +120,7 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
     String sessionId, {
     required int position,
     required Question question,
-    required int option,
+    required int? option,
     int? elapsedMs,
   }) async {
     if (failNextAnswer) {
@@ -456,7 +456,7 @@ class _FakeSession {
   final String? levelId;
   final bool negativeMarking;
   final int cost;
-  final selected = <int, int>{};
+  final selected = <int, int?>{};
   final elapsed = <int, int>{};
 }
 

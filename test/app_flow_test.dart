@@ -302,6 +302,42 @@ void main() {
     expect(api.settings?.onboarded, isTrue);
   });
 
+  testWidgets('the name typed at sign-up becomes the learner name, and sign-out clears it', (tester) async {
+    // Onboarding no longer asks for a name, so the phone has none.
+    final onboarded = jsonEncode({'onboarded': true, 'name': '', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, signedIn: false);
+    await settle(tester);
+
+    await tester.tap(find.text('Start learning').first);
+    await settle(tester);
+    await tester.enterText(find.widgetWithText(TextField, 'Your name'), 'Nisha');
+    await tester.enterText(find.widgetWithText(TextField, 'Email'), 'nisha@test.local');
+    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'long enough');
+    await tester.tap(find.text('CREATE ACCOUNT'));
+    await settle(tester);
+    expect(api.settings?.name, 'Nisha', reason: 'not the "Learner" placeholder');
+    expect(c.read(profileProvider).name, 'Nisha');
+
+    await c.read(authProvider.notifier).signOut();
+    await settle(tester);
+    expect(c.read(profileProvider).name, isEmpty);
+  });
+
+  testWidgets('an account saved with the placeholder name gets its sign-up name back', (tester) async {
+    final c = await pumpApp(tester, server: (s) {
+      s.settings = const ServerSettings(
+        name: 'Learner',
+        persona: 'citizen',
+        language: 'en',
+        dailyGoal: 3,
+        onboarded: true,
+      );
+    });
+    await settle(tester);
+    expect(api.settings?.name, 'Ravi');
+    expect(c.read(profileProvider).name, 'Ravi');
+  });
+
   testWidgets('a learner who forgot their password resets it with the emailed code and plays', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Asha', 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, signedIn: false);
@@ -768,6 +804,13 @@ void main() {
       await tester.pump(const Duration(seconds: 1));
     }
     expect(sounds.played, List.filled(5, Sfx.tick));
+
+    // Time runs out: the server is told, and the right answer shows at once.
+    await tester.pump(const Duration(seconds: 1));
+    await settle(tester);
+    expect(find.text("Time's up"), findsOneWidget);
+    expect(find.textContaining('Answer: '), findsOneWidget);
+    expect(api.verdictsSent.last?.reveal?.correctIndex, isNotNull);
     c.read(routerProvider).go(Routes.home);
     await settle(tester);
   });
