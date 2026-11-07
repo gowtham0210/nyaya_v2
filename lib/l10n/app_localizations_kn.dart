@@ -689,6 +689,16 @@ class AppLocalizationsKn extends AppLocalizations {
   String get journeyHowScoring => 'ಅಂಕಗಳು ಹೇಗೆ ಸಿಗುತ್ತವೆ';
 
   @override
+  String get journeyReplayFree => 'ಮತ್ತೆ ಆಡಿ · ಉಚಿತ';
+
+  @override
+  String get journeyFreeReplay => 'ಉಚಿತ ಮರುಆಟ';
+
+  @override
+  String get journeyRuleReplay =>
+      'ನೀವು ಪೂರ್ಣಗೊಳಿಸಿದ ಹಂತವನ್ನು ಮತ್ತೆ ಆಡುವುದು ಉಚಿತ. ಮತ್ತೆ ಆಡಿದರೆ ಅರ್ಧ XP ಸಿಗುತ್ತದೆ ಮತ್ತು ಅದು ನಿಮ್ಮ ದೈನಂದಿನ ಗುರಿಗೆ ಎಣಿಕೆಯಾಗುತ್ತದೆ.';
+
+  @override
   String journeyRuleEnergy(int count) {
     return 'ಪ್ರತಿ ಪ್ರಯತ್ನಕ್ಕೆ $count ಶಕ್ತಿ ಖರ್ಚಾಗುತ್ತದೆ. ಮೊದಲ ಉತ್ತರಕ್ಕೂ ಮೊದಲು ಬಿಟ್ಟರೆ ಅದು ಮರಳಿ ಸಿಗುತ್ತದೆ.';
   }

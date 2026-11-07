@@ -378,6 +378,9 @@
     }
   },
   "journeyHowScoring": "How scoring works",
+  "journeyReplayFree": "Replay · free",
+  "journeyFreeReplay": "Free replay",
+  "journeyRuleReplay": "A level you have cleared is free to replay. Replays earn half XP and count toward your daily goal.",
   "journeyRuleEnergy": "Each try costs {count} energy. If you leave before your first answer, you get it back.",
   "@journeyRuleEnergy": {
     "placeholders": {

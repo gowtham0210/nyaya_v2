@@ -13,6 +13,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/day.dart';
 import '../../../core/widgets/chunky_button.dart';
 import '../../auth/application/auth_controller.dart';
+import '../../journey/application/journey_controller.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../progress/application/progress_sync.dart';
 import '../application/quiz_controller.dart';
@@ -41,7 +42,7 @@ abstract final class QuizLauncher {
       return;
     }
 
-    final cost = request.mode.energyCost;
+    final cost = energyCostOf(request, ref.read(journeyProvider).stars);
     if (!profile.canAfford(cost)) {
       await OutOfEnergySheet.show(context, needed: cost);
       return;

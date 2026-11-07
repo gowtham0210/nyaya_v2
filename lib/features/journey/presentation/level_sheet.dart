@@ -100,8 +100,9 @@ class _LevelSheet extends ConsumerWidget {
         ? GameRules.casePathQuestions
         : min(catalog.available(node.chapter.id, difficulty: node.level), GameRules.casePathQuestions);
     final locked = status == NodeStatus.locked;
-    final cost = QuizMode.casePath.energyCost;
     final replay = status == NodeStatus.completed;
+    // Replaying a cleared level is free (the server agrees).
+    final cost = energyCostOf(QuizRequest(QuizMode.casePath, levelId: node.id), progress.stars);
     final next = progress.current;
 
     return _SheetBody(
@@ -177,7 +178,7 @@ class _LevelSheet extends ConsumerWidget {
             runSpacing: 8,
             children: [
               _Fact(icon: Icons.help_outline_rounded, text: l.journeyQuestions(count)),
-              _Fact(icon: Icons.bolt_rounded, text: premium ? l.energyUnlimited : l.modeEnergyCost(cost)),
+              _Fact(icon: Icons.bolt_rounded, text: premium ? l.energyUnlimited : (cost == 0 ? l.journeyFreeReplay : l.modeEnergyCost(cost))),
               _Fact(icon: Icons.timer_off_outlined, text: l.journeyNoTimer),
             ],
           ),
@@ -190,12 +191,14 @@ class _LevelSheet extends ConsumerWidget {
           const SizedBox(height: AppSpacing.md),
           const _StarRules(),
           const SizedBox(height: AppSpacing.sm),
-          _ScoringRules(cost: cost),
+          _ScoringRules(cost: QuizMode.casePath.energyCost),
           const SizedBox(height: AppSpacing.md),
           ChunkyButton(
             label: premium
                 ? (replay ? l.journeyReplay : l.commonStart)
-                : (replay ? l.journeyReplayCost(cost) : l.journeyStartCost(cost)),
+                : (replay
+                    ? (cost == 0 ? l.journeyReplayFree : l.journeyReplayCost(cost))
+                    : l.journeyStartCost(cost)),
             icon: Icons.play_arrow_rounded,
             color: node.chapter.color,
             onPressed: count == 0
@@ -265,6 +268,7 @@ class _ScoringRules extends StatelessWidget {
     final l = context.l10n;
     final rules = [
       l.journeyRuleEnergy(cost),
+      l.journeyRuleReplay,
       l.journeyRuleRetry,
       l.journeyRuleBest,
       l.journeyRuleNoMinus,

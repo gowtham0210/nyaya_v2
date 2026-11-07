@@ -930,9 +930,12 @@ not pushed, staging not deployed):
 - Updates category paintings: prompts added to `docs/UPDATES_ART.md` (`updates_<category>.webp`); Journey ones
   show until they exist. Editors can also upload per-article pictures in the portal.
 Checked: 220 app tests, 152 server e2e + 75 unit tests, simulator walk-through against a local API (top bar, search →
-chapter, You marker, Saved, sign-out → sign-in). Not checked on Android or a narrow phone. Still open: energy vs
-daily goal clash (5 free energy, exam costs 2, goal can be 5) — needs a user decision; staging has no High Courts news
-(content).
+chapter, You marker, Saved, sign-out → sign-in). Not checked on Android or a narrow phone. Staging has no High Courts
+news (content, not code).
+- Energy vs daily goal (user chose free replays): replaying a Learning Path level already cleared (1+ stars) costs no
+  energy, earns half XP (server `isReplay`, was only for 3-star levels) and counts toward the daily goal, so a goal of
+  5 is always reachable. Server `start` checks `clearedLevel`; app uses `energyCostOf(request, stars)` everywhere and
+  the level sheet says "Replay · free". Free quizzes (Today's Questions, mistake practice) already counted.
 
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).

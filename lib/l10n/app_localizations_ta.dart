@@ -691,6 +691,16 @@ class AppLocalizationsTa extends AppLocalizations {
   String get journeyHowScoring => 'மதிப்பெண் எப்படி கணக்கிடப்படுகிறது';
 
   @override
+  String get journeyReplayFree => 'மீண்டும் விளையாடு · இலவசம்';
+
+  @override
+  String get journeyFreeReplay => 'இலவச மறுவிளையாட்டு';
+
+  @override
+  String get journeyRuleReplay =>
+      'நீங்கள் முடித்த நிலையை மீண்டும் விளையாடுவது இலவசம். மீண்டும் விளையாடும்போது பாதி XP கிடைக்கும், அது உங்கள் தினசரி இலக்கில் சேரும்.';
+
+  @override
   String journeyRuleEnergy(int count) {
     return 'ஒவ்வொரு முயற்சிக்கும் $count ஆற்றல் செலவாகும். முதல் பதிலுக்கு முன் வெளியேறினால் அது திரும்பக் கிடைக்கும்.';
   }

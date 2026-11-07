@@ -683,6 +683,16 @@ class AppLocalizationsHi extends AppLocalizations {
   String get journeyHowScoring => 'अंक कैसे मिलते हैं';
 
   @override
+  String get journeyReplayFree => 'फिर खेलें · मुफ़्त';
+
+  @override
+  String get journeyFreeReplay => 'मुफ़्त दोबारा';
+
+  @override
+  String get journeyRuleReplay =>
+      'जो लेवल आप पार कर चुके हैं, उसे दोबारा खेलना मुफ़्त है। दोबारा खेलने पर आधे XP मिलते हैं और यह आपके रोज़ के लक्ष्य में गिना जाता है।';
+
+  @override
   String journeyRuleEnergy(int count) {
     return 'हर कोशिश में $count ऊर्जा लगती है। पहले उत्तर से पहले छोड़ने पर यह वापस मिल जाती है।';
   }

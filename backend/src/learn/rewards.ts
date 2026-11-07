@@ -56,6 +56,7 @@ export const ECONOMY = {
   freeDailyEnergy: 5,
   /** Energy a quiz costs to start; the docket is always free. */
   /** Mistake practice is free, so learners fix weak spots. */
+  /** Replaying a Case Path level already cleared is free too (see start). */
   energyCost: {
     case_path: 1,
     daily_docket: 0,
@@ -126,7 +127,8 @@ export function sessionXp(opts: {
   questions: AnsweredQuestion[];
   /** Streak before this session counted. */
   streak: number;
-  isReplayOfMastered: boolean;
+  /** A level already cleared: free to replay, so it earns half XP. */
+  isReplay: boolean;
 }): XpBreakdown {
   let sum = 0;
   let combo = 0;
@@ -152,7 +154,7 @@ export function sessionXp(opts: {
   const modeMul =
     opts.mode === 'daily_docket'
       ? RULES.dailyDocketMultiplier
-      : opts.isReplayOfMastered
+      : opts.isReplay
         ? RULES.replayMultiplier
         : 1;
   const streakMul = streakMultiplier(opts.streak);

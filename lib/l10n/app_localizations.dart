@@ -1240,6 +1240,24 @@ abstract class AppLocalizations {
   /// **'How scoring works'**
   String get journeyHowScoring;
 
+  /// No description provided for @journeyReplayFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Replay · free'**
+  String get journeyReplayFree;
+
+  /// No description provided for @journeyFreeReplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Free replay'**
+  String get journeyFreeReplay;
+
+  /// No description provided for @journeyRuleReplay.
+  ///
+  /// In en, this message translates to:
+  /// **'A level you have cleared is free to replay. Replays earn half XP and count toward your daily goal.'**
+  String get journeyRuleReplay;
+
   /// No description provided for @journeyRuleEnergy.
   ///
   /// In en, this message translates to:

@@ -239,7 +239,7 @@ class QuizController extends Notifier<QuizState> {
   Future<bool> abandon() async {
     _timer?.cancel();
     // The phone's copy took the energy when the quiz opened; give it back now.
-    ref.read(profileProvider.notifier).refundEnergy(request.mode.energyCost);
+    ref.read(profileProvider.notifier).refundEnergy(energyCostOf(request, ref.read(journeyProvider).stars));
     final id = _sessionId;
     if (id == null) return true;
     var refunded = true;

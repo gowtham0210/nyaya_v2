@@ -77,7 +77,10 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
         .take(plan.count)
         .toList();
     if (picked.isEmpty) throw const ApiException(422, 'no_questions_available', 'none');
-    final cost = premium ? 0 : plan.mode.energyCost;
+    final levelId = plan.mode == QuizMode.casePath ? '${plan.chapterIds.single}_${plan.difficulty}' : null;
+    // Like the API: a level already cleared is free to replay.
+    final replay = levelId != null && (stars[levelId] ?? 0) > 0;
+    final cost = premium || replay ? 0 : plan.mode.energyCost;
     if (energy < cost) throw const ApiException(409, 'not_enough_energy', 'none');
     energy -= cost;
     final id = 'session-${++sessionsStarted}';
@@ -85,7 +88,7 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
       picked,
       revealAtEnd: plan.revealAtEnd,
       mode: plan.mode,
-      levelId: plan.mode == QuizMode.casePath ? '${plan.chapterIds.single}_${plan.difficulty}' : null,
+      levelId: levelId,
       negativeMarking: plan.negativeMarking,
       cost: cost,
     );

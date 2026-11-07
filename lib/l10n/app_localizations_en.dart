@@ -683,6 +683,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get journeyHowScoring => 'How scoring works';
 
   @override
+  String get journeyReplayFree => 'Replay · free';
+
+  @override
+  String get journeyFreeReplay => 'Free replay';
+
+  @override
+  String get journeyRuleReplay =>
+      'A level you have cleared is free to replay. Replays earn half XP and count toward your daily goal.';
+
+  @override
   String journeyRuleEnergy(int count) {
     return 'Each try costs $count energy. If you leave before your first answer, you get it back.';
   }

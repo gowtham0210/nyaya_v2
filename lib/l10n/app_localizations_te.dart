@@ -687,6 +687,16 @@ class AppLocalizationsTe extends AppLocalizations {
   String get journeyHowScoring => 'స్కోర్ ఎలా లెక్కిస్తారు';
 
   @override
+  String get journeyReplayFree => 'మళ్లీ ఆడండి · ఉచితం';
+
+  @override
+  String get journeyFreeReplay => 'ఉచిత రీప్లే';
+
+  @override
+  String get journeyRuleReplay =>
+      'మీరు పూర్తి చేసిన లెవెల్‌ను మళ్లీ ఆడటం ఉచితం. మళ్లీ ఆడితే సగం XP వస్తుంది, అది మీ రోజువారీ లక్ష్యంలో లెక్కకు వస్తుంది.';
+
+  @override
   String journeyRuleEnergy(int count) {
     return 'ప్రతి ప్రయత్నానికి $count ఎనర్జీ ఖర్చవుతుంది. మొదటి జవాబుకు ముందే వదిలేస్తే అది తిరిగి వస్తుంది.';
   }

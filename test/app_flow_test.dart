@@ -180,6 +180,18 @@ void main() {
     expect(p.streak, 1);
     expect(p.energy, 5, reason: '3-star bonus refunds 1 energy');
     expect(find.text('NEXT LEVEL'), findsOneWidget);
+
+    // A cleared level is free to replay, and the sheet says so.
+    await tester.tap(find.text('Back to map'));
+    await settle(tester);
+    await tester.tap(find.bySemanticsLabel(RegExp(r'^Level 1, Completed')).first);
+    await settle(tester);
+    expect(find.text('Free replay'), findsOneWidget);
+    await tester.tap(find.text('REPLAY · FREE'));
+    await settle(tester);
+    expect(find.textContaining('Question 1 of'), findsOneWidget);
+    expect(c.read(profileProvider).energy, 5);
+    expect(api.energy, 5);
   });
 
   // Premium is hidden in the beta; run with --dart-define=NYAYA_PREMIUM=true.

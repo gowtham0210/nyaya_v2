@@ -136,6 +136,25 @@ describe('coins, energy, premium and settings', () => {
     expect(late.body.code).toBe('quiz_started');
   });
 
+  it('lets a learner replay a level they have cleared for free, at half XP', async () => {
+    const s = await t.signInAs('learner');
+    // Failing a level does not make it free.
+    await play(s, level(2), 'b');
+    expect((await progress(s)).energy.today).toBe(4);
+    await play(s, level(2), 'b');
+    expect((await progress(s)).energy.today).toBe(3);
+
+    const first = await play(s, level(2));
+    expect((await progress(s)).energy.today).toBe(3); // 1 spent, 1 back for 3 stars
+    const replay = await play(s, level(2));
+    expect((await progress(s)).energy.today).toBe(3); // free
+    expect(replay.rewards.xp.total).toBeLessThan(first.rewards.xp.total);
+    expect(replay.rewards.energy_bonus).toBe(0);
+    // Other levels still cost energy.
+    await as(s).post('/v1/quiz-sessions', level(3)).expect(201);
+    expect((await progress(s)).energy.today).toBe(2);
+  });
+
   it('pays coins and the 3-star energy bonus at submit', async () => {
     const s = await t.signInAs('learner');
     await as(s)

@@ -689,6 +689,16 @@ class AppLocalizationsMl extends AppLocalizations {
   String get journeyHowScoring => 'സ്കോർ എങ്ങനെ കണക്കാക്കുന്നു';
 
   @override
+  String get journeyReplayFree => 'വീണ്ടും കളിക്കൂ · സൗജന്യം';
+
+  @override
+  String get journeyFreeReplay => 'സൗജന്യ റീപ്ലേ';
+
+  @override
+  String get journeyRuleReplay =>
+      'നിങ്ങൾ പൂർത്തിയാക്കിയ ലെവൽ വീണ്ടും കളിക്കുന്നത് സൗജന്യമാണ്. വീണ്ടും കളിക്കുമ്പോൾ പകുതി XP കിട്ടും, അത് നിങ്ങളുടെ ദിവസ ലക്ഷ്യത്തിൽ കണക്കാക്കും.';
+
+  @override
   String journeyRuleEnergy(int count) {
     return 'ഓരോ ശ്രമത്തിനും $count എനർജി ചെലവാകും. ആദ്യ ഉത്തരത്തിന് മുമ്പ് വിട്ടാൽ അത് തിരികെ ലഭിക്കും.';
   }
