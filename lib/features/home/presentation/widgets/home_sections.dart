@@ -11,6 +11,7 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/utils/day.dart';
 import '../../../../core/widgets/chunky_button.dart';
 import '../../../../core/widgets/common.dart';
+import '../../../../core/widgets/pressable.dart';
 import '../../../../core/widgets/ticking_builder.dart';
 import '../../../gamification/domain/league.dart';
 import '../../../gamification/presentation/league_emblem.dart';
@@ -44,7 +45,11 @@ class ContinueJourneyCard extends ConsumerWidget {
       onPlay = () => context.go(Routes.journey);
     } else {
       subtitle = l.homeChapterLevel(node.chapterIndex + 1, node.level);
-      onPlay = () => QuizLauncher.start(context, ref, QuizRequest(QuizMode.casePath, levelId: node.id));
+      onPlay = () => QuizLauncher.start(
+        context,
+        ref,
+        QuizRequest(QuizMode.casePath, levelId: node.id),
+      );
     }
 
     return Container(
@@ -52,7 +57,11 @@ class ContinueJourneyCard extends ConsumerWidget {
         borderRadius: BorderRadius.circular(AppRadius.lg),
         color: context.nyaya.hero,
         boxShadow: [
-          BoxShadow(color: AppPalette.terracotta.withValues(alpha: 0.25), blurRadius: 24, offset: const Offset(0, 12)),
+          BoxShadow(
+            color: AppPalette.terracotta.withValues(alpha: 0.25),
+            blurRadius: 24,
+            offset: const Offset(0, 12),
+          ),
         ],
       ),
       child: Stack(
@@ -60,7 +69,11 @@ class ContinueJourneyCard extends ConsumerWidget {
           Positioned(
             right: -18,
             top: -10,
-            child: Icon(chapter.icon, size: 140, color: Colors.white.withValues(alpha: 0.08)),
+            child: Icon(
+              chapter.icon,
+              size: 140,
+              color: Colors.white.withValues(alpha: 0.08),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(AppSpacing.lg - 4),
@@ -76,9 +89,19 @@ class ContinueJourneyCard extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                Text(chapterTitle, style: context.text.headlineSmall?.copyWith(color: Colors.white)),
+                Text(
+                  chapterTitle,
+                  style: context.text.headlineSmall?.copyWith(
+                    color: Colors.white,
+                  ),
+                ),
                 const SizedBox(height: 4),
-                Text(subtitle, style: context.text.bodyMedium?.copyWith(color: Colors.white70)),
+                Text(
+                  subtitle,
+                  style: context.text.bodyMedium?.copyWith(
+                    color: Colors.white70,
+                  ),
+                ),
                 const SizedBox(height: AppSpacing.md),
                 Row(
                   children: [
@@ -91,7 +114,12 @@ class ContinueJourneyCard extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    Text('$done/${chapter.levels}', style: context.text.labelLarge?.copyWith(color: Colors.white)),
+                    Text(
+                      '$done/${chapter.levels}',
+                      style: context.text.labelLarge?.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: AppSpacing.md),
@@ -125,7 +153,9 @@ class DailyGoalStreakCard extends ConsumerWidget {
     final goalMet = doneToday >= p.dailyGoal;
     final activeToday = p.lastActiveDay == today;
     final monday = Day.weekStart(now);
-    final dayLetters = DateFormat.E(Localizations.localeOf(context).languageCode);
+    final dayLetters = DateFormat.E(
+      Localizations.localeOf(context).languageCode,
+    );
 
     return NyayaCard(
       child: Column(
@@ -135,7 +165,10 @@ class DailyGoalStreakCard extends ConsumerWidget {
               ProgressRing(
                 value: doneToday / p.dailyGoal,
                 size: 68,
-                child: Text('$doneToday/${p.dailyGoal}', style: context.text.titleSmall),
+                child: Text(
+                  '$doneToday/${p.dailyGoal}',
+                  style: context.text.titleSmall,
+                ),
               ),
               const SizedBox(width: AppSpacing.md),
               Expanded(
@@ -145,19 +178,29 @@ class DailyGoalStreakCard extends ConsumerWidget {
                     Text(l.homeDailyGoal, style: context.text.titleMedium),
                     const SizedBox(height: 2),
                     Text(
-                      goalMet ? l.homeGoalDone : l.homeGoalProgress(doneToday, p.dailyGoal),
-                      style: context.text.bodyMedium?.copyWith(color: context.nyaya.textSecondary),
+                      goalMet
+                          ? l.homeGoalDone
+                          : l.homeGoalProgress(doneToday, p.dailyGoal),
+                      style: context.text.bodyMedium?.copyWith(
+                        color: context.nyaya.textSecondary,
+                      ),
                     ),
                     const SizedBox(height: 8),
                     Row(
                       children: [
-                        Icon(Icons.local_fire_department_rounded, color: context.nyaya.streak, size: 20),
+                        Icon(
+                          Icons.local_fire_department_rounded,
+                          color: context.nyaya.streak,
+                          size: 20,
+                        ),
                         const SizedBox(width: 4),
                         Flexible(
                           child: Text(
                             activeToday ? l.homeStreakSafe : l.homeStreakAtRisk,
                             style: context.text.labelMedium?.copyWith(
-                              color: activeToday ? context.nyaya.success : context.nyaya.streak,
+                              color: activeToday
+                                  ? context.nyaya.success
+                                  : context.nyaya.streak,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
@@ -185,8 +228,12 @@ class DailyGoalStreakCard extends ConsumerWidget {
                       Text(
                         dayLetters.format(d).characters.take(2).toString(),
                         style: context.text.labelSmall?.copyWith(
-                          color: isToday ? context.colors.primary : context.nyaya.textSecondary,
-                          fontWeight: isToday ? FontWeight.w800 : FontWeight.w600,
+                          color: isToday
+                              ? context.colors.primary
+                              : context.nyaya.textSecondary,
+                          fontWeight: isToday
+                              ? FontWeight.w800
+                              : FontWeight.w600,
                         ),
                       ),
                       const SizedBox(height: 6),
@@ -200,12 +247,21 @@ class DailyGoalStreakCard extends ConsumerWidget {
                               : frozen
                               ? AppPalette.frost
                               : context.colors.surfaceContainerLow,
-                          border: isToday && !active ? Border.all(color: context.nyaya.streak, width: 2) : null,
+                          border: isToday && !active
+                              ? Border.all(
+                                  color: context.nyaya.streak,
+                                  width: 2,
+                                )
+                              : null,
                         ),
                         child: Icon(
-                          frozen ? Icons.ac_unit_rounded : Icons.local_fire_department_rounded,
+                          frozen
+                              ? Icons.ac_unit_rounded
+                              : Icons.local_fire_department_rounded,
                           size: 18,
-                          color: active || frozen ? Colors.white : context.nyaya.locked,
+                          color: active || frozen
+                              ? Colors.white
+                              : context.nyaya.locked,
                         ),
                       ),
                     ],
@@ -231,14 +287,27 @@ class DailyDocketCard extends ConsumerWidget {
     final done = ref.read(profileProvider.notifier).docketDoneToday;
 
     return NyayaCard(
-      onTap: done ? null : () => QuizLauncher.start(context, ref, const QuizRequest(QuizMode.dailyDocket)),
+      onTap: done
+          ? null
+          : () => QuizLauncher.start(
+              context,
+              ref,
+              const QuizRequest(QuizMode.dailyDocket),
+            ),
       child: Row(
         children: [
           Container(
             width: 56,
             height: 56,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(AppRadius.md), color: AppPalette.burntClay),
-            child: Icon(done ? Icons.check_rounded : Icons.today_rounded, color: Colors.white, size: 30),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(AppRadius.md),
+              color: AppPalette.burntClay,
+            ),
+            child: Icon(
+              done ? Icons.check_rounded : Icons.today_rounded,
+              color: Colors.white,
+              size: 30,
+            ),
           ),
           const SizedBox(width: AppSpacing.md),
           Expanded(
@@ -247,7 +316,12 @@ class DailyDocketCard extends ConsumerWidget {
               children: [
                 Row(
                   children: [
-                    Flexible(child: Text(l.modeDailyDocket, style: context.text.titleMedium)),
+                    Flexible(
+                      child: Text(
+                        l.modeDailyDocket,
+                        style: context.text.titleMedium,
+                      ),
+                    ),
                     const SizedBox(width: 8),
                     _Badge(text: l.modeFree, color: context.nyaya.success),
                   ],
@@ -257,18 +331,26 @@ class DailyDocketCard extends ConsumerWidget {
                   TickingBuilder(
                     builder: (context) => Text(
                       '${l.docketDoneToday} · ${l.docketNextIn(formatCountdown(Day.untilMidnight(ref.read(clockProvider)())))}',
-                      style: context.text.bodyMedium?.copyWith(color: context.nyaya.textSecondary),
+                      style: context.text.bodyMedium?.copyWith(
+                        color: context.nyaya.textSecondary,
+                      ),
                     ),
                   )
                 else
                   Text(
                     l.modeDailyDocketDesc,
-                    style: context.text.bodyMedium?.copyWith(color: context.nyaya.textSecondary),
+                    style: context.text.bodyMedium?.copyWith(
+                      color: context.nyaya.textSecondary,
+                    ),
                   ),
               ],
             ),
           ),
-          if (!done) Icon(Icons.chevron_right_rounded, color: context.nyaya.textSecondary),
+          if (!done)
+            Icon(
+              Icons.chevron_right_rounded,
+              color: context.nyaya.textSecondary,
+            ),
         ],
       ),
     );
@@ -297,7 +379,10 @@ class _Badge extends StatelessWidget {
         children: [
           Text(
             text,
-            style: context.text.labelSmall?.copyWith(color: color, fontWeight: FontWeight.w800),
+            style: context.text.labelSmall?.copyWith(
+              color: color,
+              fontWeight: FontWeight.w800,
+            ),
           ),
           if (icon != null) Icon(icon, size: 14, color: color),
         ],
@@ -315,9 +400,27 @@ class QuizModesGrid extends ConsumerWidget {
     final l = context.l10n;
     final persona = ref.watch(profileProvider.select((p) => p.persona));
     final modes = [
-      (QuizMode.casePath, l.modeCasePath, l.modeCasePathDesc, Icons.route_rounded, AppPalette.terracotta),
-      (QuizMode.dailyDocket, l.modeDailyDocket, l.modeDailyDocketDesc, Icons.today_rounded, AppPalette.burntClay),
-      (QuizMode.duel, l.modeDuel, l.modeDuelDesc, Icons.sports_kabaddi_rounded, AppPalette.moss),
+      (
+        QuizMode.casePath,
+        l.modeCasePath,
+        l.modeCasePathDesc,
+        Icons.route_rounded,
+        AppPalette.terracotta,
+      ),
+      (
+        QuizMode.dailyDocket,
+        l.modeDailyDocket,
+        l.modeDailyDocketDesc,
+        Icons.today_rounded,
+        AppPalette.burntClay,
+      ),
+      (
+        QuizMode.duel,
+        l.modeDuel,
+        l.modeDuelDesc,
+        Icons.sports_kabaddi_rounded,
+        AppPalette.moss,
+      ),
       (
         QuizMode.exam,
         l.modeExam,
@@ -331,12 +434,62 @@ class QuizModesGrid extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Same serif heading as the other Explore Law sections.
-        Semantics(
-          header: true,
-          child: Text(
-            l.homeModesTitle,
-            style: AppTheme.serif(TextStyle(fontSize: 26, height: 1.15, color: context.colors.onSurface)),
-          ),
+        // Full width, so the scales sit at the right edge and not beside the text.
+        Stack(
+          children: [
+            // The painted scales behind the heading's right side; absent until added.
+            PositionedDirectional(
+              end: 0,
+              bottom: 0,
+              child: ExcludeSemantics(
+                child: Image.asset(
+                  'assets/images/modes_scales.webp',
+                  height: 76,
+                  errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Room above the heading for the scales.
+                  const SizedBox(height: 30),
+                  Semantics(
+                    header: true,
+                    child: Text(
+                      l.homeModesTitle,
+                      style: AppTheme.serif(
+                        TextStyle(
+                          fontSize: 26,
+                          height: 1.15,
+                          color: context.colors.onSurface,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  // A short brush-stroke underline.
+                  ExcludeSemantics(
+                    child: Container(
+                      width: 120,
+                      height: 3,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(2),
+                        gradient: LinearGradient(
+                          colors: [
+                            AppPalette.terracotta,
+                            AppPalette.terracotta.withValues(alpha: 0),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: AppSpacing.md),
         // Two columns of equal-height tiles that fit their text; one column on
@@ -358,7 +511,11 @@ class QuizModesGrid extends ConsumerWidget {
             ];
             const gap = SizedBox(width: 12, height: 12);
             if (box.maxWidth < 300) {
-              return Column(children: [for (final (i, t) in tiles.indexed) ...[if (i > 0) gap, t]]);
+              return Column(
+                children: [
+                  for (final (i, t) in tiles.indexed) ...[if (i > 0) gap, t],
+                ],
+              );
             }
             return Column(
               children: [
@@ -370,7 +527,11 @@ class QuizModesGrid extends ConsumerWidget {
                       children: [
                         Expanded(child: tiles[i]),
                         gap,
-                        Expanded(child: i + 1 < tiles.length ? tiles[i + 1] : const SizedBox.shrink()),
+                        Expanded(
+                          child: i + 1 < tiles.length
+                              ? tiles[i + 1]
+                              : const SizedBox.shrink(),
+                        ),
                       ],
                     ),
                   ),
@@ -384,7 +545,8 @@ class QuizModesGrid extends ConsumerWidget {
   }
 }
 
-/// One quiz mode: icon and energy cost on top, then the name and what it is.
+/// One quiz mode: a picture on top with the energy cost on it, then the name,
+/// what it is and an arrow. The Case Path tile is filled, as the main mode.
 class _ModeTile extends StatelessWidget {
   const _ModeTile({
     required this.mode,
@@ -402,50 +564,189 @@ class _ModeTile extends StatelessWidget {
   final Color color;
   final VoidCallback onTap;
 
+  static String _asset(QuizMode mode) => switch (mode) {
+    QuizMode.casePath => 'assets/images/mode_case_path.webp',
+    QuizMode.dailyDocket => 'assets/images/mode_daily_docket.webp',
+    QuizMode.duel => 'assets/images/mode_duel.webp',
+    QuizMode.exam => 'assets/images/mode_exam.webp',
+    QuizMode.mistakeReview => '',
+  };
+
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
     final cost = mode.energyCost;
-    return NyayaCard(
-      padding: const EdgeInsets.all(14),
+    final featured = mode == QuizMode.casePath;
+    final fg = featured ? AppPalette.creamLight : context.colors.onSurface;
+    final fgSoft = featured
+        ? AppPalette.creamLight.withValues(alpha: 0.85)
+        : context.nyaya.textSecondary;
+    final badge = cost == 0
+        ? _Badge(text: l.modeFree, color: context.nyaya.success)
+        : _Badge(
+            text: l.modeEnergyCost(cost),
+            icon: Icons.bolt_rounded,
+            color: AppPalette.ochreText,
+          );
+
+    return Pressable(
       onTap: onTap,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: color.withValues(alpha: 0.14),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: Icon(icon, color: color, size: 26),
+      scale: 0.98,
+      child: Container(
+        decoration: BoxDecoration(
+          color: featured ? AppPalette.terracotta : context.colors.surface,
+          borderRadius: BorderRadius.circular(AppRadius.lg),
+          border: Border.all(
+            color: featured ? AppPalette.ochre : context.nyaya.cardBorder,
+            width: featured ? 1.5 : 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(
+                alpha: context.isDark ? 0.25 : 0.04,
               ),
-              const SizedBox(width: 8),
-              // Scales down rather than overflows with long words and large text.
-              Expanded(
-                child: Align(
-                  alignment: AlignmentDirectional.centerEnd,
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    // In words, not just a bolt: "1 energy", "2 energy" or "Free".
-                    child: cost == 0
-                        ? _Badge(text: l.modeFree, color: context.nyaya.success)
-                        : _Badge(text: l.modeEnergyCost(cost), icon: Icons.bolt_rounded, color: AppPalette.ochreText),
+              blurRadius: 18,
+              offset: const Offset(0, 6),
+            ),
+          ],
+        ),
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(AppRadius.lg - 1),
+                  ),
+                  child: Stack(
+                    alignment: Alignment.bottomLeft,
+                    children: [
+                      AspectRatio(
+                        aspectRatio: 1.45,
+                        // Until the painting is added the tile shows its icon.
+                        child: ExcludeSemantics(
+                          child: Image.asset(
+                            _asset(mode),
+                            fit: BoxFit.cover,
+                            errorBuilder: (_, _, _) => ColoredBox(
+                              color: color.withValues(alpha: 0.14),
+                              child: Icon(
+                                icon,
+                                color: featured ? AppPalette.creamLight : color,
+                                size: 44,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          alignment: AlignmentDirectional.centerStart,
+                          // Solid behind the pill so it reads on any picture.
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              color: featured
+                                  ? AppPalette.ochreSoft
+                                  : AppPalette.creamLight,
+                              borderRadius: BorderRadius.circular(AppRadius.xl),
+                            ),
+                            child: badge,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(14, 10, 14, 14),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              name,
+                              style: AppTheme.serif(
+                                TextStyle(
+                                  fontSize: 20,
+                                  height: 1.15,
+                                  fontWeight: FontWeight.w700,
+                                  color: fg,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              desc,
+                              style: context.text.bodySmall?.copyWith(
+                                color: fgSoft,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      ExcludeSemantics(
+                        child: Container(
+                          width: 34,
+                          height: 34,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: featured
+                                ? AppPalette.creamLight
+                                : AppPalette.terracotta.withValues(alpha: 0.12),
+                          ),
+                          child: const Icon(
+                            Icons.arrow_forward_rounded,
+                            size: 20,
+                            color: AppPalette.terracotta,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            if (featured)
+              // A bookmark ribbon: this is the main mode.
+              PositionedDirectional(
+                top: 0,
+                end: 14,
+                child: ExcludeSemantics(
+                  child: ClipPath(
+                    clipper: _RibbonClipper(),
+                    child: const SizedBox(
+                      width: 26,
+                      height: 36,
+                      child: ColoredBox(color: AppPalette.ochre),
+                    ),
                   ),
                 ),
               ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Text(name, style: context.text.titleSmall),
-          const SizedBox(height: 2),
-          Text(desc, style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary)),
-        ],
+          ],
+        ),
       ),
     );
   }
+}
+
+class _RibbonClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) => Path()
+    ..lineTo(size.width, 0)
+    ..lineTo(size.width, size.height)
+    ..lineTo(size.width / 2, size.height - 9)
+    ..lineTo(0, size.height)
+    ..close();
+
+  @override
+  bool shouldReclip(_RibbonClipper oldClipper) => false;
 }
 
 class LeagueCard extends ConsumerWidget {
@@ -487,16 +788,29 @@ class LeagueCard extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(l.homeLeagueTitle, style: context.text.labelMedium?.copyWith(color: context.nyaya.textSecondary)),
+                Text(
+                  l.homeLeagueTitle,
+                  style: context.text.labelMedium?.copyWith(
+                    color: context.nyaya.textSecondary,
+                  ),
+                ),
                 const SizedBox(height: 2),
                 Text(
-                  p.weeklyXp == 0 ? l.tierName(tier) : l.homeLeagueRank(rank, l.tierName(tier)),
+                  p.weeklyXp == 0
+                      ? l.tierName(tier)
+                      : l.homeLeagueRank(rank, l.tierName(tier)),
                   style: context.text.titleMedium,
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  p.weeklyXp == 0 ? l.leaderboardEarnToJoin : l.homeLeagueEnds(formatCountdown(Day.untilWeekEnd(now))),
-                  style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary),
+                  p.weeklyXp == 0
+                      ? l.leaderboardEarnToJoin
+                      : l.homeLeagueEnds(
+                          formatCountdown(Day.untilWeekEnd(now)),
+                        ),
+                  style: context.text.bodySmall?.copyWith(
+                    color: context.nyaya.textSecondary,
+                  ),
                 ),
               ],
             ),
