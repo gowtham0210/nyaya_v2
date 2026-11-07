@@ -113,6 +113,37 @@ void main() {
     expect(find.text('CONTINUE WHERE YOU LEFT OFF'), findsNothing);
   });
 
+  testWidgets('a new learner picks a language, then creates an account, then sees the intro', (tester) async {
+    final c = await pumpApp(tester, signedIn: false);
+    expect(find.text('Choose your language'), findsOneWidget);
+    await tester.tap(find.text('English').first);
+    await settle(tester);
+
+    expect(find.text('Create your free account'), findsOneWidget);
+    expect(find.byTooltip('Close'), findsNothing);
+    await tester.enterText(find.widgetWithText(TextField, 'Your name'), 'Meena');
+    await tester.enterText(find.widgetWithText(TextField, 'Email'), 'meena@test.local');
+    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'long enough');
+    await tester.tap(find.text('CREATE ACCOUNT'));
+    await settle(tester);
+
+    expect(c.read(authProvider)?.email, 'meena@test.local');
+    expect(find.text('Create your free account'), findsNothing);
+    // The intro slides follow, then the persona.
+    for (var i = 0; i < 2; i++) {
+      await tester.tap(find.byTooltip('Continue'));
+      await settle(tester);
+    }
+    await tester.tap(find.text('Get Started'));
+    await settle(tester);
+    await tester.tap(find.text('Law aspirant'));
+    await settle(tester);
+    await tester.tap(find.text('GET STARTED'));
+    await settle(tester);
+    expect(c.read(profileProvider).onboarded, isTrue);
+    expect(api.settings?.name, 'Meena');
+  });
+
   testWidgets('playing a Case Path level end to end awards stars and XP', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'coins': 60, 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
@@ -282,15 +313,14 @@ void main() {
     expect(c.read(profileProvider).onboarded, isFalse);
   });
 
-  testWidgets('a signed-out learner creates an account before the first quiz', (tester) async {
+  testWidgets('a signed-out learner must create an account before anything else', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Asha', 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, signedIn: false);
     await settle(tester);
 
-    await tester.tap(find.text('Start learning').first);
-    await settle(tester);
-    expect(find.text('Create your free account'), findsOneWidget);
-    expect(c.read(profileProvider).energy, 5, reason: 'no energy spent before signing in');
+    expect(find.text('Create your free account'), findsOneWidget, reason: 'sign-in is the first screen');
+    expect(find.byTooltip('Close'), findsNothing, reason: 'it cannot be skipped');
+    expect(c.read(profileProvider).energy, 5);
 
     await tester.enterText(find.widgetWithText(TextField, 'Email'), 'asha@test.local');
     await tester.enterText(find.widgetWithText(TextField, 'Password'), 'short');
@@ -300,6 +330,10 @@ void main() {
 
     await tester.enterText(find.widgetWithText(TextField, 'Password'), 'long enough');
     await tester.tap(find.text('CREATE ACCOUNT'));
+    await settle(tester);
+    expect(c.read(routerProvider).state.matchedLocation, Routes.home);
+
+    await tester.tap(find.text('Start learning').first);
     await settle(tester);
     expect(find.textContaining('Question 1 of'), findsOneWidget);
     expect(api.energy, 4, reason: 'the server charges the energy');
@@ -316,8 +350,6 @@ void main() {
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, signedIn: false);
     await settle(tester);
 
-    await tester.tap(find.text('Start learning').first);
-    await settle(tester);
     await tester.enterText(find.widgetWithText(TextField, 'Your name'), 'Nisha');
     await tester.enterText(find.widgetWithText(TextField, 'Email'), 'nisha@test.local');
     await tester.enterText(find.widgetWithText(TextField, 'Password'), 'long enough');
@@ -329,6 +361,7 @@ void main() {
     await c.read(authProvider.notifier).signOut();
     await settle(tester);
     expect(c.read(profileProvider).name, isEmpty);
+    expect(find.text('Create your free account'), findsOneWidget, reason: 'signing out leads to sign-in');
   });
 
   testWidgets('an account saved with the placeholder name gets its sign-up name back', (tester) async {
@@ -351,8 +384,6 @@ void main() {
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, signedIn: false);
     await settle(tester);
 
-    await tester.tap(find.text('Start learning').first);
-    await settle(tester);
     await tester.tap(find.text('I already have an account'));
     await settle(tester);
     await tester.enterText(find.widgetWithText(TextField, 'Email'), 'asha@test.local');
@@ -375,7 +406,7 @@ void main() {
     await tester.tap(find.text('SET NEW PASSWORD'));
     await settle(tester);
     expect(c.read(authProvider)?.email, 'asha@test.local');
-    expect(find.textContaining('Question 1 of'), findsOneWidget, reason: 'the quiz that asked for sign-in starts');
+    expect(c.read(routerProvider).state.matchedLocation, Routes.home, reason: 'signed in, on to Home');
   });
 
   testWidgets('Journey tab shows the Case Path map and opens a level from its chapter card', (tester) async {

@@ -13,12 +13,13 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/chunky_button.dart';
 import '../../../core/widgets/common.dart';
 import '../../../core/widgets/pressable.dart';
+import '../../auth/application/auth_controller.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../progress/application/progress_sync.dart';
 import '../../profile/domain/user_profile.dart';
 import 'intro_slides.dart';
 
-/// Language → 3 intro slides → persona. The daily goal keeps its default and
+/// Language → sign-in (required) → 3 intro slides → persona. The daily goal keeps its default and
 /// the name stays empty; both can be changed later in Settings.
 /// Target: under 30 seconds to the first quiz.
 class OnboardingScreen extends ConsumerStatefulWidget {
@@ -50,6 +51,23 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     ref.read(feedbackProvider).play(Haptic.tap);
     setState(() => _step = step);
     _page.animateToPage(step, duration: const Duration(milliseconds: 380), curve: Curves.easeOutCubic);
+  }
+
+  /// Language chosen: an account comes next (needed for everything), then
+  /// the intro. A returning learner whose account is already set up goes
+  /// straight Home.
+  Future<void> _afterLanguage() async {
+    if (!ref.read(authProvider.notifier).isSignedIn) {
+      final signedIn = await context.push<bool>(Routes.signInRequired);
+      if (signedIn != true || !mounted) return;
+      await ref.read(progressSyncProvider.notifier).refresh();
+      if (!mounted) return;
+      if (ref.read(profileProvider).onboarded) {
+        context.go(Routes.home);
+        return;
+      }
+    }
+    _go(_introStep);
   }
 
   bool get _canContinue => switch (_step) {
@@ -105,7 +123,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 controller: _page,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  _LanguageStep(onPicked: () => _go(_introStep)),
+                  _LanguageStep(onPicked: _afterLanguage),
                   IntroSlides(onDone: () => _go(_introStep + 1)),
                   _PersonaStep(
                     selected: _persona,

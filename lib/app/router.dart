@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../core/config/features.dart';
+import '../features/auth/application/auth_controller.dart';
 import '../features/auth/presentation/auth_screen.dart';
 import '../features/auth/presentation/reset_password_screen.dart';
 import '../features/chat/presentation/chat_screen.dart';
@@ -35,6 +36,9 @@ abstract final class Routes {
   static const search = '/search';
   static const premium = '/premium';
   static const signIn = '/sign-in';
+
+  /// Sign-in with no way to skip it: every learner needs an account.
+  static const signInRequired = '/sign-in?required=1';
   static const resetPassword = '/reset-password';
   static String update(String id) => '/updates/$id';
 }
@@ -42,17 +46,22 @@ abstract final class Routes {
 final _rootKey = GlobalKey<NavigatorState>();
 
 final routerProvider = Provider<GoRouter>((ref) {
-  return GoRouter(
+  final router = GoRouter(
     navigatorKey: _rootKey,
     initialLocation: Routes.home,
     redirect: (context, state) {
       final onboarded = ref.read(profileProvider).onboarded;
-      final atOnboarding = state.matchedLocation == Routes.onboarding;
-      if (!Features.premium && state.matchedLocation == Routes.premium) return Routes.home;
-      if (!onboarded && !atOnboarding && state.matchedLocation != Routes.premium) {
+      final signedIn = ref.read(authProvider) != null;
+      final location = state.matchedLocation;
+      final atOnboarding = location == Routes.onboarding;
+      final atAuth = location == Routes.signIn || location == Routes.resetPassword;
+      if (!Features.premium && location == Routes.premium) return Routes.home;
+      if (!onboarded && !atOnboarding && !atAuth && location != Routes.premium) {
         return Routes.onboarding;
       }
       if (onboarded && atOnboarding) return Routes.home;
+      // Language first (onboarding), then an account: nothing else works signed out.
+      if (onboarded && !signedIn && !atAuth) return Routes.signInRequired;
       return null;
     },
     // Any unknown deep link lands safely on Home instead of an error page.
@@ -119,7 +128,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.signIn,
         parentNavigatorKey: _rootKey,
-        pageBuilder: (context, state) => const MaterialPage(fullscreenDialog: true, child: AuthScreen()),
+        pageBuilder: (context, state) => MaterialPage(
+          fullscreenDialog: true,
+          child: AuthScreen(required: state.uri.queryParameters['required'] == '1'),
+        ),
       ),
       GoRoute(
         path: Routes.resetPassword,
@@ -136,4 +148,11 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
     ],
   );
+  // Signing out (or a session the server ended) leads straight to sign-in.
+  // Signing in needs no refresh: the sign-in screen moves on by itself, and a
+  // refresh would rebuild it mid-way.
+  ref.listen(authProvider, (before, after) {
+    if (before != null && after == null) router.refresh();
+  });
+  return router;
 });

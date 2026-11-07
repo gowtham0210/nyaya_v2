@@ -15,7 +15,11 @@ import '../application/auth_controller.dart';
 /// Create an account (default) or sign in. Pops `true` once signed in, so
 /// callers such as the quiz launcher can carry on.
 class AuthScreen extends ConsumerStatefulWidget {
-  const AuthScreen({super.key});
+  const AuthScreen({super.key, this.required = false});
+
+  /// Every learner needs an account: no close button. Shown after the
+  /// language choice and whenever a learner is signed out.
+  final bool required;
 
   @override
   ConsumerState<AuthScreen> createState() => _AuthScreenState();
@@ -65,7 +69,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
         await auth.register(name: _name.text, email: email, password: password);
       }
       TextInput.finishAutofillContext();
-      if (mounted) context.pop(true);
+      if (mounted) _done();
     } on ApiException catch (e) {
       if (!mounted) return;
       setState(() {
@@ -85,7 +89,17 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
   /// Signed in with a new password: done here too.
   Future<void> _forgotPassword() async {
     final signedIn = await context.push<bool>(Routes.resetPassword, extra: _email.text.trim());
-    if (signedIn == true && mounted) context.pop(true);
+    if (signedIn == true && mounted) _done();
+  }
+
+  /// Back to whoever asked (onboarding, a quiz), or Home when sign-in was
+  /// the whole screen (after signing out).
+  void _done() {
+    if (context.canPop()) {
+      context.pop(true);
+    } else {
+      context.go(Routes.home);
+    }
   }
 
   @override
@@ -94,11 +108,14 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     final n = context.nyaya;
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          tooltip: l.commonClose,
-          icon: const Icon(Icons.close_rounded),
-          onPressed: () => context.pop(false),
-        ),
+        automaticallyImplyLeading: false,
+        leading: widget.required
+            ? null
+            : IconButton(
+                tooltip: l.commonClose,
+                icon: const Icon(Icons.close_rounded),
+                onPressed: () => context.pop(false),
+              ),
       ),
       body: SafeArea(
         child: AutofillGroup(
