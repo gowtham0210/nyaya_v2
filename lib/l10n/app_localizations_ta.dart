@@ -1268,6 +1268,13 @@ class AppLocalizationsTa extends AppLocalizations {
   String get updatesAskAi => 'இது பற்றி AI-இடம் கேள்';
 
   @override
+  String get updatesSavedFilter => 'சேமித்தவை';
+
+  @override
+  String get updatesSavedEmpty =>
+      'இன்னும் எதுவும் சேமிக்கப்படவில்லை. எந்தப் புதுப்பிப்பிலும் புக்மார்க்கைத் தட்டினால் அது இங்கே இருக்கும்.';
+
+  @override
   String get updatesEmpty => 'இந்தப் பிரிவில் இன்னும் செய்திகள் இல்லை.';
 
   @override

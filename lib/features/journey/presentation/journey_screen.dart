@@ -487,7 +487,7 @@ class _ResourceSheet extends ConsumerWidget {
               FilledButton(
                 onPressed: () {
                   Navigator.pop(context);
-                  context.push(Routes.settings);
+                  context.push(Routes.store);
                 },
                 child: Text(l.journeyOpenStore),
               )

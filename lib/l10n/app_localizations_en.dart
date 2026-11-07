@@ -1258,6 +1258,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get updatesAskAi => 'Ask AI about this';
 
   @override
+  String get updatesSavedFilter => 'Saved';
+
+  @override
+  String get updatesSavedEmpty =>
+      'Nothing saved yet. Tap the bookmark on any update to keep it here.';
+
+  @override
   String get updatesEmpty => 'No updates in this category yet.';
 
   @override

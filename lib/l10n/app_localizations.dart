@@ -2170,6 +2170,18 @@ abstract class AppLocalizations {
   /// **'Ask AI about this'**
   String get updatesAskAi;
 
+  /// No description provided for @updatesSavedFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get updatesSavedFilter;
+
+  /// No description provided for @updatesSavedEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing saved yet. Tap the bookmark on any update to keep it here.'**
+  String get updatesSavedEmpty;
+
   /// No description provided for @updatesEmpty.
   ///
   /// In en, this message translates to:

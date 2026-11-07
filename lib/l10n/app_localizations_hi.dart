@@ -1256,6 +1256,13 @@ class AppLocalizationsHi extends AppLocalizations {
   String get updatesAskAi => 'इसके बारे में AI से पूछें';
 
   @override
+  String get updatesSavedFilter => 'सहेजे गए';
+
+  @override
+  String get updatesSavedEmpty =>
+      'अभी कुछ सहेजा नहीं गया। किसी भी अपडेट पर बुकमार्क दबाएँ, वह यहाँ रहेगा।';
+
+  @override
   String get updatesEmpty => 'इस श्रेणी में अभी कोई अपडेट नहीं है।';
 
   @override

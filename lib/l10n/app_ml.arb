@@ -284,6 +284,8 @@
   "updatesWhyItMatters": "എന്തുകൊണ്ട് പ്രധാനം",
   "updatesSource": "ഉറവിടം",
   "updatesAskAi": "ഇതിനെക്കുറിച്ച് AI-യോട് ചോദിക്കൂ",
+  "updatesSavedFilter": "സേവ് ചെയ്തവ",
+  "updatesSavedEmpty": "ഇതുവരെ ഒന്നും സേവ് ചെയ്തിട്ടില്ല. ഏതെങ്കിലും അപ്ഡേറ്റിലെ ബുക്ക്മാർക്ക് തൊട്ടാൽ അത് ഇവിടെ കാണാം.",
   "updatesEmpty": "ഈ വിഭാഗത്തിൽ ഇതുവരെ വാർത്തകളില്ല.",
   "updatesInEnglish": "ഇംഗ്ലീഷിൽ കാണിക്കുന്നു",
   "settingsTitle": "ക്രമീകരണങ്ങൾ",

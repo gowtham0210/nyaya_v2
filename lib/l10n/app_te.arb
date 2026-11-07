@@ -284,6 +284,8 @@
   "updatesWhyItMatters": "ఇది ఎందుకు ముఖ్యం",
   "updatesSource": "మూలం",
   "updatesAskAi": "దీని గురించి AIని అడగండి",
+  "updatesSavedFilter": "సేవ్ చేసినవి",
+  "updatesSavedEmpty": "ఇంకా ఏమీ సేవ్ చేయలేదు. ఏ అప్‌డేట్‌పైనైనా బుక్‌మార్క్ నొక్కితే అది ఇక్కడ ఉంటుంది.",
   "updatesEmpty": "ఈ విభాగంలో ఇంకా అప్‌డేట్‌లు లేవు.",
   "updatesInEnglish": "ఆంగ్లంలో చూపబడుతోంది",
   "settingsTitle": "సెట్టింగ్స్",

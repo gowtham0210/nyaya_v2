@@ -65,10 +65,14 @@ class UpdatesScreen extends ConsumerStatefulWidget {
 class _UpdatesScreenState extends ConsumerState<UpdatesScreen> {
   UpdateCategory? _filter;
 
+  /// The Saved pill: only updates the learner bookmarked.
+  bool _savedOnly = false;
+
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
     final async = ref.watch(legalUpdatesProvider);
+    final saved = ref.watch(savedUpdatesProvider);
 
     return Scaffold(
       body: RefreshIndicator(
@@ -83,16 +87,34 @@ class _UpdatesScreenState extends ConsumerState<UpdatesScreen> {
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: AppSpacing.page),
                   children: [
-                    for (final c in [null, ...UpdateCategory.values])
+                    for (final c in [null, ...UpdateCategory.values]) ...[
                       Padding(
                         padding: const EdgeInsets.only(right: 10),
                         child: _FilterPill(
                           icon: c?.chipIcon ?? Icons.grid_view_rounded,
                           label: c == null ? l.updatesAll : c.label(l),
-                          selected: _filter == c,
-                          onTap: () => setState(() => _filter = c),
+                          selected: !_savedOnly && _filter == c,
+                          onTap: () => setState(() {
+                            _filter = c;
+                            _savedOnly = false;
+                          }),
                         ),
                       ),
+                      // Saved sits right after All, where it is easy to find.
+                      if (c == null)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: _FilterPill(
+                            icon: Icons.bookmark_rounded,
+                            label: l.updatesSavedFilter,
+                            selected: _savedOnly,
+                            onTap: () => setState(() {
+                              _filter = null;
+                              _savedOnly = true;
+                            }),
+                          ),
+                        ),
+                    ],
                   ],
                 ),
               ),
@@ -111,9 +133,13 @@ class _UpdatesScreenState extends ConsumerState<UpdatesScreen> {
               data: (all) {
                 final items = [
                   for (final u in all)
-                    if (_filter == null || u.category == _filter) u,
+                    if (_savedOnly ? saved.contains(u.id) : (_filter == null || u.category == _filter)) u,
                 ];
-                if (items.isEmpty) return [SliverFillRemaining(child: _Empty(text: l.updatesEmpty))];
+                if (items.isEmpty) {
+                  return [
+                    SliverFillRemaining(child: _Empty(text: _savedOnly ? l.updatesSavedEmpty : l.updatesEmpty)),
+                  ];
+                }
                 return [
                   SliverPadding(
                     padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.lg, AppSpacing.page, AppSpacing.xl),

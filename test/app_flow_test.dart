@@ -502,6 +502,15 @@ void main() {
       await tester.tapAt(const Offset(20, 20)); // outside the sheet
       await settle(tester);
     }
+
+    // The coins sheet leads straight to the store, not the top of Settings.
+    await tester.tap(find.bySemanticsLabel('60 Coins'));
+    await settle(tester);
+    await tester.tap(find.text('Open the Store'));
+    await settle(tester);
+    final store = tester.getRect(find.textContaining('STORE'));
+    expect(store.top, lessThan(400), reason: 'store section scrolled to the top');
+    expect(find.text('Streak freeze'), findsOneWidget);
     semantics.dispose();
   });
 
@@ -588,6 +597,9 @@ void main() {
     expect(find.text('Supreme Court sets timelines for Governors on State Bills'), findsOneWidget);
     expect(tester.takeException(), isNull, reason: 'missing thumbnails fall back quietly');
 
+    // The filter row scrolls sideways; the Saved pill pushed this one off a small screen.
+    await tester.drag(find.text('All'), const Offset(-150, 0));
+    await settle(tester);
     await tester.tap(find.text('Supreme Court'));
     await settle(tester);
     expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsNothing);
@@ -597,9 +609,17 @@ void main() {
     await settle(tester);
     expect(c.read(savedUpdatesProvider), {'news-1'});
 
+    await tester.drag(find.text('Supreme Court'), const Offset(300, 0));
+    await settle(tester);
     await tester.tap(find.text('All'));
     await settle(tester);
     expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsOneWidget);
+
+    // Saved shows only what was bookmarked.
+    await tester.tap(find.text('Saved'));
+    await settle(tester);
+    expect(find.text('Supreme Court sets timelines for Governors on State Bills'), findsOneWidget);
+    expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsNothing);
   });
 
   testWidgets('out of energy shows free alternatives instead of a dead end', (tester) async {

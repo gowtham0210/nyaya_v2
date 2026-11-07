@@ -284,6 +284,8 @@
   "updatesWhyItMatters": "இது ஏன் முக்கியம்",
   "updatesSource": "மூலம்",
   "updatesAskAi": "இது பற்றி AI-இடம் கேள்",
+  "updatesSavedFilter": "சேமித்தவை",
+  "updatesSavedEmpty": "இன்னும் எதுவும் சேமிக்கப்படவில்லை. எந்தப் புதுப்பிப்பிலும் புக்மார்க்கைத் தட்டினால் அது இங்கே இருக்கும்.",
   "updatesEmpty": "இந்தப் பிரிவில் இன்னும் செய்திகள் இல்லை.",
   "updatesInEnglish": "ஆங்கிலத்தில் காட்டப்படுகிறது",
   "settingsTitle": "அமைப்புகள்",

@@ -284,6 +284,8 @@
   "updatesWhyItMatters": "यह क्यों ज़रूरी है",
   "updatesSource": "स्रोत",
   "updatesAskAi": "इसके बारे में AI से पूछें",
+  "updatesSavedFilter": "सहेजे गए",
+  "updatesSavedEmpty": "अभी कुछ सहेजा नहीं गया। किसी भी अपडेट पर बुकमार्क दबाएँ, वह यहाँ रहेगा।",
   "updatesEmpty": "इस श्रेणी में अभी कोई अपडेट नहीं है।",
   "updatesInEnglish": "अंग्रेज़ी में दिखाया गया",
   "settingsTitle": "सेटिंग्स",

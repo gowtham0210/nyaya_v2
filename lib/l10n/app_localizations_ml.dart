@@ -1264,6 +1264,13 @@ class AppLocalizationsMl extends AppLocalizations {
   String get updatesAskAi => 'ഇതിനെക്കുറിച്ച് AI-യോട് ചോദിക്കൂ';
 
   @override
+  String get updatesSavedFilter => 'സേവ് ചെയ്തവ';
+
+  @override
+  String get updatesSavedEmpty =>
+      'ഇതുവരെ ഒന്നും സേവ് ചെയ്തിട്ടില്ല. ഏതെങ്കിലും അപ്ഡേറ്റിലെ ബുക്ക്മാർക്ക് തൊട്ടാൽ അത് ഇവിടെ കാണാം.';
+
+  @override
   String get updatesEmpty => 'ഈ വിഭാഗത്തിൽ ഇതുവരെ വാർത്തകളില്ല.';
 
   @override

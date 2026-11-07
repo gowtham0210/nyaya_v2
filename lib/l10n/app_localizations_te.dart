@@ -1262,6 +1262,13 @@ class AppLocalizationsTe extends AppLocalizations {
   String get updatesAskAi => 'దీని గురించి AIని అడగండి';
 
   @override
+  String get updatesSavedFilter => 'సేవ్ చేసినవి';
+
+  @override
+  String get updatesSavedEmpty =>
+      'ఇంకా ఏమీ సేవ్ చేయలేదు. ఏ అప్‌డేట్‌పైనైనా బుక్‌మార్క్ నొక్కితే అది ఇక్కడ ఉంటుంది.';
+
+  @override
   String get updatesEmpty => 'ఈ విభాగంలో ఇంకా అప్‌డేట్‌లు లేవు.';
 
   @override

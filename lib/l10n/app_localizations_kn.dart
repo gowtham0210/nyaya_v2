@@ -1263,6 +1263,13 @@ class AppLocalizationsKn extends AppLocalizations {
   String get updatesAskAi => 'ಇದರ ಬಗ್ಗೆ AI ಕೇಳಿ';
 
   @override
+  String get updatesSavedFilter => 'ಉಳಿಸಿದವು';
+
+  @override
+  String get updatesSavedEmpty =>
+      'ಇನ್ನೂ ಏನೂ ಉಳಿಸಿಲ್ಲ. ಯಾವುದೇ ಅಪ್‌ಡೇಟ್‌ನಲ್ಲಿ ಬುಕ್‌ಮಾರ್ಕ್ ಒತ್ತಿದರೆ ಅದು ಇಲ್ಲಿ ಇರುತ್ತದೆ.';
+
+  @override
   String get updatesEmpty => 'ಈ ವರ್ಗದಲ್ಲಿ ಇನ್ನೂ ಯಾವುದೇ ಸುದ್ದಿಗಳಿಲ್ಲ.';
 
   @override

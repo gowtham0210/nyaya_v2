@@ -824,6 +824,8 @@
   "updatesWhyItMatters": "Why it matters",
   "updatesSource": "Source",
   "updatesAskAi": "Ask AI about this",
+  "updatesSavedFilter": "Saved",
+  "updatesSavedEmpty": "Nothing saved yet. Tap the bookmark on any update to keep it here.",
   "updatesEmpty": "No updates in this category yet.",
   "updatesSave": "Save update",
   "updatesUnsave": "Remove from saved",

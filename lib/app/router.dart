@@ -30,6 +30,7 @@ abstract final class Routes {
   static const leaderboard = '/leaderboard';
   static const review = '/review';
   static const settings = '/settings';
+  static const store = '/settings?section=store';
   static const premium = '/premium';
   static const signIn = '/sign-in';
   static const resetPassword = '/reset-password';
@@ -106,7 +107,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.settings,
         parentNavigatorKey: _rootKey,
-        builder: (context, state) => const SettingsScreen(),
+        builder: (context, state) => SettingsScreen(openStore: state.uri.queryParameters['section'] == 'store'),
       ),
       GoRoute(
         path: Routes.signIn,
