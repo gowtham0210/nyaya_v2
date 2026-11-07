@@ -10,7 +10,7 @@ class AppLocalizationsKn extends AppLocalizations {
   AppLocalizationsKn([String locale = 'kn']) : super(locale);
 
   @override
-  String get appName => 'Nyaya';
+  String get appName => 'Nyaya Kural';
 
   @override
   String get appTagline => 'ದಿನಕ್ಕೊಂದು ಪ್ರಕರಣ, ಭಾರತೀಯ ಕಾನೂನು ಕಲಿಯಿರಿ';
@@ -1518,6 +1518,31 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get statStars => 'ನಕ್ಷತ್ರಗಳು';
+
+  @override
+  String get searchTitle => 'ಹುಡುಕಿ';
+
+  @override
+  String get searchHint => 'ಕಾನೂನುಗಳು, ವಿಷಯಗಳು, ಅಪ್‌ಡೇಟ್‌ಗಳನ್ನು ಹುಡುಕಿ';
+
+  @override
+  String get searchTopics => 'ವಿಷಯಗಳು';
+
+  @override
+  String get searchLaws => 'ಕಾನೂನುಗಳು';
+
+  @override
+  String get searchUpdates => 'ಅಪ್‌ಡೇಟ್‌ಗಳು';
+
+  @override
+  String searchAskAi(String query) {
+    return 'AI ಅನ್ನು ಕೇಳಿ: “$query”';
+  }
+
+  @override
+  String searchNoResults(String query) {
+    return '“$query” ಗೆ ಇನ್ನೂ ಏನೂ ಹೊಂದುತ್ತಿಲ್ಲ. AI ಅನ್ನು ಕೇಳಿ.';
+  }
 
   @override
   String get exploreTitle => 'ಕಾನೂನು ಅನ್ವೇಷಿಸಿ';

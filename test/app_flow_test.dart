@@ -14,6 +14,7 @@ import 'package:nyaya/features/auth/application/auth_controller.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
 import 'package:nyaya/features/journey/application/journey_controller.dart';
+import 'package:nyaya/features/journey/presentation/journey_screen.dart';
 import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
 import 'package:nyaya/features/legal_updates/presentation/updates_screen.dart';
 import 'package:nyaya/features/reminders/data/reminder_notifications.dart';
@@ -569,6 +570,35 @@ void main() {
     expect(top(tester, 'Quiz modes'), lessThan(top(tester, 'FEATURED')), reason: 'no promotion above the learning');
   });
 
+  testWidgets('Home has a top bar with the app name, and search finds laws, topics and updates', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    expect(find.text('Nyaya Kural'), findsOneWidget);
+
+    await tester.tap(find.byTooltip('Search'));
+    await settle(tester);
+    await tester.enterText(find.byType(TextField), 'bns');
+    await settle(tester);
+    expect(find.text('Bharatiya Nyaya Sanhita (BNS)'), findsOneWidget);
+    expect(find.text('Criminal Law (BNS)'), findsOneWidget, reason: 'the topic matches too');
+    expect(find.text('Ask AI: “bns”'), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField), 'waqf');
+    await settle(tester);
+    expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsOneWidget);
+
+    // A law opens its Journey chapter, not the chat.
+    await tester.enterText(find.byType(TextField), 'bns');
+    await settle(tester);
+    await tester.tap(find.text('Bharatiya Nyaya Sanhita (BNS)'));
+    await settle(tester);
+    expect(c.read(routerProvider).state.matchedLocation, Routes.journey);
+    // The criminal law chapter is still locked, so its sheet says what to do first.
+    expect(find.text('Level 1 · Locked'), findsOneWidget);
+    expect(c.read(journeyFocusProvider), isNull, reason: 'the request is used once');
+  });
+
   testWidgets('Home shows latest updates and opens one', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     await pumpApp(tester, prefs: {'profile_v1': onboarded});
@@ -830,7 +860,7 @@ void main() {
     await settle(tester);
     expect(find.text("Time's up"), findsOneWidget);
     expect(find.textContaining('Answer: '), findsOneWidget);
-    expect(api.verdictsSent.last?.reveal?.correctIndex, isNotNull);
+    expect(api.verdictsSent.last?.reveal.correctIndex, isNotNull);
     c.read(routerProvider).go(Routes.home);
     await settle(tester);
   });
@@ -898,6 +928,9 @@ void main() {
     await settle(tester);
     final card = find.text('1 mistake · 1 saved');
     await tester.scrollUntilVisible(card, 200, scrollable: find.byType(Scrollable).first);
+    // Mid-screen, clear of the pinned top bar.
+    await Scrollable.ensureVisible(tester.element(card), alignment: 0.5);
+    await settle(tester);
     expect(find.text('Review your mistakes'), findsOneWidget);
     expect(find.text('Review now'), findsOneWidget);
     await tester.tap(card);

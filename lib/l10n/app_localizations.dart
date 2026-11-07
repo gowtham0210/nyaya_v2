@@ -109,7 +109,7 @@ abstract class AppLocalizations {
   /// No description provided for @appName.
   ///
   /// In en, this message translates to:
-  /// **'Nyaya'**
+  /// **'Nyaya Kural'**
   String get appName;
 
   /// No description provided for @appTagline.
@@ -2625,6 +2625,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Stars'**
   String get statStars;
+
+  /// No description provided for @searchTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get searchTitle;
+
+  /// No description provided for @searchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search laws, topics and updates'**
+  String get searchHint;
+
+  /// No description provided for @searchTopics.
+  ///
+  /// In en, this message translates to:
+  /// **'Topics'**
+  String get searchTopics;
+
+  /// No description provided for @searchLaws.
+  ///
+  /// In en, this message translates to:
+  /// **'Laws'**
+  String get searchLaws;
+
+  /// No description provided for @searchUpdates.
+  ///
+  /// In en, this message translates to:
+  /// **'Updates'**
+  String get searchUpdates;
+
+  /// No description provided for @searchAskAi.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask AI: “{query}”'**
+  String searchAskAi(String query);
+
+  /// No description provided for @searchNoResults.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing matches “{query}” yet. Ask AI instead.'**
+  String searchNoResults(String query);
 
   /// No description provided for @exploreTitle.
   ///

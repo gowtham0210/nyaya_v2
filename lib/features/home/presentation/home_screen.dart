@@ -78,6 +78,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           },
           child: CustomScrollView(
             slivers: [
+              const HomeTopBar(),
               const SliverToBoxAdapter(child: ExploreHeader()),
               SliverPadding(
                 padding: const EdgeInsets.only(top: AppSpacing.sm, bottom: AppSpacing.xl),

@@ -33,3 +33,31 @@ holds the save button: keep the subject centred and the edges quiet.
 | 10 | `update_mediation_act` | Mediation Act makes mediation mainstream | A round wooden table with two empty chairs facing each other, two cups of tea and a few papers on it, soft light through a window. |
 
 Priority: 1–4 are on the first screen, then 8 (Explainers).
+
+## Category paintings (bundled in the app)
+
+An article with no uploaded picture shows its category's painting. These used to be borrowed from
+the Journey map, so the same pictures showed up in two places (tester review, 2026-11-07). The four
+prompts below give each category its own painting. Until a file is added, the card keeps showing
+the Journey painting.
+
+Save each into `assets/images/` with the file name shown; I convert to WebP at about 480 × 420.
+The Updates list crops to about 8:7 with the save button over the top-right corner, so keep that
+corner plain. These prompts use the watercolour style of the Home art, not the shared photo style
+above.
+
+### `updates_supreme_court` — Supreme Court
+
+> Create an image. Soft hand-painted watercolour illustration in a warm Indian editorial style, like a premium law-journal cover. Warm sunlit cream and parchment palette with terracotta #873F2B, burnt clay #B96243, sand #D9B994, muted sage green and a little ochre gold. Gentle brush texture, soft edges, no hard black outlines, calm low contrast. Square picture, 1024 x 1024 pixels, subject in the middle, top-right corner left quiet and plain. No people, no faces, no letters or text, no logos, no watermark, no border or frame, no national emblem. A judge's wooden gavel resting on its round sound block on a polished desk, an open leather-bound judgment volume behind it with a red ribbon bookmark, warm light from the left.
+
+### `updates_high_courts` — High Courts
+
+> Create an image. Soft hand-painted watercolour illustration in a warm Indian editorial style, like a premium law-journal cover. Warm sunlit cream and parchment palette with terracotta #873F2B, burnt clay #B96243, sand #D9B994, muted sage green and a little ochre gold. Gentle brush texture, soft edges, no hard black outlines, calm low contrast. Square picture, 1024 x 1024 pixels, subject in the middle, top-right corner left quiet and plain. No people, no faces, no letters or text, no logos, no watermark, no border or frame, no national emblem. A red-brick colonial-era court building with tall arched windows and a clock tower, palm and neem trees in front, a pale warm sky.
+
+### `updates_legislation` — Legislation (new laws)
+
+> Create an image. Soft hand-painted watercolour illustration in a warm Indian editorial style, like a premium law-journal cover. Warm sunlit cream and parchment palette with terracotta #873F2B, burnt clay #B96243, sand #D9B994, muted sage green and a little ochre gold. Gentle brush texture, soft edges, no hard black outlines, calm low contrast. Square picture, 1024 x 1024 pixels, subject in the middle, top-right corner left quiet and plain. No people, no faces, no letters or text, no logos, no watermark, no border or frame, no national emblem. A rolled parchment scroll tied with a terracotta ribbon and a wax seal, lying beside a fountain pen and an inkpot on a wooden desk.
+
+### `updates_explainer` — Explainers
+
+> Create an image. Soft hand-painted watercolour illustration in a warm Indian editorial style, like a premium law-journal cover. Warm sunlit cream and parchment palette with terracotta #873F2B, burnt clay #B96243, sand #D9B994, muted sage green and a little ochre gold. Gentle brush texture, soft edges, no hard black outlines, calm low contrast. Square picture, 1024 x 1024 pixels, subject in the middle, top-right corner left quiet and plain. No people, no faces, no letters or text, no logos, no watermark, no border or frame, no national emblem. An open notebook with a few blank lined pages, a glowing brass desk lamp above it and a pair of round reading glasses resting on the page.

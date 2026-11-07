@@ -17,6 +17,7 @@ import '../features/review/presentation/review_screen.dart';
 import '../features/profile/application/profile_controller.dart';
 import '../features/quiz/domain/quiz_models.dart';
 import '../features/quiz/presentation/quiz_screen.dart';
+import '../features/search/presentation/search_screen.dart';
 import '../features/settings/presentation/settings_screen.dart';
 import 'shell.dart';
 
@@ -31,6 +32,7 @@ abstract final class Routes {
   static const review = '/review';
   static const settings = '/settings';
   static const store = '/settings?section=store';
+  static const search = '/search';
   static const premium = '/premium';
   static const signIn = '/sign-in';
   static const resetPassword = '/reset-password';
@@ -103,6 +105,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: Routes.review,
         parentNavigatorKey: _rootKey,
         builder: (context, state) => const ReviewScreen(),
+      ),
+      GoRoute(
+        path: Routes.search,
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => const SearchScreen(),
       ),
       GoRoute(
         path: Routes.settings,

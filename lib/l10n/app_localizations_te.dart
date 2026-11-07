@@ -10,7 +10,7 @@ class AppLocalizationsTe extends AppLocalizations {
   AppLocalizationsTe([String locale = 'te']) : super(locale);
 
   @override
-  String get appName => 'Nyaya';
+  String get appName => 'Nyaya Kural';
 
   @override
   String get appTagline => 'రోజుకో కేసుతో భారతీయ చట్టం నేర్చుకోండి';
@@ -1515,6 +1515,31 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get statStars => 'స్టార్లు';
+
+  @override
+  String get searchTitle => 'వెతకండి';
+
+  @override
+  String get searchHint => 'చట్టాలు, అంశాలు, అప్‌డేట్‌లు వెతకండి';
+
+  @override
+  String get searchTopics => 'అంశాలు';
+
+  @override
+  String get searchLaws => 'చట్టాలు';
+
+  @override
+  String get searchUpdates => 'అప్‌డేట్‌లు';
+
+  @override
+  String searchAskAi(String query) {
+    return 'AIని అడగండి: “$query”';
+  }
+
+  @override
+  String searchNoResults(String query) {
+    return '“$query”కు ఇంకా ఏదీ సరిపోలలేదు. AIని అడగండి.';
+  }
 
   @override
   String get exploreTitle => 'చట్టాన్ని తెలుసుకోండి';

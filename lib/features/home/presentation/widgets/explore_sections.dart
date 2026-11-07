@@ -10,6 +10,7 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/common.dart';
 import '../../../journey/application/journey_controller.dart';
 import '../../../journey/domain/journey.dart';
+import '../../../journey/presentation/journey_screen.dart';
 import '../../../legal_updates/data/legal_updates_repository.dart';
 import '../../../legal_updates/presentation/updates_screen.dart';
 import '../../../quiz/domain/quiz_models.dart';
@@ -25,11 +26,17 @@ TextStyle _serif(BuildContext context, double size, {bool display = true}) {
   );
 }
 
-/// Opens the AI chat with a ready-made question about [law].
-void _askAbout(BuildContext context, String law) {
-  final q = context.l10n.exploreAskPrompt(law);
-  context.go(Uri(path: Routes.chat, queryParameters: {'q': q}).toString());
-}
+/// The main laws Home lists, each with the Journey chapter that teaches it.
+/// Search uses the same list.
+List<({IconData icon, String title, String desc, String chapterId})> coreLaws(AppLocalizations l) => [
+      (icon: Icons.balance_outlined, title: l.lawBnsTitle, desc: l.lawBnsDesc, chapterId: 'criminal'),
+      (icon: Icons.policy_outlined, title: l.lawBnssTitle, desc: l.lawBnssDesc, chapterId: 'procedure'),
+      (icon: Icons.folder_outlined, title: l.lawBsaTitle, desc: l.lawBsaDesc, chapterId: 'procedure'),
+      (icon: Icons.groups_outlined, title: l.lawEverydayTitle, desc: l.lawEverydayDesc, chapterId: 'everyday'),
+    ];
+
+/// The old IPC/CrPC row: taught alongside the new criminal laws.
+const legacyLawChapter = 'criminal';
 
 /// Starts the next Case Path level when it belongs to [chapterId]; otherwise
 /// shows the Journey map so locked chapters are never skipped.
@@ -42,43 +49,95 @@ void _exploreChapter(BuildContext context, WidgetRef ref, String chapterId) {
   }
 }
 
+/// Home's top bar: the app's logo and name, with search, the league and
+/// settings. Stays pinned while Home scrolls.
+class HomeTopBar extends StatelessWidget {
+  const HomeTopBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    return SliverAppBar(
+      pinned: true,
+      primary: false,
+      toolbarHeight: 64,
+      titleSpacing: AppSpacing.page,
+      backgroundColor: context.colors.surfaceContainerLowest,
+      surfaceTintColor: Colors.transparent,
+      scrolledUnderElevation: 1,
+      title: Row(
+        children: [
+          ExcludeSemantics(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset('assets/images/app_logo.webp', width: 38, height: 38),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Semantics(
+                  header: true,
+                  child: Text(
+                    l.appName,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTheme.serif(
+                      TextStyle(fontSize: 22, height: 1.1, color: context.colors.primary),
+                    ),
+                  ),
+                ),
+                Text(
+                  l.appTagline,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        IconButton(
+          tooltip: l.searchTitle,
+          onPressed: () => context.push(Routes.search),
+          icon: const Icon(Icons.search_rounded, size: 26),
+        ),
+        IconButton(
+          tooltip: l.leaderboardTitle,
+          onPressed: () => context.push(Routes.leaderboard),
+          icon: const Icon(Icons.emoji_events_outlined, size: 24),
+        ),
+        IconButton(
+          tooltip: l.settingsTitle,
+          onPressed: () => context.push(Routes.settings),
+          icon: const Icon(Icons.settings_outlined, size: 24),
+        ),
+        const SizedBox(width: AppSpacing.xs),
+      ],
+    );
+  }
+}
+
 class ExploreHeader extends StatelessWidget {
   const ExploreHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
-    return SafeArea(
-      bottom: false,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.md, AppSpacing.sm, AppSpacing.sm),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(child: Text(l.exploreTitle, style: _serif(context, 36))),
-                IconButton(
-                  tooltip: l.exploreAskAi,
-                  onPressed: () => context.go(Routes.chat),
-                  icon: const Icon(Icons.search_rounded, size: 28),
-                ),
-                IconButton(
-                  tooltip: l.leaderboardTitle,
-                  onPressed: () => context.push(Routes.leaderboard),
-                  icon: const Icon(Icons.emoji_events_outlined, size: 26),
-                ),
-                IconButton(
-                  tooltip: l.settingsTitle,
-                  onPressed: () => context.push(Routes.settings),
-                  icon: const Icon(Icons.settings_outlined, size: 26),
-                ),
-              ],
-            ),
-            const SizedBox(height: 2),
-            Text(l.exploreSubtitle, style: context.text.bodyLarge?.copyWith(color: context.nyaya.textSecondary)),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.sm, AppSpacing.page, AppSpacing.sm),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(l.exploreTitle, style: _serif(context, 32)),
+          const SizedBox(height: 2),
+          Text(l.exploreSubtitle, style: context.text.bodyLarge?.copyWith(color: context.nyaya.textSecondary)),
+        ],
       ),
     );
   }
@@ -661,18 +720,13 @@ class _UpdateCard extends StatelessWidget {
 }
 
 /// "Core Laws" header, the list of current codes and the legacy row.
-class CoreLawsSection extends StatelessWidget {
+class CoreLawsSection extends ConsumerWidget {
   const CoreLawsSection({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
-    final laws = [
-      (Icons.balance_outlined, l.lawBnsTitle, l.lawBnsDesc),
-      (Icons.policy_outlined, l.lawBnssTitle, l.lawBnssDesc),
-      (Icons.folder_outlined, l.lawBsaTitle, l.lawBsaDesc),
-      (Icons.groups_outlined, l.lawEverydayTitle, l.lawEverydayDesc),
-    ];
+    final laws = coreLaws(l);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -690,9 +744,15 @@ class CoreLawsSection extends StatelessWidget {
             type: MaterialType.transparency,
             child: Column(
               children: [
-                for (final (i, (icon, title, desc)) in laws.indexed) ...[
+                for (final (i, law) in laws.indexed) ...[
                   if (i > 0) Divider(height: 1, indent: 76, color: context.nyaya.cardBorder),
-                  _LawRow(icon: icon, title: title, desc: desc, onTap: () => _askAbout(context, title)),
+                  // Opens the chapter that teaches this law, not the chat.
+                  _LawRow(
+                    icon: law.icon,
+                    title: law.title,
+                    desc: law.desc,
+                    onTap: () => openJourneyChapter(context, ref, law.chapterId),
+                  ),
                 ],
               ],
             ),
@@ -712,7 +772,7 @@ class CoreLawsSection extends StatelessWidget {
               title: l.lawLegacyTitle,
               desc: l.lawLegacyDesc,
               badge: l.exploreLegacy,
-              onTap: () => _askAbout(context, l.lawLegacyTitle),
+              onTap: () => openJourneyChapter(context, ref, legacyLawChapter),
             ),
           ),
         ),

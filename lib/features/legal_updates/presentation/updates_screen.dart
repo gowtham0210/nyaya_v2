@@ -46,7 +46,16 @@ extension UpdateCategoryX on UpdateCategory {
   /// [color] lifted for text and icons on dark surfaces.
   Color tint(BuildContext context) => context.isDark ? Color.lerp(color, Colors.white, 0.45)! : color;
 
-  /// Journey painting a card shows until its own thumbnail is added.
+  /// The category's own painting (prompts in docs/UPDATES_ART.md), shown
+  /// when an article has no picture of its own.
+  String get ownImage => switch (this) {
+    UpdateCategory.supremeCourt => 'assets/images/updates_supreme_court.webp',
+    UpdateCategory.highCourts => 'assets/images/updates_high_courts.webp',
+    UpdateCategory.legislation => 'assets/images/updates_legislation.webp',
+    UpdateCategory.explainer => 'assets/images/updates_explainer.webp',
+  };
+
+  /// Journey painting used until the category's own painting is added.
   String get fallbackImage => switch (this) {
     UpdateCategory.supremeCourt => 'assets/images/journey_constitution_landmark.webp',
     UpdateCategory.highCourts => 'assets/images/journey_criminal_landmark.webp',
@@ -447,6 +456,17 @@ class UpdateFallbackArt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // The category's own painting fills the card; until it is added, the
+    // Journey painting stands in (the Journey map shows the same ones).
+    return Image.asset(
+      category.ownImage,
+      fit: BoxFit.cover,
+      excludeFromSemantics: true,
+      errorBuilder: (_, _, _) => _journeyPainting(context),
+    );
+  }
+
+  Widget _journeyPainting(BuildContext context) {
     return ColoredBox(
       color: context.colors.surfaceContainerHigh,
       child: Padding(

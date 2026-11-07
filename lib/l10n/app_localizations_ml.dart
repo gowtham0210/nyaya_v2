@@ -10,7 +10,7 @@ class AppLocalizationsMl extends AppLocalizations {
   AppLocalizationsMl([String locale = 'ml']) : super(locale);
 
   @override
-  String get appName => 'Nyaya';
+  String get appName => 'Nyaya Kural';
 
   @override
   String get appTagline => 'ദിവസം ഒരു കേസ്, ഇന്ത്യൻ നിയമം പഠിക്കാം';
@@ -1519,6 +1519,31 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get statStars => 'നക്ഷത്രങ്ങൾ';
+
+  @override
+  String get searchTitle => 'തിരയുക';
+
+  @override
+  String get searchHint => 'നിയമങ്ങൾ, വിഷയങ്ങൾ, അപ്ഡേറ്റുകൾ തിരയുക';
+
+  @override
+  String get searchTopics => 'വിഷയങ്ങൾ';
+
+  @override
+  String get searchLaws => 'നിയമങ്ങൾ';
+
+  @override
+  String get searchUpdates => 'അപ്ഡേറ്റുകൾ';
+
+  @override
+  String searchAskAi(String query) {
+    return 'AI-യോട് ചോദിക്കൂ: “$query”';
+  }
+
+  @override
+  String searchNoResults(String query) {
+    return '“$query” എന്നതിന് ഇതുവരെ ഒന്നും ചേരുന്നില്ല. AI-യോട് ചോദിക്കൂ.';
+  }
 
   @override
   String get exploreTitle => 'നിയമം അറിയാം';

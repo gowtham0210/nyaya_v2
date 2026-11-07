@@ -10,7 +10,7 @@ class AppLocalizationsHi extends AppLocalizations {
   AppLocalizationsHi([String locale = 'hi']) : super(locale);
 
   @override
-  String get appName => 'Nyaya';
+  String get appName => 'Nyaya Kural';
 
   @override
   String get appTagline => 'भारतीय कानून सीखें, रोज़ एक केस';
@@ -1509,6 +1509,31 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get statStars => 'स्टार';
+
+  @override
+  String get searchTitle => 'खोजें';
+
+  @override
+  String get searchHint => 'कानून, विषय और अपडेट खोजें';
+
+  @override
+  String get searchTopics => 'विषय';
+
+  @override
+  String get searchLaws => 'कानून';
+
+  @override
+  String get searchUpdates => 'अपडेट';
+
+  @override
+  String searchAskAi(String query) {
+    return 'AI से पूछें: “$query”';
+  }
+
+  @override
+  String searchNoResults(String query) {
+    return '“$query” से अभी कुछ मेल नहीं खाता। AI से पूछें।';
+  }
 
   @override
   String get exploreTitle => 'कानून खोजें';
