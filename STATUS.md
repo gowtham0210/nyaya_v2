@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-11-02 (review fixes, Claude Opus 5.5)
+> Last updated: 2026-11-07 (tester review fixes, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -904,9 +904,36 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       phone asks for reduced motion; hard stop at 8 s. Off by default via `splashEnabledProvider` (tests never touch
       the plugin); `main.dart` turns it on. Native launch backgrounds (Android `nyaya_cream`, iOS LaunchScreen) now
       #F9F0E2, the video's cream. New package `video_player`. Checked on iPhone 17 Pro Max simulator (debug);
-      not yet checked on Android or a real phone. Not committed.
+      not yet checked on Android or a real phone. Committed 1038fbf.
 
 ## 3. IN PROGRESS / NEXT STEPS
+**Tester review 2026-11-07** (`~/Downloads/nyaya_review.docx`, 22 points, Android phone). User decisions: keep
+language first; **sign-in required right after the language choice**; Docket once a day stays; add a top bar; plain
+mode names; level-up moment wanted; **the new Home design (Home·Saved·Progress·Profile tabs, tips, categories) is
+postponed** — fix bugs first, then scale up. Done on branch `screenshots-and-emoji-fixes` (10 commits 17a10ac..63227e2,
+not pushed, staging not deployed):
+- Sign-up name used (was "Learner"; old accounts repaired on next sync); sign-out clears the name.
+- Result: very low score says "Keep practising"; Exam result offers New exam + Back home; Share opens the share sheet
+  (`share_plus`).
+- Time's up shows the right answer: app sends `selected_option_ids: []`; server takes it only in immediate-feedback
+  modes, scores it as unanswered (**server change — deploy the API before the app**).
+- Updates has a Saved filter; "Open the Store" scrolls Settings to the store (`/settings?section=store`).
+- Mode names shrink instead of splitting words; Journey "You" marker sits beside the current stop.
+- Home: pinned top bar (logo, "Nyaya Kural", tagline, search, league, settings); real search screen (topics, laws,
+  updates, Ask AI last); Core Laws rows open their Journey chapter (`journeyFocusProvider`). App text says
+  "Nyaya Kural" in all 6 languages.
+- Modes renamed: Learning Path, Today's Questions (plural, as it has 5), Quick Quiz, Exam Practice.
+- "Level up!" overlay after a Learning Path level that opens the next step (stars, XP, league climb, what opened).
+- Onboarding: language → sign-in (no close) → intro → persona; signed-out learners are sent to sign-in; a returning
+  account already set up goes straight Home. Router refreshes only on sign-out (a refresh on sign-in rebuilt the
+  sign-in screen mid-way).
+- Updates category paintings: prompts added to `docs/UPDATES_ART.md` (`updates_<category>.webp`); Journey ones
+  show until they exist. Editors can also upload per-article pictures in the portal.
+Checked: 220 app tests, 152 server e2e + 75 unit tests, simulator walk-through against a local API (top bar, search →
+chapter, You marker, Saved, sign-out → sign-in). Not checked on Android or a narrow phone. Still open: energy vs
+daily goal clash (5 free energy, exam costs 2, goal can be 5) — needs a user decision; staging has no High Courts news
+(content).
+
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
    P3 is done (server progress Parts 1–3, M08, M12 — see 2026-10-29). Next-phase plan agreed 2026-10-29:
