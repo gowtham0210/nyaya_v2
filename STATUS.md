@@ -897,6 +897,14 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       `npx vitest run --config ./vitest.config.e2e.ts --maxWorkers=3`. Deployed to staging on 2026-11-03 (backup
       `nyaya-2026-11-03-0414.sql.gz` first, no migration); both fixes checked in the running API. Pushed as PR
       gowtham0210/nyaya_v2#1 (CI watched by Auto-fix).
+- [x] 2026-11-07: **Opening video on app start** (user's `Nyaya_Kural_app_splash_screen…1080p.mp4`, 5 s).
+      Re-encoded to `assets/video/splash.mp4` (720×1280, no audio, 380 KB). `features/splash/presentation/
+      splash_video.dart` plays it once per cold start over the first screen (Stack in `NyayaApp.builder`), cover-fit,
+      then fades out. Tap skips; skipped if it fails, is not loaded in 4 s (simulator debug takes ~2.6 s), or the
+      phone asks for reduced motion; hard stop at 8 s. Off by default via `splashEnabledProvider` (tests never touch
+      the plugin); `main.dart` turns it on. Native launch backgrounds (Android `nyaya_cream`, iOS LaunchScreen) now
+      #F9F0E2, the video's cream. New package `video_player`. Checked on iPhone 17 Pro Max simulator (debug);
+      not yet checked on Android or a real phone. Not committed.
 
 ## 3. IN PROGRESS / NEXT STEPS
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
