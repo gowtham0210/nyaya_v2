@@ -53,7 +53,7 @@
   "onbChooseLanguageSub": "You can change this anytime in Settings.",
   "onbSlide1Title": "Law, made simple",
   "onbSlide1Body": "Bite-sized quizzes on the Constitution, BNS, BNSS and the laws you meet every day.",
-  "onbSlide2Title": "Play the Case Path",
+  "onbSlide2Title": "Follow the Learning Path",
   "onbSlide2Body": "Climb level by level, earn stars, open chests and unlock new chapters.",
   "onbSlide3Title": "Build a daily habit",
   "onbSlide3Body": "Keep your streak alive, climb weekly court leagues and ask our AI anything legal.",
@@ -126,11 +126,11 @@
       }
     }
   },
-  "onbReadyBody": "Your first case is waiting on the Case Path.",
+  "onbReadyBody": "Your first lesson is waiting on the Learning Path.",
   "greetingMorning": "Good morning",
   "greetingAfternoon": "Good afternoon",
   "greetingEvening": "Good evening",
-  "homeContinueJourney": "Continue your Case Path",
+  "homeContinueJourney": "Continue your Learning Path",
   "homeContinueLeftOff": "Continue where you left off",
   "homeStartTitle": "Start your learning journey",
   "homeStartBody": "Build your understanding of Indian law, one concept at a time.",
@@ -215,13 +215,13 @@
   "homeUpdatesTitle": "Latest legal updates",
   "homeGoPremium": "Unlock unlimited energy",
   "homeGoPremiumSub": "Nyaya Premium · 7-day free trial",
-  "modeCasePath": "Case Path",
+  "modeCasePath": "Learning Path",
   "modeCasePathDesc": "Level-by-level journey",
-  "modeDailyDocket": "Daily Docket",
+  "modeDailyDocket": "Today's Questions",
   "modeDailyDocketDesc": "5 questions · same for everyone",
-  "modeDuel": "Moot Court Duel",
+  "modeDuel": "Quick Quiz",
   "modeDuelDesc": "1v1 · 7 questions · beat the clock",
-  "modeExam": "Exam Chamber",
+  "modeExam": "Exam Practice",
   "modeExamDesc": "20 questions · 20 min · negative marking",
   "modeExamDescCitizen": "20 questions · 20 min · know your rights",
   "modeFree": "Free",
@@ -234,7 +234,7 @@
     }
   },
   "docketDoneToday": "Done for today",
-  "docketNextIn": "Next docket in {time}",
+  "docketNextIn": "New questions in {time}",
   "@docketNextIn": {
     "placeholders": {
       "time": {
@@ -271,12 +271,12 @@
   },
   "energyGoUnlimited": "Get unlimited energy",
   "energyFreeOptions": "Free things you can still do",
-  "energyPlayDocket": "Play today's Daily Docket (free)",
+  "energyPlayDocket": "Play Today's Questions (free)",
   "energyAskAi": "Ask the AI a legal question",
   "energyReadUpdates": "Read legal updates",
   "energyNotEnoughCoins": "Not enough coins yet — earn them from stars and chests.",
   "energyRefilled": "+1 energy!",
-  "journeyTitle": "Case Path",
+  "journeyTitle": "Learning Path",
   "journeySubtitle": "Your journey through Indian law",
   "journeyKeepGoing": "Keep going!",
   "journeyQuote": "Small steps build a stronger understanding of the law.",
@@ -449,7 +449,7 @@
       }
     }
   },
-  "journeyEnergyInfo": "Each Case Path level costs {cost} energy. You get {free} free energy every day. It refills at midnight — in {time}.",
+  "journeyEnergyInfo": "Each Learning Path level costs {cost} energy. You get {free} free energy every day. It refills at midnight — in {time}.",
   "@journeyEnergyInfo": {
     "placeholders": {
       "cost": {
@@ -463,7 +463,7 @@
       }
     }
   },
-  "journeyCoinsInfo": "Earn coins from new stars, chapter chests, the Daily Docket, your daily goal and streak milestones. Spend them in the Store on energy refills and streak freezes.",
+  "journeyCoinsInfo": "Earn coins from new stars, chapter chests, Today's Questions, your daily goal and streak milestones. Spend them in the Store on energy refills and streak freezes.",
   "journeyOpenStore": "Open the Store",
   "journeyListView": "Show levels as a list",
   "journeyAllLevels": "All levels",
@@ -848,7 +848,7 @@
   "reminderStreak": "{count, plural, =1{Keep your 1-day streak going: one short quiz is enough.} other{Keep your {count}-day streak going: one short quiz is enough.}}",
   "@reminderStreak": {"placeholders": {"count": {"type": "int"}}},
   "reminderLearn": "One short quiz a day builds real legal know-how.",
-  "reminderJourney": "Your Case Path is waiting. Ready for the next stop?",
+  "reminderJourney": "Your Learning Path is waiting. Ready for the next stop?",
   "reminderRights": "Know your rights: a two-minute quiz is ready for you.",
   "settingsReminderTime": "Reminder time",
   "settingsRemindersBlocked": "Notifications are off for Nyaya. Turn them on in your phone's Settings to get reminders.",
@@ -883,7 +883,7 @@
   "settingsLongestStreak": "Longest streak",
   "settingsQuizzes": "Quizzes",
   "settingsAccuracy": "Accuracy",
-  "settingsDuelRecord": "Duels won",
+  "settingsDuelRecord": "Quick Quizzes won",
   "settingsAbout": "About",
   "settingsDisclaimer": "Legal disclaimer",
   "settingsDisclaimerBody": "Nyaya is an educational app. Questions, explanations, updates and AI answers are general information and are not legal advice. Laws change — always verify with the official Gazette or consult an advocate.",

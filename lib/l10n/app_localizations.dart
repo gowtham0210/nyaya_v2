@@ -415,7 +415,7 @@ abstract class AppLocalizations {
   /// No description provided for @onbSlide2Title.
   ///
   /// In en, this message translates to:
-  /// **'Play the Case Path'**
+  /// **'Follow the Learning Path'**
   String get onbSlide2Title;
 
   /// No description provided for @onbSlide2Body.
@@ -709,7 +709,7 @@ abstract class AppLocalizations {
   /// No description provided for @onbReadyBody.
   ///
   /// In en, this message translates to:
-  /// **'Your first case is waiting on the Case Path.'**
+  /// **'Your first lesson is waiting on the Learning Path.'**
   String get onbReadyBody;
 
   /// No description provided for @greetingMorning.
@@ -733,7 +733,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeContinueJourney.
   ///
   /// In en, this message translates to:
-  /// **'Continue your Case Path'**
+  /// **'Continue your Learning Path'**
   String get homeContinueJourney;
 
   /// No description provided for @homeContinueLeftOff.
@@ -919,7 +919,7 @@ abstract class AppLocalizations {
   /// No description provided for @modeCasePath.
   ///
   /// In en, this message translates to:
-  /// **'Case Path'**
+  /// **'Learning Path'**
   String get modeCasePath;
 
   /// No description provided for @modeCasePathDesc.
@@ -931,7 +931,7 @@ abstract class AppLocalizations {
   /// No description provided for @modeDailyDocket.
   ///
   /// In en, this message translates to:
-  /// **'Daily Docket'**
+  /// **'Today\'s Questions'**
   String get modeDailyDocket;
 
   /// No description provided for @modeDailyDocketDesc.
@@ -943,7 +943,7 @@ abstract class AppLocalizations {
   /// No description provided for @modeDuel.
   ///
   /// In en, this message translates to:
-  /// **'Moot Court Duel'**
+  /// **'Quick Quiz'**
   String get modeDuel;
 
   /// No description provided for @modeDuelDesc.
@@ -955,7 +955,7 @@ abstract class AppLocalizations {
   /// No description provided for @modeExam.
   ///
   /// In en, this message translates to:
-  /// **'Exam Chamber'**
+  /// **'Exam Practice'**
   String get modeExam;
 
   /// No description provided for @modeExamDesc.
@@ -991,7 +991,7 @@ abstract class AppLocalizations {
   /// No description provided for @docketNextIn.
   ///
   /// In en, this message translates to:
-  /// **'Next docket in {time}'**
+  /// **'New questions in {time}'**
   String docketNextIn(String time);
 
   /// No description provided for @energyTitle.
@@ -1045,7 +1045,7 @@ abstract class AppLocalizations {
   /// No description provided for @energyPlayDocket.
   ///
   /// In en, this message translates to:
-  /// **'Play today\'s Daily Docket (free)'**
+  /// **'Play Today\'s Questions (free)'**
   String get energyPlayDocket;
 
   /// No description provided for @energyAskAi.
@@ -1075,7 +1075,7 @@ abstract class AppLocalizations {
   /// No description provided for @journeyTitle.
   ///
   /// In en, this message translates to:
-  /// **'Case Path'**
+  /// **'Learning Path'**
   String get journeyTitle;
 
   /// No description provided for @journeySubtitle.
@@ -1345,13 +1345,13 @@ abstract class AppLocalizations {
   /// No description provided for @journeyEnergyInfo.
   ///
   /// In en, this message translates to:
-  /// **'Each Case Path level costs {cost} energy. You get {free} free energy every day. It refills at midnight — in {time}.'**
+  /// **'Each Learning Path level costs {cost} energy. You get {free} free energy every day. It refills at midnight — in {time}.'**
   String journeyEnergyInfo(int cost, int free, String time);
 
   /// No description provided for @journeyCoinsInfo.
   ///
   /// In en, this message translates to:
-  /// **'Earn coins from new stars, chapter chests, the Daily Docket, your daily goal and streak milestones. Spend them in the Store on energy refills and streak freezes.'**
+  /// **'Earn coins from new stars, chapter chests, Today\'s Questions, your daily goal and streak milestones. Spend them in the Store on energy refills and streak freezes.'**
   String get journeyCoinsInfo;
 
   /// No description provided for @journeyOpenStore.
@@ -2311,7 +2311,7 @@ abstract class AppLocalizations {
   /// No description provided for @reminderJourney.
   ///
   /// In en, this message translates to:
-  /// **'Your Case Path is waiting. Ready for the next stop?'**
+  /// **'Your Learning Path is waiting. Ready for the next stop?'**
   String get reminderJourney;
 
   /// No description provided for @reminderRights.
@@ -2419,7 +2419,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsDuelRecord.
   ///
   /// In en, this message translates to:
-  /// **'Duels won'**
+  /// **'Quick Quizzes won'**
   String get settingsDuelRecord;
 
   /// No description provided for @settingsAbout.

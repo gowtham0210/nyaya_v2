@@ -189,7 +189,7 @@ class AppLocalizationsTa extends AppLocalizations {
       'அரசியலமைப்பு, BNS, BNSS மற்றும் நீங்கள் அன்றாடம் சந்திக்கும் சட்டங்கள் குறித்த சிறு சிறு வினாடி வினாக்கள்.';
 
   @override
-  String get onbSlide2Title => 'வழக்குப் பாதையில் விளையாடுங்கள்';
+  String get onbSlide2Title => 'கற்றல் பாதையில் செல்லுங்கள்';
 
   @override
   String get onbSlide2Body =>
@@ -361,7 +361,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get onbReadyBody =>
-      'உங்கள் முதல் வழக்கு வழக்குப் பாதையில் காத்திருக்கிறது.';
+      'உங்கள் முதல் பாடம் கற்றல் பாதையில் காத்திருக்கிறது.';
 
   @override
   String get greetingMorning => 'காலை வணக்கம்';
@@ -373,7 +373,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get greetingEvening => 'மாலை வணக்கம்';
 
   @override
-  String get homeContinueJourney => 'உங்கள் வழக்குப் பாதையைத் தொடருங்கள்';
+  String get homeContinueJourney => 'உங்கள் கற்றல் பாதையைத் தொடருங்கள்';
 
   @override
   String get homeContinueLeftOff => 'விட்ட இடத்திலிருந்து தொடருங்கள்';
@@ -489,25 +489,25 @@ class AppLocalizationsTa extends AppLocalizations {
   String get homeGoPremiumSub => 'Nyaya Premium · 7 நாள் இலவசச் சோதனை';
 
   @override
-  String get modeCasePath => 'வழக்குப் பாதை';
+  String get modeCasePath => 'கற்றல் பாதை';
 
   @override
   String get modeCasePathDesc => 'நிலை வாரியான பயணம்';
 
   @override
-  String get modeDailyDocket => 'தினசரி வழக்குப் பட்டியல்';
+  String get modeDailyDocket => 'இன்றைய கேள்விகள்';
 
   @override
   String get modeDailyDocketDesc => '5 கேள்விகள் · அனைவருக்கும் ஒரே கேள்விகள்';
 
   @override
-  String get modeDuel => 'மாதிரி நீதிமன்றப் போட்டி';
+  String get modeDuel => 'விரைவு வினாடி வினா';
 
   @override
   String get modeDuelDesc => '1v1 · 7 கேள்விகள் · நேரத்தை வெல்லுங்கள்';
 
   @override
-  String get modeExam => 'தேர்வு அறை';
+  String get modeExam => 'தேர்வுப் பயிற்சி';
 
   @override
   String get modeExamDesc => '20 கேள்விகள் · 20 நிமி · எதிர்மறை மதிப்பெண்';
@@ -529,7 +529,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String docketNextIn(String time) {
-    return 'அடுத்த பட்டியல் $time-இல்';
+    return 'புதிய கேள்விகள் $time-இல்';
   }
 
   @override
@@ -570,8 +570,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get energyFreeOptions => 'இலவசமாக இன்னும் செய்யக்கூடியவை';
 
   @override
-  String get energyPlayDocket =>
-      'இன்றைய தினசரி வழக்குப் பட்டியலை விளையாடுங்கள் (இலவசம்)';
+  String get energyPlayDocket => 'இன்றைய கேள்விகளை விளையாடுங்கள் (இலவசம்)';
 
   @override
   String get energyAskAi => 'AI-இடம் ஒரு சட்டக் கேள்வி கேளுங்கள்';
@@ -587,7 +586,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get energyRefilled => '+1 ஆற்றல்!';
 
   @override
-  String get journeyTitle => 'வழக்குப் பாதை';
+  String get journeyTitle => 'கற்றல் பாதை';
 
   @override
   String get journeySubtitle => 'இந்தியச் சட்டத்தில் உங்கள் பயணம்';
@@ -762,12 +761,12 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String journeyEnergyInfo(int cost, int free, String time) {
-    return 'வழக்குப் பாதையின் ஒவ்வொரு நிலைக்கும் $cost ஆற்றல் செலவாகும். ஒவ்வொரு நாளும் $free ஆற்றல் இலவசம். நள்ளிரவில் நிரம்பும் — இன்னும் $time.';
+    return 'கற்றல் பாதையின் ஒவ்வொரு நிலைக்கும் $cost ஆற்றல் செலவாகும். ஒவ்வொரு நாளும் $free ஆற்றல் இலவசம். நள்ளிரவில் நிரம்பும் — இன்னும் $time.';
   }
 
   @override
   String get journeyCoinsInfo =>
-      'புதிய நட்சத்திரங்கள், அத்தியாயப் பெட்டிகள், டெய்லி டாக்கெட், தினசரி இலக்கு, தொடர் மைல்கற்கள் மூலம் நாணயங்கள் பெறுங்கள். அவற்றை கடையில் ஆற்றல் நிரப்பவும் தொடர் முடக்கத்துக்கும் செலவிடுங்கள்.';
+      'புதிய நட்சத்திரங்கள், அத்தியாயப் பெட்டிகள், இன்றைய கேள்விகள், தினசரி இலக்கு, தொடர் மைல்கற்கள் மூலம் நாணயங்கள் பெறுங்கள். அவற்றை கடையில் ஆற்றல் நிரப்பவும் தொடர் முடக்கத்துக்கும் செலவிடுங்கள்.';
 
   @override
   String get journeyOpenStore => 'கடையைத் திற';
@@ -1348,7 +1347,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get reminderJourney =>
-      'உங்கள் வழக்குப் பாதை காத்திருக்கிறது. அடுத்த நிறுத்தத்திற்குத் தயாரா?';
+      'உங்கள் கற்றல் பாதை காத்திருக்கிறது. அடுத்த நிறுத்தத்திற்குத் தயாரா?';
 
   @override
   String get reminderRights =>
@@ -1409,7 +1408,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get settingsAccuracy => 'துல்லியம்';
 
   @override
-  String get settingsDuelRecord => 'வென்ற போட்டிகள்';
+  String get settingsDuelRecord => 'வென்ற விரைவு வினாடி வினாக்கள்';
 
   @override
   String get settingsAbout => 'பற்றி';

@@ -186,7 +186,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'संविधान, BNS, BNSS और रोज़मर्रा के कानूनों पर छोटे-छोटे क्विज़।';
 
   @override
-  String get onbSlide2Title => 'केस पथ खेलें';
+  String get onbSlide2Title => 'सीखने के पथ पर चलें';
 
   @override
   String get onbSlide2Body =>
@@ -354,7 +354,7 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get onbReadyBody => 'आपका पहला केस केस पथ पर इंतज़ार कर रहा है।';
+  String get onbReadyBody => 'आपका पहला पाठ सीखने के पथ पर इंतज़ार कर रहा है।';
 
   @override
   String get greetingMorning => 'सुप्रभात';
@@ -366,7 +366,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get greetingEvening => 'शुभ संध्या';
 
   @override
-  String get homeContinueJourney => 'अपना केस पथ जारी रखें';
+  String get homeContinueJourney => 'अपना सीखने का पथ जारी रखें';
 
   @override
   String get homeContinueLeftOff => 'जहाँ छोड़ा था, वहीं से शुरू करें';
@@ -481,25 +481,25 @@ class AppLocalizationsHi extends AppLocalizations {
   String get homeGoPremiumSub => 'Nyaya प्रीमियम · 7 दिन का मुफ़्त ट्रायल';
 
   @override
-  String get modeCasePath => 'केस पथ';
+  String get modeCasePath => 'सीखने का पथ';
 
   @override
   String get modeCasePathDesc => 'लेवल-दर-लेवल सफ़र';
 
   @override
-  String get modeDailyDocket => 'दैनिक डॉकेट';
+  String get modeDailyDocket => 'आज के सवाल';
 
   @override
   String get modeDailyDocketDesc => '5 सवाल · सबके लिए एक जैसे';
 
   @override
-  String get modeDuel => 'मूट कोर्ट मुक़ाबला';
+  String get modeDuel => 'क्विक क्विज़';
 
   @override
   String get modeDuelDesc => '1v1 · 7 सवाल · घड़ी को हराएँ';
 
   @override
-  String get modeExam => 'परीक्षा कक्ष';
+  String get modeExam => 'परीक्षा अभ्यास';
 
   @override
   String get modeExamDesc => '20 सवाल · 20 मिनट · नेगेटिव मार्किंग';
@@ -520,7 +520,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String docketNextIn(String time) {
-    return 'अगला डॉकेट $time में';
+    return 'नए सवाल $time में';
   }
 
   @override
@@ -561,7 +561,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get energyFreeOptions => 'मुफ़्त में आप ये कर सकते हैं';
 
   @override
-  String get energyPlayDocket => 'आज का दैनिक डॉकेट खेलें (मुफ़्त)';
+  String get energyPlayDocket => 'आज के सवाल खेलें (मुफ़्त)';
 
   @override
   String get energyAskAi => 'AI से कानूनी सवाल पूछें';
@@ -577,7 +577,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get energyRefilled => '+1 ऊर्जा!';
 
   @override
-  String get journeyTitle => 'केस पथ';
+  String get journeyTitle => 'सीखने का पथ';
 
   @override
   String get journeySubtitle => 'भारतीय कानून के साथ आपका सफ़र';
@@ -751,12 +751,12 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String journeyEnergyInfo(int cost, int free, String time) {
-    return 'केस पथ के हर लेवल में $cost ऊर्जा लगती है। हर दिन आपको $free ऊर्जा मुफ़्त मिलती है। यह आधी रात को भरती है — $time में।';
+    return 'सीखने के पथ के हर लेवल में $cost ऊर्जा लगती है। हर दिन आपको $free ऊर्जा मुफ़्त मिलती है। यह आधी रात को भरती है — $time में।';
   }
 
   @override
   String get journeyCoinsInfo =>
-      'नए स्टार, अध्याय संदूक, डेली डॉकेट, रोज़ का लक्ष्य और स्ट्रीक पड़ावों से सिक्के कमाएँ। इन्हें स्टोर में ऊर्जा भरने और स्ट्रीक फ़्रीज़ पर खर्च करें।';
+      'नए स्टार, अध्याय संदूक, आज के सवाल, रोज़ का लक्ष्य और स्ट्रीक पड़ावों से सिक्के कमाएँ। इन्हें स्टोर में ऊर्जा भरने और स्ट्रीक फ़्रीज़ पर खर्च करें।';
 
   @override
   String get journeyOpenStore => 'स्टोर खोलें';
@@ -1336,7 +1336,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get reminderJourney =>
-      'आपका केस पाथ इंतज़ार कर रहा है। अगले पड़ाव के लिए तैयार?';
+      'आपका सीखने का पथ इंतज़ार कर रहा है। अगले पड़ाव के लिए तैयार?';
 
   @override
   String get reminderRights =>
@@ -1396,7 +1396,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get settingsAccuracy => 'सटीकता';
 
   @override
-  String get settingsDuelRecord => 'जीते मुक़ाबले';
+  String get settingsDuelRecord => 'जीते क्विक क्विज़';
 
   @override
   String get settingsAbout => 'जानकारी';

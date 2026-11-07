@@ -378,7 +378,7 @@ void main() {
 
     await tester.tap(find.text('Journey'));
     await settle(tester);
-    expect(find.text('Case Path'), findsOneWidget);
+    expect(find.text('Learning Path'), findsOneWidget);
     expect(find.text('Your journey through Indian law'), findsOneWidget);
     expect(find.text('CHAPTER 1 · 0/3 COMPLETED'), findsOneWidget);
     expect(find.text('You'), findsOneWidget);
@@ -494,7 +494,7 @@ void main() {
 
     for (final (label, text) in [
       ('0 Stars', 'Earn up to 3 stars on each level'),
-      ('5 energy left', 'Each Case Path level costs 1 energy. You get 5 free energy every day.'),
+      ('5 energy left', 'Each Learning Path level costs 1 energy. You get 5 free energy every day.'),
       ('60 Coins', 'Spend them in the Store on energy refills and streak freezes.'),
     ]) {
       await tester.tap(find.bySemanticsLabel(label));
@@ -663,7 +663,7 @@ void main() {
     await tester.tap(find.text('Start learning').first); // "Start your learning journey" card
     await settle(tester);
     expect(find.text("You're out of energy"), findsOneWidget);
-    expect(find.text("Play today's Daily Docket (free)"), findsOneWidget);
+    expect(find.text("Play Today's Questions (free)"), findsOneWidget);
     expect(find.text('Ask the AI a legal question'), findsOneWidget);
     expect(find.text('Get unlimited energy'), findsNothing, reason: 'premium is hidden in the beta');
   });
@@ -797,7 +797,7 @@ void main() {
     await settle(tester);
     const duel = QuizRequest(QuizMode.duel);
     // Home's quiz modes section opens it.
-    final tile = find.text('Moot Court Duel');
+    final tile = find.text('Quick Quiz');
     await tester.scrollUntilVisible(tile, 200, scrollable: find.byType(Scrollable).first);
     await tester.ensureVisible(tile);
     await settle(tester);

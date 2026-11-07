@@ -186,7 +186,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Bite-sized quizzes on the Constitution, BNS, BNSS and the laws you meet every day.';
 
   @override
-  String get onbSlide2Title => 'Play the Case Path';
+  String get onbSlide2Title => 'Follow the Learning Path';
 
   @override
   String get onbSlide2Body =>
@@ -354,7 +354,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get onbReadyBody => 'Your first case is waiting on the Case Path.';
+  String get onbReadyBody =>
+      'Your first lesson is waiting on the Learning Path.';
 
   @override
   String get greetingMorning => 'Good morning';
@@ -366,7 +367,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get greetingEvening => 'Good evening';
 
   @override
-  String get homeContinueJourney => 'Continue your Case Path';
+  String get homeContinueJourney => 'Continue your Learning Path';
 
   @override
   String get homeContinueLeftOff => 'Continue where you left off';
@@ -481,25 +482,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeGoPremiumSub => 'Nyaya Premium · 7-day free trial';
 
   @override
-  String get modeCasePath => 'Case Path';
+  String get modeCasePath => 'Learning Path';
 
   @override
   String get modeCasePathDesc => 'Level-by-level journey';
 
   @override
-  String get modeDailyDocket => 'Daily Docket';
+  String get modeDailyDocket => 'Today\'s Questions';
 
   @override
   String get modeDailyDocketDesc => '5 questions · same for everyone';
 
   @override
-  String get modeDuel => 'Moot Court Duel';
+  String get modeDuel => 'Quick Quiz';
 
   @override
   String get modeDuelDesc => '1v1 · 7 questions · beat the clock';
 
   @override
-  String get modeExam => 'Exam Chamber';
+  String get modeExam => 'Exam Practice';
 
   @override
   String get modeExamDesc => '20 questions · 20 min · negative marking';
@@ -520,7 +521,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String docketNextIn(String time) {
-    return 'Next docket in $time';
+    return 'New questions in $time';
   }
 
   @override
@@ -561,7 +562,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get energyFreeOptions => 'Free things you can still do';
 
   @override
-  String get energyPlayDocket => 'Play today\'s Daily Docket (free)';
+  String get energyPlayDocket => 'Play Today\'s Questions (free)';
 
   @override
   String get energyAskAi => 'Ask the AI a legal question';
@@ -577,7 +578,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get energyRefilled => '+1 energy!';
 
   @override
-  String get journeyTitle => 'Case Path';
+  String get journeyTitle => 'Learning Path';
 
   @override
   String get journeySubtitle => 'Your journey through Indian law';
@@ -751,12 +752,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String journeyEnergyInfo(int cost, int free, String time) {
-    return 'Each Case Path level costs $cost energy. You get $free free energy every day. It refills at midnight — in $time.';
+    return 'Each Learning Path level costs $cost energy. You get $free free energy every day. It refills at midnight — in $time.';
   }
 
   @override
   String get journeyCoinsInfo =>
-      'Earn coins from new stars, chapter chests, the Daily Docket, your daily goal and streak milestones. Spend them in the Store on energy refills and streak freezes.';
+      'Earn coins from new stars, chapter chests, Today\'s Questions, your daily goal and streak milestones. Spend them in the Store on energy refills and streak freezes.';
 
   @override
   String get journeyOpenStore => 'Open the Store';
@@ -1338,7 +1339,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reminderJourney =>
-      'Your Case Path is waiting. Ready for the next stop?';
+      'Your Learning Path is waiting. Ready for the next stop?';
 
   @override
   String get reminderRights =>
@@ -1399,7 +1400,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsAccuracy => 'Accuracy';
 
   @override
-  String get settingsDuelRecord => 'Duels won';
+  String get settingsDuelRecord => 'Quick Quizzes won';
 
   @override
   String get settingsAbout => 'About';

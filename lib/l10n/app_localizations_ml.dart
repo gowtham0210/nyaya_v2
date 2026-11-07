@@ -189,7 +189,7 @@ class AppLocalizationsMl extends AppLocalizations {
       'ഭരണഘടന, BNS, BNSS എന്നിവയെക്കുറിച്ചും ദിവസവും കാണുന്ന നിയമങ്ങളെക്കുറിച്ചും ചെറിയ ക്വിസുകൾ.';
 
   @override
-  String get onbSlide2Title => 'കേസ് പാത കളിക്കൂ';
+  String get onbSlide2Title => 'പഠന പാതയിലൂടെ മുന്നേറൂ';
 
   @override
   String get onbSlide2Body =>
@@ -360,8 +360,7 @@ class AppLocalizationsMl extends AppLocalizations {
   }
 
   @override
-  String get onbReadyBody =>
-      'നിങ്ങളുടെ ആദ്യ കേസ് കേസ് പാതയിൽ കാത്തിരിക്കുന്നു.';
+  String get onbReadyBody => 'നിങ്ങളുടെ ആദ്യ പാഠം പഠന പാതയിൽ കാത്തിരിക്കുന്നു.';
 
   @override
   String get greetingMorning => 'സുപ്രഭാതം';
@@ -373,7 +372,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get greetingEvening => 'ശുഭ സന്ധ്യ';
 
   @override
-  String get homeContinueJourney => 'കേസ് പാത തുടരുക';
+  String get homeContinueJourney => 'നിങ്ങളുടെ പഠന പാത തുടരൂ';
 
   @override
   String get homeContinueLeftOff => 'നിർത്തിയിടത്തു നിന്ന് തുടരുക';
@@ -488,25 +487,25 @@ class AppLocalizationsMl extends AppLocalizations {
   String get homeGoPremiumSub => 'Nyaya Premium · 7 ദിവസം സൗജന്യ ട്രയൽ';
 
   @override
-  String get modeCasePath => 'കേസ് പാത';
+  String get modeCasePath => 'പഠന പാത';
 
   @override
   String get modeCasePathDesc => 'ലെവൽ തോറുമുള്ള യാത്ര';
 
   @override
-  String get modeDailyDocket => 'ഡെയ്‌ലി ഡോക്കറ്റ്';
+  String get modeDailyDocket => 'ഇന്നത്തെ ചോദ്യങ്ങൾ';
 
   @override
   String get modeDailyDocketDesc => '5 ചോദ്യങ്ങൾ · എല്ലാവർക്കും ഒരേത്';
 
   @override
-  String get modeDuel => 'മൂട്ട് കോർട്ട് ഡ്യുവൽ';
+  String get modeDuel => 'ക്വിക്ക് ക്വിസ്';
 
   @override
   String get modeDuelDesc => '1v1 · 7 ചോദ്യങ്ങൾ · സമയത്തെ തോൽപ്പിക്കൂ';
 
   @override
-  String get modeExam => 'പരീക്ഷാ ചേംബർ';
+  String get modeExam => 'പരീക്ഷാ പരിശീലനം';
 
   @override
   String get modeExamDesc => '20 ചോദ്യങ്ങൾ · 20 മിനിറ്റ് · നെഗറ്റീവ് മാർക്ക്';
@@ -528,7 +527,7 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String docketNextIn(String time) {
-    return 'അടുത്ത ഡോക്കറ്റ് $time-ൽ';
+    return 'പുതിയ ചോദ്യങ്ങൾ $timeൽ';
   }
 
   @override
@@ -569,7 +568,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get energyFreeOptions => 'ഇപ്പോഴും സൗജന്യമായി ചെയ്യാവുന്നവ';
 
   @override
-  String get energyPlayDocket => 'ഇന്നത്തെ ഡെയ്‌ലി ഡോക്കറ്റ് കളിക്കൂ (സൗജന്യം)';
+  String get energyPlayDocket => 'ഇന്നത്തെ ചോദ്യങ്ങൾ കളിക്കൂ (സൗജന്യം)';
 
   @override
   String get energyAskAi => 'AI-യോട് ഒരു നിയമ ചോദ്യം ചോദിക്കൂ';
@@ -585,7 +584,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get energyRefilled => '+1 എനർജി!';
 
   @override
-  String get journeyTitle => 'കേസ് പാത';
+  String get journeyTitle => 'പഠന പാത';
 
   @override
   String get journeySubtitle => 'ഇന്ത്യൻ നിയമത്തിലൂടെയുള്ള നിങ്ങളുടെ യാത്ര';
@@ -759,12 +758,12 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String journeyEnergyInfo(int cost, int free, String time) {
-    return 'കേസ് പാത്തിലെ ഓരോ ലെവലിനും $cost എനർജി ചെലവാകും. ദിവസവും $free എനർജി സൗജന്യം. അർധരാത്രി വീണ്ടും നിറയും — $timeൽ.';
+    return 'പഠന പാതയിലെ ഓരോ ലെവലിനും $cost എനർജി ചെലവാകും. ദിവസവും $free എനർജി സൗജന്യം. അർധരാത്രി വീണ്ടും നിറയും — $timeൽ.';
   }
 
   @override
   String get journeyCoinsInfo =>
-      'പുതിയ നക്ഷത്രങ്ങൾ, അധ്യായ പെട്ടികൾ, ഡെയ്‌ലി ഡോക്കറ്റ്, ദിവസ ലക്ഷ്യം, സ്ട്രീക്ക് നാഴികക്കല്ലുകൾ എന്നിവയിൽ നിന്ന് നാണയങ്ങൾ നേടുക. സ്റ്റോറിൽ എനർജി നിറയ്ക്കാനും സ്ട്രീക്ക് ഫ്രീസിനും ചെലവാക്കുക.';
+      'പുതിയ നക്ഷത്രങ്ങൾ, അധ്യായ പെട്ടികൾ, ഇന്നത്തെ ചോദ്യങ്ങൾ, ദിവസ ലക്ഷ്യം, സ്ട്രീക്ക് നാഴികക്കല്ലുകൾ എന്നിവയിൽ നിന്ന് നാണയങ്ങൾ നേടുക. സ്റ്റോറിൽ എനർജി നിറയ്ക്കാനും സ്ട്രീക്ക് ഫ്രീസിനും ചെലവാക്കുക.';
 
   @override
   String get journeyOpenStore => 'സ്റ്റോർ തുറക്കുക';
@@ -1345,7 +1344,7 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get reminderJourney =>
-      'നിങ്ങളുടെ കേസ് പാത്ത് കാത്തിരിക്കുന്നു. അടുത്ത സ്റ്റോപ്പിന് തയ്യാറാണോ?';
+      'നിങ്ങളുടെ പഠന പാത കാത്തിരിക്കുന്നു. അടുത്ത സ്റ്റോപ്പിന് തയ്യാറാണോ?';
 
   @override
   String get reminderRights =>
@@ -1405,7 +1404,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get settingsAccuracy => 'കൃത്യത';
 
   @override
-  String get settingsDuelRecord => 'ജയിച്ച ഡ്യുവലുകൾ';
+  String get settingsDuelRecord => 'ജയിച്ച ക്വിക്ക് ക്വിസുകൾ';
 
   @override
   String get settingsAbout => 'കുറിച്ച്';

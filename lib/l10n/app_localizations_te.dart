@@ -189,7 +189,7 @@ class AppLocalizationsTe extends AppLocalizations {
       'రాజ్యాంగం, BNS, BNSS, మీకు రోజూ ఎదురయ్యే చట్టాలపై చిన్న చిన్న క్విజ్‌లు.';
 
   @override
-  String get onbSlide2Title => 'కేస్ పాత్ ఆడండి';
+  String get onbSlide2Title => 'అభ్యాస మార్గంలో నడవండి';
 
   @override
   String get onbSlide2Body =>
@@ -358,7 +358,7 @@ class AppLocalizationsTe extends AppLocalizations {
   }
 
   @override
-  String get onbReadyBody => 'కేస్ పాత్‌లో మీ మొదటి కేసు ఎదురుచూస్తోంది.';
+  String get onbReadyBody => 'మీ మొదటి పాఠం అభ్యాస మార్గంలో ఎదురుచూస్తోంది.';
 
   @override
   String get greetingMorning => 'శుభోదయం';
@@ -370,7 +370,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get greetingEvening => 'శుభ సాయంత్రం';
 
   @override
-  String get homeContinueJourney => 'మీ కేస్ పాత్ కొనసాగించండి';
+  String get homeContinueJourney => 'మీ అభ్యాస మార్గాన్ని కొనసాగించండి';
 
   @override
   String get homeContinueLeftOff => 'ఆపిన చోటు నుండి కొనసాగించండి';
@@ -485,25 +485,25 @@ class AppLocalizationsTe extends AppLocalizations {
   String get homeGoPremiumSub => 'Nyaya Premium · 7 రోజుల ఉచిత ట్రయల్';
 
   @override
-  String get modeCasePath => 'కేస్ పాత్';
+  String get modeCasePath => 'అభ్యాస మార్గం';
 
   @override
   String get modeCasePathDesc => 'లెవెల్ వారీ ప్రయాణం';
 
   @override
-  String get modeDailyDocket => 'డైలీ డాకెట్';
+  String get modeDailyDocket => 'నేటి ప్రశ్నలు';
 
   @override
   String get modeDailyDocketDesc => '5 ప్రశ్నలు · అందరికీ ఒకటే';
 
   @override
-  String get modeDuel => 'మూట్ కోర్ట్ డ్యుయెల్';
+  String get modeDuel => 'క్విక్ క్విజ్';
 
   @override
   String get modeDuelDesc => '1v1 · 7 ప్రశ్నలు · సమయాన్ని ఓడించండి';
 
   @override
-  String get modeExam => 'ఎగ్జామ్ ఛాంబర్';
+  String get modeExam => 'పరీక్ష సాధన';
 
   @override
   String get modeExamDesc => '20 ప్రశ్నలు · 20 నిమి · నెగటివ్ మార్కింగ్';
@@ -525,7 +525,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String docketNextIn(String time) {
-    return 'తదుపరి డాకెట్ $timeలో';
+    return 'కొత్త ప్రశ్నలు $timeలో';
   }
 
   @override
@@ -566,7 +566,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get energyFreeOptions => 'మీరు ఇప్పటికీ ఉచితంగా చేయగలిగేవి';
 
   @override
-  String get energyPlayDocket => 'నేటి డైలీ డాకెట్ ఆడండి (ఉచితం)';
+  String get energyPlayDocket => 'నేటి ప్రశ్నలు ఆడండి (ఉచితం)';
 
   @override
   String get energyAskAi => 'AIని చట్టపరమైన ప్రశ్న అడగండి';
@@ -582,7 +582,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get energyRefilled => '+1 ఎనర్జీ!';
 
   @override
-  String get journeyTitle => 'కేస్ పాత్';
+  String get journeyTitle => 'అభ్యాస మార్గం';
 
   @override
   String get journeySubtitle => 'భారతీయ చట్టంలో మీ ప్రయాణం';
@@ -756,12 +756,12 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String journeyEnergyInfo(int cost, int free, String time) {
-    return 'కేస్ పాత్‌లో ప్రతి లెవెల్‌కు $cost ఎనర్జీ ఖర్చవుతుంది. ప్రతిరోజూ $free ఎనర్జీ ఉచితం. అర్ధరాత్రి తిరిగి నిండుతుంది — $timeలో.';
+    return 'అభ్యాస మార్గంలో ప్రతి లెవెల్‌కు $cost ఎనర్జీ ఖర్చవుతుంది. ప్రతిరోజూ $free ఎనర్జీ ఉచితం. అర్ధరాత్రి తిరిగి నిండుతుంది — $timeలో.';
   }
 
   @override
   String get journeyCoinsInfo =>
-      'కొత్త స్టార్లు, అధ్యాయ చెస్ట్‌లు, డైలీ డాకెట్, రోజువారీ లక్ష్యం, స్ట్రీక్ మైలురాళ్ల నుంచి కాయిన్‌లు సంపాదించండి. వాటిని స్టోర్‌లో ఎనర్జీ నింపడానికి, స్ట్రీక్ ఫ్రీజ్‌లకు ఖర్చు చేయండి.';
+      'కొత్త స్టార్లు, అధ్యాయ చెస్ట్‌లు, నేటి ప్రశ్నలు, రోజువారీ లక్ష్యం, స్ట్రీక్ మైలురాళ్ల నుంచి కాయిన్‌లు సంపాదించండి. వాటిని స్టోర్‌లో ఎనర్జీ నింపడానికి, స్ట్రీక్ ఫ్రీజ్‌లకు ఖర్చు చేయండి.';
 
   @override
   String get journeyOpenStore => 'స్టోర్ తెరవండి';
@@ -1341,7 +1341,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get reminderJourney =>
-      'మీ కేస్ పాత్ ఎదురుచూస్తోంది. తదుపరి మజిలీకి సిద్ధమా?';
+      'మీ అభ్యాస మార్గం ఎదురుచూస్తోంది. తదుపరి మజిలీకి సిద్ధమా?';
 
   @override
   String get reminderRights =>
@@ -1402,7 +1402,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get settingsAccuracy => 'ఖచ్చితత్వం';
 
   @override
-  String get settingsDuelRecord => 'గెలిచిన డ్యుయెల్స్';
+  String get settingsDuelRecord => 'గెలిచిన క్విక్ క్విజ్‌లు';
 
   @override
   String get settingsAbout => 'గురించి';
