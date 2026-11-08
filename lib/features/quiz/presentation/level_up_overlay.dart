@@ -7,9 +7,11 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/chunky_button.dart';
 import '../../../core/widgets/common.dart';
 import '../../journey/domain/journey.dart';
+import 'league_climb.dart';
 
 /// The moment a Learning Path level opens the next step: a big "Level up!"
-/// badge, the stars won, the XP earned, a league climb when there was one,
+/// badge, the stars won, the XP earned, the league climb played on a small
+/// slice of the league when there was one,
 /// and what is now open. Continue shows the usual result underneath.
 class LevelUpOverlay extends StatelessWidget {
   const LevelUpOverlay({
@@ -50,7 +52,8 @@ class LevelUpOverlay extends StatelessWidget {
     final climbed = rankAfter < rankBefore;
 
     return Material(
-      color: context.colors.surface.withValues(alpha: 0.97),
+      // Solid, so the result screen underneath doesn't show through.
+      color: context.colors.surface,
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.page, vertical: AppSpacing.lg),
@@ -105,12 +108,6 @@ class LevelUpOverlay extends StatelessWidget {
                 runSpacing: 10,
                 children: [
                   _Pill(icon: Icons.diamond_rounded, text: '+$xp XP', color: context.colors.primary),
-                  if (climbed)
-                    _Pill(
-                      icon: Icons.trending_up_rounded,
-                      text: l.levelUpRank(rankBefore, rankAfter),
-                      color: context.nyaya.success,
-                    ),
                 ],
               ).animate().fadeIn(delay: 600.ms).slideY(begin: 0.2),
               if (unlocked != null) ...[
@@ -129,6 +126,13 @@ class LevelUpOverlay extends StatelessWidget {
                     ),
                   ],
                 ).animate().fadeIn(delay: 750.ms),
+              ],
+              if (climbed) ...[
+                const SizedBox(height: AppSpacing.md),
+                LeagueClimb(rankBefore: rankBefore, rankAfter: rankAfter, xpEarned: xp)
+                    .animate()
+                    .fadeIn(delay: 850.ms)
+                    .slideY(begin: 0.15),
               ],
                       ],
                     ),

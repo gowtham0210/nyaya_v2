@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-11-07 (tester review fixes, Claude Opus 5.5)
+> Last updated: 2026-11-08 (tester review fixes on staging and the iPhone, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -936,6 +936,15 @@ news (content, not code).
   energy, earns half XP (server `isReplay`, was only for 3-star levels) and counts toward the daily goal, so a goal of
   5 is always reachable. Server `start` checks `clearedLevel`; app uses `energyCostOf(request, stars)` everywhere and
   the level sheet says "Replay · free". Free quizzes (Today's Questions, mistake practice) already counted.
+- 2026-11-08: release build (up to `edfef9d`, against staging) installed on the user's iPhone. Server and portal
+  deployed to staging from `edfef9d` (no migration, so no backup; without `--seed`; branch not pushed yet). Checked:
+  API and portal answer 200, the API runs the new code (time-out answers, free replays). Not yet tried on the phone.
+- 2026-11-08: Level up screen now plays the league climb (user asked for a mini leaderboard, not a badge):
+  `league_climb.dart` loads `leagueProvider` and shows the learner's row sliding from the old rank to the new one
+  past up to 4 learners they overtook (each drops one place), with one learner above; rank and XP count up
+  (1.4 s, after the badge; instant with reduce motion). Falls back to the old badge when the league can't load.
+  Level up background is now solid. Tests: 222 app tests (new `league_climb_test.dart`). Checked on the simulator
+  against the local API (#28 → #20, #20 → #4). Not committed.
 
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
