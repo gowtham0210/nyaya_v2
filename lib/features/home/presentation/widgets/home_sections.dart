@@ -506,8 +506,8 @@ class QuizModesGrid extends ConsumerWidget {
                   desc: desc,
                   icon: icon,
                   color: color,
-                  // Tile padding (14 + 14) and the arrow (8 + 34) take the rest.
-                  nameWidth: tileWidth - 70,
+                  // Tile padding (14 + 14), the arrow (8 + 34) and the border (up to 3 + 3) take the rest.
+                  nameWidth: tileWidth - 76,
                   onTap: () => mode == QuizMode.casePath
                       ? context.go(Routes.journey)
                       : QuizLauncher.start(context, ref, QuizRequest(mode)),
@@ -589,7 +589,8 @@ class _ModeTile extends StatelessWidget {
         ? AppPalette.creamLight.withValues(alpha: 0.85)
         : context.nyaya.textSecondary;
     final badge = cost == 0
-        ? _Badge(text: l.modeFree, color: context.nyaya.success)
+        // Always on a light pill, so a dark green that reads in both themes.
+        ? _Badge(text: l.modeFree, color: AppPalette.moss)
         : _Badge(
             text: l.modeEnergyCost(cost),
             icon: Icons.bolt_rounded,

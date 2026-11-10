@@ -60,8 +60,10 @@ export function looksLikeCode(text: string): boolean {
   return codeLines.length >= 2;
 }
 
+// Only names that are not also everyday English words: "show me how to react
+// if police stop me" is a legal question, not a request for React code.
 const CODE_LANGUAGES =
-  'python|javascript|typescript|java|c\\+\\+|c#|html|css|sql|bash|php|ruby|golang|kotlin|swift|dart|flutter|react|node\\.?js|powershell';
+  'python|javascript|typescript|java|c\\+\\+|c#|html|css|sql|bash|php|golang|kotlin|flutter|node\\.?js|powershell';
 
 /**
  * A request to write or fix software. Caught before the model is called, so it

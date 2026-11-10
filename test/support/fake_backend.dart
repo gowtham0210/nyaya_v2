@@ -151,7 +151,8 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
       }
     }
     final correct = verdicts.where((v) => v.correct).length;
-    final wrong = s.selected.length - correct;
+    // A time-out (null) is unanswered, not wrong, as on the real server.
+    final wrong = s.selected.values.where((o) => o != null).length - correct;
     final total = verdicts.length;
     final level = s.levelId;
     final before = level == null ? 0 : (stars[level] ?? 0);

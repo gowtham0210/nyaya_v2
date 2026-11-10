@@ -138,7 +138,7 @@ describe('chat', () => {
     expect(rows).toEqual([{ answers: 0 }]);
   });
 
-  it('never returns code, and does not count that answer', async () => {
+  it('never returns code, but still counts that paid answer', async () => {
     const s = await t.signInAs('learner');
     const fetchMock = azureReplies(
       answer('Sure:\n```python\nprint("hello")\n```'),
@@ -150,7 +150,7 @@ describe('chat', () => {
       .send(question('Tell me about hello'))
       .expect(200);
     expect(res.body.reply).toBe(OFF_TOPIC_REPLY);
-    expect(res.body.remaining_today).toBe(2);
+    expect(res.body.remaining_today).toBe(1);
     // The model is also told to stay in scope.
     const sent = JSON.parse(
       (fetchMock.mock.calls[0] as [string, RequestInit])[1].body as string,
@@ -160,7 +160,7 @@ describe('chat', () => {
       .select({ answers: chatUsage.answers })
       .from(chatUsage)
       .where(eq(chatUsage.userId, s.id));
-    expect(rows).toEqual([{ answers: 0 }]);
+    expect(rows).toEqual([{ answers: 1 }]);
   });
 
   it('refuses requests to write code without calling the model', async () => {
@@ -180,6 +180,25 @@ describe('chat', () => {
     ])
       expect((await ask(q)).body.reply).toBe(OFF_TOPIC_REPLY);
     expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('answers legal questions that use words that are also code names', async () => {
+    const s = await t.signInAs('learner');
+    const fetchMock = azureReplies(answer('Stay calm.'), answer('Stay calm.'));
+    // Two questions: the test limit is 2 answers a day.
+    for (const q of [
+      'Show me how to react if police stop me',
+      'Give me the rules for a swift trial in Dart district',
+    ]) {
+      const res = await t
+        .http()
+        .post('/v1/chat')
+        .set('Authorization', `Bearer ${s.token}`)
+        .send(question(q))
+        .expect(200);
+      expect(res.body.reply).toBe('Stay calm.');
+    }
+    expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 
   it('still answers legal questions that mention a code', async () => {

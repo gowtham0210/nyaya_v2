@@ -70,8 +70,9 @@ export class ChatService {
     );
     // A code block is never a legal answer, whatever the question was.
     const offTopic = result.kind === 'answer' && looksLikeCode(result.text);
-    // Only answers count against the limit; failed and declined questions are free.
-    if (result.kind !== 'answer' || offTopic) await this.release(userId, day);
+    // Failed and declined questions are free. An answer counts even when it is
+    // code we refuse to show: the model call was paid for, so it stays capped.
+    if (result.kind !== 'answer') await this.release(userId, day);
     if (result.kind === 'failed') {
       this.logger.warn(`Azure chat failed: ${result.reason}`);
       throw new ApiError(
@@ -83,7 +84,7 @@ export class ChatService {
     if (result.kind === 'filtered')
       return { reply: DECLINED_REPLY, remaining_today: limit - used + 1 };
     if (offTopic)
-      return { reply: OFF_TOPIC_REPLY, remaining_today: limit - used + 1 };
+      return { reply: OFF_TOPIC_REPLY, remaining_today: limit - used };
     return { reply: result.text, remaining_today: limit - used };
   }
 

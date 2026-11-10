@@ -944,7 +944,11 @@ news (content, not code).
   past up to 4 learners they overtook (each drops one place), with one learner above; rank and XP count up
   (1.4 s, after the badge; instant with reduce motion). Falls back to the old badge when the league can't load.
   Level up background is now solid. Tests: 222 app tests (new `league_climb_test.dart`). Checked on the simulator
-  against the local API (#28 → #20, #20 → #4). Not committed.
+  against the local API (#28 → #20, #20 → #4).
+- 2026-11-10: OpenQodex review before push (5 findings, all fixed): Ask AI code filter no longer refuses legal
+  questions with words like react/swift/dart/ruby; a model answer that was code still counts toward the daily
+  limit (it was paid for); Home mode names leave room for the tile border; the Free badge is dark green on its
+  light pill in dark mode; the test server treats a time-out as unanswered. **Server change: redeploy staging.**
 
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
