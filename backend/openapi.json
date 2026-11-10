@@ -5355,6 +5355,7 @@
             "example": [
               "a"
             ],
+            "description": "Empty means time ran out. Allowed only where each answer is explained at once (not exams); it scores as unanswered and still returns the feedback.",
             "type": "array",
             "items": {
               "type": "string"
