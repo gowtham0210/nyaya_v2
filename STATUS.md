@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-11-02 (review fixes, Claude Opus 5.5)
+> Last updated: 2026-11-08 (tester review fixes on staging and the iPhone, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -894,9 +894,62 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       20 wrong guesses sent together still end the code. The review itself never completes on this branch (187
       files, ~15,800 added lines; it leaves ~405 changed ranges unread, mostly Flutter screens): split future work
       into smaller pushes. Server e2e tests time out while starting when the Mac is under load: run
-      `npx vitest run --config ./vitest.config.e2e.ts --maxWorkers=3`. **These two fixes are not on staging yet.**
+      `npx vitest run --config ./vitest.config.e2e.ts --maxWorkers=3`. Deployed to staging on 2026-11-03 (backup
+      `nyaya-2026-11-03-0414.sql.gz` first, no migration); both fixes checked in the running API. Pushed as PR
+      gowtham0210/nyaya_v2#1 (CI watched by Auto-fix).
+- [x] 2026-11-07: **Opening video on app start** (user's `Nyaya_Kural_app_splash_screen…1080p.mp4`, 5 s).
+      Re-encoded to `assets/video/splash.mp4` (720×1280, no audio, 380 KB). `features/splash/presentation/
+      splash_video.dart` plays it once per cold start over the first screen (Stack in `NyayaApp.builder`), cover-fit,
+      then fades out. Tap skips; skipped if it fails, is not loaded in 4 s (simulator debug takes ~2.6 s), or the
+      phone asks for reduced motion; hard stop at 8 s. Off by default via `splashEnabledProvider` (tests never touch
+      the plugin); `main.dart` turns it on. Native launch backgrounds (Android `nyaya_cream`, iOS LaunchScreen) now
+      #F9F0E2, the video's cream. New package `video_player`. Checked on iPhone 17 Pro Max simulator (debug);
+      not yet checked on Android or a real phone. Committed 1038fbf.
 
 ## 3. IN PROGRESS / NEXT STEPS
+**Tester review 2026-11-07** (`~/Downloads/nyaya_review.docx`, 22 points, Android phone). User decisions: keep
+language first; **sign-in required right after the language choice**; Docket once a day stays; add a top bar; plain
+mode names; level-up moment wanted; **the new Home design (Home·Saved·Progress·Profile tabs, tips, categories) is
+postponed** — fix bugs first, then scale up. Done on branch `screenshots-and-emoji-fixes` (10 commits 17a10ac..63227e2,
+not pushed, staging not deployed):
+- Sign-up name used (was "Learner"; old accounts repaired on next sync); sign-out clears the name.
+- Result: very low score says "Keep practising"; Exam result offers New exam + Back home; Share opens the share sheet
+  (`share_plus`).
+- Time's up shows the right answer: app sends `selected_option_ids: []`; server takes it only in immediate-feedback
+  modes, scores it as unanswered (**server change — deploy the API before the app**).
+- Updates has a Saved filter; "Open the Store" scrolls Settings to the store (`/settings?section=store`).
+- Mode names shrink instead of splitting words; Journey "You" marker sits beside the current stop.
+- Home: pinned top bar (logo, "Nyaya Kural", tagline, search, league, settings); real search screen (topics, laws,
+  updates, Ask AI last); Core Laws rows open their Journey chapter (`journeyFocusProvider`). App text says
+  "Nyaya Kural" in all 6 languages.
+- Modes renamed: Learning Path, Today's Questions (plural, as it has 5), Quick Quiz, Exam Practice.
+- "Level up!" overlay after a Learning Path level that opens the next step (stars, XP, league climb, what opened).
+- Onboarding: language → sign-in (no close) → intro → persona; signed-out learners are sent to sign-in; a returning
+  account already set up goes straight Home. Router refreshes only on sign-out (a refresh on sign-in rebuilt the
+  sign-in screen mid-way).
+- Updates category paintings: prompts added to `docs/UPDATES_ART.md` (`updates_<category>.webp`); Journey ones
+  show until they exist. Editors can also upload per-article pictures in the portal.
+Checked: 220 app tests, 152 server e2e + 75 unit tests, simulator walk-through against a local API (top bar, search →
+chapter, You marker, Saved, sign-out → sign-in). Not checked on Android or a narrow phone. Staging has no High Courts
+news (content, not code).
+- Energy vs daily goal (user chose free replays): replaying a Learning Path level already cleared (1+ stars) costs no
+  energy, earns half XP (server `isReplay`, was only for 3-star levels) and counts toward the daily goal, so a goal of
+  5 is always reachable. Server `start` checks `clearedLevel`; app uses `energyCostOf(request, stars)` everywhere and
+  the level sheet says "Replay · free". Free quizzes (Today's Questions, mistake practice) already counted.
+- 2026-11-08: release build (up to `edfef9d`, against staging) installed on the user's iPhone. Server and portal
+  deployed to staging from `edfef9d` (no migration, so no backup; without `--seed`; branch not pushed yet). Checked:
+  API and portal answer 200, the API runs the new code (time-out answers, free replays). Not yet tried on the phone.
+- 2026-11-08: Level up screen now plays the league climb (user asked for a mini leaderboard, not a badge):
+  `league_climb.dart` loads `leagueProvider` and shows the learner's row sliding from the old rank to the new one
+  past up to 4 learners they overtook (each drops one place), with one learner above; rank and XP count up
+  (1.4 s, after the badge; instant with reduce motion). Falls back to the old badge when the league can't load.
+  Level up background is now solid. Tests: 222 app tests (new `league_climb_test.dart`). Checked on the simulator
+  against the local API (#28 → #20, #20 → #4).
+- 2026-11-10: OpenQodex review before push (5 findings, all fixed): Ask AI code filter no longer refuses legal
+  questions with words like react/swift/dart/ruby; a model answer that was code still counts toward the daily
+  limit (it was paid for); Home mode names leave room for the tile border; the Free badge is dark green on its
+  light pill in dark mode; the test server treats a time-out as unanswered. **Server change: redeploy staging.**
+
 Session 1 core build is COMPLETE. Candidate next steps (await user's priority):
 1. Platform (P1) is done (CI, staging, backups, AI chat through the backend — see 2026-10-28/29).
    P3 is done (server progress Parts 1–3, M08, M12 — see 2026-10-29). Next-phase plan agreed 2026-10-29:

@@ -109,7 +109,7 @@ abstract class AppLocalizations {
   /// No description provided for @appName.
   ///
   /// In en, this message translates to:
-  /// **'Nyaya'**
+  /// **'Nyaya Kural'**
   String get appName;
 
   /// No description provided for @appTagline.
@@ -415,7 +415,7 @@ abstract class AppLocalizations {
   /// No description provided for @onbSlide2Title.
   ///
   /// In en, this message translates to:
-  /// **'Play the Case Path'**
+  /// **'Follow the Learning Path'**
   String get onbSlide2Title;
 
   /// No description provided for @onbSlide2Body.
@@ -709,7 +709,7 @@ abstract class AppLocalizations {
   /// No description provided for @onbReadyBody.
   ///
   /// In en, this message translates to:
-  /// **'Your first case is waiting on the Case Path.'**
+  /// **'Your first lesson is waiting on the Learning Path.'**
   String get onbReadyBody;
 
   /// No description provided for @greetingMorning.
@@ -733,7 +733,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeContinueJourney.
   ///
   /// In en, this message translates to:
-  /// **'Continue your Case Path'**
+  /// **'Continue your Learning Path'**
   String get homeContinueJourney;
 
   /// No description provided for @homeContinueLeftOff.
@@ -913,13 +913,13 @@ abstract class AppLocalizations {
   /// No description provided for @homeGoPremiumSub.
   ///
   /// In en, this message translates to:
-  /// **'Nyaya Premium · 7-day free trial'**
+  /// **'Nyaya Kural Premium · 7-day free trial'**
   String get homeGoPremiumSub;
 
   /// No description provided for @modeCasePath.
   ///
   /// In en, this message translates to:
-  /// **'Case Path'**
+  /// **'Learning Path'**
   String get modeCasePath;
 
   /// No description provided for @modeCasePathDesc.
@@ -931,7 +931,7 @@ abstract class AppLocalizations {
   /// No description provided for @modeDailyDocket.
   ///
   /// In en, this message translates to:
-  /// **'Daily Docket'**
+  /// **'Today\'s Questions'**
   String get modeDailyDocket;
 
   /// No description provided for @modeDailyDocketDesc.
@@ -943,7 +943,7 @@ abstract class AppLocalizations {
   /// No description provided for @modeDuel.
   ///
   /// In en, this message translates to:
-  /// **'Moot Court Duel'**
+  /// **'Quick Quiz'**
   String get modeDuel;
 
   /// No description provided for @modeDuelDesc.
@@ -955,7 +955,7 @@ abstract class AppLocalizations {
   /// No description provided for @modeExam.
   ///
   /// In en, this message translates to:
-  /// **'Exam Chamber'**
+  /// **'Exam Practice'**
   String get modeExam;
 
   /// No description provided for @modeExamDesc.
@@ -991,7 +991,7 @@ abstract class AppLocalizations {
   /// No description provided for @docketNextIn.
   ///
   /// In en, this message translates to:
-  /// **'Next docket in {time}'**
+  /// **'New questions in {time}'**
   String docketNextIn(String time);
 
   /// No description provided for @energyTitle.
@@ -1045,7 +1045,7 @@ abstract class AppLocalizations {
   /// No description provided for @energyPlayDocket.
   ///
   /// In en, this message translates to:
-  /// **'Play today\'s Daily Docket (free)'**
+  /// **'Play Today\'s Questions (free)'**
   String get energyPlayDocket;
 
   /// No description provided for @energyAskAi.
@@ -1075,7 +1075,7 @@ abstract class AppLocalizations {
   /// No description provided for @journeyTitle.
   ///
   /// In en, this message translates to:
-  /// **'Case Path'**
+  /// **'Learning Path'**
   String get journeyTitle;
 
   /// No description provided for @journeySubtitle.
@@ -1240,6 +1240,24 @@ abstract class AppLocalizations {
   /// **'How scoring works'**
   String get journeyHowScoring;
 
+  /// No description provided for @journeyReplayFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Replay · free'**
+  String get journeyReplayFree;
+
+  /// No description provided for @journeyFreeReplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Free replay'**
+  String get journeyFreeReplay;
+
+  /// No description provided for @journeyRuleReplay.
+  ///
+  /// In en, this message translates to:
+  /// **'A level you have cleared is free to replay. Replays earn half XP and count toward your daily goal.'**
+  String get journeyRuleReplay;
+
   /// No description provided for @journeyRuleEnergy.
   ///
   /// In en, this message translates to:
@@ -1345,13 +1363,13 @@ abstract class AppLocalizations {
   /// No description provided for @journeyEnergyInfo.
   ///
   /// In en, this message translates to:
-  /// **'Each Case Path level costs {cost} energy. You get {free} free energy every day. It refills at midnight — in {time}.'**
+  /// **'Each Learning Path level costs {cost} energy. You get {free} free energy every day. It refills at midnight — in {time}.'**
   String journeyEnergyInfo(int cost, int free, String time);
 
   /// No description provided for @journeyCoinsInfo.
   ///
   /// In en, this message translates to:
-  /// **'Earn coins from new stars, chapter chests, the Daily Docket, your daily goal and streak milestones. Spend them in the Store on energy refills and streak freezes.'**
+  /// **'Earn coins from new stars, chapter chests, Today\'s Questions, your daily goal and streak milestones. Spend them in the Store on energy refills and streak freezes.'**
   String get journeyCoinsInfo;
 
   /// No description provided for @journeyOpenStore.
@@ -1549,7 +1567,7 @@ abstract class AppLocalizations {
   /// No description provided for @quizRefundFailed.
   ///
   /// In en, this message translates to:
-  /// **'Couldn\'t reach Nyaya, so your energy wasn\'t given back.'**
+  /// **'Couldn\'t reach Nyaya Kural, so your energy wasn\'t given back.'**
   String get quizRefundFailed;
 
   /// No description provided for @quizOptionCorrect.
@@ -1665,6 +1683,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Almost there'**
   String get resultTryAgain;
+
+  /// No description provided for @resultKeepPractising.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep practising'**
+  String get resultKeepPractising;
+
+  /// No description provided for @resultNewExam.
+  ///
+  /// In en, this message translates to:
+  /// **'New exam'**
+  String get resultNewExam;
+
+  /// No description provided for @levelUpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Level up!'**
+  String get levelUpTitle;
+
+  /// No description provided for @levelUpCleared.
+  ///
+  /// In en, this message translates to:
+  /// **'Level {number} cleared'**
+  String levelUpCleared(int number);
+
+  /// No description provided for @levelUpNextLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Level {number} is now open'**
+  String levelUpNextLevel(int number);
+
+  /// No description provided for @levelUpChest.
+  ///
+  /// In en, this message translates to:
+  /// **'The chapter chest is ready to open'**
+  String get levelUpChest;
+
+  /// No description provided for @levelUpNewChapter.
+  ///
+  /// In en, this message translates to:
+  /// **'New chapter: {chapter}'**
+  String levelUpNewChapter(String chapter);
+
+  /// No description provided for @levelUpRank.
+  ///
+  /// In en, this message translates to:
+  /// **'League rank #{before} → #{after}'**
+  String levelUpRank(int before, int after);
 
   /// No description provided for @resultTryAgainBody.
   ///
@@ -1987,7 +2053,7 @@ abstract class AppLocalizations {
   /// No description provided for @chatTitle.
   ///
   /// In en, this message translates to:
-  /// **'Nyaya AI'**
+  /// **'Nyaya Kural AI'**
   String get chatTitle;
 
   /// No description provided for @chatSubtitle.
@@ -2158,6 +2224,18 @@ abstract class AppLocalizations {
   /// **'Ask AI about this'**
   String get updatesAskAi;
 
+  /// No description provided for @updatesSavedFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get updatesSavedFilter;
+
+  /// No description provided for @updatesSavedEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing saved yet. Tap the bookmark on any update to keep it here.'**
+  String get updatesSavedEmpty;
+
   /// No description provided for @updatesEmpty.
   ///
   /// In en, this message translates to:
@@ -2287,7 +2365,7 @@ abstract class AppLocalizations {
   /// No description provided for @reminderJourney.
   ///
   /// In en, this message translates to:
-  /// **'Your Case Path is waiting. Ready for the next stop?'**
+  /// **'Your Learning Path is waiting. Ready for the next stop?'**
   String get reminderJourney;
 
   /// No description provided for @reminderRights.
@@ -2305,7 +2383,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsRemindersBlocked.
   ///
   /// In en, this message translates to:
-  /// **'Notifications are off for Nyaya. Turn them on in your phone\'s Settings to get reminders.'**
+  /// **'Notifications are off for Nyaya Kural. Turn them on in your phone\'s Settings to get reminders.'**
   String get settingsRemindersBlocked;
 
   /// No description provided for @settingsStore.
@@ -2347,7 +2425,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsPremium.
   ///
   /// In en, this message translates to:
-  /// **'Nyaya Premium'**
+  /// **'Nyaya Kural Premium'**
   String get settingsPremium;
 
   /// No description provided for @settingsPremiumActive.
@@ -2395,7 +2473,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsDuelRecord.
   ///
   /// In en, this message translates to:
-  /// **'Duels won'**
+  /// **'Wins'**
   String get settingsDuelRecord;
 
   /// No description provided for @settingsAbout.
@@ -2413,7 +2491,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsDisclaimerBody.
   ///
   /// In en, this message translates to:
-  /// **'Nyaya is an educational app. Questions, explanations, updates and AI answers are general information and are not legal advice. Laws change — always verify with the official Gazette or consult an advocate.'**
+  /// **'Nyaya Kural is an educational app. Questions, explanations, updates and AI answers are general information and are not legal advice. Laws change — always verify with the official Gazette or consult an advocate.'**
   String get settingsDisclaimerBody;
 
   /// No description provided for @settingsPrivacy.
@@ -2455,7 +2533,7 @@ abstract class AppLocalizations {
   /// No description provided for @premiumTitle.
   ///
   /// In en, this message translates to:
-  /// **'Nyaya Premium'**
+  /// **'Nyaya Kural Premium'**
   String get premiumTitle;
 
   /// No description provided for @premiumHeadline.
@@ -2479,7 +2557,7 @@ abstract class AppLocalizations {
   /// No description provided for @premiumBenefitAi.
   ///
   /// In en, this message translates to:
-  /// **'More Nyaya AI'**
+  /// **'More Nyaya Kural AI'**
   String get premiumBenefitAi;
 
   /// No description provided for @premiumBenefitAiSub.
@@ -2557,7 +2635,7 @@ abstract class AppLocalizations {
   /// No description provided for @premiumActivated.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to Nyaya Premium!'**
+  /// **'Welcome to Nyaya Kural Premium!'**
   String get premiumActivated;
 
   /// No description provided for @premiumAlready.
@@ -2601,6 +2679,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Stars'**
   String get statStars;
+
+  /// No description provided for @searchTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get searchTitle;
+
+  /// No description provided for @searchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search laws, topics and updates'**
+  String get searchHint;
+
+  /// No description provided for @searchTopics.
+  ///
+  /// In en, this message translates to:
+  /// **'Topics'**
+  String get searchTopics;
+
+  /// No description provided for @searchLaws.
+  ///
+  /// In en, this message translates to:
+  /// **'Laws'**
+  String get searchLaws;
+
+  /// No description provided for @searchUpdates.
+  ///
+  /// In en, this message translates to:
+  /// **'Updates'**
+  String get searchUpdates;
+
+  /// No description provided for @searchAskAi.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask AI: “{query}”'**
+  String searchAskAi(String query);
+
+  /// No description provided for @searchNoResults.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing matches “{query}” yet. Ask AI instead.'**
+  String searchNoResults(String query);
 
   /// No description provided for @exploreTitle.
   ///
@@ -2833,7 +2953,7 @@ abstract class AppLocalizations {
   /// No description provided for @authCreateSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Questions come from Nyaya\'s reviewed library, and your results are saved to your account.'**
+  /// **'Questions come from Nyaya Kural\'s reviewed library, and your results are saved to your account.'**
   String get authCreateSubtitle;
 
   /// No description provided for @authSignInTitle.
@@ -2911,7 +3031,7 @@ abstract class AppLocalizations {
   /// No description provided for @authErrorNetwork.
   ///
   /// In en, this message translates to:
-  /// **'Can\'t reach Nyaya right now. Check your connection and try again.'**
+  /// **'Can\'t reach Nyaya Kural right now. Check your connection and try again.'**
   String get authErrorNetwork;
 
   /// No description provided for @authErrorRateLimited.
@@ -3037,7 +3157,7 @@ abstract class AppLocalizations {
   /// No description provided for @updateRequiredTitle.
   ///
   /// In en, this message translates to:
-  /// **'Please update Nyaya'**
+  /// **'Please update Nyaya Kural'**
   String get updateRequiredTitle;
 
   /// No description provided for @updateRequiredBody.
@@ -3115,7 +3235,7 @@ abstract class AppLocalizations {
   /// No description provided for @quizOffline.
   ///
   /// In en, this message translates to:
-  /// **'Can\'t reach Nyaya. Check your connection and try again.'**
+  /// **'Can\'t reach Nyaya Kural. Check your connection and try again.'**
   String get quizOffline;
 
   /// No description provided for @quizSignedOut.

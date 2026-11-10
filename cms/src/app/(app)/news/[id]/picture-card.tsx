@@ -34,8 +34,12 @@ export function PictureCard({
     form.set('file', file);
     setBusy('upload');
     startTransition(async () => {
-      const res = await uploadNewsPicture(articleId, form);
-      setError(res.error);
+      try {
+        const res = await uploadNewsPicture(articleId, form);
+        setError(res.error);
+      } catch {
+        setError('The picture could not be uploaded. Check your connection and try again.');
+      }
       setBusy(null);
       if (input.current) input.current.value = '';
     });

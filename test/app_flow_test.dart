@@ -14,6 +14,7 @@ import 'package:nyaya/features/auth/application/auth_controller.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
 import 'package:nyaya/features/journey/application/journey_controller.dart';
+import 'package:nyaya/features/journey/presentation/journey_screen.dart';
 import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
 import 'package:nyaya/features/legal_updates/presentation/updates_screen.dart';
 import 'package:nyaya/features/reminders/data/reminder_notifications.dart';
@@ -112,6 +113,37 @@ void main() {
     expect(find.text('CONTINUE WHERE YOU LEFT OFF'), findsNothing);
   });
 
+  testWidgets('a new learner picks a language, then creates an account, then sees the intro', (tester) async {
+    final c = await pumpApp(tester, signedIn: false);
+    expect(find.text('Choose your language'), findsOneWidget);
+    await tester.tap(find.text('English').first);
+    await settle(tester);
+
+    expect(find.text('Create your free account'), findsOneWidget);
+    expect(find.byTooltip('Close'), findsNothing);
+    await tester.enterText(find.widgetWithText(TextField, 'Your name'), 'Meena');
+    await tester.enterText(find.widgetWithText(TextField, 'Email'), 'meena@test.local');
+    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'long enough');
+    await tester.tap(find.text('CREATE ACCOUNT'));
+    await settle(tester);
+
+    expect(c.read(authProvider)?.email, 'meena@test.local');
+    expect(find.text('Create your free account'), findsNothing);
+    // The intro slides follow, then the persona.
+    for (var i = 0; i < 2; i++) {
+      await tester.tap(find.byTooltip('Continue'));
+      await settle(tester);
+    }
+    await tester.tap(find.text('Get Started'));
+    await settle(tester);
+    await tester.tap(find.text('Law aspirant'));
+    await settle(tester);
+    await tester.tap(find.text('GET STARTED'));
+    await settle(tester);
+    expect(c.read(profileProvider).onboarded, isTrue);
+    expect(api.settings?.name, 'Meena');
+  });
+
   testWidgets('playing a Case Path level end to end awards stars and XP', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'coins': 60, 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
@@ -133,6 +165,13 @@ void main() {
       await settle(tester);
     }
 
+    // Clearing a level for the first time opens the next one: "Level up!" first.
+    expect(find.text('Level up!'), findsOneWidget);
+    expect(find.text('Level 1 cleared · Constitution Basics'), findsOneWidget);
+    expect(find.text('Level 2 is now open'), findsOneWidget);
+    await tester.tap(find.text('CONTINUE'));
+    await settle(tester);
+    expect(find.text('Level up!'), findsNothing);
     expect(find.text('Perfect case!'), findsOneWidget);
     expect(sounds.played, [...List.filled(6, Sfx.correct), Sfx.levelComplete]);
     expect(c.read(journeyProvider).stars['constitution_1'], 3);
@@ -141,6 +180,18 @@ void main() {
     expect(p.streak, 1);
     expect(p.energy, 5, reason: '3-star bonus refunds 1 energy');
     expect(find.text('NEXT LEVEL'), findsOneWidget);
+
+    // A cleared level is free to replay, and the sheet says so.
+    await tester.tap(find.text('Back to map'));
+    await settle(tester);
+    await tester.tap(find.bySemanticsLabel(RegExp(r'^Level 1, Completed')).first);
+    await settle(tester);
+    expect(find.text('Free replay'), findsOneWidget);
+    await tester.tap(find.text('REPLAY · FREE'));
+    await settle(tester);
+    expect(find.textContaining('Question 1 of'), findsOneWidget);
+    expect(c.read(profileProvider).energy, 5);
+    expect(api.energy, 5);
   });
 
   // Premium is hidden in the beta; run with --dart-define=NYAYA_PREMIUM=true.
@@ -274,15 +325,14 @@ void main() {
     expect(c.read(profileProvider).onboarded, isFalse);
   });
 
-  testWidgets('a signed-out learner creates an account before the first quiz', (tester) async {
+  testWidgets('a signed-out learner must create an account before anything else', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Asha', 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, signedIn: false);
     await settle(tester);
 
-    await tester.tap(find.text('Start learning').first);
-    await settle(tester);
-    expect(find.text('Create your free account'), findsOneWidget);
-    expect(c.read(profileProvider).energy, 5, reason: 'no energy spent before signing in');
+    expect(find.text('Create your free account'), findsOneWidget, reason: 'sign-in is the first screen');
+    expect(find.byTooltip('Close'), findsNothing, reason: 'it cannot be skipped');
+    expect(c.read(profileProvider).energy, 5);
 
     await tester.enterText(find.widgetWithText(TextField, 'Email'), 'asha@test.local');
     await tester.enterText(find.widgetWithText(TextField, 'Password'), 'short');
@@ -293,6 +343,10 @@ void main() {
     await tester.enterText(find.widgetWithText(TextField, 'Password'), 'long enough');
     await tester.tap(find.text('CREATE ACCOUNT'));
     await settle(tester);
+    expect(c.read(routerProvider).state.matchedLocation, Routes.home);
+
+    await tester.tap(find.text('Start learning').first);
+    await settle(tester);
     expect(find.textContaining('Question 1 of'), findsOneWidget);
     expect(api.energy, 4, reason: 'the server charges the energy');
     expect(c.read(profileProvider).energy, 4);
@@ -302,13 +356,46 @@ void main() {
     expect(api.settings?.onboarded, isTrue);
   });
 
+  testWidgets('the name typed at sign-up becomes the learner name, and sign-out clears it', (tester) async {
+    // Onboarding no longer asks for a name, so the phone has none.
+    final onboarded = jsonEncode({'onboarded': true, 'name': '', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, signedIn: false);
+    await settle(tester);
+
+    await tester.enterText(find.widgetWithText(TextField, 'Your name'), 'Nisha');
+    await tester.enterText(find.widgetWithText(TextField, 'Email'), 'nisha@test.local');
+    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'long enough');
+    await tester.tap(find.text('CREATE ACCOUNT'));
+    await settle(tester);
+    expect(api.settings?.name, 'Nisha', reason: 'not the "Learner" placeholder');
+    expect(c.read(profileProvider).name, 'Nisha');
+
+    await c.read(authProvider.notifier).signOut();
+    await settle(tester);
+    expect(c.read(profileProvider).name, isEmpty);
+    expect(find.text('Create your free account'), findsOneWidget, reason: 'signing out leads to sign-in');
+  });
+
+  testWidgets('an account saved with the placeholder name gets its sign-up name back', (tester) async {
+    final c = await pumpApp(tester, server: (s) {
+      s.settings = const ServerSettings(
+        name: 'Learner',
+        persona: 'citizen',
+        language: 'en',
+        dailyGoal: 3,
+        onboarded: true,
+      );
+    });
+    await settle(tester);
+    expect(api.settings?.name, 'Ravi');
+    expect(c.read(profileProvider).name, 'Ravi');
+  });
+
   testWidgets('a learner who forgot their password resets it with the emailed code and plays', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Asha', 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, signedIn: false);
     await settle(tester);
 
-    await tester.tap(find.text('Start learning').first);
-    await settle(tester);
     await tester.tap(find.text('I already have an account'));
     await settle(tester);
     await tester.enterText(find.widgetWithText(TextField, 'Email'), 'asha@test.local');
@@ -331,7 +418,7 @@ void main() {
     await tester.tap(find.text('SET NEW PASSWORD'));
     await settle(tester);
     expect(c.read(authProvider)?.email, 'asha@test.local');
-    expect(find.textContaining('Question 1 of'), findsOneWidget, reason: 'the quiz that asked for sign-in starts');
+    expect(c.read(routerProvider).state.matchedLocation, Routes.home, reason: 'signed in, on to Home');
   });
 
   testWidgets('Journey tab shows the Case Path map and opens a level from its chapter card', (tester) async {
@@ -341,7 +428,7 @@ void main() {
 
     await tester.tap(find.text('Journey'));
     await settle(tester);
-    expect(find.text('Case Path'), findsOneWidget);
+    expect(find.text('Learning Path'), findsOneWidget);
     expect(find.text('Your journey through Indian law'), findsOneWidget);
     expect(find.text('CHAPTER 1 · 0/3 COMPLETED'), findsOneWidget);
     expect(find.text('You'), findsOneWidget);
@@ -457,7 +544,7 @@ void main() {
 
     for (final (label, text) in [
       ('0 Stars', 'Earn up to 3 stars on each level'),
-      ('5 energy left', 'Each Case Path level costs 1 energy. You get 5 free energy every day.'),
+      ('5 energy left', 'Each Learning Path level costs 1 energy. You get 5 free energy every day.'),
       ('60 Coins', 'Spend them in the Store on energy refills and streak freezes.'),
     ]) {
       await tester.tap(find.bySemanticsLabel(label));
@@ -466,6 +553,15 @@ void main() {
       await tester.tapAt(const Offset(20, 20)); // outside the sheet
       await settle(tester);
     }
+
+    // The coins sheet leads straight to the store, not the top of Settings.
+    await tester.tap(find.bySemanticsLabel('60 Coins'));
+    await settle(tester);
+    await tester.tap(find.text('Open the Store'));
+    await settle(tester);
+    final store = tester.getRect(find.textContaining('STORE'));
+    expect(store.top, lessThan(400), reason: 'store section scrolled to the top');
+    expect(find.text('Streak freeze'), findsOneWidget);
     semantics.dispose();
   });
 
@@ -524,6 +620,35 @@ void main() {
     expect(top(tester, 'Quiz modes'), lessThan(top(tester, 'FEATURED')), reason: 'no promotion above the learning');
   });
 
+  testWidgets('Home has a top bar with the app name, and search finds laws, topics and updates', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    expect(find.text('Nyaya Kural'), findsOneWidget);
+
+    await tester.tap(find.byTooltip('Search'));
+    await settle(tester);
+    await tester.enterText(find.byType(TextField), 'bns');
+    await settle(tester);
+    expect(find.text('Bharatiya Nyaya Sanhita (BNS)'), findsOneWidget);
+    expect(find.text('Criminal Law (BNS)'), findsOneWidget, reason: 'the topic matches too');
+    expect(find.text('Ask AI: “bns”'), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField), 'waqf');
+    await settle(tester);
+    expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsOneWidget);
+
+    // A law opens its Journey chapter, not the chat.
+    await tester.enterText(find.byType(TextField), 'bns');
+    await settle(tester);
+    await tester.tap(find.text('Bharatiya Nyaya Sanhita (BNS)'));
+    await settle(tester);
+    expect(c.read(routerProvider).state.matchedLocation, Routes.journey);
+    // The criminal law chapter is still locked, so its sheet says what to do first.
+    expect(find.text('Level 1 · Locked'), findsOneWidget);
+    expect(c.read(journeyFocusProvider), isNull, reason: 'the request is used once');
+  });
+
   testWidgets('Home shows latest updates and opens one', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     await pumpApp(tester, prefs: {'profile_v1': onboarded});
@@ -552,6 +677,9 @@ void main() {
     expect(find.text('Supreme Court sets timelines for Governors on State Bills'), findsOneWidget);
     expect(tester.takeException(), isNull, reason: 'missing thumbnails fall back quietly');
 
+    // The filter row scrolls sideways; the Saved pill pushed this one off a small screen.
+    await tester.drag(find.text('All'), const Offset(-150, 0));
+    await settle(tester);
     await tester.tap(find.text('Supreme Court'));
     await settle(tester);
     expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsNothing);
@@ -561,9 +689,17 @@ void main() {
     await settle(tester);
     expect(c.read(savedUpdatesProvider), {'news-1'});
 
+    await tester.drag(find.text('Supreme Court'), const Offset(300, 0));
+    await settle(tester);
     await tester.tap(find.text('All'));
     await settle(tester);
     expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsOneWidget);
+
+    // Saved shows only what was bookmarked.
+    await tester.tap(find.text('Saved'));
+    await settle(tester);
+    expect(find.text('Supreme Court sets timelines for Governors on State Bills'), findsOneWidget);
+    expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsNothing);
   });
 
   testWidgets('out of energy shows free alternatives instead of a dead end', (tester) async {
@@ -577,7 +713,7 @@ void main() {
     await tester.tap(find.text('Start learning').first); // "Start your learning journey" card
     await settle(tester);
     expect(find.text("You're out of energy"), findsOneWidget);
-    expect(find.text("Play today's Daily Docket (free)"), findsOneWidget);
+    expect(find.text("Play Today's Questions (free)"), findsOneWidget);
     expect(find.text('Ask the AI a legal question'), findsOneWidget);
     expect(find.text('Get unlimited energy'), findsNothing, reason: 'premium is hidden in the beta');
   });
@@ -711,7 +847,7 @@ void main() {
     await settle(tester);
     const duel = QuizRequest(QuizMode.duel);
     // Home's quiz modes section opens it.
-    final tile = find.text('Moot Court Duel');
+    final tile = find.text('Quick Quiz');
     await tester.scrollUntilVisible(tile, 200, scrollable: find.byType(Scrollable).first);
     await tester.ensureVisible(tile);
     await settle(tester);
@@ -768,6 +904,13 @@ void main() {
       await tester.pump(const Duration(seconds: 1));
     }
     expect(sounds.played, List.filled(5, Sfx.tick));
+
+    // Time runs out: the server is told, and the right answer shows at once.
+    await tester.pump(const Duration(seconds: 1));
+    await settle(tester);
+    expect(find.text("Time's up"), findsOneWidget);
+    expect(find.textContaining('Answer: '), findsOneWidget);
+    expect(api.verdictsSent.last?.reveal.correctIndex, isNotNull);
     c.read(routerProvider).go(Routes.home);
     await settle(tester);
   });
@@ -829,12 +972,17 @@ void main() {
       await tester.tap(find.text(i == 5 ? 'FINISH' : 'NEXT'));
       await settle(tester);
     }
+    await tester.tap(find.text('CONTINUE')); // past "Level up!"
+    await settle(tester);
     await tester.tap(find.text('Back to map'));
     await settle(tester);
     await tester.tap(find.text('Home'));
     await settle(tester);
     final card = find.text('1 mistake · 1 saved');
     await tester.scrollUntilVisible(card, 200, scrollable: find.byType(Scrollable).first);
+    // Mid-screen, clear of the pinned top bar.
+    await Scrollable.ensureVisible(tester.element(card), alignment: 0.5);
+    await settle(tester);
     expect(find.text('Review your mistakes'), findsOneWidget);
     expect(find.text('Review now'), findsOneWidget);
     await tester.tap(card);
@@ -912,7 +1060,7 @@ void main() {
     await settle(tester);
     await tester.tap(find.text('Leave'));
     await settle(tester);
-    expect(find.text("Couldn't reach Nyaya, so your energy wasn't given back."), findsOneWidget);
+    expect(find.text("Couldn't reach Nyaya Kural, so your energy wasn't given back."), findsOneWidget);
   });
 
   testWidgets('the free Daily Docket promises no refund when you leave', (tester) async {
@@ -1013,6 +1161,8 @@ void main() {
       await settle(tester);
     }
     expect(find.text('5/6 correct'), findsOneWidget);
+    await tester.tap(find.text('CONTINUE')); // past "Level up!"
+    await settle(tester);
     await tester.tap(find.text('Review answers'));
     await settle(tester);
     expect(find.text('Hide answers'), findsOneWidget);

@@ -25,6 +25,24 @@ import 'map_node.dart';
 
 /// Candy-Crush-style level map: a winding road from the bottom up, chapter
 /// signposts, starred nodes, a pulsing "you are here" marker and chests.
+/// A chapter to show when the Journey tab opens next: Home's law rows and
+/// search set it, the map scrolls there and opens that chapter's stop.
+final journeyFocusProvider = NotifierProvider<JourneyFocus, String?>(JourneyFocus.new);
+
+class JourneyFocus extends Notifier<String?> {
+  @override
+  String? build() => null;
+
+  void request(String chapterId) => state = chapterId;
+  void clear() => state = null;
+}
+
+/// Opens the Journey tab at [chapterId].
+void openJourneyChapter(BuildContext context, WidgetRef ref, String chapterId) {
+  ref.read(journeyFocusProvider.notifier).request(chapterId);
+  context.go(Routes.journey);
+}
+
 class JourneyScreen extends ConsumerStatefulWidget {
   const JourneyScreen({super.key});
 
@@ -59,12 +77,28 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
 
   void _openSheet(JourneyNode node) => showNodeSheet(context, ref, node, onShowNext: _scrollToCurrent);
 
+  /// Shows the chapter someone asked for (see [journeyFocusProvider]).
+  void _showFocus() {
+    final id = ref.read(journeyFocusProvider);
+    final layout = _layout;
+    if (id == null || layout == null || !_scroll.hasClients || !mounted) return;
+    ref.read(journeyFocusProvider.notifier).clear();
+    final chapter = JourneyCatalog.chapters.indexWhere((c) => c.id == id);
+    if (chapter < 0) return;
+    final node = _chapterFocus(ref.read(journeyProvider), chapter);
+    _scroll.jumpTo(layout.scrollOffsetFor(node.globalIndex, _viewport));
+    _openSheet(node);
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
     // After a level or chest, bring the new next step into view.
     ref.listen(journeyProvider.select((p) => p.current?.id), (before, now) {
       if (before != now) WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToCurrent());
+    });
+    ref.listen(journeyFocusProvider, (_, id) {
+      if (id != null) WidgetsBinding.instance.addPostFrameCallback((_) => _showFocus());
     });
     final progress = ref.watch(journeyProvider);
     final profile = ref.watch(profileProvider);
@@ -85,7 +119,11 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
               _viewport = box.maxHeight;
               if (!_didInitialScroll) {
                 _didInitialScroll = true;
-                WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToCurrent(animate: false));
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  _scrollToCurrent(animate: false);
+                  // Opened from a law row or search before the map existed.
+                  _showFocus();
+                });
               }
               return SingleChildScrollView(
                 controller: _scroll,
@@ -144,6 +182,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                           stars: progress.stars[node.id] ?? 0,
                           userName: profile.name,
                           onTap: () => _openSheet(node),
+                          mapWidth: layout.width,
                         ),
                     ],
                   ),
@@ -487,7 +526,7 @@ class _ResourceSheet extends ConsumerWidget {
               FilledButton(
                 onPressed: () {
                   Navigator.pop(context);
-                  context.push(Routes.settings);
+                  context.push(Routes.store);
                 },
                 child: Text(l.journeyOpenStore),
               )

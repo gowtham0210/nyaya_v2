@@ -10,7 +10,7 @@ class AppLocalizationsMl extends AppLocalizations {
   AppLocalizationsMl([String locale = 'ml']) : super(locale);
 
   @override
-  String get appName => 'Nyaya';
+  String get appName => 'Nyaya Kural';
 
   @override
   String get appTagline => 'ദിവസം ഒരു കേസ്, ഇന്ത്യൻ നിയമം പഠിക്കാം';
@@ -189,7 +189,7 @@ class AppLocalizationsMl extends AppLocalizations {
       'ഭരണഘടന, BNS, BNSS എന്നിവയെക്കുറിച്ചും ദിവസവും കാണുന്ന നിയമങ്ങളെക്കുറിച്ചും ചെറിയ ക്വിസുകൾ.';
 
   @override
-  String get onbSlide2Title => 'കേസ് പാത കളിക്കൂ';
+  String get onbSlide2Title => 'പഠന പാതയിലൂടെ മുന്നേറൂ';
 
   @override
   String get onbSlide2Body =>
@@ -360,8 +360,7 @@ class AppLocalizationsMl extends AppLocalizations {
   }
 
   @override
-  String get onbReadyBody =>
-      'നിങ്ങളുടെ ആദ്യ കേസ് കേസ് പാതയിൽ കാത്തിരിക്കുന്നു.';
+  String get onbReadyBody => 'നിങ്ങളുടെ ആദ്യ പാഠം പഠന പാതയിൽ കാത്തിരിക്കുന്നു.';
 
   @override
   String get greetingMorning => 'സുപ്രഭാതം';
@@ -373,7 +372,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get greetingEvening => 'ശുഭ സന്ധ്യ';
 
   @override
-  String get homeContinueJourney => 'കേസ് പാത തുടരുക';
+  String get homeContinueJourney => 'നിങ്ങളുടെ പഠന പാത തുടരൂ';
 
   @override
   String get homeContinueLeftOff => 'നിർത്തിയിടത്തു നിന്ന് തുടരുക';
@@ -485,28 +484,28 @@ class AppLocalizationsMl extends AppLocalizations {
   String get homeGoPremium => 'പരിധിയില്ലാത്ത എനർജി നേടൂ';
 
   @override
-  String get homeGoPremiumSub => 'Nyaya Premium · 7 ദിവസം സൗജന്യ ട്രയൽ';
+  String get homeGoPremiumSub => 'Nyaya Kural Premium · 7 ദിവസം സൗജന്യ ട്രയൽ';
 
   @override
-  String get modeCasePath => 'കേസ് പാത';
+  String get modeCasePath => 'പഠന പാത';
 
   @override
   String get modeCasePathDesc => 'ലെവൽ തോറുമുള്ള യാത്ര';
 
   @override
-  String get modeDailyDocket => 'ഡെയ്‌ലി ഡോക്കറ്റ്';
+  String get modeDailyDocket => 'ഇന്നത്തെ ചോദ്യങ്ങൾ';
 
   @override
   String get modeDailyDocketDesc => '5 ചോദ്യങ്ങൾ · എല്ലാവർക്കും ഒരേത്';
 
   @override
-  String get modeDuel => 'മൂട്ട് കോർട്ട് ഡ്യുവൽ';
+  String get modeDuel => 'ക്വിക്ക് ക്വിസ്';
 
   @override
   String get modeDuelDesc => '1v1 · 7 ചോദ്യങ്ങൾ · സമയത്തെ തോൽപ്പിക്കൂ';
 
   @override
-  String get modeExam => 'പരീക്ഷാ ചേംബർ';
+  String get modeExam => 'പരീക്ഷാ പരിശീലനം';
 
   @override
   String get modeExamDesc => '20 ചോദ്യങ്ങൾ · 20 മിനിറ്റ് · നെഗറ്റീവ് മാർക്ക്';
@@ -528,7 +527,7 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String docketNextIn(String time) {
-    return 'അടുത്ത ഡോക്കറ്റ് $time-ൽ';
+    return 'പുതിയ ചോദ്യങ്ങൾ $timeൽ';
   }
 
   @override
@@ -569,7 +568,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get energyFreeOptions => 'ഇപ്പോഴും സൗജന്യമായി ചെയ്യാവുന്നവ';
 
   @override
-  String get energyPlayDocket => 'ഇന്നത്തെ ഡെയ്‌ലി ഡോക്കറ്റ് കളിക്കൂ (സൗജന്യം)';
+  String get energyPlayDocket => 'ഇന്നത്തെ ചോദ്യങ്ങൾ കളിക്കൂ (സൗജന്യം)';
 
   @override
   String get energyAskAi => 'AI-യോട് ഒരു നിയമ ചോദ്യം ചോദിക്കൂ';
@@ -585,7 +584,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get energyRefilled => '+1 എനർജി!';
 
   @override
-  String get journeyTitle => 'കേസ് പാത';
+  String get journeyTitle => 'പഠന പാത';
 
   @override
   String get journeySubtitle => 'ഇന്ത്യൻ നിയമത്തിലൂടെയുള്ള നിങ്ങളുടെ യാത്ര';
@@ -690,6 +689,16 @@ class AppLocalizationsMl extends AppLocalizations {
   String get journeyHowScoring => 'സ്കോർ എങ്ങനെ കണക്കാക്കുന്നു';
 
   @override
+  String get journeyReplayFree => 'വീണ്ടും കളിക്കൂ · സൗജന്യം';
+
+  @override
+  String get journeyFreeReplay => 'സൗജന്യ റീപ്ലേ';
+
+  @override
+  String get journeyRuleReplay =>
+      'നിങ്ങൾ പൂർത്തിയാക്കിയ ലെവൽ വീണ്ടും കളിക്കുന്നത് സൗജന്യമാണ്. വീണ്ടും കളിക്കുമ്പോൾ പകുതി XP കിട്ടും, അത് നിങ്ങളുടെ ദിവസ ലക്ഷ്യത്തിൽ കണക്കാക്കും.';
+
+  @override
   String journeyRuleEnergy(int count) {
     return 'ഓരോ ശ്രമത്തിനും $count എനർജി ചെലവാകും. ആദ്യ ഉത്തരത്തിന് മുമ്പ് വിട്ടാൽ അത് തിരികെ ലഭിക്കും.';
   }
@@ -759,12 +768,12 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String journeyEnergyInfo(int cost, int free, String time) {
-    return 'കേസ് പാത്തിലെ ഓരോ ലെവലിനും $cost എനർജി ചെലവാകും. ദിവസവും $free എനർജി സൗജന്യം. അർധരാത്രി വീണ്ടും നിറയും — $timeൽ.';
+    return 'പഠന പാതയിലെ ഓരോ ലെവലിനും $cost എനർജി ചെലവാകും. ദിവസവും $free എനർജി സൗജന്യം. അർധരാത്രി വീണ്ടും നിറയും — $timeൽ.';
   }
 
   @override
   String get journeyCoinsInfo =>
-      'പുതിയ നക്ഷത്രങ്ങൾ, അധ്യായ പെട്ടികൾ, ഡെയ്‌ലി ഡോക്കറ്റ്, ദിവസ ലക്ഷ്യം, സ്ട്രീക്ക് നാഴികക്കല്ലുകൾ എന്നിവയിൽ നിന്ന് നാണയങ്ങൾ നേടുക. സ്റ്റോറിൽ എനർജി നിറയ്ക്കാനും സ്ട്രീക്ക് ഫ്രീസിനും ചെലവാക്കുക.';
+      'പുതിയ നക്ഷത്രങ്ങൾ, അധ്യായ പെട്ടികൾ, ഇന്നത്തെ ചോദ്യങ്ങൾ, ദിവസ ലക്ഷ്യം, സ്ട്രീക്ക് നാഴികക്കല്ലുകൾ എന്നിവയിൽ നിന്ന് നാണയങ്ങൾ നേടുക. സ്റ്റോറിൽ എനർജി നിറയ്ക്കാനും സ്ട്രീക്ക് ഫ്രീസിനും ചെലവാക്കുക.';
 
   @override
   String get journeyOpenStore => 'സ്റ്റോർ തുറക്കുക';
@@ -884,7 +893,7 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get quizRefundFailed =>
-      'Nyaya-യിൽ എത്താനായില്ല, അതിനാൽ നിങ്ങളുടെ എനർജി തിരികെ ലഭിച്ചില്ല.';
+      'Nyaya Kural-യിൽ എത്താനായില്ല, അതിനാൽ നിങ്ങളുടെ എനർജി തിരികെ ലഭിച്ചില്ല.';
 
   @override
   String get quizOptionCorrect => 'ശരിയുത്തരം';
@@ -947,6 +956,38 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get resultTryAgain => 'ഏതാണ്ട് എത്തി';
+
+  @override
+  String get resultKeepPractising => 'പരിശീലനം തുടരൂ';
+
+  @override
+  String get resultNewExam => 'പുതിയ പരീക്ഷ';
+
+  @override
+  String get levelUpTitle => 'ലെവൽ അപ്പ്!';
+
+  @override
+  String levelUpCleared(int number) {
+    return 'ലെവൽ $number പൂർത്തിയായി';
+  }
+
+  @override
+  String levelUpNextLevel(int number) {
+    return 'ലെവൽ $number ഇപ്പോൾ തുറന്നു';
+  }
+
+  @override
+  String get levelUpChest => 'അധ്യായ പെട്ടി തുറക്കാൻ തയ്യാർ';
+
+  @override
+  String levelUpNewChapter(String chapter) {
+    return 'പുതിയ അധ്യായം: $chapter';
+  }
+
+  @override
+  String levelUpRank(int before, int after) {
+    return 'ലീഗ് റാങ്ക് #$before → #$after';
+  }
 
   @override
   String get resultTryAgainBody =>
@@ -1155,7 +1196,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get tier_supremeCourt => 'സുപ്രീം കോടതി';
 
   @override
-  String get chatTitle => 'Nyaya AI';
+  String get chatTitle => 'Nyaya Kural AI';
 
   @override
   String get chatSubtitle => 'നിങ്ങളുടെ നിയമ വിവര സഹായി';
@@ -1258,6 +1299,13 @@ class AppLocalizationsMl extends AppLocalizations {
   String get updatesAskAi => 'ഇതിനെക്കുറിച്ച് AI-യോട് ചോദിക്കൂ';
 
   @override
+  String get updatesSavedFilter => 'സേവ് ചെയ്തവ';
+
+  @override
+  String get updatesSavedEmpty =>
+      'ഇതുവരെ ഒന്നും സേവ് ചെയ്തിട്ടില്ല. ഏതെങ്കിലും അപ്ഡേറ്റിലെ ബുക്ക്മാർക്ക് തൊട്ടാൽ അത് ഇവിടെ കാണാം.';
+
+  @override
   String get updatesEmpty => 'ഈ വിഭാഗത്തിൽ ഇതുവരെ വാർത്തകളില്ല.';
 
   @override
@@ -1332,7 +1380,7 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get reminderJourney =>
-      'നിങ്ങളുടെ കേസ് പാത്ത് കാത്തിരിക്കുന്നു. അടുത്ത സ്റ്റോപ്പിന് തയ്യാറാണോ?';
+      'നിങ്ങളുടെ പഠന പാത കാത്തിരിക്കുന്നു. അടുത്ത സ്റ്റോപ്പിന് തയ്യാറാണോ?';
 
   @override
   String get reminderRights =>
@@ -1343,7 +1391,7 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get settingsRemindersBlocked =>
-      'Nyaya-യ്ക്ക് അറിയിപ്പുകൾ ഓഫാണ്. ഓർമ്മപ്പെടുത്തലുകൾ ലഭിക്കാൻ ഫോണിന്റെ ക്രമീകരണങ്ങളിൽ അവ ഓണാക്കൂ.';
+      'Nyaya Kural-യ്ക്ക് അറിയിപ്പുകൾ ഓഫാണ്. ഓർമ്മപ്പെടുത്തലുകൾ ലഭിക്കാൻ ഫോണിന്റെ ക്രമീകരണങ്ങളിൽ അവ ഓണാക്കൂ.';
 
   @override
   String get settingsStore => 'സ്റ്റോർ';
@@ -1368,7 +1416,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get settingsFreezeFull => 'നിങ്ങൾക്ക് പരമാവധി ഫ്രീസുകൾ ഇതിനകം ഉണ്ട്.';
 
   @override
-  String get settingsPremium => 'Nyaya Premium';
+  String get settingsPremium => 'Nyaya Kural Premium';
 
   @override
   String get settingsPremiumActive => 'Premium സജീവം';
@@ -1392,7 +1440,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get settingsAccuracy => 'കൃത്യത';
 
   @override
-  String get settingsDuelRecord => 'ജയിച്ച ഡ്യുവലുകൾ';
+  String get settingsDuelRecord => 'വിജയങ്ങൾ';
 
   @override
   String get settingsAbout => 'കുറിച്ച്';
@@ -1402,7 +1450,7 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get settingsDisclaimerBody =>
-      'Nyaya ഒരു വിദ്യാഭ്യാസ ആപ്പാണ്. ചോദ്യങ്ങൾ, വിശദീകരണങ്ങൾ, വാർത്തകൾ, AI ഉത്തരങ്ങൾ എന്നിവ പൊതുവായ വിവരങ്ങൾ മാത്രമാണ്, നിയമോപദേശമല്ല. നിയമങ്ങൾ മാറാം — എപ്പോഴും ഔദ്യോഗിക ഗസറ്റ് പരിശോധിക്കുക അല്ലെങ്കിൽ ഒരു അഭിഭാഷകനെ സമീപിക്കുക.';
+      'Nyaya Kural ഒരു വിദ്യാഭ്യാസ ആപ്പാണ്. ചോദ്യങ്ങൾ, വിശദീകരണങ്ങൾ, വാർത്തകൾ, AI ഉത്തരങ്ങൾ എന്നിവ പൊതുവായ വിവരങ്ങൾ മാത്രമാണ്, നിയമോപദേശമല്ല. നിയമങ്ങൾ മാറാം — എപ്പോഴും ഔദ്യോഗിക ഗസറ്റ് പരിശോധിക്കുക അല്ലെങ്കിൽ ഒരു അഭിഭാഷകനെ സമീപിക്കുക.';
 
   @override
   String get settingsPrivacy => 'സ്വകാര്യത';
@@ -1427,7 +1475,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get settingsResetAction => 'റീസെറ്റ് ചെയ്യുക';
 
   @override
-  String get premiumTitle => 'Nyaya Premium';
+  String get premiumTitle => 'Nyaya Kural Premium';
 
   @override
   String get premiumHeadline => 'ദിവസവും കൂടുതൽ പഠിക്കൂ';
@@ -1441,7 +1489,7 @@ class AppLocalizationsMl extends AppLocalizations {
   }
 
   @override
-  String get premiumBenefitAi => 'കൂടുതൽ Nyaya AI';
+  String get premiumBenefitAi => 'കൂടുതൽ Nyaya Kural AI';
 
   @override
   String premiumBenefitAiSub(int free, int premium) {
@@ -1484,7 +1532,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get premiumRestore => 'വാങ്ങലുകൾ വീണ്ടെടുക്കുക';
 
   @override
-  String get premiumActivated => 'Nyaya Premium-ലേക്ക് സ്വാഗതം!';
+  String get premiumActivated => 'Nyaya Kural Premium-ലേക്ക് സ്വാഗതം!';
 
   @override
   String get premiumAlready => 'നിങ്ങൾ ഒരു Premium അംഗമാണ്';
@@ -1506,6 +1554,31 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get statStars => 'നക്ഷത്രങ്ങൾ';
+
+  @override
+  String get searchTitle => 'തിരയുക';
+
+  @override
+  String get searchHint => 'നിയമങ്ങൾ, വിഷയങ്ങൾ, അപ്ഡേറ്റുകൾ തിരയുക';
+
+  @override
+  String get searchTopics => 'വിഷയങ്ങൾ';
+
+  @override
+  String get searchLaws => 'നിയമങ്ങൾ';
+
+  @override
+  String get searchUpdates => 'അപ്ഡേറ്റുകൾ';
+
+  @override
+  String searchAskAi(String query) {
+    return 'AI-യോട് ചോദിക്കൂ: “$query”';
+  }
+
+  @override
+  String searchNoResults(String query) {
+    return '“$query” എന്നതിന് ഇതുവരെ ഒന്നും ചേരുന്നില്ല. AI-യോട് ചോദിക്കൂ.';
+  }
 
   @override
   String get exploreTitle => 'നിയമം അറിയാം';
@@ -1632,7 +1705,7 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get authCreateSubtitle =>
-      'ചോദ്യങ്ങൾ Nyaya-യുടെ പരിശോധിച്ച ശേഖരത്തിൽ നിന്നാണ്, നിങ്ങളുടെ ഫലങ്ങൾ അക്കൗണ്ടിൽ സൂക്ഷിക്കും.';
+      'ചോദ്യങ്ങൾ Nyaya Kural-യുടെ പരിശോധിച്ച ശേഖരത്തിൽ നിന്നാണ്, നിങ്ങളുടെ ഫലങ്ങൾ അക്കൗണ്ടിൽ സൂക്ഷിക്കും.';
 
   @override
   String get authSignInTitle => 'വീണ്ടും സ്വാഗതം';
@@ -1673,7 +1746,7 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get authErrorNetwork =>
-      'ഇപ്പോൾ Nyaya-യുമായി ബന്ധപ്പെടാനായില്ല. കണക്ഷൻ പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.';
+      'ഇപ്പോൾ Nyaya Kural-യുമായി ബന്ധപ്പെടാനായില്ല. കണക്ഷൻ പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.';
 
   @override
   String get authErrorRateLimited =>
@@ -1746,7 +1819,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get settingsSignOut => 'സൈൻ ഔട്ട്';
 
   @override
-  String get updateRequiredTitle => 'ദയവായി Nyaya അപ്ഡേറ്റ് ചെയ്യുക';
+  String get updateRequiredTitle => 'ദയവായി Nyaya Kural അപ്ഡേറ്റ് ചെയ്യുക';
 
   @override
   String get updateRequiredBody =>
@@ -1791,7 +1864,7 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get quizOffline =>
-      'Nyaya-യുമായി ബന്ധപ്പെടാനായില്ല. കണക്ഷൻ പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.';
+      'Nyaya Kural-യുമായി ബന്ധപ്പെടാനായില്ല. കണക്ഷൻ പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.';
 
   @override
   String get quizSignedOut =>

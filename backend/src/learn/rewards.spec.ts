@@ -28,7 +28,7 @@ const session = (
     mode: 'case_path',
     questions: answers.map(slow),
     streak: 0,
-    isReplayOfMastered: false,
+    isReplay: false,
     ...opts,
   }).total;
 
@@ -72,7 +72,7 @@ describe('XP', () => {
   });
 
   it('pays half for replaying a mastered level and 1.25x for the docket', () => {
-    expect(session([true], { isReplayOfMastered: true })).toBe(15);
+    expect(session([true], { isReplay: true })).toBe(15);
     expect(session([true], { mode: 'daily_docket' })).toBe(
       Math.round(30 * 1.25),
     );

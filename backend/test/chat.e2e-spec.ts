@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
 import { chatUsage } from '../src/db/schema.js';
-import { DECLINED_REPLY } from '../src/chat/chat.prompt.js';
+import { DECLINED_REPLY, OFF_TOPIC_REPLY } from '../src/chat/chat.prompt.js';
 import { startApp, type TestApp } from './helpers.js';
 
 const azure = {
@@ -136,6 +136,93 @@ describe('chat', () => {
       .from(chatUsage)
       .where(eq(chatUsage.userId, s.id));
     expect(rows).toEqual([{ answers: 0 }]);
+  });
+
+  it('never returns code, but still counts that paid answer', async () => {
+    const s = await t.signInAs('learner');
+    const fetchMock = azureReplies(
+      answer('Sure:\n```python\nprint("hello")\n```'),
+    );
+    const res = await t
+      .http()
+      .post('/v1/chat')
+      .set('Authorization', `Bearer ${s.token}`)
+      .send(question('Tell me about hello'))
+      .expect(200);
+    expect(res.body.reply).toBe(OFF_TOPIC_REPLY);
+    expect(res.body.remaining_today).toBe(1);
+    // The model is also told to stay in scope.
+    const sent = JSON.parse(
+      (fetchMock.mock.calls[0] as [string, RequestInit])[1].body as string,
+    );
+    expect(sent.messages[0].content).toContain('Never write, fix, explain');
+    const rows = await t.db
+      .select({ answers: chatUsage.answers })
+      .from(chatUsage)
+      .where(eq(chatUsage.userId, s.id));
+    expect(rows).toEqual([{ answers: 1 }]);
+  });
+
+  it('refuses requests to write code without calling the model', async () => {
+    const s = await t.signInAs('learner');
+    const fetchMock = azureReplies();
+    const ask = (content: string) =>
+      t
+        .http()
+        .post('/v1/chat')
+        .set('Authorization', `Bearer ${s.token}`)
+        .send(question(content))
+        .expect(200);
+    for (const q of [
+      'Write a Python program to sort a list',
+      'please fix this javascript bug',
+      'Give me source code for a login page',
+    ])
+      expect((await ask(q)).body.reply).toBe(OFF_TOPIC_REPLY);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('answers legal questions that use words that are also code names', async () => {
+    const s = await t.signInAs('learner');
+    const fetchMock = azureReplies(answer('Stay calm.'), answer('Stay calm.'));
+    // Two questions: the test limit is 2 answers a day.
+    for (const q of [
+      'Show me how to react if police stop me',
+      'Give me the rules for a swift trial in Dart district',
+    ]) {
+      const res = await t
+        .http()
+        .post('/v1/chat')
+        .set('Authorization', `Bearer ${s.token}`)
+        .send(question(q))
+        .expect(200);
+      expect(res.body.reply).toBe('Stay calm.');
+    }
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+
+  it('still answers legal questions that mention a code', async () => {
+    const s = await t.signInAs('learner');
+    azureReplies(answer('It sets out the court procedure.'));
+    const res = await t
+      .http()
+      .post('/v1/chat')
+      .set('Authorization', `Bearer ${s.token}`)
+      .send(question('Explain the Code of Criminal Procedure in simple words'))
+      .expect(200);
+    expect(res.body.reply).toBe('It sets out the court procedure.');
+  });
+
+  it('also catches code that is not in a fenced block', async () => {
+    const s = await t.signInAs('learner');
+    azureReplies(answer('import os\ndef run():\n  pass'));
+    const res = await t
+      .http()
+      .post('/v1/chat')
+      .set('Authorization', `Bearer ${s.token}`)
+      .send(question('Tell me about bail'))
+      .expect(200);
+    expect(res.body.reply).toBe(OFF_TOPIC_REPLY);
   });
 
   it('rejects a conversation that does not end with a question', async () => {

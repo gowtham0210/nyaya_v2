@@ -6,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../journey/application/journey_controller.dart';
 import '../../profile/application/profile_controller.dart';
 import '../application/quiz_controller.dart';
 import '../data/quiz_api.dart';
@@ -55,7 +56,7 @@ class _QuizSession extends ConsumerWidget {
     final refund = !state.hasStarted;
     // Say exactly what leaving costs: the server gives energy back only
     // before the first answer, and an attempt can't be picked up again.
-    final cost = ref.read(profileProvider).isPremium ? 0 : request.mode.energyCost;
+    final cost = ref.read(profileProvider).isPremium ? 0 : energyCostOf(request, ref.read(journeyProvider).stars);
     final body = switch ((refund, cost > 0)) {
       (true, true) => l.quizQuitRefund(cost),
       (true, false) => l.quizQuitFree,

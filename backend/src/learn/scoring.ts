@@ -51,7 +51,8 @@ export function scoreSession(questions: readonly ScoredQuestion[]) {
   let correct = 0;
   let answered = 0;
   for (const q of questions) {
-    if (!q.selectedOptionIds) continue;
+    // Empty: time ran out on a question, which counts as unanswered.
+    if (!q.selectedOptionIds?.length) continue;
     answered++;
     if (isCorrect(q.selectedOptionIds, q.correctOptionIds)) correct++;
   }

@@ -239,7 +239,7 @@ class QuizController extends Notifier<QuizState> {
   Future<bool> abandon() async {
     _timer?.cancel();
     // The phone's copy took the energy when the quiz opened; give it back now.
-    ref.read(profileProvider.notifier).refundEnergy(request.mode.energyCost);
+    ref.read(profileProvider.notifier).refundEnergy(energyCostOf(request, ref.read(journeyProvider).stars));
     final id = _sessionId;
     if (id == null) return true;
     var refunded = true;
@@ -286,9 +286,31 @@ class QuizController extends Notifier<QuizState> {
     if (s.request.mode == QuizMode.exam) {
       _finishExam();
     } else {
-      // Time ran out: nothing is sent, so the answer stays secret until the result.
-      _lockAnswer(null, verdict: null, elapsedMs: _elapsedMs);
+      _timeOut();
     }
+  }
+
+  /// Time ran out on a question: tell the server, which records it as
+  /// unanswered and sends back the right answer to show now. Offline, the
+  /// answer shows on the result screen instead.
+  Future<void> _timeOut() async {
+    final s = state;
+    final elapsed = _elapsedMs;
+    state = s.copyWith(sending: true, clearSelected: true);
+    Verdict? verdict;
+    try {
+      verdict = await _api.answer(
+        _sessionId!,
+        position: s.index + 1,
+        question: s.current,
+        option: null,
+        elapsedMs: elapsed,
+      );
+    } on ApiException {
+      verdict = null;
+    }
+    if (!ref.mounted) return;
+    _lockAnswer(null, verdict: verdict, elapsedMs: elapsed);
   }
 
   int get _elapsedMs => _now().difference(_questionStart).inMilliseconds;

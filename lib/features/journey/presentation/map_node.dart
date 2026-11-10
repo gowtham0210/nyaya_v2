@@ -18,6 +18,7 @@ class MapNode extends StatelessWidget {
     required this.stars,
     required this.userName,
     required this.onTap,
+    this.youOnLeft = false,
   });
 
   final JourneyNode node;
@@ -25,6 +26,10 @@ class MapNode extends StatelessWidget {
   final int stars;
   final String userName;
   final VoidCallback onTap;
+
+  /// Which side of the current stop the "You" marker sits on: the side facing
+  /// the middle of the screen, so it never covers the stops above or below.
+  final bool youOnLeft;
 
   static const box = 140.0;
 
@@ -35,13 +40,21 @@ class MapNode extends StatelessWidget {
     required int stars,
     required String userName,
     required VoidCallback onTap,
+    required double mapWidth,
   }) {
     return Positioned(
       left: center.dx - box / 2,
       top: center.dy - box / 2 - 4,
       width: box,
       height: box,
-      child: MapNode(node: node, status: status, stars: stars, userName: userName, onTap: onTap),
+      child: MapNode(
+        node: node,
+        status: status,
+        stars: stars,
+        userName: userName,
+        onTap: onTap,
+        youOnLeft: center.dx > mapWidth / 2,
+      ),
     );
   }
 
@@ -108,9 +121,12 @@ class MapNode extends StatelessWidget {
           ),
           if (node.kind == NodeKind.level && status == NodeStatus.completed)
             Positioned(top: 18, child: StarRow(stars: stars, size: 20, spacing: 0, arc: true)),
+          // Beside the stop, not above it: stops are only 96 points apart.
           if (isCurrent)
             Positioned(
-              top: node.kind == NodeKind.level ? -8 : 6,
+              top: box / 2 - 16,
+              left: youOnLeft ? null : box / 2 + size / 2 + 10,
+              right: youOnLeft ? box / 2 + size / 2 + 10 : null,
               child: _YouMarker(name: userName),
             ),
         ],

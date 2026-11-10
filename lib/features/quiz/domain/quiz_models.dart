@@ -192,3 +192,9 @@ class QuizResult {
       : duelPlayerPoints! > (duelOpponentPoints ?? 0);
   bool get duelDraw => duelPlayerPoints != null && duelPlayerPoints == duelOpponentPoints;
 }
+
+/// Energy [request] costs to start, given the learner's best stars per level.
+/// A Learning Path level already cleared (1+ stars) is free to replay; the
+/// server applies the same rule and pays half XP for it.
+int energyCostOf(QuizRequest request, Map<String, int> stars) =>
+    request.mode == QuizMode.casePath && (stars[request.levelId] ?? 0) > 0 ? 0 : request.mode.energyCost;

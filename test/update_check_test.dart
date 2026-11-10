@@ -139,20 +139,20 @@ void main() {
 
   testWidgets('an old build sees only the update screen', (tester) async {
     await pump(tester, '0.1.0', _FakeConfig(const AppSettings(minVersion: '0.2.0', updateUrl: 'https://apps.apple.com/app/id1')));
-    expect(find.text('Please update Nyaya'), findsOneWidget);
+    expect(find.text('Please update Nyaya Kural'), findsOneWidget);
     expect(find.text('Update'), findsOneWidget);
     expect(find.text('Choose your language'), findsNothing);
   });
 
   testWidgets('without a store link there is a message but no button', (tester) async {
     await pump(tester, '0.1.0', _FakeConfig(const AppSettings(minVersion: '0.2.0')));
-    expect(find.text('Please update Nyaya'), findsOneWidget);
+    expect(find.text('Please update Nyaya Kural'), findsOneWidget);
     expect(find.text('Update'), findsNothing);
   });
 
   testWidgets('a current build opens the app as usual', (tester) async {
     await pump(tester, '0.2.0', _FakeConfig(const AppSettings(minVersion: '0.2.0')));
-    expect(find.text('Please update Nyaya'), findsNothing);
+    expect(find.text('Please update Nyaya Kural'), findsNothing);
     expect(find.text('Choose your language'), findsOneWidget);
   });
 }

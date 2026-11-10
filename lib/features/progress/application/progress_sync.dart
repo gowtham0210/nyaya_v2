@@ -57,10 +57,25 @@ class ProgressSync extends Notifier<void> {
     ServerProgress? p = await _guard(api.fetch);
     if (p == null || !ref.mounted) return p;
     final local = ref.read(profileProvider);
-    if (p.settings == null && local.onboarded) {
+    final accountName = ref.read(authProvider)?.displayName.trim() ?? '';
+    // Accounts made before this fix saved the placeholder instead of the
+    // sign-up name; repair them once.
+    final placeholderName = p.settings?.name == _placeholderName && accountName.isNotEmpty;
+    if ((p.settings == null && local.onboarded) || placeholderName) {
+      final settings = placeholderName
+          ? ServerSettings(
+              name: accountName,
+              persona: p.settings!.persona,
+              language: p.settings!.language,
+              dailyGoal: p.settings!.dailyGoal,
+              onboarded: p.settings!.onboarded,
+            )
+          : _settingsOf(local, accountName: accountName);
       final uploaded = await _guard(() async {
-        await api.saveSettings(_settingsOf(local));
-        return local.isPremium && Features.premium && !p!.premium ? api.setPremium(true) : api.fetch();
+        await api.saveSettings(settings);
+        return !placeholderName && local.isPremium && Features.premium && !p!.premium
+            ? api.setPremium(true)
+            : api.fetch();
       });
       if (uploaded != null) p = uploaded;
     }
@@ -96,7 +111,9 @@ class ProgressSync extends Notifier<void> {
   Future<void> pushSettings() async {
     if (!ref.read(authProvider.notifier).isSignedIn) return;
     await _guard(() async {
-      await ref.read(progressApiProvider).saveSettings(_settingsOf(ref.read(profileProvider)));
+      await ref.read(progressApiProvider).saveSettings(
+            _settingsOf(ref.read(profileProvider), accountName: ref.read(authProvider)?.displayName ?? ''),
+          );
       return null;
     });
   }
@@ -131,8 +148,14 @@ class ProgressSync extends Notifier<void> {
     }
   }
 
-  static ServerSettings _settingsOf(UserProfile p) => ServerSettings(
-        name: p.name.trim().isEmpty ? 'Learner' : p.name.trim(),
+  static const _placeholderName = 'Learner';
+
+  /// The phone's settings for the account. Onboarding no longer asks for a
+  /// name, so the name typed at sign-up is used until the learner changes it.
+  static ServerSettings _settingsOf(UserProfile p, {required String accountName}) => ServerSettings(
+        name: p.name.trim().isNotEmpty
+            ? p.name.trim()
+            : (accountName.trim().isNotEmpty ? accountName.trim() : _placeholderName),
         persona: p.persona.name,
         language: p.language.code,
         dailyGoal: p.dailyGoal,

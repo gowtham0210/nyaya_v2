@@ -10,7 +10,7 @@ class AppLocalizationsTe extends AppLocalizations {
   AppLocalizationsTe([String locale = 'te']) : super(locale);
 
   @override
-  String get appName => 'Nyaya';
+  String get appName => 'Nyaya Kural';
 
   @override
   String get appTagline => 'రోజుకో కేసుతో భారతీయ చట్టం నేర్చుకోండి';
@@ -189,7 +189,7 @@ class AppLocalizationsTe extends AppLocalizations {
       'రాజ్యాంగం, BNS, BNSS, మీకు రోజూ ఎదురయ్యే చట్టాలపై చిన్న చిన్న క్విజ్‌లు.';
 
   @override
-  String get onbSlide2Title => 'కేస్ పాత్ ఆడండి';
+  String get onbSlide2Title => 'అభ్యాస మార్గంలో నడవండి';
 
   @override
   String get onbSlide2Body =>
@@ -358,7 +358,7 @@ class AppLocalizationsTe extends AppLocalizations {
   }
 
   @override
-  String get onbReadyBody => 'కేస్ పాత్‌లో మీ మొదటి కేసు ఎదురుచూస్తోంది.';
+  String get onbReadyBody => 'మీ మొదటి పాఠం అభ్యాస మార్గంలో ఎదురుచూస్తోంది.';
 
   @override
   String get greetingMorning => 'శుభోదయం';
@@ -370,7 +370,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get greetingEvening => 'శుభ సాయంత్రం';
 
   @override
-  String get homeContinueJourney => 'మీ కేస్ పాత్ కొనసాగించండి';
+  String get homeContinueJourney => 'మీ అభ్యాస మార్గాన్ని కొనసాగించండి';
 
   @override
   String get homeContinueLeftOff => 'ఆపిన చోటు నుండి కొనసాగించండి';
@@ -482,28 +482,28 @@ class AppLocalizationsTe extends AppLocalizations {
   String get homeGoPremium => 'అపరిమిత ఎనర్జీ పొందండి';
 
   @override
-  String get homeGoPremiumSub => 'Nyaya Premium · 7 రోజుల ఉచిత ట్రయల్';
+  String get homeGoPremiumSub => 'Nyaya Kural Premium · 7 రోజుల ఉచిత ట్రయల్';
 
   @override
-  String get modeCasePath => 'కేస్ పాత్';
+  String get modeCasePath => 'అభ్యాస మార్గం';
 
   @override
   String get modeCasePathDesc => 'లెవెల్ వారీ ప్రయాణం';
 
   @override
-  String get modeDailyDocket => 'డైలీ డాకెట్';
+  String get modeDailyDocket => 'నేటి ప్రశ్నలు';
 
   @override
   String get modeDailyDocketDesc => '5 ప్రశ్నలు · అందరికీ ఒకటే';
 
   @override
-  String get modeDuel => 'మూట్ కోర్ట్ డ్యుయెల్';
+  String get modeDuel => 'క్విక్ క్విజ్';
 
   @override
   String get modeDuelDesc => '1v1 · 7 ప్రశ్నలు · సమయాన్ని ఓడించండి';
 
   @override
-  String get modeExam => 'ఎగ్జామ్ ఛాంబర్';
+  String get modeExam => 'పరీక్ష సాధన';
 
   @override
   String get modeExamDesc => '20 ప్రశ్నలు · 20 నిమి · నెగటివ్ మార్కింగ్';
@@ -525,7 +525,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String docketNextIn(String time) {
-    return 'తదుపరి డాకెట్ $timeలో';
+    return 'కొత్త ప్రశ్నలు $timeలో';
   }
 
   @override
@@ -566,7 +566,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get energyFreeOptions => 'మీరు ఇప్పటికీ ఉచితంగా చేయగలిగేవి';
 
   @override
-  String get energyPlayDocket => 'నేటి డైలీ డాకెట్ ఆడండి (ఉచితం)';
+  String get energyPlayDocket => 'నేటి ప్రశ్నలు ఆడండి (ఉచితం)';
 
   @override
   String get energyAskAi => 'AIని చట్టపరమైన ప్రశ్న అడగండి';
@@ -582,7 +582,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get energyRefilled => '+1 ఎనర్జీ!';
 
   @override
-  String get journeyTitle => 'కేస్ పాత్';
+  String get journeyTitle => 'అభ్యాస మార్గం';
 
   @override
   String get journeySubtitle => 'భారతీయ చట్టంలో మీ ప్రయాణం';
@@ -687,6 +687,16 @@ class AppLocalizationsTe extends AppLocalizations {
   String get journeyHowScoring => 'స్కోర్ ఎలా లెక్కిస్తారు';
 
   @override
+  String get journeyReplayFree => 'మళ్లీ ఆడండి · ఉచితం';
+
+  @override
+  String get journeyFreeReplay => 'ఉచిత రీప్లే';
+
+  @override
+  String get journeyRuleReplay =>
+      'మీరు పూర్తి చేసిన లెవెల్‌ను మళ్లీ ఆడటం ఉచితం. మళ్లీ ఆడితే సగం XP వస్తుంది, అది మీ రోజువారీ లక్ష్యంలో లెక్కకు వస్తుంది.';
+
+  @override
   String journeyRuleEnergy(int count) {
     return 'ప్రతి ప్రయత్నానికి $count ఎనర్జీ ఖర్చవుతుంది. మొదటి జవాబుకు ముందే వదిలేస్తే అది తిరిగి వస్తుంది.';
   }
@@ -756,12 +766,12 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String journeyEnergyInfo(int cost, int free, String time) {
-    return 'కేస్ పాత్‌లో ప్రతి లెవెల్‌కు $cost ఎనర్జీ ఖర్చవుతుంది. ప్రతిరోజూ $free ఎనర్జీ ఉచితం. అర్ధరాత్రి తిరిగి నిండుతుంది — $timeలో.';
+    return 'అభ్యాస మార్గంలో ప్రతి లెవెల్‌కు $cost ఎనర్జీ ఖర్చవుతుంది. ప్రతిరోజూ $free ఎనర్జీ ఉచితం. అర్ధరాత్రి తిరిగి నిండుతుంది — $timeలో.';
   }
 
   @override
   String get journeyCoinsInfo =>
-      'కొత్త స్టార్లు, అధ్యాయ చెస్ట్‌లు, డైలీ డాకెట్, రోజువారీ లక్ష్యం, స్ట్రీక్ మైలురాళ్ల నుంచి కాయిన్‌లు సంపాదించండి. వాటిని స్టోర్‌లో ఎనర్జీ నింపడానికి, స్ట్రీక్ ఫ్రీజ్‌లకు ఖర్చు చేయండి.';
+      'కొత్త స్టార్లు, అధ్యాయ చెస్ట్‌లు, నేటి ప్రశ్నలు, రోజువారీ లక్ష్యం, స్ట్రీక్ మైలురాళ్ల నుంచి కాయిన్‌లు సంపాదించండి. వాటిని స్టోర్‌లో ఎనర్జీ నింపడానికి, స్ట్రీక్ ఫ్రీజ్‌లకు ఖర్చు చేయండి.';
 
   @override
   String get journeyOpenStore => 'స్టోర్ తెరవండి';
@@ -881,7 +891,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get quizRefundFailed =>
-      'Nyayaని చేరలేకపోయాం, కాబట్టి మీ ఎనర్జీ తిరిగి రాలేదు.';
+      'Nyaya Kuralని చేరలేకపోయాం, కాబట్టి మీ ఎనర్జీ తిరిగి రాలేదు.';
 
   @override
   String get quizOptionCorrect => 'సరైన జవాబు';
@@ -944,6 +954,38 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get resultTryAgain => 'దాదాపు చేరుకున్నారు';
+
+  @override
+  String get resultKeepPractising => 'సాధన కొనసాగించండి';
+
+  @override
+  String get resultNewExam => 'కొత్త పరీక్ష';
+
+  @override
+  String get levelUpTitle => 'లెవెల్ అప్!';
+
+  @override
+  String levelUpCleared(int number) {
+    return 'లెవెల్ $number పూర్తి';
+  }
+
+  @override
+  String levelUpNextLevel(int number) {
+    return 'లెవెల్ $number ఇప్పుడు తెరుచుకుంది';
+  }
+
+  @override
+  String get levelUpChest => 'అధ్యాయ చెస్ట్ తెరవడానికి సిద్ధం';
+
+  @override
+  String levelUpNewChapter(String chapter) {
+    return 'కొత్త అధ్యాయం: $chapter';
+  }
+
+  @override
+  String levelUpRank(int before, int after) {
+    return 'లీగ్ ర్యాంక్ #$before → #$after';
+  }
 
   @override
   String get resultTryAgainBody =>
@@ -1153,7 +1195,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get tier_supremeCourt => 'సుప్రీంకోర్టు';
 
   @override
-  String get chatTitle => 'Nyaya AI';
+  String get chatTitle => 'Nyaya Kural AI';
 
   @override
   String get chatSubtitle => 'మీ న్యాయ సమాచార సహాయకుడు';
@@ -1256,6 +1298,13 @@ class AppLocalizationsTe extends AppLocalizations {
   String get updatesAskAi => 'దీని గురించి AIని అడగండి';
 
   @override
+  String get updatesSavedFilter => 'సేవ్ చేసినవి';
+
+  @override
+  String get updatesSavedEmpty =>
+      'ఇంకా ఏమీ సేవ్ చేయలేదు. ఏ అప్‌డేట్‌పైనైనా బుక్‌మార్క్ నొక్కితే అది ఇక్కడ ఉంటుంది.';
+
+  @override
   String get updatesEmpty => 'ఈ విభాగంలో ఇంకా అప్‌డేట్‌లు లేవు.';
 
   @override
@@ -1328,7 +1377,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get reminderJourney =>
-      'మీ కేస్ పాత్ ఎదురుచూస్తోంది. తదుపరి మజిలీకి సిద్ధమా?';
+      'మీ అభ్యాస మార్గం ఎదురుచూస్తోంది. తదుపరి మజిలీకి సిద్ధమా?';
 
   @override
   String get reminderRights =>
@@ -1339,7 +1388,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get settingsRemindersBlocked =>
-      'Nyayaకు నోటిఫికేషన్లు ఆఫ్‌లో ఉన్నాయి. రిమైండర్లు పొందడానికి ఫోన్ సెట్టింగ్స్‌లో వాటిని ఆన్ చేయండి.';
+      'Nyaya Kuralకు నోటిఫికేషన్లు ఆఫ్‌లో ఉన్నాయి. రిమైండర్లు పొందడానికి ఫోన్ సెట్టింగ్స్‌లో వాటిని ఆన్ చేయండి.';
 
   @override
   String get settingsStore => 'స్టోర్';
@@ -1365,7 +1414,7 @@ class AppLocalizationsTe extends AppLocalizations {
       'మీ దగ్గర ఇప్పటికే గరిష్ఠ సంఖ్యలో ఫ్రీజ్‌లు ఉన్నాయి.';
 
   @override
-  String get settingsPremium => 'Nyaya Premium';
+  String get settingsPremium => 'Nyaya Kural Premium';
 
   @override
   String get settingsPremiumActive => 'Premium యాక్టివ్‌గా ఉంది';
@@ -1389,7 +1438,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get settingsAccuracy => 'ఖచ్చితత్వం';
 
   @override
-  String get settingsDuelRecord => 'గెలిచిన డ్యుయెల్స్';
+  String get settingsDuelRecord => 'విజయాలు';
 
   @override
   String get settingsAbout => 'గురించి';
@@ -1399,7 +1448,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get settingsDisclaimerBody =>
-      'Nyaya ఒక విద్యా యాప్. ప్రశ్నలు, వివరణలు, అప్‌డేట్‌లు, AI జవాబులు సాధారణ సమాచారం మాత్రమే, న్యాయ సలహా కాదు. చట్టాలు మారుతుంటాయి — ఎల్లప్పుడూ అధికారిక గెజిట్‌లో సరిచూసుకోండి లేదా న్యాయవాదిని సంప్రదించండి.';
+      'Nyaya Kural ఒక విద్యా యాప్. ప్రశ్నలు, వివరణలు, అప్‌డేట్‌లు, AI జవాబులు సాధారణ సమాచారం మాత్రమే, న్యాయ సలహా కాదు. చట్టాలు మారుతుంటాయి — ఎల్లప్పుడూ అధికారిక గెజిట్‌లో సరిచూసుకోండి లేదా న్యాయవాదిని సంప్రదించండి.';
 
   @override
   String get settingsPrivacy => 'గోప్యత';
@@ -1424,7 +1473,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get settingsResetAction => 'రీసెట్ చేయండి';
 
   @override
-  String get premiumTitle => 'Nyaya Premium';
+  String get premiumTitle => 'Nyaya Kural Premium';
 
   @override
   String get premiumHeadline => 'ప్రతిరోజూ మరింత నేర్చుకోండి';
@@ -1438,7 +1487,7 @@ class AppLocalizationsTe extends AppLocalizations {
   }
 
   @override
-  String get premiumBenefitAi => 'మరింత Nyaya AI';
+  String get premiumBenefitAi => 'మరింత Nyaya Kural AI';
 
   @override
   String premiumBenefitAiSub(int free, int premium) {
@@ -1480,7 +1529,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get premiumRestore => 'కొనుగోళ్లను పునరుద్ధరించండి';
 
   @override
-  String get premiumActivated => 'Nyaya Premiumకి స్వాగతం!';
+  String get premiumActivated => 'Nyaya Kural Premiumకి స్వాగతం!';
 
   @override
   String get premiumAlready => 'మీరు Premium సభ్యులు';
@@ -1502,6 +1551,31 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get statStars => 'స్టార్లు';
+
+  @override
+  String get searchTitle => 'వెతకండి';
+
+  @override
+  String get searchHint => 'చట్టాలు, అంశాలు, అప్‌డేట్‌లు వెతకండి';
+
+  @override
+  String get searchTopics => 'అంశాలు';
+
+  @override
+  String get searchLaws => 'చట్టాలు';
+
+  @override
+  String get searchUpdates => 'అప్‌డేట్‌లు';
+
+  @override
+  String searchAskAi(String query) {
+    return 'AIని అడగండి: “$query”';
+  }
+
+  @override
+  String searchNoResults(String query) {
+    return '“$query”కు ఇంకా ఏదీ సరిపోలలేదు. AIని అడగండి.';
+  }
 
   @override
   String get exploreTitle => 'చట్టాన్ని తెలుసుకోండి';
@@ -1627,7 +1701,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get authCreateSubtitle =>
-      'ప్రశ్నలు Nyaya సమీక్షించిన సేకరణ నుండి వస్తాయి, మీ ఫలితాలు మీ ఖాతాలో భద్రంగా ఉంటాయి.';
+      'ప్రశ్నలు Nyaya Kural సమీక్షించిన సేకరణ నుండి వస్తాయి, మీ ఫలితాలు మీ ఖాతాలో భద్రంగా ఉంటాయి.';
 
   @override
   String get authSignInTitle => 'మళ్లీ స్వాగతం';
@@ -1669,7 +1743,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get authErrorNetwork =>
-      'ఇప్పుడు Nyaya ను చేరుకోలేకపోతున్నాం. కనెక్షన్ చూసి మళ్లీ ప్రయత్నించండి.';
+      'ఇప్పుడు Nyaya Kural ను చేరుకోలేకపోతున్నాం. కనెక్షన్ చూసి మళ్లీ ప్రయత్నించండి.';
 
   @override
   String get authErrorRateLimited =>
@@ -1742,7 +1816,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get settingsSignOut => 'సైన్ అవుట్';
 
   @override
-  String get updateRequiredTitle => 'దయచేసి Nyaya ను అప్‌డేట్ చేయండి';
+  String get updateRequiredTitle => 'దయచేసి Nyaya Kural ను అప్‌డేట్ చేయండి';
 
   @override
   String get updateRequiredBody =>
@@ -1786,7 +1860,7 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get quizOffline =>
-      'Nyaya ను చేరుకోలేకపోతున్నాం. కనెక్షన్ చూసి మళ్లీ ప్రయత్నించండి.';
+      'Nyaya Kural ను చేరుకోలేకపోతున్నాం. కనెక్షన్ చూసి మళ్లీ ప్రయత్నించండి.';
 
   @override
   String get quizSignedOut =>

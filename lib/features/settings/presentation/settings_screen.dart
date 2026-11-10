@@ -25,7 +25,10 @@ import 'delete_account_dialog.dart';
 import 'edit_name_dialog.dart';
 
 class SettingsScreen extends ConsumerWidget {
-  const SettingsScreen({super.key});
+  const SettingsScreen({super.key, this.openStore = false});
+
+  /// Opened from "Open the Store": scrolls straight to the store section.
+  final bool openStore;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -130,7 +133,10 @@ class SettingsScreen extends ConsumerWidget {
           ]),
 
           // ── Premium & store ───────────────────────────────────────────────
-          _Header('${l.settingsStore} · ${p.coins} ${l.statCoins}'),
+          _ScrollIntoView(
+            enabled: openStore,
+            child: _Header('${l.settingsStore} · ${p.coins} ${l.statCoins}'),
+          ),
           _Group(children: [
             if (Features.premium)
               ListTile(
@@ -424,6 +430,32 @@ class SettingsScreen extends ConsumerWidget {
     unawaited(sync.refresh());
     if (context.mounted) context.go(Routes.onboarding);
   }
+}
+
+/// Scrolls its child to the top of the screen once, after the first frame.
+class _ScrollIntoView extends StatefulWidget {
+  const _ScrollIntoView({required this.enabled, required this.child});
+
+  final bool enabled;
+  final Widget child;
+
+  @override
+  State<_ScrollIntoView> createState() => _ScrollIntoViewState();
+}
+
+class _ScrollIntoViewState extends State<_ScrollIntoView> {
+  @override
+  void initState() {
+    super.initState();
+    if (!widget.enabled) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      Scrollable.ensureVisible(context, duration: const Duration(milliseconds: 350), curve: Curves.easeOutCubic);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
 }
 
 class _Header extends StatelessWidget {

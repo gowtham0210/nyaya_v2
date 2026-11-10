@@ -153,8 +153,9 @@ class ProfileController extends Notifier<UserProfile> {
     ));
   }
 
-  /// Signed out: show no progress, coins or premium (they belong to the account).
+  /// Signed out: show no name, progress, coins or premium (they belong to the account).
   void clearServerProgress() => _set(state.copyWith(
+        name: '',
         leagueTier: 1,
         clearLeagueOutcome: true,
         coins: 0,

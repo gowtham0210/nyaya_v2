@@ -8,6 +8,7 @@ import 'app/app.dart';
 import 'core/api/token_store.dart';
 import 'core/monitoring/monitoring.dart';
 import 'core/storage/local_store.dart';
+import 'features/splash/presentation/splash_video.dart';
 import 'features/update/application/update_check.dart';
 
 Future<void> main() => Monitoring.run(_start);
@@ -24,6 +25,7 @@ Future<void> _start() async {
         sharedPreferencesProvider.overrideWithValue(prefs),
         tokenStoreProvider.overrideWithValue(tokens),
         appVersionProvider.overrideWithValue(version),
+        splashEnabledProvider.overrideWithValue(true),
       ],
       child: const NyayaApp(),
     ),

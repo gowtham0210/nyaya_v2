@@ -2,7 +2,6 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
 import {
   ArrayMaxSize,
-  ArrayMinSize,
   IsArray,
   IsBoolean,
   IsIn,
@@ -139,9 +138,13 @@ export class AnswerDto {
   @Max(MAX_QUESTIONS)
   position: number;
 
-  @ApiProperty({ type: [String], example: ['a'] })
+  @ApiProperty({
+    type: [String],
+    example: ['a'],
+    description:
+      'Empty means time ran out. Allowed only where each answer is explained at once (not exams); it scores as unanswered and still returns the feedback.',
+  })
   @IsArray()
-  @ArrayMinSize(1)
   @ArrayMaxSize(6)
   @IsString({ each: true })
   @MaxLength(8, { each: true })

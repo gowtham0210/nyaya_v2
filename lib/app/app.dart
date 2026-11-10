@@ -7,6 +7,7 @@ import '../core/theme/app_theme.dart';
 import '../features/profile/application/profile_controller.dart';
 import '../features/progress/application/progress_sync.dart';
 import '../features/reminders/application/reminder_sync.dart';
+import '../features/splash/presentation/splash_video.dart';
 import '../features/update/application/update_check.dart';
 import '../features/update/presentation/update_required_screen.dart';
 import 'router.dart';
@@ -23,6 +24,8 @@ class NyayaApp extends ConsumerStatefulWidget {
 
 class _NyayaAppState extends ConsumerState<NyayaApp> {
   late final AppLifecycleListener _lifecycle;
+  // The opening video plays once per cold start, over whatever screen opens first.
+  late bool _showSplash = ref.read(splashEnabledProvider);
 
   @override
   void initState() {
@@ -72,10 +75,27 @@ class _NyayaAppState extends ConsumerState<NyayaApp> {
       routerConfig: ref.watch(routerProvider),
       // A build the server no longer allows sees only the update screen.
       // Text follows the phone's size setting up to 1.5x, the most the game layouts can hold.
-      builder: (context, child) => MediaQuery.withClampedTextScaling(
-        maxScaleFactor: maxTextScale,
-        child: update != null ? UpdateRequiredScreen(updateUrl: update.updateUrl) : child!,
-      ),
+      builder: (context, child) {
+        final app = MediaQuery.withClampedTextScaling(
+          maxScaleFactor: maxTextScale,
+          child: update != null
+              ? UpdateRequiredScreen(updateUrl: update.updateUrl)
+              : child!,
+        );
+        if (!_showSplash) return app;
+        return Stack(
+          children: [
+            app,
+            Positioned.fill(
+              child: SplashVideo(
+                onDone: () {
+                  if (mounted) setState(() => _showSplash = false);
+                },
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

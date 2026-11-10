@@ -46,7 +46,16 @@ extension UpdateCategoryX on UpdateCategory {
   /// [color] lifted for text and icons on dark surfaces.
   Color tint(BuildContext context) => context.isDark ? Color.lerp(color, Colors.white, 0.45)! : color;
 
-  /// Journey painting a card shows until its own thumbnail is added.
+  /// The category's own painting (prompts in docs/UPDATES_ART.md), shown
+  /// when an article has no picture of its own.
+  String get ownImage => switch (this) {
+    UpdateCategory.supremeCourt => 'assets/images/updates_supreme_court.webp',
+    UpdateCategory.highCourts => 'assets/images/updates_high_courts.webp',
+    UpdateCategory.legislation => 'assets/images/updates_legislation.webp',
+    UpdateCategory.explainer => 'assets/images/updates_explainer.webp',
+  };
+
+  /// Journey painting used until the category's own painting is added.
   String get fallbackImage => switch (this) {
     UpdateCategory.supremeCourt => 'assets/images/journey_constitution_landmark.webp',
     UpdateCategory.highCourts => 'assets/images/journey_criminal_landmark.webp',
@@ -65,10 +74,14 @@ class UpdatesScreen extends ConsumerStatefulWidget {
 class _UpdatesScreenState extends ConsumerState<UpdatesScreen> {
   UpdateCategory? _filter;
 
+  /// The Saved pill: only updates the learner bookmarked.
+  bool _savedOnly = false;
+
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
     final async = ref.watch(legalUpdatesProvider);
+    final saved = ref.watch(savedUpdatesProvider);
 
     return Scaffold(
       body: RefreshIndicator(
@@ -83,16 +96,34 @@ class _UpdatesScreenState extends ConsumerState<UpdatesScreen> {
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: AppSpacing.page),
                   children: [
-                    for (final c in [null, ...UpdateCategory.values])
+                    for (final c in [null, ...UpdateCategory.values]) ...[
                       Padding(
                         padding: const EdgeInsets.only(right: 10),
                         child: _FilterPill(
                           icon: c?.chipIcon ?? Icons.grid_view_rounded,
                           label: c == null ? l.updatesAll : c.label(l),
-                          selected: _filter == c,
-                          onTap: () => setState(() => _filter = c),
+                          selected: !_savedOnly && _filter == c,
+                          onTap: () => setState(() {
+                            _filter = c;
+                            _savedOnly = false;
+                          }),
                         ),
                       ),
+                      // Saved sits right after All, where it is easy to find.
+                      if (c == null)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: _FilterPill(
+                            icon: Icons.bookmark_rounded,
+                            label: l.updatesSavedFilter,
+                            selected: _savedOnly,
+                            onTap: () => setState(() {
+                              _filter = null;
+                              _savedOnly = true;
+                            }),
+                          ),
+                        ),
+                    ],
                   ],
                 ),
               ),
@@ -111,9 +142,13 @@ class _UpdatesScreenState extends ConsumerState<UpdatesScreen> {
               data: (all) {
                 final items = [
                   for (final u in all)
-                    if (_filter == null || u.category == _filter) u,
+                    if (_savedOnly ? saved.contains(u.id) : (_filter == null || u.category == _filter)) u,
                 ];
-                if (items.isEmpty) return [SliverFillRemaining(child: _Empty(text: l.updatesEmpty))];
+                if (items.isEmpty) {
+                  return [
+                    SliverFillRemaining(child: _Empty(text: _savedOnly ? l.updatesSavedEmpty : l.updatesEmpty)),
+                  ];
+                }
                 return [
                   SliverPadding(
                     padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.lg, AppSpacing.page, AppSpacing.xl),
@@ -421,6 +456,17 @@ class UpdateFallbackArt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // The category's own painting fills the card; until it is added, the
+    // Journey painting stands in (the Journey map shows the same ones).
+    return Image.asset(
+      category.ownImage,
+      fit: BoxFit.cover,
+      excludeFromSemantics: true,
+      errorBuilder: (_, _, _) => _journeyPainting(context),
+    );
+  }
+
+  Widget _journeyPainting(BuildContext context) {
     return ColoredBox(
       color: context.colors.surfaceContainerHigh,
       child: Padding(

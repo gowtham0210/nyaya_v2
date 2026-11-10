@@ -77,7 +77,10 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
         .take(plan.count)
         .toList();
     if (picked.isEmpty) throw const ApiException(422, 'no_questions_available', 'none');
-    final cost = premium ? 0 : plan.mode.energyCost;
+    final levelId = plan.mode == QuizMode.casePath ? '${plan.chapterIds.single}_${plan.difficulty}' : null;
+    // Like the API: a level already cleared is free to replay.
+    final replay = levelId != null && (stars[levelId] ?? 0) > 0;
+    final cost = premium || replay ? 0 : plan.mode.energyCost;
     if (energy < cost) throw const ApiException(409, 'not_enough_energy', 'none');
     energy -= cost;
     final id = 'session-${++sessionsStarted}';
@@ -85,7 +88,7 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
       picked,
       revealAtEnd: plan.revealAtEnd,
       mode: plan.mode,
-      levelId: plan.mode == QuizMode.casePath ? '${plan.chapterIds.single}_${plan.difficulty}' : null,
+      levelId: levelId,
       negativeMarking: plan.negativeMarking,
       cost: cost,
     );
@@ -120,7 +123,7 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
     String sessionId, {
     required int position,
     required Question question,
-    required int option,
+    required int? option,
     int? elapsedMs,
   }) async {
     if (failNextAnswer) {
@@ -148,7 +151,8 @@ class FakeQuizApi implements QuizApi, ProgressApi, LeagueApi, ReviewApi {
       }
     }
     final correct = verdicts.where((v) => v.correct).length;
-    final wrong = s.selected.length - correct;
+    // A time-out (null) is unanswered, not wrong, as on the real server.
+    final wrong = s.selected.values.where((o) => o != null).length - correct;
     final total = verdicts.length;
     final level = s.levelId;
     final before = level == null ? 0 : (stars[level] ?? 0);
@@ -456,7 +460,7 @@ class _FakeSession {
   final String? levelId;
   final bool negativeMarking;
   final int cost;
-  final selected = <int, int>{};
+  final selected = <int, int?>{};
   final elapsed = <int, int>{};
 }
 

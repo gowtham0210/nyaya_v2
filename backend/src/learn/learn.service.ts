@@ -290,9 +290,20 @@ export class LearnService {
           "Today's docket is already done; a new one opens at midnight (India time)",
         );
 
-      const cost = (await isPremium(tx, userId, this.premiumOpts))
-        ? 0
-        : ECONOMY.energyCost[dto.mode];
+      // A Case Path level already cleared (1+ stars) is free to replay, so a
+      // learner can always practise toward the daily goal.
+      const replay =
+        dto.mode === 'case_path' &&
+        (await this.clearedLevel(
+          tx,
+          userId,
+          [...subjectIds][0],
+          minDifficulty!,
+        ));
+      const cost =
+        replay || (await isPremium(tx, userId, this.premiumOpts))
+          ? 0
+          : ECONOMY.energyCost[dto.mode];
       if (cost > 0 && (await energyToday(tx, userId, now)) < cost)
         throw err(
           HttpStatus.CONFLICT,
@@ -488,6 +499,9 @@ export class LearnService {
           'Time is up for this quiz; submit it to see your result',
         );
 
+      const timedOut = selected.length === 0;
+      if (timedOut && feedbackOf(s) !== 'immediate')
+        throw err(HttpStatus.BAD_REQUEST, 'invalid_answer', 'Choose an option');
       const ids = new Set(q.options.map((o) => o.id));
       if (
         new Set(selected).size !== selected.length ||
@@ -499,7 +513,11 @@ export class LearnService {
           'Choose from the options shown',
         );
       }
-      if (q.questionType === 'single_select' && selected.length !== 1) {
+      if (
+        !timedOut &&
+        q.questionType === 'single_select' &&
+        selected.length !== 1
+      ) {
         throw err(
           HttpStatus.BAD_REQUEST,
           'invalid_answer',
@@ -811,6 +829,25 @@ export class LearnService {
   }
 
   /** Submitted sessions, oldest first, with each Case Path session's level. */
+  /** Whether the learner has cleared this Case Path level (1+ stars) before. */
+  private async clearedLevel(
+    tx: Tx,
+    userId: string,
+    subjectId: string,
+    difficulty: number,
+  ): Promise<boolean> {
+    const [sub] = await tx
+      .select({ slug: subjects.slug })
+      .from(subjects)
+      .where(eq(subjects.id, subjectId))
+      .limit(1);
+    if (!sub) return false;
+    const level = levelId(sub.slug, difficulty);
+    return (await this.finished(tx, userId)).some(
+      (f) => f.level === level && stars(f.correct, f.total) >= 1,
+    );
+  }
+
   private async finished(tx: Tx, userId: string): Promise<Finished[]> {
     const rows = await tx
       .select({
@@ -1015,7 +1052,7 @@ export class LearnService {
       mode: s.mode,
       questions: answered,
       streak: before.streak,
-      isReplayOfMastered: bestBefore === 3,
+      isReplay: bestBefore >= 1,
     });
     // A second docket on the same day earns nothing (the first one counts).
     if (docketAgain) xp.total = 0;

@@ -8,7 +8,13 @@ import { indiaToday } from '../learn/scoring.js';
 import { isPremium } from '../learn/wallet.js';
 import { azureChat } from './azure-chat.js';
 import type { ChatReplyDto, ChatRequestDto } from './chat.dto.js';
-import { DECLINED_REPLY, systemPrompt } from './chat.prompt.js';
+import {
+  DECLINED_REPLY,
+  OFF_TOPIC_REPLY,
+  asksForCode,
+  looksLikeCode,
+  systemPrompt,
+} from './chat.prompt.js';
 
 @Injectable()
 export class ChatService {
@@ -51,12 +57,21 @@ export class ChatService {
         `You have used today's ${limit} AI answers`,
       );
 
+    // Not a legal question: no model call, and nothing counted.
+    if (asksForCode(last.content)) {
+      await this.release(userId, day);
+      return { reply: OFF_TOPIC_REPLY, remaining_today: limit - used + 1 };
+    }
+
     const result = await azureChat(
       azure,
       systemPrompt(body.language, body.persona),
       body.messages.map((m) => ({ role: m.role, content: m.content })),
     );
-    // Only answers count against the limit; failed and declined questions are free.
+    // A code block is never a legal answer, whatever the question was.
+    const offTopic = result.kind === 'answer' && looksLikeCode(result.text);
+    // Failed and declined questions are free. An answer counts even when it is
+    // code we refuse to show: the model call was paid for, so it stays capped.
     if (result.kind !== 'answer') await this.release(userId, day);
     if (result.kind === 'failed') {
       this.logger.warn(`Azure chat failed: ${result.reason}`);
@@ -68,6 +83,8 @@ export class ChatService {
     }
     if (result.kind === 'filtered')
       return { reply: DECLINED_REPLY, remaining_today: limit - used + 1 };
+    if (offTopic)
+      return { reply: OFF_TOPIC_REPLY, remaining_today: limit - used };
     return { reply: result.text, remaining_today: limit - used };
   }
 
