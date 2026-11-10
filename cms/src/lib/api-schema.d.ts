@@ -1902,6 +1902,7 @@ export interface components {
         AnswerDto: {
             position: number;
             /**
+             * @description Empty means time ran out. Allowed only where each answer is explained at once (not exams); it scores as unanswered and still returns the feedback.
              * @example [
              *       "a"
              *     ]
