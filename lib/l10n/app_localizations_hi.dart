@@ -1713,7 +1713,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get authPassword => 'पासवर्ड';
 
   @override
-  String get authPasswordHint => 'कम से कम 8 अक्षर';
+  String get authPasswordHint =>
+      '8+ अक्षर, बड़े-छोटे अक्षर, एक संख्या और एक चिह्न रखें';
 
   @override
   String get authCreate => 'खाता बनाएँ';
@@ -1743,8 +1744,33 @@ class AppLocalizationsHi extends AppLocalizations {
       'बहुत ज़्यादा कोशिशें हो गईं। कुछ मिनट रुकें और फिर कोशिश करें।';
 
   @override
-  String get authErrorInvalid =>
-      'सही ईमेल और कम से कम 8 अक्षर का पासवर्ड दर्ज करें।';
+  String get authErrorInvalid => 'सही ईमेल पता दर्ज करें।';
+
+  @override
+  String get authErrorPasswordEmpty => 'पासवर्ड दर्ज करें।';
+
+  @override
+  String authErrorPasswordNeeds(String rules) {
+    return 'पासवर्ड में $rules होना चाहिए।';
+  }
+
+  @override
+  String get authPwNeedLength => 'कम से कम 8 अक्षर';
+
+  @override
+  String get authPwNeedUpper => 'कम से कम एक बड़ा (कैपिटल) अक्षर';
+
+  @override
+  String get authPwNeedLower => 'कम से कम एक छोटा अक्षर';
+
+  @override
+  String get authPwNeedDigit => 'कम से कम एक संख्या';
+
+  @override
+  String get authPwNeedSymbol => 'कम से कम एक विशेष चिह्न (जैसे ! @ # %)';
+
+  @override
+  String get authPwNeedNoSpace => 'कोई स्पेस नहीं';
 
   @override
   String get authErrorName => 'अपना नाम दर्ज करें।';
@@ -1788,8 +1814,12 @@ class AppLocalizationsHi extends AppLocalizations {
       'पासवर्ड बदलना अभी उपलब्ध नहीं है। कृपया बाद में कोशिश करें।';
 
   @override
+  String get authResetErrorEnterCode =>
+      'अपने ईमेल से 6 अंकों का कोड दर्ज करें।';
+
+  @override
   String get authResetErrorInvalid =>
-      '6 अंकों का कोड और कम से कम 8 अक्षरों का नया पासवर्ड डालें।';
+      'कोड जाँचें और ध्यान रखें कि नया पासवर्ड सभी नियमों को पूरा करे।';
 
   @override
   String get authResetDone => 'आपका पासवर्ड बदल दिया गया है।';

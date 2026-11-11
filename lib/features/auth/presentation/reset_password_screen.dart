@@ -9,6 +9,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/chunky_button.dart';
 import '../application/auth_controller.dart';
+import 'widgets/password_rules.dart';
 
 /// Forgot password: the email first, then the emailed code and a new
 /// password. Pops `true` once signed in with the new password.
@@ -78,8 +79,11 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
 
   Future<void> _save() async {
     final l = context.l10n;
-    if (!RegExp(r'^\d{6}$').hasMatch(_code.text.trim()) || _password.text.length < 8) {
-      setState(() => _error = l.authResetErrorInvalid);
+    final problem = !RegExp(r'^\d{6}$').hasMatch(_code.text.trim())
+        ? l.authResetErrorEnterCode
+        : passwordProblem(context, _password.text);
+    if (problem != null) {
+      setState(() => _error = problem);
       return;
     }
     await _run(() async {
@@ -151,7 +155,6 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
                   onSubmitted: (_) => _save(),
                   decoration: InputDecoration(
                     labelText: l.authResetNewPassword,
-                    helperText: l.authPasswordHint,
                     suffixIcon: IconButton(
                       tooltip: l.authPassword,
                       icon: Icon(_showPassword ? Icons.visibility_off_rounded : Icons.visibility_rounded),

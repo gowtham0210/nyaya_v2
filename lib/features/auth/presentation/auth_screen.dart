@@ -10,6 +10,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/chunky_button.dart';
 import '../../../app/router.dart';
 import '../../profile/application/profile_controller.dart';
+import 'widgets/password_rules.dart';
 import '../application/auth_controller.dart';
 
 /// Create an account (default) or sign in. Pops `true` once signed in, so
@@ -49,8 +50,12 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     String? problem;
     if (!_signIn && _name.text.trim().isEmpty) {
       problem = l.authErrorName;
-    } else if (!email.contains('@') || password.isEmpty || (!_signIn && password.length < 8)) {
+    } else if (!email.contains('@')) {
       problem = l.authErrorInvalid;
+    } else if (_signIn) {
+      if (password.isEmpty) problem = l.authErrorPasswordEmpty;
+    } else {
+      problem = passwordProblem(context, password);
     }
     if (problem != null) {
       setState(() => _error = problem);
@@ -167,7 +172,6 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                 onSubmitted: (_) => _submit(),
                 decoration: InputDecoration(
                   labelText: l.authPassword,
-                  helperText: _signIn ? null : l.authPasswordHint,
                   suffixIcon: IconButton(
                     tooltip: l.authPassword,
                     icon: Icon(_showPassword ? Icons.visibility_off_rounded : Icons.visibility_rounded),

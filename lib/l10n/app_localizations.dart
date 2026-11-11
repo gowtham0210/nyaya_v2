@@ -2989,7 +2989,7 @@ abstract class AppLocalizations {
   /// No description provided for @authPasswordHint.
   ///
   /// In en, this message translates to:
-  /// **'At least 8 characters'**
+  /// **'Use 8+ characters with upper and lower case, a number and a symbol'**
   String get authPasswordHint;
 
   /// No description provided for @authCreate.
@@ -3043,8 +3043,56 @@ abstract class AppLocalizations {
   /// No description provided for @authErrorInvalid.
   ///
   /// In en, this message translates to:
-  /// **'Enter a valid email and a password of at least 8 characters.'**
+  /// **'Enter a valid email address.'**
   String get authErrorInvalid;
+
+  /// No description provided for @authErrorPasswordEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a password.'**
+  String get authErrorPasswordEmpty;
+
+  /// No description provided for @authErrorPasswordNeeds.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must contain {rules}.'**
+  String authErrorPasswordNeeds(String rules);
+
+  /// No description provided for @authPwNeedLength.
+  ///
+  /// In en, this message translates to:
+  /// **'at least 8 characters'**
+  String get authPwNeedLength;
+
+  /// No description provided for @authPwNeedUpper.
+  ///
+  /// In en, this message translates to:
+  /// **'at least one uppercase (capital) letter'**
+  String get authPwNeedUpper;
+
+  /// No description provided for @authPwNeedLower.
+  ///
+  /// In en, this message translates to:
+  /// **'at least one lowercase letter'**
+  String get authPwNeedLower;
+
+  /// No description provided for @authPwNeedDigit.
+  ///
+  /// In en, this message translates to:
+  /// **'at least one number'**
+  String get authPwNeedDigit;
+
+  /// No description provided for @authPwNeedSymbol.
+  ///
+  /// In en, this message translates to:
+  /// **'at least one special character (like ! @ # %)'**
+  String get authPwNeedSymbol;
+
+  /// No description provided for @authPwNeedNoSpace.
+  ///
+  /// In en, this message translates to:
+  /// **'no spaces'**
+  String get authPwNeedNoSpace;
 
   /// No description provided for @authErrorName.
   ///
@@ -3118,10 +3166,16 @@ abstract class AppLocalizations {
   /// **'Password reset isn\'t available right now. Please try again later.'**
   String get authResetUnavailable;
 
+  /// No description provided for @authResetErrorEnterCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the 6-digit code from your email.'**
+  String get authResetErrorEnterCode;
+
   /// No description provided for @authResetErrorInvalid.
   ///
   /// In en, this message translates to:
-  /// **'Enter the 6-digit code and a new password of at least 8 characters.'**
+  /// **'Check the code and make sure the new password meets all the rules.'**
   String get authResetErrorInvalid;
 
   /// No description provided for @authResetDone.

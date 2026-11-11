@@ -1723,7 +1723,8 @@ class AppLocalizationsMl extends AppLocalizations {
   String get authPassword => 'പാസ്‌വേഡ്';
 
   @override
-  String get authPasswordHint => 'കുറഞ്ഞത് 8 അക്ഷരങ്ങൾ';
+  String get authPasswordHint =>
+      '8+ അക്ഷരങ്ങൾ, വലിയ-ചെറിയ അക്ഷരം, ഒരു അക്കം, ഒരു ചിഹ്നം എന്നിവ ഉപയോഗിക്കുക';
 
   @override
   String get authCreate => 'അക്കൗണ്ട് ഉണ്ടാക്കുക';
@@ -1753,8 +1754,33 @@ class AppLocalizationsMl extends AppLocalizations {
       'വളരെയധികം ശ്രമങ്ങൾ. കുറച്ച് മിനിറ്റ് കാത്തിരുന്ന് വീണ്ടും ശ്രമിക്കുക.';
 
   @override
-  String get authErrorInvalid =>
-      'ശരിയായ ഇമെയിലും കുറഞ്ഞത് 8 അക്ഷരങ്ങളുള്ള പാസ്‌വേഡും നൽകുക.';
+  String get authErrorInvalid => 'ശരിയായ ഇമെയിൽ വിലാസം നൽകുക.';
+
+  @override
+  String get authErrorPasswordEmpty => 'പാസ്‌വേഡ് നൽകുക.';
+
+  @override
+  String authErrorPasswordNeeds(String rules) {
+    return 'പാസ്‌വേഡിൽ $rules ഉണ്ടായിരിക്കണം.';
+  }
+
+  @override
+  String get authPwNeedLength => 'കുറഞ്ഞത് 8 അക്ഷരങ്ങൾ';
+
+  @override
+  String get authPwNeedUpper => 'കുറഞ്ഞത് ഒരു വലിയ (ക്യാപിറ്റൽ) അക്ഷരം';
+
+  @override
+  String get authPwNeedLower => 'കുറഞ്ഞത് ഒരു ചെറിയ അക്ഷരം';
+
+  @override
+  String get authPwNeedDigit => 'കുറഞ്ഞത് ഒരു അക്കം';
+
+  @override
+  String get authPwNeedSymbol => 'കുറഞ്ഞത് ഒരു പ്രത്യേക ചിഹ്നം (ഉദാ. ! @ # %)';
+
+  @override
+  String get authPwNeedNoSpace => 'ഇടവേളകൾ പാടില്ല';
 
   @override
   String get authErrorName => 'നിങ്ങളുടെ പേര് നൽകുക.';
@@ -1798,8 +1824,12 @@ class AppLocalizationsMl extends AppLocalizations {
       'പാസ്‌വേഡ് മാറ്റൽ ഇപ്പോൾ ലഭ്യമല്ല. ദയവായി പിന്നീട് ശ്രമിക്കൂ.';
 
   @override
+  String get authResetErrorEnterCode =>
+      'നിങ്ങളുടെ ഇമെയിലിലെ 6 അക്ക കോഡ് നൽകുക.';
+
+  @override
   String get authResetErrorInvalid =>
-      '6 അക്ക കോഡും കുറഞ്ഞത് 8 അക്ഷരമുള്ള പുതിയ പാസ്‌വേഡും നൽകൂ.';
+      'കോഡ് പരിശോധിക്കുക, പുതിയ പാസ്‌വേഡ് എല്ലാ നിബന്ധനകളും പാലിക്കുന്നുണ്ടെന്ന് ഉറപ്പാക്കുക.';
 
   @override
   String get authResetDone => 'നിങ്ങളുടെ പാസ്‌വേഡ് മാറ്റി.';

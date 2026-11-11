@@ -7,6 +7,7 @@ import {
   MinLength,
 } from 'class-validator';
 import { ROLES, type Role } from '../db/schema.js';
+import { PASSWORD_RULE, PASSWORD_RULE_MESSAGE } from './passwords.js';
 
 export class SignInDto {
   @ApiProperty({ example: 'editor@example.com' })
@@ -32,6 +33,7 @@ export class RegisterDto {
   @IsString()
   @MinLength(8)
   @MaxLength(200)
+  @Matches(PASSWORD_RULE, { message: PASSWORD_RULE_MESSAGE })
   password: string;
 
   @ApiProperty({ example: 'Asha' })
@@ -67,6 +69,7 @@ export class PasswordResetConfirmDto {
   @IsString()
   @MinLength(8)
   @MaxLength(200)
+  @Matches(PASSWORD_RULE, { message: PASSWORD_RULE_MESSAGE })
   new_password: string;
 }
 

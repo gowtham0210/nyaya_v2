@@ -1720,7 +1720,8 @@ class AppLocalizationsTe extends AppLocalizations {
   String get authPassword => 'పాస్‌వర్డ్';
 
   @override
-  String get authPasswordHint => 'కనీసం 8 అక్షరాలు';
+  String get authPasswordHint =>
+      '8+ అక్షరాలు, పెద్ద-చిన్న అక్షరాలు, ఒక సంఖ్య మరియు ఒక చిహ్నం ఉపయోగించండి';
 
   @override
   String get authCreate => 'ఖాతా సృష్టించండి';
@@ -1750,8 +1751,33 @@ class AppLocalizationsTe extends AppLocalizations {
       'చాలాసార్లు ప్రయత్నించారు. కొన్ని నిమిషాలు ఆగి మళ్లీ ప్రయత్నించండి.';
 
   @override
-  String get authErrorInvalid =>
-      'సరైన ఇమెయిల్, కనీసం 8 అక్షరాల పాస్‌వర్డ్ ఇవ్వండి.';
+  String get authErrorInvalid => 'సరైన ఇమెయిల్ చిరునామా ఇవ్వండి.';
+
+  @override
+  String get authErrorPasswordEmpty => 'పాస్‌వర్డ్ ఇవ్వండి.';
+
+  @override
+  String authErrorPasswordNeeds(String rules) {
+    return 'పాస్‌వర్డ్‌లో $rules ఉండాలి.';
+  }
+
+  @override
+  String get authPwNeedLength => 'కనీసం 8 అక్షరాలు';
+
+  @override
+  String get authPwNeedUpper => 'కనీసం ఒక పెద్ద (క్యాపిటల్) అక్షరం';
+
+  @override
+  String get authPwNeedLower => 'కనీసం ఒక చిన్న అక్షరం';
+
+  @override
+  String get authPwNeedDigit => 'కనీసం ఒక సంఖ్య';
+
+  @override
+  String get authPwNeedSymbol => 'కనీసం ఒక ప్రత్యేక చిహ్నం (ఉదా. ! @ # %)';
+
+  @override
+  String get authPwNeedNoSpace => 'ఖాళీలు ఉండకూడదు';
 
   @override
   String get authErrorName => 'మీ పేరు ఇవ్వండి.';
@@ -1795,8 +1821,11 @@ class AppLocalizationsTe extends AppLocalizations {
       'పాస్‌వర్డ్ మార్చడం ఇప్పుడు అందుబాటులో లేదు. దయచేసి తర్వాత ప్రయత్నించండి.';
 
   @override
+  String get authResetErrorEnterCode => 'మీ ఇమెయిల్‌లోని 6 అంకెల కోడ్ ఇవ్వండి.';
+
+  @override
   String get authResetErrorInvalid =>
-      '6 అంకెల కోడ్ మరియు కనీసం 8 అక్షరాల కొత్త పాస్‌వర్డ్ ఇవ్వండి.';
+      'కోడ్ సరిచూసుకోండి, కొత్త పాస్‌వర్డ్ అన్ని నియమాలకు సరిపోయేలా చూడండి.';
 
   @override
   String get authResetDone => 'మీ పాస్‌వర్డ్ మార్చబడింది.';

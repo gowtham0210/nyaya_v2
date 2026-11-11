@@ -1716,7 +1716,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authPassword => 'Password';
 
   @override
-  String get authPasswordHint => 'At least 8 characters';
+  String get authPasswordHint =>
+      'Use 8+ characters with upper and lower case, a number and a symbol';
 
   @override
   String get authCreate => 'CREATE ACCOUNT';
@@ -1746,8 +1747,34 @@ class AppLocalizationsEn extends AppLocalizations {
       'Too many attempts. Wait a few minutes and try again.';
 
   @override
-  String get authErrorInvalid =>
-      'Enter a valid email and a password of at least 8 characters.';
+  String get authErrorInvalid => 'Enter a valid email address.';
+
+  @override
+  String get authErrorPasswordEmpty => 'Enter a password.';
+
+  @override
+  String authErrorPasswordNeeds(String rules) {
+    return 'Password must contain $rules.';
+  }
+
+  @override
+  String get authPwNeedLength => 'at least 8 characters';
+
+  @override
+  String get authPwNeedUpper => 'at least one uppercase (capital) letter';
+
+  @override
+  String get authPwNeedLower => 'at least one lowercase letter';
+
+  @override
+  String get authPwNeedDigit => 'at least one number';
+
+  @override
+  String get authPwNeedSymbol =>
+      'at least one special character (like ! @ # %)';
+
+  @override
+  String get authPwNeedNoSpace => 'no spaces';
 
   @override
   String get authErrorName => 'Enter your name.';
@@ -1791,8 +1818,12 @@ class AppLocalizationsEn extends AppLocalizations {
       'Password reset isn\'t available right now. Please try again later.';
 
   @override
+  String get authResetErrorEnterCode =>
+      'Enter the 6-digit code from your email.';
+
+  @override
   String get authResetErrorInvalid =>
-      'Enter the 6-digit code and a new password of at least 8 characters.';
+      'Check the code and make sure the new password meets all the rules.';
 
   @override
   String get authResetDone => 'Your password has been changed.';

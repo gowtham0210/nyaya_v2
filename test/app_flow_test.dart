@@ -123,7 +123,7 @@ void main() {
     expect(find.byTooltip('Close'), findsNothing);
     await tester.enterText(find.widgetWithText(TextField, 'Your name'), 'Meena');
     await tester.enterText(find.widgetWithText(TextField, 'Email'), 'meena@test.local');
-    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'long enough');
+    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'Long-enough1');
     await tester.tap(find.text('CREATE ACCOUNT'));
     await settle(tester);
 
@@ -336,11 +336,21 @@ void main() {
 
     await tester.enterText(find.widgetWithText(TextField, 'Email'), 'asha@test.local');
     await tester.enterText(find.widgetWithText(TextField, 'Password'), 'short');
+    await tester.ensureVisible(find.text('CREATE ACCOUNT', skipOffstage: false));
+    await tester.pump();
     await tester.tap(find.text('CREATE ACCOUNT'));
     await settle(tester);
-    expect(find.text('Enter a valid email and a password of at least 8 characters.'), findsOneWidget);
+    expect(
+      find.text(
+        'Password must contain at least 8 characters, at least one uppercase (capital) letter, '
+        'at least one number, at least one special character (like ! @ # %).',
+      ),
+      findsOneWidget,
+    );
 
-    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'long enough');
+    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'Long-enough1');
+    await tester.ensureVisible(find.text('CREATE ACCOUNT', skipOffstage: false));
+    await tester.pump();
     await tester.tap(find.text('CREATE ACCOUNT'));
     await settle(tester);
     expect(c.read(routerProvider).state.matchedLocation, Routes.home);
@@ -364,7 +374,7 @@ void main() {
 
     await tester.enterText(find.widgetWithText(TextField, 'Your name'), 'Nisha');
     await tester.enterText(find.widgetWithText(TextField, 'Email'), 'nisha@test.local');
-    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'long enough');
+    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'Long-enough1');
     await tester.tap(find.text('CREATE ACCOUNT'));
     await settle(tester);
     expect(api.settings?.name, 'Nisha', reason: 'not the "Learner" placeholder');
@@ -409,12 +419,16 @@ void main() {
     expect(find.textContaining("we've sent it a 6-digit code"), findsOneWidget);
 
     await tester.enterText(find.widgetWithText(TextField, '6-digit code'), '000000');
-    await tester.enterText(find.widgetWithText(TextField, 'New password'), 'a new password');
+    await tester.enterText(find.widgetWithText(TextField, 'New password'), 'A-new-password1');
+    await tester.ensureVisible(find.text('SET NEW PASSWORD', skipOffstage: false));
+    await tester.pump();
     await tester.tap(find.text('SET NEW PASSWORD'));
     await settle(tester);
     expect(find.text('This code is wrong or has expired. Ask for a new one.'), findsOneWidget);
 
     await tester.enterText(find.widgetWithText(TextField, '6-digit code'), FakeAuthApi.resetCode);
+    await tester.ensureVisible(find.text('SET NEW PASSWORD', skipOffstage: false));
+    await tester.pump();
     await tester.tap(find.text('SET NEW PASSWORD'));
     await settle(tester);
     expect(c.read(authProvider)?.email, 'asha@test.local');

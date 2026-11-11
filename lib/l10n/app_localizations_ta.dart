@@ -1728,7 +1728,8 @@ class AppLocalizationsTa extends AppLocalizations {
   String get authPassword => 'கடவுச்சொல்';
 
   @override
-  String get authPasswordHint => 'குறைந்தது 8 எழுத்துகள்';
+  String get authPasswordHint =>
+      '8+ எழுத்துகள், பெரிய-சிறிய எழுத்து, ஒரு எண் மற்றும் ஒரு குறியீடு பயன்படுத்துங்கள்';
 
   @override
   String get authCreate => 'கணக்கை உருவாக்கு';
@@ -1758,8 +1759,34 @@ class AppLocalizationsTa extends AppLocalizations {
       'பல முயற்சிகள். சில நிமிடங்கள் காத்திருந்து மீண்டும் முயலுங்கள்.';
 
   @override
-  String get authErrorInvalid =>
-      'சரியான மின்னஞ்சலையும், குறைந்தது 8 எழுத்துகள் கொண்ட கடவுச்சொல்லையும் உள்ளிடுங்கள்.';
+  String get authErrorInvalid => 'சரியான மின்னஞ்சல் முகவரியை உள்ளிடுங்கள்.';
+
+  @override
+  String get authErrorPasswordEmpty => 'கடவுச்சொல்லை உள்ளிடுங்கள்.';
+
+  @override
+  String authErrorPasswordNeeds(String rules) {
+    return 'கடவுச்சொல்லில் $rules இருக்க வேண்டும்.';
+  }
+
+  @override
+  String get authPwNeedLength => 'குறைந்தது 8 எழுத்துகள்';
+
+  @override
+  String get authPwNeedUpper => 'குறைந்தது ஒரு பெரிய (கேப்பிடல்) எழுத்து';
+
+  @override
+  String get authPwNeedLower => 'குறைந்தது ஒரு சிறிய எழுத்து';
+
+  @override
+  String get authPwNeedDigit => 'குறைந்தது ஒரு எண்';
+
+  @override
+  String get authPwNeedSymbol =>
+      'குறைந்தது ஒரு சிறப்புக் குறியீடு (எ.கா. ! @ # %)';
+
+  @override
+  String get authPwNeedNoSpace => 'இடைவெளிகள் கூடாது';
 
   @override
   String get authErrorName => 'உங்கள் பெயரை உள்ளிடுங்கள்.';
@@ -1803,8 +1830,12 @@ class AppLocalizationsTa extends AppLocalizations {
       'கடவுச்சொல் மாற்றம் இப்போது கிடைக்கவில்லை. பின்னர் முயலுங்கள்.';
 
   @override
+  String get authResetErrorEnterCode =>
+      'உங்கள் மின்னஞ்சலில் உள்ள 6 இலக்கக் குறியீட்டை உள்ளிடுங்கள்.';
+
+  @override
   String get authResetErrorInvalid =>
-      '6 இலக்கக் குறியீட்டையும் குறைந்தது 8 எழுத்துகள் கொண்ட புதிய கடவுச்சொல்லையும் உள்ளிடுங்கள்.';
+      'குறியீட்டைச் சரிபார்த்து, புதிய கடவுச்சொல் அனைத்து விதிகளுக்கும் பொருந்துவதை உறுதிசெய்யுங்கள்.';
 
   @override
   String get authResetDone => 'உங்கள் கடவுச்சொல் மாற்றப்பட்டது.';

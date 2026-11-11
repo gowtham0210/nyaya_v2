@@ -53,3 +53,12 @@ export async function verifyPassword(
 export const DUMMY_HASH =
   'scrypt$16384$8$1$AAAAAAAAAAAAAAAAAAAAAA$' +
   Buffer.alloc(KEY_LEN).toString('base64url');
+
+/**
+ * Rules for a new password (sign-up and reset). Sign-in is not held to them,
+ * so accounts made under older rules can still get in.
+ */
+export const PASSWORD_RULE =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s])\S{8,200}$/;
+export const PASSWORD_RULE_MESSAGE =
+  'Password must be 8-200 characters with an uppercase letter, a lowercase letter, a number and a special character, and no spaces.';

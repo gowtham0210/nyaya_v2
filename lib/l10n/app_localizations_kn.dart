@@ -1723,7 +1723,8 @@ class AppLocalizationsKn extends AppLocalizations {
   String get authPassword => 'ಪಾಸ್‌ವರ್ಡ್';
 
   @override
-  String get authPasswordHint => 'ಕನಿಷ್ಠ 8 ಅಕ್ಷರಗಳು';
+  String get authPasswordHint =>
+      '8+ ಅಕ್ಷರಗಳು, ದೊಡ್ಡ-ಸಣ್ಣ ಅಕ್ಷರ, ಒಂದು ಸಂಖ್ಯೆ ಮತ್ತು ಒಂದು ಚಿಹ್ನೆ ಬಳಸಿ';
 
   @override
   String get authCreate => 'ಖಾತೆ ತೆರೆಯಿರಿ';
@@ -1753,8 +1754,33 @@ class AppLocalizationsKn extends AppLocalizations {
       'ತುಂಬಾ ಪ್ರಯತ್ನಗಳಾಗಿವೆ. ಕೆಲವು ನಿಮಿಷ ಕಾದು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
 
   @override
-  String get authErrorInvalid =>
-      'ಸರಿಯಾದ ಇಮೇಲ್ ಮತ್ತು ಕನಿಷ್ಠ 8 ಅಕ್ಷರಗಳ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ.';
+  String get authErrorInvalid => 'ಸರಿಯಾದ ಇಮೇಲ್ ವಿಳಾಸ ನಮೂದಿಸಿ.';
+
+  @override
+  String get authErrorPasswordEmpty => 'ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ.';
+
+  @override
+  String authErrorPasswordNeeds(String rules) {
+    return 'ಪಾಸ್‌ವರ್ಡ್‌ನಲ್ಲಿ $rules ಇರಬೇಕು.';
+  }
+
+  @override
+  String get authPwNeedLength => 'ಕನಿಷ್ಠ 8 ಅಕ್ಷರಗಳು';
+
+  @override
+  String get authPwNeedUpper => 'ಕನಿಷ್ಠ ಒಂದು ದೊಡ್ಡ (ಕ್ಯಾಪಿಟಲ್) ಅಕ್ಷರ';
+
+  @override
+  String get authPwNeedLower => 'ಕನಿಷ್ಠ ಒಂದು ಸಣ್ಣ ಅಕ್ಷರ';
+
+  @override
+  String get authPwNeedDigit => 'ಕನಿಷ್ಠ ಒಂದು ಸಂಖ್ಯೆ';
+
+  @override
+  String get authPwNeedSymbol => 'ಕನಿಷ್ಠ ಒಂದು ವಿಶೇಷ ಚಿಹ್ನೆ (ಉದಾ. ! @ # %)';
+
+  @override
+  String get authPwNeedNoSpace => 'ಖಾಲಿ ಜಾಗ ಇರಬಾರದು';
 
   @override
   String get authErrorName => 'ನಿಮ್ಮ ಹೆಸರನ್ನು ನಮೂದಿಸಿ.';
@@ -1798,8 +1824,12 @@ class AppLocalizationsKn extends AppLocalizations {
       'ಪಾಸ್‌ವರ್ಡ್ ಬದಲಾವಣೆ ಈಗ ಲಭ್ಯವಿಲ್ಲ. ದಯವಿಟ್ಟು ನಂತರ ಪ್ರಯತ್ನಿಸಿ.';
 
   @override
+  String get authResetErrorEnterCode =>
+      'ನಿಮ್ಮ ಇಮೇಲ್‌ನಲ್ಲಿರುವ 6 ಅಂಕಿಯ ಕೋಡ್ ನಮೂದಿಸಿ.';
+
+  @override
   String get authResetErrorInvalid =>
-      '6 ಅಂಕಿಯ ಕೋಡ್ ಮತ್ತು ಕನಿಷ್ಠ 8 ಅಕ್ಷರಗಳ ಹೊಸ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ.';
+      'ಕೋಡ್ ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಹೊಸ ಪಾಸ್‌ವರ್ಡ್ ಎಲ್ಲಾ ನಿಯಮಗಳನ್ನು ಪೂರೈಸುವಂತೆ ನೋಡಿಕೊಳ್ಳಿ.';
 
   @override
   String get authResetDone => 'ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ಬದಲಾಗಿದೆ.';
