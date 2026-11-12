@@ -7,11 +7,11 @@ import type { Me, NewsCategory, NewsStatus, VersionStatus } from './api';
 type Role = Me['roles'][number];
 
 export const WORKFLOW = {
-  submit: { label: 'Submit for review', from: ['draft', 'changes_requested'], roles: ['content_editor'] },
-  request_changes: { label: 'Request changes', from: ['in_review'], roles: ['legal_reviewer'] },
-  approve: { label: 'Approve', from: ['in_review'], roles: ['legal_reviewer'] },
+  submit: { label: 'Submit for review', from: ['draft', 'changes_requested'], roles: ['content_editor', 'admin'] },
+  request_changes: { label: 'Request changes', from: ['in_review'], roles: ['legal_reviewer', 'admin'] },
+  approve: { label: 'Approve', from: ['in_review'], roles: ['legal_reviewer', 'admin'] },
   publish: { label: 'Publish', from: ['approved'], roles: ['publisher', 'admin'] },
-  revise: { label: 'Start a revision', from: ['published', 'retired'], roles: ['content_editor'] },
+  revise: { label: 'Start a revision', from: ['published', 'retired'], roles: ['content_editor', 'admin'] },
   retire: { label: 'Retire', from: [], roles: ['publisher', 'admin'] },
 } as const satisfies Record<string, { label: string; from: readonly VersionStatus[]; roles: readonly Role[] }>;
 
@@ -21,7 +21,9 @@ export type WorkflowAction = keyof typeof WORKFLOW;
 export const BULK_ACTIONS = ['submit', 'approve', 'publish'] as const satisfies readonly WorkflowAction[];
 export type BulkAction = (typeof BULK_ACTIONS)[number];
 
-export const hasRole = (me: Me, ...roles: readonly Role[]) => roles.some((r) => me.roles.includes(r));
+/** Admins can do everything any other staff role can, so they pass every role check. */
+export const hasRole = (me: Me, ...roles: readonly Role[]) =>
+  me.roles.includes('admin') || roles.some((r) => me.roles.includes(r));
 
 /** Staff who handle learner reports (the API checks this too). */
 export const TRIAGE_ROLES = ['content_editor', 'legal_reviewer', 'publisher', 'admin'] as const satisfies readonly Role[];
@@ -65,11 +67,11 @@ export const ROLE_LABEL: Record<Role, string> = {
 
 /** The news article lifecycle, mirroring the API (which enforces it). */
 export const NEWS_WORKFLOW = {
-  submit: { label: 'Submit for review', from: ['draft', 'changes_requested'], roles: ['content_editor'] },
-  request_changes: { label: 'Request changes', from: ['in_review'], roles: ['legal_reviewer'] },
-  approve: { label: 'Approve', from: ['in_review'], roles: ['legal_reviewer'] },
+  submit: { label: 'Submit for review', from: ['draft', 'changes_requested'], roles: ['content_editor', 'admin'] },
+  request_changes: { label: 'Request changes', from: ['in_review'], roles: ['legal_reviewer', 'admin'] },
+  approve: { label: 'Approve', from: ['in_review'], roles: ['legal_reviewer', 'admin'] },
   publish: { label: 'Publish', from: ['approved'], roles: ['publisher', 'admin'] },
-  revise: { label: 'Correct this article', from: ['published', 'retired'], roles: ['content_editor'] },
+  revise: { label: 'Correct this article', from: ['published', 'retired'], roles: ['content_editor', 'admin'] },
   retire: { label: 'Retire', from: ['published'], roles: ['publisher', 'admin'] },
 } as const satisfies Record<string, { label: string; from: readonly NewsStatus[]; roles: readonly Role[] }>;
 

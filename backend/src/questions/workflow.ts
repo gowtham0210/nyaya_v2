@@ -29,25 +29,25 @@ export const READ_ROLES: Role[] = [
  * applies to the question's latest version, which must be in one of [from].
  */
 export const ACTIONS = {
-  edit: { from: ['draft', 'changes_requested'], roles: ['content_editor'] },
+  edit: { from: ['draft', 'changes_requested'], roles: ['content_editor', 'admin'] },
   submit: {
     from: ['draft', 'changes_requested'],
     to: 'in_review',
-    roles: ['content_editor'],
+    roles: ['content_editor', 'admin'],
   },
   request_changes: {
     from: ['in_review'],
     to: 'changes_requested',
-    roles: ['legal_reviewer'],
+    roles: ['legal_reviewer', 'admin'],
   },
-  approve: { from: ['in_review'], to: 'approved', roles: ['legal_reviewer'] },
+  approve: { from: ['in_review'], to: 'approved', roles: ['legal_reviewer', 'admin'] },
   publish: {
     from: ['approved'],
     to: 'published',
     roles: ['publisher', 'admin'],
   },
   // A revision is a new draft version; a published one stays live meanwhile.
-  revise: { from: ['published', 'retired'], roles: ['content_editor'] },
+  revise: { from: ['published', 'retired'], roles: ['content_editor', 'admin'] },
 } as const satisfies Record<
   string,
   { from: readonly VersionStatus[]; to?: VersionStatus; roles: readonly Role[] }

@@ -80,9 +80,9 @@ async function QuestionList({ searchParams }: { searchParams: PageProps<'/questi
         </div>
       </div>
 
-      <form method="get" action="/questions" className="grid gap-3 sm:grid-cols-[1fr_12rem_14rem_7rem_auto]" role="search">
+      <form method="get" action="/questions" className="grid gap-3 sm:grid-cols-2 xl:grid-cols-[minmax(0,1fr)_12rem_14rem_7rem_auto]" role="search">
         <label className="sr-only" htmlFor="q">Search</label>
-        <input id="q" name="q" defaultValue={q} placeholder="Search question text" className={inputClass} />
+        <input id="q" name="q" defaultValue={q} placeholder="Search question text" className={`${inputClass} sm:col-span-2 xl:col-span-1`} />
         <label className="sr-only" htmlFor="status">Status</label>
         <select id="status" name="status" defaultValue={status ?? ''} className={inputClass}>
           <option value="">Any status</option>

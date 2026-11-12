@@ -65,7 +65,7 @@ async function NewsList({ searchParams }: { searchParams: PageProps<'/news'>['se
         )}
       </div>
 
-      <form method="get" action="/news" className="grid gap-3 sm:grid-cols-[1fr_14rem_auto]" role="search">
+      <form method="get" action="/news" className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_14rem_auto]" role="search">
         <label className="sr-only" htmlFor="q">Search</label>
         <input id="q" name="q" defaultValue={q} placeholder="Search titles" className={inputClass} />
         <label className="sr-only" htmlFor="status">Status</label>

@@ -14,18 +14,18 @@ export const NEWS_READ_ROLES: Role[] = [
  * Every action needs the article to be in one of [from].
  */
 export const NEWS_ACTIONS = {
-  edit: { from: ['draft', 'changes_requested'], roles: ['content_editor'] },
+  edit: { from: ['draft', 'changes_requested'], roles: ['content_editor', 'admin'] },
   submit: {
     from: ['draft', 'changes_requested'],
     to: 'in_review',
-    roles: ['content_editor'],
+    roles: ['content_editor', 'admin'],
   },
   request_changes: {
     from: ['in_review'],
     to: 'changes_requested',
-    roles: ['legal_reviewer'],
+    roles: ['legal_reviewer', 'admin'],
   },
-  approve: { from: ['in_review'], to: 'approved', roles: ['legal_reviewer'] },
+  approve: { from: ['in_review'], to: 'approved', roles: ['legal_reviewer', 'admin'] },
   publish: {
     from: ['approved'],
     to: 'published',
@@ -35,7 +35,7 @@ export const NEWS_ACTIONS = {
   revise: {
     from: ['published', 'retired'],
     to: 'draft',
-    roles: ['content_editor'],
+    roles: ['content_editor', 'admin'],
   },
   retire: { from: ['published'], to: 'retired', roles: ['publisher', 'admin'] },
 } as const satisfies Record<
