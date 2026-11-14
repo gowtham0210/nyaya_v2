@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:nyaya/core/api/token_store.dart';
 import 'package:nyaya/core/storage/local_store.dart';
+import 'package:nyaya/core/theme/app_colors.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
 import 'package:nyaya/features/chat/presentation/chat_screen.dart';
 import 'package:nyaya/l10n/app_localizations.dart';
@@ -37,7 +38,7 @@ void main() {
         'sources': ?sources,
       };
 
-  testWidgets('shows one grey pill per website; tapping it lists the pages with their titles', (tester) async {
+  testWidgets('shows one chip per website; tapping it raises a sheet with a button per page', (tester) async {
     await pump(tester, [
       answer(sources: [
         {'site': 'India Code', 'title': 'Punishment for murder.', 'url': 'https://indiacode.gov.in/handle/123456789/545600'},
@@ -51,24 +52,34 @@ void main() {
     expect(find.text('Wikipedia'), findsOneWidget);
     expect(pill, findsOneWidget);
 
-    final box = tester.widget<Container>(find.ancestor(of: pill, matching: find.byType(Container)).first);
-    final deco = box.decoration! as BoxDecoration;
-    final fill = deco.color!;
-    expect((fill.r - fill.g).abs() + (fill.g - fill.b).abs(), lessThan(0.02), reason: 'neutral grey');
-    expect(deco.borderRadius, BorderRadius.circular(999), reason: 'oval pill');
-    final text = tester.widget<Text>(pill);
-    expect(text.style!.fontSize, lessThan(12));
-    // Under the answer text.
+    // A small rounded chip in the theme's muted tone, under the answer text.
+    final material = tester.widget<Material>(find.ancestor(of: pill, matching: find.byType(Material)).first);
+    expect(material.shape, isA<StadiumBorder>());
+    expect(tester.widget<Text>(pill).style!.fontSize, lessThan(14));
     expect(tester.getTopLeft(pill).dy, greaterThan(tester.getTopLeft(find.textContaining('Murder is punishable')).dy));
-    // Nothing is shown until a pill is tapped.
+    // Nothing is shown until a chip is tapped.
     expect(find.text('Punishment for murder.'), findsNothing);
 
     await tester.tap(pill);
     await tester.pumpAndSettle();
+    // A bottom sheet lists the pages, each with a button in the brand colour.
     expect(find.text('Punishment for murder.'), findsOneWidget);
     expect(find.text('The Bharatiya Nyaya Sanhita, 2023'), findsOneWidget);
     expect(find.text('indiacode.gov.in'), findsNWidgets(2));
-    expect(find.text('Capital punishment in India'), findsNothing, reason: 'that page belongs to the other pill');
+    expect(find.text('Read the law on India Code'), findsNWidgets(2));
+    expect(find.text('Capital punishment in India'), findsNothing, reason: 'that page belongs to the other chip');
+    final sheetTop = tester.getTopLeft(find.text('Punishment for murder.')).dy;
+    expect(sheetTop, greaterThan(tester.view.physicalSize.height / tester.view.devicePixelRatio / 3), reason: 'it rises from the bottom');
+    final button = tester.widget<FilledButton>(find.byType(FilledButton).first);
+    final bg = button.style!.backgroundColor!.resolve({})!;
+    expect(bg, tester.element(find.byType(FilledButton).first).colors.primary);
+    await tester.tapAt(const Offset(5, 5)); // tap outside closes the sheet
+    await tester.pumpAndSettle();
+    expect(find.text('Read the law on India Code'), findsNothing);
+
+    await tester.tap(find.text('Wikipedia'));
+    await tester.pumpAndSettle();
+    expect(find.text('Read the article'), findsOneWidget);
   });
 
   testWidgets('shows no citation when the answer used no source', (tester) async {

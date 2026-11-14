@@ -22,7 +22,9 @@ const STOPWORDS = new Set(
   `a an the is are was were be been am do does did can could should would will shall may might must
   what which who whom whose when where why how and or but if then than so of in on at to for from by
   with about into over under as it its this that these those i me my we our you your he she they them
-  their there here not no yes any some please tell explain give say mean meaning law legal india indian`
+  their there here not no yes any some please tell explain give say mean meaning law legal india indian
+  abt abut explain explained describe define definition details detail info information know need want
+  regarding related kindly simple simply words short brief shortly example examples between difference`
     .split(/\s+/)
     .filter(Boolean),
 );
@@ -212,7 +214,7 @@ export function sourcesPrompt(sources: Source[]): string {
 Reference pages found just now on the web (they may be irrelevant):
 ${list}
 
-Use a page only if its text above really informs your answer; never invent details from it. List every page you relied on, so the reader can check where the answer came from. After your answer, on its own final line, write "SOURCES:" followed by the numbers of the pages you relied on, e.g. "SOURCES: 1,3", or "SOURCES: none". Never mention this line or the numbers in the answer itself.
+Every page above is a candidate reference. Before finishing, check each one: if it is about the same law or topic as the question and nothing in it contradicts your answer, it counts as a reference for the answer, even if you already knew the facts. Never invent details from these pages. On its own final line write "SOURCES:" followed by the numbers of all such pages, e.g. "SOURCES: 4,5"; write "SOURCES: none" only if no page is about the topic. Never mention this line or the numbers in the answer itself.
 `;
 }
 

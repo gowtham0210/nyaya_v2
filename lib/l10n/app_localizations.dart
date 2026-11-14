@@ -3046,6 +3046,12 @@ abstract class AppLocalizations {
   /// **'Enter a valid email and a password of at least 8 characters.'**
   String get authErrorInvalid;
 
+  /// No description provided for @authErrorPasswordRules.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must contain at least one uppercase (capital) letter, at least one lowercase letter, at least one special character (like ! @ # %).'**
+  String get authErrorPasswordRules;
+
   /// No description provided for @authErrorName.
   ///
   /// In en, this message translates to:

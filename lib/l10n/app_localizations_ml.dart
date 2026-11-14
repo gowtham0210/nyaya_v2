@@ -1757,6 +1757,10 @@ class AppLocalizationsMl extends AppLocalizations {
       'ശരിയായ ഇമെയിലും കുറഞ്ഞത് 8 അക്ഷരങ്ങളുള്ള പാസ്‌വേഡും നൽകുക.';
 
   @override
+  String get authErrorPasswordRules =>
+      'പാസ്‌വേഡിൽ കുറഞ്ഞത് ഒരു വലിയ അക്ഷരം (capital), കുറഞ്ഞത് ഒരു ചെറിയ അക്ഷരം, കുറഞ്ഞത് ഒരു പ്രത്യേക ചിഹ്നം (ഉദാ. ! @ # %) എന്നിവ വേണം.';
+
+  @override
   String get authErrorName => 'നിങ്ങളുടെ പേര് നൽകുക.';
 
   @override

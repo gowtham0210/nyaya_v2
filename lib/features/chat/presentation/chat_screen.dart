@@ -391,8 +391,9 @@ class _Bubble extends StatelessWidget {
   }
 }
 
-/// Source citations under an answer: one small grey pill per website. Tapping
-/// a pill opens a popup listing the pages used from it; each opens the original page.
+/// Source citations under an answer: one small rounded chip per website. Tapping
+/// a chip slides up a sheet listing the pages used from it, each with a button
+/// that opens the original page.
 class _Sources extends StatelessWidget {
   const _Sources({required this.sources});
 
@@ -400,9 +401,7 @@ class _Sources extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = Theme.of(context).brightness == Brightness.dark;
-    final fill = dark ? const Color(0xFF3A3A3A) : const Color(0xFFEDEDED);
-    final grey = dark ? const Color(0xFFB0B0B0) : const Color(0xFF616161);
+    final tone = context.nyaya.textSecondary;
     final bySite = <String, List<ChatSource>>{};
     for (final s in sources) {
       (bySite[s.site] ??= []).add(s);
@@ -414,43 +413,18 @@ class _Sources extends StatelessWidget {
         runSpacing: 6,
         children: [
           for (final e in bySite.entries)
-            PopupMenuButton<ChatSource>(
-              tooltip: e.key,
-              position: PopupMenuPosition.under,
-              constraints: const BoxConstraints(maxWidth: 300),
-              onSelected: (s) => _open(context, s),
-              itemBuilder: (_) => [
-                for (final s in e.value)
-                  PopupMenuItem<ChatSource>(
-                    value: s,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          s.title,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: context.text.bodyMedium?.copyWith(
-                            color: context.colors.primary,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                        Text(
-                          Uri.parse(s.url).host,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: context.text.labelSmall?.copyWith(color: grey),
-                        ),
-                      ],
-                    ),
+            Material(
+              color: tone.withValues(alpha: 0.14),
+              shape: const StadiumBorder(),
+              child: InkWell(
+                customBorder: const StadiumBorder(),
+                onTap: () => _SourcesSheet.show(context, e.key, e.value),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                  child: Text(
+                    e.value.length > 1 ? '${e.key} +${e.value.length - 1}' : e.key,
+                    style: context.text.labelMedium?.copyWith(color: tone, fontWeight: FontWeight.w600),
                   ),
-              ],
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(color: fill, borderRadius: BorderRadius.circular(999)),
-                child: Text(
-                  e.value.length > 1 ? '${e.key} +${e.value.length - 1}' : e.key,
-                  style: context.text.labelSmall?.copyWith(color: grey, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
@@ -458,12 +432,66 @@ class _Sources extends StatelessWidget {
       ),
     );
   }
+}
+
+class _SourcesSheet extends StatelessWidget {
+  const _SourcesSheet({required this.site, required this.pages});
+
+  final String site;
+  final List<ChatSource> pages;
+
+  static Future<void> show(BuildContext context, String site, List<ChatSource> pages) => showModalBottomSheet<void>(
+        context: context,
+        showDragHandle: true,
+        isScrollControlled: true,
+        builder: (_) => _SourcesSheet(site: site, pages: pages),
+      );
+
+  /// What the button says, by website.
+  static String _action(String site) => switch (site) {
+        'India Code' => 'Read the law on India Code',
+        'Supreme Court of India' => 'View on the Supreme Court website',
+        'Wikipedia' => 'Read the article',
+        _ => 'Open the source',
+      };
 
   static Future<void> _open(BuildContext context, ChatSource s) async {
     final messenger = ScaffoldMessenger.of(context);
     final failed = context.l10n.quizOpenSourceFailed;
     final opened = await launchUrl(Uri.parse(s.url), mode: LaunchMode.externalApplication).catchError((_) => false);
     if (!opened) messenger.showSnackBar(SnackBar(content: Text(failed)));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(site, style: context.text.labelLarge?.copyWith(color: context.nyaya.textSecondary)),
+            for (final p in pages) ...[
+              const SizedBox(height: 14),
+              Text(p.title, style: context.text.titleMedium, maxLines: 3, overflow: TextOverflow.ellipsis),
+              const SizedBox(height: 2),
+              Text(Uri.parse(p.url).host, style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary)),
+              const SizedBox(height: 10),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton.icon(
+                  style: FilledButton.styleFrom(backgroundColor: context.colors.primary, foregroundColor: context.colors.onPrimary),
+                  onPressed: () => _open(context, p),
+                  icon: const Icon(Icons.open_in_new_rounded, size: 18),
+                  label: Text(_action(p.site)),
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
   }
 }
 
