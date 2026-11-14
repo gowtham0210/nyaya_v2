@@ -6438,11 +6438,39 @@
           "persona"
         ]
       },
+      "ChatSourceDto": {
+        "type": "object",
+        "properties": {
+          "site": {
+            "type": "string",
+            "example": "India Code"
+          },
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "description": "The page the answer drew on"
+          }
+        },
+        "required": [
+          "site",
+          "title",
+          "url"
+        ]
+      },
       "ChatReplyDto": {
         "type": "object",
         "properties": {
           "reply": {
             "type": "string"
+          },
+          "sources": {
+            "description": "Pages (India Code, Supreme Court of India, Wikipedia) the answer relied on; absent when none were used",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChatSourceDto"
+            }
           },
           "remaining_today": {
             "type": "number",

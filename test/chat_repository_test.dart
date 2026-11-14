@@ -43,6 +43,37 @@ void main() {
     ]);
   });
 
+  test('keeps the cited pages, and drops any without an https link', () async {
+    final repo = repoWith((_) async => http.Response(
+          jsonEncode({
+            'reply': 'Answer.',
+            'remaining_today': 1,
+            'sources': [
+              {'site': 'India Code', 'title': 'The Bharatiya Nyaya Sanhita, 2023', 'url': 'https://indiacode.gov.in/handle/123456789/496548'},
+              {'site': 'Elsewhere', 'title': 'Bad link', 'url': 'javascript:alert(1)'},
+            ],
+          }),
+          200,
+        ));
+    final reply = await ask(repo);
+    expect(reply.sources.map((s) => s.url), ['https://indiacode.gov.in/handle/123456789/496548']);
+    expect(reply.sources.single.site, 'India Code');
+    // Replies without sources are unchanged.
+    final plain = await ask(repoWith((_) async => http.Response(jsonEncode({'reply': 'A', 'remaining_today': 1}), 200)));
+    expect(plain.sources, isEmpty);
+  });
+
+  test('a saved message keeps its sources', () {
+    final m = ChatMessage(
+      role: ChatRole.assistant,
+      text: 'A',
+      at: at,
+      sources: const [ChatSource(site: 'Supreme Court of India', title: 'Legal Aid', url: 'https://www.sci.gov.in/legal-aid/')],
+    );
+    expect(ChatMessage.fromJson(m.toJson()).sources.single.url, 'https://www.sci.gov.in/legal-aid/');
+    expect(ChatMessage.fromJson(ChatMessage(role: ChatRole.user, text: 'Q', at: at).toJson()).sources, isEmpty);
+  });
+
   test('falls back to offline answers when the server is unreachable or has no AI', () async {
     for (final handler in <Future<http.Response> Function(http.Request)>[
       (_) async => throw http.ClientException('no network'),

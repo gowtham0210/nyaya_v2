@@ -15,6 +15,7 @@ import {
   looksLikeCode,
   systemPrompt,
 } from './chat.prompt.js';
+import { findSources, sourcesPrompt, splitSources, type Source } from './sources.js';
 
 @Injectable()
 export class ChatService {
@@ -63,11 +64,24 @@ export class ChatService {
       return { reply: OFF_TOPIC_REPLY, remaining_today: limit - used + 1 };
     }
 
+    const earlier = body.messages
+      .slice(0, -1)
+      .reverse()
+      .find((m) => m.role === 'user')?.content;
+    const candidates = await findSources(last.content, earlier);
     const result = await azureChat(
       azure,
-      systemPrompt(body.language, body.persona),
+      systemPrompt(body.language, body.persona) +
+        (candidates.length ? sourcesPrompt(candidates) : ''),
       body.messages.map((m) => ({ role: m.role, content: m.content })),
     );
+    // Only pages the model says it used are cited; the marker line is hidden.
+    let cited: Source[] = [];
+    if (result.kind === 'answer' && candidates.length) {
+      const split = splitSources(result.text, candidates);
+      result.text = split.text;
+      cited = split.used;
+    }
     // A code block is never a legal answer, whatever the question was.
     const offTopic = result.kind === 'answer' && looksLikeCode(result.text);
     // Failed and declined questions are free. An answer counts even when it is
@@ -85,7 +99,13 @@ export class ChatService {
       return { reply: DECLINED_REPLY, remaining_today: limit - used + 1 };
     if (offTopic)
       return { reply: OFF_TOPIC_REPLY, remaining_today: limit - used };
-    return { reply: result.text, remaining_today: limit - used };
+    return {
+      reply: result.text,
+      remaining_today: limit - used,
+      ...(cited.length && {
+        sources: cited.map(({ site, title, url }) => ({ site, title, url })),
+      }),
+    };
   }
 
   /** Counts one answer for today, or returns null when the limit is used up. */

@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../app/router.dart';
 import '../../../core/config/features.dart';
@@ -362,8 +363,15 @@ class _Bubble extends StatelessWidget {
             ),
             border: isUser ? null : Border.all(color: context.nyaya.cardBorder),
           ),
-          child: Text.rich(
-            _richText(message.text, context.text.bodyMedium!.copyWith(color: fg, height: 1.5)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text.rich(
+                _richText(message.text, context.text.bodyMedium!.copyWith(color: fg, height: 1.5)),
+              ),
+              if (!isUser && message.sources.isNotEmpty) _Sources(sources: message.sources),
+            ],
           ),
         ),
       ).animate().fadeIn(duration: 220.ms).slideY(begin: 0.1),
@@ -380,6 +388,82 @@ class _Bubble extends StatelessWidget {
           TextSpan(text: parts[i], style: i.isOdd ? const TextStyle(fontWeight: FontWeight.w800) : null),
       ],
     );
+  }
+}
+
+/// Source citations under an answer: one small grey pill per website. Tapping
+/// a pill opens a popup listing the pages used from it; each opens the original page.
+class _Sources extends StatelessWidget {
+  const _Sources({required this.sources});
+
+  final List<ChatSource> sources;
+
+  @override
+  Widget build(BuildContext context) {
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    final fill = dark ? const Color(0xFF3A3A3A) : const Color(0xFFEDEDED);
+    final grey = dark ? const Color(0xFFB0B0B0) : const Color(0xFF616161);
+    final bySite = <String, List<ChatSource>>{};
+    for (final s in sources) {
+      (bySite[s.site] ??= []).add(s);
+    }
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Wrap(
+        spacing: 6,
+        runSpacing: 6,
+        children: [
+          for (final e in bySite.entries)
+            PopupMenuButton<ChatSource>(
+              tooltip: e.key,
+              position: PopupMenuPosition.under,
+              constraints: const BoxConstraints(maxWidth: 300),
+              onSelected: (s) => _open(context, s),
+              itemBuilder: (_) => [
+                for (final s in e.value)
+                  PopupMenuItem<ChatSource>(
+                    value: s,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          s.title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: context.text.bodyMedium?.copyWith(
+                            color: context.colors.primary,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                        Text(
+                          Uri.parse(s.url).host,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: context.text.labelSmall?.copyWith(color: grey),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(color: fill, borderRadius: BorderRadius.circular(999)),
+                child: Text(
+                  e.value.length > 1 ? '${e.key} +${e.value.length - 1}' : e.key,
+                  style: context.text.labelSmall?.copyWith(color: grey, fontWeight: FontWeight.w600),
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  static Future<void> _open(BuildContext context, ChatSource s) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final failed = context.l10n.quizOpenSourceFailed;
+    final opened = await launchUrl(Uri.parse(s.url), mode: LaunchMode.externalApplication).catchError((_) => false);
+    if (!opened) messenger.showSnackBar(SnackBar(content: Text(failed)));
   }
 }
 

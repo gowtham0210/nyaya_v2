@@ -75,6 +75,7 @@ class ChatController extends Notifier<ChatState> {
           role: ChatRole.assistant,
           text: reply.text,
           at: ref.read(clockProvider)(),
+          sources: reply.sources,
         ),
       ];
       state = state.copyWith(messages: updated, sending: false);

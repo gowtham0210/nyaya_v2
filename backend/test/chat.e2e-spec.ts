@@ -22,9 +22,18 @@ function azureReplies(...bodies: { status?: number; json: unknown }[]) {
     fetchMock.mockResolvedValueOnce(
       new Response(JSON.stringify(b.json), { status: b.status ?? 200 }),
     );
-  vi.stubGlobal('fetch', fetchMock);
+  // Source lookups on the two official sites are not Azure calls: they find
+  // nothing here unless a test hands them pages, so fetchMock only sees Azure.
+  vi.stubGlobal('fetch', (url: string, init?: RequestInit) =>
+    url.startsWith(azure.endpoint)
+      ? (fetchMock(url, init) as Promise<Response>)
+      : Promise.resolve(sitePages(url)),
+  );
   return fetchMock;
 }
+
+let sitePages: (url: string) => Response = () =>
+  new Response('{}', { status: 404 });
 
 const answer = (text: string) => ({
   json: { choices: [{ finish_reason: 'stop', message: { content: text } }] },
@@ -223,6 +232,125 @@ describe('chat', () => {
       .send(question('Tell me about bail'))
       .expect(200);
     expect(res.body.reply).toBe(OFF_TOPIC_REPLY);
+  });
+
+  describe('reference sources', () => {
+    const icPage = {
+      _embedded: {
+        searchResult: {
+          _embedded: {
+            objects: [
+              {
+                _embedded: {
+                  indexableObject: {
+                    name: 'The Bharatiya Nyaya Sanhita, 2023',
+                    handle: '123456789/496548',
+                  },
+                },
+              },
+            ],
+          },
+        },
+      },
+    };
+    const sciPage =
+      '<div class="searchItem"><h2 class="heading3"><a title="x" href="https://www.sci.gov.in/legal-aid/" target="_self">Legal Aid</a></h2><p>Free legal aid &amp; advice [&hellip;]</p></div>';
+    const withSites = () => {
+      sitePages = (url) =>
+        url.startsWith('https://indiacode.gov.in/')
+          ? new Response(JSON.stringify(icPage))
+          : url.startsWith('https://www.sci.gov.in/')
+            ? new Response(sciPage)
+            : new Response('', { status: 404 });
+    };
+    afterEach(() => {
+      sitePages = () => new Response('{}', { status: 404 });
+    });
+    const ask = async (q: string) => {
+      const s = await t.signInAs('learner');
+      return t
+        .http()
+        .post('/v1/chat')
+        .set('Authorization', `Bearer ${s.token}`)
+        .send(question(q))
+        .expect(200);
+    };
+
+    it('cites only the pages the answer relied on and hides the marker', async () => {
+      withSites();
+      const fetchMock = azureReplies(
+        answer('Murder is punishable under BNS.\n\nSOURCES: 1'),
+      );
+      const res = await ask('What is the punishment for murder under BNS?');
+      expect(res.body.reply).toBe('Murder is punishable under BNS.');
+      expect(res.body.sources).toEqual([
+        {
+          site: 'India Code',
+          title: 'The Bharatiya Nyaya Sanhita, 2023',
+          url: 'https://indiacode.gov.in/handle/123456789/496548',
+        },
+      ]);
+      const prompt = JSON.parse(
+        (fetchMock.mock.calls[0] as [string, RequestInit])[1].body as string,
+      ).messages[0].content as string;
+      expect(prompt).toContain('[1] India Code');
+      expect(prompt).toContain('[2] Supreme Court of India');
+    });
+
+    it('can cite Wikipedia, using the page address the site returned', async () => {
+      sitePages = (url) =>
+        url.startsWith('https://en.wikipedia.org/')
+          ? new Response(
+              JSON.stringify({
+                query: {
+                  pages: {
+                    '1': {
+                      title: 'Collegium system',
+                      index: 1,
+                      extract: 'The collegium system appoints judges.',
+                      fullurl: 'https://en.wikipedia.org/wiki/Collegium_system',
+                    },
+                  },
+                },
+              }),
+            )
+          : new Response('', { status: 404 });
+      azureReplies(answer('Judges are appointed by the collegium.\nSOURCES: 1'));
+      const res = await ask('How does the collegium system work?');
+      expect(res.body.sources).toEqual([
+        {
+          site: 'Wikipedia',
+          title: 'Collegium system',
+          url: 'https://en.wikipedia.org/wiki/Collegium_system',
+        },
+      ]);
+    });
+
+    it('cites nothing when the model used none of the pages', async () => {
+      withSites();
+      azureReplies(answer('Bail is a right in some cases.\nSOURCES: none'));
+      const res = await ask('Explain bail rules');
+      expect(res.body.reply).toBe('Bail is a right in some cases.');
+      expect(res.body).not.toHaveProperty('sources');
+    });
+
+    it('ignores source numbers it was never given', async () => {
+      withSites();
+      azureReplies(answer('Answer.\nSOURCES: 7'));
+      const res = await ask('Explain bail rules');
+      expect(res.body).not.toHaveProperty('sources');
+    });
+
+    it('answers normally, with no sources, when the sites find nothing', async () => {
+      const fetchMock = azureReplies(answer('A Zero FIR can be filed anywhere.'));
+      const res = await ask('What is a Zero FIR?');
+      expect(res.body.reply).toBe('A Zero FIR can be filed anywhere.');
+      expect(res.body).not.toHaveProperty('sources');
+      const prompt = JSON.parse(
+        (fetchMock.mock.calls[0] as [string, RequestInit])[1].body as string,
+      ).messages[0].content as string;
+      expect(prompt).not.toContain('SOURCES');
+    });
   });
 
   it('rejects a conversation that does not end with a question', async () => {
