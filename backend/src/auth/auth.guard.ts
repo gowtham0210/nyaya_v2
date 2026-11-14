@@ -67,7 +67,12 @@ export class AuthGuard implements CanActivate {
       ROLES,
       targets,
     );
-    if (needed && !needed.some((r) => user.roles.includes(r)))
+    // Admins may do everything any other staff role can; other roles stay strict.
+    if (
+      needed &&
+      !user.roles.includes('admin') &&
+      !needed.some((r) => user.roles.includes(r))
+    )
       throw ApiError.forbidden();
     return true;
   }

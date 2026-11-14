@@ -21,7 +21,9 @@ export type WorkflowAction = keyof typeof WORKFLOW;
 export const BULK_ACTIONS = ['submit', 'approve', 'publish'] as const satisfies readonly WorkflowAction[];
 export type BulkAction = (typeof BULK_ACTIONS)[number];
 
-export const hasRole = (me: Me, ...roles: readonly Role[]) => roles.some((r) => me.roles.includes(r));
+/** Admins hold every staff permission; every other role is limited to its own. */
+export const hasRole = (me: Me, ...roles: readonly Role[]) =>
+  me.roles.includes('admin') || roles.some((r) => me.roles.includes(r));
 
 /** Staff who handle learner reports (the API checks this too). */
 export const TRIAGE_ROLES = ['content_editor', 'legal_reviewer', 'publisher', 'admin'] as const satisfies readonly Role[];
