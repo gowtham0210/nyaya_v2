@@ -15,7 +15,12 @@ import {
   looksLikeCode,
   systemPrompt,
 } from './chat.prompt.js';
-import { findSources, sourcesPrompt, splitSources, type Source } from './sources.js';
+import {
+  findSources,
+  sourcesPrompt,
+  splitSources,
+  type Source,
+} from './sources.js';
 
 @Injectable()
 export class ChatService {

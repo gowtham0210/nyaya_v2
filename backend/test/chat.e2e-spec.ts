@@ -315,7 +315,9 @@ describe('chat', () => {
               }),
             )
           : new Response('', { status: 404 });
-      azureReplies(answer('Judges are appointed by the collegium.\nSOURCES: 1'));
+      azureReplies(
+        answer('Judges are appointed by the collegium.\nSOURCES: 1'),
+      );
       const res = await ask('How does the collegium system work?');
       expect(res.body.sources).toEqual([
         {
@@ -342,7 +344,9 @@ describe('chat', () => {
     });
 
     it('answers normally, with no sources, when the sites find nothing', async () => {
-      const fetchMock = azureReplies(answer('A Zero FIR can be filed anywhere.'));
+      const fetchMock = azureReplies(
+        answer('A Zero FIR can be filed anywhere.'),
+      );
       const res = await ask('What is a Zero FIR?');
       expect(res.body.reply).toBe('A Zero FIR can be filed anywhere.');
       expect(res.body).not.toHaveProperty('sources');

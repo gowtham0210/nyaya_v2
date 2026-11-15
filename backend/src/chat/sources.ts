@@ -109,7 +109,8 @@ async function indiaCode(terms: string): Promise<Source[]> {
     const meta = (k: string) => item.metadata?.[k]?.[0]?.value;
     const parts = [
       item.name,
-      meta('dc.identifier.act_name') && `Act: ${meta('dc.identifier.act_name')}`,
+      meta('dc.identifier.act_name') &&
+        `Act: ${meta('dc.identifier.act_name')}`,
       meta('dc.identifier.section_number') &&
         `Section ${meta('dc.identifier.section_number')}`,
       ...Object.values(o.hitHighlights ?? {}).flat(),
