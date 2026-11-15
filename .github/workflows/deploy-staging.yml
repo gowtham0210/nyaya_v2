@@ -1,0 +1,106 @@
+name: Deploy staging
+
+# After CI passes on a push to main: build the API and portal images, push them
+# to GHCR, then ask the VPS to run them. The server side is
+# deploy/staging/cd-deploy.sh; the GitHub key can run nothing else there.
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+
+permissions: {}
+
+# One deploy at a time; a newer push waits instead of cutting one off halfway.
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build ${{ matrix.name }} image
+    # Only pushes to main in this repository, never pull requests (from forks or not).
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      matrix:
+        include:
+          - name: api
+            context: backend
+            build-args: ''
+          - name: cms
+            context: cms
+            # Built into the browser code, so it is given at build time.
+            build-args: |
+              NEXT_PUBLIC_SENTRY_DSN=${{ vars.PORTAL_SENTRY_DSN }}
+              NEXT_PUBLIC_SENTRY_ENV=staging
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          persist-credentials: false
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+      - uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4.8.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: ${{ matrix.context }}
+          push: true
+          build-args: ${{ matrix.build-args }}
+          tags: ghcr.io/${{ github.repository_owner }}/nyaya-v2-${{ matrix.name }}:${{ github.event.workflow_run.head_sha }}
+          labels: org.opencontainers.image.source=https://github.com/${{ github.repository }}
+          cache-from: type=gha,scope=${{ matrix.name }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.name }}
+
+  deploy:
+    name: Deploy to staging
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: staging
+      url: https://staging-cms.deepwebstudio.dev
+    permissions:
+      # The server uses this job's short-lived token to pull the images.
+      packages: read
+    steps:
+      - name: Run the deploy on the server
+        env:
+          SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.STAGING_KNOWN_HOSTS }}
+          HOST: ${{ secrets.STAGING_HOST }}
+          SHA: ${{ github.event.workflow_run.head_sha }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          umask 077
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          # The token goes on stdin, never on a command line.
+          printf '%s\n' "$TOKEN" | ssh -i ~/.ssh/deploy_key \
+            -o StrictHostKeyChecking=yes -o ServerAliveInterval=30 \
+            "$HOST" "$SHA"
+
+      - name: Check the API and portal answer
+        run: |
+          check() {
+            for i in $(seq 1 24); do
+              code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 "$1" || true)
+              [ "$code" = 200 ] && { echo "$1 -> 200"; return 0; }
+              sleep 5
+            done
+            echo "::error::$1 did not answer 200 (last: $code)"
+            return 1
+          }
+          check https://staging-api.deepwebstudio.dev/v1/news
+          check https://staging-cms.deepwebstudio.dev/login

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Builds and (re)starts Nyaya v2 staging on the VPS from this checkout.
 #   ./deploy/staging/deploy.sh [--seed]
+# Normally not needed: pushes to main deploy themselves (deploy-staging.yml).
+# Use this when GitHub Actions is down, or to --seed.
 # --seed imports the starter questions (published as unreviewed staging data)
 # and (re)creates the staff accounts with SEED_PASSWORD from the server's .env.
 set -euo pipefail
@@ -32,6 +34,12 @@ fi
 if ! grep -q '^PORTAL_PROXY_SECRET=' .env; then
   echo "PORTAL_PROXY_SECRET=$(openssl rand -hex 32)" >> .env
 fi
+# Same lock as cd-deploy.sh, so a GitHub deploy can't run at the same time.
+exec 9>"$DIR/.deploy.lock"
+flock -w 600 9
+# Run the images built here, not the last GitHub ones, until the next push.
+sed -i '/^IMAGE_TAG=/d' .env
+echo "IMAGE_TAG=manual" >> .env
 docker compose up -d --build
 if [ "$SEED" = "--seed" ]; then
   docker compose exec -T -e SEED_PUBLISH_IMPORTED=true api node dist/db/seed.js
