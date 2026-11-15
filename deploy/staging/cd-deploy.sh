@@ -40,6 +40,10 @@ echo "== backup"
 
 echo "== pull $SHA"
 printf '%s\n' "$TOKEN" | docker login ghcr.io -u "$OWNER" --password-stdin >/dev/null
+# Pulled with the new compose file before anything here changes: if the pull
+# fails, the server keeps its old files and IMAGE_TAG, and still runs as before.
+IMAGE_TAG=$SHA docker compose -f "$work/docker-compose.yml" --project-directory "$DIR" \
+  pull api cms
 install -m 644 "$work/docker-compose.yml" docker-compose.yml
 install -m 755 "$work/backup.sh" backup.sh
 install -m 644 "$work/backup.cron" /etc/cron.d/nyaya-v2-backup
@@ -47,7 +51,6 @@ install -m 644 "$work/nginx.conf" /opt/yercaud/nginx/user_conf.d/nyaya-v2-stagin
 # Manual docker compose commands later use the same images.
 sed -i '/^IMAGE_TAG=/d' .env
 echo "IMAGE_TAG=$SHA" >> .env
-docker compose pull api cms
 
 echo "== start"
 # A recreate once failed with a container name clash although the new
