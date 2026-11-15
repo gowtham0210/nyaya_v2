@@ -1,6 +1,9 @@
 # Nyaya v2 staging: Postgres + API + Content Management Portal on the shared VPS.
 #
-#   ./deploy/staging/deploy.sh          (from the repo root, on your machine)
+#   Every push to main deploys itself after CI (.github/workflows/deploy-staging.yml
+#   pulls the GHCR images tagged with that commit; IMAGE_TAG in .env).
+#   ./deploy/staging/deploy.sh          (by hand, from the repo root: builds on the
+#                                        server and runs those images, tag "manual")
 #
 # Lives in /opt/nyaya-v2 on the VPS. Secrets come from .env next to this file
 # (made once by deploy.sh, never committed). The yercaud project's nginx-certbot
@@ -26,7 +29,7 @@ services:
 
   api:
     build: ./backend
-    image: nyaya-v2-api
+    image: ghcr.io/gowtham0210/nyaya-v2-api:${IMAGE_TAG:-manual}
     container_name: nyaya-v2-api
     restart: unless-stopped
     depends_on:
@@ -67,7 +70,7 @@ services:
       args:
         NEXT_PUBLIC_SENTRY_DSN: ${PORTAL_SENTRY_DSN:-}
         NEXT_PUBLIC_SENTRY_ENV: staging
-    image: nyaya-v2-cms
+    image: ghcr.io/gowtham0210/nyaya-v2-cms:${IMAGE_TAG:-manual}
     container_name: nyaya-v2-cms
     restart: unless-stopped
     depends_on: [api]

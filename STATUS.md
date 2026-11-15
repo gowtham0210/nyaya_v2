@@ -2,7 +2,7 @@
 
 > **Read this first.** This file is the offline context for any AI assistant or developer
 > picking up the project. Keep it updated after every meaningful step.
-> Last updated: 2026-11-08 (tester review fixes on staging and the iPhone, Claude Opus 5.5)
+> Last updated: 2026-11-15 (main deployed to staging, Claude Opus 5.5)
 
 ## 1. What the product is
 Flutter mobile quiz app on **Indian law** ("Nyaya") for advocates, law aspirants (CLAT/AIBE/judiciary)
@@ -905,6 +905,12 @@ English, Hindi, Tamil, Telugu, Kannada, Malayalam.
       the plugin); `main.dart` turns it on. Native launch backgrounds (Android `nyaya_cream`, iOS LaunchScreen) now
       #F9F0E2, the video's cream. New package `video_player`. Checked on iPhone 17 Pro Max simulator (debug);
       not yet checked on Android or a real phone. Committed 1038fbf.
+- [x] 2026-11-15: **main `d82e716` (PR #3, update/cms) deployed to staging.** Backup `nyaya-2026-11-15-0745.sql.gz`
+      taken first; migrations 0016 (password_reset_codes) and 0017 (news_images) applied on start (18 in total).
+      deploy.sh's `compose up` failed once with a container-name clash ("…_nyaya-v2-api is already in use") but the
+      new containers had started; a second `docker compose up -d` settled it. Checked: news 200, portal /login 200,
+      other sites on the VPS still up. **No SMTP_* settings in `/opt/nyaya-v2/.env` yet**, so "Forgot password"
+      answers 503 `password_reset_unavailable` on staging until they are added.
 
 ## 3. IN PROGRESS / NEXT STEPS
 **Tester review 2026-11-07** (`~/Downloads/nyaya_review.docx`, 22 points, Android phone). User decisions: keep
