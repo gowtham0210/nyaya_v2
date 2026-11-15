@@ -1757,6 +1757,10 @@ class AppLocalizationsKn extends AppLocalizations {
       'ಸರಿಯಾದ ಇಮೇಲ್ ಮತ್ತು ಕನಿಷ್ಠ 8 ಅಕ್ಷರಗಳ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ.';
 
   @override
+  String get authErrorPasswordRules =>
+      'ಪಾಸ್‌ವರ್ಡ್‌ನಲ್ಲಿ ಕನಿಷ್ಠ ಒಂದು ದೊಡ್ಡ ಅಕ್ಷರ (capital), ಕನಿಷ್ಠ ಒಂದು ಸಣ್ಣ ಅಕ್ಷರ, ಕನಿಷ್ಠ ಒಂದು ವಿಶೇಷ ಚಿಹ್ನೆ (ಉದಾ. ! @ # %) ಇರಬೇಕು.';
+
+  @override
   String get authErrorName => 'ನಿಮ್ಮ ಹೆಸರನ್ನು ನಮೂದಿಸಿ.';
 
   @override

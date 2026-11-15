@@ -1754,6 +1754,10 @@ class AppLocalizationsTe extends AppLocalizations {
       'సరైన ఇమెయిల్, కనీసం 8 అక్షరాల పాస్‌వర్డ్ ఇవ్వండి.';
 
   @override
+  String get authErrorPasswordRules =>
+      'పాస్‌వర్డ్‌లో కనీసం ఒక పెద్ద అక్షరం (capital), కనీసం ఒక చిన్న అక్షరం, కనీసం ఒక ప్రత్యేక చిహ్నం (ఉదా. ! @ # %) ఉండాలి.';
+
+  @override
   String get authErrorName => 'మీ పేరు ఇవ్వండి.';
 
   @override

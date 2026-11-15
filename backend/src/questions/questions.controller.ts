@@ -101,7 +101,11 @@ export class QuestionsController {
     @Body() body: BulkActionDto,
   ) {
     const roles: readonly Role[] = ACTIONS[body.action].roles;
-    if (!roles.some((r) => user.roles.includes(r))) throw ApiError.forbidden();
+    if (
+      !user.roles.includes('admin') &&
+      !roles.some((r) => user.roles.includes(r))
+    )
+      throw ApiError.forbidden();
     return this.questions.bulk(actor, body);
   }
 

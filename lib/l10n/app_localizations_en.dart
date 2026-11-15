@@ -1750,6 +1750,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Enter a valid email and a password of at least 8 characters.';
 
   @override
+  String get authErrorPasswordRules =>
+      'Password must contain at least one uppercase (capital) letter, at least one lowercase letter, at least one special character (like ! @ # %).';
+
+  @override
   String get authErrorName => 'Enter your name.';
 
   @override

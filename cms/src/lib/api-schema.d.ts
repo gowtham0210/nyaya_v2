@@ -2220,8 +2220,17 @@ export interface components {
             /** @enum {string} */
             persona: "advocate" | "aspirant" | "citizen";
         };
+        ChatSourceDto: {
+            /** @example India Code */
+            site: string;
+            title: string;
+            /** @description The page the answer drew on */
+            url: string;
+        };
         ChatReplyDto: {
             reply: string;
+            /** @description Pages (India Code, Supreme Court of India, Wikipedia) the answer relied on; absent when none were used */
+            sources?: components["schemas"]["ChatSourceDto"][];
             /** @description AI answers left today (India date) */
             remaining_today: number;
         };

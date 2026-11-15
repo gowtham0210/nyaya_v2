@@ -1762,6 +1762,10 @@ class AppLocalizationsTa extends AppLocalizations {
       'சரியான மின்னஞ்சலையும், குறைந்தது 8 எழுத்துகள் கொண்ட கடவுச்சொல்லையும் உள்ளிடுங்கள்.';
 
   @override
+  String get authErrorPasswordRules =>
+      'கடவுச்சொல்லில் குறைந்தது ஒரு பெரிய எழுத்து (capital), குறைந்தது ஒரு சிறிய எழுத்து, குறைந்தது ஒரு சிறப்பு எழுத்து (எ.கா. ! @ # %) இருக்க வேண்டும்.';
+
+  @override
   String get authErrorName => 'உங்கள் பெயரை உள்ளிடுங்கள்.';
 
   @override

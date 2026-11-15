@@ -123,7 +123,7 @@ void main() {
     expect(find.byTooltip('Close'), findsNothing);
     await tester.enterText(find.widgetWithText(TextField, 'Your name'), 'Meena');
     await tester.enterText(find.widgetWithText(TextField, 'Email'), 'meena@test.local');
-    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'long enough');
+    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'Long enough!');
     await tester.tap(find.text('CREATE ACCOUNT'));
     await settle(tester);
 
@@ -340,7 +340,16 @@ void main() {
     await settle(tester);
     expect(find.text('Enter a valid email and a password of at least 8 characters.'), findsOneWidget);
 
-    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'long enough');
+    // Long enough but too plain: the password rules are spelled out.
+    await tester.enterText(find.widgetWithText(TextField, 'Password'), '1234567890');
+    await tester.tap(find.text('CREATE ACCOUNT'));
+    await settle(tester);
+    expect(
+      find.text('Password must contain at least one uppercase (capital) letter, at least one lowercase letter, at least one special character (like ! @ # %).'),
+      findsOneWidget,
+    );
+
+    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'Long enough!');
     await tester.tap(find.text('CREATE ACCOUNT'));
     await settle(tester);
     expect(c.read(routerProvider).state.matchedLocation, Routes.home);
@@ -364,7 +373,7 @@ void main() {
 
     await tester.enterText(find.widgetWithText(TextField, 'Your name'), 'Nisha');
     await tester.enterText(find.widgetWithText(TextField, 'Email'), 'nisha@test.local');
-    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'long enough');
+    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'Long enough!');
     await tester.tap(find.text('CREATE ACCOUNT'));
     await settle(tester);
     expect(api.settings?.name, 'Nisha', reason: 'not the "Learner" placeholder');

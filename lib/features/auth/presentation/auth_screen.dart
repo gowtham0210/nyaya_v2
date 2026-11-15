@@ -42,6 +42,10 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     super.dispose();
   }
 
+  /// A new password needs an uppercase letter, a lowercase letter and a special character.
+  static bool _isStrong(String p) =>
+      RegExp(r'[A-Z]').hasMatch(p) && RegExp(r'[a-z]').hasMatch(p) && RegExp(r'[^A-Za-z0-9\s]').hasMatch(p);
+
   Future<void> _submit() async {
     final l = context.l10n;
     final email = _email.text.trim();
@@ -51,6 +55,8 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
       problem = l.authErrorName;
     } else if (!email.contains('@') || password.isEmpty || (!_signIn && password.length < 8)) {
       problem = l.authErrorInvalid;
+    } else if (!_signIn && !_isStrong(password)) {
+      problem = l.authErrorPasswordRules;
     }
     if (problem != null) {
       setState(() => _error = problem);

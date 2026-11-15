@@ -1747,6 +1747,10 @@ class AppLocalizationsHi extends AppLocalizations {
       'सही ईमेल और कम से कम 8 अक्षर का पासवर्ड दर्ज करें।';
 
   @override
+  String get authErrorPasswordRules =>
+      'पासवर्ड में कम से कम एक अपरकेस (बड़ा) अक्षर, कम से कम एक लोअरकेस अक्षर और कम से कम एक विशेष वर्ण (जैसे ! @ # %) होना चाहिए।';
+
+  @override
   String get authErrorName => 'अपना नाम दर्ज करें।';
 
   @override

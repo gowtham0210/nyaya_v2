@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../app/router.dart';
 import '../../../core/config/features.dart';
@@ -362,8 +363,15 @@ class _Bubble extends StatelessWidget {
             ),
             border: isUser ? null : Border.all(color: context.nyaya.cardBorder),
           ),
-          child: Text.rich(
-            _richText(message.text, context.text.bodyMedium!.copyWith(color: fg, height: 1.5)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text.rich(
+                _richText(message.text, context.text.bodyMedium!.copyWith(color: fg, height: 1.5)),
+              ),
+              if (!isUser && message.sources.isNotEmpty) _Sources(sources: message.sources),
+            ],
           ),
         ),
       ).animate().fadeIn(duration: 220.ms).slideY(begin: 0.1),
@@ -379,6 +387,110 @@ class _Bubble extends StatelessWidget {
         for (var i = 0; i < parts.length; i++)
           TextSpan(text: parts[i], style: i.isOdd ? const TextStyle(fontWeight: FontWeight.w800) : null),
       ],
+    );
+  }
+}
+
+/// Source citations under an answer: one small rounded chip per website. Tapping
+/// a chip slides up a sheet listing the pages used from it, each with a button
+/// that opens the original page.
+class _Sources extends StatelessWidget {
+  const _Sources({required this.sources});
+
+  final List<ChatSource> sources;
+
+  @override
+  Widget build(BuildContext context) {
+    final tone = context.nyaya.textSecondary;
+    final bySite = <String, List<ChatSource>>{};
+    for (final s in sources) {
+      (bySite[s.site] ??= []).add(s);
+    }
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Wrap(
+        spacing: 6,
+        runSpacing: 6,
+        children: [
+          for (final e in bySite.entries)
+            Material(
+              color: tone.withValues(alpha: 0.14),
+              shape: const StadiumBorder(),
+              child: InkWell(
+                customBorder: const StadiumBorder(),
+                onTap: () => _SourcesSheet.show(context, e.key, e.value),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                  child: Text(
+                    e.value.length > 1 ? '${e.key} +${e.value.length - 1}' : e.key,
+                    style: context.text.labelMedium?.copyWith(color: tone, fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SourcesSheet extends StatelessWidget {
+  const _SourcesSheet({required this.site, required this.pages});
+
+  final String site;
+  final List<ChatSource> pages;
+
+  static Future<void> show(BuildContext context, String site, List<ChatSource> pages) => showModalBottomSheet<void>(
+        context: context,
+        showDragHandle: true,
+        isScrollControlled: true,
+        builder: (_) => _SourcesSheet(site: site, pages: pages),
+      );
+
+  /// What the button says, by website.
+  static String _action(String site) => switch (site) {
+        'India Code' => 'Read the law on India Code',
+        'Supreme Court of India' => 'View on the Supreme Court website',
+        'Wikipedia' => 'Read the article',
+        _ => 'Open the source',
+      };
+
+  static Future<void> _open(BuildContext context, ChatSource s) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final failed = context.l10n.quizOpenSourceFailed;
+    final opened = await launchUrl(Uri.parse(s.url), mode: LaunchMode.externalApplication).catchError((_) => false);
+    if (!opened) messenger.showSnackBar(SnackBar(content: Text(failed)));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(site, style: context.text.labelLarge?.copyWith(color: context.nyaya.textSecondary)),
+            for (final p in pages) ...[
+              const SizedBox(height: 14),
+              Text(p.title, style: context.text.titleMedium, maxLines: 3, overflow: TextOverflow.ellipsis),
+              const SizedBox(height: 2),
+              Text(Uri.parse(p.url).host, style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary)),
+              const SizedBox(height: 10),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton.icon(
+                  style: FilledButton.styleFrom(backgroundColor: context.colors.primary, foregroundColor: context.colors.onPrimary),
+                  onPressed: () => _open(context, p),
+                  icon: const Icon(Icons.open_in_new_rounded, size: 18),
+                  label: Text(_action(p.site)),
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
     );
   }
 }

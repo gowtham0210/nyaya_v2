@@ -51,7 +51,7 @@ class BackendChatRepository implements ChatRepository {
         'language': language.code,
         'persona': persona.name,
       }) as Map<String, dynamic>;
-      return AssistantReply(text: res['reply'] as String);
+      return AssistantReply(text: res['reply'] as String, sources: ChatSource.parseAll(res['sources']));
     } on ApiException catch (e) {
       if (e.isNetwork || e.code == 'chat_unavailable') {
         return offline.reply(history: history, language: language, persona: persona);

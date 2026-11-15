@@ -17,7 +17,7 @@ export function NavLinks() {
   const pathname = usePathname();
   const status = useSearchParams().get('status');
   return (
-    <nav className="flex gap-1 overflow-x-auto text-sm" aria-label="Main">
+    <nav className="flex flex-col gap-1 text-sm" aria-label="Main">
       {LINKS.map((l) => {
         const active =
           'path' in l ? pathname === l.path || pathname.startsWith(`${l.path}/`) : pathname === '/questions' && (status ?? null) === l.status;
@@ -26,7 +26,7 @@ export function NavLinks() {
             key={l.href}
             href={l.href}
             aria-current={active ? 'page' : undefined}
-            className={`rounded-lg px-3 py-1.5 whitespace-nowrap ${active ? 'bg-surface-2 font-medium text-text' : 'text-muted hover:text-text'}`}
+            className={`rounded-lg px-3 py-2.5 whitespace-nowrap ${active ? 'bg-surface-2 font-medium text-text' : 'text-muted hover:text-text'}`}
           >
             {l.label}
           </Link>

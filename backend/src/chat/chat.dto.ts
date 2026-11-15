@@ -49,8 +49,21 @@ export class ChatRequestDto {
   persona: Persona;
 }
 
+export class ChatSourceDto {
+  @ApiProperty({ example: 'India Code' }) site: string;
+  @ApiProperty() title: string;
+  @ApiProperty({ description: 'The page the answer drew on' }) url: string;
+}
+
 export class ChatReplyDto {
   @ApiProperty() reply: string;
+  @ApiProperty({
+    type: [ChatSourceDto],
+    required: false,
+    description:
+      'Pages (India Code, Supreme Court of India, Wikipedia) the answer relied on; absent when none were used',
+  })
+  sources?: ChatSourceDto[];
   @ApiProperty({ description: 'AI answers left today (India date)' })
   remaining_today: number;
 }
