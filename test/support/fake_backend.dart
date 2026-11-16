@@ -526,7 +526,21 @@ MemoryTokenStore signedInTokens() => MemoryTokenStore(const StoredSession(
 /// Two published articles, as the API would send them.
 class FakeLegalUpdates implements LegalUpdatesRepository {
   @override
-  Future<List<LegalUpdate>> fetch() async => [
+  Future<List<LegalUpdate>> fetch() async => FakeLegalUpdatesList.items;
+}
+
+/// A fixed list of updates, newest first, as the repository returns them.
+class FixedLegalUpdates implements LegalUpdatesRepository {
+  FixedLegalUpdates(List<LegalUpdate> items) : _items = [...items]..sort((a, b) => b.date.compareTo(a.date));
+
+  final List<LegalUpdate> _items;
+
+  @override
+  Future<List<LegalUpdate>> fetch() async => _items;
+}
+
+abstract final class FakeLegalUpdatesList {
+  static final items = [
         LegalUpdate(
           id: 'news-1',
           category: UpdateCategory.supremeCourt,
@@ -550,7 +564,7 @@ class FakeLegalUpdates implements LegalUpdatesRepository {
           date: DateTime(2025, 4, 5),
           readMinutes: 3,
         ),
-      ];
+  ];
 }
 
 /// Records what would be scheduled instead of touching the phone.

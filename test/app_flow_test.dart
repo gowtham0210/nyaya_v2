@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,6 +26,7 @@ import 'package:nyaya/features/leaderboard/data/league_api.dart';
 import 'package:nyaya/features/progress/application/progress_sync.dart';
 import 'package:nyaya/features/progress/data/progress_api.dart';
 import 'package:nyaya/features/progress/domain/server_progress.dart';
+import 'package:nyaya/features/search/presentation/search_screen.dart';
 import 'package:nyaya/features/settings/presentation/settings_screen.dart';
 import 'package:nyaya/features/review/data/review_api.dart';
 import 'package:nyaya/features/quiz/application/quiz_controller.dart';
@@ -48,6 +50,7 @@ void main() {
     Map<String, Object> prefs = const {},
     bool signedIn = true,
     void Function(FakeQuizApi server)? server,
+    LegalUpdatesRepository? updates,
   }) async {
     tester.view.physicalSize = const Size(1170, 2532);
     tester.view.devicePixelRatio = 3;
@@ -64,7 +67,7 @@ void main() {
       progressApiProvider.overrideWithValue(api),
       leagueApiProvider.overrideWithValue(api),
       reviewApiProvider.overrideWithValue(api),
-      legalUpdatesRepositoryProvider.overrideWithValue(FakeLegalUpdates()),
+      legalUpdatesRepositoryProvider.overrideWithValue(updates ?? FakeLegalUpdates()),
       reminderNotificationsProvider.overrideWithValue(FakeReminderNotifications()),
       soundPlayerProvider.overrideWithValue(sounds = FakeSounds()),
       authApiProvider.overrideWithValue(authApi = FakeAuthApi(tokens)),
@@ -326,6 +329,15 @@ void main() {
     expect(authApi.deleted, 1);
     expect(find.text('Choose your language'), findsOneWidget, reason: 'back to the start');
     expect(c.read(profileProvider).onboarded, isFalse);
+  });
+
+  testWidgets('right after registering, the profile already has the new name for the avatar', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, signedIn: false);
+    await settle(tester);
+    // The listener runs the moment the account is signed in, before the server's settings come back.
+    await c.read(authProvider.notifier).register(name: 'Asha', email: 'asha@test.local', password: 'Passw0rd!');
+    expect(c.read(profileProvider).name, 'Asha');
   });
 
   testWidgets('a signed-out learner must create an account before anything else', (tester) async {
@@ -659,6 +671,195 @@ void main() {
     // The criminal law chapter is still locked, so its sheet says what to do first.
     expect(find.text('Level 1 · Locked'), findsOneWidget);
     expect(c.read(journeyFocusProvider), isNull, reason: 'the request is used once');
+  });
+
+  group('unified search', () {
+    Future<ProviderContainer> openSearch(WidgetTester tester) async {
+      final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+      final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+      await settle(tester);
+      await tester.tap(find.byTooltip('Search'));
+      await settle(tester);
+      return c;
+    }
+
+    Future<void> search(WidgetTester tester, String text) async {
+      await tester.enterText(find.byType(TextField), text);
+      await settle(tester);
+    }
+
+    const governors = 'Supreme Court sets timelines for Governors on State Bills';
+
+    testWidgets('before typing, the updates are listed under the topics', (tester) async {
+      await openSearch(tester);
+      expect(find.text('TOPICS'), findsOneWidget);
+      expect(find.text('Constitution Basics'), findsOneWidget);
+      expect(find.text('UPDATES'), findsOneWidget);
+      expect(find.text('Supreme Court sets timelines for Governors on State Bills'), findsOneWidget);
+      expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsOneWidget);
+      expect(find.text('LAWS'), findsNothing);
+    });
+
+    testWidgets('a quiz-only match shows topics and no updates', (tester) async {
+      await openSearch(tester);
+      await search(tester, 'bns');
+      expect(find.text('TOPICS'), findsOneWidget);
+      expect(find.text('Criminal Law (BNS)'), findsOneWidget);
+      expect(find.text('UPDATES'), findsNothing);
+    });
+
+    testWidgets('a legal-update-only match shows updates and no topics', (tester) async {
+      await openSearch(tester);
+      await search(tester, 'waqf');
+      expect(find.text('UPDATES'), findsOneWidget);
+      expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsOneWidget);
+      expect(find.text('TOPICS'), findsNothing);
+      expect(find.text('LAWS'), findsNothing);
+    });
+
+    testWidgets('updates are found by summary, key points, why it matters and source, not only the title',
+        (tester) async {
+      await openSearch(tester);
+      for (final query in ['indefinitely', 'pocket veto', 'stalled', '8 April 2025', 'Gazette of India']) {
+        await search(tester, query);
+        expect(find.text('UPDATES'), findsOneWidget, reason: query);
+      }
+      await search(tester, 'pocket veto');
+      expect(find.text(governors), findsOneWidget);
+      await tester.tap(find.text(governors));
+      await settle(tester);
+      expect(find.text('Key points'), findsOneWidget, reason: 'opens the update');
+    });
+
+    testWidgets('one search can match both topics and updates, each under its own heading', (tester) async {
+      await openSearch(tester);
+      await search(tester, 'court');
+      expect(find.text('TOPICS'), findsOneWidget);
+      expect(find.text('Constitution Basics'), findsOneWidget, reason: 'its subtitle mentions courts');
+      expect(find.text('UPDATES'), findsOneWidget);
+      expect(find.text(governors), findsOneWidget);
+      expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsNothing);
+    });
+
+    testWidgets('matching ignores case and works on part of a word', (tester) async {
+      await openSearch(tester);
+      await search(tester, 'WAQF');
+      expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsOneWidget);
+      await search(tester, 'gOvErN');
+      expect(find.text(governors), findsOneWidget);
+      await search(tester, 'bNs');
+      expect(find.text('Criminal Law (BNS)'), findsOneWidget);
+    });
+
+    testWidgets('no match says so and offers to ask the AI', (tester) async {
+      await openSearch(tester);
+      await search(tester, 'zzzqx');
+      expect(find.textContaining('Nothing matches'), findsOneWidget);
+      expect(find.text('TOPICS'), findsNothing);
+      expect(find.text('UPDATES'), findsNothing);
+      expect(find.text('Ask AI: “zzzqx”'), findsOneWidget);
+    });
+  });
+
+  test('searchMatches needs every word, ignores case and accepts part of a word', () {
+    expect(searchMatches('governor bills', ['Governors on State Bills']), isTrue);
+    expect(searchMatches('GOV', ['Governors']), isTrue);
+    expect(searchMatches('governor tax', ['Governors on State Bills']), isFalse);
+    expect(searchMatches('  ', ['anything']), isTrue, reason: 'no words: nothing is filtered out');
+  });
+
+  group('High Courts updates (docs/high-court-updates-2026-11.json)', () {
+    // The reviewed drafts, in the shape the portal's create call takes, shown
+    // the way the API would serve them once published.
+    LegalUpdatesRepository drafts() {
+      final raw = jsonDecode(File('docs/high-court-updates-2026-11.json').readAsStringSync()) as List;
+      final items = [
+        for (final (i, a) in raw.cast<Map<String, dynamic>>().indexed)
+          LegalUpdate.fromJson({
+            'id': 'hc-$i',
+            'category': a['category'],
+            'title': a['title'],
+            'summary': a['summary'],
+            'key_points': a['key_points'],
+            'why_it_matters': a['why_it_matters'],
+            'source': a['source'],
+            'source_url': a['source_url'],
+            'date': a['event_date'],
+            'read_minutes': a['read_minutes'],
+          })!,
+      ];
+      return FixedLegalUpdates([...items, ...FakeLegalUpdatesList.items]);
+    }
+
+    Future<void> pumpHome(WidgetTester tester) async {
+      final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+      await pumpApp(tester, prefs: {'profile_v1': onboarded}, updates: drafts());
+      await settle(tester);
+    }
+
+    Future<void> openUpdates(WidgetTester tester) async {
+      await pumpHome(tester);
+      await tester.tap(find.text('Updates').last);
+      await settle(tester);
+    }
+
+    /// The filter row scrolls sideways, so bring a pill into view first.
+    Future<void> pickFilter(WidgetTester tester, String label) async {
+      final row = find.byWidgetPredicate((w) => w is ListView && w.scrollDirection == Axis.horizontal);
+      await tester.scrollUntilVisible(
+        find.text(label),
+        100,
+        scrollable: find.descendant(of: row, matching: find.byType(Scrollable)).first,
+      );
+      await settle(tester);
+      await tester.tap(find.text(label));
+      await settle(tester);
+    }
+
+    testWidgets('the drafts are valid, from nine different courts, each with an https source', (tester) async {
+      final all = await drafts().fetch();
+      final hc = all.where((u) => u.category == UpdateCategory.highCourts).toList();
+      expect(hc, hasLength(9));
+      expect(hc.every((u) => u.sourceUrl!.startsWith('https://')), isTrue);
+      expect({for (final u in hc) u.source.split(';').first.split(' (').first}, hasLength(9));
+    });
+
+    testWidgets('the High Courts filter lists them, the other filters are unchanged', (tester) async {
+      await openUpdates(tester);
+      await pickFilter(tester, 'High Courts');
+      expect(find.textContaining('Finance companies cannot seize vehicles'), findsOneWidget);
+      expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsNothing);
+
+      await pickFilter(tester, 'Legislation');
+      expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsOneWidget);
+      expect(find.textContaining('Finance companies cannot seize vehicles'), findsNothing);
+    });
+
+    testWidgets('one opens its detail page', (tester) async {
+      await openUpdates(tester);
+      await pickFilter(tester, 'High Courts');
+      await tester.tap(find.textContaining('Finance companies cannot seize vehicles'));
+      await settle(tester);
+      expect(find.textContaining('Sadab Ahmad'), findsWidgets, reason: 'the summary names the case');
+      await tester.scrollUntilVisible(find.text('Key points'), 200, scrollable: find.byType(Scrollable).first);
+      expect(find.text('Key points'), findsOneWidget);
+    });
+
+    testWidgets('search finds them by title and by what the article says', (tester) async {
+      await pumpHome(tester);
+      await tester.tap(find.byTooltip('Search'));
+      await settle(tester);
+      for (final (query, title) in [
+        ('unborn', 'Parents can claim compensation for the loss of an unborn child in a road accident'),
+        ('GOKUL', 'Gokul Dairy: no stay on ordinance giving State nominees a vote, but ballots kept separate'),
+        ('371a', 'Article 371A does not shield Naga customs that violate fundamental rights'),
+        ('musclemen', 'Finance companies cannot seize vehicles by force through recovery agents'),
+      ]) {
+        await tester.enterText(find.byType(TextField), query);
+        await settle(tester);
+        expect(find.text(title), findsOneWidget, reason: query);
+      }
+    });
   });
 
   testWidgets('Home shows latest updates and opens one', (tester) async {
