@@ -31,13 +31,6 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     super.dispose();
   }
 
-  /// Every word of the query must appear somewhere in [fields].
-  static bool _matches(String query, List<String> fields) {
-    final words = query.toLowerCase().split(RegExp(r'\s+')).where((w) => w.isNotEmpty);
-    final haystack = fields.join(' ').toLowerCase();
-    return words.every(haystack.contains);
-  }
-
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
@@ -46,17 +39,18 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
     final topics = [
       for (final c in JourneyCatalog.chapters)
-        if (q.isEmpty || _matches(q, [l.chapterTitle(c.id), l.chapterSubtitle(c.id)])) c,
+        if (q.isEmpty || searchMatches(q, [l.chapterTitle(c.id), l.chapterSubtitle(c.id)])) c,
     ];
     final laws = [
       for (final law in coreLaws(l))
-        if (q.isNotEmpty && _matches(q, [law.title, law.desc])) law,
-      if (q.isNotEmpty && _matches(q, [l.lawLegacyTitle, l.lawLegacyDesc]))
+        if (q.isNotEmpty && searchMatches(q, [law.title, law.desc])) law,
+      if (q.isNotEmpty && searchMatches(q, [l.lawLegacyTitle, l.lawLegacyDesc]))
         (icon: Icons.description_outlined, title: l.lawLegacyTitle, desc: l.lawLegacyDesc, chapterId: legacyLawChapter),
     ];
     final news = [
       for (final u in updates)
-        if (q.isNotEmpty && _matches(q, [u.title, u.category.label(l)])) u,
+        // With nothing typed, the updates are listed under the topics, like the topics themselves.
+        if (q.isEmpty || searchMatches(q, updateSearchFields(u, l))) u,
     ];
     final nothing = q.isNotEmpty && topics.isEmpty && laws.isEmpty && news.isEmpty;
 
@@ -149,6 +143,25 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     context.go(Uri(path: Routes.chat, queryParameters: {'q': q}).toString());
   }
 }
+
+/// Every word of the query must appear somewhere in [fields], in any case
+/// and as part of a word ("gov" finds "Governor").
+bool searchMatches(String query, List<String> fields) {
+  final words = query.toLowerCase().split(RegExp(r'\s+')).where((w) => w.isNotEmpty);
+  final haystack = fields.join(' ').toLowerCase();
+  return words.every(haystack.contains);
+}
+
+/// What a search looks through for a legal update: the card's title and
+/// category, and the article's summary, key points, why it matters and source.
+List<String> updateSearchFields(LegalUpdate u, AppLocalizations l) => [
+      u.title,
+      u.category.label(l),
+      u.summary,
+      ...u.keyPoints,
+      u.whyItMatters,
+      u.source,
+    ];
 
 class _Heading extends StatelessWidget {
   const _Heading(this.text);
