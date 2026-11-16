@@ -95,7 +95,8 @@ async function ArticleDetail({ params }: { params: PageProps<'/news/[id]'>['para
             key={`${a.status}:${a.updated_at}`}
             articleId={a.id}
             actions={newsActions(me, a.status)}
-            approveBlocked={a.created_by === me.id || a.updated_by === me.id}
+            // Admins may approve their own work; everyone else needs another reviewer.
+            approveBlocked={!me.roles.includes('admin') && (a.created_by === me.id || a.updated_by === me.id)}
           />
         </Card>
         <Card>

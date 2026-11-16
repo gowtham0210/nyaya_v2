@@ -164,6 +164,22 @@ describe('legal news', () => {
       .expect(200);
   });
 
+  it('lets an admin approve and publish an article they wrote themselves', async () => {
+    const admin = await t.signInAs('admin');
+    const own = (
+      await as(admin.token).post('/v1/editor/news', complete).expect(201)
+    ).body.id;
+    await as(admin.token).post(`/v1/editor/news/${own}/submit`).expect(200);
+    const approved = await as(admin.token)
+      .post(`/v1/editor/news/${own}/approve`)
+      .expect(200);
+    expect(approved.body).toMatchObject({
+      status: 'approved',
+      reviewer_id: admin.id,
+    });
+    await as(admin.token).post(`/v1/editor/news/${own}/publish`).expect(200);
+  });
+
   it('takes an article off the app to correct it, and when retired', async () => {
     const id = await publishArticle({ title: 'To be corrected' });
     const draft = await as(editor.token)

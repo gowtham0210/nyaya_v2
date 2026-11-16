@@ -1111,7 +1111,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Approve the article under review (not your own) */
+        /** Approve the article under review (not your own, unless you are an admin) */
         post: operations["EditorNewsController_approve"];
         delete?: never;
         options?: never;

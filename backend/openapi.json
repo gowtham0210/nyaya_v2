@@ -2826,7 +2826,7 @@
             "bearer": []
           }
         ],
-        "summary": "Approve the article under review (not your own)",
+        "summary": "Approve the article under review (not your own, unless you are an admin)",
         "tags": [
           "editor"
         ]
