@@ -1820,6 +1820,44 @@ class AppLocalizationsTe extends AppLocalizations {
   String get settingsSignOut => 'సైన్ అవుట్';
 
   @override
+  String get profileTitle => 'నా ప్రొఫైల్';
+
+  @override
+  String get profileIdentity => 'నేర్చుకునే గుర్తింపు';
+
+  @override
+  String get profileProgress => 'మీ పురోగతి';
+
+  @override
+  String get profileSettingsSub => 'భాష, థీమ్, రిమైండర్లు మరియు మరిన్ని';
+
+  @override
+  String get profileSignOutTitle => 'సైన్ అవుట్ చేయాలా?';
+
+  @override
+  String get profileSignOutBody =>
+      'మీ ఇమెయిల్ మరియు పాస్‌వర్డ్‌తో ఎప్పుడైనా మళ్లీ సైన్ ఇన్ చేయవచ్చు. మీ పురోగతి మీ ఖాతాలో భద్రంగా ఉంటుంది.';
+
+  @override
+  String get profileDangerZone => 'ప్రమాద ప్రాంతం';
+
+  @override
+  String get profileDangerBody =>
+      'ఖాతాను తొలగిస్తే మీ పురోగతి, నాణేలు, సేవ్ చేసిన ప్రశ్నలు శాశ్వతంగా పోతాయి. దీన్ని తిరిగి పొందలేరు.';
+
+  @override
+  String get settingsLearningPrefs => 'నేర్చుకునే ప్రాధాన్యతలు';
+
+  @override
+  String get settingsNotifications => 'నోటిఫికేషన్లు';
+
+  @override
+  String get settingsData => 'డేటా నిర్వహణ';
+
+  @override
+  String get settingsAboutSupport => 'గురించి మరియు సహాయం';
+
+  @override
   String get updateRequiredTitle => 'దయచేసి Nyaya Kural ను అప్‌డేట్ చేయండి';
 
   @override

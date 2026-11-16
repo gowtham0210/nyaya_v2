@@ -13,6 +13,7 @@ import 'package:nyaya/core/storage/local_store.dart';
 import 'package:nyaya/features/auth/application/auth_controller.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
+import 'package:nyaya/core/widgets/common.dart';
 import 'package:nyaya/features/journey/application/journey_controller.dart';
 import 'package:nyaya/features/journey/presentation/journey_screen.dart';
 import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
@@ -300,9 +301,11 @@ void main() {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
     await settle(tester);
-    c.read(routerProvider).go(Routes.settings);
+    c.read(routerProvider).go(Routes.profile);
     await settle(tester);
     await tester.scrollUntilVisible(find.text('Delete account'), 300, scrollable: find.byType(Scrollable).first);
+    await tester.ensureVisible(find.text('Delete account'));
+    await settle(tester);
     await tester.tap(find.text('Delete account'));
     await settle(tester);
 
@@ -563,7 +566,7 @@ void main() {
       await settle(tester);
     }
 
-    // The coins sheet leads straight to the store, not the top of Settings.
+    // The coins sheet leads straight to the store on My Profile.
     await tester.tap(find.bySemanticsLabel('60 Coins'));
     await settle(tester);
     await tester.tap(find.text('Open the Store'));
@@ -725,6 +728,92 @@ void main() {
     expect(find.text("Play Today's Questions (free)"), findsOneWidget);
     expect(find.text('Ask the AI a legal question'), findsOneWidget);
     expect(find.text('Get unlimited energy'), findsNothing, reason: 'premium is hidden in the beta');
+  });
+
+  testWidgets('Home avatar opens My Profile, the gear opens Settings, and back returns Home', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+
+    await tester.tap(find.byTooltip('My Profile'));
+    await settle(tester);
+    expect(find.text('My Profile'), findsOneWidget);
+    expect(find.text('ravi@test.local'), findsOneWidget);
+    expect(find.text('Learning as'), findsOneWidget);
+    for (final label in ['Total XP', 'Longest streak', 'Quizzes', 'Accuracy', 'Wins', 'Stars']) {
+      expect(find.text(label), findsOneWidget, reason: label);
+    }
+    await tester.pageBack();
+    await settle(tester);
+    expect(find.text('My Profile'), findsNothing);
+
+    await tester.tap(find.byTooltip('Settings'));
+    await settle(tester);
+    expect(find.text('LEARNING PREFERENCES'), findsOneWidget);
+    // Profile things are no longer in Settings.
+    expect(find.text('Sign out'), findsNothing);
+    expect(find.text('Delete account'), findsNothing);
+    expect(find.text('Your stats'), findsNothing);
+    expect(find.text('Streak freeze'), findsNothing);
+    await tester.pageBack();
+    await settle(tester);
+    expect(c.read(routerProvider).state.matchedLocation, Routes.home);
+  });
+
+  testWidgets('the old /settings?section=store link opens the store on My Profile', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    c.read(routerProvider).push('/settings?section=store');
+    await settle(tester);
+    expect(find.text('My Profile'), findsOneWidget);
+    expect(find.text('Streak freeze'), findsOneWidget);
+    expect(find.text('LEARNING PREFERENCES'), findsNothing);
+  });
+
+  testWidgets('a new name shows on My Profile and Home at once and in the sign-in snapshot', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    c.read(routerProvider).push(Routes.profile);
+    await settle(tester);
+    await tester.tap(find.byTooltip('Edit name'));
+    await settle(tester);
+    await tester.enterText(find.descendant(of: find.byType(AlertDialog), matching: find.byType(TextField)), 'Ravi Kumar');
+    await tester.tap(find.text('Done'));
+    await settle(tester);
+    expect(find.text('Ravi Kumar'), findsOneWidget);
+    expect(c.read(profileProvider).name, 'Ravi Kumar');
+    expect(c.read(authProvider)!.displayName, 'Ravi Kumar');
+    expect(c.read(tokenStoreProvider).current!.user['display_name'], 'Ravi Kumar');
+    expect(api.settings?.name, 'Ravi Kumar', reason: 'sent to the server');
+    await tester.pageBack();
+    await settle(tester);
+    expect(tester.widget<InitialsAvatar>(find.byType(InitialsAvatar).first).name, 'Ravi Kumar', reason: 'Home shows it too');
+  });
+
+  testWidgets('signing out asks first, and cancelling keeps the session', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    c.read(routerProvider).push(Routes.profile);
+    await settle(tester);
+    await tester.scrollUntilVisible(find.text('Sign out'), 300, scrollable: find.byType(Scrollable).first);
+    await tester.ensureVisible(find.text('Sign out'));
+    await settle(tester);
+    await tester.tap(find.text('Sign out'));
+    await settle(tester);
+    expect(find.text('Sign out?'), findsOneWidget);
+    await tester.tap(find.text('Cancel'));
+    await settle(tester);
+    expect(c.read(authProvider), isNotNull);
+
+    await tester.tap(find.text('Sign out'));
+    await settle(tester);
+    await tester.tap(find.descendant(of: find.byType(AlertDialog), matching: find.text('Sign out')));
+    await settle(tester);
+    expect(c.read(authProvider), isNull);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('Reset this phone brings back onboarding, keeps the name, and does not repeat the league result', (tester) async {

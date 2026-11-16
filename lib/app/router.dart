@@ -19,6 +19,7 @@ import '../features/profile/application/profile_controller.dart';
 import '../features/quiz/domain/quiz_models.dart';
 import '../features/quiz/presentation/quiz_screen.dart';
 import '../features/search/presentation/search_screen.dart';
+import '../features/profile/presentation/profile_screen.dart';
 import '../features/settings/presentation/settings_screen.dart';
 import 'shell.dart';
 
@@ -31,8 +32,9 @@ abstract final class Routes {
   static const quiz = '/quiz';
   static const leaderboard = '/leaderboard';
   static const review = '/review';
+  static const profile = '/profile';
   static const settings = '/settings';
-  static const store = '/settings?section=store';
+  static const store = '/profile?section=store';
   static const search = '/search';
   static const premium = '/premium';
   static const signIn = '/sign-in';
@@ -123,7 +125,14 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.settings,
         parentNavigatorKey: _rootKey,
-        builder: (context, state) => SettingsScreen(openStore: state.uri.queryParameters['section'] == 'store'),
+        // The store moved to My Profile; the old deep link still lands on it.
+        redirect: (context, state) => state.uri.queryParameters['section'] == 'store' ? Routes.store : null,
+        builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: Routes.profile,
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => ProfileScreen(openStore: state.uri.queryParameters['section'] == 'store'),
       ),
       GoRoute(
         path: Routes.signIn,

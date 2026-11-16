@@ -1813,6 +1813,44 @@ class AppLocalizationsHi extends AppLocalizations {
   String get settingsSignOut => 'साइन आउट करें';
 
   @override
+  String get profileTitle => 'मेरी प्रोफ़ाइल';
+
+  @override
+  String get profileIdentity => 'सीखने की पहचान';
+
+  @override
+  String get profileProgress => 'आपकी प्रगति';
+
+  @override
+  String get profileSettingsSub => 'भाषा, थीम, रिमाइंडर और बहुत कुछ';
+
+  @override
+  String get profileSignOutTitle => 'साइन आउट करें?';
+
+  @override
+  String get profileSignOutBody =>
+      'आप अपने ईमेल और पासवर्ड से कभी भी दोबारा साइन इन कर सकते हैं। आपकी प्रगति आपके खाते में सुरक्षित रहती है।';
+
+  @override
+  String get profileDangerZone => 'जोखिम क्षेत्र';
+
+  @override
+  String get profileDangerBody =>
+      'खाता हटाने पर आपकी प्रगति, सिक्के और सहेजे गए प्रश्न हमेशा के लिए मिट जाते हैं। इसे वापस नहीं किया जा सकता।';
+
+  @override
+  String get settingsLearningPrefs => 'सीखने की पसंद';
+
+  @override
+  String get settingsNotifications => 'सूचनाएँ';
+
+  @override
+  String get settingsData => 'डेटा प्रबंधन';
+
+  @override
+  String get settingsAboutSupport => 'जानकारी और सहायता';
+
+  @override
   String get updateRequiredTitle => 'कृपया Nyaya Kural अपडेट करें';
 
   @override

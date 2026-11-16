@@ -1823,6 +1823,45 @@ class AppLocalizationsMl extends AppLocalizations {
   String get settingsSignOut => 'സൈൻ ഔട്ട്';
 
   @override
+  String get profileTitle => 'എന്റെ പ്രൊഫൈൽ';
+
+  @override
+  String get profileIdentity => 'പഠന ഐഡന്റിറ്റി';
+
+  @override
+  String get profileProgress => 'നിങ്ങളുടെ പുരോഗതി';
+
+  @override
+  String get profileSettingsSub =>
+      'ഭാഷ, തീം, ഓർമ്മപ്പെടുത്തലുകൾ എന്നിവയും കൂടുതലും';
+
+  @override
+  String get profileSignOutTitle => 'സൈൻ ഔട്ട് ചെയ്യണോ?';
+
+  @override
+  String get profileSignOutBody =>
+      'നിങ്ങളുടെ ഇമെയിലും പാസ്‌വേഡും ഉപയോഗിച്ച് എപ്പോൾ വേണമെങ്കിലും വീണ്ടും സൈൻ ഇൻ ചെയ്യാം. നിങ്ങളുടെ പുരോഗതി അക്കൗണ്ടിൽ സുരക്ഷിതമായി തുടരും.';
+
+  @override
+  String get profileDangerZone => 'അപകട മേഖല';
+
+  @override
+  String get profileDangerBody =>
+      'അക്കൗണ്ട് ഇല്ലാതാക്കിയാൽ നിങ്ങളുടെ പുരോഗതി, നാണയങ്ങൾ, സേവ് ചെയ്ത ചോദ്യങ്ങൾ എന്നിവ എന്നെന്നേക്കുമായി നീക്കം ചെയ്യപ്പെടും. ഇത് തിരികെ ലഭിക്കില്ല.';
+
+  @override
+  String get settingsLearningPrefs => 'പഠന മുൻഗണനകൾ';
+
+  @override
+  String get settingsNotifications => 'അറിയിപ്പുകൾ';
+
+  @override
+  String get settingsData => 'ഡാറ്റ മാനേജ്മെന്റ്';
+
+  @override
+  String get settingsAboutSupport => 'കുറിച്ച്, സഹായം';
+
+  @override
   String get updateRequiredTitle => 'ദയവായി Nyaya Kural അപ്ഡേറ്റ് ചെയ്യുക';
 
   @override

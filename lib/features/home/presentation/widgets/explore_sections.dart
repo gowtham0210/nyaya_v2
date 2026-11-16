@@ -13,6 +13,7 @@ import '../../../journey/domain/journey.dart';
 import '../../../journey/presentation/journey_screen.dart';
 import '../../../legal_updates/data/legal_updates_repository.dart';
 import '../../../legal_updates/presentation/updates_screen.dart';
+import '../../../profile/application/profile_controller.dart';
 import '../../../quiz/domain/quiz_models.dart';
 import '../../../quiz/presentation/quiz_launcher.dart';
 import 'law_illustration.dart';
@@ -116,6 +117,14 @@ class HomeTopBar extends StatelessWidget {
           tooltip: l.settingsTitle,
           onPressed: () => context.push(Routes.settings),
           icon: const Icon(Icons.settings_outlined, size: 24),
+        ),
+        // My Profile: the learner's own initials.
+        Consumer(
+          builder: (context, ref, _) => IconButton(
+            tooltip: l.profileTitle,
+            onPressed: () => context.push(Routes.profile),
+            icon: InitialsAvatar(name: ref.watch(profileProvider).name, size: 30),
+          ),
         ),
         const SizedBox(width: AppSpacing.xs),
       ],

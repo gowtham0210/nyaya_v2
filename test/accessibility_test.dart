@@ -107,6 +107,7 @@ void main() {
     Routes.leaderboard,
     Routes.review,
     Routes.settings,
+    Routes.profile,
   ];
 
   for (final theme in ['light', 'dark']) {
@@ -406,7 +407,7 @@ void main() {
     });
   }
 
-  for (final route in [Routes.home, Routes.settings]) {
+  for (final route in [Routes.home, Routes.settings, Routes.profile]) {
     testWidgets('$route lays out at the smallest text size', (tester) async {
       final c = await pumpApp(tester, theme: 'light', textScale: 0.8);
       c.read(routerProvider).go(route);

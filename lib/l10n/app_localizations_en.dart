@@ -1816,6 +1816,44 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsSignOut => 'Sign out';
 
   @override
+  String get profileTitle => 'My Profile';
+
+  @override
+  String get profileIdentity => 'Learning identity';
+
+  @override
+  String get profileProgress => 'Your progress';
+
+  @override
+  String get profileSettingsSub => 'Language, theme, reminders and more';
+
+  @override
+  String get profileSignOutTitle => 'Sign out?';
+
+  @override
+  String get profileSignOutBody =>
+      'You can sign back in any time with your email and password. Your progress stays saved on your account.';
+
+  @override
+  String get profileDangerZone => 'Danger zone';
+
+  @override
+  String get profileDangerBody =>
+      'Deleting your account permanently removes your progress, coins and saved questions. This cannot be undone.';
+
+  @override
+  String get settingsLearningPrefs => 'Learning preferences';
+
+  @override
+  String get settingsNotifications => 'Notifications';
+
+  @override
+  String get settingsData => 'Data management';
+
+  @override
+  String get settingsAboutSupport => 'About and support';
+
+  @override
   String get updateRequiredTitle => 'Please update Nyaya Kural';
 
   @override

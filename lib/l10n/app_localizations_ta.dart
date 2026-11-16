@@ -1828,6 +1828,44 @@ class AppLocalizationsTa extends AppLocalizations {
   String get settingsSignOut => 'வெளியேறு';
 
   @override
+  String get profileTitle => 'என் சுயவிவரம்';
+
+  @override
+  String get profileIdentity => 'கற்றல் அடையாளம்';
+
+  @override
+  String get profileProgress => 'உங்கள் முன்னேற்றம்';
+
+  @override
+  String get profileSettingsSub => 'மொழி, தீம், நினைவூட்டல்கள் மற்றும் பல';
+
+  @override
+  String get profileSignOutTitle => 'வெளியேறவா?';
+
+  @override
+  String get profileSignOutBody =>
+      'உங்கள் மின்னஞ்சல் மற்றும் கடவுச்சொல்லுடன் எப்போது வேண்டுமானாலும் மீண்டும் உள்நுழையலாம். உங்கள் முன்னேற்றம் கணக்கில் பாதுகாப்பாக இருக்கும்.';
+
+  @override
+  String get profileDangerZone => 'ஆபத்துப் பகுதி';
+
+  @override
+  String get profileDangerBody =>
+      'கணக்கை நீக்கினால் உங்கள் முன்னேற்றம், நாணயங்கள் மற்றும் சேமித்த கேள்விகள் நிரந்தரமாக அழியும். இதைத் திரும்பப் பெற முடியாது.';
+
+  @override
+  String get settingsLearningPrefs => 'கற்றல் விருப்பங்கள்';
+
+  @override
+  String get settingsNotifications => 'அறிவிப்புகள்';
+
+  @override
+  String get settingsData => 'தரவு மேலாண்மை';
+
+  @override
+  String get settingsAboutSupport => 'பற்றி மற்றும் உதவி';
+
+  @override
   String get updateRequiredTitle => 'Nyaya Kural ஐ புதுப்பிக்கவும்';
 
   @override

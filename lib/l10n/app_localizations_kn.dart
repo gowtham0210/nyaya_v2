@@ -1823,6 +1823,44 @@ class AppLocalizationsKn extends AppLocalizations {
   String get settingsSignOut => 'ಸೈನ್ ಔಟ್';
 
   @override
+  String get profileTitle => 'ನನ್ನ ಪ್ರೊಫೈಲ್';
+
+  @override
+  String get profileIdentity => 'ಕಲಿಕೆಯ ಗುರುತು';
+
+  @override
+  String get profileProgress => 'ನಿಮ್ಮ ಪ್ರಗತಿ';
+
+  @override
+  String get profileSettingsSub => 'ಭಾಷೆ, ಥೀಮ್, ಜ್ಞಾಪನೆಗಳು ಮತ್ತು ಇನ್ನಷ್ಟು';
+
+  @override
+  String get profileSignOutTitle => 'ಸೈನ್ ಔಟ್ ಮಾಡಬೇಕೇ?';
+
+  @override
+  String get profileSignOutBody =>
+      'ನಿಮ್ಮ ಇಮೇಲ್ ಮತ್ತು ಪಾಸ್‌ವರ್ಡ್‌ನೊಂದಿಗೆ ಯಾವಾಗ ಬೇಕಾದರೂ ಮತ್ತೆ ಸೈನ್ ಇನ್ ಮಾಡಬಹುದು. ನಿಮ್ಮ ಪ್ರಗತಿ ನಿಮ್ಮ ಖಾತೆಯಲ್ಲಿ ಸುರಕ್ಷಿತವಾಗಿರುತ್ತದೆ.';
+
+  @override
+  String get profileDangerZone => 'ಅಪಾಯ ವಲಯ';
+
+  @override
+  String get profileDangerBody =>
+      'ಖಾತೆಯನ್ನು ಅಳಿಸಿದರೆ ನಿಮ್ಮ ಪ್ರಗತಿ, ನಾಣ್ಯಗಳು ಮತ್ತು ಉಳಿಸಿದ ಪ್ರಶ್ನೆಗಳು ಶಾಶ್ವತವಾಗಿ ಅಳಿಯುತ್ತವೆ. ಇದನ್ನು ಹಿಂತಿರುಗಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ.';
+
+  @override
+  String get settingsLearningPrefs => 'ಕಲಿಕೆಯ ಆದ್ಯತೆಗಳು';
+
+  @override
+  String get settingsNotifications => 'ಅಧಿಸೂಚನೆಗಳು';
+
+  @override
+  String get settingsData => 'ಡೇಟಾ ನಿರ್ವಹಣೆ';
+
+  @override
+  String get settingsAboutSupport => 'ಕುರಿತು ಮತ್ತು ಸಹಾಯ';
+
+  @override
   String get updateRequiredTitle => 'ದಯವಿಟ್ಟು Nyaya Kural ಅನ್ನು ಅಪ್‌ಡೇಟ್ ಮಾಡಿ';
 
   @override

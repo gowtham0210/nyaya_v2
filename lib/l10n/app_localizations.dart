@@ -3160,6 +3160,78 @@ abstract class AppLocalizations {
   /// **'Sign out'**
   String get settingsSignOut;
 
+  /// No description provided for @profileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Profile'**
+  String get profileTitle;
+
+  /// No description provided for @profileIdentity.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning identity'**
+  String get profileIdentity;
+
+  /// No description provided for @profileProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Your progress'**
+  String get profileProgress;
+
+  /// No description provided for @profileSettingsSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Language, theme, reminders and more'**
+  String get profileSettingsSub;
+
+  /// No description provided for @profileSignOutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out?'**
+  String get profileSignOutTitle;
+
+  /// No description provided for @profileSignOutBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You can sign back in any time with your email and password. Your progress stays saved on your account.'**
+  String get profileSignOutBody;
+
+  /// No description provided for @profileDangerZone.
+  ///
+  /// In en, this message translates to:
+  /// **'Danger zone'**
+  String get profileDangerZone;
+
+  /// No description provided for @profileDangerBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Deleting your account permanently removes your progress, coins and saved questions. This cannot be undone.'**
+  String get profileDangerBody;
+
+  /// No description provided for @settingsLearningPrefs.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning preferences'**
+  String get settingsLearningPrefs;
+
+  /// No description provided for @settingsNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get settingsNotifications;
+
+  /// No description provided for @settingsData.
+  ///
+  /// In en, this message translates to:
+  /// **'Data management'**
+  String get settingsData;
+
+  /// No description provided for @settingsAboutSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'About and support'**
+  String get settingsAboutSupport;
+
   /// No description provided for @updateRequiredTitle.
   ///
   /// In en, this message translates to:
