@@ -46,7 +46,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Email a learner a 6-digit code to choose a new password. The answer is the same whether or not the email has an account. */
+        /** Email a learner a 6-digit code to choose a new password. 404 user_not_found when no learner account has this email; 429 after three codes in 15 minutes. */
         post: operations["AuthController_requestPasswordReset"];
         delete?: never;
         options?: never;

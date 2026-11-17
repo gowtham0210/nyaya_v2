@@ -100,6 +100,25 @@ class SavedUpdatesController extends Notifier<Set<String>> {
   }
 }
 
+final readUpdatesProvider = NotifierProvider<ReadUpdatesController, Set<String>>(ReadUpdatesController.new);
+
+/// Ids of updates the learner has opened, kept on the device. The saved
+/// library uses it for its Unread and Read views.
+class ReadUpdatesController extends Notifier<Set<String>> {
+  static const _key = 'read_updates_v1';
+
+  LocalStore get _store => ref.read(localStoreProvider);
+
+  @override
+  Set<String> build() => (_store.readJsonList(_key) ?? const []).cast<String>().toSet();
+
+  void markRead(String id) {
+    if (state.contains(id)) return;
+    state = {...state, id};
+    _store.writeJson(_key, state.toList());
+  }
+}
+
 abstract interface class LegalUpdatesRepository {
   Future<List<LegalUpdate>> fetch();
 }

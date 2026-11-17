@@ -852,7 +852,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get quizExamHint =>
-      'एक उत्तर चुनें, फिर आगे बढ़ें। आप किसी प्रश्न पर वापस नहीं जा सकते।';
+      'एक उत्तर चुनें, फिर आगे बढ़ें। जमा करने से पहले आप वापस जाकर उत्तर बदल सकते हैं।';
+
+  @override
+  String get quizPrevious => 'पिछला';
 
   @override
   String quizSecondsLeft(int seconds) {
@@ -1298,6 +1301,56 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get updatesSavedEmpty =>
       'अभी कुछ सहेजा नहीं गया। किसी भी अपडेट पर बुकमार्क दबाएँ, वह यहाँ रहेगा।';
+
+  @override
+  String get libraryTitle => 'मेरी लाइब्रेरी';
+
+  @override
+  String get librarySubtitle => 'आपकी अपनी क़ानूनी पढ़ने की जगह';
+
+  @override
+  String get librarySearchHint => 'सहेजे गए अपडेट खोजें…';
+
+  @override
+  String libraryAll(int count) {
+    return 'सभी ($count)';
+  }
+
+  @override
+  String libraryUnread(int count) {
+    return 'अपठित ($count)';
+  }
+
+  @override
+  String libraryRead(int count) {
+    return 'पढ़े ($count)';
+  }
+
+  @override
+  String get libraryCollections => 'मेरे संग्रह';
+
+  @override
+  String get libraryRecent => 'हाल में सहेजे';
+
+  @override
+  String get libraryUnreadBadge => 'अपठित';
+
+  @override
+  String get libraryReadBadge => 'पढ़ा';
+
+  @override
+  String libraryUpdateCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count अपडेट',
+      one: '1 अपडेट',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get libraryNoMatches => 'कोई सहेजा हुआ अपडेट नहीं मिला।';
 
   @override
   String get updatesEmpty => 'इस श्रेणी में अभी कोई अपडेट नहीं है।';
@@ -1790,6 +1843,10 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get authResetUnavailable =>
       'पासवर्ड बदलना अभी उपलब्ध नहीं है। कृपया बाद में कोशिश करें।';
+
+  @override
+  String get authResetNoAccount =>
+      'इस ईमेल से कोई खाता पंजीकृत नहीं है। पता जाँचें या नया खाता बनाएँ।';
 
   @override
   String get authResetErrorInvalid =>

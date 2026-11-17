@@ -1519,8 +1519,14 @@ abstract class AppLocalizations {
   /// No description provided for @quizExamHint.
   ///
   /// In en, this message translates to:
-  /// **'Pick an answer, then move on. You can\'t go back to a question.'**
+  /// **'Pick an answer, then move on. You can go back and change an answer until you submit.'**
   String get quizExamHint;
+
+  /// No description provided for @quizPrevious.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous'**
+  String get quizPrevious;
 
   /// No description provided for @quizSecondsLeft.
   ///
@@ -2235,6 +2241,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Nothing saved yet. Tap the bookmark on any update to keep it here.'**
   String get updatesSavedEmpty;
+
+  /// No description provided for @libraryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Library'**
+  String get libraryTitle;
+
+  /// No description provided for @librarySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your personal legal reading space'**
+  String get librarySubtitle;
+
+  /// No description provided for @librarySearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search saved updates…'**
+  String get librarySearchHint;
+
+  /// No description provided for @libraryAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All ({count})'**
+  String libraryAll(int count);
+
+  /// No description provided for @libraryUnread.
+  ///
+  /// In en, this message translates to:
+  /// **'Unread ({count})'**
+  String libraryUnread(int count);
+
+  /// No description provided for @libraryRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Read ({count})'**
+  String libraryRead(int count);
+
+  /// No description provided for @libraryCollections.
+  ///
+  /// In en, this message translates to:
+  /// **'My Collections'**
+  String get libraryCollections;
+
+  /// No description provided for @libraryRecent.
+  ///
+  /// In en, this message translates to:
+  /// **'Recently Saved'**
+  String get libraryRecent;
+
+  /// No description provided for @libraryUnreadBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Unread'**
+  String get libraryUnreadBadge;
+
+  /// No description provided for @libraryReadBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Read'**
+  String get libraryReadBadge;
+
+  /// No description provided for @libraryUpdateCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 update} other{{count} updates}}'**
+  String libraryUpdateCount(int count);
+
+  /// No description provided for @libraryNoMatches.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved updates match.'**
+  String get libraryNoMatches;
 
   /// No description provided for @updatesEmpty.
   ///
@@ -3123,6 +3201,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password reset isn\'t available right now. Please try again later.'**
   String get authResetUnavailable;
+
+  /// No description provided for @authResetNoAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'No account is registered with this email. Check the address or create an account.'**
+  String get authResetNoAccount;
 
   /// No description provided for @authResetErrorInvalid.
   ///

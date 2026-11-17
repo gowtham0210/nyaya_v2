@@ -12,6 +12,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/common.dart';
 import '../../../core/widgets/pressable.dart';
 import '../data/legal_updates_repository.dart';
+import 'saved_library.dart';
 
 extension UpdateCategoryX on UpdateCategory {
   String label(AppLocalizations l) => switch (this) {
@@ -88,7 +89,7 @@ class _UpdatesScreenState extends ConsumerState<UpdatesScreen> {
         onRefresh: () => ref.refresh(legalUpdatesProvider.future),
         child: CustomScrollView(
           slivers: [
-            const SliverToBoxAdapter(child: _Header()),
+            SliverToBoxAdapter(child: _Header(library: _savedOnly)),
             SliverToBoxAdapter(
               child: SizedBox(
                 height: 52,
@@ -99,7 +100,7 @@ class _UpdatesScreenState extends ConsumerState<UpdatesScreen> {
                     for (final c in [null, ...UpdateCategory.values]) ...[
                       Padding(
                         padding: const EdgeInsets.only(right: 10),
-                        child: _FilterPill(
+                        child: FilterPill(
                           icon: c?.chipIcon ?? Icons.grid_view_rounded,
                           label: c == null ? l.updatesAll : c.label(l),
                           selected: !_savedOnly && _filter == c,
@@ -113,7 +114,7 @@ class _UpdatesScreenState extends ConsumerState<UpdatesScreen> {
                       if (c == null)
                         Padding(
                           padding: const EdgeInsets.only(right: 10),
-                          child: _FilterPill(
+                          child: FilterPill(
                             icon: Icons.bookmark_rounded,
                             label: l.updatesSavedFilter,
                             selected: _savedOnly,
@@ -140,6 +141,9 @@ class _UpdatesScreenState extends ConsumerState<UpdatesScreen> {
                 ),
               ],
               data: (all) {
+                if (_savedOnly && all.any((u) => saved.contains(u.id))) {
+                  return [SliverToBoxAdapter(child: SavedLibrary(updates: all))];
+                }
                 final items = [
                   for (final u in all)
                     if (_savedOnly ? saved.contains(u.id) : (_filter == null || u.category == _filter)) u,
@@ -171,7 +175,10 @@ class _UpdatesScreenState extends ConsumerState<UpdatesScreen> {
 
 /// Serif title over a faded painting of the Supreme Court.
 class _Header extends StatelessWidget {
-  const _Header();
+  const _Header({this.library = false});
+
+  /// The saved library has its own title and line.
+  final bool library;
 
   @override
   Widget build(BuildContext context) {
@@ -212,10 +219,13 @@ class _Header extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 28),
-                Text(l.updatesTitle, style: AppTheme.serif(TextStyle(fontSize: 42, height: 1.05, color: titleColor))),
+                Text(
+                  library ? l.libraryTitle : l.updatesTitle,
+                  style: AppTheme.serif(TextStyle(fontSize: 42, height: 1.05, color: titleColor)),
+                ),
                 const SizedBox(height: 6),
                 Text(
-                  l.updatesSubtitle,
+                  library ? l.librarySubtitle : l.updatesSubtitle,
                   style: AppTheme.serif(
                     TextStyle(fontSize: 16, height: 1.3, color: context.colors.onSurface),
                     display: false,
@@ -230,10 +240,22 @@ class _Header extends StatelessWidget {
   }
 }
 
-class _FilterPill extends StatelessWidget {
-  const _FilterPill({required this.icon, required this.label, required this.selected, required this.onTap});
+class FilterPill extends StatelessWidget {
+  const FilterPill({
+    super.key,
+    required this.icon,
+    required this.label,
+    required this.selected,
+    required this.onTap,
+    this.iconSize = 22,
+    this.compact = false,
+  });
 
   final IconData icon;
+  final double iconSize;
+
+  /// Tighter, so a few pills share one row; the label shrinks rather than wraps.
+  final bool compact;
   final String label;
   final bool selected;
   final VoidCallback onTap;
@@ -248,7 +270,7 @@ class _FilterPill extends StatelessWidget {
         onTap: onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(horizontal: 18),
+          padding: EdgeInsets.symmetric(horizontal: compact ? 10 : 18),
           decoration: BoxDecoration(
             color: selected ? context.colors.primary : context.colors.surface,
             borderRadius: BorderRadius.circular(30),
@@ -257,9 +279,17 @@ class _FilterPill extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, size: 22, color: fg),
-              const SizedBox(width: 10),
-              Text(label, style: AppTheme.serif(TextStyle(fontSize: 16, color: fg), display: false)),
+              Icon(icon, size: iconSize, color: fg),
+              SizedBox(width: compact ? 6 : 10),
+              if (compact)
+                Flexible(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(label, style: AppTheme.serif(TextStyle(fontSize: 15, color: fg), display: false)),
+                  ),
+                )
+              else
+                Text(label, style: AppTheme.serif(TextStyle(fontSize: 16, color: fg), display: false)),
             ],
           ),
         ),

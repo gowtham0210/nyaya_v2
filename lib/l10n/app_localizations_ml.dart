@@ -858,7 +858,10 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get quizExamHint =>
-      'ഒരു ഉത്തരം തിരഞ്ഞെടുത്ത് മുന്നോട്ട് പോകുക. മുമ്പത്തെ ചോദ്യത്തിലേക്ക് മടങ്ങാനാവില്ല.';
+      'ഒരു ഉത്തരം തിരഞ്ഞെടുത്ത് മുന്നോട്ട് പോകുക. സമർപ്പിക്കുന്നതിന് മുമ്പ് തിരികെ പോയി ഉത്തരം മാറ്റാം.';
+
+  @override
+  String get quizPrevious => 'മുമ്പത്തേത്';
 
   @override
   String quizSecondsLeft(int seconds) {
@@ -1304,6 +1307,57 @@ class AppLocalizationsMl extends AppLocalizations {
   @override
   String get updatesSavedEmpty =>
       'ഇതുവരെ ഒന്നും സേവ് ചെയ്തിട്ടില്ല. ഏതെങ്കിലും അപ്ഡേറ്റിലെ ബുക്ക്മാർക്ക് തൊട്ടാൽ അത് ഇവിടെ കാണാം.';
+
+  @override
+  String get libraryTitle => 'എന്റെ ലൈബ്രറി';
+
+  @override
+  String get librarySubtitle => 'നിങ്ങളുടെ സ്വന്തം നിയമ വായനാ ഇടം';
+
+  @override
+  String get librarySearchHint => 'സേവ് ചെയ്ത അപ്ഡേറ്റുകൾ തിരയുക…';
+
+  @override
+  String libraryAll(int count) {
+    return 'എല്ലാം ($count)';
+  }
+
+  @override
+  String libraryUnread(int count) {
+    return 'വായിക്കാത്തവ ($count)';
+  }
+
+  @override
+  String libraryRead(int count) {
+    return 'വായിച്ചവ ($count)';
+  }
+
+  @override
+  String get libraryCollections => 'എന്റെ ശേഖരങ്ങൾ';
+
+  @override
+  String get libraryRecent => 'സമീപകാലത്ത് സേവ് ചെയ്തവ';
+
+  @override
+  String get libraryUnreadBadge => 'വായിച്ചിട്ടില്ല';
+
+  @override
+  String get libraryReadBadge => 'വായിച്ചു';
+
+  @override
+  String libraryUpdateCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count അപ്ഡേറ്റുകൾ',
+      one: '1 അപ്ഡേറ്റ്',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get libraryNoMatches =>
+      'പൊരുത്തപ്പെടുന്ന സേവ് ചെയ്ത അപ്ഡേറ്റുകൾ ഇല്ല.';
 
   @override
   String get updatesEmpty => 'ഈ വിഭാഗത്തിൽ ഇതുവരെ വാർത്തകളില്ല.';
@@ -1800,6 +1854,10 @@ class AppLocalizationsMl extends AppLocalizations {
   @override
   String get authResetUnavailable =>
       'പാസ്‌വേഡ് മാറ്റൽ ഇപ്പോൾ ലഭ്യമല്ല. ദയവായി പിന്നീട് ശ്രമിക്കൂ.';
+
+  @override
+  String get authResetNoAccount =>
+      'ഈ ഇമെയിലിൽ അക്കൗണ്ട് രജിസ്റ്റർ ചെയ്തിട്ടില്ല. വിലാസം പരിശോധിക്കുക അല്ലെങ്കിൽ പുതിയ അക്കൗണ്ട് ഉണ്ടാക്കുക.';
 
   @override
   String get authResetErrorInvalid =>

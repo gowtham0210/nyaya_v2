@@ -61,7 +61,7 @@ class HomeTopBar extends StatelessWidget {
     return SliverAppBar(
       pinned: true,
       primary: false,
-      toolbarHeight: 64,
+      toolbarHeight: 72,
       titleSpacing: AppSpacing.page,
       backgroundColor: context.colors.surfaceContainerLowest,
       surfaceTintColor: Colors.transparent,
@@ -82,20 +82,24 @@ class HomeTopBar extends StatelessWidget {
               children: [
                 Semantics(
                   header: true,
-                  child: Text(
-                    l.appName,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTheme.serif(
-                      TextStyle(fontSize: 22, height: 1.1, color: context.colors.primary),
+                  // The name shrinks to fit beside the four buttons rather than being cut off.
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      l.appName,
+                      maxLines: 1,
+                      style: AppTheme.serif(
+                        TextStyle(fontSize: 22, height: 1.1, color: context.colors.primary),
+                      ),
                     ),
                   ),
                 ),
                 Text(
                   l.appTagline,
-                  maxLines: 1,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary),
+                  style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary, height: 1.2),
                 ),
               ],
             ),
@@ -294,7 +298,8 @@ class _LearningCard extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 FractionallySizedBox(
-                  widthFactor: 0.66,
+                  // A little wider in the Indian scripts, whose long words broke mid-word.
+                  widthFactor: context.isIndicScript ? 0.76 : 0.66,
                   alignment: Alignment.centerLeft,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -511,7 +516,7 @@ class _FeaturedCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.page, 0, AppSpacing.page),
             child: FractionallySizedBox(
-              widthFactor: 0.56,
+              widthFactor: context.isIndicScript ? 0.68 : 0.56,
               alignment: Alignment.centerLeft,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -531,7 +536,8 @@ class _FeaturedCard extends StatelessWidget {
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     textScaler: MediaQuery.textScalerOf(context).clamp(maxScaleFactor: 1.2),
-                    style: _serif(context, 30),
+                    // Tamil, Telugu, Kannada and Malayalam words are long: a smaller size keeps them whole.
+                    style: _serif(context, context.isIndicScript ? 25 : 30),
                   ),
                   const SizedBox(height: AppSpacing.sm),
                   Expanded(

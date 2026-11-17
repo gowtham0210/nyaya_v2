@@ -852,7 +852,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get quizExamHint =>
-      'Pick an answer, then move on. You can\'t go back to a question.';
+      'Pick an answer, then move on. You can go back and change an answer until you submit.';
+
+  @override
+  String get quizPrevious => 'Previous';
 
   @override
   String quizSecondsLeft(int seconds) {
@@ -1300,6 +1303,56 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get updatesSavedEmpty =>
       'Nothing saved yet. Tap the bookmark on any update to keep it here.';
+
+  @override
+  String get libraryTitle => 'My Library';
+
+  @override
+  String get librarySubtitle => 'Your personal legal reading space';
+
+  @override
+  String get librarySearchHint => 'Search saved updates…';
+
+  @override
+  String libraryAll(int count) {
+    return 'All ($count)';
+  }
+
+  @override
+  String libraryUnread(int count) {
+    return 'Unread ($count)';
+  }
+
+  @override
+  String libraryRead(int count) {
+    return 'Read ($count)';
+  }
+
+  @override
+  String get libraryCollections => 'My Collections';
+
+  @override
+  String get libraryRecent => 'Recently Saved';
+
+  @override
+  String get libraryUnreadBadge => 'Unread';
+
+  @override
+  String get libraryReadBadge => 'Read';
+
+  @override
+  String libraryUpdateCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count updates',
+      one: '1 update',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get libraryNoMatches => 'No saved updates match.';
 
   @override
   String get updatesEmpty => 'No updates in this category yet.';
@@ -1793,6 +1846,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get authResetUnavailable =>
       'Password reset isn\'t available right now. Please try again later.';
+
+  @override
+  String get authResetNoAccount =>
+      'No account is registered with this email. Check the address or create an account.';
 
   @override
   String get authResetErrorInvalid =>

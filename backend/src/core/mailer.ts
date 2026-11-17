@@ -29,6 +29,14 @@ export class Mailer {
         secure: smtp.port === 465,
         auth: smtp.user ? { user: smtp.user, pass: smtp.password } : undefined,
       });
+    // Say at start-up what a password reset will do, so it is never a mystery.
+    this.logger.log(
+      smtp
+        ? `Password reset emails: ON, sent through ${smtp.host}:${smtp.port}`
+        : config.isProduction
+          ? 'Password reset emails: OFF (no SMTP_HOST), so "Forgot password" answers 503'
+          : 'Password reset emails: OFF (no SMTP_HOST). The 6-digit code is printed in this console instead of being emailed',
+    );
   }
 
   get available() {

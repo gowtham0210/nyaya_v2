@@ -856,7 +856,10 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get quizExamHint =>
-      'ఒక జవాబు ఎంచుకుని ముందుకు వెళ్లండి. వెనక్కి వెళ్లి ప్రశ్న మార్చలేరు.';
+      'ఒక జవాబు ఎంచుకుని ముందుకు వెళ్లండి. సమర్పించే ముందు వెనక్కి వెళ్లి జవాబు మార్చవచ్చు.';
+
+  @override
+  String get quizPrevious => 'మునుపటి';
 
   @override
   String quizSecondsLeft(int seconds) {
@@ -1303,6 +1306,56 @@ class AppLocalizationsTe extends AppLocalizations {
   @override
   String get updatesSavedEmpty =>
       'ఇంకా ఏమీ సేవ్ చేయలేదు. ఏ అప్‌డేట్‌పైనైనా బుక్‌మార్క్ నొక్కితే అది ఇక్కడ ఉంటుంది.';
+
+  @override
+  String get libraryTitle => 'నా లైబ్రరీ';
+
+  @override
+  String get librarySubtitle => 'మీ వ్యక్తిగత న్యాయ పఠన స్థలం';
+
+  @override
+  String get librarySearchHint => 'సేవ్ చేసిన అప్‌డేట్లను వెతకండి…';
+
+  @override
+  String libraryAll(int count) {
+    return 'అన్నీ ($count)';
+  }
+
+  @override
+  String libraryUnread(int count) {
+    return 'చదవనివి ($count)';
+  }
+
+  @override
+  String libraryRead(int count) {
+    return 'చదివినవి ($count)';
+  }
+
+  @override
+  String get libraryCollections => 'నా సంకలనాలు';
+
+  @override
+  String get libraryRecent => 'ఇటీవల సేవ్ చేసినవి';
+
+  @override
+  String get libraryUnreadBadge => 'చదవలేదు';
+
+  @override
+  String get libraryReadBadge => 'చదివారు';
+
+  @override
+  String libraryUpdateCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count అప్‌డేట్లు',
+      one: '1 అప్‌డేట్',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get libraryNoMatches => 'సరిపోలే సేవ్ చేసిన అప్‌డేట్లు లేవు.';
 
   @override
   String get updatesEmpty => 'ఈ విభాగంలో ఇంకా అప్‌డేట్‌లు లేవు.';
@@ -1797,6 +1850,10 @@ class AppLocalizationsTe extends AppLocalizations {
   @override
   String get authResetUnavailable =>
       'పాస్‌వర్డ్ మార్చడం ఇప్పుడు అందుబాటులో లేదు. దయచేసి తర్వాత ప్రయత్నించండి.';
+
+  @override
+  String get authResetNoAccount =>
+      'ఈ ఇమెయిల్‌తో ఖాతా నమోదు కాలేదు. చిరునామాను తనిఖీ చేయండి లేదా కొత్త ఖాతా సృష్టించండి.';
 
   @override
   String get authResetErrorInvalid =>

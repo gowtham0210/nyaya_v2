@@ -522,7 +522,8 @@
     }
   },
   "quizDuelHint": "A right answer scores up to 1,000 points, more the faster you answer. A wrong answer scores 0.",
-  "quizExamHint": "Pick an answer, then move on. You can't go back to a question.",
+  "quizExamHint": "Pick an answer, then move on. You can go back and change an answer until you submit.",
+  "quizPrevious": "Previous",
   "quizSecondsLeft": "{seconds} seconds left",
   "@quizSecondsLeft": {
     "placeholders": {
@@ -839,6 +840,46 @@
   "updatesAskAi": "Ask AI about this",
   "updatesSavedFilter": "Saved",
   "updatesSavedEmpty": "Nothing saved yet. Tap the bookmark on any update to keep it here.",
+  "libraryTitle": "My Library",
+  "librarySubtitle": "Your personal legal reading space",
+  "librarySearchHint": "Search saved updates…",
+  "libraryAll": "All ({count})",
+  "@libraryAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "libraryUnread": "Unread ({count})",
+  "@libraryUnread": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "libraryRead": "Read ({count})",
+  "@libraryRead": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "libraryCollections": "My Collections",
+  "libraryRecent": "Recently Saved",
+  "libraryUnreadBadge": "Unread",
+  "libraryReadBadge": "Read",
+  "libraryUpdateCount": "{count, plural, =1{1 update} other{{count} updates}}",
+  "@libraryUpdateCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "libraryNoMatches": "No saved updates match.",
   "updatesEmpty": "No updates in this category yet.",
   "updatesSave": "Save update",
   "updatesUnsave": "Remove from saved",
@@ -1045,6 +1086,7 @@
   "authResetResend": "Send a new code",
   "authResetErrorCode": "This code is wrong or has expired. Ask for a new one.",
   "authResetUnavailable": "Password reset isn't available right now. Please try again later.",
+  "authResetNoAccount": "No account is registered with this email. Check the address or create an account.",
   "authResetErrorInvalid": "Enter the 6-digit code and a new password of at least 8 characters.",
   "authResetDone": "Your password has been changed.",
   "settingsAccount": "Account",

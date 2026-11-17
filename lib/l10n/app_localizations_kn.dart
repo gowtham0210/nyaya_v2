@@ -858,7 +858,10 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get quizExamHint =>
-      'ಒಂದು ಉತ್ತರ ಆರಿಸಿ ಮುಂದೆ ಸಾಗಿ. ಹಿಂದಿನ ಪ್ರಶ್ನೆಗೆ ಮರಳಲು ಆಗುವುದಿಲ್ಲ.';
+      'ಒಂದು ಉತ್ತರ ಆರಿಸಿ ಮುಂದೆ ಸಾಗಿ. ಸಲ್ಲಿಸುವ ಮೊದಲು ಹಿಂದೆ ಹೋಗಿ ಉತ್ತರ ಬದಲಿಸಬಹುದು.';
+
+  @override
+  String get quizPrevious => 'ಹಿಂದಿನದು';
 
   @override
   String quizSecondsLeft(int seconds) {
@@ -1304,6 +1307,56 @@ class AppLocalizationsKn extends AppLocalizations {
   @override
   String get updatesSavedEmpty =>
       'ಇನ್ನೂ ಏನೂ ಉಳಿಸಿಲ್ಲ. ಯಾವುದೇ ಅಪ್‌ಡೇಟ್‌ನಲ್ಲಿ ಬುಕ್‌ಮಾರ್ಕ್ ಒತ್ತಿದರೆ ಅದು ಇಲ್ಲಿ ಇರುತ್ತದೆ.';
+
+  @override
+  String get libraryTitle => 'ನನ್ನ ಗ್ರಂಥಾಲಯ';
+
+  @override
+  String get librarySubtitle => 'ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಕಾನೂನು ಓದುವ ತಾಣ';
+
+  @override
+  String get librarySearchHint => 'ಉಳಿಸಿದ ಅಪ್‌ಡೇಟ್‌ಗಳನ್ನು ಹುಡುಕಿ…';
+
+  @override
+  String libraryAll(int count) {
+    return 'ಎಲ್ಲಾ ($count)';
+  }
+
+  @override
+  String libraryUnread(int count) {
+    return 'ಓದದಿರುವವು ($count)';
+  }
+
+  @override
+  String libraryRead(int count) {
+    return 'ಓದಿದವು ($count)';
+  }
+
+  @override
+  String get libraryCollections => 'ನನ್ನ ಸಂಗ್ರಹಗಳು';
+
+  @override
+  String get libraryRecent => 'ಇತ್ತೀಚೆಗೆ ಉಳಿಸಿದವು';
+
+  @override
+  String get libraryUnreadBadge => 'ಓದಿಲ್ಲ';
+
+  @override
+  String get libraryReadBadge => 'ಓದಿದೆ';
+
+  @override
+  String libraryUpdateCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ಅಪ್‌ಡೇಟ್‌ಗಳು',
+      one: '1 ಅಪ್‌ಡೇಟ್',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get libraryNoMatches => 'ಹೊಂದುವ ಉಳಿಸಿದ ಅಪ್‌ಡೇಟ್‌ಗಳಿಲ್ಲ.';
 
   @override
   String get updatesEmpty => 'ಈ ವರ್ಗದಲ್ಲಿ ಇನ್ನೂ ಯಾವುದೇ ಸುದ್ದಿಗಳಿಲ್ಲ.';
@@ -1800,6 +1853,10 @@ class AppLocalizationsKn extends AppLocalizations {
   @override
   String get authResetUnavailable =>
       'ಪಾಸ್‌ವರ್ಡ್ ಬದಲಾವಣೆ ಈಗ ಲಭ್ಯವಿಲ್ಲ. ದಯವಿಟ್ಟು ನಂತರ ಪ್ರಯತ್ನಿಸಿ.';
+
+  @override
+  String get authResetNoAccount =>
+      'ಈ ಇಮೇಲ್‌ನೊಂದಿಗೆ ಯಾವುದೇ ಖಾತೆ ನೋಂದಾಯಿತವಾಗಿಲ್ಲ. ವಿಳಾಸವನ್ನು ಪರಿಶೀಲಿಸಿ ಅಥವಾ ಹೊಸ ಖಾತೆ ರಚಿಸಿ.';
 
   @override
   String get authResetErrorInvalid =>

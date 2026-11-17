@@ -489,10 +489,18 @@ class FakeAuthApi implements AuthApi {
 
   /// Emails a reset code was asked for; [resetCode] is the right code.
   final resetRequested = <String>[];
+
+  /// Emails with no account: asking for a code for one answers 404 `user_not_found`, as the API does.
+  final unregistered = <String>{};
   static const resetCode = '123456';
 
   @override
-  Future<void> requestPasswordReset({required String email}) async => resetRequested.add(email);
+  Future<void> requestPasswordReset({required String email}) async {
+    if (unregistered.contains(email)) {
+      throw const ApiException(404, 'user_not_found', 'No account is registered with this email');
+    }
+    resetRequested.add(email);
+  }
 
   @override
   Future<Account> resetPassword({required String email, required String code, required String newPassword}) {

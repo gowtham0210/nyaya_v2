@@ -861,7 +861,10 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get quizExamHint =>
-      'ஒரு விடையைத் தேர்ந்து அடுத்ததற்குச் செல்லுங்கள். முந்தைய கேள்விக்குத் திரும்ப முடியாது.';
+      'ஒரு விடையைத் தேர்ந்து அடுத்ததற்குச் செல்லுங்கள். சமர்ப்பிக்கும் முன் திரும்பிச் சென்று விடையை மாற்றலாம்.';
+
+  @override
+  String get quizPrevious => 'முந்தையது';
 
   @override
   String quizSecondsLeft(int seconds) {
@@ -1308,6 +1311,56 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get updatesSavedEmpty =>
       'இன்னும் எதுவும் சேமிக்கப்படவில்லை. எந்தப் புதுப்பிப்பிலும் புக்மார்க்கைத் தட்டினால் அது இங்கே இருக்கும்.';
+
+  @override
+  String get libraryTitle => 'என் நூலகம்';
+
+  @override
+  String get librarySubtitle => 'உங்கள் சொந்த சட்ட வாசிப்பு இடம்';
+
+  @override
+  String get librarySearchHint => 'சேமித்த புதுப்பிப்புகளைத் தேடுங்கள்…';
+
+  @override
+  String libraryAll(int count) {
+    return 'அனைத்தும் ($count)';
+  }
+
+  @override
+  String libraryUnread(int count) {
+    return 'படிக்காதவை ($count)';
+  }
+
+  @override
+  String libraryRead(int count) {
+    return 'படித்தவை ($count)';
+  }
+
+  @override
+  String get libraryCollections => 'என் தொகுப்புகள்';
+
+  @override
+  String get libraryRecent => 'சமீபத்தில் சேமித்தவை';
+
+  @override
+  String get libraryUnreadBadge => 'படிக்கவில்லை';
+
+  @override
+  String get libraryReadBadge => 'படித்தது';
+
+  @override
+  String libraryUpdateCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count புதுப்பிப்புகள்',
+      one: '1 புதுப்பிப்பு',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get libraryNoMatches => 'பொருந்தும் சேமித்த புதுப்பிப்புகள் இல்லை.';
 
   @override
   String get updatesEmpty => 'இந்தப் பிரிவில் இன்னும் செய்திகள் இல்லை.';
@@ -1805,6 +1858,10 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get authResetUnavailable =>
       'கடவுச்சொல் மாற்றம் இப்போது கிடைக்கவில்லை. பின்னர் முயலுங்கள்.';
+
+  @override
+  String get authResetNoAccount =>
+      'இந்த மின்னஞ்சலில் கணக்கு பதிவு செய்யப்படவில்லை. முகவரியைச் சரிபார்க்கவும் அல்லது புதிய கணக்கை உருவாக்கவும்.';
 
   @override
   String get authResetErrorInvalid =>

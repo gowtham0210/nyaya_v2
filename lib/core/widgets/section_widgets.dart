@@ -89,32 +89,6 @@ class StatTile extends StatelessWidget {
   }
 }
 
-/// Scrolls its child to the top of the screen once, after the first frame.
-class ScrollIntoView extends StatefulWidget {
-  const ScrollIntoView({super.key, required this.enabled, required this.child});
-
-  final bool enabled;
-  final Widget child;
-
-  @override
-  State<ScrollIntoView> createState() => _ScrollIntoViewState();
-}
-
-class _ScrollIntoViewState extends State<ScrollIntoView> {
-  @override
-  void initState() {
-    super.initState();
-    if (!widget.enabled) return;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-      Scrollable.ensureVisible(context, duration: const Duration(milliseconds: 350), curve: Curves.easeOutCubic);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) => widget.child;
-}
-
 /// A bottom sheet with one radio choice; picking a value closes the sheet.
 Future<void> showPickerSheet<T>(
   BuildContext context, {

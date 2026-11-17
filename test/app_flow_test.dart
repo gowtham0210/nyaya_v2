@@ -13,7 +13,9 @@ import 'package:nyaya/core/services/sounds.dart';
 import 'package:nyaya/core/storage/local_store.dart';
 import 'package:nyaya/features/auth/application/auth_controller.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
+import 'package:nyaya/core/theme/app_colors.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
+import 'package:nyaya/core/widgets/chunky_button.dart';
 import 'package:nyaya/core/widgets/common.dart';
 import 'package:nyaya/features/journey/application/journey_controller.dart';
 import 'package:nyaya/features/journey/presentation/journey_screen.dart';
@@ -397,7 +399,8 @@ void main() {
     await c.read(authProvider.notifier).signOut();
     await settle(tester);
     expect(c.read(profileProvider).name, isEmpty);
-    expect(find.text('Create your free account'), findsOneWidget, reason: 'signing out leads to sign-in');
+    expect(c.read(profileProvider).onboarded, isFalse);
+    expect(find.text('Choose your language'), findsOneWidget, reason: 'signing out starts again from the language');
   });
 
   testWidgets('an account saved with the placeholder name gets its sign-up name back', (tester) async {
@@ -443,6 +446,29 @@ void main() {
     await settle(tester);
     expect(c.read(authProvider)?.email, 'asha@test.local');
     expect(c.read(routerProvider).state.matchedLocation, Routes.home, reason: 'signed in, on to Home');
+  });
+
+  testWidgets('Forgot password says so when no account is registered with the email, and stays on the email step', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Asha', 'persona': 'citizen'});
+    await pumpApp(tester, prefs: {'profile_v1': onboarded}, signedIn: false);
+    await settle(tester);
+    authApi.unregistered.add('nobody@test.local');
+
+    await tester.tap(find.text('I already have an account'));
+    await settle(tester);
+    await tester.enterText(find.widgetWithText(TextField, 'Email'), 'nobody@test.local');
+    await tester.tap(find.text('Forgot password?'));
+    await settle(tester);
+    await tester.tap(find.text('SEND CODE'));
+    await settle(tester);
+
+    expect(
+      find.text('No account is registered with this email. Check the address or create an account.'),
+      findsOneWidget,
+    );
+    expect(authApi.resetRequested, isEmpty, reason: 'no code was asked for');
+    expect(find.text('SEND CODE'), findsOneWidget, reason: 'still on the email step');
+    expect(find.textContaining("we've sent it a 6-digit code"), findsNothing);
   });
 
   testWidgets('Journey tab shows the Case Path map and opens a level from its chapter card', (tester) async {
@@ -862,6 +888,110 @@ void main() {
     });
   });
 
+  group('My Library (saved updates)', () {
+    const governors = 'Supreme Court sets timelines for Governors on State Bills';
+    const waqf = 'Waqf (Amendment) Act, 2025 receives Presidential assent';
+
+    Future<ProviderContainer> openLibrary(WidgetTester tester, {List<String> saved = const ['news-1', 'news-2']}) async {
+      final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+      final c = await pumpApp(tester, prefs: {'profile_v1': onboarded, 'saved_updates_v1': jsonEncode(saved)});
+      await settle(tester);
+      await tester.tap(find.text('Updates').last);
+      await settle(tester);
+      await tester.tap(find.text('Saved'));
+      await settle(tester);
+      return c;
+    }
+
+    /// A collection card (the filter pills above carry the same names).
+    Finder collection(String name) => find.descendant(of: find.byType(Wrap), matching: find.text(name));
+
+    testWidgets('shows the library with counts, collections and the newest saved first', (tester) async {
+      await openLibrary(tester);
+      expect(find.text('My Library'), findsOneWidget);
+      expect(find.text('Your personal legal reading space'), findsOneWidget);
+      expect(find.text('All (2)'), findsOneWidget);
+      expect(find.text('Unread (2)'), findsOneWidget);
+      expect(find.text('Read (0)'), findsOneWidget);
+      expect(find.text('My Collections'), findsOneWidget);
+      expect(find.text('Recently Saved'), findsOneWidget);
+      expect(find.text('1 update'), findsNWidgets(2), reason: 'one collection each for Supreme Court and Legislation');
+      expect(collection('Supreme Court'), findsOneWidget);
+      expect(collection('Legislation'), findsOneWidget);
+      expect(collection('High Courts'), findsNothing, reason: 'nothing saved in it');
+      // news-2 was saved last, so it comes first.
+      expect(tester.getTopLeft(find.text(waqf)).dy, lessThan(tester.getTopLeft(find.text(governors)).dy));
+    });
+
+    testWidgets('opening an update marks it read; Unread and Read follow', (tester) async {
+      final c = await openLibrary(tester);
+      await tester.tap(find.text(governors));
+      await settle(tester);
+      expect(c.read(readUpdatesProvider), {'news-1'});
+      await tester.pageBack();
+      await settle(tester);
+      expect(find.text('Unread (1)'), findsOneWidget);
+      expect(find.text('Read (1)'), findsOneWidget);
+
+      await tester.tap(find.text('Unread (1)'));
+      await settle(tester);
+      expect(find.text(waqf), findsOneWidget);
+      expect(find.text(governors), findsNothing);
+      await tester.tap(find.text('Read (1)'));
+      await settle(tester);
+      expect(find.text(governors), findsOneWidget);
+      expect(find.text(waqf), findsNothing);
+    });
+
+    testWidgets('search and collections narrow the list, and no match says so', (tester) async {
+      await openLibrary(tester);
+      await tester.enterText(find.byType(TextField), 'GOVERNOR');
+      await settle(tester);
+      expect(find.text(governors), findsOneWidget);
+      expect(find.text(waqf), findsNothing);
+
+      await tester.enterText(find.byType(TextField), 'zzzqx');
+      await settle(tester);
+      expect(find.text('No saved updates match.'), findsOneWidget);
+
+      await tester.enterText(find.byType(TextField), '');
+      await tester.tap(collection('Legislation'));
+      await settle(tester);
+      expect(find.text(waqf), findsOneWidget);
+      expect(find.text(governors), findsNothing);
+      await tester.tap(collection('Legislation'));
+      await settle(tester);
+      expect(find.text(governors), findsOneWidget, reason: 'tapping the collection again clears it');
+    });
+
+    testWidgets('the bookmark removes an update, and an empty library keeps the old message', (tester) async {
+      final c = await openLibrary(tester, saved: ['news-1']);
+      await tester.tap(find.descendant(of: find.byType(NyayaCard), matching: find.byIcon(Icons.bookmark_rounded)));
+      await settle(tester);
+      expect(c.read(savedUpdatesProvider), isEmpty);
+      expect(find.text('Nothing saved yet. Tap the bookmark on any update to keep it here.'), findsOneWidget);
+    });
+  });
+
+  testWidgets('Indian-language UIs use slightly smaller text so the script matches English in size', (tester) async {
+    double scaleOf(WidgetTester t) => MediaQuery.textScalerOf(t.element(find.byType(Scaffold).first)).scale(10);
+
+    final english = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen', 'language': 'en'});
+    await pumpApp(tester, prefs: {'profile_v1': english});
+    await settle(tester);
+    expect(scaleOf(tester), closeTo(10, 0.01));
+    await tester.pumpWidget(const SizedBox());
+
+    for (final (code, factor) in [('ta', 8.8), ('te', 8.8), ('kn', 8.8), ('ml', 8.8), ('hi', 9.4)]) {
+      final prefs = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen', 'language': code});
+      await pumpApp(tester, prefs: {'profile_v1': prefs});
+      await settle(tester);
+      expect(scaleOf(tester), closeTo(factor, 0.01), reason: code);
+      await tester.pumpWidget(const SizedBox());
+    }
+    expect(scriptTextScale('en'), 1.0);
+  });
+
   testWidgets('Home shows latest updates and opens one', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     await pumpApp(tester, prefs: {'profile_v1': onboarded});
@@ -991,6 +1121,41 @@ void main() {
     await tester.pageBack();
     await settle(tester);
     expect(tester.widget<InitialsAvatar>(find.byType(InitialsAvatar).first).name, 'Ravi Kumar', reason: 'Home shows it too');
+  });
+
+  testWidgets('Open the Store lands on the Store heading and stays there when the page above it changes', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    tester.view.physicalSize = const Size(1080, 1920);
+    await settle(tester);
+    c.read(routerProvider).push(Routes.store);
+    await tester.pump(const Duration(milliseconds: 100));
+    // Something above the Store changes height after the page opens, as the
+    // sync (premium badge) or a late font does on a real phone.
+    c.read(profileProvider.notifier).activatePremium();
+    await settle(tester);
+    final top = tester.getRect(find.textContaining('STORE')).top;
+    expect(top, inInclusiveRange(70, 90), reason: 'the Store heading sits right under the app bar');
+    expect(find.text('Streak freeze'), findsOneWidget);
+
+    // The Store card glows to show where you landed, then settles.
+    List<BoxShadow> glow() =>
+        ((tester.widget<AnimatedContainer>(find.byKey(const Key('store-card'))).decoration! as BoxDecoration).boxShadow) ??
+        const [];
+    expect(glow(), isNotEmpty, reason: 'highlighted on arrival');
+    await tester.pump(const Duration(seconds: 3));
+    await tester.pump(const Duration(seconds: 1));
+    expect(glow(), isEmpty, reason: 'back to normal after a moment');
+  });
+
+  testWidgets('My Profile opened normally does not highlight the Store', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    c.read(routerProvider).push(Routes.profile);
+    await settle(tester);
+    final card = tester.widget<AnimatedContainer>(find.byKey(const Key('store-card')));
+    expect((card.decoration! as BoxDecoration).boxShadow ?? const [], isEmpty);
   });
 
   testWidgets('signing out asks first, and cancelling keeps the session', (tester) async {
@@ -1320,6 +1485,48 @@ void main() {
     semantics.dispose();
   });
 
+  testWidgets('Previous in a practice quiz shows the earlier question with your answer and the right one, read only', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    await tester.tap(find.text('Start learning').first);
+    await settle(tester);
+    const request = QuizRequest(QuizMode.casePath, levelId: 'constitution_1');
+    QuizState state() => c.read(quizControllerProvider(request));
+
+    expect(find.text('PREVIOUS'), findsNothing, reason: 'nothing before the first question');
+    final first = state().current;
+    await tester.tap(find.text(api.wrongTextFor(first.id)).first);
+    await settle(tester);
+    expect(find.text('PREVIOUS'), findsNothing, reason: 'still the first question');
+    await tester.tap(find.text('NEXT'));
+    await settle(tester);
+
+    // Question 2, not answered yet: Previous sits beside the prompt.
+    expect(state().index, 1);
+    expect(find.text('PREVIOUS'), findsOneWidget);
+    expect(find.text('Tap an answer to check it.'), findsOneWidget);
+    await tester.tap(find.text('PREVIOUS'));
+    await settle(tester);
+    expect(state().viewing, 0);
+    expect(find.text(first.text), findsOneWidget, reason: 'the first question is shown again');
+    expect(find.text('Not quite'), findsOneWidget, reason: 'with its verdict');
+    expect(find.text('PREVIOUS'), findsNothing, reason: 'nothing before it');
+
+    // Tapping an option changes nothing.
+    await tester.tap(find.text(api.correctTextFor(first.id)).first, warnIfMissed: false);
+    await settle(tester);
+    expect(state().answers, hasLength(1));
+    expect(state().viewing, 0);
+
+    // Next goes forward to the question that is still waiting for an answer.
+    await tester.tap(find.text('NEXT'));
+    await settle(tester);
+    expect(state().viewing, isNull);
+    expect(state().index, 1);
+    expect(find.text('Tap an answer to check it.'), findsOneWidget);
+  });
+
   testWidgets('leaving says exactly what happens to the energy', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
@@ -1405,7 +1612,7 @@ void main() {
     await settle(tester);
     final total = c.read(quizControllerProvider(exam)).questions.length;
     expect(find.text('0 of $total answered'), findsOneWidget);
-    expect(find.text("Pick an answer, then move on. You can't go back to a question."), findsOneWidget);
+    expect(find.text('Pick an answer, then move on. You can go back and change an answer until you submit.'), findsOneWidget);
 
     await tester.tap(find.text('SKIP'));
     await settle(tester);
@@ -1414,6 +1621,52 @@ void main() {
     await tester.tap(find.text(api.correctTextFor(q.id)).first);
     await settle(tester);
     expect(find.text('1 of $total answered'), findsOneWidget);
+    c.read(routerProvider).go(Routes.home);
+    await settle(tester);
+  });
+
+  testWidgets('the exam has a Previous button: go back, see your answer, change it, and nothing is counted twice', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    const exam = QuizRequest(QuizMode.exam);
+    c.read(routerProvider).push(Routes.quiz, extra: exam);
+    await settle(tester);
+    QuizState state() => c.read(quizControllerProvider(exam));
+    final total = state().questions.length;
+    expect(find.text('PREVIOUS'), findsNothing, reason: 'nothing before the first question');
+
+    final first = state().current;
+    await tester.tap(find.text(api.correctTextFor(first.id)).first);
+    await settle(tester);
+    await tester.tap(find.text('NEXT'));
+    await settle(tester);
+    expect(state().index, 1);
+    expect(find.text('PREVIOUS'), findsOneWidget);
+    // Previous and Next are the same size, and Previous fits on one line.
+    final buttons = find.byType(ChunkyButton);
+    expect(buttons, findsNWidgets(2));
+    expect(tester.getSize(buttons.first), tester.getSize(buttons.last));
+
+    await tester.tap(find.text('PREVIOUS'));
+    await settle(tester);
+    expect(state().index, 0);
+    expect(state().current.id, first.id);
+    expect(state().selected, isNotNull, reason: 'the earlier answer is still chosen');
+    expect(find.text('1 of $total answered'), findsOneWidget);
+    expect(find.text('PREVIOUS'), findsNothing);
+
+    // Change the answer, then move on: it replaces the old one.
+    final other = [for (var i = 0; i < first.options.length; i++) i].firstWhere((i) => i != state().selected);
+    await tester.tap(find.text(first.options[other]).first);
+    await settle(tester);
+    expect(state().selected, other);
+    expect(find.text('1 of $total answered'), findsOneWidget, reason: 'still one answered question');
+    await tester.tap(find.text('NEXT'));
+    await settle(tester);
+    expect(state().index, 1);
+    expect(state().answers.length, 2, reason: 'the first question was replaced, not added again');
+    expect(state().answers.first.selectedIndex, other);
     c.read(routerProvider).go(Routes.home);
     await settle(tester);
   });
