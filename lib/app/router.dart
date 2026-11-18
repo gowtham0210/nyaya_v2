@@ -7,6 +7,9 @@ import '../features/auth/application/auth_controller.dart';
 import '../features/auth/presentation/auth_screen.dart';
 import '../features/auth/presentation/reset_password_screen.dart';
 import '../features/chat/presentation/chat_screen.dart';
+import '../features/constitution/presentation/constitution_screen.dart';
+import '../features/daily_tip/data/daily_tip_repository.dart';
+import '../features/daily_tip/presentation/daily_tip_detail_screen.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/journey/presentation/journey_screen.dart';
 import '../features/leaderboard/presentation/leaderboard_screen.dart';
@@ -37,12 +40,14 @@ abstract final class Routes {
   static const store = '/profile?section=store';
   static const search = '/search';
   static const premium = '/premium';
+  static const constitution = '/constitution';
   static const signIn = '/sign-in';
 
   /// Sign-in with no way to skip it: every learner needs an account.
   static const signInRequired = '/sign-in?required=1';
   static const resetPassword = '/reset-password';
   static String update(String id) => '/updates/$id';
+  static String dailyTip(String id) => '/daily-tip/$id';
 }
 
 final _rootKey = GlobalKey<NavigatorState>();
@@ -99,6 +104,15 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => UpdateDetailScreen(id: state.pathParameters['id']!),
       ),
       GoRoute(
+        path: '/daily-tip/:id',
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => DailyTipDetailScreen(
+          id: state.pathParameters['id']!,
+          // Home passes the tip it already loaded; a link has only the id.
+          initial: state.extra is DailyTip ? state.extra! as DailyTip : null,
+        ),
+      ),
+      GoRoute(
         path: Routes.quiz,
         parentNavigatorKey: _rootKey,
         redirect: (context, state) => state.extra is QuizRequest ? null : Routes.home,
@@ -116,6 +130,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: Routes.review,
         parentNavigatorKey: _rootKey,
         builder: (context, state) => const ReviewScreen(),
+      ),
+      GoRoute(
+        path: Routes.constitution,
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => const ConstitutionScreen(),
       ),
       GoRoute(
         path: Routes.search,

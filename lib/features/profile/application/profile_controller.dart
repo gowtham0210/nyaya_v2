@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/config/features.dart';
 import '../../../core/config/game_rules.dart';
 import '../../../core/storage/local_store.dart';
 import '../../../core/utils/day.dart';
@@ -99,6 +100,7 @@ class ProfileController extends Notifier<UserProfile> {
   // ── AI assistant quota ────────────────────────────────────────────────────
 
   int get aiMessagesLeft {
+    if (Features.unlimitedAi) return 1 << 20; // no daily limit in this version
     final limit = state.isPremium ? GameRules.premiumDailyAiMessages : GameRules.freeDailyAiMessages;
     return (limit - state.aiMessagesToday).clamp(0, limit);
   }

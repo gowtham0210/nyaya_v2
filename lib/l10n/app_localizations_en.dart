@@ -377,7 +377,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeStartBody =>
-      'Build your understanding of Indian law, one concept at a time.';
+      'Begin with the Constitution, where every law starts.';
 
   @override
   String get homeStartRecommended => 'Recommended start';
@@ -1960,4 +1960,107 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get quizSignedOut => 'Your session ended. Sign in again to play.';
+
+  @override
+  String get dailyTipLabel => 'Daily tip';
+
+  @override
+  String get dailyTipReadMore => 'Read more';
+
+  @override
+  String get dailyTipLoadFailed => 'Couldn\'t load today\'s tip.';
+
+  @override
+  String get dailyTipUnavailable => 'This tip isn\'t available any more.';
+
+  @override
+  String get dailyTipLegalReference => 'Legal reference';
+
+  @override
+  String dailyTipLastVerified(String date) {
+    return 'Last verified on $date';
+  }
+
+  @override
+  String get constitutionTitle => 'Constitution of India';
+
+  @override
+  String get constitutionHomeDesc =>
+      'Read the official text on India Code, in many languages';
+
+  @override
+  String get constitutionAttribution =>
+      'Published on India Code by the Legislative Department, Ministry of Law and Justice.';
+
+  @override
+  String get constitutionNotice =>
+      'Each edition is shown as published there. For legal or official use, please refer to the official source.';
+
+  @override
+  String get constitutionOpensExternally =>
+      'PDFs open in your browser or PDF app.';
+
+  @override
+  String get constitutionStale => 'These details may be out of date.';
+
+  @override
+  String get constitutionLoadFailed =>
+      'Couldn\'t load the Constitution editions.';
+
+  @override
+  String get constitutionEmpty => 'No editions are available right now.';
+
+  @override
+  String get constitutionYourLanguage => 'In your language';
+
+  @override
+  String constitutionFallbackEnglish(String language) {
+    return 'No edition in $language is listed, so the English edition is shown.';
+  }
+
+  @override
+  String get constitutionAllEditions => 'All languages';
+
+  @override
+  String get constitutionOriginalSection => 'The original copy';
+
+  @override
+  String get constitutionLarge => 'Large file';
+
+  @override
+  String get constitutionScanned => 'Scanned';
+
+  @override
+  String constitutionSize(String size) {
+    return 'About $size';
+  }
+
+  @override
+  String constitutionUpdated(String date) {
+    return 'Updated $date';
+  }
+
+  @override
+  String get constitutionWarnTitle => 'Before you open this PDF';
+
+  @override
+  String constitutionLargeWarning(String size) {
+    return 'This file is about $size. It may use a lot of mobile data, so Wi-Fi is better.';
+  }
+
+  @override
+  String get constitutionScannedWarning =>
+      'This is a scanned copy. Its text can\'t be searched, and screen readers may not be able to read it.';
+
+  @override
+  String get constitutionOpenAnyway => 'Open PDF';
+
+  @override
+  String get constitutionOpenFailed => 'Couldn\'t open the PDF.';
+
+  @override
+  String get constitutionOpenSourcePage => 'Open on India Code';
+
+  @override
+  String get constitutionSourceLink => 'See the collection on India Code';
 }

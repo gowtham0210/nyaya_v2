@@ -375,7 +375,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get homeStartTitle => 'अपनी सीखने की यात्रा शुरू करें';
 
   @override
-  String get homeStartBody => 'भारतीय कानून को एक-एक अवधारणा के साथ समझें।';
+  String get homeStartBody => 'संविधान से शुरू करें, जहाँ हर कानून की जड़ है।';
 
   @override
   String get homeStartRecommended => 'शुरुआत के लिए सुझाव';
@@ -1958,4 +1958,106 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get quizSignedOut =>
       'आपका सत्र खत्म हो गया। खेलने के लिए फिर से साइन इन करें।';
+
+  @override
+  String get dailyTipLabel => 'आज की टिप';
+
+  @override
+  String get dailyTipReadMore => 'और पढ़ें';
+
+  @override
+  String get dailyTipLoadFailed => 'आज की टिप लोड नहीं हो सकी।';
+
+  @override
+  String get dailyTipUnavailable => 'यह टिप अब उपलब्ध नहीं है।';
+
+  @override
+  String get dailyTipLegalReference => 'कानूनी संदर्भ';
+
+  @override
+  String dailyTipLastVerified(String date) {
+    return 'अंतिम सत्यापन: $date';
+  }
+
+  @override
+  String get constitutionTitle => 'भारत का संविधान';
+
+  @override
+  String get constitutionHomeDesc =>
+      'India Code पर आधिकारिक पाठ पढ़ें, कई भाषाओं में';
+
+  @override
+  String get constitutionAttribution =>
+      'India Code पर विधायी विभाग, विधि और न्याय मंत्रालय द्वारा प्रकाशित।';
+
+  @override
+  String get constitutionNotice =>
+      'हर संस्करण वैसा ही दिखाया गया है जैसा वहाँ प्रकाशित है। कानूनी या आधिकारिक उपयोग के लिए कृपया आधिकारिक स्रोत देखें।';
+
+  @override
+  String get constitutionOpensExternally =>
+      'PDF आपके ब्राउज़र या PDF ऐप में खुलते हैं।';
+
+  @override
+  String get constitutionStale => 'ये विवरण पुराने हो सकते हैं।';
+
+  @override
+  String get constitutionLoadFailed => 'संविधान के संस्करण लोड नहीं हो सके।';
+
+  @override
+  String get constitutionEmpty => 'अभी कोई संस्करण उपलब्ध नहीं है।';
+
+  @override
+  String get constitutionYourLanguage => 'आपकी भाषा में';
+
+  @override
+  String constitutionFallbackEnglish(String language) {
+    return '$language में कोई संस्करण सूचीबद्ध नहीं है, इसलिए अंग्रेज़ी संस्करण दिखाया गया है।';
+  }
+
+  @override
+  String get constitutionAllEditions => 'सभी भाषाएँ';
+
+  @override
+  String get constitutionOriginalSection => 'मूल प्रति';
+
+  @override
+  String get constitutionLarge => 'बड़ी फ़ाइल';
+
+  @override
+  String get constitutionScanned => 'स्कैन की गई';
+
+  @override
+  String constitutionSize(String size) {
+    return 'लगभग $size';
+  }
+
+  @override
+  String constitutionUpdated(String date) {
+    return 'अपडेट: $date';
+  }
+
+  @override
+  String get constitutionWarnTitle => 'यह PDF खोलने से पहले';
+
+  @override
+  String constitutionLargeWarning(String size) {
+    return 'यह फ़ाइल लगभग $size की है। इसमें काफ़ी मोबाइल डेटा लग सकता है, इसलिए वाई-फ़ाई बेहतर है।';
+  }
+
+  @override
+  String get constitutionScannedWarning =>
+      'यह स्कैन की गई प्रति है। इसके टेक्स्ट में खोज नहीं हो सकती, और स्क्रीन रीडर इसे पढ़ न पाएँ।';
+
+  @override
+  String get constitutionOpenAnyway => 'PDF खोलें';
+
+  @override
+  String get constitutionOpenFailed => 'PDF नहीं खुल सका।';
+
+  @override
+  String get constitutionOpenSourcePage => 'India Code पर खोलें';
+
+  @override
+  String get constitutionSourceLink => 'India Code पर संग्रह देखें';
 }

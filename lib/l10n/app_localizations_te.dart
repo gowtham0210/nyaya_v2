@@ -379,7 +379,8 @@ class AppLocalizationsTe extends AppLocalizations {
   String get homeStartTitle => 'మీ అభ్యాస ప్రయాణం ప్రారంభించండి';
 
   @override
-  String get homeStartBody => 'భారతీయ చట్టాన్ని ఒక్కో భావనగా అర్థం చేసుకోండి.';
+  String get homeStartBody =>
+      'రాజ్యాంగంతో మొదలుపెట్టండి; అన్ని చట్టాలు అక్కడినుంచే మొదలవుతాయి.';
 
   @override
   String get homeStartRecommended => 'ప్రారంభానికి సూచన';
@@ -1964,4 +1965,106 @@ class AppLocalizationsTe extends AppLocalizations {
   @override
   String get quizSignedOut =>
       'మీ సెషన్ ముగిసింది. ఆడటానికి మళ్లీ సైన్ ఇన్ చేయండి.';
+
+  @override
+  String get dailyTipLabel => 'నేటి చిట్కా';
+
+  @override
+  String get dailyTipReadMore => 'ఇంకా చదవండి';
+
+  @override
+  String get dailyTipLoadFailed => 'నేటి చిట్కాను లోడ్ చేయలేకపోయాం.';
+
+  @override
+  String get dailyTipUnavailable => 'ఈ చిట్కా ఇక అందుబాటులో లేదు.';
+
+  @override
+  String get dailyTipLegalReference => 'చట్టపరమైన సూచన';
+
+  @override
+  String dailyTipLastVerified(String date) {
+    return 'చివరిగా ధృవీకరించిన తేదీ: $date';
+  }
+
+  @override
+  String get constitutionTitle => 'భారత రాజ్యాంగం';
+
+  @override
+  String get constitutionHomeDesc =>
+      'India Code లో అధికారిక పాఠాన్ని అనేక భాషల్లో చదవండి';
+
+  @override
+  String get constitutionAttribution =>
+      'India Code లో శాసన విభాగం, న్యాయ మంత్రిత్వ శాఖ ప్రచురించింది.';
+
+  @override
+  String get constitutionNotice =>
+      'ప్రతి సంచిక అక్కడ ప్రచురితమైనట్లే చూపబడుతుంది. చట్టపరమైన లేదా అధికారిక అవసరాలకు, దయచేసి అధికారిక మూలాన్ని చూడండి.';
+
+  @override
+  String get constitutionOpensExternally =>
+      'PDFలు మీ బ్రౌజర్ లేదా PDF యాప్‌లో తెరుచుకుంటాయి.';
+
+  @override
+  String get constitutionStale => 'ఈ వివరాలు పాతవి కావచ్చు.';
+
+  @override
+  String get constitutionLoadFailed => 'రాజ్యాంగ సంచికలను లోడ్ చేయలేకపోయాం.';
+
+  @override
+  String get constitutionEmpty => 'ప్రస్తుతం సంచికలు ఏవీ అందుబాటులో లేవు.';
+
+  @override
+  String get constitutionYourLanguage => 'మీ భాషలో';
+
+  @override
+  String constitutionFallbackEnglish(String language) {
+    return '$language లో సంచిక జాబితాలో లేదు, అందుకే ఇంగ్లీష్ సంచిక చూపబడుతోంది.';
+  }
+
+  @override
+  String get constitutionAllEditions => 'అన్ని భాషలు';
+
+  @override
+  String get constitutionOriginalSection => 'అసలు ప్రతి';
+
+  @override
+  String get constitutionLarge => 'పెద్ద ఫైల్';
+
+  @override
+  String get constitutionScanned => 'స్కాన్ చేసినది';
+
+  @override
+  String constitutionSize(String size) {
+    return 'సుమారు $size';
+  }
+
+  @override
+  String constitutionUpdated(String date) {
+    return 'నవీకరించినది: $date';
+  }
+
+  @override
+  String get constitutionWarnTitle => 'ఈ PDF తెరిచే ముందు';
+
+  @override
+  String constitutionLargeWarning(String size) {
+    return 'ఈ ఫైల్ సుమారు $size. దీనికి ఎక్కువ మొబైల్ డేటా ఖర్చవ్వచ్చు, కాబట్టి వై-ఫై మంచిది.';
+  }
+
+  @override
+  String get constitutionScannedWarning =>
+      'ఇది స్కాన్ చేసిన ప్రతి. దీని టెక్స్ట్‌లో వెతకలేరు, స్క్రీన్ రీడర్లు చదవలేకపోవచ్చు.';
+
+  @override
+  String get constitutionOpenAnyway => 'PDF తెరువు';
+
+  @override
+  String get constitutionOpenFailed => 'PDF తెరవలేకపోయాం.';
+
+  @override
+  String get constitutionOpenSourcePage => 'India Code లో తెరువు';
+
+  @override
+  String get constitutionSourceLink => 'India Code లో సేకరణను చూడండి';
 }

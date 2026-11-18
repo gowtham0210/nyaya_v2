@@ -13,6 +13,7 @@ import 'package:nyaya/core/services/sounds.dart';
 import 'package:nyaya/core/storage/local_store.dart';
 import 'package:nyaya/features/auth/application/auth_controller.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
+import 'package:nyaya/features/daily_tip/data/daily_tip_repository.dart';
 import 'package:nyaya/core/theme/app_colors.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
 import 'package:nyaya/core/widgets/chunky_button.dart';
@@ -70,6 +71,7 @@ void main() {
       leagueApiProvider.overrideWithValue(api),
       reviewApiProvider.overrideWithValue(api),
       legalUpdatesRepositoryProvider.overrideWithValue(updates ?? FakeLegalUpdates()),
+      dailyTipRepositoryProvider.overrideWithValue(FakeDailyTips()),
       reminderNotificationsProvider.overrideWithValue(FakeReminderNotifications()),
       soundPlayerProvider.overrideWithValue(sounds = FakeSounds()),
       authApiProvider.overrideWithValue(authApi = FakeAuthApi(tokens)),
@@ -670,13 +672,16 @@ void main() {
     expect(top(tester, 'Quiz modes'), lessThan(top(tester, 'FEATURED')), reason: 'no promotion above the learning');
   });
 
-  testWidgets('Home has a top bar with the app name, and search finds laws, topics and updates', (tester) async {
+  testWidgets('Home has a top bar with the app name on two lines and no search icon; search still finds laws, topics and updates', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
     await settle(tester);
-    expect(find.text('Nyaya Kural'), findsOneWidget);
+    // "Nyaya" over "Kural", with no tagline and no search button in the bar.
+    expect(find.text('Nyaya\nKural'), findsOneWidget);
+    expect(find.text('Learn Indian law, one case a day'), findsNothing);
+    expect(find.byTooltip('Search'), findsNothing);
 
-    await tester.tap(find.byTooltip('Search'));
+    c.read(routerProvider).push(Routes.search);
     await settle(tester);
     await tester.enterText(find.byType(TextField), 'bns');
     await settle(tester);
@@ -704,7 +709,7 @@ void main() {
       final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
       final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
       await settle(tester);
-      await tester.tap(find.byTooltip('Search'));
+      c.read(routerProvider).push(Routes.search);
       await settle(tester);
       return c;
     }
@@ -873,7 +878,7 @@ void main() {
 
     testWidgets('search finds them by title and by what the article says', (tester) async {
       await pumpHome(tester);
-      await tester.tap(find.byTooltip('Search'));
+      ProviderScope.containerOf(tester.element(find.byType(NyayaApp))).read(routerProvider).push(Routes.search);
       await settle(tester);
       for (final (query, title) in [
         ('unborn', 'Parents can claim compensation for the loss of an unborn child in a road accident'),

@@ -15,6 +15,10 @@ export type VersionStatus = Version['status'];
 export type News = Schemas['NewsDetailDto'];
 export type NewsStatus = News['status'];
 export type NewsCategory = News['category'];
+export type DailyTip = Schemas['DailyTipDetailDto'];
+export type DailyTipStatus = DailyTip['status'];
+export type DailyTipCategory = DailyTip['category'];
+export type DailyTipLanguage = NonNullable<Schemas['CreateDailyTipDto']['language']>;
 
 /** The API's standard error body. */
 export interface ApiError {

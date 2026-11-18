@@ -171,7 +171,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             ),
 
             // ── Quota / limit ───────────────────────────────────────────────
-            if (!profile.isPremium)
+            if (!profile.isPremium && !Features.unlimitedAi)
               if (left <= 0 || chat.limitReached)
                 _LimitBanner(onUpgrade: Features.premium ? () => context.push(Routes.premium) : null)
               else

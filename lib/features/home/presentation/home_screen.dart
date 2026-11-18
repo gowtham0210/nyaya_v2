@@ -7,6 +7,10 @@ import '../../../app/router.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/storage/local_store.dart';
+import '../../daily_tip/application/daily_tip_renewal.dart';
+import '../../daily_tip/data/daily_tip_repository.dart';
+import '../../daily_tip/presentation/daily_tip_card.dart';
 import '../../gamification/domain/league.dart';
 import '../../gamification/presentation/league_emblem.dart';
 import '../../profile/application/profile_controller.dart';
@@ -24,14 +28,28 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  /// Fetches the new Daily Tip at 00:00 India time, and on returning to the app
+  /// the next day. It lives and dies with this screen.
+  late final _tipRenewal = DailyTipRenewal(
+    clock: () => ref.read(clockProvider)(),
+    renew: () => ref.invalidate(dailyTipProvider),
+  );
+
   @override
   void initState() {
     super.initState();
+    _tipRenewal.start();
     WidgetsBinding.instance.addPostFrameCallback((_) => _maybeShowLeagueOutcome());
     // The result arrives from the server after a sync, often after Home opens.
     ref.listenManual(profileProvider.select((p) => p.pendingLeagueOutcome), (before, after) {
       if (before == null && after != null) _maybeShowLeagueOutcome();
     });
+  }
+
+  @override
+  void dispose() {
+    _tipRenewal.dispose();
+    super.dispose();
   }
 
   void _maybeShowLeagueOutcome() {
@@ -55,6 +73,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     const sections = <Widget>[
       Padding(padding: page, child: ContinueLearningCard()),
       Padding(padding: page, child: ReviewCard()),
+      // Today's tip from the content portal; absent when none is published.
+      Padding(padding: page, child: DailyTipCard()),
       // Duel, Exam and Daily Docket start here; Case Path opens the Journey tab.
       SizedBox(height: AppSpacing.lg),
       Padding(padding: page, child: QuizModesGrid()),
@@ -74,6 +94,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           color: context.colors.primary,
           onRefresh: () async {
             ref.read(profileProvider.notifier).refreshDay();
+            ref.invalidate(dailyTipProvider);
             await ref.read(progressSyncProvider.notifier).refresh();
           },
           child: CustomScrollView(
@@ -87,7 +108,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     // Only what shows on opening fades in; sections further down
                     // are built while scrolling and would look blank for a moment.
                     for (final (i, s) in sections.indexed)
-                      s is SizedBox || i > 3
+                      s is SizedBox || i > 4
                           ? s
                           : s.animate().fadeIn(delay: (40 * i).ms, duration: 350.ms).slideY(begin: 0.06),
                   ],

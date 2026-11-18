@@ -2959,6 +2959,573 @@
           "editor"
         ]
       }
+    },
+    "/v1/daily-tips/today": {
+      "get": {
+        "operationId": "DailyTipsController_today",
+        "parameters": [
+          {
+            "name": "language",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "en",
+              "type": "string",
+              "enum": [
+                "en",
+                "hi",
+                "ta",
+                "te",
+                "kn",
+                "ml"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TodayTipDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Today's published tip (India date); tip is null when there is none",
+        "tags": [
+          "daily-tips"
+        ]
+      }
+    },
+    "/v1/daily-tips/{id}": {
+      "get": {
+        "operationId": "DailyTipsController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicDailyTipDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "One published tip whose day has come",
+        "tags": [
+          "daily-tips"
+        ]
+      }
+    },
+    "/v1/editor/daily-tips": {
+      "get": {
+        "operationId": "EditorDailyTipsController_list",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "in_review",
+                "changes_requested",
+                "approved",
+                "published",
+                "retired"
+              ]
+            }
+          },
+          {
+            "name": "category",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "citizen_rights",
+                "criminal_law",
+                "consumer_rights",
+                "family_law",
+                "property",
+                "workplace",
+                "general"
+              ]
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "description": "Searches titles",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipPageDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "editor"
+        ]
+      },
+      "post": {
+        "operationId": "EditorDailyTipsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDailyTipDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Start a daily tip as a draft",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/daily-tips/{id}": {
+      "get": {
+        "operationId": "EditorDailyTipsController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "editor"
+        ]
+      },
+      "patch": {
+        "operationId": "EditorDailyTipsController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDailyTipDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Edit a draft, or one with changes requested",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/daily-tips/{id}/submit": {
+      "post": {
+        "operationId": "EditorDailyTipsController_submit",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Send the tip for legal review",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/daily-tips/{id}/request-changes": {
+      "post": {
+        "operationId": "EditorDailyTipsController_requestChanges",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipReasonDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/daily-tips/{id}/approve": {
+      "post": {
+        "operationId": "EditorDailyTipsController_approve",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Approve the tip under review (not your own, unless you are an admin)",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/daily-tips/{id}/publish": {
+      "post": {
+        "operationId": "EditorDailyTipsController_publish",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Publish the approved tip; the app shows it on its publish date",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/daily-tips/{id}/revise": {
+      "post": {
+        "operationId": "EditorDailyTipsController_revise",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipReasonDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Take a published or retired tip back to draft to correct it; it leaves the app until published again",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/daily-tips/{id}/retire": {
+      "post": {
+        "operationId": "EditorDailyTipsController_retire",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipReasonDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Take a published tip off the app",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/constitution": {
+      "get": {
+        "operationId": "ConstitutionController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConstitutionDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "The Constitution of India's editions on India Code: official PDF links with size and warnings. No document is served by this API.",
+        "tags": [
+          "constitution"
+        ]
+      }
+    },
+    "/v1/admin/constitution/drift": {
+      "get": {
+        "operationId": "AdminConstitutionController_drift",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConstitutionDriftDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Compare India Code with the reviewed manifest: changed, missing and new editions",
+        "tags": [
+          "admin"
+        ]
+      }
     }
   },
   "info": {
@@ -7065,6 +7632,749 @@
         },
         "required": [
           "reason"
+        ]
+      },
+      "PublicDailyTipDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "citizen_rights",
+              "criminal_law",
+              "consumer_rights",
+              "family_law",
+              "property",
+              "workplace",
+              "general"
+            ]
+          },
+          "language": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "legal_reference": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string"
+          },
+          "publish_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "last_verified_on": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "required": [
+          "id",
+          "category",
+          "language",
+          "title",
+          "summary",
+          "explanation",
+          "legal_reference",
+          "source_url",
+          "publish_date",
+          "last_verified_on"
+        ]
+      },
+      "TodayTipDto": {
+        "type": "object",
+        "properties": {
+          "tip": {
+            "nullable": true,
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PublicDailyTipDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "tip"
+        ]
+      },
+      "DailyTipListItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "in_review",
+              "changes_requested",
+              "approved",
+              "published",
+              "retired"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "citizen_rights",
+              "criminal_law",
+              "consumer_rights",
+              "family_law",
+              "property",
+              "workplace",
+              "general"
+            ]
+          },
+          "language": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "publish_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "category",
+          "language",
+          "title",
+          "publish_date",
+          "updated_at"
+        ]
+      },
+      "DailyTipPageDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DailyTipListItemDto"
+            }
+          },
+          "next_cursor": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ]
+      },
+      "DailyTipDetailDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "in_review",
+              "changes_requested",
+              "approved",
+              "published",
+              "retired"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "citizen_rights",
+              "criminal_law",
+              "consumer_rights",
+              "family_law",
+              "property",
+              "workplace",
+              "general"
+            ]
+          },
+          "language": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "publish_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "legal_reference": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "last_verified_on": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "created_by": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "updated_by": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "reviewer_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "approved_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "retired_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "changes_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "Why changes were last requested, while they still are"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "category",
+          "language",
+          "title",
+          "publish_date",
+          "updated_at",
+          "summary",
+          "explanation",
+          "legal_reference",
+          "source_url",
+          "last_verified_on",
+          "created_by",
+          "updated_by",
+          "reviewer_id",
+          "approved_at",
+          "published_at",
+          "retired_at",
+          "created_at",
+          "changes_reason"
+        ]
+      },
+      "CreateDailyTipDto": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "citizen_rights",
+              "criminal_law",
+              "consumer_rights",
+              "family_law",
+              "property",
+              "workplace",
+              "general"
+            ]
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "en",
+              "hi",
+              "ta",
+              "te",
+              "kn",
+              "ml"
+            ],
+            "default": "en"
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Shown on the Home card"
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "legal_reference": {
+            "type": "string",
+            "example": "Consumer Protection Act, 2019, Section 35"
+          },
+          "source_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "publish_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "description": "The India day the tip is shown on Home"
+          },
+          "last_verified_on": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          }
+        },
+        "required": [
+          "category"
+        ]
+      },
+      "UpdateDailyTipDto": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "citizen_rights",
+              "criminal_law",
+              "consumer_rights",
+              "family_law",
+              "property",
+              "workplace",
+              "general"
+            ]
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "en",
+              "hi",
+              "ta",
+              "te",
+              "kn",
+              "ml"
+            ],
+            "default": "en"
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Shown on the Home card"
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "legal_reference": {
+            "type": "string",
+            "example": "Consumer Protection Act, 2019, Section 35"
+          },
+          "source_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "publish_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "description": "The India day the tip is shown on Home"
+          },
+          "last_verified_on": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          }
+        }
+      },
+      "TipReasonDto": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "minLength": 3
+          }
+        },
+        "required": [
+          "reason"
+        ]
+      },
+      "ConstitutionSourceDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "collection_url": {
+            "type": "string",
+            "description": "The collection page on India Code"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "When India Code was last read; null if it never was"
+          },
+          "stale": {
+            "type": "boolean",
+            "description": "True when India Code could not be reached and reviewed values are shown"
+          }
+        },
+        "required": [
+          "name",
+          "collection_url",
+          "fetched_at",
+          "stale"
+        ]
+      },
+      "ConstitutionFileDto": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "example": "pdf"
+          },
+          "size_bytes": {
+            "type": "number",
+            "description": "As India Code reports it; treat as approximate (the served file can differ)"
+          },
+          "checksum_md5": {
+            "type": "string",
+            "description": "MD5 as India Code reports it"
+          },
+          "source_modified_at": {
+            "type": "string",
+            "format": "date",
+            "description": "The day the item last changed on India Code"
+          }
+        },
+        "required": [
+          "format",
+          "size_bytes",
+          "checksum_md5",
+          "source_modified_at"
+        ]
+      },
+      "ConstitutionFlagsDto": {
+        "type": "object",
+        "properties": {
+          "large": {
+            "type": "boolean",
+            "description": "A large download: warn before opening on mobile data"
+          },
+          "scanned": {
+            "type": "boolean",
+            "description": "Scanned pages with no text layer: cannot be searched or read aloud"
+          }
+        },
+        "required": [
+          "large",
+          "scanned"
+        ]
+      },
+      "ConstitutionEditionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "ta",
+            "description": "Stable id; `original` for the 1950 copy"
+          },
+          "language_code": {
+            "type": "string",
+            "nullable": true,
+            "example": "ta"
+          },
+          "language_name": {
+            "type": "string",
+            "example": "Tamil"
+          },
+          "native_name": {
+            "type": "string",
+            "nullable": true,
+            "example": "தமிழ்"
+          },
+          "script": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "example": "The Constitution of India in Tamil"
+          },
+          "source_title": {
+            "type": "string",
+            "nullable": true,
+            "description": "India Code's own title for the item, kept for attribution (it can contain typos)"
+          },
+          "authority_note": {
+            "type": "string",
+            "nullable": true,
+            "description": "Reviewed wording about this edition’s legal standing; null until approved. Do not infer authority when null."
+          },
+          "download_url": {
+            "type": "string",
+            "description": "Official India Code address of the PDF (https, India Code host only)"
+          },
+          "source_page_url": {
+            "type": "string",
+            "description": "The item's page on India Code"
+          },
+          "file": {
+            "$ref": "#/components/schemas/ConstitutionFileDto"
+          },
+          "flags": {
+            "$ref": "#/components/schemas/ConstitutionFlagsDto"
+          }
+        },
+        "required": [
+          "id",
+          "language_code",
+          "language_name",
+          "native_name",
+          "script",
+          "title",
+          "source_title",
+          "authority_note",
+          "download_url",
+          "source_page_url",
+          "file",
+          "flags"
+        ]
+      },
+      "ConstitutionDto": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/ConstitutionSourceDto"
+          },
+          "notice": {
+            "type": "string",
+            "description": "Neutral attribution to show with the list"
+          },
+          "original": {
+            "nullable": true,
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConstitutionEditionDto"
+              }
+            ]
+          },
+          "editions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConstitutionEditionDto"
+            }
+          }
+        },
+        "required": [
+          "source",
+          "notice",
+          "original",
+          "editions"
+        ]
+      },
+      "DriftSummaryDto": {
+        "type": "object",
+        "properties": {
+          "unchanged": {
+            "type": "number"
+          },
+          "changed": {
+            "type": "number"
+          },
+          "missing": {
+            "type": "number"
+          },
+          "new": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "unchanged",
+          "changed",
+          "missing",
+          "new"
+        ]
+      },
+      "DriftLiveDto": {
+        "type": "object",
+        "properties": {
+          "bitstream_uuid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "md5": {
+            "type": "string"
+          },
+          "size_bytes": {
+            "type": "number"
+          },
+          "item_modified": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "required": [
+          "bitstream_uuid",
+          "md5",
+          "size_bytes",
+          "item_modified"
+        ]
+      },
+      "DriftItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "language_name": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "unchanged",
+              "changed",
+              "missing",
+              "unknown"
+            ]
+          },
+          "changed_fields": {
+            "description": "What differs from the reviewed values: bitstream, checksum, size, text_layer",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "modified_since_review": {
+            "type": "boolean",
+            "description": "The item was edited on India Code after the review, though its file may be the same"
+          },
+          "live": {
+            "nullable": true,
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DriftLiveDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "language_name",
+          "state",
+          "changed_fields",
+          "modified_since_review",
+          "live"
+        ]
+      },
+      "DriftNewItemDto": {
+        "type": "object",
+        "properties": {
+          "item_uuid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "handle": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "size_bytes": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "item_uuid",
+          "handle",
+          "title",
+          "size_bytes"
+        ]
+      },
+      "ConstitutionDriftDto": {
+        "type": "object",
+        "properties": {
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "last_error": {
+            "type": "string",
+            "nullable": true,
+            "description": "Why the last read of India Code failed, if it did"
+          },
+          "summary": {
+            "$ref": "#/components/schemas/DriftSummaryDto"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DriftItemDto"
+            }
+          },
+          "new_items": {
+            "description": "On India Code but not in the manifest: hidden from the app until curated",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DriftNewItemDto"
+            }
+          }
+        },
+        "required": [
+          "fetched_at",
+          "last_error",
+          "summary",
+          "items",
+          "new_items"
         ]
       }
     }

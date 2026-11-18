@@ -50,8 +50,8 @@ void _exploreChapter(BuildContext context, WidgetRef ref, String chapterId) {
   }
 }
 
-/// Home's top bar: the app's logo and name, with search, the league and
-/// settings. Stays pinned while Home scrolls.
+/// Home's top bar: the app's logo and name (one word per line), with the
+/// league, settings and profile. Stays pinned while Home scrolls.
 class HomeTopBar extends StatelessWidget {
   const HomeTopBar({super.key});
 
@@ -80,26 +80,21 @@ class HomeTopBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
+                // "Nyaya" on the first line, "Kural" on the second. Read out as one name.
                 Semantics(
                   header: true,
-                  // The name shrinks to fit beside the four buttons rather than being cut off.
+                  label: l.appName,
+                  excludeSemantics: true,
                   child: FittedBox(
                     fit: BoxFit.scaleDown,
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      l.appName,
-                      maxLines: 1,
+                      l.appName.split(' ').join('\n'),
                       style: AppTheme.serif(
                         TextStyle(fontSize: 22, height: 1.1, color: context.colors.primary),
                       ),
                     ),
                   ),
-                ),
-                Text(
-                  l.appTagline,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary, height: 1.2),
                 ),
               ],
             ),
@@ -107,11 +102,6 @@ class HomeTopBar extends StatelessWidget {
         ],
       ),
       actions: [
-        IconButton(
-          tooltip: l.searchTitle,
-          onPressed: () => context.push(Routes.search),
-          icon: const Icon(Icons.search_rounded, size: 26),
-        ),
         IconButton(
           tooltip: l.leaderboardTitle,
           onPressed: () => context.push(Routes.leaderboard),
@@ -770,6 +760,25 @@ class CoreLawsSection extends ConsumerWidget {
                   ),
                 ],
               ],
+            ),
+          ),
+        ),
+        const SizedBox(height: AppSpacing.md),
+        // The official text of the Constitution on India Code (not the Journey chapter).
+        Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            color: context.colors.surface,
+            borderRadius: BorderRadius.circular(AppRadius.md),
+            border: Border.all(color: context.nyaya.cardBorder),
+          ),
+          child: Material(
+            type: MaterialType.transparency,
+            child: _LawRow(
+              icon: Icons.menu_book_outlined,
+              title: l.constitutionTitle,
+              desc: l.constitutionHomeDesc,
+              onTap: () => context.push(Routes.constitution),
             ),
           ),
         ),

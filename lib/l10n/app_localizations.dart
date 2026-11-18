@@ -751,7 +751,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeStartBody.
   ///
   /// In en, this message translates to:
-  /// **'Build your understanding of Indian law, one concept at a time.'**
+  /// **'Begin with the Constitution, where every law starts.'**
   String get homeStartBody;
 
   /// No description provided for @homeStartRecommended.
@@ -3405,6 +3405,180 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your session ended. Sign in again to play.'**
   String get quizSignedOut;
+
+  /// No description provided for @dailyTipLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily tip'**
+  String get dailyTipLabel;
+
+  /// No description provided for @dailyTipReadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Read more'**
+  String get dailyTipReadMore;
+
+  /// No description provided for @dailyTipLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load today\'s tip.'**
+  String get dailyTipLoadFailed;
+
+  /// No description provided for @dailyTipUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'This tip isn\'t available any more.'**
+  String get dailyTipUnavailable;
+
+  /// No description provided for @dailyTipLegalReference.
+  ///
+  /// In en, this message translates to:
+  /// **'Legal reference'**
+  String get dailyTipLegalReference;
+
+  /// No description provided for @dailyTipLastVerified.
+  ///
+  /// In en, this message translates to:
+  /// **'Last verified on {date}'**
+  String dailyTipLastVerified(String date);
+
+  /// No description provided for @constitutionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Constitution of India'**
+  String get constitutionTitle;
+
+  /// No description provided for @constitutionHomeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Read the official text on India Code, in many languages'**
+  String get constitutionHomeDesc;
+
+  /// No description provided for @constitutionAttribution.
+  ///
+  /// In en, this message translates to:
+  /// **'Published on India Code by the Legislative Department, Ministry of Law and Justice.'**
+  String get constitutionAttribution;
+
+  /// No description provided for @constitutionNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Each edition is shown as published there. For legal or official use, please refer to the official source.'**
+  String get constitutionNotice;
+
+  /// No description provided for @constitutionOpensExternally.
+  ///
+  /// In en, this message translates to:
+  /// **'PDFs open in your browser or PDF app.'**
+  String get constitutionOpensExternally;
+
+  /// No description provided for @constitutionStale.
+  ///
+  /// In en, this message translates to:
+  /// **'These details may be out of date.'**
+  String get constitutionStale;
+
+  /// No description provided for @constitutionLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load the Constitution editions.'**
+  String get constitutionLoadFailed;
+
+  /// No description provided for @constitutionEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No editions are available right now.'**
+  String get constitutionEmpty;
+
+  /// No description provided for @constitutionYourLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'In your language'**
+  String get constitutionYourLanguage;
+
+  /// No description provided for @constitutionFallbackEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'No edition in {language} is listed, so the English edition is shown.'**
+  String constitutionFallbackEnglish(String language);
+
+  /// No description provided for @constitutionAllEditions.
+  ///
+  /// In en, this message translates to:
+  /// **'All languages'**
+  String get constitutionAllEditions;
+
+  /// No description provided for @constitutionOriginalSection.
+  ///
+  /// In en, this message translates to:
+  /// **'The original copy'**
+  String get constitutionOriginalSection;
+
+  /// No description provided for @constitutionLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'Large file'**
+  String get constitutionLarge;
+
+  /// No description provided for @constitutionScanned.
+  ///
+  /// In en, this message translates to:
+  /// **'Scanned'**
+  String get constitutionScanned;
+
+  /// No description provided for @constitutionSize.
+  ///
+  /// In en, this message translates to:
+  /// **'About {size}'**
+  String constitutionSize(String size);
+
+  /// No description provided for @constitutionUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated {date}'**
+  String constitutionUpdated(String date);
+
+  /// No description provided for @constitutionWarnTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Before you open this PDF'**
+  String get constitutionWarnTitle;
+
+  /// No description provided for @constitutionLargeWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'This file is about {size}. It may use a lot of mobile data, so Wi-Fi is better.'**
+  String constitutionLargeWarning(String size);
+
+  /// No description provided for @constitutionScannedWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a scanned copy. Its text can\'t be searched, and screen readers may not be able to read it.'**
+  String get constitutionScannedWarning;
+
+  /// No description provided for @constitutionOpenAnyway.
+  ///
+  /// In en, this message translates to:
+  /// **'Open PDF'**
+  String get constitutionOpenAnyway;
+
+  /// No description provided for @constitutionOpenFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t open the PDF.'**
+  String get constitutionOpenFailed;
+
+  /// No description provided for @constitutionOpenSourcePage.
+  ///
+  /// In en, this message translates to:
+  /// **'Open on India Code'**
+  String get constitutionOpenSourcePage;
+
+  /// No description provided for @constitutionSourceLink.
+  ///
+  /// In en, this message translates to:
+  /// **'See the collection on India Code'**
+  String get constitutionSourceLink;
 }
 
 class _AppLocalizationsDelegate

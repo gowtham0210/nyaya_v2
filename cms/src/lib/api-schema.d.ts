@@ -1170,6 +1170,209 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/daily-tips/today": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Today's published tip (India date); tip is null when there is none */
+        get: operations["DailyTipsController_today"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/daily-tips/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** One published tip whose day has come */
+        get: operations["DailyTipsController_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/daily-tips": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EditorDailyTipsController_list"];
+        put?: never;
+        /** Start a daily tip as a draft */
+        post: operations["EditorDailyTipsController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/daily-tips/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EditorDailyTipsController_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Edit a draft, or one with changes requested */
+        patch: operations["EditorDailyTipsController_update"];
+        trace?: never;
+    };
+    "/v1/editor/daily-tips/{id}/submit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Send the tip for legal review */
+        post: operations["EditorDailyTipsController_submit"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/daily-tips/{id}/request-changes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["EditorDailyTipsController_requestChanges"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/daily-tips/{id}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Approve the tip under review (not your own, unless you are an admin) */
+        post: operations["EditorDailyTipsController_approve"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/daily-tips/{id}/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Publish the approved tip; the app shows it on its publish date */
+        post: operations["EditorDailyTipsController_publish"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/daily-tips/{id}/revise": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Take a published or retired tip back to draft to correct it; it leaves the app until published again */
+        post: operations["EditorDailyTipsController_revise"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/daily-tips/{id}/retire": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Take a published tip off the app */
+        post: operations["EditorDailyTipsController_retire"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/constitution": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The Constitution of India's editions on India Code: official PDF links with size and warnings. No document is served by this API. */
+        get: operations["ConstitutionController_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/constitution/drift": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Compare India Code with the reviewed manifest: changed, missing and new editions */
+        get: operations["AdminConstitutionController_drift"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -2399,6 +2602,234 @@ export interface components {
         };
         NewsReasonDto: {
             reason: string;
+        };
+        PublicDailyTipDto: {
+            /** Format: uuid */
+            id: string;
+            /** @enum {string} */
+            category: "citizen_rights" | "criminal_law" | "consumer_rights" | "family_law" | "property" | "workplace" | "general";
+            language: string;
+            title: string;
+            summary: string;
+            explanation: string;
+            legal_reference: string;
+            source_url: string;
+            /** Format: date */
+            publish_date: string;
+            /** Format: date */
+            last_verified_on: string;
+        };
+        TodayTipDto: {
+            tip: components["schemas"]["PublicDailyTipDto"] | null;
+        };
+        DailyTipListItemDto: {
+            /** Format: uuid */
+            id: string;
+            /** @enum {string} */
+            status: "draft" | "in_review" | "changes_requested" | "approved" | "published" | "retired";
+            /** @enum {string} */
+            category: "citizen_rights" | "criminal_law" | "consumer_rights" | "family_law" | "property" | "workplace" | "general";
+            language: string;
+            title: string;
+            /** Format: date */
+            publish_date: string | null;
+            /** Format: date-time */
+            updated_at: string;
+        };
+        DailyTipPageDto: {
+            items: components["schemas"]["DailyTipListItemDto"][];
+            next_cursor: string | null;
+        };
+        DailyTipDetailDto: {
+            /** Format: uuid */
+            id: string;
+            /** @enum {string} */
+            status: "draft" | "in_review" | "changes_requested" | "approved" | "published" | "retired";
+            /** @enum {string} */
+            category: "citizen_rights" | "criminal_law" | "consumer_rights" | "family_law" | "property" | "workplace" | "general";
+            language: string;
+            title: string;
+            /** Format: date */
+            publish_date: string | null;
+            /** Format: date-time */
+            updated_at: string;
+            summary: string;
+            explanation: string;
+            legal_reference: string;
+            source_url: string | null;
+            /** Format: date */
+            last_verified_on: string | null;
+            /** Format: uuid */
+            created_by: string | null;
+            /** Format: uuid */
+            updated_by: string | null;
+            /** Format: uuid */
+            reviewer_id: string | null;
+            /** Format: date-time */
+            approved_at: string | null;
+            /** Format: date-time */
+            published_at: string | null;
+            /** Format: date-time */
+            retired_at: string | null;
+            /** Format: date-time */
+            created_at: string;
+            /** @description Why changes were last requested, while they still are */
+            changes_reason: string | null;
+        };
+        CreateDailyTipDto: {
+            /** @enum {string} */
+            category: "citizen_rights" | "criminal_law" | "consumer_rights" | "family_law" | "property" | "workplace" | "general";
+            /**
+             * @default en
+             * @enum {string}
+             */
+            language?: "en" | "hi" | "ta" | "te" | "kn" | "ml";
+            title?: string;
+            /** @description Shown on the Home card */
+            summary?: string;
+            explanation?: string;
+            /** @example Consumer Protection Act, 2019, Section 35 */
+            legal_reference?: string;
+            source_url?: string | null;
+            /**
+             * Format: date
+             * @description The India day the tip is shown on Home
+             */
+            publish_date?: string | null;
+            /** Format: date */
+            last_verified_on?: string | null;
+        };
+        UpdateDailyTipDto: {
+            /** @enum {string} */
+            category?: "citizen_rights" | "criminal_law" | "consumer_rights" | "family_law" | "property" | "workplace" | "general";
+            /**
+             * @default en
+             * @enum {string}
+             */
+            language?: "en" | "hi" | "ta" | "te" | "kn" | "ml";
+            title?: string;
+            /** @description Shown on the Home card */
+            summary?: string;
+            explanation?: string;
+            /** @example Consumer Protection Act, 2019, Section 35 */
+            legal_reference?: string;
+            source_url?: string | null;
+            /**
+             * Format: date
+             * @description The India day the tip is shown on Home
+             */
+            publish_date?: string | null;
+            /** Format: date */
+            last_verified_on?: string | null;
+        };
+        TipReasonDto: {
+            reason: string;
+        };
+        ConstitutionSourceDto: {
+            name: string;
+            /** @description The collection page on India Code */
+            collection_url: string;
+            /**
+             * Format: date-time
+             * @description When India Code was last read; null if it never was
+             */
+            fetched_at: string | null;
+            /** @description True when India Code could not be reached and reviewed values are shown */
+            stale: boolean;
+        };
+        ConstitutionFileDto: {
+            /** @example pdf */
+            format: string;
+            /** @description As India Code reports it; treat as approximate (the served file can differ) */
+            size_bytes: number;
+            /** @description MD5 as India Code reports it */
+            checksum_md5: string;
+            /**
+             * Format: date
+             * @description The day the item last changed on India Code
+             */
+            source_modified_at: string;
+        };
+        ConstitutionFlagsDto: {
+            /** @description A large download: warn before opening on mobile data */
+            large: boolean;
+            /** @description Scanned pages with no text layer: cannot be searched or read aloud */
+            scanned: boolean;
+        };
+        ConstitutionEditionDto: {
+            /**
+             * @description Stable id; `original` for the 1950 copy
+             * @example ta
+             */
+            id: string;
+            /** @example ta */
+            language_code: string | null;
+            /** @example Tamil */
+            language_name: string;
+            /** @example தமிழ் */
+            native_name: string | null;
+            script: string | null;
+            /** @example The Constitution of India in Tamil */
+            title: string;
+            /** @description India Code's own title for the item, kept for attribution (it can contain typos) */
+            source_title: string | null;
+            /** @description Reviewed wording about this edition’s legal standing; null until approved. Do not infer authority when null. */
+            authority_note: string | null;
+            /** @description Official India Code address of the PDF (https, India Code host only) */
+            download_url: string;
+            /** @description The item's page on India Code */
+            source_page_url: string;
+            file: components["schemas"]["ConstitutionFileDto"];
+            flags: components["schemas"]["ConstitutionFlagsDto"];
+        };
+        ConstitutionDto: {
+            source: components["schemas"]["ConstitutionSourceDto"];
+            /** @description Neutral attribution to show with the list */
+            notice: string;
+            original: components["schemas"]["ConstitutionEditionDto"] | null;
+            editions: components["schemas"]["ConstitutionEditionDto"][];
+        };
+        DriftSummaryDto: {
+            unchanged: number;
+            changed: number;
+            missing: number;
+            new: number;
+        };
+        DriftLiveDto: {
+            /** Format: uuid */
+            bitstream_uuid: string;
+            md5: string;
+            size_bytes: number;
+            /** Format: date */
+            item_modified: string;
+        };
+        DriftItemDto: {
+            id: string;
+            language_name: string;
+            /** @enum {string} */
+            state: "unchanged" | "changed" | "missing" | "unknown";
+            /** @description What differs from the reviewed values: bitstream, checksum, size, text_layer */
+            changed_fields: string[];
+            /** @description The item was edited on India Code after the review, though its file may be the same */
+            modified_since_review: boolean;
+            live: components["schemas"]["DriftLiveDto"] | null;
+        };
+        DriftNewItemDto: {
+            /** Format: uuid */
+            item_uuid: string;
+            handle: string;
+            title: string;
+            size_bytes: number | null;
+        };
+        ConstitutionDriftDto: {
+            /** Format: date-time */
+            fetched_at: string | null;
+            /** @description Why the last read of India Code failed, if it did */
+            last_error: string | null;
+            summary: components["schemas"]["DriftSummaryDto"];
+            items: components["schemas"]["DriftItemDto"][];
+            /** @description On India Code but not in the manifest: hidden from the app until curated */
+            new_items: components["schemas"]["DriftNewItemDto"][];
         };
     };
     responses: never;
@@ -4180,6 +4611,319 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["NewsDetailDto"];
+                };
+            };
+        };
+    };
+    DailyTipsController_today: {
+        parameters: {
+            query?: {
+                language?: "en" | "hi" | "ta" | "te" | "kn" | "ml";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TodayTipDto"];
+                };
+            };
+        };
+    };
+    DailyTipsController_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PublicDailyTipDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_list: {
+        parameters: {
+            query?: {
+                status?: "draft" | "in_review" | "changes_requested" | "approved" | "published" | "retired";
+                category?: "citizen_rights" | "criminal_law" | "consumer_rights" | "family_law" | "property" | "workplace" | "general";
+                /** @description Searches titles */
+                q?: string;
+                cursor?: string;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipPageDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateDailyTipDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateDailyTipDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_submit: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_requestChanges: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TipReasonDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_approve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_publish: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_revise: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TipReasonDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_retire: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TipReasonDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    ConstitutionController_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConstitutionDto"];
+                };
+            };
+        };
+    };
+    AdminConstitutionController_drift: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConstitutionDriftDto"];
                 };
             };
         };

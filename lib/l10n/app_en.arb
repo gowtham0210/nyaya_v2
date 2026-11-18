@@ -133,7 +133,7 @@
   "homeContinueJourney": "Continue your Learning Path",
   "homeContinueLeftOff": "Continue where you left off",
   "homeStartTitle": "Start your learning journey",
-  "homeStartBody": "Build your understanding of Indian law, one concept at a time.",
+  "homeStartBody": "Begin with the Constitution, where every law starts.",
   "homeStartRecommended": "Recommended start",
   "homeStartLawDesc": "Understand fundamental rights, duties and constitutional principles.",
   "homeStartLearning": "Start learning",
@@ -1126,5 +1126,69 @@
   "quizRetry": "TRY AGAIN",
   "quizScoring": "Scoring your case…",
   "quizOffline": "Can't reach Nyaya Kural. Check your connection and try again.",
-  "quizSignedOut": "Your session ended. Sign in again to play."
+  "quizSignedOut": "Your session ended. Sign in again to play.",
+  "dailyTipLabel": "Daily tip",
+  "dailyTipReadMore": "Read more",
+  "dailyTipLoadFailed": "Couldn't load today's tip.",
+  "dailyTipUnavailable": "This tip isn't available any more.",
+  "dailyTipLegalReference": "Legal reference",
+  "dailyTipLastVerified": "Last verified on {date}",
+  "@dailyTipLastVerified": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "constitutionTitle": "Constitution of India",
+  "constitutionHomeDesc": "Read the official text on India Code, in many languages",
+  "constitutionAttribution": "Published on India Code by the Legislative Department, Ministry of Law and Justice.",
+  "constitutionNotice": "Each edition is shown as published there. For legal or official use, please refer to the official source.",
+  "constitutionOpensExternally": "PDFs open in your browser or PDF app.",
+  "constitutionStale": "These details may be out of date.",
+  "constitutionLoadFailed": "Couldn't load the Constitution editions.",
+  "constitutionEmpty": "No editions are available right now.",
+  "constitutionYourLanguage": "In your language",
+  "constitutionFallbackEnglish": "No edition in {language} is listed, so the English edition is shown.",
+  "@constitutionFallbackEnglish": {
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
+  "constitutionAllEditions": "All languages",
+  "constitutionOriginalSection": "The original copy",
+  "constitutionLarge": "Large file",
+  "constitutionScanned": "Scanned",
+  "constitutionSize": "About {size}",
+  "@constitutionSize": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "constitutionUpdated": "Updated {date}",
+  "@constitutionUpdated": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "constitutionWarnTitle": "Before you open this PDF",
+  "constitutionLargeWarning": "This file is about {size}. It may use a lot of mobile data, so Wi-Fi is better.",
+  "@constitutionLargeWarning": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "constitutionScannedWarning": "This is a scanned copy. Its text can't be searched, and screen readers may not be able to read it.",
+  "constitutionOpenAnyway": "Open PDF",
+  "constitutionOpenFailed": "Couldn't open the PDF.",
+  "constitutionOpenSourcePage": "Open on India Code",
+  "constitutionSourceLink": "See the collection on India Code"
 }

@@ -1,4 +1,4 @@
-import type { Me, NewsCategory, NewsStatus, VersionStatus } from './api';
+import type { DailyTipCategory, DailyTipStatus, Me, NewsCategory, NewsStatus, VersionStatus } from './api';
 
 /**
  * Mirrors the API's lifecycle rules so the UI only offers allowed actions.
@@ -90,4 +90,43 @@ export const NEWS_CATEGORY_LABEL: Record<NewsCategory, string> = {
   high_courts: 'High Courts',
   legislation: 'Legislation',
   explainer: 'Explainer',
+};
+
+/** The daily tip lifecycle: the same steps and roles as news, mirroring the API (which enforces it). */
+export const TIP_WORKFLOW = {
+  submit: { label: 'Submit for review', from: ['draft', 'changes_requested'], roles: ['content_editor'] },
+  request_changes: { label: 'Request changes', from: ['in_review'], roles: ['legal_reviewer'] },
+  approve: { label: 'Approve', from: ['in_review'], roles: ['legal_reviewer'] },
+  publish: { label: 'Publish', from: ['approved'], roles: ['publisher', 'admin'] },
+  revise: { label: 'Correct this tip', from: ['published', 'retired'], roles: ['content_editor'] },
+  retire: { label: 'Retire', from: ['published'], roles: ['publisher', 'admin'] },
+} as const satisfies Record<string, { label: string; from: readonly DailyTipStatus[]; roles: readonly Role[] }>;
+
+export type TipAction = keyof typeof TIP_WORKFLOW;
+
+export const canEditTip = (me: Me, status: DailyTipStatus) =>
+  hasRole(me, 'content_editor') && (status === 'draft' || status === 'changes_requested');
+
+export const tipActions = (me: Me, status: DailyTipStatus): TipAction[] =>
+  (Object.keys(TIP_WORKFLOW) as TipAction[]).filter(
+    (a) => hasRole(me, ...TIP_WORKFLOW[a].roles) && (TIP_WORKFLOW[a].from as readonly string[]).includes(status),
+  );
+
+export const TIP_CATEGORY_LABEL: Record<DailyTipCategory, string> = {
+  citizen_rights: 'Citizen rights',
+  criminal_law: 'Criminal law',
+  consumer_rights: 'Consumer rights',
+  family_law: 'Family law',
+  property: 'Property',
+  workplace: 'Workplace',
+  general: 'General',
+};
+
+export const TIP_LANGUAGE_LABEL: Record<string, string> = {
+  en: 'English',
+  hi: 'Hindi',
+  ta: 'Tamil',
+  te: 'Telugu',
+  kn: 'Kannada',
+  ml: 'Malayalam',
 };

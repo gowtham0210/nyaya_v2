@@ -127,6 +127,13 @@
       "when": 1793606038535,
       "tag": "0017_news_images",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1794889901866,
+      "tag": "0018_daily_tips",
+      "breakpoints": true
     }
   ]
 }

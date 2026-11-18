@@ -1,8 +1,15 @@
+import 'dart:async';
+
 import 'package:nyaya/core/api/api_client.dart';
 import 'package:nyaya/core/api/token_store.dart';
 import 'package:nyaya/core/services/sounds.dart';
 import 'package:nyaya/core/utils/day.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
+import 'package:nyaya/features/constitution/application/document_opener.dart';
+import 'package:nyaya/features/constitution/data/constitution_repository.dart';
+import 'package:nyaya/features/constitution/domain/constitution_edition.dart';
+import 'package:nyaya/features/daily_tip/data/daily_tip_repository.dart';
+import 'package:nyaya/features/daily_tip/domain/india_day.dart';
 import 'package:nyaya/features/gamification/domain/xp_calculator.dart';
 import 'package:nyaya/features/journey/domain/journey.dart';
 import 'package:nyaya/features/leaderboard/data/league_api.dart';
@@ -530,6 +537,184 @@ MemoryTokenStore signedInTokens() => MemoryTokenStore(const StoredSession(
       refreshToken: 'refresh',
       user: {'id': 'user-1', 'email': 'ravi@test.local', 'display_name': 'Ravi', 'roles': ['learner']},
     ));
+
+/// Today's tip as the API would send it; none by default, so tests that are
+/// not about tips see the same Home as before.
+class FakeDailyTips implements DailyTipRepository {
+  FakeDailyTips({this.tip});
+
+  DailyTip? tip;
+
+  /// Set to make loading fail as if offline.
+  bool failing = false;
+  final languagesAsked = <String>[];
+
+  @override
+  Future<DailyTip?> today(String language) async {
+    languagesAsked.add(language);
+    if (failing) throw const ApiException(0, 'network', 'Could not reach the server');
+    return tip;
+  }
+
+  @override
+  Future<DailyTip> byId(String id) async {
+    if (failing) throw const ApiException(0, 'network', 'Could not reach the server');
+    final t = tip;
+    if (t == null || t.id != id) throw const ApiException(404, 'not_found', 'Tip not found');
+    return t;
+  }
+}
+
+DailyTip sampleTip({String id = 'tip-1'}) => DailyTip(
+      id: id,
+      title: 'You can ask for a bill',
+      summary: 'Every seller must give you a bill on request.',
+      explanation: 'A consumer can ask for a bill or receipt for any purchase. Keep it as proof.',
+      legalReference: 'Consumer Protection Act, 2019, Section 2(9)',
+      sourceUrl: 'https://consumeraffairs.nic.in/acts-and-rules',
+      publishDate: DateTime(2026, 11, 17),
+      lastVerified: DateTime(2026, 11, 10),
+    );
+
+/// 00:00 India time on [day] is 18:30 UTC the evening before.
+DateTime istTime(String day, [int hour = 0, int minute = 0, int second = 0]) {
+  final p = day.split('-').map(int.parse).toList();
+  return DateTime.utc(p[0], p[1], p[2], hour, minute, second).subtract(indiaOffset);
+}
+
+/// A clock the test moves by hand.
+class TestClock {
+  TestClock(this.now);
+  DateTime now;
+  DateTime call() => now;
+}
+
+/// A server that, like the real one, gives the tip dated for the India day it
+/// is asked on, and counts how often it is asked.
+class DatedTips extends FakeDailyTips {
+  DatedTips(this.clock);
+
+  final TestClock clock;
+  int get calls => languagesAsked.length;
+
+  /// While set, answers wait for it: the request is "in flight".
+  Completer<void>? gate;
+
+  @override
+  Future<DailyTip?> today(String language) async {
+    languagesAsked.add(language);
+    final day = indiaDay(clock.now);
+    await gate?.future;
+    return DailyTip(
+      id: 'tip-$day',
+      title: 'Tip for $day',
+      summary: 'Summary',
+      explanation: 'Explanation',
+      legalReference: 'Act, Section 1',
+      sourceUrl: 'https://example.gov.in/',
+      publishDate: DateTime.parse(day),
+      lastVerified: DateTime.parse(day),
+    );
+  }
+}
+
+/// One edition as `GET /v1/constitution` sends it.
+Map<String, dynamic> constitutionEditionJson(
+  String code,
+  String name, {
+  String? native,
+  String? script,
+  int size = 6000000,
+  bool large = false,
+  bool scanned = false,
+  String? title,
+}) => {
+  'id': code,
+  'language_code': code,
+  'language_name': name,
+  'native_name': native,
+  'script': script,
+  'title': title ?? 'The Constitution of India in $name',
+  'source_title': 'India Code: $name',
+  'authority_note': null,
+  'download_url': 'https://indiacode.gov.in/server/api/core/bitstreams/pdf-$code/content',
+  'source_page_url': 'https://indiacode.gov.in/handle/123456789/$code',
+  'file': {'format': 'pdf', 'size_bytes': size, 'checksum_md5': 'a' * 32, 'source_modified_at': '2026-08-12'},
+  'flags': {'large': large, 'scanned': scanned},
+};
+
+/// A body like the API's, with the six app languages, one big scan, one small
+/// scan, and the original copy.
+Map<String, dynamic> sampleConstitutionJson({bool stale = false, List<String> without = const []}) => {
+  'source': {
+    'name': 'India Code, Legislative Department, Ministry of Law and Justice',
+    'collection_url': 'https://indiacode.gov.in/handle/123456789/618379',
+    'fetched_at': '2026-11-17T06:00:00.000Z',
+    'stale': stale,
+  },
+  'notice': 'Published on India Code by the Legislative Department, Ministry of Law and Justice.',
+  'original': constitutionEditionJson(
+    'original',
+    'Original (1950) copy',
+    size: 78814676,
+    large: true,
+    scanned: true,
+    title: 'Copy of the Original Constitution of India',
+  )..['language_code'] = null,
+  'editions': [
+    for (final e in [
+      constitutionEditionJson('en', 'English', native: 'English', script: 'Latin', size: 3376465),
+      constitutionEditionJson('hi', 'Hindi', native: 'हिन्दी', script: 'Devanagari', size: 3125957),
+      constitutionEditionJson('kn', 'Kannada', native: 'ಕನ್ನಡ', script: 'Kannada', size: 6655162),
+      constitutionEditionJson('kok', 'Konkani', native: 'कोंकणी', script: 'Devanagari', size: 137000000, large: true, scanned: true),
+      constitutionEditionJson('ml', 'Malayalam', native: 'മലയാളം', script: 'Malayalam', size: 2404584),
+      constitutionEditionJson('sd-Arab', 'Sindhi (Arabic script)', native: 'سنڌي', script: 'Perso-Arabic', size: 13599208, scanned: true),
+      constitutionEditionJson('ta', 'Tamil', native: 'தமிழ்', script: 'Tamil', size: 10479267),
+      constitutionEditionJson('te', 'Telugu', native: 'తెలుగు', script: 'Telugu', size: 6685693),
+    ])
+      if (!without.contains(e['id'])) e,
+  ],
+};
+
+/// The editions list without the network.
+class FakeConstitution implements ConstitutionRepository {
+  FakeConstitution({Map<String, dynamic>? json}) : json = json ?? sampleConstitutionJson();
+
+  Map<String, dynamic> json;
+
+  /// Set to make loading fail as if offline.
+  bool failing = false;
+
+  /// While set, loading waits for it.
+  Completer<void>? gate;
+  int calls = 0;
+
+  @override
+  Future<ConstitutionLibrary> fetch() async {
+    calls++;
+    await gate?.future;
+    if (failing) throw const ApiException(0, 'network', 'Could not reach the server');
+    return ConstitutionLibrary.fromJson(json);
+  }
+}
+
+/// A phone that opens nothing: records what it was asked to open.
+class FakeDocumentOpener implements DocumentOpener {
+  final opened = <Uri>[];
+
+  /// Addresses this phone cannot open.
+  final refuses = <Uri>{};
+
+  /// Everything fails when set.
+  bool refuseAll = false;
+
+  @override
+  Future<bool> open(Uri uri) async {
+    if (refuseAll || refuses.contains(uri)) return false;
+    opened.add(uri);
+    return true;
+  }
+}
 
 /// Two published articles, as the API would send them.
 class FakeLegalUpdates implements LegalUpdatesRepository {

@@ -722,6 +722,88 @@ export const newsImages = pgTable('news_images', {
   createdAt: createdAt(),
 });
 
+// ---------------------------------------------------------------- daily tips
+
+export const DAILY_TIP_CATEGORIES = [
+  'citizen_rights',
+  'criminal_law',
+  'consumer_rights',
+  'family_law',
+  'property',
+  'workplace',
+  'general',
+] as const;
+export type DailyTipCategory = (typeof DAILY_TIP_CATEGORIES)[number];
+export const dailyTipCategory = pgEnum(
+  'daily_tip_category',
+  DAILY_TIP_CATEGORIES,
+);
+
+export const DAILY_TIP_STATUSES = [
+  'draft',
+  'in_review',
+  'changes_requested',
+  'approved',
+  'published',
+  'retired',
+] as const;
+export type DailyTipStatus = (typeof DAILY_TIP_STATUSES)[number];
+export const dailyTipStatus = pgEnum('daily_tip_status', DAILY_TIP_STATUSES);
+
+/** Languages a tip can be written in (the app's six). */
+export const DAILY_TIP_LANGUAGES = [
+  'en',
+  'hi',
+  'ta',
+  'te',
+  'kn',
+  'ml',
+] as const;
+
+/**
+ * A short legal tip for the app's Home screen. It follows the news article's
+ * lifecycle (an editor writes, a legal reviewer approves, a publisher
+ * publishes) and keeps one row: correcting a published tip takes it back to
+ * draft until it is approved again. The app shows the published tip whose
+ * [publishDate] is today (India), so scheduling is a query, not a job. Review
+ * decisions and their reasons are in the audit log.
+ */
+export const dailyTips = pgTable(
+  'daily_tips',
+  {
+    id: uuid('id').primaryKey(),
+    status: dailyTipStatus('status').notNull().default('draft'),
+    category: dailyTipCategory('category').notNull(),
+    language: text('language').notNull().default('en'),
+    title: text('title').notNull().default(''),
+    summary: text('summary').notNull().default(''),
+    explanation: text('explanation').notNull().default(''),
+    /** The Act and section, e.g. "Consumer Protection Act, 2019, Section 35". */
+    legalReference: text('legal_reference').notNull().default(''),
+    sourceUrl: text('source_url'),
+    /** The India day the tip is shown on the app's Home screen. */
+    publishDate: date('publish_date'),
+    /** When an editor last checked the tip against its official source. */
+    lastVerifiedOn: date('last_verified_on'),
+    createdBy: uuid('created_by').references(() => users.id),
+    updatedBy: uuid('updated_by').references(() => users.id),
+    reviewerId: uuid('reviewer_id').references(() => users.id),
+    approvedAt: timestamp('approved_at', { withTimezone: true }),
+    publishedBy: uuid('published_by').references(() => users.id),
+    publishedAt: timestamp('published_at', { withTimezone: true }),
+    retiredAt: timestamp('retired_at', { withTimezone: true }),
+    createdAt: createdAt(),
+    updatedAt: updatedAt(),
+  },
+  (t) => [
+    index('daily_tips_status_idx').on(t.status, t.publishDate),
+    // One live tip per day and language.
+    uniqueIndex('daily_tips_live_day_idx')
+      .on(t.publishDate, t.language)
+      .where(sql`${t.status} = 'published'`),
+  ],
+);
+
 // ---------------------------------------------------------------- review & reports
 
 /**
