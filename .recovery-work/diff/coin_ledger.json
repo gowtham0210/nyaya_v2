@@ -1,0 +1,158 @@
+{
+ "new": [
+  {
+   "id": "01a1f230-924f-7314-a599-cbb0b106bd13",
+   "user_id": "01a1f230-9148-76e8-b267-6c9783a18a17",
+   "amount": 60,
+   "reason": "welcome",
+   "session_id": null,
+   "subject_id": null,
+   "created_at": "2026-11-19T05:03:51.888000Z",
+   "cohort_id": null,
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 61,
+    "xmin": 3835,
+    "xmax": 0,
+    "ctid": "0,61"
+   }
+  },
+  {
+   "id": "01a1f3c3-406f-778f-b211-5ddeaac663e0",
+   "user_id": "01a1f3c3-3ffe-74e0-8a54-b4bd45d71d83",
+   "amount": 60,
+   "reason": "welcome",
+   "session_id": null,
+   "subject_id": null,
+   "created_at": "2026-11-19T12:23:41.936000Z",
+   "cohort_id": null,
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 62,
+    "xmin": 4545,
+    "xmax": 0,
+    "ctid": "0,62"
+   }
+  },
+  {
+   "id": "01a1f42f-4d38-7353-bf46-d25b69bcd261",
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "amount": 60,
+   "reason": "welcome",
+   "session_id": null,
+   "subject_id": null,
+   "created_at": "2026-11-19T14:21:43.097000Z",
+   "cohort_id": null,
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 63,
+    "xmin": 4573,
+    "xmax": 0,
+    "ctid": "0,63"
+   }
+  },
+  {
+   "id": "01a201a3-896a-747a-bfcc-2b304df48623",
+   "user_id": "01a201a3-890d-773b-baf6-45f85695758d",
+   "amount": 60,
+   "reason": "welcome",
+   "session_id": null,
+   "subject_id": null,
+   "created_at": "2026-11-22T05:03:44.490000Z",
+   "cohort_id": null,
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 64,
+    "xmin": 6860,
+    "xmax": 0,
+    "ctid": "0,64"
+   }
+  },
+  {
+   "id": "01a201ab-bb3b-746e-acbb-4f4ceea2fbde",
+   "user_id": "01a201ab-bae8-7359-abff-3bbf32cd8595",
+   "amount": 60,
+   "reason": "welcome",
+   "session_id": null,
+   "subject_id": null,
+   "created_at": "2026-11-22T05:12:41.531000Z",
+   "cohort_id": null,
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 65,
+    "xmin": 6908,
+    "xmax": 0,
+    "ctid": "0,65"
+   }
+  },
+  {
+   "id": "01a201fd-6d17-70e3-b4aa-f4ba2d41a9bc",
+   "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+   "amount": 15,
+   "reason": "daily_goal",
+   "session_id": "01a201fc-cb66-733a-9d50-2ec7380be422",
+   "subject_id": null,
+   "created_at": "2026-11-22T06:41:55.456000Z",
+   "cohort_id": null,
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 66,
+    "xmin": 7112,
+    "xmax": 0,
+    "ctid": "0,66"
+   }
+  },
+  {
+   "id": "01a201fe-4774-773a-a24b-35ac9996af9c",
+   "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+   "amount": 10,
+   "reason": "daily_docket",
+   "session_id": "01a201fe-1a2d-705e-a81b-91b0c7c69d67",
+   "subject_id": null,
+   "created_at": "2026-11-22T06:42:51.361000Z",
+   "cohort_id": null,
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 67,
+    "xmin": 7128,
+    "xmax": 0,
+    "ctid": "0,67"
+   }
+  },
+  {
+   "id": "01a20229-40b9-7634-b577-673470831d0a",
+   "user_id": "01a20229-402e-75ac-90f3-bcc484bcdc8c",
+   "amount": 60,
+   "reason": "welcome",
+   "session_id": null,
+   "subject_id": null,
+   "created_at": "2026-11-22T07:29:47.709000Z",
+   "cohort_id": null,
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 68,
+    "xmin": 7154,
+    "xmax": 0,
+    "ctid": "0,68"
+   }
+  }
+ ],
+ "modified": [],
+ "removedSinceNov19": []
+}

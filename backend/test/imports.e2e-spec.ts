@@ -322,6 +322,7 @@ describe('question import and export', () => {
       created: 0,
       skipped: 2,
       failed: 0,
+      withdrawn: 0, // only an exam import can have withdrawn rows
       with_warnings: 0,
     });
   });

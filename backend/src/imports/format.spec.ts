@@ -1,5 +1,12 @@
 import writeXlsxFile from 'write-excel-file/node';
-import { checkRow, guardCell, readRows, type SheetRow } from './format.js';
+import {
+  checkExamRow,
+  checkRow,
+  contentKey,
+  guardCell,
+  readRows,
+  type SheetRow,
+} from './format.js';
 
 const topics = new Map([
   ['constitution-basics', { id: 't1', isActive: true }],
@@ -52,7 +59,6 @@ describe('checkRow', () => {
     );
     expect(r.draft).not.toBeNull();
     expect(r.problems.map((p) => [p.level, p.field])).toEqual([
-      ['warning', 'explanation'],
       ['warning', 'source_title'],
       ['warning', 'valid_from'],
     ]);
@@ -72,12 +78,19 @@ describe('checkRow', () => {
     [{ valid_to: '1949-01-01' }, 'valid_to'],
     [{ source_url: 'http://example.com' }, 'source_url'],
     [{ stem: '' }, 'stem'],
-    [{ stem: 'x'.repeat(2001) }, 'stem'],
+    [{ stem: 'x'.repeat(7001) }, 'stem'],
     [{ language: 'fr' }, 'language'],
   ])('refuses %o (error on %s)', (patch, field) => {
     const r = checkRow({ ...complete, ...patch }, topics);
     expect(r.draft).toBeNull();
     expect(errorsOf(r)).toContain(field);
+  });
+});
+
+describe('stem length', () => {
+  it('accepts a long passage-based stem up to 7000 characters', () => {
+    const r = checkRow({ ...complete, stem: 'x'.repeat(7000) }, topics);
+    expect(errorsOf(r)).not.toContain('stem');
   });
 });
 
@@ -216,5 +229,63 @@ describe('readRows', () => {
     ).rejects.toMatchObject({
       code: 'invalid_file',
     });
+  });
+});
+
+describe('checkExamRow: a withdrawn question', () => {
+  const exams = new Map([['clat', 'e1']]);
+  const row = (over: Record<string, string> = {}) =>
+    checkExamRow({ ...complete, exam: 'clat', ...over }, topics, exams, null);
+
+  it('is flagged withdrawn, makes no draft, and never gets an answer', () => {
+    const r = row({ correct: 'WITHDRAWN', explanation: '' });
+    expect(r.withdrawn).toBe(true);
+    expect(r.draft).toBeNull();
+    expect(r.problems.filter((p) => p.level === 'error')).toEqual([]);
+    expect(r.problems[0].reason).toMatch(/no question is created/i);
+  });
+
+  it('is not triggered by a blank, a wrong letter or similar words', () => {
+    for (const correct of ['', 'e', 'withdraw', 'a, b', 'none']) {
+      const r = row({ correct });
+      expect(r.withdrawn).toBeUndefined();
+      expect(r.draft).toBeNull();
+      expect(errorsOf(r)).toContain('correct');
+    }
+  });
+
+  it('still fails on any other error', () => {
+    const r = row({ correct: 'withdrawn', topic: 'nope', exam: 'xyz' });
+    expect(r.withdrawn).toBe(false);
+    expect(errorsOf(r)).toEqual(expect.arrayContaining(['topic', 'exam']));
+  });
+
+  it('leaves the ordinary row alone', () => {
+    const r = row({ correct: 'a' });
+    expect(r.withdrawn).toBeUndefined();
+    expect(r.draft).not.toBeNull();
+  });
+
+  it('is not honoured by the general importer', () => {
+    const r = checkRow({ ...complete, correct: 'WITHDRAWN' }, topics);
+    expect(r.draft).toBeNull();
+    expect(errorsOf(r)).toContain('correct');
+  });
+});
+
+describe('contentKey', () => {
+  const opts = (...t: string[]) => t.map((text) => ({ text }));
+
+  it('is the same for the same topic, text and options, ignoring case and spacing', () => {
+    expect(contentKey('t', 'Which  is it?', opts('A', 'B'))).toBe(
+      contentKey('t', 'which is it?', opts('a', ' b ')),
+    );
+  });
+
+  it('differs when only the options, the topic or the option order differ', () => {
+    const base = contentKey('t', 'Which is it?', opts('A', 'B'));
+    expect(contentKey('t', 'Which is it?', opts('A', 'C'))).not.toBe(base);
+    expect(contentKey('u', 'Which is it?', opts('A', 'B'))).not.toBe(base);
+    expect(contentKey('t', 'Which is it?', opts('B', 'A'))).not.toBe(base);
   });
 });

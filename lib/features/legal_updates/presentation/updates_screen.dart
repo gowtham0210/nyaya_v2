@@ -499,15 +499,14 @@ class UpdateFallbackArt extends StatelessWidget {
   Widget _journeyPainting(BuildContext context) {
     return ColoredBox(
       color: context.colors.surfaceContainerHigh,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(6, 14, 6, 4),
-        child: Image.asset(
-          category.fallbackImage,
-          fit: BoxFit.contain,
-          alignment: Alignment.bottomCenter,
-          excludeFromSemantics: true,
-          errorBuilder: (_, _, _) => Center(child: Icon(category.icon, size: 36, color: category.tint(context))),
-        ),
+      // Fills the tile edge to edge (no side gaps); the crop keeps the
+      // building's tower and body in view.
+      child: Image.asset(
+        category.fallbackImage,
+        fit: BoxFit.cover,
+        alignment: const Alignment(0, -0.3),
+        excludeFromSemantics: true,
+        errorBuilder: (_, _, _) => Center(child: Icon(category.icon, size: 36, color: category.tint(context))),
       ),
     );
   }

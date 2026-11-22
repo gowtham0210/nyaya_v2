@@ -1,0 +1,563 @@
+[
+ {
+  "id": "01a1ce74-7372-77d9-b107-da36f48117fa",
+  "user_id": "01a1c93e-72a4-70c3-8bd4-adfb57cbe6cb",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": null,
+  "created_at": "2026-11-12T06:31:40.610000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 3,
+   "xmin": 1116,
+   "xmax": 0,
+   "ctid": "0,3"
+  }
+ },
+ {
+  "id": "01a1ce74-90a2-73a6-a860-960ea48cbe7d",
+  "user_id": "01a1c93e-72a4-70c3-8bd4-adfb57cbe6cb",
+  "amount": 1,
+  "reason": "quiz_refund",
+  "session_id": null,
+  "created_at": "2026-11-12T06:31:48.117000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 4,
+   "xmin": 1116,
+   "xmax": 0,
+   "ctid": "0,4"
+  }
+ },
+ {
+  "id": "01a1cf0b-2fbd-740b-816d-4c81ea6fd55d",
+  "user_id": "01a1c93e-72a4-70c3-8bd4-adfb57cbe6cb",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1cf0b-2fab-75d6-a087-ea99fec1f32f",
+  "created_at": "2026-11-12T09:16:19.195000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 5,
+   "xmin": 1123,
+   "xmax": 0,
+   "ctid": "0,5"
+  }
+ },
+ {
+  "id": "01a1cf1d-bc62-7685-9de0-60e78a56f690",
+  "user_id": "01a1c93e-72a4-70c3-8bd4-adfb57cbe6cb",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": null,
+  "created_at": "2026-11-12T09:36:34.868000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 8,
+   "xmin": 1130,
+   "xmax": 0,
+   "ctid": "0,8"
+  }
+ },
+ {
+  "id": "01a1cf1d-cab7-7382-9f0b-68f5f3ad465f",
+  "user_id": "01a1c93e-72a4-70c3-8bd4-adfb57cbe6cb",
+  "amount": 1,
+  "reason": "quiz_refund",
+  "session_id": null,
+  "created_at": "2026-11-12T09:36:38.575000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 9,
+   "xmin": 1130,
+   "xmax": 0,
+   "ctid": "0,9"
+  }
+ },
+ {
+  "id": "01a1e2e1-99a3-71af-b8ef-368e8522ee94",
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e2e1-998a-76b0-82a6-dc49c985d4df",
+  "created_at": "2026-11-16T05:43:18.123000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 10,
+   "xmin": 1473,
+   "xmax": 0,
+   "ctid": "0,10"
+  }
+ },
+ {
+  "id": "01a1e2e2-335c-704b-a65f-5b55b8ed5600",
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e2e2-3351-758a-b519-17b5228ce4ad",
+  "created_at": "2026-11-16T05:43:57.496000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 11,
+   "xmin": 1481,
+   "xmax": 0,
+   "ctid": "0,11"
+  }
+ },
+ {
+  "id": "01a1e2e2-b9d3-7713-baf3-f6f0394ea449",
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e2e2-b9ba-7587-9aeb-b0632244768e",
+  "created_at": "2026-11-16T05:44:31.889000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 12,
+   "xmin": 1489,
+   "xmax": 0,
+   "ctid": "0,12"
+  }
+ },
+ {
+  "id": "01a1e2e3-480c-76ab-91d7-17b485f9e120",
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e2e3-4803-732a-b2df-2bc34fb84582",
+  "created_at": "2026-11-16T05:45:08.326000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 13,
+   "xmin": 1497,
+   "xmax": 0,
+   "ctid": "0,13"
+  }
+ },
+ {
+  "id": "01a1e2e4-5fe0-7759-869f-80dd3c72ec03",
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e2e4-5fda-71d1-af8b-8db42d98b3a5",
+  "created_at": "2026-11-16T05:46:19.975000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 14,
+   "xmin": 1506,
+   "xmax": 0,
+   "ctid": "0,14"
+  }
+ },
+ {
+  "id": "01a1e318-85cc-75a9-a11f-98718c5b6556",
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "amount": 1,
+  "reason": "refill",
+  "session_id": null,
+  "created_at": "2026-11-16T06:43:17.510000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 15,
+   "xmin": 1570,
+   "xmax": 0,
+   "ctid": "0,15"
+  }
+ },
+ {
+  "id": "01a1e318-956f-7761-a815-f386093dafc6",
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e318-9559-7126-bfee-d1f587a959a8",
+  "created_at": "2026-11-16T06:43:21.512000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 16,
+   "xmin": 1571,
+   "xmax": 0,
+   "ctid": "0,16"
+  }
+ },
+ {
+  "id": "01a1e322-19d2-703f-8ad3-1cfe2e6682ca",
+  "user_id": "01a1e320-64e7-7759-8ac6-68ebebbf840e",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e322-19aa-7043-9be8-b8051dba28ea",
+  "created_at": "2026-11-16T06:53:45.155000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 17,
+   "xmin": 1579,
+   "xmax": 0,
+   "ctid": "0,17"
+  }
+ },
+ {
+  "id": "01a1e322-e188-7622-bfa4-6c46bb15c2ed",
+  "user_id": "01a1e320-64e7-7759-8ac6-68ebebbf840e",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": null,
+  "created_at": "2026-11-16T06:54:36.367000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 20,
+   "xmin": 1584,
+   "xmax": 0,
+   "ctid": "0,20"
+  }
+ },
+ {
+  "id": "01a1e322-f0cf-71b6-a557-ebf6e9eaefe9",
+  "user_id": "01a1e320-64e7-7759-8ac6-68ebebbf840e",
+  "amount": 1,
+  "reason": "quiz_refund",
+  "session_id": null,
+  "created_at": "2026-11-16T06:54:40.326000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 21,
+   "xmin": 1584,
+   "xmax": 0,
+   "ctid": "0,21"
+  }
+ },
+ {
+  "id": "01a1e332-1c83-75db-957e-96762ca322fb",
+  "user_id": "01a1e32e-d8ae-71e9-a25d-879180bfcc4f",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e332-1c7b-7185-ba11-75bfdbb41142",
+  "created_at": "2026-11-16T07:11:14.524000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 22,
+   "xmin": 1605,
+   "xmax": 0,
+   "ctid": "0,22"
+  }
+ },
+ {
+  "id": "01a1e338-853a-7095-a23b-35396235a362",
+  "user_id": "01a1e32e-d8ae-71e9-a25d-879180bfcc4f",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e338-851f-7352-9da8-e145675d7e40",
+  "created_at": "2026-11-16T07:18:14.539000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 23,
+   "xmin": 1611,
+   "xmax": 0,
+   "ctid": "0,23"
+  }
+ },
+ {
+  "id": "01a1e35b-7805-71eb-9801-0aba6f978d01",
+  "user_id": "01a1e35b-5a0a-7176-b3dd-c048b9e4b1dc",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e35b-77f4-73e7-b1fb-863cac49a395",
+  "created_at": "2026-11-16T07:56:24.924000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 24,
+   "xmin": 1632,
+   "xmax": 0,
+   "ctid": "0,24"
+  }
+ },
+ {
+  "id": "01a1e35c-2db9-72cf-a19d-55eb6f9abcdd",
+  "user_id": "01a1e35b-5a0a-7176-b3dd-c048b9e4b1dc",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e35c-2db0-7564-87df-fbf2a8c258f2",
+  "created_at": "2026-11-16T07:57:11.459000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 25,
+   "xmin": 1640,
+   "xmax": 0,
+   "ctid": "0,25"
+  }
+ },
+ {
+  "id": "01a1e35c-958b-77bc-872b-9ddda2e71445",
+  "user_id": "01a1e35b-5a0a-7176-b3dd-c048b9e4b1dc",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e35c-9581-760a-b450-dd5990eb1295",
+  "created_at": "2026-11-16T07:57:38.029000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 26,
+   "xmin": 1648,
+   "xmax": 0,
+   "ctid": "0,26"
+  }
+ },
+ {
+  "id": "01a1e35d-7a58-77c0-a7d4-c06a6bcb42d0",
+  "user_id": "01a1e35b-5a0a-7176-b3dd-c048b9e4b1dc",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e35d-7a53-7475-a498-60f7b04f88fb",
+  "created_at": "2026-11-16T07:58:36.616000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 27,
+   "xmin": 1657,
+   "xmax": 0,
+   "ctid": "0,27"
+  }
+ },
+ {
+  "id": "01a1e35d-e16b-77ce-bba9-2df3ed106b15",
+  "user_id": "01a1e35b-5a0a-7176-b3dd-c048b9e4b1dc",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e35d-e163-71d3-bb43-d21a67d8cb24",
+  "created_at": "2026-11-16T07:59:02.995000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 28,
+   "xmin": 1665,
+   "xmax": 0,
+   "ctid": "0,28"
+  }
+ },
+ {
+  "id": "01a1e361-7f2c-763f-a6ff-52e2f7b8227c",
+  "user_id": "01a1e35f-3a75-7167-be29-ff6b2d11c200",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e361-7f21-7249-806f-aabbdf4f04f1",
+  "created_at": "2026-11-16T08:02:59.980000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 29,
+   "xmin": 1682,
+   "xmax": 0,
+   "ctid": "0,29"
+  }
+ },
+ {
+  "id": "01a1e368-42a6-71e9-a3c2-0de74e556089",
+  "user_id": "01a1e368-0cf4-7257-8cc2-bf254bad4273",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e368-4296-7088-8540-c0e4b21f5216",
+  "created_at": "2026-11-16T08:10:23.232000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 30,
+   "xmin": 1693,
+   "xmax": 0,
+   "ctid": "0,30"
+  }
+ },
+ {
+  "id": "01a1e45e-0d52-7720-8799-9e4bf47d2dc7",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e45e-0d3a-74e1-9770-2497e7957b5f",
+  "created_at": "2026-11-16T12:38:51.411000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 31,
+   "xmin": 1750,
+   "xmax": 0,
+   "ctid": "0,31"
+  }
+ },
+ {
+  "id": "01a1e51d-e3b1-7240-8289-9776637e1cd6",
+  "user_id": "01a1e511-282d-73f7-8ce1-950ecce0d19c",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a1e51d-e3a2-779c-8dfe-351cfb1f20fa",
+  "created_at": "2026-11-16T16:08:23.675000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 32,
+   "xmin": 1780,
+   "xmax": 0,
+   "ctid": "0,32"
+  }
+ },
+ {
+  "id": "01a1e847-2364-759d-b495-b64ce743a9d7",
+  "user_id": "01a1e846-b507-70d9-a52c-3807c9a2389d",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": null,
+  "created_at": "2026-11-17T06:52:18.611000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 35,
+   "xmin": 2109,
+   "xmax": 0,
+   "ctid": "0,35"
+  }
+ },
+ {
+  "id": "01a1e847-3281-71b1-8cfa-9c7431416d35",
+  "user_id": "01a1e846-b507-70d9-a52c-3807c9a2389d",
+  "amount": 1,
+  "reason": "quiz_refund",
+  "session_id": null,
+  "created_at": "2026-11-17T06:52:22.516000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 36,
+   "xmin": 2109,
+   "xmax": 0,
+   "ctid": "0,36"
+  }
+ },
+ {
+  "id": "01a1f9a5-fd2e-732c-9b80-16a363876e4d",
+  "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": null,
+  "created_at": "2026-11-20T15:49:27.398000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 39,
+   "xmin": 6844,
+   "xmax": 0,
+   "ctid": "0,39"
+  }
+ },
+ {
+  "id": "01a1f9a6-13ed-755c-9010-14961b87f35f",
+  "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+  "amount": 1,
+  "reason": "quiz_refund",
+  "session_id": null,
+  "created_at": "2026-11-20T15:49:33.274000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 40,
+   "xmin": 6844,
+   "xmax": 0,
+   "ctid": "0,40"
+  }
+ },
+ {
+  "id": "01a201fb-f18c-75fc-8b40-72e2fe3e32b6",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a201fb-f17d-73b7-a8b1-7d6ab7777aad",
+  "created_at": "2026-11-22T06:40:18.277000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 41,
+   "xmin": 7083,
+   "xmax": 0,
+   "ctid": "0,41"
+  }
+ },
+ {
+  "id": "01a201fc-cb6f-77b7-b144-a61768bacaba",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "amount": -2,
+  "reason": "quiz_start",
+  "session_id": "01a201fc-cb66-733a-9d50-2ec7380be422",
+  "created_at": "2026-11-22T06:41:14.074000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 42,
+   "xmin": 7091,
+   "xmax": 0,
+   "ctid": "0,42"
+  }
+ },
+ {
+  "id": "01a201fd-a622-7682-aa1d-985df06a1129",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "amount": -1,
+  "reason": "quiz_start",
+  "session_id": "01a201fd-a612-7300-bfd0-366ae82c7bfa",
+  "created_at": "2026-11-22T06:42:10.041000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 43,
+   "xmin": 7113,
+   "xmax": 0,
+   "ctid": "0,43"
+  }
+ }
+]

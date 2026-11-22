@@ -9,6 +9,7 @@ import { TIP_CATEGORY_LABEL, TIP_LANGUAGE_LABEL, canEditTip, tipActions } from '
 import { saveTip } from '../actions';
 import { DailyTipForm } from '../daily-tip-form';
 import type { TipInput } from '../form-state';
+import { VerifyPanel } from './verify-panel';
 import { TipWorkflowPanel } from './workflow-panel';
 
 export const metadata: Metadata = { title: 'Daily tip' };
@@ -89,6 +90,12 @@ async function TipDetail({ params }: { params: PageProps<'/daily-tips/[id]'>['pa
             approveBlocked={!me.roles.includes('admin') && (t.created_by === me.id || t.updated_by === me.id)}
           />
         </Card>
+        {canEditTip(me, t.status) && (
+          <Card>
+            <h2 className="mb-3 font-serif text-xl">Source check</h2>
+            <VerifyPanel key={`${t.source_url}:${t.last_verified_on}`} tipId={t.id} sourceUrl={t.source_url} />
+          </Card>
+        )}
         <Card>
           <h2 className="mb-3 font-serif text-xl">Dates</h2>
           <dl className="grid gap-2 text-sm">

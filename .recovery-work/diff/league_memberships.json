@@ -1,0 +1,21 @@
+{
+ "new": [
+  {
+   "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+   "week_id": "2026-W47",
+   "cohort_id": "01a1e2e2-011c-729f-aacc-482f73e5aee4",
+   "joined_at": "2026-11-22T06:39:54.466000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 4,
+    "xmin": 7080,
+    "xmax": 0,
+    "ctid": "0,4"
+   }
+  }
+ ],
+ "modified": [],
+ "removedSinceNov19": []
+}

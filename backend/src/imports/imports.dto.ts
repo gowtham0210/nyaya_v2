@@ -1,6 +1,13 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsIn, IsOptional, IsUUID } from 'class-validator';
+import {
+  IsBoolean,
+  IsIn,
+  IsOptional,
+  IsString,
+  IsUUID,
+  Matches,
+} from 'class-validator';
 import {
   IMPORT_FORMATS,
   IMPORT_OUTCOMES,
@@ -41,7 +48,7 @@ export class ImportRowDto {
   @ApiProperty({
     enum: IMPORT_OUTCOMES,
     description:
-      'created: a new draft (or would be, in a test run); skipped: already in the bank; failed: has errors',
+      'created: a new draft (or would be, in a test run); skipped: already in the bank; failed: has errors; withdrawn: key says WITHDRAWN, so no question is made (exam import)',
   })
   outcome: ImportOutcome;
   @ApiProperty({
@@ -58,6 +65,11 @@ export class ImportTotalsDto {
   @ApiProperty() created: number;
   @ApiProperty() skipped: number;
   @ApiProperty() failed: number;
+  @ApiProperty({
+    description:
+      'Exam import only: rows the exam body withdrew. No question is made; each becomes a withdrawn paper position',
+  })
+  withdrawn: number;
   @ApiProperty({
     description: 'Created rows that still need something before review',
   })
@@ -98,6 +110,40 @@ export class ImportReportDto {
   @ApiProperty({ type: [ImportRowDto] }) rows: ImportRowDto[];
 }
 
+/** The text fields of the exam-import form; the file itself is the `file` part. */
+export class CreateExamImportDto extends CreateImportDto {
+  @ApiPropertyOptional({
+    format: 'uuid',
+    description:
+      'Optional. The content source the questions come from, kept for attribution.',
+  })
+  @IsOptional()
+  @IsUUID()
+  content_source_id?: string;
+
+  @ApiPropertyOptional({
+    example: 'aibe',
+    description:
+      'The exam the whole file is for (its slug). It fills a blank exam cell, so the file needs no exam column; a row that names a different exam is rejected.',
+  })
+  @IsOptional()
+  @IsString()
+  @Matches(/^[a-z0-9][a-z0-9-]{0,40}$/, {
+    message: 'Use the exam slug, e.g. aibe',
+  })
+  exam?: string;
+}
+
+export class ExamImportSourceDto {
+  @ApiProperty({ format: 'uuid' }) id: string;
+  @ApiProperty() title: string;
+}
+
+export class ExamImportReportDto extends ImportReportDto {
+  @ApiProperty({ type: ExamImportSourceDto, nullable: true })
+  content_source: ExamImportSourceDto | null;
+}
+
 export class ExportQuery {
   @ApiPropertyOptional({ enum: ['csv', 'xlsx'], default: 'csv' })
   @IsOptional()
@@ -116,4 +162,82 @@ export class ExportQuery {
   @IsOptional()
   @IsUUID()
   topic_id?: string;
+}
+
+export const TEMPLATE_KINDS = ['general', 'exam'] as const;
+
+export class TemplateQuery {
+  @ApiProperty({
+    enum: TEMPLATE_KINDS,
+    description: 'general: the ordinary import; exam: adds the exam columns',
+  })
+  @IsIn(TEMPLATE_KINDS)
+  kind: (typeof TEMPLATE_KINDS)[number];
+
+  @ApiPropertyOptional({ enum: ['xlsx', 'csv'], default: 'xlsx' })
+  @IsOptional()
+  @IsIn(['xlsx', 'csv'])
+  format?: 'xlsx' | 'csv';
+
+  @ApiPropertyOptional({
+    example: 'aibe',
+    description: 'Exam template only: fills the exam column of the sample row',
+  })
+  @IsOptional()
+  @IsString()
+  @Matches(/^[a-z0-9][a-z0-9-]{0,40}$/)
+  exam?: string;
+}
+
+export class PaperPositionDraftDto {
+  @ApiProperty({ minimum: 1 }) position: number;
+  @ApiProperty({
+    type: String,
+    format: 'uuid',
+    nullable: true,
+    description: 'Null for a withdrawn position, which pins no question',
+  })
+  question_version_id: string | null;
+  @ApiPropertyOptional({ description: "The row's external_ref, if it had one" })
+  original_ref?: string;
+  @ApiPropertyOptional({ description: 'Set for a withdrawn position' })
+  withdrawn_note?: string;
+}
+
+export class PaperCandidateDto {
+  @ApiProperty({ description: 'Row number in the imported file' }) row: number;
+  @ApiProperty({ description: 'The position this row would take (file order)' })
+  position: number;
+  @ApiProperty({ type: String, nullable: true }) external_ref: string | null;
+  @ApiProperty({ enum: IMPORT_OUTCOMES }) outcome: ImportOutcome;
+  @ApiProperty({ type: String, format: 'uuid', nullable: true })
+  question_id: string | null;
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    description: "The question's latest version status",
+  })
+  status: string | null;
+  @ApiProperty({
+    description: 'True when the question has a published version to pin',
+  })
+  ready: boolean;
+  @ApiProperty({ type: String, nullable: true }) reason: string | null;
+}
+
+export class PaperPositionsDto {
+  @ApiProperty({ format: 'uuid' }) job_id: string;
+  @ApiProperty({ type: [PaperCandidateDto] }) rows: PaperCandidateDto[];
+  @ApiProperty({ description: 'Rows with a published version to pin' })
+  ready: number;
+  @ApiProperty({ description: 'Rows kept as withdrawn positions' })
+  withdrawn: number;
+  @ApiProperty({ description: 'Rows still waiting on review or publishing' })
+  not_ready: number;
+  @ApiProperty({
+    type: [PaperPositionDraftDto],
+    description:
+      'Positions for the rows that are ready, in the format of PUT /admin/exam-papers/{id}/positions. Read-only: nothing is saved.',
+  })
+  positions: PaperPositionDraftDto[];
 }

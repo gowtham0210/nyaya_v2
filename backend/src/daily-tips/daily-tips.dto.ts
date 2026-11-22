@@ -127,6 +127,17 @@ export class ListTipsQuery {
   limit?: number;
 }
 
+/** The editor's attestation that the tip was checked against its source. */
+export class VerifyTipDto {
+  @ApiProperty({
+    enum: [true],
+    description:
+      'Must be true: the editor opened the exact official source link and confirmed the tip matches it',
+  })
+  @IsIn([true])
+  confirmed_against_source: true;
+}
+
 /** What the app shows: published tips only. */
 export class PublicDailyTipDto {
   @ApiProperty({ format: 'uuid' }) id: string;
@@ -156,6 +167,10 @@ export class DailyTipListItemDto {
   @ApiProperty({ type: String, format: 'date', nullable: true })
   publish_date: string | null;
   @ApiProperty({ format: 'date-time' }) updated_at: string;
+  @ApiProperty() legal_reference: string;
+  @ApiProperty({ type: String, nullable: true }) source_url: string | null;
+  @ApiProperty({ type: String, format: 'date', nullable: true })
+  last_verified_on: string | null;
 }
 
 export class DailyTipPageDto {
@@ -166,10 +181,6 @@ export class DailyTipPageDto {
 export class DailyTipDetailDto extends DailyTipListItemDto {
   @ApiProperty() summary: string;
   @ApiProperty() explanation: string;
-  @ApiProperty() legal_reference: string;
-  @ApiProperty({ type: String, nullable: true }) source_url: string | null;
-  @ApiProperty({ type: String, format: 'date', nullable: true })
-  last_verified_on: string | null;
   @ApiProperty({ type: String, format: 'uuid', nullable: true })
   created_by: string | null;
   @ApiProperty({ type: String, format: 'uuid', nullable: true })

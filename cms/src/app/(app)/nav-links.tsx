@@ -12,6 +12,7 @@ const LINKS = [
   { label: 'Reports', href: '/reports', status: null, path: '/reports' },
   { label: 'Topics', href: '/topics', status: null, path: '/topics' },
   { label: 'Imports', href: '/imports', status: null, path: '/imports' },
+  { label: 'Exams', href: '/exams', status: null, path: '/exams' },
 ];
 
 export function NavLinks() {

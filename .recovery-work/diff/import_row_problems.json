@@ -1,0 +1,5548 @@
+{
+ "new": [
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 2,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 55,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "4,55"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 2,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 56,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "4,56"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 3,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 57,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "4,57"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 3,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 58,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "4,58"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 4,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 59,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "4,59"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 4,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 60,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "4,60"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 5,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 61,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "4,61"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 5,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 62,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "4,62"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 6,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 1,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,1"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 6,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 2,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,2"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 7,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 3,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,3"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 7,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 4,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,4"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 8,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 5,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,5"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 8,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 6,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,6"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 9,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 7,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,7"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 9,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 8,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,8"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 10,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 9,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,9"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 10,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 10,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,10"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 11,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 11,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,11"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 11,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 12,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,12"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 12,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 13,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,13"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 12,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 14,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,14"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 13,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 15,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,15"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 13,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 16,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,16"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 14,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 17,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,17"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 14,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 18,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,18"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 15,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 19,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,19"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 15,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 20,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,20"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 16,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 21,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,21"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 16,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 22,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,22"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 17,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 23,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,23"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 17,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 24,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,24"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 18,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 25,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,25"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 18,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 26,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,26"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 19,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 27,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,27"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 19,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 28,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,28"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 20,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 29,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,29"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 20,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 30,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,30"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 21,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 31,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,31"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 21,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 32,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,32"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 22,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 33,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,33"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 22,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 34,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,34"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 23,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 35,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,35"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 23,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 36,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,36"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 24,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 37,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,37"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 24,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 38,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,38"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 25,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 39,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,39"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 25,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 40,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,40"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 26,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 41,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,41"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 26,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 42,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,42"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 27,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 43,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,43"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 27,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 44,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,44"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 28,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 45,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,45"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 28,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 46,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,46"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 29,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 47,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,47"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 29,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 48,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,48"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 30,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 49,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,49"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 30,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 50,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,50"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 31,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 51,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,51"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 31,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 52,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,52"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 32,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 53,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,53"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 32,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 54,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,54"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 33,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 55,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,55"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 33,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 56,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,56"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 34,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 57,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,57"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 34,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 58,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,58"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 35,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 59,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,59"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 35,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 60,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,60"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 36,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 61,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,61"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 36,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 62,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,62"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 37,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 63,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,63"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 37,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 64,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,64"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 38,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 65,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "5,65"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 38,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 1,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,1"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 39,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 2,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,2"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 39,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 3,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,3"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 40,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 4,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,4"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 40,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 5,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,5"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 41,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 6,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,6"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 41,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 7,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,7"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 42,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 8,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,8"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 42,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 9,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,9"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 43,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 10,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,10"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 43,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 11,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,11"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 44,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 12,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,12"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 44,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 13,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,13"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 45,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 14,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,14"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 45,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 15,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,15"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 46,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 16,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,16"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 46,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 17,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,17"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 47,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 18,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,18"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 47,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 19,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,19"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 48,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 20,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,20"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 48,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 21,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,21"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 49,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 22,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,22"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 49,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 23,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,23"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 50,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 24,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,24"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 50,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 25,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,25"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 51,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 26,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,26"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 51,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 27,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,27"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 52,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 28,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,28"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 52,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 29,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,29"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 53,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 30,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,30"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 53,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 31,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,31"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 54,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 32,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,32"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 54,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 33,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,33"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 55,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 34,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,34"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 55,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 35,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,35"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 56,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 36,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,36"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 56,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 37,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,37"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 57,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 38,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,38"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 57,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 39,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,39"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 58,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 40,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,40"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 58,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 41,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,41"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 59,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 42,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,42"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 59,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 43,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,43"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 60,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 44,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,44"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 60,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 45,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,45"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 61,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 46,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,46"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 61,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 47,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,47"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 62,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 48,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,48"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 62,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 49,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,49"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 63,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 50,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,50"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 63,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 51,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,51"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 64,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 52,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,52"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 64,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 53,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,53"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 65,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 54,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,54"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 65,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 55,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,55"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 66,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 56,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,56"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 66,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 57,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,57"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 67,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 58,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,58"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 67,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 59,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,59"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 68,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 60,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,60"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 68,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 61,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,61"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 69,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 62,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,62"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 69,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 63,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,63"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 70,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 64,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,64"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 70,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 6,
+    "off": 65,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "6,65"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 71,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 1,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,1"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 71,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 2,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,2"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 72,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 3,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,3"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 72,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 4,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,4"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 73,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 5,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,5"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 73,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 6,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,6"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 74,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 7,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,7"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 74,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 8,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,8"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 75,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 9,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,9"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 75,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 10,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,10"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 76,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 11,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,11"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 76,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 12,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,12"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 77,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 13,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,13"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 77,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 14,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,14"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 78,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 15,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,15"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 78,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 16,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,16"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 79,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 17,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,17"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 79,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 18,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,18"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 80,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 19,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,19"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 80,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 20,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,20"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 81,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 21,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,21"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 81,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 22,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,22"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 82,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 23,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,23"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 82,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 24,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,24"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 83,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 25,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,25"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 83,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 26,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,26"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 84,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 27,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,27"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 84,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 28,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,28"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 85,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 29,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,29"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 85,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 30,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,30"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 86,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 31,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,31"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 86,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 32,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,32"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 87,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 33,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,33"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 87,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 34,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,34"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 88,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 35,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,35"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 88,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 36,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,36"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 89,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 37,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,37"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 89,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 38,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,38"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 90,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 39,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,39"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 90,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 40,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,40"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 91,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 41,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,41"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 91,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 42,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,42"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 92,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 43,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,43"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 92,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 44,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,44"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 93,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 45,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,45"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 93,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 46,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,46"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 94,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 47,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,47"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 94,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 48,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,48"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 95,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 49,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,49"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 95,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 50,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,50"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 96,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 51,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,51"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 96,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 52,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,52"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 97,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 53,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,53"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 97,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 54,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,54"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 98,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 55,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,55"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 98,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 56,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,56"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 99,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 57,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,57"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 99,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 58,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,58"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 100,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 59,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,59"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 100,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 60,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,60"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 101,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 61,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,61"
+   }
+  },
+  {
+   "job_id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+   "line": 101,
+   "position": 1,
+   "level": "warning",
+   "field": "valid_from",
+   "reason": "The date the content applies from is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 62,
+    "xmin": 3859,
+    "xmax": 0,
+    "ctid": "7,62"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 2,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 63,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "7,63"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 3,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 64,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "7,64"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 4,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 65,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "7,65"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 5,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 7,
+    "off": 66,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "7,66"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 6,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 1,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,1"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 7,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 2,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,2"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 8,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 3,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,3"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 9,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 4,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,4"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 10,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 5,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,5"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 11,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 6,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,6"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 12,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 7,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,7"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 13,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 8,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,8"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 14,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 9,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,9"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 15,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 10,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,10"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 16,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 11,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,11"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 17,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 12,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,12"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 18,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 13,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,13"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 19,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 14,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,14"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 20,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 15,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,15"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 21,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 16,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,16"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 22,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 17,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,17"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 23,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 18,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,18"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 24,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 19,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,19"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 25,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 20,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,20"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 26,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 21,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,21"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 27,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 22,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,22"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 28,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 23,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,23"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 29,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 24,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,24"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 30,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 25,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,25"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 31,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 26,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,26"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 32,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 27,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,27"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 33,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 28,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,28"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 34,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 29,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,29"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 35,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 30,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,30"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 36,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 31,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,31"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 37,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 32,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,32"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 38,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 33,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,33"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 39,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 34,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,34"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 40,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 35,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,35"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 41,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 36,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,36"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 42,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 37,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,37"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 43,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 38,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,38"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 44,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 39,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,39"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 45,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 40,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,40"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 46,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 41,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,41"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 47,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 42,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,42"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 48,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 43,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,43"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 49,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 44,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,44"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 50,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 45,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,45"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 51,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 46,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,46"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 52,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 47,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,47"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 53,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 48,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,48"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 54,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 49,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,49"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 55,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 50,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,50"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 56,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 51,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,51"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 57,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 52,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,52"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 58,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 53,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,53"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 59,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 54,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,54"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 60,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 55,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,55"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 61,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 56,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,56"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 62,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 57,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,57"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 63,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 58,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,58"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 64,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 59,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,59"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 65,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 60,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,60"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 66,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 61,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,61"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 67,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 62,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,62"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 68,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 63,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,63"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 69,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 64,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,64"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 70,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 65,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,65"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 71,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 66,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,66"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 72,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 67,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,67"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 73,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 68,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,68"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 74,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 69,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,69"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 75,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 8,
+    "off": 70,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "8,70"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 76,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 1,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,1"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 77,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 2,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,2"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 78,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 3,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,3"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 79,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 4,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,4"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 80,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 5,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,5"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 81,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 6,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,6"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 82,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 7,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,7"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 83,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 8,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,8"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 84,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 9,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,9"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 85,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 10,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,10"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 86,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 11,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,11"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 87,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 12,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,12"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 88,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 13,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,13"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 89,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 14,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,14"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 90,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 15,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,15"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 91,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 16,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,16"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 92,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 17,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,17"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 93,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 18,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,18"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 94,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 19,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,19"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 95,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 20,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,20"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 96,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 21,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,21"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 97,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 22,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,22"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 98,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 23,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,23"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 99,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 24,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,24"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 100,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 25,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,25"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 101,
+   "position": 0,
+   "level": "warning",
+   "field": "correct",
+   "reason": "Marked WITHDRAWN: no question is created. It becomes a withdrawn position when the paper is built",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 26,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,26"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 102,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 27,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,27"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 103,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 28,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,28"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 104,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 29,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,29"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 105,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 30,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,30"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 106,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 31,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,31"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 107,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 32,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,32"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 108,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 33,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,33"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 109,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 34,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,34"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 110,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 35,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,35"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 111,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 36,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,36"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 112,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 37,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,37"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 113,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 38,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,38"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 114,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 39,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,39"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 115,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 40,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,40"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 116,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 41,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,41"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 117,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 42,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,42"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 118,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 43,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,43"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 119,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 44,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,44"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 120,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 45,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,45"
+   }
+  },
+  {
+   "job_id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+   "line": 121,
+   "position": 0,
+   "level": "warning",
+   "field": "explanation",
+   "reason": "An explanation is required before review",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 46,
+    "xmin": 4762,
+    "xmax": 0,
+    "ctid": "9,46"
+   }
+  },
+  {
+   "job_id": "01a1f834-a281-7017-894f-032a256861f2",
+   "line": 145,
+   "position": 0,
+   "level": "warning",
+   "field": "correct",
+   "reason": "Marked WITHDRAWN: no question is created. It becomes a withdrawn position when the paper is built",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 47,
+    "xmin": 5156,
+    "xmax": 0,
+    "ctid": "9,47"
+   }
+  },
+  {
+   "job_id": "01a1f854-e0d5-72f8-b853-5a4bfd741b1a",
+   "line": 145,
+   "position": 0,
+   "level": "warning",
+   "field": "correct",
+   "reason": "Marked WITHDRAWN: no question is created. It becomes a withdrawn position when the paper is built",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 48,
+    "xmin": 5639,
+    "xmax": 0,
+    "ctid": "9,48"
+   }
+  },
+  {
+   "job_id": "01a1f85a-2c71-7577-a5ef-11440d83a82e",
+   "line": 90,
+   "position": 0,
+   "level": "warning",
+   "field": "correct",
+   "reason": "Marked WITHDRAWN: no question is created. It becomes a withdrawn position when the paper is built",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 49,
+    "xmin": 6091,
+    "xmax": 0,
+    "ctid": "9,49"
+   }
+  },
+  {
+   "job_id": "01a1f85a-2c71-7577-a5ef-11440d83a82e",
+   "line": 98,
+   "position": 0,
+   "level": "warning",
+   "field": "correct",
+   "reason": "Marked WITHDRAWN: no question is created. It becomes a withdrawn position when the paper is built",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 50,
+    "xmin": 6091,
+    "xmax": 0,
+    "ctid": "9,50"
+   }
+  },
+  {
+   "job_id": "01a1f85a-2c71-7577-a5ef-11440d83a82e",
+   "line": 100,
+   "position": 0,
+   "level": "warning",
+   "field": "correct",
+   "reason": "Marked WITHDRAWN: no question is created. It becomes a withdrawn position when the paper is built",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 51,
+    "xmin": 6091,
+    "xmax": 0,
+    "ctid": "9,51"
+   }
+  },
+  {
+   "job_id": "01a1f85a-2c71-7577-a5ef-11440d83a82e",
+   "line": 103,
+   "position": 0,
+   "level": "warning",
+   "field": "correct",
+   "reason": "Marked WITHDRAWN: no question is created. It becomes a withdrawn position when the paper is built",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 9,
+    "off": 52,
+    "xmin": 6091,
+    "xmax": 0,
+    "ctid": "9,52"
+   }
+  }
+ ],
+ "modified": [],
+ "removedSinceNov19": []
+}

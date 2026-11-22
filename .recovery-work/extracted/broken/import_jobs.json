@@ -1,0 +1,191 @@
+[
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 1,
+   "xmin": 2236,
+   "xmax": 2236,
+   "ctid": "0,1"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ef73-02ce-75fc-8c08-6108aecf9867",
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "file_name": "aibe18-a-import.csv",
+  "file_sha256": "23e436b035f2c9da7f86050094d855064f07736c8fd335aab88ce9cb923dd773",
+  "format": "csv",
+  "created_at": "2026-11-18T16:17:34.414000Z",
+  "content_source_id": "01a1eecd-70ed-7095-9e64-de0e4802b3d5"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 2,
+   "xmin": 2237,
+   "xmax": 2237,
+   "ctid": "0,2"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ef73-03e4-77d0-a162-92cd771bbf89",
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "file_name": "aibe19-a-import.csv",
+  "file_sha256": "8ada9775c6fbe0d596f6d556993ee0a074d114385474cb26440ca82d71dcabbb",
+  "format": "csv",
+  "created_at": "2026-11-18T16:17:34.692000Z",
+  "content_source_id": "01a1eecd-70fe-7093-90b7-8b761cbe6f1f"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 3,
+   "xmin": 2238,
+   "xmax": 2238,
+   "ctid": "0,3"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ef73-04e4-7644-a1a6-5aa7e1dbc3cc",
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "file_name": "aibe20-a-import.csv",
+  "file_sha256": "ec4ac8961d53d5239a464160a272a630362abfdb5afefc1a936124ed94005458",
+  "format": "csv",
+  "created_at": "2026-11-18T16:17:34.948000Z",
+  "content_source_id": "01a1eecd-7105-7227-a09a-822511f92458"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 4,
+   "xmin": 3859,
+   "xmax": 3859,
+   "ctid": "0,4"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f277-2bc0-727a-8371-81cdbc3a4f38",
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "file_name": "aibe21-a-import.csv",
+  "file_sha256": "4f18a8dc249a6c391e1bc7b04f50d66e6077f3c4e47c4f33f7a570a75a13206b",
+  "format": "csv",
+  "created_at": "2026-11-19T06:20:58.688000Z",
+  "content_source_id": "01a1f276-fae8-714b-aed4-95ad76efe43d"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 5,
+   "xmin": 4762,
+   "xmax": 4762,
+   "ctid": "0,5"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f7e0-77b4-72cf-8cd6-acd67d4021b6",
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "file_name": "UG_2026_Nyaya_Import.xlsx",
+  "file_sha256": "8c16151d87260fd82a97f431e2567dd821d0a9f892622d210b610dfd1060aec8",
+  "format": "xlsx",
+  "created_at": "2026-11-20T07:34:05.492000Z",
+  "content_source_id": null
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 6,
+   "xmin": 5156,
+   "xmax": 5156,
+   "ctid": "0,6"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f834-a281-7017-894f-032a256861f2",
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "file_name": "CLAT_2023_UG_Nyaya_Import.xlsx",
+  "file_sha256": "61628e8dcaaa68e48c3cbc5197c9f13a43fc2da8927177c389c2d03dc345cad1",
+  "format": "xlsx",
+  "created_at": "2026-11-20T09:06:01.473000Z",
+  "content_source_id": null
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 7,
+   "xmin": 5639,
+   "xmax": 5639,
+   "ctid": "0,7"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f854-e0d5-72f8-b853-5a4bfd741b1a",
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "file_name": "CLAT_2023_UG_Import_with_passages_v2.xlsx",
+  "file_sha256": "4e3840a3f0099e900c40643fcb4e5a935b8e8439ee1565a6c679f242919e83d4",
+  "format": "xlsx",
+  "created_at": "2026-11-20T09:41:14.581000Z",
+  "content_source_id": null
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 8,
+   "xmin": 6091,
+   "xmax": 6091,
+   "ctid": "0,8"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f85a-2c71-7577-a5ef-11440d83a82e",
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "file_name": "CLAT_2025_UG_SetA_Import_with_passages.xlsx",
+  "file_sha256": "1ff141e0d780d1c0385fb73462609557c98105afe5e4c3c336d115e35791613d",
+  "format": "xlsx",
+  "created_at": "2026-11-20T09:47:01.617000Z",
+  "content_source_id": null
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 9,
+   "xmin": 6448,
+   "xmax": 6448,
+   "ctid": "0,9"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f85e-d9bf-75f7-9d6a-e1bf63069615",
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "file_name": "CLAT_2024_UG_SetB_Import_with_passages.xlsx",
+  "file_sha256": "6713c174c38387bc542fc7c961ddfa08b71a058254e45b674cf1a4a87afe1a53",
+  "format": "xlsx",
+  "created_at": "2026-11-20T09:52:08.127000Z",
+  "content_source_id": null
+ }
+]

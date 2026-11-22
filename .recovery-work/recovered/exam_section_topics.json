@@ -1,0 +1,466 @@
+[
+ {
+  "section_id": "01a1f1ca-f566-74d2-9547-c387109576ff",
+  "topic_id": "01a1eecd-6fb5-7206-a1c1-66e3afd78a13",
+  "min_count": 0,
+  "max_count": 10,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 25,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,25"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f569-70cb-920c-3e94cbee8724",
+  "topic_id": "01a1eecd-6fc4-72f3-9d34-d8c374503476",
+  "min_count": 0,
+  "max_count": 8,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 26,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,26"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f56b-72e6-8330-0a38e7f7a257",
+  "topic_id": "01a1eecd-6fd1-708a-8d39-9a396e02adb4",
+  "min_count": 0,
+  "max_count": 10,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 27,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,27"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f56e-773b-8a07-2d4b0f5dce3e",
+  "topic_id": "01a1eecd-6fe0-7592-92e1-6c84e686a5cf",
+  "min_count": 0,
+  "max_count": 10,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 28,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,28"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f571-7538-b27f-bd27a208e40a",
+  "topic_id": "01a1eecd-6fec-7799-87bc-caee24c13878",
+  "min_count": 0,
+  "max_count": 8,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 29,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,29"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f573-70c5-bfdb-71fb068c2b48",
+  "topic_id": "01a1eecd-6ffb-702f-91f5-887bdb145bc0",
+  "min_count": 0,
+  "max_count": 4,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 30,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,30"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f575-7654-9ee4-788a4bdf4369",
+  "topic_id": "01a1eecd-700a-7492-a3ed-c60b5d156f14",
+  "min_count": 0,
+  "max_count": 8,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 31,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,31"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f577-748d-84d4-0b0b42fd883c",
+  "topic_id": "01a1eecd-7017-75d6-964b-2cdbf3df10b5",
+  "min_count": 0,
+  "max_count": 4,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 32,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,32"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f579-70e5-addf-b99946ce9957",
+  "topic_id": "01a1eecd-7023-734a-bb18-2c2fb84829d6",
+  "min_count": 0,
+  "max_count": 3,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 33,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,33"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f57c-7184-9f51-1e04e906e2fa",
+  "topic_id": "01a1eecd-7030-75d1-85f5-796dc880856d",
+  "min_count": 0,
+  "max_count": 4,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 34,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,34"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f57e-7403-af55-63f61859fdd7",
+  "topic_id": "01a1eecd-703d-7520-9730-61e48794c9a1",
+  "min_count": 0,
+  "max_count": 2,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 35,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,35"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f580-7272-b696-be66d1cf5446",
+  "topic_id": "01a1eecd-704a-7143-b82c-65e0a9767914",
+  "min_count": 0,
+  "max_count": 2,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 36,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,36"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f582-728b-8907-c3fb1fb444d1",
+  "topic_id": "01a1eecd-7057-72d4-9d24-c8da4bc6e8fa",
+  "min_count": 0,
+  "max_count": 2,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 37,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,37"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f584-77d2-99db-867ed515e30a",
+  "topic_id": "01a1eecd-706c-7318-9048-b8dd0a8ccaca",
+  "min_count": 0,
+  "max_count": 4,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 38,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,38"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f587-70b7-a3c3-75939e741b33",
+  "topic_id": "01a1eecd-7078-7245-a005-b5611896c014",
+  "min_count": 0,
+  "max_count": 5,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 39,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,39"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f587-70b7-a3c3-75939e741b33",
+  "topic_id": "01a1eecd-7084-7572-9bb0-447dd3ada138",
+  "min_count": 0,
+  "max_count": 5,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 40,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,40"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f587-70b7-a3c3-75939e741b33",
+  "topic_id": "01a1eecd-7091-7122-a1e8-eb833bb8e689",
+  "min_count": 0,
+  "max_count": 5,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 41,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,41"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f589-739e-ac43-f16ced40d61f",
+  "topic_id": "01a1eecd-709d-7530-9af2-71f31aa16e61",
+  "min_count": 0,
+  "max_count": 4,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 42,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,42"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f58c-7021-a3c2-c6052a10dcb1",
+  "topic_id": "01a1eecd-70aa-7551-8aad-d3b02729a93e",
+  "min_count": 0,
+  "max_count": 8,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 43,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,43"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f58c-7021-a3c2-c6052a10dcb1",
+  "topic_id": "01a1eecd-70b8-735f-932d-c7ed5b615506",
+  "min_count": 0,
+  "max_count": 8,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 44,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,44"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f58c-7021-a3c2-c6052a10dcb1",
+  "topic_id": "01a1eecd-70c8-7367-b951-f9b82ec82864",
+  "min_count": 0,
+  "max_count": 8,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 45,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,45"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f58c-7021-a3c2-c6052a10dcb1",
+  "topic_id": "01a1eecd-70d6-740c-9afa-a0b3eec981ee",
+  "min_count": 0,
+  "max_count": 8,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 46,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,46"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f58e-7092-9f67-049dc78b5bf1",
+  "topic_id": "01a1eecd-70c8-7367-b951-f9b82ec82864",
+  "min_count": 0,
+  "max_count": 2,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 47,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,47"
+  }
+ },
+ {
+  "section_id": "01a1f1ca-f590-77c6-9d43-fb6cdf74b769",
+  "topic_id": "01a1eecd-70e0-77c7-9978-9ef594ef7d28",
+  "min_count": 0,
+  "max_count": 2,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 48,
+   "xmin": 3702,
+   "xmax": 0,
+   "ctid": "0,48"
+  }
+ },
+ {
+  "section_id": "01a1f823-67a4-76b3-bbec-faaa4ab8cf6e",
+  "topic_id": "01a1f7c3-1176-74e4-b3d5-a47c9d04a960",
+  "min_count": 0,
+  "max_count": null,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 49,
+   "xmin": 5139,
+   "xmax": 0,
+   "ctid": "0,49"
+  }
+ },
+ {
+  "section_id": "01a1f823-67ac-7277-8244-28935335a3d5",
+  "topic_id": "01a1f7c3-117a-7177-babd-09cd844ce4a6",
+  "min_count": 0,
+  "max_count": null,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 50,
+   "xmin": 5139,
+   "xmax": 0,
+   "ctid": "0,50"
+  }
+ },
+ {
+  "section_id": "01a1f823-67b0-720b-9af3-9dce2fc4f47a",
+  "topic_id": "01a1f7c3-117b-710b-ae00-13114126d1ab",
+  "min_count": 0,
+  "max_count": null,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 51,
+   "xmin": 5139,
+   "xmax": 0,
+   "ctid": "0,51"
+  }
+ },
+ {
+  "section_id": "01a1f823-67b7-766d-9969-eab06a386bea",
+  "topic_id": "01a1f7c3-117d-746f-9a2e-96f12697b0c4",
+  "min_count": 0,
+  "max_count": null,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 52,
+   "xmin": 5139,
+   "xmax": 0,
+   "ctid": "0,52"
+  }
+ },
+ {
+  "section_id": "01a1f823-67ba-7521-a6a1-dfae913fa4fd",
+  "topic_id": "01a1f7c3-117f-77e9-9d1b-e8c968fe06bb",
+  "min_count": 0,
+  "max_count": null,
+  "weight": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 53,
+   "xmin": 5139,
+   "xmax": 0,
+   "ctid": "0,53"
+  }
+ }
+]

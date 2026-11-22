@@ -1,0 +1,65 @@
+[
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 1,
+   "xmin": 2236,
+   "xmax": 2236,
+   "ctid": "0,1"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ef73-02ce-75fc-8c08-6108aecf9867",
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "file_name": "aibe18-a-import.csv",
+  "file_sha256": "23e436b035f2c9da7f86050094d855064f07736c8fd335aab88ce9cb923dd773",
+  "format": "csv",
+  "created_at": "2026-11-18T16:17:34.414000Z",
+  "content_source_id": "01a1eecd-70ed-7095-9e64-de0e4802b3d5"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 2,
+   "xmin": 2237,
+   "xmax": 2237,
+   "ctid": "0,2"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ef73-03e4-77d0-a162-92cd771bbf89",
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "file_name": "aibe19-a-import.csv",
+  "file_sha256": "8ada9775c6fbe0d596f6d556993ee0a074d114385474cb26440ca82d71dcabbb",
+  "format": "csv",
+  "created_at": "2026-11-18T16:17:34.692000Z",
+  "content_source_id": "01a1eecd-70fe-7093-90b7-8b761cbe6f1f"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 3,
+   "xmin": 2238,
+   "xmax": 2238,
+   "ctid": "0,3"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ef73-04e4-7644-a1a6-5aa7e1dbc3cc",
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "file_name": "aibe20-a-import.csv",
+  "file_sha256": "ec4ac8961d53d5239a464160a272a630362abfdb5afefc1a936124ed94005458",
+  "format": "csv",
+  "created_at": "2026-11-18T16:17:34.948000Z",
+  "content_source_id": "01a1eecd-7105-7227-a09a-822511f92458"
+ }
+]

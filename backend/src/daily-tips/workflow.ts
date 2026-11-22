@@ -15,6 +15,10 @@ export const TIP_READ_ROLES: Role[] = [
  */
 export const TIP_ACTIONS = {
   edit: { from: ['draft', 'changes_requested'], roles: ['content_editor'] },
+  // Records that the editor checked the tip against its exact official
+  // source today. It only sets the verification date; it never moves the tip
+  // through review, and it counts as editing for the "no self-approval" rule.
+  verify: { from: ['draft', 'changes_requested'], roles: ['content_editor'] },
   submit: {
     from: ['draft', 'changes_requested'],
     to: 'in_review',
@@ -76,10 +80,22 @@ export function tipProblems(t: TipContent): ErrorDetail[] {
   else if (!/^https:\/\/\S+$/.test(t.sourceUrl))
     add('source_url', 'The source link must use https');
   if (!t.publishDate) add('publish_date', 'Choose the day the tip is shown');
-  if (!t.lastVerifiedOn)
-    add(
-      'last_verified_on',
-      'Say when the tip was last checked against its source',
-    );
+  // lastVerifiedOn is optional: an unverified tip can still be reviewed and
+  // published; the verification page lists tips that have not been checked.
   return problems;
+}
+
+/**
+ * Whether [url] points at the exact page the tip rests on. A bare site address
+ * (https://www.indiacode.nic.in/) names a website, not a provision, so it
+ * cannot stand in for checking the tip against its source.
+ */
+export function isExactSourceLink(url: string | null): boolean {
+  if (!url || !/^https:\/\/\S+$/.test(url)) return false;
+  try {
+    const u = new URL(url);
+    return u.pathname.replace(/\/+$/, '') !== '' || u.search !== '';
+  } catch {
+    return false;
+  }
 }

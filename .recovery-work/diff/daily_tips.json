@@ -1,0 +1,213 @@
+{
+ "new": [],
+ "modified": [
+  {
+   "key": "01a1e805-6942-76a2-98b3-3d8edbe7d057",
+   "changedFields": [
+    "status",
+    "last_verified_on",
+    "updated_by",
+    "reviewer_id",
+    "approved_at",
+    "published_by",
+    "published_at",
+    "updated_at"
+   ],
+   "before": {
+    "id": "01a1e805-6942-76a2-98b3-3d8edbe7d057",
+    "status": "draft",
+    "category": "family_law",
+    "language": "en",
+    "title": "What is a Lok Adalat, and is its decision final?",
+    "summary": "A Lok Adalat is a free, informal forum to settle disputes by agreement. If both sides agree, its award is final and binding, with no appeal, and the court fee is refunded.",
+    "explanation": "Lok Adalats are set up under the Legal Services Authorities Act, 1987 to settle disputes through compromise. They can handle many civil cases, family disputes, motor accident claims, bank recovery matters, and compoundable criminal cases, but not non-compoundable offences. Cases can be referred to a Lok Adalat from a court, or you can apply before filing a case. When the parties agree, the Lok Adalat passes an award, which has the force of a civil court decree, is final and cannot be appealed. If a case in court is settled there, the court fee paid is refunded. Apply at the District Legal Services Authority or the court.",
+    "legal_reference": "Legal Services Authorities Act, 1987 — Sections 19, 20 and 21",
+    "source_url": "https://nalsa.gov.in/",
+    "publish_date": "2027-02-16",
+    "last_verified_on": null,
+    "created_by": "01a1ce0c-4152-71cb-a89a-4dc3d905b63e",
+    "updated_by": "01a1ce0c-4152-71cb-a89a-4dc3d905b63e",
+    "reviewer_id": null,
+    "approved_at": null,
+    "published_by": null,
+    "published_at": null,
+    "retired_at": null,
+    "created_at": "2026-11-17T05:40:31.170000Z",
+    "updated_at": "2026-11-17T05:43:38.517000Z"
+   },
+   "after": {
+    "id": "01a1e805-6942-76a2-98b3-3d8edbe7d057",
+    "status": "published",
+    "category": "family_law",
+    "language": "en",
+    "title": "What is a Lok Adalat, and is its decision final?",
+    "summary": "A Lok Adalat is a free, informal forum to settle disputes by agreement. If both sides agree, its award is final and binding, with no appeal, and the court fee is refunded.",
+    "explanation": "Lok Adalats are set up under the Legal Services Authorities Act, 1987 to settle disputes through compromise. They can handle many civil cases, family disputes, motor accident claims, bank recovery matters, and compoundable criminal cases, but not non-compoundable offences. Cases can be referred to a Lok Adalat from a court, or you can apply before filing a case. When the parties agree, the Lok Adalat passes an award, which has the force of a civil court decree, is final and cannot be appealed. If a case in court is settled there, the court fee paid is refunded. Apply at the District Legal Services Authority or the court.",
+    "legal_reference": "Legal Services Authorities Act, 1987 — Sections 19, 20 and 21",
+    "source_url": "https://nalsa.gov.in/",
+    "publish_date": "2027-02-16",
+    "last_verified_on": "2026-11-22",
+    "created_by": "01a1ce0c-4152-71cb-a89a-4dc3d905b63e",
+    "updated_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+    "reviewer_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+    "approved_at": "2026-11-22T07:42:44.830000Z",
+    "published_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+    "published_at": "2026-11-22T07:42:46.215000Z",
+    "retired_at": null,
+    "created_at": "2026-11-17T05:40:31.170000Z",
+    "updated_at": "2026-11-22T07:42:46.215000Z",
+    "_confidence": "medium",
+    "_source": "wal-redo",
+    "_notes": [
+     "row version created after last checkpoint; reconstructed from WAL redo"
+    ],
+    "_loc": {
+     "blk": 14,
+     "off": 20,
+     "xmin": 7179,
+     "xmax": 7179,
+     "ctid": "14,20"
+    }
+   }
+  },
+  {
+   "key": "01a1e805-6933-7332-a6d4-5fc69863ed4a",
+   "changedFields": [
+    "status",
+    "last_verified_on",
+    "updated_by",
+    "reviewer_id",
+    "approved_at",
+    "published_by",
+    "published_at",
+    "updated_at"
+   ],
+   "before": {
+    "id": "01a1e805-6933-7332-a6d4-5fc69863ed4a",
+    "status": "draft",
+    "category": "family_law",
+    "language": "en",
+    "title": "Can a bank's recovery agent harass or threaten me about a loan?",
+    "summary": "No. Lenders and their agents must follow rules on conduct. They cannot threaten, abuse, or call you at odd hours, and they cannot take your property without a legal process.",
+    "explanation": "The RBI has issued directions and a Fair Practices Code for banks and other regulated lenders, which require recovery agents to behave courteously, identify themselves, call only at reasonable hours, and not use threats, abuse or humiliation. The Supreme Court has held that recovery by muscle power is not allowed. For secured loans, a lender can take action under the SARFAESI Act only after following the notice and procedure, and cannot just seize your property. If you are harassed, record the calls and messages, write to the lender's grievance officer, then complain to the RBI Ombudsman, and, for threats, report to the police. Always read the loan agreement and keep payment proofs.",
+    "legal_reference": "Reserve Bank of India directions and Fair Practices Code; Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest Act, 2002 — RBI Fair Practices Code and recovery agents guidelines; SARFAESI Act section 13",
+    "source_url": "https://www.rbi.org.in/",
+    "publish_date": "2027-01-27",
+    "last_verified_on": null,
+    "created_by": "01a1ce0c-4152-71cb-a89a-4dc3d905b63e",
+    "updated_by": "01a1ce0c-4152-71cb-a89a-4dc3d905b63e",
+    "reviewer_id": null,
+    "approved_at": null,
+    "published_by": null,
+    "published_at": null,
+    "retired_at": null,
+    "created_at": "2026-11-17T05:40:31.155000Z",
+    "updated_at": "2026-11-17T05:43:38.133000Z"
+   },
+   "after": {
+    "id": "01a1e805-6933-7332-a6d4-5fc69863ed4a",
+    "status": "published",
+    "category": "family_law",
+    "language": "en",
+    "title": "Can a bank's recovery agent harass or threaten me about a loan?",
+    "summary": "No. Lenders and their agents must follow rules on conduct. They cannot threaten, abuse, or call you at odd hours, and they cannot take your property without a legal process.",
+    "explanation": "The RBI has issued directions and a Fair Practices Code for banks and other regulated lenders, which require recovery agents to behave courteously, identify themselves, call only at reasonable hours, and not use threats, abuse or humiliation. The Supreme Court has held that recovery by muscle power is not allowed. For secured loans, a lender can take action under the SARFAESI Act only after following the notice and procedure, and cannot just seize your property. If you are harassed, record the calls and messages, write to the lender's grievance officer, then complain to the RBI Ombudsman, and, for threats, report to the police. Always read the loan agreement and keep payment proofs.",
+    "legal_reference": "Reserve Bank of India directions and Fair Practices Code; Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest Act, 2002 — RBI Fair Practices Code and recovery agents guidelines; SARFAESI Act section 13",
+    "source_url": "https://www.rbi.org.in/",
+    "publish_date": "2027-01-27",
+    "last_verified_on": "2026-11-22",
+    "created_by": "01a1ce0c-4152-71cb-a89a-4dc3d905b63e",
+    "updated_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+    "reviewer_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+    "approved_at": "2026-11-22T07:38:51.966000Z",
+    "published_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+    "published_at": "2026-11-22T07:38:53.470000Z",
+    "retired_at": null,
+    "created_at": "2026-11-17T05:40:31.155000Z",
+    "updated_at": "2026-11-22T07:38:53.470000Z",
+    "_confidence": "medium",
+    "_source": "wal-redo",
+    "_notes": [
+     "row version created after last checkpoint; reconstructed from WAL redo"
+    ],
+    "_loc": {
+     "blk": 19,
+     "off": 8,
+     "xmin": 7169,
+     "xmax": 7169,
+     "ctid": "19,8"
+    }
+   }
+  },
+  {
+   "key": "01a1e805-6946-7465-b357-e749fc885030",
+   "changedFields": [
+    "status",
+    "last_verified_on",
+    "updated_by",
+    "reviewer_id",
+    "approved_at",
+    "published_by",
+    "published_at",
+    "updated_at"
+   ],
+   "before": {
+    "id": "01a1e805-6946-7465-b357-e749fc885030",
+    "status": "draft",
+    "category": "family_law",
+    "language": "en",
+    "title": "If I sign as a guarantor for someone's loan, can the bank ask me to pay?",
+    "summary": "Yes. A guarantor's liability is generally the same as the borrower's, so the bank can ask the guarantor to pay if the borrower does not, unless the contract says otherwise.",
+    "explanation": "Under the Indian Contract Act, a contract of guarantee is one where a person, the surety, promises to perform the promise or discharge the liability of another if that person defaults. The surety's liability is, unless the contract says otherwise, the same as that of the principal borrower. The lender is not required to sue the borrower first, and can proceed against the guarantor directly. There are limits: a guarantor can be released if the loan terms are changed without their consent or if the lender releases the borrower. A guarantor who pays has the right to recover from the borrower. Before signing, read the whole agreement, ask about the amount and period, and keep a copy.",
+    "legal_reference": "Indian Contract Act, 1872 — Sections 126, 128, 133 and 140",
+    "source_url": "https://www.indiacode.nic.in/",
+    "publish_date": "2027-02-23",
+    "last_verified_on": null,
+    "created_by": "01a1ce0c-4152-71cb-a89a-4dc3d905b63e",
+    "updated_by": "01a1ce0c-4152-71cb-a89a-4dc3d905b63e",
+    "reviewer_id": null,
+    "approved_at": null,
+    "published_by": null,
+    "published_at": null,
+    "retired_at": null,
+    "created_at": "2026-11-17T05:40:31.174000Z",
+    "updated_at": "2026-11-17T05:43:38.668000Z"
+   },
+   "after": {
+    "id": "01a1e805-6946-7465-b357-e749fc885030",
+    "status": "published",
+    "category": "family_law",
+    "language": "en",
+    "title": "If I sign as a guarantor for someone's loan, can the bank ask me to pay?",
+    "summary": "Yes. A guarantor's liability is generally the same as the borrower's, so the bank can ask the guarantor to pay if the borrower does not, unless the contract says otherwise.",
+    "explanation": "Under the Indian Contract Act, a contract of guarantee is one where a person, the surety, promises to perform the promise or discharge the liability of another if that person defaults. The surety's liability is, unless the contract says otherwise, the same as that of the principal borrower. The lender is not required to sue the borrower first, and can proceed against the guarantor directly. There are limits: a guarantor can be released if the loan terms are changed without their consent or if the lender releases the borrower. A guarantor who pays has the right to recover from the borrower. Before signing, read the whole agreement, ask about the amount and period, and keep a copy.",
+    "legal_reference": "Indian Contract Act, 1872 — Sections 126, 128, 133 and 140",
+    "source_url": "https://www.indiacode.nic.in/",
+    "publish_date": "2027-02-23",
+    "last_verified_on": "2026-11-22",
+    "created_by": "01a1ce0c-4152-71cb-a89a-4dc3d905b63e",
+    "updated_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+    "reviewer_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+    "approved_at": "2026-11-22T07:41:31.378000Z",
+    "published_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+    "published_at": "2026-11-22T07:41:33.378000Z",
+    "retired_at": null,
+    "created_at": "2026-11-17T05:40:31.174000Z",
+    "updated_at": "2026-11-22T07:41:33.378000Z",
+    "_confidence": "medium",
+    "_source": "wal-redo",
+    "_notes": [
+     "row version created after last checkpoint; reconstructed from WAL redo"
+    ],
+    "_loc": {
+     "blk": 19,
+     "off": 9,
+     "xmin": 7175,
+     "xmax": 7175,
+     "ctid": "19,9"
+    }
+   }
+  }
+ ],
+ "removedSinceNov19": []
+}

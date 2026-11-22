@@ -30,6 +30,7 @@ import {
   TodayTipDto,
   TodayTipQuery,
   UpdateDailyTipDto,
+  VerifyTipDto,
 } from './daily-tips.dto.js';
 import { DailyTipsService } from './daily-tips.service.js';
 import { TIP_ACTIONS, TIP_READ_ROLES } from './workflow.js';
@@ -103,6 +104,22 @@ export class EditorDailyTipsController {
     @Body() body: UpdateDailyTipDto,
   ) {
     return this.tips.update(actor, id, body);
+  }
+
+  @Post(':id/verify')
+  @HttpCode(200)
+  @Roles(...TIP_ACTIONS.verify.roles)
+  @ApiOperation({
+    summary:
+      "Record that you checked the tip against its exact official source today; sets the verification date and nothing else",
+  })
+  @ApiOkResponse({ type: DailyTipDetailDto })
+  verify(
+    @CurrentActor() actor: Actor,
+    @Id() id: string,
+    @Body() _body: VerifyTipDto,
+  ) {
+    return this.tips.verify(actor, id);
   }
 
   @Post(':id/submit')

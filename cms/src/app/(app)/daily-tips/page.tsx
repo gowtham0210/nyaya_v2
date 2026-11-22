@@ -1,3 +1,4 @@
+import { FilterForm } from '@/components/filter-form';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -5,6 +6,7 @@ import { StatusBadge } from '@/components/status-badge';
 import { Skeleton, buttonClass, inputClass } from '@/components/ui';
 import { api, must, type DailyTipCategory, type DailyTipStatus } from '@/lib/api';
 import { getMe } from '@/lib/session';
+import { PublishAllApproved } from './publish-all';
 import { STATUS_LABEL, TIP_CATEGORY_LABEL, TIP_LANGUAGE_LABEL, TIP_WORKFLOW, hasRole } from '@/lib/workflow';
 
 export const metadata: Metadata = { title: 'Daily tips' };
@@ -44,6 +46,11 @@ async function TipList({ searchParams }: { searchParams: PageProps<'/daily-tips'
     getMe(),
     client.GET('/v1/editor/daily-tips', { params: { query: { status, category, q, cursor, limit: 25 } } }).then(must),
   ]);
+  const canPublish = hasRole(me, 'publisher');
+  // Up to 100 shown; the button publishes them all, however many.
+  const approved = canPublish
+    ? await client.GET('/v1/editor/daily-tips', { params: { query: { status: 'approved', limit: 100 } } }).then(must)
+    : null;
   const href = (patch: Record<string, string | undefined>) => {
     const p = new URLSearchParams();
     for (const [k, v] of Object.entries({ status, category, q, ...patch })) if (v) p.set(k, v);
@@ -60,14 +67,21 @@ async function TipList({ searchParams }: { searchParams: PageProps<'/daily-tips'
             The tip on the app&apos;s Home screen. Learners see the published tip whose day is today (India time).
           </p>
         </div>
-        {hasRole(me, ...TIP_WORKFLOW.submit.roles) && (
-          <Link href="/daily-tips/new" className={buttonClass()}>
-            New tip
+        <div className="flex flex-wrap gap-2">
+          <Link href="/daily-tips/verification" className={buttonClass('secondary')}>
+            Tips to verify
           </Link>
-        )}
+          {hasRole(me, ...TIP_WORKFLOW.submit.roles) && (
+            <Link href="/daily-tips/new" className={buttonClass()}>
+              New tip
+            </Link>
+          )}
+        </div>
       </div>
 
-      <form method="get" action="/daily-tips" className="grid gap-3 sm:grid-cols-[1fr_12rem_14rem_auto]" role="search">
+      {approved && <PublishAllApproved count={approved.items.length} />}
+
+      <FilterForm method="get" action="/daily-tips" className="grid gap-3 sm:grid-cols-[1fr_12rem_14rem_auto]" role="search">
         <label className="sr-only" htmlFor="q">Search</label>
         <input id="q" name="q" defaultValue={q} placeholder="Search titles" className={inputClass} />
         <label className="sr-only" htmlFor="category">Category</label>
@@ -85,7 +99,7 @@ async function TipList({ searchParams }: { searchParams: PageProps<'/daily-tips'
           ))}
         </select>
         <button type="submit" className={buttonClass('secondary')}>Filter</button>
-      </form>
+      </FilterForm>
 
       {page.items.length === 0 ? (
         <div className="rounded-xl border border-dashed border-border px-6 py-16 text-center text-muted">No tips match these filters.</div>

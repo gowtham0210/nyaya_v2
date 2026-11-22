@@ -7,6 +7,9 @@ export default defineConfig({
     globals: true,
     root: './',
     include: ['**/*.e2e-spec.ts'],
+    // Every file boots a whole app and database. Starting one per CPU thread
+    // at once can push startup past the hook timeout, so at most 6 run together.
+    maxWorkers: 6,
     // Each file starts its own in-memory database and runs every migration;
     // with several files in parallel that can take a while on a busy machine.
     // Some tests start their own app, so they get the same time.

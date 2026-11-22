@@ -1,0 +1,181 @@
+{
+ "new": [
+  {
+   "key": "3rykSajqG9YhNyURmquzvLRO6JHCs3wx9DSkPHbm3qs",
+   "hits": 1,
+   "reset_at": "2026-11-22T06:28:58.296000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 1,
+    "off": 133,
+    "xmin": 7018,
+    "xmax": 0,
+    "ctid": "1,133"
+   }
+  },
+  {
+   "key": "xZ3Q7EU9GwwZ7FEO8-gVW-_h7LjGbhf8rfYu4FfaAcI",
+   "hits": 1,
+   "reset_at": "2026-11-22T07:44:35.193000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 1,
+    "off": 145,
+    "xmin": 7151,
+    "xmax": 0,
+    "ctid": "1,145"
+   }
+  },
+  {
+   "key": "maaASKwCbsBxdKFS1NFiWTs6qII_wZDCqiwFA2x-9Mg",
+   "hits": 1,
+   "reset_at": "2026-11-22T07:30:47.451000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 1,
+    "off": 146,
+    "xmin": 7152,
+    "xmax": 0,
+    "ctid": "1,146"
+   }
+  }
+ ],
+ "modified": [
+  {
+   "key": "\"q7Qh7sV5Ny16OIRbZ_xfCsnz69MRW3jUUFAoQQqYhRM\"|1",
+   "changedFields": [
+    "reset_at"
+   ],
+   "before": {
+    "key": "q7Qh7sV5Ny16OIRbZ_xfCsnz69MRW3jUUFAoQQqYhRM",
+    "hits": 1,
+    "reset_at": "2026-11-16T16:25:16.080000Z"
+   },
+   "after": {
+    "key": "q7Qh7sV5Ny16OIRbZ_xfCsnz69MRW3jUUFAoQQqYhRM",
+    "hits": 1,
+    "reset_at": "2026-11-22T06:42:58.308000Z",
+    "_confidence": "high",
+    "_source": "heap-file",
+    "_loc": {
+     "blk": 1,
+     "off": 134,
+     "xmin": 7019,
+     "xmax": 0,
+     "ctid": "1,134"
+    }
+   }
+  },
+  {
+   "key": "\"0oKPUb8pctgjV7vcmF-6lbGzjRsuekm1DCOYhAVPT1w\"|1",
+   "changedFields": [
+    "reset_at"
+   ],
+   "before": {
+    "key": "0oKPUb8pctgjV7vcmF-6lbGzjRsuekm1DCOYhAVPT1w",
+    "hits": 1,
+    "reset_at": "2026-11-16T16:12:19.021000Z"
+   },
+   "after": {
+    "key": "0oKPUb8pctgjV7vcmF-6lbGzjRsuekm1DCOYhAVPT1w",
+    "hits": 1,
+    "reset_at": "2026-11-22T06:29:28.191000Z",
+    "_confidence": "high",
+    "_source": "heap-file",
+    "_loc": {
+     "blk": 1,
+     "off": 135,
+     "xmin": 7021,
+     "xmax": 0,
+     "ctid": "1,135"
+    }
+   }
+  },
+  {
+   "key": "\"cQ35Odn_z5oboJHA6mN3XPBW0TSeS1yeZCuKVGXk0RY\"|1",
+   "changedFields": [
+    "reset_at"
+   ],
+   "before": {
+    "key": "cQ35Odn_z5oboJHA6mN3XPBW0TSeS1yeZCuKVGXk0RY",
+    "hits": 1,
+    "reset_at": "2026-11-19T03:25:01.273000Z"
+   },
+   "after": {
+    "key": "cQ35Odn_z5oboJHA6mN3XPBW0TSeS1yeZCuKVGXk0RY",
+    "hits": 1,
+    "reset_at": "2026-11-22T07:36:09.919000Z",
+    "_confidence": "medium",
+    "_source": "wal-redo",
+    "_notes": [
+     "row version created after last checkpoint; reconstructed from WAL redo"
+    ],
+    "_loc": {
+     "blk": 1,
+     "off": 147,
+     "xmin": 7157,
+     "xmax": 7157,
+     "ctid": "1,147"
+    }
+   }
+  },
+  {
+   "key": "\"0QVIYFh8TZpScTp2VU4qDBOzJCCxR3iAOY59pa2vUL8\"|1",
+   "changedFields": [
+    "reset_at"
+   ],
+   "before": {
+    "key": "0QVIYFh8TZpScTp2VU4qDBOzJCCxR3iAOY59pa2vUL8",
+    "hits": 1,
+    "reset_at": "2026-11-19T03:30:27.607000Z"
+   },
+   "after": {
+    "key": "0QVIYFh8TZpScTp2VU4qDBOzJCCxR3iAOY59pa2vUL8",
+    "hits": 1,
+    "reset_at": "2026-11-22T07:43:55.179000Z",
+    "_confidence": "medium",
+    "_source": "wal-redo",
+    "_notes": [
+     "row version created after last checkpoint; reconstructed from WAL redo"
+    ],
+    "_loc": {
+     "blk": 1,
+     "off": 149,
+     "xmin": 7180,
+     "xmax": 7180,
+     "ctid": "1,149"
+    }
+   }
+  }
+ ],
+ "removedSinceNov19": [
+  {
+   "key": "P-DKY4LuJd9Qi8pPDHyBD5dXORmAEbOTEaf3wPJrLO0",
+   "hits": 1,
+   "reset_at": "2026-11-16T11:28:02.655000Z"
+  },
+  {
+   "key": "RXg9Ez1fbTN-QKgEy1c9_Fty7cbuVHnxGbzEhfopj0c",
+   "hits": 1,
+   "reset_at": "2026-11-16T12:05:11.686000Z"
+  },
+  {
+   "key": "3rykSajqG9YhNyURmquzvLRO6JHCs3wx9DSkPHbm3qs",
+   "hits": 2,
+   "reset_at": "2026-11-16T16:11:05.441000Z"
+  },
+  {
+   "key": "QGiaiGdoGuH_SQeIw398A-XqVDnjyJJ7r7VGQiXZVPo",
+   "hits": 1,
+   "reset_at": "2026-11-19T02:45:07.587000Z"
+  },
+  {
+   "key": "maaASKwCbsBxdKFS1NFiWTs6qII_wZDCqiwFA2x-9Mg",
+   "hits": 2,
+   "reset_at": "2026-11-19T02:53:00.638000Z"
+  }
+ ]
+}

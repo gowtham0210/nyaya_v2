@@ -80,7 +80,7 @@ export function DailyTipForm({
           <Field label="Show on" htmlFor="publish_date" hint="The India day the app shows it on Home. One published tip per day and language." errors={errs('publish_date')}>
             <input id="publish_date" type="date" value={values.publish_date} onChange={(e) => set('publish_date', e.target.value)} aria-invalid={!!errs('publish_date')} className={inputClass} />
           </Field>
-          <Field label="Last verified" htmlFor="last_verified_on" hint="The day you last checked the tip against the source." errors={errs('last_verified_on')}>
+          <Field label="Last verified (optional)" htmlFor="last_verified_on" hint="Optional. The day you last checked the tip against the source; leave empty if not checked yet." errors={errs('last_verified_on')}>
             <input id="last_verified_on" type="date" value={values.last_verified_on} onChange={(e) => set('last_verified_on', e.target.value)} aria-invalid={!!errs('last_verified_on')} className={inputClass} />
           </Field>
         </div>

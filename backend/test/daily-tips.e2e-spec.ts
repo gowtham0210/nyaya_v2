@@ -90,7 +90,6 @@ describe('daily tips', () => {
         'legal_reference',
         'source_url',
         'publish_date',
-        'last_verified_on',
       ]),
     );
 
@@ -266,6 +265,48 @@ describe('daily tips', () => {
       .get('/v1/editor/daily-tips?category=workplace')
       .expect(200);
     expect(none.body.items).toEqual([]);
+  });
+
+  describe('recording a source check', () => {
+    const verify = (token: string, id: string, body: object = { confirmed_against_source: true }) =>
+      as(token).post(`/v1/editor/daily-tips/${id}/verify`, body);
+
+    it('sets only the verification date, names who checked, and keeps the tip in draft', async () => {
+      const id = await create({ last_verified_on: null });
+      const res = await verify(editor.token, id).expect(200);
+      expect(res.body.status).toBe('draft');
+      expect(res.body.last_verified_on).toBe(today());
+      expect(res.body.updated_by).toBe(editor.id);
+      const log = await as(editor.token).get(`/v1/editor/daily-tips/${id}`).expect(200);
+      expect(log.body.last_verified_on).toBe(today());
+    });
+
+    it('needs the editor to confirm, and the exact source link, not a site home page', async () => {
+      const id = await create({ last_verified_on: null, source_url: 'https://www.indiacode.nic.in/' });
+      await verify(editor.token, id, {}).expect(400);
+      await verify(editor.token, id, { confirmed_against_source: false }).expect(400);
+      const res = await verify(editor.token, id).expect(422);
+      expect(JSON.stringify(res.body)).toContain('source_url');
+      const after = await as(editor.token).get(`/v1/editor/daily-tips/${id}`).expect(200);
+      expect(after.body.last_verified_on).toBeNull();
+    });
+
+    it('is for editors on drafts only, and the checker cannot approve it afterwards', async () => {
+      const id = await create({ last_verified_on: null });
+      await verify(reviewer.token, id).expect(403);
+      await verify(learner.token, id).expect(403);
+      await verify(editor.token, id).expect(200);
+      await submit(id).expect(200);
+      // Under review the date can no longer be changed this way.
+      await verify(editor.token, id).expect(409);
+      // A tip still cannot be published without the review.
+      await publish(id).expect(409);
+    });
+
+    it('is optional: an unverified tip can still be submitted for review', async () => {
+      const id = await create({ last_verified_on: null });
+      await submit(id).expect(200);
+    });
   });
 
   it('writes the steps to the audit log', async () => {

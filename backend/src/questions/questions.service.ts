@@ -11,13 +11,16 @@ import {
   sql,
   type SQL,
 } from 'drizzle-orm';
-import { AuditService, type Actor } from '../core/audit.service.js';
+import { AuditService, isAdmin, type Actor } from '../core/audit.service.js';
 import { DB, type Db, type Tx } from '../core/db.js';
 import { ApiError } from '../core/errors.js';
 import { newId } from '../core/ids.js';
 import { decodeCursor, toPage, type Page } from '../core/pagination.js';
 import {
   auditLog,
+  contentSources,
+  examQuestionTags,
+  exams,
   questions,
   questionVersions,
   reviewDecisions,
@@ -35,6 +38,7 @@ import type {
   VersionDto,
   VersionSummaryDto,
 } from './questions.dto.js';
+import { requirePublishable } from '../exams/publish-gates.js';
 import { ACTIONS, contentProblems, type Action } from './workflow.js';
 
 type QuestionRow = typeof questions.$inferSelect;
@@ -69,6 +73,11 @@ const FIELDS: [keyof UpdateQuestionDto, keyof VersionPatch, boolean][] = [
   ['provision_reference', 'provisionReference', true],
   ['valid_from', 'validFrom', true],
   ['valid_to', 'validTo', true],
+  ['content_source_id', 'contentSourceId', true],
+  ['law_regime', 'lawRegime', false],
+  ['concept_key', 'conceptKey', true],
+  ['alternate_correct_option_ids', 'alternateCorrectOptionIds', false],
+  ['lock_option_order', 'lockOptionOrder', false],
 ];
 
 function toPatch(dto: UpdateQuestionDto): VersionPatch {
@@ -117,6 +126,11 @@ export function toVersionDto(v: VersionRow): VersionDto {
     provision_reference: v.provisionReference,
     valid_from: v.validFrom,
     valid_to: v.validTo,
+    content_source_id: v.contentSourceId,
+    law_regime: v.lawRegime,
+    concept_key: v.conceptKey,
+    alternate_correct_option_ids: v.alternateCorrectOptionIds,
+    lock_option_order: v.lockOptionOrder,
     verified_at: iso(v.verifiedAt),
     reviewer_id: v.reviewerId,
     change_note: v.changeNote,
@@ -230,6 +244,14 @@ export class QuestionsService {
       live_version_id: q.liveVersionId,
       retired_at: iso(q.retiredAt),
       created_at: q.createdAt.toISOString(),
+      exam_only: q.examOnly,
+      exam_ids: (
+        await tx
+          .select({ examId: examQuestionTags.examId })
+          .from(examQuestionTags)
+          .where(eq(examQuestionTags.questionId, id))
+          .orderBy(asc(examQuestionTags.examId))
+      ).map((t) => t.examId),
       latest: toVersionDto(versions[versions.length - 1]),
       versions: versions.map(toSummary),
       reviews: reviews.map((r) => ({
@@ -249,11 +271,20 @@ export class QuestionsService {
     const patch = toPatch(dto);
     return this.db.transaction(async (tx) => {
       await this.requireTopic(tx, dto.topic_id);
+      this.requireDisjoint(
+        patch.correctOptionIds ?? [],
+        patch.alternateCorrectOptionIds ?? [],
+      );
+      await this.requireSource(tx, patch.contentSourceId);
+      await this.requireExams(tx, dto.exam_ids);
       const questionId = newId();
       const versionId = newId();
-      await tx
-        .insert(questions)
-        .values({ id: questionId, createdBy: actor.id });
+      await tx.insert(questions).values({
+        id: questionId,
+        createdBy: actor.id,
+        examOnly: dto.exam_only ?? false,
+      });
+      await this.setTags(tx, actor, questionId, dto.exam_ids ?? []);
       await tx.insert(questionVersions).values({
         ...patch,
         id: versionId,
@@ -276,8 +307,38 @@ export class QuestionsService {
 
   update(actor: Actor, id: string, dto: UpdateQuestionDto) {
     const patch = toPatch(dto);
-    return this.act(actor, id, 'edit', async (tx, _q, v) => {
+    return this.act(actor, id, 'edit', async (tx, q, v) => {
       if (patch.topicId) await this.requireTopic(tx, patch.topicId);
+      this.requireDisjoint(
+        patch.correctOptionIds ?? v.correctOptionIds,
+        patch.alternateCorrectOptionIds ?? v.alternateCorrectOptionIds,
+      );
+      await this.requireSource(tx, patch.contentSourceId);
+      await this.requireExams(tx, dto.exam_ids);
+      if (dto.exam_only !== undefined && dto.exam_only !== q.examOnly) {
+        // Flipping it on a question the games may already be using would
+        // pull it out of them, or put exam material in front of players.
+        if (q.liveVersionId)
+          throw new ApiError(
+            HttpStatus.CONFLICT,
+            'exam_only_locked',
+            'exam_only cannot be changed once the question has been published',
+          );
+        await tx
+          .update(questions)
+          .set({ examOnly: dto.exam_only })
+          .where(eq(questions.id, q.id));
+      }
+      if (dto.exam_ids) {
+        const examOnly = dto.exam_only ?? q.examOnly;
+        if (examOnly && q.liveVersionId && dto.exam_ids.length === 0)
+          throw new ApiError(
+            HttpStatus.UNPROCESSABLE_ENTITY,
+            'exam_tag_required',
+            'A published exam-only question must keep at least one exam tag',
+          );
+        await this.setTags(tx, actor, q.id, dto.exam_ids);
+      }
       await tx
         .update(questionVersions)
         .set({ ...patch, updatedBy: actor.id, updatedAt: new Date() })
@@ -304,11 +365,13 @@ export class QuestionsService {
 
   approve(actor: Actor, id: string, note?: string) {
     return this.act(actor, id, 'approve', async (tx, _q, v) => {
-      if (
+      const ownWork =
         v.createdBy === actor.id ||
         v.updatedBy === actor.id ||
-        (await this.hasEdited(tx, actor, id, v.id))
-      ) {
+        (await this.hasEdited(tx, actor, id, v.id));
+      // A reviewer cannot approve their own work. An admin can; the audit
+      // row says so.
+      if (ownWork && !isAdmin(actor)) {
         throw ApiError.forbidden(
           'A reviewer cannot approve a version they wrote or edited',
         );
@@ -320,7 +383,10 @@ export class QuestionsService {
         reviewerId: actor.id,
       });
       await this.recordDecision(tx, actor, v, 'approved', note ?? null);
-      return { version_id: v.id };
+      return {
+        version_id: v.id,
+        ...(ownWork ? { admin_override: 'approved own work' } : {}),
+      };
     });
   }
 
@@ -331,6 +397,16 @@ export class QuestionsService {
         throw ApiError.incomplete([
           { reason: 'The version has no recorded review' },
         ]);
+      // The reviewer and the publisher must be different people. An admin
+      // may publish a version they approved; the audit row says so.
+      const sameAsReviewer = v.reviewerId === actor.id;
+      if (sameAsReviewer && !isAdmin(actor)) {
+        throw ApiError.forbidden(
+          'The reviewer of a version cannot also publish it',
+        );
+      }
+      // An exam-only question needs an exam tag first.
+      await requirePublishable(tx, q.id);
       const now = new Date();
       if (q.liveVersionId) {
         await tx
@@ -346,7 +422,13 @@ export class QuestionsService {
         .update(questions)
         .set({ liveVersionId: v.id, retiredAt: null, updatedAt: now })
         .where(eq(questions.id, q.id));
-      return { version_id: v.id, superseded_version_id: q.liveVersionId };
+      return {
+        version_id: v.id,
+        superseded_version_id: q.liveVersionId,
+        ...(sameAsReviewer
+          ? { admin_override: 'published a version the same admin approved' }
+          : {}),
+      };
     });
   }
 
@@ -477,7 +559,8 @@ export class QuestionsService {
         action: AUDIT_ACTIONS[action],
         entityType: 'question',
         entityId: id,
-        data,
+        // Admin actions say so in the log, next to the actor id and time.
+        data: isAdmin(actor) ? { ...data, actor_role: 'admin' } : data,
       });
       return this.get(id, tx);
     });
@@ -560,6 +643,132 @@ export class QuestionsService {
         [{ field: 'topic_id', reason: 'No topic has this id' }],
       );
     }
+  }
+
+  /** The database refuses an alternate that is also correct; say so as a 422 instead. */
+  private requireDisjoint(correct: string[], alternates: string[]) {
+    if (alternates.some((a) => correct.includes(a)))
+      throw new ApiError(
+        HttpStatus.UNPROCESSABLE_ENTITY,
+        'validation_failed',
+        'An alternate answer cannot also be a correct answer',
+        [
+          {
+            field: 'alternate_correct_option_ids',
+            reason: 'Overlaps correct_option_ids',
+          },
+        ],
+      );
+  }
+
+  /**
+   * Replaces a question's exam tags at any stage of its life (tags are not
+   * versioned). A published exam-only question must keep at least one.
+   */
+  async setExamTags(
+    actor: Actor,
+    id: string,
+    examIds: string[],
+  ): Promise<QuestionDetailDto> {
+    return this.db.transaction(async (tx) => {
+      const q = await this.lockQuestion(tx, id);
+      // Tags decide where a question may be used and are not versioned, so
+      // anyone but an admin may change them only while the question is still
+      // an unpublished draft (or has changes requested). Otherwise a tag
+      // change would skip review.
+      if (!isAdmin(actor)) {
+        const [latest] = await tx
+          .select({ status: questionVersions.status })
+          .from(questionVersions)
+          .where(eq(questionVersions.questionId, id))
+          .orderBy(desc(questionVersions.versionNo))
+          .limit(1);
+        const editable =
+          latest !== undefined &&
+          (latest.status === 'draft' || latest.status === 'changes_requested');
+        if (q.liveVersionId || !editable)
+          throw ApiError.forbidden(
+            'Exam tags can be changed only while the question is an unpublished draft; ask an admin',
+          );
+      }
+      await this.requireExams(tx, examIds);
+      if (q.examOnly && q.liveVersionId && examIds.length === 0)
+        throw new ApiError(
+          HttpStatus.UNPROCESSABLE_ENTITY,
+          'exam_tag_required',
+          'A published exam-only question must keep at least one exam tag',
+        );
+      await this.setTags(tx, actor, id, examIds);
+      return this.get(id, tx);
+    });
+  }
+
+  private async requireSource(tx: Tx, sourceId: string | null | undefined) {
+    if (!sourceId) return;
+    const [s] = await tx
+      .select({ id: contentSources.id })
+      .from(contentSources)
+      .where(eq(contentSources.id, sourceId))
+      .limit(1);
+    if (!s)
+      throw new ApiError(
+        HttpStatus.UNPROCESSABLE_ENTITY,
+        'validation_failed',
+        'The content source does not exist',
+        [{ field: 'content_source_id', reason: 'No such content source' }],
+      );
+  }
+
+  private async requireExams(tx: Tx, ids: string[] | undefined) {
+    if (!ids?.length) return;
+    const found = await tx
+      .select({ id: exams.id })
+      .from(exams)
+      .where(inArray(exams.id, ids));
+    if (found.length !== new Set(ids).size)
+      throw new ApiError(
+        HttpStatus.UNPROCESSABLE_ENTITY,
+        'validation_failed',
+        'An exam does not exist',
+        [{ field: 'exam_ids', reason: 'Unknown exam id' }],
+      );
+  }
+
+  /** Makes [examIds] the question's exam tags, adding and removing as needed. */
+  private async setTags(
+    tx: Tx,
+    actor: Actor,
+    questionId: string,
+    examIds: string[],
+  ) {
+    const want = new Set(examIds);
+    const have = await tx
+      .select({ examId: examQuestionTags.examId })
+      .from(examQuestionTags)
+      .where(eq(examQuestionTags.questionId, questionId));
+    const haveIds = new Set(have.map((h) => h.examId));
+    const add = [...want].filter((e) => !haveIds.has(e));
+    const drop = [...haveIds].filter((e) => !want.has(e));
+    for (const examId of add)
+      await tx
+        .insert(examQuestionTags)
+        .values({ questionId, examId, createdBy: actor.id });
+    if (drop.length)
+      await tx
+        .delete(examQuestionTags)
+        .where(
+          and(
+            eq(examQuestionTags.questionId, questionId),
+            inArray(examQuestionTags.examId, drop),
+          ),
+        );
+    if (add.length || drop.length)
+      await this.audit.record(tx, actor, {
+        action: 'question.exam_tags_changed',
+        entityType: 'question',
+        entityId: questionId,
+        data: { added: add, removed: drop },
+      });
   }
 
   private async requireComplete(tx: Tx, v: VersionRow) {

@@ -1,0 +1,173 @@
+{
+ "new": [
+  {
+   "id": "01a20229-402e-75ac-90f3-bcc484bcdc8c",
+   "email": "keerthumock123@gmail.com",
+   "display_name": "Keerthana",
+   "password_hash": "scrypt$16384$8$1$RtubwlfzAv7MT2NkMCnkkQ$wqbvS36uIIqa0RRlFcaiskuQ1_2KD0e2C2SlKuorGuK0EeGHqxHafYJlsJEX8YvpVyCOyQYAocjiuGd0MtMhxA",
+   "roles": [
+    "learner"
+   ],
+   "is_active": true,
+   "created_at": "2026-11-22T07:29:47.565000Z",
+   "updated_at": "2026-11-22T07:29:52.446000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 1,
+    "off": 9,
+    "xmin": 7156,
+    "xmax": 7156,
+    "ctid": "1,9"
+   }
+  },
+  {
+   "id": "01a1f230-9148-76e8-b267-6c9783a18a17",
+   "email": "keerthtest@gmail.coim",
+   "display_name": "Keerth test",
+   "password_hash": "scrypt$16384$8$1$n2RZ2pm_HyhS-zWjpN7avw$lwkuXDNSvh_A_N6ElbXvE5QkUOsZDckYaAI6hI3djSX3_tJmEadBibhdoFXK7wG0i2ljFul9nJA0ZH7ys_he5A",
+   "roles": [
+    "learner"
+   ],
+   "is_active": true,
+   "created_at": "2026-11-19T05:03:51.623000Z",
+   "updated_at": "2026-11-19T05:03:56.033000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 1,
+    "off": 47,
+    "xmin": 3836,
+    "xmax": 4538,
+    "ctid": "1,47"
+   }
+  },
+  {
+   "id": "01a1f3c3-3ffe-74e0-8a54-b4bd45d71d83",
+   "email": "keerthtest@gmail.com",
+   "display_name": "Keerth test",
+   "password_hash": "scrypt$16384$8$1$QnJBI3KKxBhxmsObSGpVjg$Z0XsZhUKoIhwPwjmGJ2hGBVOmpisOVTYX4mZ_LhwOjem_B9sYzzYIzx_bMPn3V0tWYAW6upv9Ezx6EmYKt1tEw",
+   "roles": [
+    "learner"
+   ],
+   "is_active": true,
+   "created_at": "2026-11-19T12:23:41.821000Z",
+   "updated_at": "2026-11-19T12:23:46.320000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 1,
+    "off": 49,
+    "xmin": 4547,
+    "xmax": 4566,
+    "ctid": "1,49"
+   }
+  },
+  {
+   "id": "01a201a3-890d-773b-baf6-45f85695758d",
+   "email": "keerthana123@gmail.com",
+   "display_name": "Keerthana",
+   "password_hash": "scrypt$16384$8$1$FxhuFX3y7Qg_KKbm6PTFOw$dn6XYzUMYqU4BDHOd5GqLZhPeiZReH2pPhXUEKgPd-K6oZpc4KaLZ0zlEgs-3eX0fhXuJbuAOShcQRC3B6nDrw",
+   "roles": [
+    "learner"
+   ],
+   "is_active": true,
+   "created_at": "2026-11-22T05:03:44.396000Z",
+   "updated_at": "2026-11-22T05:03:53.262000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 1,
+    "off": 53,
+    "xmin": 6862,
+    "xmax": 6888,
+    "ctid": "1,53"
+   }
+  },
+  {
+   "id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "email": "keerthtest1@gmail.com",
+   "display_name": "Keerthu",
+   "password_hash": "scrypt$16384$8$1$tvdpznLiFTHU6ow689Ntbw$UOVWwxtL0zgdPY4lW-Mob2nGX59g5hZ8FfAtCnJNrZsjH2zRKSxAkiovVYWgQrarzbGKL7RCW_tjN7mHhepZYQ",
+   "roles": [
+    "learner"
+   ],
+   "is_active": true,
+   "created_at": "2026-11-19T14:21:43.004000Z",
+   "updated_at": "2026-11-20T15:50:16.420000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 1,
+    "off": 54,
+    "xmin": 6845,
+    "xmax": 7145,
+    "ctid": "1,54"
+   }
+  },
+  {
+   "id": "01a201ab-bae8-7359-abff-3bbf32cd8595",
+   "email": "keerthu123@gmail.com",
+   "display_name": "Keerthuuu",
+   "password_hash": "scrypt$16384$8$1$FwUew9c5pW73zWzZCKkn1w$fDKOHMBWv61GfVwtSAkiYkwEv_2Ynfqx5wa_WFdAbNnEggz1uxQyQL240KXZzKBpLzEvQlxnluUuiZ9klu7jvg",
+   "roles": [
+    "learner"
+   ],
+   "is_active": true,
+   "created_at": "2026-11-22T05:12:41.447000Z",
+   "updated_at": "2026-11-22T05:12:50.510000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 1,
+    "off": 58,
+    "xmin": 6910,
+    "xmax": 7015,
+    "ctid": "1,58"
+   }
+  }
+ ],
+ "modified": [
+  {
+   "key": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+   "changedFields": [
+    "password_hash",
+    "updated_at"
+   ],
+   "before": {
+    "id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+    "email": "keerthana.r2022cse@sece.ac.in",
+    "display_name": "anu",
+    "password_hash": "scrypt$16384$8$1$9fCwzpDlgAG3e5CUEIjbpw$tNDDc0zY-mGPsj9oPBPKxqbkZ8vVvbrpJLe_-a3ZqLu9xKvOjHcfYmMtsaJbXWS9pdLT8gQd7jonM90adoQ_VA",
+    "roles": [
+     "learner"
+    ],
+    "is_active": true,
+    "created_at": "2026-11-16T08:54:44.013000Z",
+    "updated_at": "2026-11-16T16:11:19.124000Z"
+   },
+   "after": {
+    "id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+    "email": "keerthana.r2022cse@sece.ac.in",
+    "display_name": "anu",
+    "password_hash": "scrypt$16384$8$1$FizzMloSp83ElZVrAH2p0w$CbPxAYYJw2Yulkut-ZxoEL88rQ6pNWeuzkSMuzPedM03Dgn7MHVrjstyNrY4cnYNGqbADZwXTiAfWUyu6_Pzog",
+    "roles": [
+     "learner"
+    ],
+    "is_active": true,
+    "created_at": "2026-11-16T08:54:44.013000Z",
+    "updated_at": "2026-11-22T06:28:28.292000Z",
+    "_confidence": "high",
+    "_source": "heap-file",
+    "_loc": {
+     "blk": 1,
+     "off": 59,
+     "xmin": 7024,
+     "xmax": 7140,
+     "ctid": "1,59"
+    }
+   }
+  }
+ ],
+ "removedSinceNov19": []
+}

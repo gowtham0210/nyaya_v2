@@ -8,6 +8,7 @@ import {
   index,
   integer,
   jsonb,
+  numeric,
   pgEnum,
   pgTable,
   primaryKey,
@@ -129,6 +130,11 @@ export const acts = pgTable('acts', {
   year: smallint('year'),
   jurisdiction: text('jurisdiction').notNull().default('IN'),
   isActive: boolean('is_active').notNull().default(true),
+  /** The day the Act stopped applying (e.g. a code replaced by a newer one). */
+  repealedOn: date('repealed_on'),
+  replacedByActId: uuid('replaced_by_act_id').references(
+    (): AnyPgColumn => acts.id,
+  ),
   createdAt: createdAt(),
   updatedAt: updatedAt(),
 });
@@ -150,6 +156,87 @@ export const topics = pgTable(
     updatedAt: updatedAt(),
   },
   (t) => [index('topics_subject_idx').on(t.subjectId)],
+);
+
+// ---------------------------------------------------------------- provenance
+
+export const CONTENT_SOURCE_KINDS = [
+  'official_bci',
+  'third_party',
+  'original',
+] as const;
+export type ContentSourceKind = (typeof CONTENT_SOURCE_KINDS)[number];
+export const contentSourceKind = pgEnum(
+  'content_source_kind',
+  CONTENT_SOURCE_KINDS,
+);
+
+/**
+ * Historical licence record. The application no longer reads, shows or
+ * changes it and nothing is gated on it; the column and its values are kept
+ * only so existing records are preserved.
+ */
+export const LICENSE_STATUSES = [
+  'pending',
+  'permission_granted',
+  'permitted_by_terms',
+  'blocked',
+] as const;
+export type LicenseStatus = (typeof LICENSE_STATUSES)[number];
+export const licenseStatus = pgEnum('license_status', LICENSE_STATUSES);
+
+/**
+ * Which law a question is about: the codes in force before 1 July 2024 (IPC,
+ * CrPC, Evidence Act), the newer ones (BNS, BNSS, BSA), both, or neither. It
+ * is a label only; the question's wording is never changed.
+ */
+export const LAW_REGIMES = [
+  'old_codes',
+  'new_codes',
+  'both',
+  'neutral',
+] as const;
+export type LawRegime = (typeof LAW_REGIMES)[number];
+export const lawRegime = pgEnum('law_regime', LAW_REGIMES);
+
+/**
+ * A document or publisher that content came from: attribution and provenance
+ * only. It never blocks importing or publishing. The license_* columns are a
+ * preserved historical record that the application no longer uses. Content
+ * written in-house has no source row.
+ */
+export const contentSources = pgTable(
+  'content_sources',
+  {
+    id: uuid('id').primaryKey(),
+    kind: contentSourceKind('kind').notNull(),
+    title: text('title').notNull(),
+    publisher: text('publisher'),
+    url: text('url'),
+    retrievedOn: date('retrieved_on'),
+    /** SHA-256 of the source document, as lower-case hex. */
+    sha256: text('sha256'),
+    licenseStatus: licenseStatus('license_status').notNull().default('pending'),
+    licenseNote: text('license_note'),
+    allowedUses: text('allowed_uses')
+      .array()
+      .notNull()
+      .default(sql`'{}'::text[]`),
+    createdBy: uuid('created_by').references(() => users.id),
+    createdAt: createdAt(),
+    updatedAt: updatedAt(),
+  },
+  (t) => [
+    index('content_sources_license_idx').on(t.licenseStatus),
+    check(
+      'content_sources_url_https',
+      sql`${t.url} is null or ${t.url} ~ '^https://'`,
+    ),
+    check(
+      'content_sources_sha256_hex',
+      sql`${t.sha256} is null or ${t.sha256} ~ '^[0-9a-f]{64}$'`,
+    ),
+  ],
 );
 
 // ---------------------------------------------------------------- questions
@@ -188,6 +275,12 @@ export const questions = pgTable('questions', {
   ),
   createdBy: uuid('created_by').references(() => users.id),
   retiredAt: timestamp('retired_at', { withTimezone: true }),
+  /**
+   * True for questions meant only for the mock exams. Every game mode skips
+   * them. An ordinary question stays false and is shared with an exam by
+   * tagging it (exam_question_tags).
+   */
+  examOnly: boolean('exam_only').notNull().default(false),
   createdAt: createdAt(),
   updatedAt: updatedAt(),
 });
@@ -228,6 +321,25 @@ export const questionVersions = pgTable(
     provisionReference: text('provision_reference'),
     validFrom: date('valid_from'),
     validTo: date('valid_to'),
+    /**
+     * Further options an official key also accepts (any one of them counts).
+     * Never overlaps correct_option_ids; each must be one of the options.
+     */
+    alternateCorrectOptionIds: text('alternate_correct_option_ids')
+      .array()
+      .notNull()
+      .default(sql`'{}'::text[]`),
+    /** Exams show the options in their stored order (e.g. "Both A and B"). */
+    lockOptionOrder: boolean('lock_option_order').notNull().default(false),
+    lawRegime: lawRegime('law_regime').notNull().default('neutral'),
+    /** A reviewer's note on the law's current state; never part of the question. */
+    currencyNote: text('currency_note'),
+    /** Where the content came from (attribution only). */
+    contentSourceId: uuid('content_source_id').references(
+      () => contentSources.id,
+    ),
+    /** Optional key to keep near-duplicate questions out of one mock. */
+    conceptKey: text('concept_key'),
     verifiedAt: timestamp('verified_at', { withTimezone: true }),
     reviewerId: uuid('reviewer_id').references(() => users.id),
     changeNote: text('change_note'),
@@ -248,7 +360,29 @@ export const questionVersions = pgTable(
     ),
     index('question_versions_status_idx').on(t.status),
     index('question_versions_topic_idx').on(t.topicId),
+    index('question_versions_content_source_idx').on(t.contentSourceId),
     check('difficulty_range', sql`${t.difficulty} between 1 and 3`),
+    check(
+      'alternate_disjoint_from_correct',
+      sql`not (${t.alternateCorrectOptionIds} && ${t.correctOptionIds})`,
+    ),
+  ],
+);
+
+/** The Acts a question version is about (for old/new code labels and search). */
+export const questionVersionActs = pgTable(
+  'question_version_acts',
+  {
+    versionId: uuid('version_id')
+      .notNull()
+      .references(() => questionVersions.id),
+    actId: uuid('act_id')
+      .notNull()
+      .references(() => acts.id),
+  },
+  (t) => [
+    primaryKey({ columns: [t.versionId, t.actId] }),
+    index('question_version_acts_act_idx').on(t.actId),
   ],
 );
 
@@ -883,8 +1017,17 @@ export const contentReports = pgTable(
 export const IMPORT_FORMATS = ['csv', 'xlsx'] as const;
 export const importFormat = pgEnum('import_format', IMPORT_FORMATS);
 
-/** What happened to one row: a new draft, an existing question, or nothing. */
-export const IMPORT_OUTCOMES = ['created', 'skipped', 'failed'] as const;
+/**
+ * What happened to one row: a new draft, an existing question, nothing, or
+ * (exam import only) a question the exam body withdrew: no question is made,
+ * and the row becomes a withdrawn paper position when the paper is built.
+ */
+export const IMPORT_OUTCOMES = [
+  'created',
+  'skipped',
+  'failed',
+  'withdrawn',
+] as const;
 export type ImportOutcome = (typeof IMPORT_OUTCOMES)[number];
 export const importOutcome = pgEnum('import_outcome', IMPORT_OUTCOMES);
 
@@ -904,6 +1047,10 @@ export const importJobs = pgTable('import_jobs', {
   fileName: text('file_name').notNull(),
   fileSha256: text('file_sha256').notNull().unique(),
   format: importFormat('format').notNull(),
+  /** Where the file's content came from, if it is not written in-house. */
+  contentSourceId: uuid('content_source_id').references(
+    () => contentSources.id,
+  ),
   createdAt: createdAt(),
 });
 
@@ -968,5 +1115,596 @@ export const appOpens = pgTable(
   (t) => [
     primaryKey({ columns: [t.userId, t.day] }),
     index('app_opens_day_idx').on(t.day),
+  ],
+);
+
+// ---------------------------------------------------------------- mock exams
+
+/** A formal exam that learners can practise: AIBE first, then CLAT and AILET. */
+export const exams = pgTable('exams', {
+  id: uuid('id').primaryKey(),
+  slug: text('slug').notNull().unique(),
+  name: text('name').notNull(),
+  shortName: text('short_name').notNull(),
+  isActive: boolean('is_active').notNull().default(false),
+  sortOrder: integer('sort_order').notNull().default(0),
+  instructions: text('instructions').notNull().default(''),
+  createdAt: createdAt(),
+  updatedAt: updatedAt(),
+});
+
+export const BLUEPRINT_STATUSES = ['draft', 'published', 'retired'] as const;
+export type BlueprintStatus = (typeof BLUEPRINT_STATUSES)[number];
+export const blueprintStatus = pgEnum('blueprint_status', BLUEPRINT_STATUSES);
+
+/**
+ * How sure we are that a blueprint matches the exam's real rules. Timed
+ * mode needs official_confirmed; an inferred or unverified blueprint is
+ * practice-only until a person approves it.
+ */
+export const CONFIG_STATUSES = [
+  'official_confirmed',
+  'inferred',
+  'unverified',
+] as const;
+export type ConfigStatus = (typeof CONFIG_STATUSES)[number];
+export const configStatus = pgEnum('config_status', CONFIG_STATUSES);
+
+export const SECTION_NAVIGATIONS = ['free', 'locked_order'] as const;
+export const sectionNavigation = pgEnum(
+  'section_navigation',
+  SECTION_NAVIGATIONS,
+);
+
+/**
+ * How a randomised mock treats questions about the old codes (IPC, CrPC,
+ * Evidence Act). A random mock tests current law, so it leaves old-code-only
+ * questions out under every value except include_all. any (the default),
+ * exclude_old and prefer_new all leave them out; prefer_new is not a
+ * permission to include them. Fixed historical papers are not filtered: they
+ * keep their original questions.
+ */
+export const LAW_REGIME_FILTERS = [
+  'any',
+  'exclude_old',
+  'prefer_new',
+  'include_all',
+] as const;
+export type LawRegimeFilter = (typeof LAW_REGIME_FILTERS)[number];
+export const lawRegimeFilter = pgEnum('law_regime_filter', LAW_REGIME_FILTERS);
+
+/** How a question with more than one accepted answer is scored. */
+export const ALTERNATE_ANSWER_POLICIES = ['any_accepted'] as const;
+export const alternateAnswerPolicy = pgEnum(
+  'alternate_answer_policy',
+  ALTERNATE_ANSWER_POLICIES,
+);
+
+/**
+ * The rules of one exam paper format: length, timer and marking. A published
+ * blueprint never changes; a change is a new version. Each fixed paper points
+ * to its own blueprint, so different years can differ.
+ */
+export const examBlueprints = pgTable(
+  'exam_blueprints',
+  {
+    id: uuid('id').primaryKey(),
+    examId: uuid('exam_id')
+      .notNull()
+      .references(() => exams.id),
+    code: text('code').notNull(),
+    version: integer('version').notNull().default(1),
+    status: blueprintStatus('status').notNull().default('draft'),
+    /**
+     * The one blueprint randomised mocks of this exam use. At most one per
+     * exam, and only a published one; it is set and cleared on purpose, never
+     * as a side effect of publishing.
+     */
+    isCurrent: boolean('is_current').notNull().default(false),
+    durationSeconds: integer('duration_seconds').notNull(),
+    totalQuestions: integer('total_questions').notNull(),
+    marksCorrect: numeric('marks_correct', {
+      precision: 5,
+      scale: 2,
+    }).notNull(),
+    /** Marks taken off for a wrong answer, as a positive number; 0 means none. */
+    negativeMarks: numeric('negative_marks', { precision: 5, scale: 2 })
+      .notNull()
+      .default('0'),
+    marksUnanswered: numeric('marks_unanswered', { precision: 5, scale: 2 })
+      .notNull()
+      .default('0'),
+    passPercentGeneral: numeric('pass_percent_general', {
+      precision: 5,
+      scale: 2,
+    }),
+    passPercentReserved: numeric('pass_percent_reserved', {
+      precision: 5,
+      scale: 2,
+    }),
+    sectionNavigation: sectionNavigation('section_navigation')
+      .notNull()
+      .default('free'),
+    lawRegimeFilter: lawRegimeFilter('law_regime_filter')
+      .notNull()
+      .default('any'),
+    alternateAnswerPolicy: alternateAnswerPolicy('alternate_answer_policy')
+      .notNull()
+      .default('any_accepted'),
+    configStatus: configStatus('config_status').notNull().default('unverified'),
+    /** Which document the rules come from, e.g. a BCI notice or booklet. */
+    configSource: text('config_source'),
+    configCheckedOn: date('config_checked_on'),
+    createdBy: uuid('created_by').references(() => users.id),
+    createdAt: createdAt(),
+    updatedAt: updatedAt(),
+  },
+  (t) => [
+    uniqueIndex('exam_blueprints_code_version_idx').on(
+      t.examId,
+      t.code,
+      t.version,
+    ),
+    index('exam_blueprints_exam_idx').on(t.examId, t.status),
+    uniqueIndex('exam_blueprints_current_idx')
+      .on(t.examId)
+      .where(sql`${t.isCurrent}`),
+    check(
+      'exam_blueprints_current_published_check',
+      sql`not ${t.isCurrent} or ${t.status} = 'published'`,
+    ),
+    check('exam_blueprints_duration_check', sql`${t.durationSeconds} > 0`),
+    check('exam_blueprints_total_check', sql`${t.totalQuestions} > 0`),
+    check(
+      'exam_blueprints_marks_check',
+      sql`${t.marksCorrect} >= 0 and ${t.negativeMarks} >= 0 and ${t.marksUnanswered} >= 0`,
+    ),
+    check(
+      'exam_blueprints_pass_check',
+      sql`(${t.passPercentGeneral} is null or ${t.passPercentGeneral} between 0 and 100)
+        and (${t.passPercentReserved} is null or ${t.passPercentReserved} between 0 and 100)`,
+    ),
+  ],
+);
+
+/** One part of a blueprint (for AIBE, a group of the BCI syllabus). */
+export const examSections = pgTable(
+  'exam_sections',
+  {
+    id: uuid('id').primaryKey(),
+    blueprintId: uuid('blueprint_id')
+      .notNull()
+      .references(() => examBlueprints.id),
+    code: text('code').notNull(),
+    name: text('name').notNull(),
+    position: integer('position').notNull(),
+    questionCount: integer('question_count').notNull(),
+    /** Set only when a section has its own timer. */
+    durationSeconds: integer('duration_seconds'),
+    /** Set only when a section is marked differently from the blueprint. */
+    marksCorrect: numeric('marks_correct', { precision: 5, scale: 2 }),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    uniqueIndex('exam_sections_code_idx').on(t.blueprintId, t.code),
+    uniqueIndex('exam_sections_position_idx').on(t.blueprintId, t.position),
+    check('exam_sections_count_check', sql`${t.questionCount} > 0`),
+    check(
+      'exam_sections_duration_check',
+      sql`${t.durationSeconds} is null or ${t.durationSeconds} > 0`,
+    ),
+  ],
+);
+
+/** Which topics a section draws from, and how many questions each may supply. */
+export const examSectionTopics = pgTable(
+  'exam_section_topics',
+  {
+    sectionId: uuid('section_id')
+      .notNull()
+      .references(() => examSections.id),
+    topicId: uuid('topic_id')
+      .notNull()
+      .references(() => topics.id),
+    minCount: integer('min_count').notNull().default(0),
+    maxCount: integer('max_count'),
+    weight: integer('weight').notNull().default(1),
+  },
+  (t) => [
+    primaryKey({ columns: [t.sectionId, t.topicId] }),
+    index('exam_section_topics_topic_idx').on(t.topicId),
+    check(
+      'exam_section_topics_range_check',
+      sql`${t.minCount} >= 0 and (${t.maxCount} is null or ${t.maxCount} >= ${t.minCount}) and ${t.weight} > 0`,
+    ),
+  ],
+);
+
+/**
+ * Marks a question as usable in an exam's mocks. Every exam-only question
+ * needs at least one; an ordinary question is shared by tagging it.
+ */
+export const examQuestionTags = pgTable(
+  'exam_question_tags',
+  {
+    questionId: uuid('question_id')
+      .notNull()
+      .references(() => questions.id),
+    examId: uuid('exam_id')
+      .notNull()
+      .references(() => exams.id),
+    createdBy: uuid('created_by').references(() => users.id),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.questionId, t.examId] }),
+    index('exam_question_tags_exam_idx').on(t.examId),
+  ],
+);
+
+// ---------------------------------------------------------------- fixed exam papers
+
+/** A paper is edited as a draft; publishing freezes it, and a change is a new revision. */
+export const PAPER_STATUSES = ['draft', 'published', 'retired'] as const;
+export type PaperStatus = (typeof PAPER_STATUSES)[number];
+export const paperStatus = pgEnum('paper_status', PAPER_STATUSES);
+
+/**
+ * How a position scores when the exam body withdrew its question. Until the
+ * rule for a paper is confirmed it is unscored: the position is left out of
+ * the marks and the percentage.
+ */
+export const WITHDRAWN_POLICIES = ['unscored', 'award_all'] as const;
+export type WithdrawnPolicy = (typeof WITHDRAWN_POLICIES)[number];
+export const withdrawnPolicy = pgEnum('withdrawn_policy', WITHDRAWN_POLICIES);
+
+export const PAPER_ANSWER_STATUSES = [
+  'keyed',
+  'multi_accepted',
+  'withdrawn',
+] as const;
+export type PaperAnswerStatus = (typeof PAPER_ANSWER_STATUSES)[number];
+export const paperAnswerStatus = pgEnum(
+  'paper_answer_status',
+  PAPER_ANSWER_STATUSES,
+);
+
+export const KEY_HISTORY_KINDS = [
+  'provisional',
+  'final',
+  'revised',
+  'withdrawn',
+] as const;
+export type KeyHistoryKind = (typeof KEY_HISTORY_KINDS)[number];
+export const keyHistoryKind = pgEnum('key_history_kind', KEY_HISTORY_KINDS);
+
+/**
+ * One previous-year paper (or one set of it), as it was set. Revision 1 is
+ * the first record; a later correction is a new row pointing back to the one
+ * it replaces. Once published a paper is frozen: the service refuses any
+ * change to it or its positions.
+ */
+export const examPapers = pgTable(
+  'exam_papers',
+  {
+    id: uuid('id').primaryKey(),
+    examId: uuid('exam_id')
+      .notNull()
+      .references(() => exams.id),
+    /** Stable across revisions, e.g. aibe-xviii-set-a. */
+    code: text('code').notNull(),
+    revision: integer('revision').notNull().default(1),
+    supersedesId: uuid('supersedes_id').references(
+      (): AnyPgColumn => examPapers.id,
+    ),
+    title: text('title').notNull(),
+    /** The edition as the body names it, e.g. XVIII. */
+    edition: text('edition'),
+    year: integer('year'),
+    /** The booklet set, e.g. A. */
+    setLabel: text('set_label'),
+    status: paperStatus('status').notNull().default('draft'),
+    frozenAt: timestamp('frozen_at', { withTimezone: true }),
+    /** The blueprint whose rules this paper follows, when one applies. */
+    blueprintId: uuid('blueprint_id').references(() => examBlueprints.id),
+    totalQuestions: integer('total_questions').notNull(),
+    durationSeconds: integer('duration_seconds'),
+    /**
+     * An admin-set clock for practising against this paper. It is not the
+     * official exam time and never makes the paper's rules "confirmed": the
+     * official timed mode still needs duration_seconds and official_confirmed.
+     */
+    practiceTimerSeconds: integer('practice_timer_seconds'),
+    marksCorrect: numeric('marks_correct', { precision: 5, scale: 2 }),
+    negativeMarks: numeric('negative_marks', { precision: 5, scale: 2 }),
+    marksUnanswered: numeric('marks_unanswered', { precision: 5, scale: 2 }),
+    withdrawnPolicy: withdrawnPolicy('withdrawn_policy')
+      .notNull()
+      .default('unscored'),
+    /** A person has confirmed the withdrawn rule from the exam body's notice. */
+    withdrawnPolicyConfirmed: boolean('withdrawn_policy_confirmed')
+      .notNull()
+      .default(false),
+    configStatus: configStatus('config_status').notNull().default('unverified'),
+    sourceNote: text('source_note'),
+    createdBy: uuid('created_by').references(() => users.id),
+    createdAt: createdAt(),
+    updatedAt: updatedAt(),
+  },
+  (t) => [
+    uniqueIndex('exam_papers_code_revision_idx').on(
+      t.examId,
+      t.code,
+      t.revision,
+    ),
+    uniqueIndex('exam_papers_published_idx')
+      .on(t.examId, t.code)
+      .where(sql`${t.status} = 'published'`),
+    index('exam_papers_exam_idx').on(t.examId, t.status),
+    check('exam_papers_total_check', sql`${t.totalQuestions} > 0`),
+    check(
+      'exam_papers_marks_check',
+      sql`(${t.marksCorrect} is null or ${t.marksCorrect} >= 0)
+        and (${t.negativeMarks} is null or ${t.negativeMarks} >= 0)
+        and (${t.marksUnanswered} is null or ${t.marksUnanswered} >= 0)`,
+    ),
+    check(
+      'exam_papers_duration_check',
+      sql`${t.durationSeconds} is null or ${t.durationSeconds} > 0`,
+    ),
+    check(
+      'exam_papers_frozen_check',
+      sql`(${t.status} = 'draft') = (${t.frozenAt} is null)`,
+    ),
+    check(
+      'exam_papers_award_all_check',
+      sql`${t.withdrawnPolicy} <> 'award_all' or ${t.withdrawnPolicyConfirmed}`,
+    ),
+  ],
+);
+
+/**
+ * One position of a paper. It pins an exact, immutable question version, or
+ * is a placeholder for a question the body withdrew (no version).
+ */
+export const examPaperQuestions = pgTable(
+  'exam_paper_questions',
+  {
+    id: uuid('id').primaryKey(),
+    paperId: uuid('paper_id')
+      .notNull()
+      .references(() => examPapers.id),
+    position: integer('position').notNull(),
+    questionId: uuid('question_id').references(() => questions.id),
+    questionVersionId: uuid('question_version_id').references(
+      () => questionVersions.id,
+    ),
+    answerStatus: paperAnswerStatus('answer_status').notNull(),
+    /** The number the question carried in the original paper. */
+    originalRef: text('original_ref'),
+    /** Option ids in the order shown; null means the version's own order. */
+    optionOrder: jsonb('option_order').$type<string[]>(),
+    /** How the original labelled options, e.g. "A-D" or "1-4". */
+    originalLabelScheme: text('original_label_scheme'),
+    /** Where this position's key was taken from, in the body's words. */
+    officialKeyText: text('official_key_text'),
+    sourceRef: text('source_ref'),
+    withdrawnNote: text('withdrawn_note'),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    uniqueIndex('exam_paper_questions_position_idx').on(t.paperId, t.position),
+    index('exam_paper_questions_version_idx').on(t.questionVersionId),
+    check('exam_paper_questions_position_check', sql`${t.position} >= 1`),
+    check(
+      'exam_paper_questions_withdrawn_check',
+      sql`(${t.answerStatus} = 'withdrawn') = (${t.questionVersionId} is null)
+        and (${t.questionVersionId} is null) = (${t.questionId} is null)`,
+    ),
+  ],
+);
+
+/**
+ * Append-only record of what the official key said for a position, and where
+ * that came from. The newest row is the effective key; a position without
+ * rows uses the pinned version's own key.
+ */
+export const examPaperKeyHistory = pgTable(
+  'exam_paper_key_history',
+  {
+    id: uuid('id').primaryKey(),
+    paperId: uuid('paper_id')
+      .notNull()
+      .references(() => examPapers.id),
+    paperQuestionId: uuid('paper_question_id')
+      .notNull()
+      .references(() => examPaperQuestions.id),
+    kind: keyHistoryKind('kind').notNull(),
+    /** Every option the body accepted; empty for a withdrawn question. */
+    acceptedOptionIds: jsonb('accepted_option_ids')
+      .$type<string[]>()
+      .notNull()
+      .default([]),
+    contentSourceId: uuid('content_source_id').references(
+      () => contentSources.id,
+    ),
+    /** The document, in words: title, notice number, page. */
+    sourceDocumentRef: text('source_document_ref'),
+    retrievedOn: date('retrieved_on'),
+    sourceSha256: text('source_sha256'),
+    note: text('note'),
+    recordedBy: uuid('recorded_by').references(() => users.id),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index('exam_paper_key_history_pq_idx').on(t.paperQuestionId, t.createdAt),
+    index('exam_paper_key_history_paper_idx').on(t.paperId),
+    check(
+      'exam_paper_key_history_sha_check',
+      sql`${t.sourceSha256} is null or ${t.sourceSha256} ~ '^[0-9a-f]{64}$'`,
+    ),
+  ],
+);
+
+// ---------------------------------------------------------------- formal exam attempts
+
+export const EXAM_ATTEMPT_KINDS = ['fixed_paper', 'random_mock'] as const;
+export type ExamAttemptKind = (typeof EXAM_ATTEMPT_KINDS)[number];
+export const examAttemptKind = pgEnum('exam_attempt_kind', EXAM_ATTEMPT_KINDS);
+
+/** Practice has no deadline; timed has one the server sets and enforces. */
+export const EXAM_ATTEMPT_MODES = ['practice', 'timed'] as const;
+export type ExamAttemptMode = (typeof EXAM_ATTEMPT_MODES)[number];
+export const examAttemptMode = pgEnum('exam_attempt_mode', EXAM_ATTEMPT_MODES);
+
+export const EXAM_ATTEMPT_STATUSES = [
+  'in_progress',
+  'submitted',
+  'expired',
+] as const;
+export type ExamAttemptStatus = (typeof EXAM_ATTEMPT_STATUSES)[number];
+export const examAttemptStatus = pgEnum(
+  'exam_attempt_status',
+  EXAM_ATTEMPT_STATUSES,
+);
+
+/**
+ * One formal exam attempt. Separate from the learning games (quiz_sessions):
+ * it earns no XP, coins, energy, streak or league points. Everything that
+ * scores it is copied here when it starts, so later changes to the paper,
+ * blueprint or questions never alter an attempt that exists.
+ */
+export const examAttempts = pgTable(
+  'exam_attempts',
+  {
+    id: uuid('id').primaryKey(),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id),
+    examId: uuid('exam_id')
+      .notNull()
+      .references(() => exams.id),
+    kind: examAttemptKind('kind').notNull(),
+    mode: examAttemptMode('mode').notNull(),
+    status: examAttemptStatus('status').notNull().default('in_progress'),
+    paperId: uuid('paper_id').references(() => examPapers.id),
+    paperRevision: integer('paper_revision'),
+    blueprintId: uuid('blueprint_id').references(() => examBlueprints.id),
+    language: text('language').notNull().default('en'),
+    /** Random mocks: the seed and algorithm version that built the question list. */
+    seed: text('seed'),
+    algorithmVersion: integer('algorithm_version'),
+    startedAt: timestamp('started_at', { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    /** Set by the server at start (timed only); the client only displays it. */
+    deadlineAt: timestamp('deadline_at', { withTimezone: true }),
+    durationSeconds: integer('duration_seconds'),
+    submittedAt: timestamp('submitted_at', { withTimezone: true }),
+    /** learner, expiry (lazily, when touched after the deadline) or sweep. */
+    finalisedBy: text('finalised_by'),
+    /** Locked-order blueprints only: the section answers may be saved to. */
+    currentSectionPosition: integer('current_section_position'),
+    sectionNavigation: sectionNavigation('section_navigation')
+      .notNull()
+      .default('free'),
+    // The marking rules in force, copied at start. Null means not configured.
+    marksCorrect: numeric('marks_correct', { precision: 5, scale: 2 }),
+    negativeMarks: numeric('negative_marks', { precision: 5, scale: 2 }),
+    marksUnanswered: numeric('marks_unanswered', { precision: 5, scale: 2 }),
+    withdrawnPolicy: withdrawnPolicy('withdrawn_policy')
+      .notNull()
+      .default('unscored'),
+    withdrawnPolicyConfirmed: boolean('withdrawn_policy_confirmed')
+      .notNull()
+      .default(false),
+    /** The rules came from a source marked official_confirmed. */
+    rulesVerified: boolean('rules_verified').notNull().default(false),
+    passPercentGeneral: numeric('pass_percent_general', {
+      precision: 5,
+      scale: 2,
+    }),
+    passPercentReserved: numeric('pass_percent_reserved', {
+      precision: 5,
+      scale: 2,
+    }),
+    /** Written once, when the attempt is finalised. */
+    result: jsonb('result').$type<Record<string, unknown>>(),
+    createdAt: createdAt(),
+    updatedAt: updatedAt(),
+  },
+  (t) => [
+    // At most one open attempt per learner and exam; also makes a double
+    // "start" request safe.
+    uniqueIndex('exam_attempts_open_idx')
+      .on(t.userId, t.examId)
+      .where(sql`${t.status} = 'in_progress'`),
+    index('exam_attempts_user_idx').on(t.userId, t.id),
+    index('exam_attempts_deadline_idx')
+      .on(t.deadlineAt)
+      .where(sql`${t.status} = 'in_progress'`),
+    // An official timed attempt always has a deadline. A practice attempt may
+    // also have one (the paper's practice timer).
+    check(
+      'exam_attempts_deadline_check',
+      sql`${t.mode} <> 'timed' or ${t.deadlineAt} is not null`,
+    ),
+    check(
+      'exam_attempts_closed_check',
+      sql`(${t.status} = 'in_progress') = (${t.submittedAt} is null)`,
+    ),
+    check(
+      'exam_attempts_paper_check',
+      sql`(${t.kind} = 'fixed_paper') = (${t.paperId} is not null)`,
+    ),
+  ],
+);
+
+/** The frozen content of one position of an attempt, and the learner's answer to it. */
+export const examAttemptQuestions = pgTable(
+  'exam_attempt_questions',
+  {
+    id: uuid('id').primaryKey(),
+    attemptId: uuid('attempt_id')
+      .notNull()
+      .references(() => examAttempts.id),
+    position: integer('position').notNull(),
+    sectionCode: text('section_code'),
+    sectionPosition: integer('section_position'),
+    questionId: uuid('question_id').references(() => questions.id),
+    questionVersionId: uuid('question_version_id').references(
+      () => questionVersions.id,
+    ),
+    topicId: uuid('topic_id'),
+    answerStatus: paperAnswerStatus('answer_status').notNull(),
+    questionType: text('question_type').notNull().default('single_select'),
+    /** Option ids in the order shown to this learner. */
+    optionOrder: jsonb('option_order').$type<string[]>(),
+    originalRef: text('original_ref'),
+    originalLabelScheme: text('original_label_scheme'),
+    /** The key as it stood at start. Never sent to the learner before submission. */
+    acceptedOptionIds: jsonb('accepted_option_ids')
+      .$type<string[]>()
+      .notNull()
+      .default([]),
+    /** Marks for a correct answer here; null when not configured. */
+    marksCorrect: numeric('marks_correct', { precision: 5, scale: 2 }),
+    selectedOptionIds: jsonb('selected_option_ids').$type<string[]>(),
+    /** The client's counter for this answer; an older one never overwrites a newer one. */
+    answerSeq: integer('answer_seq').notNull().default(0),
+    answeredAt: timestamp('answered_at', { withTimezone: true }),
+  },
+  (t) => [
+    uniqueIndex('exam_attempt_questions_position_idx').on(
+      t.attemptId,
+      t.position,
+    ),
+    index('exam_attempt_questions_question_idx').on(t.questionId),
+    check('exam_attempt_questions_position_check', sql`${t.position} >= 1`),
+    check(
+      'exam_attempt_questions_withdrawn_check',
+      sql`(${t.answerStatus} = 'withdrawn') = (${t.questionVersionId} is null)`,
+    ),
+    check('exam_attempt_questions_seq_check', sql`${t.answerSeq} >= 0`),
   ],
 );

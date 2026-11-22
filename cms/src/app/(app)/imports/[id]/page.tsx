@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui';
 import { api, must } from '@/lib/api';
 import { ImportReport } from '../import-report';
+import { PaperPanel } from '../paper-panel';
 
 export const metadata: Metadata = { title: 'Import report' };
 
@@ -35,6 +36,9 @@ async function Report({ params }: { params: PageProps<'/imports/[id]'>['params']
         </p>
       </div>
       <ImportReport report={report} />
+      <Suspense fallback={<Skeleton className="h-40" />}>
+        <PaperPanel jobId={id} />
+      </Suspense>
     </>
   );
 }

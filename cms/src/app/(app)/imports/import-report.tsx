@@ -8,6 +8,7 @@ const OUTCOME: Record<Row['outcome'], { done: string; planned: string; tone: str
   created: { done: 'Draft created', planned: 'Will be a draft', tone: 'bg-[var(--st-approved-bg)] text-[var(--st-approved-fg)]' },
   skipped: { done: 'Already in the bank', planned: 'Already in the bank', tone: 'bg-surface-2 text-muted' },
   failed: { done: 'Not imported', planned: 'Will not be imported', tone: 'bg-[var(--st-changes-bg)] text-[var(--st-changes-fg)]' },
+  withdrawn: { done: 'Withdrawn position', planned: 'Will be a withdrawn position', tone: 'bg-surface-2 text-muted' },
 };
 
 /** Counts, then one line per row; rows with nothing to say are folded away. */
@@ -15,6 +16,12 @@ export function ImportReport({ report }: { report: Report }) {
   const t = report.totals;
   const notable = report.rows.filter((r) => r.outcome !== 'created' || r.problems.length > 0);
   const clean = report.rows.length - notable.length;
+  const duplicates = report.rows.filter(
+    (r) => r.outcome === 'skipped' || r.problems.some((p) => p.reason.startsWith('Same question as row')),
+  ).length;
+  const invalid = report.rows.filter((r) => r.outcome === 'failed').length - report.rows.filter(
+    (r) => r.outcome === 'failed' && r.problems.some((p) => p.reason.startsWith('Same question as row')),
+  ).length;
   const stat = (n: number, label: string) => (
     <div className="rounded-lg border border-border bg-surface px-4 py-3">
       <div className="font-serif text-2xl">{n}</div>
@@ -24,11 +31,14 @@ export function ImportReport({ report }: { report: Report }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {stat(t.created, report.dry_run ? 'will become drafts' : 'drafts created')}
-        {stat(t.with_warnings, 'of those need more before review')}
-        {stat(t.skipped, 'already in the bank')}
-        {stat(t.failed, 'have errors')}
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-7">
+        {stat(report.rows.length, 'rows in the file')}
+        {stat(t.created, report.dry_run ? 'valid: ready to import as drafts' : 'drafts created')}
+        {stat(invalid, 'invalid: have errors')}
+        {stat(duplicates, 'duplicates (in the bank or the file)')}
+        {stat(t.with_warnings, 'valid but need more before review')}
+        {stat(t.failed + t.skipped, report.dry_run ? 'will not be imported' : 'not imported')}
+        {t.withdrawn > 0 && stat(t.withdrawn, 'withdrawn (no question; kept as a paper position)')}
       </div>
 
       {notable.length > 0 && (

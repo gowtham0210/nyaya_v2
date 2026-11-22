@@ -1,0 +1,164 @@
+[
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 1,
+   "xmin": 1129,
+   "xmax": 1130,
+   "ctid": "0,1"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1cf1d-bc4c-73c7-ba42-3168361dc9fe",
+  "opponent_session_id": null,
+  "opponent_name": "Aishwarya P.",
+  "practice": true,
+  "opponent_rating": 940,
+  "opponent_answers": [
+   {
+    "correct": true,
+    "elapsed_ms": 6312
+   },
+   {
+    "correct": true,
+    "elapsed_ms": 7997
+   },
+   {
+    "correct": true,
+    "elapsed_ms": 3098
+   },
+   {
+    "correct": true,
+    "elapsed_ms": 6477
+   },
+   {
+    "correct": false,
+    "elapsed_ms": 11017
+   },
+   {
+    "correct": false,
+    "elapsed_ms": 8188
+   },
+   {
+    "correct": true,
+    "elapsed_ms": 8520
+   }
+  ],
+  "rating_before": 1000,
+  "player_points": null,
+  "opponent_points": null,
+  "outcome": null,
+  "rating_after": null
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 2,
+   "xmin": 7113,
+   "xmax": 7121,
+   "ctid": "0,3"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a201fd-a612-7300-bfd0-366ae82c7bfa",
+  "opponent_session_id": null,
+  "opponent_name": "Joseph R.",
+  "practice": true,
+  "opponent_rating": 1056,
+  "opponent_answers": [
+   {
+    "correct": true,
+    "elapsed_ms": 6898
+   },
+   {
+    "correct": false,
+    "elapsed_ms": 8385
+   },
+   {
+    "correct": true,
+    "elapsed_ms": 8967
+   },
+   {
+    "correct": true,
+    "elapsed_ms": 9471
+   },
+   {
+    "correct": false,
+    "elapsed_ms": 10920
+   },
+   {
+    "correct": false,
+    "elapsed_ms": 2524
+   },
+   {
+    "correct": true,
+    "elapsed_ms": 2921
+   }
+  ],
+  "rating_before": 1000,
+  "player_points": null,
+  "opponent_points": null,
+  "outcome": null,
+  "rating_after": null
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 3,
+   "xmin": 7121,
+   "xmax": 0,
+   "ctid": "0,3"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a201fd-a612-7300-bfd0-366ae82c7bfa",
+  "opponent_session_id": null,
+  "opponent_name": "Joseph R.",
+  "practice": true,
+  "opponent_rating": 1056,
+  "opponent_answers": [
+   {
+    "correct": true,
+    "elapsed_ms": 6898
+   },
+   {
+    "correct": false,
+    "elapsed_ms": 8385
+   },
+   {
+    "correct": true,
+    "elapsed_ms": 8967
+   },
+   {
+    "correct": true,
+    "elapsed_ms": 9471
+   },
+   {
+    "correct": false,
+    "elapsed_ms": 10920
+   },
+   {
+    "correct": false,
+    "elapsed_ms": 2524
+   },
+   {
+    "correct": true,
+    "elapsed_ms": 2921
+   }
+  ],
+  "rating_before": 1000,
+  "player_points": 0,
+  "opponent_points": 3058,
+  "outcome": "lost",
+  "rating_after": 987
+ }
+]

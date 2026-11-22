@@ -16,7 +16,12 @@ import type {
   TodayTipDto,
   UpdateDailyTipDto,
 } from './daily-tips.dto.js';
-import { TIP_ACTIONS, tipProblems, type TipAction } from './workflow.js';
+import {
+  isExactSourceLink,
+  TIP_ACTIONS,
+  tipProblems,
+  type TipAction,
+} from './workflow.js';
 
 type TipRow = typeof dailyTips.$inferSelect;
 type TipPatch = Partial<typeof dailyTips.$inferInsert>;
@@ -25,6 +30,7 @@ const iso = (d: Date | null) => (d ? d.toISOString() : null);
 
 const AUDIT_ACTIONS: Record<TipAction, string> = {
   edit: 'daily_tip.updated',
+  verify: 'daily_tip.verified',
   submit: 'daily_tip.submitted',
   request_changes: 'daily_tip.changes_requested',
   approve: 'daily_tip.approved',
@@ -84,6 +90,9 @@ const toListItem = (t: TipRow): DailyTipListItemDto => ({
   title: t.title,
   publish_date: t.publishDate,
   updated_at: t.updatedAt.toISOString(),
+  legal_reference: t.legalReference,
+  source_url: t.sourceUrl,
+  last_verified_on: t.lastVerifiedOn,
 });
 
 /** A published tip always passed the completeness check, so these are set. */
@@ -191,9 +200,6 @@ export class DailyTipsService {
       ...toListItem(t),
       summary: t.summary,
       explanation: t.explanation,
-      legal_reference: t.legalReference,
-      source_url: t.sourceUrl,
-      last_verified_on: t.lastVerifiedOn,
       created_by: t.createdBy,
       updated_by: t.updatedBy,
       reviewer_id: t.reviewerId,
@@ -237,6 +243,34 @@ export class DailyTipsService {
         .set({ ...patch, updatedBy: actor.id, updatedAt: new Date() })
         .where(eq(dailyTips.id, id));
       return { fields: Object.keys(dto) };
+    });
+  }
+
+  /**
+   * Records that [actor] checked the tip against its exact official source
+   * today (India). Nothing else changes, the tip stays where it is in review,
+   * and the audit entry names who checked and which link they checked.
+   */
+  verify(actor: Actor, id: string, now = new Date()) {
+    return this.act(actor, id, 'verify', async (tx, t) => {
+      if (!isExactSourceLink(t.sourceUrl))
+        throw ApiError.incomplete([
+          {
+            field: 'source_url',
+            reason:
+              'Add the exact official link to the provision before recording a check; a website home page is not enough',
+          },
+        ]);
+      const verifiedOn = indiaToday(now);
+      await tx
+        .update(dailyTips)
+        .set({ lastVerifiedOn: verifiedOn, updatedBy: actor.id, updatedAt: new Date() })
+        .where(eq(dailyTips.id, id));
+      return {
+        verified_on: verifiedOn,
+        source_url: t.sourceUrl,
+        previous_verified_on: t.lastVerifiedOn,
+      };
     });
   }
 
@@ -395,6 +429,7 @@ export class DailyTipsService {
           eq(auditLog.actorId, actor.id),
           inArray(auditLog.action, [
             AUDIT_ACTIONS.edit,
+            AUDIT_ACTIONS.verify,
             'daily_tip.created',
           ]),
           lastRevise ? gte(auditLog.createdAt, lastRevise.at) : undefined,

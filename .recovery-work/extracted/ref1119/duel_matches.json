@@ -1,0 +1,56 @@
+[
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 1,
+   "xmin": 1129,
+   "xmax": 1130,
+   "ctid": "0,1"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1cf1d-bc4c-73c7-ba42-3168361dc9fe",
+  "opponent_session_id": null,
+  "opponent_name": "Aishwarya P.",
+  "practice": true,
+  "opponent_rating": 940,
+  "opponent_answers": [
+   {
+    "correct": true,
+    "elapsed_ms": 6312
+   },
+   {
+    "correct": true,
+    "elapsed_ms": 7997
+   },
+   {
+    "correct": true,
+    "elapsed_ms": 3098
+   },
+   {
+    "correct": true,
+    "elapsed_ms": 6477
+   },
+   {
+    "correct": false,
+    "elapsed_ms": 11017
+   },
+   {
+    "correct": false,
+    "elapsed_ms": 8188
+   },
+   {
+    "correct": true,
+    "elapsed_ms": 8520
+   }
+  ],
+  "rating_before": 1000,
+  "player_points": null,
+  "opponent_points": null,
+  "outcome": null,
+  "rating_after": null
+ }
+]

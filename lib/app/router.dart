@@ -13,6 +13,14 @@ import '../features/daily_tip/presentation/daily_tip_detail_screen.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/journey/presentation/journey_screen.dart';
 import '../features/leaderboard/presentation/leaderboard_screen.dart';
+import '../features/mock_exams/data/mock_exam_cache.dart';
+import '../features/mock_exams/presentation/mock_attempt_screen.dart';
+import '../features/mock_exams/presentation/mock_exam_home_screen.dart';
+import '../features/mock_exams/presentation/mock_exam_instructions_screen.dart';
+import '../features/mock_exams/presentation/mock_exams_screen.dart';
+import '../features/mock_exams/presentation/mock_history_screen.dart';
+import '../features/mock_exams/presentation/mock_result_screen.dart';
+import '../features/mock_exams/presentation/mock_review_screen.dart';
 import '../features/legal_updates/presentation/update_detail_screen.dart';
 import '../features/legal_updates/presentation/updates_screen.dart';
 import '../features/onboarding/presentation/onboarding_screen.dart';
@@ -42,6 +50,16 @@ abstract final class Routes {
   static const premium = '/premium';
   static const constitution = '/constitution';
   static const signIn = '/sign-in';
+
+  /// Mock Exams: formal exam papers and random mocks. Not the "Exam" game mode.
+  static const mockExams = '/mock-exams';
+  static const mockHistory = '/mock-exams/history';
+  static String mockExam(String slug) => '/mock-exams/$slug';
+  static String mockInstructions(String slug, {String? paperId}) =>
+      paperId == null ? '/mock-exams/$slug/instructions' : '/mock-exams/$slug/instructions?paper=$paperId';
+  static String mockAttempt(String slug, String id) => '/mock-exams/$slug/attempt/$id';
+  static String mockResult(String id) => '/mock-exams/result/$id';
+  static String mockReview(String id) => '/mock-exams/review/$id';
 
   /// Sign-in with no way to skip it: every learner needs an account.
   static const signInRequired = '/sign-in?required=1';
@@ -121,6 +139,48 @@ final routerProvider = Provider<GoRouter>((ref) {
           child: QuizScreen(request: state.extra! as QuizRequest),
         ),
       ),
+      // Declared before '/mock-exams/:slug' so "history" is not read as an exam.
+      GoRoute(
+        path: Routes.mockExams,
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => const MockExamsScreen(),
+      ),
+      GoRoute(
+        path: Routes.mockHistory,
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => MockHistoryScreen(exam: state.uri.queryParameters['exam']),
+      ),
+      GoRoute(
+        path: '/mock-exams/result/:id',
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => MockResultScreen(attemptId: state.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: '/mock-exams/review/:id',
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => MockReviewScreen(attemptId: state.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: '/mock-exams/:slug',
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => MockExamHomeScreen(slug: state.pathParameters['slug']!),
+      ),
+      GoRoute(
+        path: '/mock-exams/:slug/instructions',
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => MockExamInstructionsScreen(
+          slug: state.pathParameters['slug']!,
+          paperId: state.uri.queryParameters['paper'],
+        ),
+      ),
+      GoRoute(
+        path: '/mock-exams/:slug/attempt/:id',
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => MockAttemptScreen(
+          slug: state.pathParameters['slug']!,
+          id: state.pathParameters['id']!,
+        ),
+      ),
       GoRoute(
         path: Routes.leaderboard,
         parentNavigatorKey: _rootKey,
@@ -181,6 +241,11 @@ final routerProvider = Provider<GoRouter>((ref) {
   // refresh would rebuild it mid-way.
   ref.listen(authProvider, (before, after) {
     if (before != null && after == null) router.refresh();
+    // An unfinished exam kept for offline resume belongs to one account: it is
+    // wiped on sign-out and when a different account signs in.
+    if (before != null && before.id != after?.id) {
+      ref.read(mockExamCacheProvider).clearAll();
+    }
   });
   return router;
 });

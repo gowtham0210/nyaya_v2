@@ -1,0 +1,86 @@
+{
+ "new": [
+  {
+   "section_id": "01a1f823-67a4-76b3-bbec-faaa4ab8cf6e",
+   "topic_id": "01a1f7c3-1176-74e4-b3d5-a47c9d04a960",
+   "min_count": 0,
+   "max_count": null,
+   "weight": 1,
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 49,
+    "xmin": 5139,
+    "xmax": 0,
+    "ctid": "0,49"
+   }
+  },
+  {
+   "section_id": "01a1f823-67ac-7277-8244-28935335a3d5",
+   "topic_id": "01a1f7c3-117a-7177-babd-09cd844ce4a6",
+   "min_count": 0,
+   "max_count": null,
+   "weight": 1,
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 50,
+    "xmin": 5139,
+    "xmax": 0,
+    "ctid": "0,50"
+   }
+  },
+  {
+   "section_id": "01a1f823-67b0-720b-9af3-9dce2fc4f47a",
+   "topic_id": "01a1f7c3-117b-710b-ae00-13114126d1ab",
+   "min_count": 0,
+   "max_count": null,
+   "weight": 1,
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 51,
+    "xmin": 5139,
+    "xmax": 0,
+    "ctid": "0,51"
+   }
+  },
+  {
+   "section_id": "01a1f823-67b7-766d-9969-eab06a386bea",
+   "topic_id": "01a1f7c3-117d-746f-9a2e-96f12697b0c4",
+   "min_count": 0,
+   "max_count": null,
+   "weight": 1,
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 52,
+    "xmin": 5139,
+    "xmax": 0,
+    "ctid": "0,52"
+   }
+  },
+  {
+   "section_id": "01a1f823-67ba-7521-a6a1-dfae913fa4fd",
+   "topic_id": "01a1f7c3-117f-77e9-9d1b-e8c968fe06bb",
+   "min_count": 0,
+   "max_count": null,
+   "weight": 1,
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 53,
+    "xmin": 5139,
+    "xmax": 0,
+    "ctid": "0,53"
+   }
+  }
+ ],
+ "modified": [],
+ "removedSinceNov19": []
+}

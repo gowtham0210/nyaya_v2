@@ -132,8 +132,6 @@
   "greetingEvening": "Good evening",
   "homeContinueJourney": "Continue your Learning Path",
   "homeContinueLeftOff": "Continue where you left off",
-  "homeStartTitle": "Start your learning journey",
-  "homeStartBody": "Begin with the Constitution, where every law starts.",
   "homeStartRecommended": "Recommended start",
   "homeStartLawDesc": "Understand fundamental rights, duties and constitutional principles.",
   "homeStartLearning": "Start learning",
@@ -1050,7 +1048,7 @@
   "chapterEverydayTitle": "Everyday Law",
   "chapterEverydaySubtitle": "Law for daily life",
   "authCreateTitle": "Create your free account",
-  "authCreateSubtitle": "Questions come from Nyaya Kural's reviewed library, and your results are saved to your account.",
+  "authCreateSubtitle": "Enter your name, email and a password to get started.",
   "authSignInTitle": "Welcome back",
   "authSignInSubtitle": "Sign in to keep practising.",
   "authName": "Your name",
@@ -1190,5 +1188,273 @@
   "constitutionOpenAnyway": "Open PDF",
   "constitutionOpenFailed": "Couldn't open the PDF.",
   "constitutionOpenSourcePage": "Open on India Code",
-  "constitutionSourceLink": "See the collection on India Code"
+  "constitutionSourceLink": "See the collection on India Code",
+  "mockExamsTitle": "Mock Exams",
+  "mockExamsIntro": "Practise with previous-year papers and random mocks.",
+  "mockHomeCardBody": "Previous-year papers and random mocks",
+  "mockExamsEmpty": "No mock exams are open yet.",
+  "mockExamsEmptyBody": "Check back soon.",
+  "mockLoadError": "Couldn’t load Mock Exams. Check your connection and try again.",
+  "mockRetry": "Try again",
+  "mockHistoryTitle": "Attempt history",
+  "mockHistoryEmpty": "You haven’t taken a mock exam yet.",
+  "mockStatsTitle": "Your statistics",
+  "mockStatsLine": "{count} finished · best {best} · average {average}",
+  "@mockStatsLine": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "best": {
+        "type": "String"
+      },
+      "average": {
+        "type": "String"
+      }
+    }
+  },
+  "mockStatsNoMarks": "{count} finished · no scored attempts yet",
+  "@mockStatsNoMarks": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "mockInProgress": "In progress",
+  "mockResumeTitle": "Continue your attempt",
+  "mockResumeBody": "You have an unfinished mock exam.",
+  "mockResume": "Resume",
+  "mockPapersTitle": "Previous-year papers",
+  "mockNoPapers": "No previous-year papers are published yet.",
+  "mockPaperQuestions": "{count} questions",
+  "@mockPaperQuestions": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "mockPaperMinutes": "{minutes} min",
+  "@mockPaperMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "mockUnverifiedChip": "Unverified",
+  "mockUnverifiedNote": "The marking rules for this paper aren’t officially confirmed yet.",
+  "mockRandomTitle": "Random mock",
+  "mockRandomBody": "A fresh set of questions built from the exam format.",
+  "mockModePractice": "Practice",
+  "mockModeTimed": "Timed",
+  "mockStartPractice": "Start Practice",
+  "mockStartTimed": "Start timed",
+  "mockPracticeNote": "No time limit. Your answers are saved as you go.",
+  "mockTimedNote": "The timer runs on our server. Closing the app doesn’t pause it.",
+  "mockTimedUnavailable": "Timed mode is unavailable",
+  "mockTimedUnavailableRandom": "Timed mode opens once an official exam format is confirmed.",
+  "mockTimedUnavailablePaper": "Timed mode opens once this paper’s duration and rules are officially confirmed.",
+  "mockStartNoBlueprint": "Random mocks aren’t set up for this exam yet.",
+  "mockStartPoolShort": "There aren’t enough questions to build a random mock yet.",
+  "mockStartInProgress": "You already have an unfinished attempt. Resume it first.",
+  "mockStartTimedRefused": "Timed mode isn’t available for this one.",
+  "mockStartFailed": "Couldn’t start. Please try again.",
+  "mockNetworkError": "No connection. Check your internet and try again.",
+  "mockQuestionOf": "Question {n} of {total}",
+  "@mockQuestionOf": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "mockSectionName": "Section {name}",
+  "@mockSectionName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "mockTimeLeft": "{time} left",
+  "@mockTimeLeft": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "mockTimeLeftSemantic": "Time left: {time}",
+  "@mockTimeLeftSemantic": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "mockPracticeLabel": "Practice · no time limit",
+  "mockSaving": "Saving…",
+  "mockSaved": "Saved",
+  "mockOffline": "Offline. Answers will be saved when you’re back online.",
+  "mockServerIssue": "Server issue. Your answers are saved and will retry automatically.",
+  "mockOfflineEstimate": "Offline: the time left is an estimate until you reconnect.",
+  "mockPrevious": "Previous",
+  "mockNext": "Next",
+  "mockPalette": "Questions",
+  "mockPaletteAnswered": "Answered",
+  "mockPaletteUnanswered": "Not answered",
+  "mockPaletteWithdrawn": "Withdrawn",
+  "mockPaletteItem": "Question {n}, {state}",
+  "@mockPaletteItem": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "state": {
+        "type": "String"
+      }
+    }
+  },
+  "mockAnsweredCount": "{answered} of {total} answered",
+  "@mockAnsweredCount": {
+    "placeholders": {
+      "answered": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "mockSubmit": "Submit",
+  "mockSubmitTitle": "Submit this mock exam?",
+  "mockSubmitBody": "You have answered {answered} of {total}. You can’t change your answers after submitting.",
+  "@mockSubmitBody": {
+    "placeholders": {
+      "answered": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "mockSubmitUnanswered": "{count} not answered.",
+  "@mockSubmitUnanswered": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "mockKeepGoing": "Keep going",
+  "mockSubmitFailed": "Couldn’t submit. Your answers are saved; try again when you’re online.",
+  "mockWithdrawnTitle": "This question was withdrawn",
+  "mockWithdrawnBody": "The exam body withdrew it, so it can’t be answered.",
+  "mockAdvanceSection": "Finish this section",
+  "mockAdvanceTitle": "Move to the next section?",
+  "mockAdvanceBody": "You won’t be able to come back to this section.",
+  "mockSectionClosed": "This section is closed.",
+  "mockTimeUp": "Time is up",
+  "mockTimeUpBody": "Your attempt has ended. Opening your result.",
+  "mockEndedOffline": "Time is up. We’ll show your result as soon as we can reach the server.",
+  "mockAttemptNotFound": "This attempt couldn’t be found.",
+  "mockSignedOut": "Please sign in again to continue.",
+  "mockSelectedSemantic": "Selected",
+  "mockResultTitle": "Result",
+  "mockMarks": "{obtained} / {max}",
+  "@mockMarks": {
+    "placeholders": {
+      "obtained": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "mockPercent": "{percent}%",
+  "@mockPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "mockMarksUnavailable": "Marks aren’t shown because this exam’s marking rules aren’t configured.",
+  "mockResultPass": "PASS",
+  "mockResultFail": "FAIL",
+  "mockCorrect": "Correct",
+  "mockIncorrect": "Incorrect",
+  "mockUnanswered": "Unanswered",
+  "mockWithdrawnCount": "Withdrawn",
+  "mockProvisionalTitle": "Provisional result",
+  "mockProvisionalBody": "This result is provisional because some scoring rules aren’t confirmed yet.",
+  "mockSectionsTitle": "Sections",
+  "mockPassTitle": "Pass criteria",
+  "mockPassLine": "{category}: {threshold}% needed · {outcome}",
+  "@mockPassLine": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      },
+      "threshold": {
+        "type": "String"
+      },
+      "outcome": {
+        "type": "String"
+      }
+    }
+  },
+  "mockPassGeneral": "General",
+  "mockPassReserved": "Reserved",
+  "mockPassReached": "reached",
+  "mockPassNotReached": "not reached",
+  "mockPassUnavailable": "Pass criteria aren’t available for this exam, so no pass or fail is shown.",
+  "mockExpiredNote": "This attempt ended when the time ran out.",
+  "mockViewReview": "Review answers",
+  "mockBackToMockExams": "Back to Mock Exams",
+  "mockReviewTitle": "Answer review",
+  "mockYourAnswer": "Your answer",
+  "mockAcceptedAnswer": "Accepted answer",
+  "mockNotAnswered": "Not answered",
+  "mockExplanation": "Explanation",
+  "mockOutcomeWithdrawn": "Withdrawn, not scored",
+  "mockPracticeTimerLabel": "Practice timing — not officially confirmed by BCI",
+  "mockPracticeTimerNote": "A clock runs on our server and ends the attempt when time is up. This is practice timing, not the official exam time.",
+  "mockStartPracticeTimer": "Start Timed Practice ({minutes} minutes)",
+  "@mockStartPracticeTimer": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "mockInstrPracticeTimer": "This paper has a practice timer. It is practice timing, not officially confirmed by BCI. The clock runs on our server, closing the app does not pause it, and the attempt ends when time is up.",
+  "mockMarkForReview": "Mark for review",
+  "mockMarkedForReview": "Marked for review",
+  "mockPaletteMarked": "Marked",
+  "mockSubmitMarked": "{count} marked for review.",
+  "@mockSubmitMarked": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "mockDetailsTitle": "Exam details",
+  "mockInstructionsHeading": "Before you start",
+  "mockInstrAnswer": "Tap an option to answer. You can change your answer until you submit.",
+  "mockInstrNavigate": "Use Previous and Next, or the question grid, to move around.",
+  "mockInstrMark": "Mark for review is a reminder on this device only. It does not change your answer and is not sent to the server.",
+  "mockInstrSave": "Your answers are saved as you go. If you lose your connection, they are sent when it returns.",
+  "mockInstrResume": "You can leave and come back to an unfinished attempt.",
+  "mockInstrReview": "Correct answers and explanations are shown only after you submit.",
+  "mockInstrProvisional": "Results may be marked provisional when the marking rules for a paper are not officially confirmed.",
+  "mockInstrTimed": "In timed mode the server keeps the clock. Closing the app does not pause it, and the attempt ends when time is up."
 }

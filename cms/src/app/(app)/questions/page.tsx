@@ -1,3 +1,4 @@
+import { FilterForm } from '@/components/filter-form';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -80,7 +81,7 @@ async function QuestionList({ searchParams }: { searchParams: PageProps<'/questi
         </div>
       </div>
 
-      <form method="get" action="/questions" className="grid gap-3 sm:grid-cols-[1fr_12rem_14rem_7rem_auto]" role="search">
+      <FilterForm method="get" action="/questions" className="grid gap-3 sm:grid-cols-[1fr_12rem_14rem_7rem_auto]" role="search">
         <label className="sr-only" htmlFor="q">Search</label>
         <input id="q" name="q" defaultValue={q} placeholder="Search question text" className={inputClass} />
         <label className="sr-only" htmlFor="status">Status</label>
@@ -111,7 +112,7 @@ async function QuestionList({ searchParams }: { searchParams: PageProps<'/questi
           ))}
         </select>
         <button type="submit" className={buttonClass('secondary')}>Filter</button>
-      </form>
+      </FilterForm>
 
       {page.items.length === 0 ? (
         <div className="rounded-xl border border-dashed border-border px-6 py-16 text-center text-muted">

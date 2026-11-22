@@ -6,7 +6,12 @@ import { newId } from './ids.js';
 export interface Actor {
   id: string;
   requestId: string;
+  /** The signed-in user's roles, where the request carries them. */
+  roles?: readonly string[];
 }
+
+/** Admin is the highest-privilege role; every admin action is still audited. */
+export const isAdmin = (actor: Actor): boolean => actor.roles?.includes('admin') ?? false;
 
 export interface AuditEntry {
   action: string;

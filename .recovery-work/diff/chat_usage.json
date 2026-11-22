@@ -1,0 +1,20 @@
+{
+ "new": [
+  {
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "day": "2026-11-22",
+   "answers": 1,
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 88,
+    "xmin": 6851,
+    "xmax": 0,
+    "ctid": "0,88"
+   }
+  }
+ ],
+ "modified": [],
+ "removedSinceNov19": []
+}

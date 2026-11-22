@@ -1,0 +1,1509 @@
+{
+ "new": [
+  {
+   "id": "01a1f1e6-0a3c-75ed-8da5-bee6c46b4dbf",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "527fbb5c1c36562ecefe235b175ac401da4d1de45dcda2f09ac25604048d2a98",
+   "expires_at": "2026-12-19T03:42:27.388000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-19T03:42:27.380000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 2,
+    "xmin": 3755,
+    "xmax": 0,
+    "ctid": "4,2"
+   }
+  },
+  {
+   "id": "01a1f1fd-dcc0-76e9-a6dd-b5581dbdf63f",
+   "user_id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+   "token_hash": "fe7e63439b1a72183ad26689f5923f0cb0b22fd5c2b831e04bb7b7aa1a24fe29",
+   "expires_at": "2026-12-19T04:08:28.608000Z",
+   "revoked_at": "2026-11-19T04:32:30.267000Z",
+   "created_at": "2026-11-19T04:08:28.598000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 6,
+    "xmin": 3770,
+    "xmax": 3770,
+    "ctid": "4,6"
+   }
+  },
+  {
+   "id": "01a1f1f1-85e7-742f-8ab8-71f7e1278e72",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "5748f1463a798cdd04c152ca59de54c5ec3b3e9be3b0f0c4c82be90a926cceac",
+   "expires_at": "2026-12-19T03:54:59.943000Z",
+   "revoked_at": "2026-11-19T04:32:49.928000Z",
+   "created_at": "2026-11-19T03:54:59.919000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 8,
+    "xmin": 3773,
+    "xmax": 3773,
+    "ctid": "4,8"
+   }
+  },
+  {
+   "id": "01a1f214-290b-770f-a69f-ca18724f1025",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "6ee760d6febcc5e214c485993c9853da25fac5f11c86f3425d5cb45f5ff72e53",
+   "expires_at": "2026-12-19T04:32:49.931000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-19T04:32:49.922000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 9,
+    "xmin": 3773,
+    "xmax": 0,
+    "ctid": "4,9"
+   }
+  },
+  {
+   "id": "01a1f220-6b86-75de-8c37-a39559d36012",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "f842574e978147a8ef3f3edf8941edce0704322bfa3081ade7d387d46c6f1dd3",
+   "expires_at": "2026-12-19T04:46:13.382000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-19T04:46:13.379000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 11,
+    "xmin": 3804,
+    "xmax": 0,
+    "ctid": "4,11"
+   }
+  },
+  {
+   "id": "01a1f220-8d57-72db-bd59-c57605c2cd26",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "3ff010991dae22f1843a5206702f518b933ea84abe446cf473d818d568fbc27f",
+   "expires_at": "2026-12-19T04:46:22.039000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-19T04:46:22.038000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 12,
+    "xmin": 3808,
+    "xmax": 0,
+    "ctid": "4,12"
+   }
+  },
+  {
+   "id": "01a1f213-dc3f-7201-9eee-e3f90c03a83a",
+   "user_id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+   "token_hash": "c1ea1c30477e1ad83d521d3c8aaa3eb0cd4b74036a2e3b64782900de3b67bb41",
+   "expires_at": "2026-12-19T04:32:30.271000Z",
+   "revoked_at": "2026-11-19T04:48:05.007000Z",
+   "created_at": "2026-11-19T04:32:30.259000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 13,
+    "xmin": 3814,
+    "xmax": 3814,
+    "ctid": "4,13"
+   }
+  },
+  {
+   "id": "01a1f222-1f9c-75dc-8c3b-9071a2f5871e",
+   "user_id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+   "token_hash": "b75504038016c91b7096ee67dfd55314440d5403b2f71b618f9c2355cae16597",
+   "expires_at": "2026-12-19T04:48:05.020000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-19T04:48:04.963000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 14,
+    "xmin": 3814,
+    "xmax": 0,
+    "ctid": "4,14"
+   }
+  },
+  {
+   "id": "01a1f229-f2aa-7160-b5f4-58ffb2d97c7d",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "f2861e79e2072e91503a44f97eee37b3866588015fc3e06e2f202f288adde8ba",
+   "expires_at": "2026-12-19T04:56:37.803000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-19T04:56:37.801000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 15,
+    "xmin": 3819,
+    "xmax": 0,
+    "ctid": "4,15"
+   }
+  },
+  {
+   "id": "01a1f21d-d3cc-7727-b006-cbcdb5c69cfb",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "e6af2f41f89c5315195aaa56ea88f69956352d7406b0db75edeadf9244700d3b",
+   "expires_at": "2026-12-19T04:43:23.468000Z",
+   "revoked_at": "2026-11-19T04:59:26.685000Z",
+   "created_at": "2026-11-19T04:43:23.439000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 16,
+    "xmin": 3823,
+    "xmax": 3823,
+    "ctid": "4,16"
+   }
+  },
+  {
+   "id": "01a1f22d-9540-7344-b693-557d90f90b62",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "ad889208c8eab5788d665bef236d9ae7cb2eb3cc6d476ab78abc2bfc608fa658",
+   "expires_at": "2026-12-19T05:00:36.032000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-19T05:00:36.031000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 18,
+    "xmin": 3830,
+    "xmax": 0,
+    "ctid": "4,18"
+   }
+  },
+  {
+   "id": "01a1f230-916a-730b-9bcd-ff4c83f28d1c",
+   "user_id": "01a1f230-9148-76e8-b267-6c9783a18a17",
+   "token_hash": "6c9b2b409d447c636e5d78b3cebe7f555a11e100421800ecf1968b799335c9cf",
+   "expires_at": "2026-12-19T05:03:51.659000Z",
+   "revoked_at": "2026-11-19T05:22:25.209000Z",
+   "created_at": "2026-11-19T05:03:51.623000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 20,
+    "xmin": 3841,
+    "xmax": 3841,
+    "ctid": "4,20"
+   }
+  },
+  {
+   "id": "01a1f241-9038-729e-8193-4f03d640ea15",
+   "user_id": "01a1f230-9148-76e8-b267-6c9783a18a17",
+   "token_hash": "8cff35e4ee4ffa0b2a98a38abd304b2621df8f1c62bd56d64c14cecbfb01a71e",
+   "expires_at": "2026-12-19T05:22:25.464000Z",
+   "revoked_at": "2026-11-19T05:22:28.145000Z",
+   "created_at": "2026-11-19T05:22:24.603000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 22,
+    "xmin": 3843,
+    "xmax": 3843,
+    "ctid": "4,22"
+   }
+  },
+  {
+   "id": "01a1f241-9ab5-70fd-b407-6943200940c2",
+   "user_id": "01a1f230-9148-76e8-b267-6c9783a18a17",
+   "token_hash": "2a46d006eddae46847fcf13bc77562bc48e7e99e0ca80998a3eb110896f87416",
+   "expires_at": "2026-12-19T05:22:28.149000Z",
+   "revoked_at": "2026-11-19T05:22:28.503000Z",
+   "created_at": "2026-11-19T05:22:28.128000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 24,
+    "xmin": 3845,
+    "xmax": 3845,
+    "ctid": "4,24"
+   }
+  },
+  {
+   "id": "01a1f22c-865f-75a5-9f06-829e568a65ca",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "394e8ff5abb159ed61cbffc04c34bb1515e8d5dd24410d6872ddb89a7dee245a",
+   "expires_at": "2026-12-19T04:59:26.687000Z",
+   "revoked_at": "2026-11-19T05:32:47.058000Z",
+   "created_at": "2026-11-19T04:59:26.680000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 26,
+    "xmin": 3848,
+    "xmax": 3848,
+    "ctid": "4,26"
+   }
+  },
+  {
+   "id": "01a1f276-fac0-75a7-a8de-280ecb35819e",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "c7f8066977f598709e231e926a70e7b1aa7bcd1ca9c4f425900babbeb465c2f8",
+   "expires_at": "2026-12-19T06:20:46.144000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-19T06:20:46.130000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 28,
+    "xmin": 3852,
+    "xmax": 0,
+    "ctid": "4,28"
+   }
+  },
+  {
+   "id": "01a1f277-2b64-736e-9c93-a2e6c2ab93e9",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "3916b426fd0df404d4d0736d7affc4db9d72186bb7430e9465ce57cbd1cbc6f4",
+   "expires_at": "2026-12-19T06:20:58.597000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-19T06:20:58.595000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 29,
+    "xmin": 3858,
+    "xmax": 0,
+    "ctid": "4,29"
+   }
+  },
+  {
+   "id": "01a1f24b-0c53-748c-9d21-00af106cb167",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "2c31654142968aec8be94570e736a84c2f4efbd90432f54cb56c45b4a3345f9d",
+   "expires_at": "2026-12-19T05:32:47.060000Z",
+   "revoked_at": "2026-11-19T06:21:54.902000Z",
+   "created_at": "2026-11-19T05:32:47.051000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 30,
+    "xmin": 3861,
+    "xmax": 3861,
+    "ctid": "4,30"
+   }
+  },
+  {
+   "id": "01a1f278-ef68-73dc-9421-02619103b223",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "fda7428561868258c4a1013890b4cd43f6bd549bb18e37132b4146391f7ffb08",
+   "expires_at": "2026-12-19T06:22:54.312000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-19T06:22:54.310000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 32,
+    "xmin": 3890,
+    "xmax": 0,
+    "ctid": "4,32"
+   }
+  },
+  {
+   "id": "01a1f279-f53a-76ce-b84f-cd890b9d6ebd",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "5ea60c12745902a52cf22671e03050dcf7633bb98b9ac42a622e4ea2f4a7e9fc",
+   "expires_at": "2026-12-19T06:24:01.338000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-19T06:24:01.336000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 33,
+    "xmin": 4019,
+    "xmax": 0,
+    "ctid": "4,33"
+   }
+  },
+  {
+   "id": "01a1f27b-4d44-76a9-bdac-2bcfa6414fd0",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "34524c1f9da1994c4b50a373cf3c3709dd97a1072f3697ced2dbaecafae01e1c",
+   "expires_at": "2026-12-19T06:25:29.412000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-19T06:25:29.409000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 34,
+    "xmin": 4023,
+    "xmax": 0,
+    "ctid": "4,34"
+   }
+  },
+  {
+   "id": "01a1f27b-b1ea-7108-a1f0-9f7c3851f4a1",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "e670348f618e886c63136596141f285c7659b290be7fe4c4cc571c6df436fc4e",
+   "expires_at": "2026-12-19T06:25:55.178000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-19T06:25:55.176000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 35,
+    "xmin": 4127,
+    "xmax": 0,
+    "ctid": "4,35"
+   }
+  },
+  {
+   "id": "01a1f280-b543-7440-920b-33c850d34eda",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "bb5e5d15f9a0119bbdb0055700879380a75d0207e608c9ddd0c7e6a5429b12ae",
+   "expires_at": "2026-12-19T06:31:23.715000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-19T06:31:23.711000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 36,
+    "xmin": 4531,
+    "xmax": 0,
+    "ctid": "4,36"
+   }
+  },
+  {
+   "id": "01a1f241-9c21-74d2-bb51-d5b638ec63c8",
+   "user_id": "01a1f230-9148-76e8-b267-6c9783a18a17",
+   "token_hash": "617a26d74812a863c8d3d27e05386f335ac0ab48ccb4644f0a0d7c0bf924e27d",
+   "expires_at": "2026-12-19T05:22:28.514000Z",
+   "revoked_at": "2026-11-19T06:34:42.702000Z",
+   "created_at": "2026-11-19T05:22:28.485000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 37,
+    "xmin": 4538,
+    "xmax": 4538,
+    "ctid": "4,37"
+   }
+  },
+  {
+   "id": "01a1f283-be90-758d-9fbf-13909fb2bc8a",
+   "user_id": "01a1f230-9148-76e8-b267-6c9783a18a17",
+   "token_hash": "dcebc71fcef51e6bed8757c40d69494e93418b4b03bb32b4d80a2aa19a4bce60",
+   "expires_at": "2026-12-19T06:34:42.704000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-19T06:34:42.696000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 38,
+    "xmin": 4538,
+    "xmax": 0,
+    "ctid": "4,38"
+   }
+  },
+  {
+   "id": "01a1f278-0758-717e-930e-7daa22004c53",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "3741cb033f103093aa6ed039454f35943ac4d848ff0865fa7f8905d2f8f29900",
+   "expires_at": "2026-12-19T06:21:54.904000Z",
+   "revoked_at": "2026-11-19T12:21:13.233000Z",
+   "created_at": "2026-11-19T06:21:54.894000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 39,
+    "xmin": 4541,
+    "xmax": 4541,
+    "ctid": "4,39"
+   }
+  },
+  {
+   "id": "01a1f3dc-9142-775e-9c97-fe0de58cebb9",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "313ff1b7d2c47fbd7a9e2a0940e052e03d5f529155d626329fd00870a55f79b9",
+   "expires_at": "2026-12-19T12:51:21.026000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-19T12:51:21.024000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 42,
+    "xmin": 4564,
+    "xmax": 0,
+    "ctid": "4,42"
+   }
+  },
+  {
+   "id": "01a1f3c3-4011-73ec-855c-28df3e001851",
+   "user_id": "01a1f3c3-3ffe-74e0-8a54-b4bd45d71d83",
+   "token_hash": "0faae4358573a431f134e8b64c07679114587b69bd9f98f6996ac189566f6320",
+   "expires_at": "2026-12-19T12:23:41.841000Z",
+   "revoked_at": "2026-11-19T12:52:13.580000Z",
+   "created_at": "2026-11-19T12:23:41.821000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 43,
+    "xmin": 4566,
+    "xmax": 4566,
+    "ctid": "4,43"
+   }
+  },
+  {
+   "id": "01a1f3dd-5e8e-7230-bd7d-f1bb33be1474",
+   "user_id": "01a1f3c3-3ffe-74e0-8a54-b4bd45d71d83",
+   "token_hash": "196665eb46bba18a6f09b7971fdea9a9957417fed6adadb628192e9cc1f0b98d",
+   "expires_at": "2026-12-19T12:52:13.582000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-19T12:52:13.570000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 44,
+    "xmin": 4566,
+    "xmax": 0,
+    "ctid": "4,44"
+   }
+  },
+  {
+   "id": "01a1f42f-4ce7-748b-bc2d-0fa3775b8498",
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "token_hash": "1caf47870aaae4c7b87831772bea4c949bed1783e73195b6385679166b22c7ec",
+   "expires_at": "2026-12-19T14:21:43.015000Z",
+   "revoked_at": "2026-11-19T14:47:33.840000Z",
+   "created_at": "2026-11-19T14:21:43.004000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 46,
+    "xmin": 4630,
+    "xmax": 4630,
+    "ctid": "4,46"
+   }
+  },
+  {
+   "id": "01a1f3c0-fb9b-7462-ac48-ba0522505a50",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "8abf77c4597c7924ad8b83b0f4dc5f4509269d25b9ac56a75f8d781e092ee3cd",
+   "expires_at": "2026-12-19T12:21:13.243000Z",
+   "revoked_at": "2026-11-19T15:03:44.968000Z",
+   "created_at": "2026-11-19T12:21:13.163000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 48,
+    "xmin": 4637,
+    "xmax": 4637,
+    "ctid": "4,48"
+   }
+  },
+  {
+   "id": "01a1f446-f6d7-74e8-8337-615b690f9737",
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "token_hash": "bf5e001618a6f03885e1b7901469740043444e1848066f17aaec0ac10ee973ee",
+   "expires_at": "2026-12-19T14:47:33.849000Z",
+   "revoked_at": "2026-11-19T15:17:49.978000Z",
+   "created_at": "2026-11-19T14:47:33.812000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 50,
+    "xmin": 4639,
+    "xmax": 4639,
+    "ctid": "4,50"
+   }
+  },
+  {
+   "id": "01a1f455-c84b-7164-90e3-024b4b8bc114",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "215fbe2b2318bb4d13f22f8c4a47d81ba2e0767a9e304fee6ccac0b61ac9cb1b",
+   "expires_at": "2026-12-19T15:03:44.971000Z",
+   "revoked_at": "2026-11-19T15:28:06.662000Z",
+   "created_at": "2026-11-19T15:03:44.964000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 52,
+    "xmin": 4684,
+    "xmax": 4684,
+    "ctid": "4,52"
+   }
+  },
+  {
+   "id": "01a1f462-ad1c-7349-a036-3d8256939fd2",
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "token_hash": "e076d7c6f57ff0e3bef6379badc0d283ca9ae794c7322b4bdf797b24e94ee836",
+   "expires_at": "2026-12-19T15:17:49.980000Z",
+   "revoked_at": "2026-11-19T15:33:49.973000Z",
+   "created_at": "2026-11-19T15:17:49.972000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 54,
+    "xmin": 4686,
+    "xmax": 4686,
+    "ctid": "4,54"
+   }
+  },
+  {
+   "id": "01a1f471-5317-776b-aca3-83865cbd2b94",
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "token_hash": "ab595693ee6fe0e2ffc664f68acaa45e80da83ff78326d52af579e740f61367f",
+   "expires_at": "2026-12-19T15:33:49.975000Z",
+   "revoked_at": "2026-11-19T15:55:46.466000Z",
+   "created_at": "2026-11-19T15:33:49.966000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 56,
+    "xmin": 4732,
+    "xmax": 4732,
+    "ctid": "4,56"
+   }
+  },
+  {
+   "id": "01a1f46c-160a-7746-b910-870d3460ed63",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "635703233a36c4078248b1e786a235948cca00b956199daaf6cd4656de2dcf0f",
+   "expires_at": "2026-12-19T15:28:06.666000Z",
+   "revoked_at": "2026-11-20T04:36:08.505000Z",
+   "created_at": "2026-11-19T15:28:06.659000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 58,
+    "xmin": 4734,
+    "xmax": 4734,
+    "ctid": "4,58"
+   }
+  },
+  {
+   "id": "01a1f73d-8cc4-7729-b9c6-73c76ddc4b48",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "4add7ece2926ec8e584c2514a45b9f3b681c5e0f2c22a6fd912d8096816dfcae",
+   "expires_at": "2026-12-20T04:36:08.517000Z",
+   "revoked_at": "2026-11-20T04:56:38.430000Z",
+   "created_at": "2026-11-20T04:36:08.464000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 60,
+    "xmin": 4736,
+    "xmax": 4736,
+    "ctid": "4,60"
+   }
+  },
+  {
+   "id": "01a1f750-5137-7364-acf2-9e585eb7babd",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "c23817c79ac46cfa0e3ee949eadca7f646dd5d51189acf21f9a7380342e819b5",
+   "expires_at": "2026-12-20T04:56:38.456000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-20T04:56:38.144000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 61,
+    "xmin": 4736,
+    "xmax": 0,
+    "ctid": "4,61"
+   }
+  },
+  {
+   "id": "01a1f758-ee03-7416-9160-2241837d1cf3",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "dc1abd8a39ab43306e9e5bd79f434dbae37be8bafd289dcf7c7ce82bb08637df",
+   "expires_at": "2026-12-20T05:06:02.883000Z",
+   "revoked_at": "2026-11-20T06:01:07.204000Z",
+   "created_at": "2026-11-20T05:06:02.852000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 63,
+    "xmin": 4742,
+    "xmax": 4742,
+    "ctid": "4,63"
+   }
+  },
+  {
+   "id": "01a1f78b-598b-772d-b093-569f1758e4b2",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "8ff428162403921712197460d4137e2bf0e81671284655a21dbd8959a4a075ce",
+   "expires_at": "2026-12-20T06:01:07.211000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-20T06:01:07.176000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 64,
+    "xmin": 4742,
+    "xmax": 0,
+    "ctid": "4,64"
+   }
+  },
+  {
+   "id": "01a1f78e-5cf9-76a0-8717-0f7c3ba95721",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "d2e01dc41d01babe8e49d3d902b8b5e08f3958febac9f0910f531cacd899808f",
+   "expires_at": "2026-12-20T06:04:24.698000Z",
+   "revoked_at": "2026-11-20T06:58:48.417000Z",
+   "created_at": "2026-11-20T06:04:24.677000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 66,
+    "xmin": 4751,
+    "xmax": 4751,
+    "ctid": "4,66"
+   }
+  },
+  {
+   "id": "01a1f7c0-29ee-71b8-9346-94a7f5606fd8",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "e63a9b93c5c01cb7b2ee0a1d21c4f8d6e978fc3163ce17ff88f712a7d5a21dcd",
+   "expires_at": "2026-12-20T06:58:48.431000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-20T06:58:48.372000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 67,
+    "xmin": 4751,
+    "xmax": 0,
+    "ctid": "4,67"
+   }
+  },
+  {
+   "id": "01a1f7c3-ba77-7634-a12a-88ad23186ad4",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "6d01ce0a5d1132a4953fb052a62ec5d456aca5cb9c74b5dfbab111b7acefb814",
+   "expires_at": "2026-12-20T07:02:42.039000Z",
+   "revoked_at": "2026-11-20T07:17:17.579000Z",
+   "created_at": "2026-11-20T07:02:42.013000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 69,
+    "xmin": 4759,
+    "xmax": 4759,
+    "ctid": "4,69"
+   }
+  },
+  {
+   "id": "01a1f7d1-1693-7622-9f54-8fff197eb2a9",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "f63f2ae13d989fe768467870916045b772b5642bb86275f629939506931d42fc",
+   "expires_at": "2026-12-20T07:17:17.588000Z",
+   "revoked_at": "2026-11-20T07:33:49.758000Z",
+   "created_at": "2026-11-20T07:17:17.205000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 71,
+    "xmin": 4761,
+    "xmax": 4761,
+    "ctid": "4,71"
+   }
+  },
+  {
+   "id": "01a1f7e0-3a48-74e5-a29f-bdf7595d5181",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "3bb8414475640766d9f91d66a6b25360c7494c9b3dd9f41fdb431a56cd33af4c",
+   "expires_at": "2026-12-20T07:33:49.768000Z",
+   "revoked_at": "2026-11-20T07:50:28.791000Z",
+   "created_at": "2026-11-20T07:33:49.720000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 73,
+    "xmin": 4764,
+    "xmax": 4764,
+    "ctid": "4,73"
+   }
+  },
+  {
+   "id": "01a1f7ef-78ba-76a2-b3d2-6829e8246662",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "3eeac14c0c19674b881e5398f7f5df3dd0a8c96503243b4ab1b7520e82a26966",
+   "expires_at": "2026-12-20T07:50:28.795000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-20T07:50:28.774000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 74,
+    "xmin": 4764,
+    "xmax": 0,
+    "ctid": "4,74"
+   }
+  },
+  {
+   "id": "01a1f7f8-22e2-7354-8ac7-dc506a56ac12",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "e8c33631b7e75f799a326955b08f48ebe9ba70efe74c8a7dbe396ce08c8e5b57",
+   "expires_at": "2026-12-20T07:59:56.642000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-20T07:59:56.620000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 75,
+    "xmin": 4887,
+    "xmax": 0,
+    "ctid": "4,75"
+   }
+  },
+  {
+   "id": "01a1f7f8-3f23-7205-bd4c-a3d9591a4bb1",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "6333121a748ba68a3c664f583b99093ace73f6d12e5cd89ba41a9cf30ac896dc",
+   "expires_at": "2026-12-20T08:00:03.876000Z",
+   "revoked_at": "2026-11-20T08:37:09.403000Z",
+   "created_at": "2026-11-20T08:00:03.872000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 77,
+    "xmin": 5132,
+    "xmax": 5132,
+    "ctid": "4,77"
+   }
+  },
+  {
+   "id": "01a1f485-69aa-7676-b6d5-ce2d1346c7cb",
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "token_hash": "20ee30bc8a5501323c2ec454b9f31aea2f8fafe1d209d76f58f1654d4b5c2821",
+   "expires_at": "2026-12-19T15:55:46.475000Z",
+   "revoked_at": "2026-11-20T08:42:47.391000Z",
+   "created_at": "2026-11-19T15:55:46.454000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 79,
+    "xmin": 5137,
+    "xmax": 5137,
+    "ctid": "4,79"
+   }
+  },
+  {
+   "id": "01a1f81a-349d-7757-a067-7194b33faebc",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "13f57c11155cddb7529976ceb1652c883ab6b1d9d7c51ecb0f359c0ebe8103b5",
+   "expires_at": "2026-12-20T08:37:09.405000Z",
+   "revoked_at": "2026-11-20T08:51:50.251000Z",
+   "created_at": "2026-11-20T08:37:09.399000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 4,
+    "off": 80,
+    "xmin": 5149,
+    "xmax": 5149,
+    "ctid": "4,80"
+   }
+  },
+  {
+   "id": "01a1f827-a56d-70fc-9767-45dc27cc45fc",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "e32b12171a252059860bcbbd144c1eb35a30ab7edd5d13945a839574a8bb92a9",
+   "expires_at": "2026-12-20T08:51:50.253000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-20T08:51:50.247000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 2,
+    "xmin": 5149,
+    "xmax": 0,
+    "ctid": "5,2"
+   }
+  },
+  {
+   "id": "01a1f834-3892-7154-8d1e-a99a42dfd823",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "d9001f47b2117e3747bd20dcedc33b0cfc6fbc664f5d7e1168d550768dba4747",
+   "expires_at": "2026-12-20T09:05:34.354000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-20T09:05:34.317000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 3,
+    "xmin": 5155,
+    "xmax": 0,
+    "ctid": "5,3"
+   }
+  },
+  {
+   "id": "01a1f81f-5ce1-736f-a7f4-30a0c8723892",
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "token_hash": "7e57b687d1f9c333995a7eb9c8c60e70115175ddb22d6eb60e39ae920eee4397",
+   "expires_at": "2026-12-20T08:42:47.393000Z",
+   "revoked_at": "2026-11-20T09:06:49.038000Z",
+   "created_at": "2026-11-20T08:42:47.382000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 5,
+    "xmin": 5163,
+    "xmax": 5163,
+    "ctid": "5,5"
+   }
+  },
+  {
+   "id": "01a1f835-5c52-73f5-a7fa-ec42d887c8d7",
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "token_hash": "4c3d0839bc44ccdb016d8f52088c2bb9d735a84380c138d6c33ce55e3535a119",
+   "expires_at": "2026-12-20T09:06:49.042000Z",
+   "revoked_at": "2026-11-20T09:39:03.831000Z",
+   "created_at": "2026-11-20T09:06:49.033000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 7,
+    "xmin": 5634,
+    "xmax": 5634,
+    "ctid": "5,7"
+   }
+  },
+  {
+   "id": "01a1f852-e290-7624-ae44-d94f1f321cc7",
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "token_hash": "72d9f121a91cfb472ddfe9a02a0a03d4cd373a5b634c8a819d82abd78ea68318",
+   "expires_at": "2026-12-20T09:39:03.952000Z",
+   "revoked_at": "2026-11-20T09:39:04.680000Z",
+   "created_at": "2026-11-20T09:39:03.662000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 9,
+    "xmin": 5636,
+    "xmax": 5636,
+    "ctid": "5,9"
+   }
+  },
+  {
+   "id": "01a1f835-2758-7254-a211-00a24b28a6f9",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "413162391ebf52393230bb13cd76e0b39e84a7e780d2ff49ef815a69268191d7",
+   "expires_at": "2026-12-20T09:06:35.480000Z",
+   "revoked_at": "2026-11-20T09:39:18.501000Z",
+   "created_at": "2026-11-20T09:06:35.479000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 11,
+    "xmin": 5638,
+    "xmax": 5638,
+    "ctid": "5,11"
+   }
+  },
+  {
+   "id": "01a1f853-1b67-7134-a8b0-42a76da045c9",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "e126cc43e0308d2d5ce81e80ea1e033a800abce4643505e79473877b9f84dd54",
+   "expires_at": "2026-12-20T09:39:18.503000Z",
+   "revoked_at": "2026-11-20T09:55:14.172000Z",
+   "created_at": "2026-11-20T09:39:18.497000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 13,
+    "xmin": 6814,
+    "xmax": 6814,
+    "ctid": "5,13"
+   }
+  },
+  {
+   "id": "01a1f852-e582-7009-96b7-efb67e33afd8",
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "token_hash": "7d48f1e3a0b7a72dca72898c65d6348697c8ec7631ee60c05c0f5f50b39f77f6",
+   "expires_at": "2026-12-20T09:39:04.706000Z",
+   "revoked_at": "2026-11-20T09:56:16.828000Z",
+   "created_at": "2026-11-20T09:39:04.629000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 15,
+    "xmin": 6823,
+    "xmax": 6823,
+    "ctid": "5,15"
+   }
+  },
+  {
+   "id": "01a1f862-a53f-75fb-aa3e-07a0095d6039",
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "token_hash": "f025ba4c25844add4d4220629f2a44785134f4bac2430d90d064a7b5c5f45988",
+   "expires_at": "2026-12-20T09:56:16.831000Z",
+   "revoked_at": "2026-11-20T11:04:01.943000Z",
+   "created_at": "2026-11-20T09:56:16.824000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 17,
+    "xmin": 6830,
+    "xmax": 6830,
+    "ctid": "5,17"
+   }
+  },
+  {
+   "id": "01a1f8a0-aca1-76fd-abc2-9c7fb8b78e7e",
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "token_hash": "c866aa8930d40470c2e2a8f2ba8f26f4f013b6682bf77a652dafbe40f6896550",
+   "expires_at": "2026-12-20T11:04:01.954000Z",
+   "revoked_at": "2026-11-20T11:27:41.979000Z",
+   "created_at": "2026-11-20T11:04:01.925000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 19,
+    "xmin": 6832,
+    "xmax": 6832,
+    "ctid": "5,19"
+   }
+  },
+  {
+   "id": "01a1f8b6-57a3-7721-8d41-c9f96ca1ab82",
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "token_hash": "8c610459c53749fc24fda07e0f8c928db84f9270202e4bb4771de2cbab080aeb",
+   "expires_at": "2026-12-20T11:27:41.987000Z",
+   "revoked_at": "2026-11-20T14:16:02.651000Z",
+   "created_at": "2026-11-20T11:27:41.972000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 21,
+    "xmin": 6834,
+    "xmax": 6834,
+    "ctid": "5,21"
+   }
+  },
+  {
+   "id": "01a1f861-b07d-76ee-845a-3785b3ffda9d",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "806b60f5e00e9041096fff811b8639e5b6e8a426a00a7cb55bbeac14adf6d30e",
+   "expires_at": "2026-12-20T09:55:14.173000Z",
+   "revoked_at": "2026-11-20T15:30:12.222000Z",
+   "created_at": "2026-11-20T09:55:14.169000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 23,
+    "xmin": 6836,
+    "xmax": 6836,
+    "ctid": "5,23"
+   }
+  },
+  {
+   "id": "01a1f950-775f-7546-af57-d27567e7aef8",
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "token_hash": "7a84f72989fae11cbc6612d2c47f072c5b5ed9ef8d84f9aa22a6cb25a526e679",
+   "expires_at": "2026-12-20T14:16:02.656000Z",
+   "revoked_at": "2026-11-20T15:31:18.952000Z",
+   "created_at": "2026-11-20T14:16:02.639000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 25,
+    "xmin": 6838,
+    "xmax": 6838,
+    "ctid": "5,25"
+   }
+  },
+  {
+   "id": "01a1f995-612a-7458-b8dd-01934c212e3f",
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "token_hash": "f047549ae7180af6a916227819a9534f21e11d3ca87a3f0c32bcda463fe811cc",
+   "expires_at": "2026-12-20T15:31:18.954000Z",
+   "revoked_at": "2026-11-20T15:46:32.448000Z",
+   "created_at": "2026-11-20T15:31:18.946000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 27,
+    "xmin": 6841,
+    "xmax": 6841,
+    "ctid": "5,27"
+   }
+  },
+  {
+   "id": "01a1f994-5c82-704c-9ccd-46f2f8625796",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "905fb73a08699b0706f51bf1b053378c5c5c3b7b61be8c203dc5490418b61907",
+   "expires_at": "2026-12-20T15:30:12.226000Z",
+   "revoked_at": "2026-11-22T04:42:40.460000Z",
+   "created_at": "2026-11-20T15:30:12.211000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 29,
+    "xmin": 6847,
+    "xmax": 6847,
+    "ctid": "5,29"
+   }
+  },
+  {
+   "id": "01a1f9a3-5183-72b8-ba91-620e42d707d5",
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "token_hash": "17054116b24e5f81dd0cfbb9b1a0be488bbbde593db672729e7ae7c497d060fb",
+   "expires_at": "2026-12-20T15:46:32.451000Z",
+   "revoked_at": "2026-11-22T04:43:20.694000Z",
+   "created_at": "2026-11-20T15:46:32.442000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 31,
+    "xmin": 6849,
+    "xmax": 7145,
+    "ctid": "5,31"
+   }
+  },
+  {
+   "id": "01a20190-3fd5-7622-881a-1a5e7576898b",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "96093b20651166585ff3863ebea2374f42ad7500a2b3ae3caaf1da365cf4f419",
+   "expires_at": "2026-12-22T04:42:40.469000Z",
+   "revoked_at": "2026-11-22T05:00:09.851000Z",
+   "created_at": "2026-11-22T04:42:40.404000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 33,
+    "xmin": 6853,
+    "xmax": 6853,
+    "ctid": "5,33"
+   }
+  },
+  {
+   "id": "01a20190-dcf8-722c-aa2b-b36e33d524e7",
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "token_hash": "db0411961dae234019af568f300c78ed9bc3301b410f83a82d1d797c2ebc40f5",
+   "expires_at": "2026-12-22T04:43:20.696000Z",
+   "revoked_at": "2026-11-22T05:03:17.537000Z",
+   "created_at": "2026-11-22T04:43:20.686000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 35,
+    "xmin": 6855,
+    "xmax": 0,
+    "ctid": "5,35"
+   }
+  },
+  {
+   "id": "01a201a3-8918-7360-98b0-45c8557eaa87",
+   "user_id": "01a201a3-890d-773b-baf6-45f85695758d",
+   "token_hash": "837de75dae8e85fdc16990329cb202b24f806f273c62e3b10e6d54e5642e4ec7",
+   "expires_at": "2026-12-22T05:03:44.408000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-22T05:03:44.396000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 36,
+    "xmin": 6859,
+    "xmax": 0,
+    "ctid": "5,36"
+   }
+  },
+  {
+   "id": "01a201a0-4303-7524-b248-c97901673768",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "b88719db0022db04fa291848dc7742eaaaf01932e8e3877c911a2f0446e053a8",
+   "expires_at": "2026-12-22T05:00:09.875000Z",
+   "revoked_at": "2026-11-22T05:10:32.220000Z",
+   "created_at": "2026-11-22T05:00:09.816000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 37,
+    "xmin": 6897,
+    "xmax": 0,
+    "ctid": "5,37"
+   }
+  },
+  {
+   "id": "01a201aa-0e5e-7599-ad00-e2779b2c4a11",
+   "user_id": "01a1ce0c-4154-76d7-b978-ebfc82c6321f",
+   "token_hash": "024199860157275a132429c646aa93181ffd82e71d138bdd43dd6b4ccbcadfc9",
+   "expires_at": "2026-12-22T05:10:51.742000Z",
+   "revoked_at": "2026-11-22T05:17:37.563000Z",
+   "created_at": "2026-11-22T05:10:51.724000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 40,
+    "xmin": 6912,
+    "xmax": 0,
+    "ctid": "5,40"
+   }
+  },
+  {
+   "id": "01a201ab-baee-7719-851c-b5853ed08f75",
+   "user_id": "01a201ab-bae8-7359-abff-3bbf32cd8595",
+   "token_hash": "328421595ab72939f879d4b9b604f288e1089c6a83bb252243173100ab2101e5",
+   "expires_at": "2026-12-22T05:12:41.454000Z",
+   "revoked_at": "2026-11-22T05:45:40.675000Z",
+   "created_at": "2026-11-22T05:12:41.447000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 42,
+    "xmin": 6918,
+    "xmax": 6918,
+    "ctid": "5,42"
+   }
+  },
+  {
+   "id": "01a201b0-60b9-765c-a1c1-f05a4bfc2907",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "fe5dbbaec3adbabc143ac81011ffa42257b8fff00abaf3aab9e6283ac702dba9",
+   "expires_at": "2026-12-22T05:17:46.041000Z",
+   "revoked_at": "2026-11-22T05:47:20.991000Z",
+   "created_at": "2026-11-22T05:17:46.036000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 44,
+    "xmin": 6920,
+    "xmax": 6920,
+    "ctid": "5,44"
+   }
+  },
+  {
+   "id": "01a201c9-ee4a-7460-a9af-5a3ab2688d41",
+   "user_id": "01a201ab-bae8-7359-abff-3bbf32cd8595",
+   "token_hash": "8541f4d2db258f437004bc1f7e6fe1446cc392a3375b2b2566fbbde6aa87357d",
+   "expires_at": "2026-12-22T05:45:40.682000Z",
+   "revoked_at": "2026-11-22T06:19:54.155000Z",
+   "created_at": "2026-11-22T05:45:40.665000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 46,
+    "xmin": 7015,
+    "xmax": 7015,
+    "ctid": "5,46"
+   }
+  },
+  {
+   "id": "01a201e9-43ad-763a-a3d8-b26bd3388b38",
+   "user_id": "01a201ab-bae8-7359-abff-3bbf32cd8595",
+   "token_hash": "146b401507cb9397a62d8ab19984644c14a536ec58ed6bb04f82e544c6fd813d",
+   "expires_at": "2026-12-22T06:19:54.157000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-22T06:19:54.143000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 47,
+    "xmin": 7015,
+    "xmax": 0,
+    "ctid": "5,47"
+   }
+  },
+  {
+   "id": "01a201f1-1c0d-7670-9305-f31ff5a43822",
+   "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+   "token_hash": "821fdb08b0fbc15b85883c0ad1e570ec3ed6f584198451fe8820b21b25065e7e",
+   "expires_at": "2026-12-22T06:28:28.301000Z",
+   "revoked_at": "2026-11-22T06:44:43.293000Z",
+   "created_at": "2026-11-22T06:28:28.289000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 49,
+    "xmin": 7130,
+    "xmax": 7130,
+    "ctid": "5,49"
+   }
+  },
+  {
+   "id": "01a201ff-fca1-7571-a63a-1d869f40ef63",
+   "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+   "token_hash": "23be48037ca46434b533445177a8b155b43b31d0de525708c6d6a651ede32aed",
+   "expires_at": "2026-12-22T06:44:43.297000Z",
+   "revoked_at": "2026-11-22T06:45:31.422000Z",
+   "created_at": "2026-11-22T06:44:43.285000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 51,
+    "xmin": 7132,
+    "xmax": 7132,
+    "ctid": "5,51"
+   }
+  },
+  {
+   "id": "01a201cb-7621-721f-a54b-33e7feafb436",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "8692ec5e62879dcd1d09171174ecf666c5fae238e8d79b1065a6a911162a9f79",
+   "expires_at": "2026-12-22T05:47:20.993000Z",
+   "revoked_at": "2026-11-22T06:51:57.286000Z",
+   "created_at": "2026-11-22T05:47:20.987000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 53,
+    "xmin": 7134,
+    "xmax": 7134,
+    "ctid": "5,53"
+   }
+  },
+  {
+   "id": "01a20200-b8a7-775d-bc51-f5863c0b0727",
+   "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+   "token_hash": "b011a53bd5770d9832dcec65d33d18d16f49d8e16b6e32724db7a378996f50ee",
+   "expires_at": "2026-12-22T06:45:31.431000Z",
+   "revoked_at": "2026-11-22T07:14:30.779000Z",
+   "created_at": "2026-11-22T06:45:31.388000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 55,
+    "xmin": 7137,
+    "xmax": 7137,
+    "ctid": "5,55"
+   }
+  },
+  {
+   "id": "01a2021b-4346-7419-9e0b-aa3652d97372",
+   "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+   "token_hash": "798c90f251c0d97ad69ca8bb1a21a92b53c550f59473dfa792cbb7fab7d57bc5",
+   "expires_at": "2026-12-22T07:14:30.859000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-22T07:14:30.764000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 56,
+    "xmin": 7137,
+    "xmax": 0,
+    "ctid": "5,56"
+   }
+  },
+  {
+   "id": "01a20206-9bee-74e3-b40a-59bf2bc973ac",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "ebecb3cf74a7bb14d4984517f59498ab7b2e220e246e9c51df3bc62403b98f18",
+   "expires_at": "2026-12-22T06:51:57.294000Z",
+   "revoked_at": "2026-11-22T07:14:46.084000Z",
+   "created_at": "2026-11-22T06:51:57.260000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 57,
+    "xmin": 7139,
+    "xmax": 7139,
+    "ctid": "5,57"
+   }
+  },
+  {
+   "id": "01a2021b-7f1e-7478-a0af-f718cceb0853",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "19b492da8cf5c112fd5180246cc5c72bcafc2d6288b302660f82f04c20afa109",
+   "expires_at": "2026-12-22T07:14:46.174000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-22T07:14:46.067000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 58,
+    "xmin": 7139,
+    "xmax": 0,
+    "ctid": "5,58"
+   }
+  },
+  {
+   "id": "01a20228-82de-701f-9b6d-2bc8ac940822",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "5b587e93f66e688ac8da055dbb66b7762ef051f45b01b473e9aa3d422b274ca0",
+   "expires_at": "2026-12-22T07:28:59.102000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-22T07:28:59.094000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 5,
+    "off": 59,
+    "xmin": 7149,
+    "xmax": 0,
+    "ctid": "5,59"
+   }
+  },
+  {
+   "id": "01a2022e-2c0a-7349-b581-d8e71de4ab91",
+   "user_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+   "token_hash": "5426d195c8f28546ef8e45c64f5d6128bacf8b5cd7c709f087a832b1310f3920",
+   "expires_at": "2026-12-22T07:35:10.090000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-22T07:35:10.073000Z",
+   "_confidence": "medium",
+   "_source": "wal-redo",
+   "_notes": [
+    "row version created after last checkpoint; reconstructed from WAL redo"
+   ],
+   "_loc": {
+    "blk": 5,
+    "off": 61,
+    "xmin": 7160,
+    "xmax": 0,
+    "ctid": "5,61"
+   }
+  },
+  {
+   "id": "01a20229-4049-7588-8323-d7aeea43a654",
+   "user_id": "01a20229-402e-75ac-90f3-bcc484bcdc8c",
+   "token_hash": "8805a20c1015995c82174f536b72a8979a0574532aa66ea18e40ad7802d4fc6c",
+   "expires_at": "2026-12-22T07:29:47.593000Z",
+   "revoked_at": "2026-11-22T07:42:55.189000Z",
+   "created_at": "2026-11-22T07:29:47.565000Z",
+   "_confidence": "medium",
+   "_source": "wal-redo",
+   "_notes": [
+    "row version created after last checkpoint; reconstructed from WAL redo"
+   ],
+   "_loc": {
+    "blk": 5,
+    "off": 62,
+    "xmin": 7181,
+    "xmax": 7181,
+    "ctid": "5,62"
+   }
+  },
+  {
+   "id": "01a20235-44d7-7391-babf-d661d46a7b34",
+   "user_id": "01a20229-402e-75ac-90f3-bcc484bcdc8c",
+   "token_hash": "bba62100a368e7f8b01ce73b681eaeca96a62e9573c4de812e004280afb4d472",
+   "expires_at": "2026-12-22T07:42:55.191000Z",
+   "revoked_at": null,
+   "created_at": "2026-11-22T07:42:55.182000Z",
+   "_confidence": "medium",
+   "_source": "wal-redo",
+   "_notes": [
+    "row version created after last checkpoint; reconstructed from WAL redo"
+   ],
+   "_loc": {
+    "blk": 5,
+    "off": 63,
+    "xmin": 7181,
+    "xmax": 0,
+    "ctid": "5,63"
+   }
+  }
+ ],
+ "modified": [
+  {
+   "key": "01a1f1da-2446-710a-a03b-e1da3c421c6d",
+   "changedFields": [
+    "revoked_at"
+   ],
+   "before": {
+    "id": "01a1f1da-2446-710a-a03b-e1da3c421c6d",
+    "user_id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+    "token_hash": "e3b04514529409773584764c0ebc0dbe90f4285b1f7e2add40aaedae0c35e11c",
+    "expires_at": "2026-12-19T03:29:27.622000Z",
+    "revoked_at": null,
+    "created_at": "2026-11-19T03:29:27.611000Z"
+   },
+   "after": {
+    "id": "01a1f1da-2446-710a-a03b-e1da3c421c6d",
+    "user_id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+    "token_hash": "e3b04514529409773584764c0ebc0dbe90f4285b1f7e2add40aaedae0c35e11c",
+    "expires_at": "2026-12-19T03:29:27.622000Z",
+    "revoked_at": "2026-11-19T04:08:28.604000Z",
+    "created_at": "2026-11-19T03:29:27.611000Z",
+    "_confidence": "high",
+    "_source": "heap-file",
+    "_loc": {
+     "blk": 4,
+     "off": 4,
+     "xmin": 3764,
+     "xmax": 3764,
+     "ctid": "4,4"
+    }
+   }
+  }
+ ],
+ "removedSinceNov19": []
+}

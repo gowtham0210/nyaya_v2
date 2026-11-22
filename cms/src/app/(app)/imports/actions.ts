@@ -12,23 +12,36 @@ export interface UploadState {
   previousImportId?: string;
 }
 
+const EXAMS = ['aibe', 'ailet', 'clat'];
+
 /**
  * Sends the chosen file to the API: a test run returns the report; a real
- * import opens the saved report. The API decides who may import.
+ * import opens the saved report. The API decides who may import. The exam
+ * kind uses the exam endpoint (exam columns and an optional content source).
  */
 export async function uploadImport(form: FormData): Promise<UploadState> {
   const file = form.get('file');
   if (!(file instanceof File) || file.size === 0) return { error: 'Choose a .csv or .xlsx file first.' };
   const dryRun = form.get('dry_run') !== 'false';
+  const isExam = form.get('kind') === 'exam';
+  const exam = String(form.get('exam') ?? '');
+  const source = String(form.get('content_source_id') ?? '');
+  if (isExam && !EXAMS.includes(exam)) return { error: 'Choose the examination first.' };
+
   const body = new FormData();
   body.set('file', file, file.name);
   body.set('dry_run', String(dryRun));
+  if (isExam) {
+    body.set('exam', exam);
+    if (/^[0-9a-f-]{36}$/i.test(source)) body.set('content_source_id', source);
+  }
 
   const client = await api();
-  const { data, error, response } = await client.POST('/v1/admin/import-jobs', {
-    body: body as never,
-    bodySerializer: (b) => b as unknown as FormData,
-  });
+  const opts = { body: body as never, bodySerializer: (b: unknown) => b as unknown as FormData };
+  const res = isExam
+    ? await client.POST('/v1/admin/exam-import-jobs', opts)
+    : await client.POST('/v1/admin/import-jobs', opts);
+  const { data, error, response } = res;
   if (!data) {
     if (response.status === 401) redirect(SESSION_ENDED_URL);
     const err = asApiError(error, response.status);

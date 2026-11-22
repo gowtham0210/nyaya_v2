@@ -1,0 +1,1322 @@
+[
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 3,
+   "xmin": 1269,
+   "xmax": 1281,
+   "ctid": "0,3"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1d8e3-b09c-757e-b3ae-3e396281229e",
+  "email": "newww@gmail.com",
+  "display_name": "neww",
+  "password_hash": "scrypt$16384$8$1$SDIGmuyIyS5lxchtxGIjdQ$NpR_-6HwJqNRoHqBxBetEkOX273ApR8goJ26h4HGR4PPbsLpPijz2vQ7XcS5plCgCaUJ6CQETK_-eaxESfpskA",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-14T07:09:22.971000Z",
+  "updated_at": "2026-11-14T07:09:23.288000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 4,
+   "xmin": 769,
+   "xmax": 0,
+   "ctid": "0,4"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1c91a-bbb9-70e3-843c-56fd42a3c2f7",
+  "email": "keerthana@gmail.com",
+  "display_name": "Keerthana",
+  "password_hash": "scrypt$16384$8$1$ENT56M3k-s_r_zQKIsf-4A$_AIbrJLgClGra1KyCn8iIvHusR9XGcsd6oC0WSW8DptSsqIWDEegvVWg-oCPKdrPUd3v6OwoxV-f5UrJO2TBCw",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-11T05:35:34.840000Z",
+  "updated_at": "2026-11-11T05:44:56.878000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 6,
+   "xmin": 780,
+   "xmax": 780,
+   "ctid": "0,6"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1c926-960a-7315-b573-43c729eeb791",
+  "email": "test@gmail.com",
+  "display_name": "test",
+  "password_hash": "scrypt$16384$8$1$Xd_D5TTTAlMMG0bbrPt4FA$V0g3LXO7wXrzqlsWmlL1TuD-Njt5gTHuDCYVe8uRRFAPlvei9U1VRy-zGjM6cjmTGUwsjf7bOwUqnZ6EywhYOw",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-11T05:48:31.625000Z",
+  "updated_at": "2026-11-11T05:48:31.986000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 8,
+   "xmin": 788,
+   "xmax": 1147,
+   "ctid": "0,8"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1c93e-72a4-70c3-8bd4-adfb57cbe6cb",
+  "email": "keerthu@gmail.com",
+  "display_name": "keerthu",
+  "password_hash": "scrypt$16384$8$1$9zr44rM-tBdzppTKuj1gjg$p4d6P7oJ0_ivA1nHKKlqmTpHN8SQkl0xp_2JrGa_PczJuqaSejyhw-CxU5OOC6AIU1ry41SxILtvXvZRtG9BlQ",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-11T06:14:35.427000Z",
+  "updated_at": "2026-11-11T06:14:42.320000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 9,
+   "xmin": 1042,
+   "xmax": 3748,
+   "ctid": "0,9"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "email": "admin@nyaya.local",
+  "display_name": "Dev Admin",
+  "password_hash": "scrypt$16384$8$1$QP6VdrcgNoukWV77MHWYjw$bMZHEZlUTGyW3CNltihhq0sHRqhV6dfIANhaDiAQkMiVcYidz7nW3hLaeV8AtqYXbfnMqgzWe3uv9xi2cDcZlQ",
+  "roles": [
+   "admin"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-12T04:37:52.080000Z",
+  "updated_at": "2026-11-12T04:37:52.080000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 10,
+   "xmin": 1043,
+   "xmax": 2351,
+   "ctid": "0,10"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ce0c-4152-71cb-a89a-4dc3d905b63e",
+  "email": "editor@nyaya.local",
+  "display_name": "Dev Editor",
+  "password_hash": "scrypt$16384$8$1$QP6VdrcgNoukWV77MHWYjw$bMZHEZlUTGyW3CNltihhq0sHRqhV6dfIANhaDiAQkMiVcYidz7nW3hLaeV8AtqYXbfnMqgzWe3uv9xi2cDcZlQ",
+  "roles": [
+   "content_editor"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-12T04:37:52.082000Z",
+  "updated_at": "2026-11-12T04:37:52.082000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 11,
+   "xmin": 1044,
+   "xmax": 3733,
+   "ctid": "0,11"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ce0c-4153-77e9-b36c-0972910afe58",
+  "email": "reviewer@nyaya.local",
+  "display_name": "Dev Reviewer",
+  "password_hash": "scrypt$16384$8$1$QP6VdrcgNoukWV77MHWYjw$bMZHEZlUTGyW3CNltihhq0sHRqhV6dfIANhaDiAQkMiVcYidz7nW3hLaeV8AtqYXbfnMqgzWe3uv9xi2cDcZlQ",
+  "roles": [
+   "legal_reviewer"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-12T04:37:52.083000Z",
+  "updated_at": "2026-11-12T04:37:52.083000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 12,
+   "xmin": 1045,
+   "xmax": 0,
+   "ctid": "0,12"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ce0c-4153-77e9-b36c-0f22f0458ffa",
+  "email": "learner@nyaya.local",
+  "display_name": "Dev Learner",
+  "password_hash": "scrypt$16384$8$1$QP6VdrcgNoukWV77MHWYjw$bMZHEZlUTGyW3CNltihhq0sHRqhV6dfIANhaDiAQkMiVcYidz7nW3hLaeV8AtqYXbfnMqgzWe3uv9xi2cDcZlQ",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-12T04:37:52.084000Z",
+  "updated_at": "2026-11-12T04:37:52.084000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 13,
+   "xmin": 1046,
+   "xmax": 2254,
+   "ctid": "0,13"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ce0c-4154-76d7-b978-ebfc82c6321f",
+  "email": "publisher@nyaya.local",
+  "display_name": "Dev Publisher",
+  "password_hash": "scrypt$16384$8$1$QP6VdrcgNoukWV77MHWYjw$bMZHEZlUTGyW3CNltihhq0sHRqhV6dfIANhaDiAQkMiVcYidz7nW3hLaeV8AtqYXbfnMqgzWe3uv9xi2cDcZlQ",
+  "roles": [
+   "publisher"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-12T04:37:52.084000Z",
+  "updated_at": "2026-11-12T04:37:52.084000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 15,
+   "xmin": 1168,
+   "xmax": 1169,
+   "ctid": "0,15"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1d493-0ecb-7185-a17c-05c60b4d8ce8",
+  "email": "newuser@gmail.com",
+  "display_name": "newuser",
+  "password_hash": "scrypt$16384$8$1$OhNq0XiQ1dOAp6J_85RuMw$QHXjCdvIJ7vBhXzUJeJB_qFcWH0FzC_8EwHmL0Gqayq65478u6_ZEmMYMRDYfUgc7esPnjGKOZ0ytSi7uIv2UQ",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-13T11:02:49.803000Z",
+  "updated_at": "2026-11-13T11:02:50.087000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 18,
+   "xmin": 1185,
+   "xmax": 1200,
+   "ctid": "0,18"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1d498-a4c3-73f4-a96a-4e7af482d2d5",
+  "email": "keerthana1@gmail.com",
+  "display_name": "keerthana",
+  "password_hash": "scrypt$16384$8$1$eZrd5Ak7vrL2fKEH1YMG5Q$jHP_imyXRbQN4ACLWXKsqeOiun0SnG6S-ajc3FgMWZFRGC1ubCS7SJVtUn500o-0-KnAB9iV_V1gupzR7SA7gw",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-13T11:08:55.874000Z",
+  "updated_at": "2026-11-13T11:08:56.106000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 20,
+   "xmin": 1207,
+   "xmax": 1208,
+   "ctid": "0,20"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1d4c5-4e86-72b3-9abd-60c430e8fa4e",
+  "email": "name@gmail.com",
+  "display_name": "name",
+  "password_hash": "scrypt$16384$8$1$RUtQQikXSB2cK4ZHo30ZcQ$yz5--kqUAACXlKJrwSSeYX6PC1bfca_GomEW-IaWt1wvlyazRsLfnKBDiEainyaJ_hwtL92gHfXbWxgkM2CLqg",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-13T11:57:42.918000Z",
+  "updated_at": "2026-11-13T11:57:43.176000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 23,
+   "xmin": 1221,
+   "xmax": 1228,
+   "ctid": "0,23"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1d4c8-5932-76c4-a5ce-03135f7cb64b",
+  "email": "test1@gmail.com",
+  "display_name": "test",
+  "password_hash": "scrypt$16384$8$1$Bq1ZeAqfr7xrlknN2pymHw$4B0JtCes5IKiyORF1eXlo609N6W1uZFjMqVJguPKnMX4wbibhHtkl_JME3ZhlbKuwlVnxEEmQKoZFIr1JNpxWg",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-13T12:01:02.257000Z",
+  "updated_at": "2026-11-13T12:01:02.503000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 26,
+   "xmin": 1237,
+   "xmax": 1242,
+   "ctid": "0,26"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1d86e-e9bd-7741-8771-3eddb0ca4301",
+  "email": "newuser1@gmail.com",
+  "display_name": "new user",
+  "password_hash": "scrypt$16384$8$1$HiZ1ZWqH-UJpceLyW0CXiw$nl-zYI1UpVfPeUAiUQsSd89R6t2PtKJjPSEPYOSQUA2NNfJF30DA5sRVQcelOmlisC3RqL9ITiQsJFM8_5B-wQ",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-14T05:01:49.884000Z",
+  "updated_at": "2026-11-14T05:01:50.442000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 28,
+   "xmin": 1247,
+   "xmax": 1250,
+   "ctid": "0,28"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1d8a5-1053-7009-bba4-d79174b99305",
+  "email": "usernew@gmail.com",
+  "display_name": "usernew",
+  "password_hash": "scrypt$16384$8$1$zl97cJcaFTt6fhJeCT03Tw$2_eGZBpCWE58QVZm63jp74QoBDwtWOX16My7OyEpAwGx3i71-59smviY0a5rfOSLfvLF0l9e5mEu1Jrtjs6cgg",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-14T06:00:58.706000Z",
+  "updated_at": "2026-11-14T06:00:59.189000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 30,
+   "xmin": 1257,
+   "xmax": 1258,
+   "ctid": "0,30"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1d8df-6dad-7222-a063-e03f8e7ce761",
+  "email": "keerthuu@gmail.com",
+  "display_name": "keerthuu",
+  "password_hash": "scrypt$16384$8$1$fQL6tcoxEoHQNDzZQd1r5g$NTpAu5Wl4M73K6j5H1VARDlFCbIokTt9tTnva4sYoSzARHhNXeeaeqOVIbXYnptyjWuW21aVFitYE4eBBTEvYA",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-14T07:04:43.691000Z",
+  "updated_at": "2026-11-14T07:04:44.198000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 32,
+   "xmin": 1289,
+   "xmax": 1299,
+   "ctid": "0,32"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1d95d-6e72-73db-8c59-b32e78541bc9",
+  "email": "test2@gmail.com",
+  "display_name": "test2",
+  "password_hash": "scrypt$16384$8$1$Dt9ZK4S_zoSYcmwRW4TWlg$HHvpFGY4XIZZXrox0K8E7qRs7IRHOr5Fb0bE_yd_pRrlcGEDB1L1aiO3JK7QMTtZeMQbVAJqtu5-19LxbqfgXA",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-14T09:22:21.425000Z",
+  "updated_at": "2026-11-14T09:22:21.681000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 34,
+   "xmin": 1305,
+   "xmax": 1323,
+   "ctid": "0,34"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1d99d-4d33-73c1-824a-9edbf6582c47",
+  "email": "newwww@gmail.com",
+  "display_name": "newwww",
+  "password_hash": "scrypt$16384$8$1$icrlz2ikhcg2f2KQQOrmNQ$x21k4WyQe0cwZ-Ljy2xnLv8TWRaZxLI8vVR2hnflWZTZRvQoULMqYj3atznGvAVrnpBwPo0_FZDeuUGO-Yd81Q",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-14T10:32:07.218000Z",
+  "updated_at": "2026-11-14T10:32:07.553000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 36,
+   "xmin": 1329,
+   "xmax": 1336,
+   "ctid": "0,36"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1d9b8-2996-702a-b550-c5ff2209d65c",
+  "email": "newtest@gmail.com",
+  "display_name": "newtest",
+  "password_hash": "scrypt$16384$8$1$Kp9NO92uOi_zzSGG37K1Zw$vpHIAtypbF37rOPq7YAAJNHGjUTrrdoseojsu-3my48vcJx9iR_8et9e1X9_8pIJykc5jdn4d47oKCWIomBteA",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-14T11:01:27.573000Z",
+  "updated_at": "2026-11-14T11:01:28.056000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 38,
+   "xmin": 1367,
+   "xmax": 1368,
+   "ctid": "0,38"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1d9d2-062c-7021-b3ae-4be114c7c97c",
+  "email": "keer@gmail.com",
+  "display_name": "keerthana",
+  "password_hash": "scrypt$16384$8$1$q6G9Ut9rgEGMMh38UfE8fQ$k-iX-4LyXwlvhb7EFPaMZffSZuQwi3DmguSvQNqg2m1RTVgRy1HMQOnR_wPyPZWgmajW2h9D0lgZZKlU0O1KSA",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-14T11:29:42.442000Z",
+  "updated_at": "2026-11-14T11:29:42.949000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 40,
+   "xmin": 1376,
+   "xmax": 1377,
+   "ctid": "0,40"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1d9da-2968-7156-829a-4d73ef2c0416",
+  "email": "keertu@gmail.com",
+  "display_name": "keertu",
+  "password_hash": "scrypt$16384$8$1$tBIS4lGOO5CevkYrMafHtg$qZ1zi3Q9DpBbpILnY6eBkB9S4mEw_fyLi9XoQr9Fbu_lXrENsb4rWbjMgizxBVno-LlMDXwIq9QNEJ2XGLa36A",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-14T11:38:35.751000Z",
+  "updated_at": "2026-11-14T11:38:36.183000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 42,
+   "xmin": 1382,
+   "xmax": 1404,
+   "ctid": "0,42"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1d9e4-057f-743a-ac0c-aac16aab89ab",
+  "email": "kee@gmail.com",
+  "display_name": "keerth",
+  "password_hash": "scrypt$16384$8$1$7-kpaKOxU5lJssxN55bZZw$5uMvnkRjfS4PNRUivu1SkNl9R5YhR3ifpUIF1IhD34zb6VIzK4SIlR4Cg-aBPXA96M9bnR885KoyD_tGxBtsVg",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-14T11:49:21.917000Z",
+  "updated_at": "2026-11-14T11:49:30.428000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 44,
+   "xmin": 1399,
+   "xmax": 1400,
+   "ctid": "0,44"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1d9f7-7122-754e-a800-eb909ecbdd30",
+  "email": "sara@gmail.com",
+  "display_name": "sara",
+  "password_hash": "scrypt$16384$8$1$SUTzBBtg1qXoeTi5XncGZg$ejCTarV-QUZarVkBJALcL12dFzlxXKwP-K3vQGalTrnEtluKSDdcDWF3VQ-Av2RuOvAjdfgQHAkYO_AsJlq6gQ",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-14T12:10:34.655000Z",
+  "updated_at": "2026-11-14T12:10:35.054000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 46,
+   "xmin": 1409,
+   "xmax": 1422,
+   "ctid": "0,46"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1da00-368f-726e-99c9-3d46de0bf6e1",
+  "email": "keeerthu@gmail.com",
+  "display_name": "keeerthu",
+  "password_hash": "scrypt$16384$8$1$qG1U-BLBu3gHLFpOp-N77A$pD53WjaUd4qicfOdZ-3nR9Xp_LvswjQPPGmvVBniHrdvUm6pJBZiTYLb6mWtDrWYddn1e6h6DxIbsWNzcRn4Lw",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-14T12:20:09.486000Z",
+  "updated_at": "2026-11-14T12:20:09.889000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 48,
+   "xmin": 1428,
+   "xmax": 1433,
+   "ctid": "0,48"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1da11-01d3-74ce-a946-e6b706d1a26e",
+  "email": "testtest@gmail.com",
+  "display_name": "testtest",
+  "password_hash": "scrypt$16384$8$1$KxRM2YPF8PZxWreE2uUpPw$s9riKdHVacaNo3Z79-GA2_hqKdEL4FhXI03OnA9K8002ThizsWPO_8Je_LH-kYsAAxVLzA9u8d_AmDWEbdAZYA",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-14T12:38:30.099000Z",
+  "updated_at": "2026-11-14T12:38:37.736000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 50,
+   "xmin": 1440,
+   "xmax": 1440,
+   "ctid": "0,50"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1da23-c517-7784-834b-a1369848fd5f",
+  "email": "testuser2@gmail.com",
+  "display_name": "test user 1",
+  "password_hash": "scrypt$16384$8$1$h23ACIoRC_Gxrw9R4dBUOg$nW0prpaBGZBHBqjHiLnGVTxLBL0xb2ndLSJCXOBbPnr-wEKdxhZq_USufekqmOdZYHc-h71lHyvXnChxg3D1tw",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-14T12:58:59.734000Z",
+  "updated_at": "2026-11-14T12:58:59.987000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 53,
+   "xmin": 1455,
+   "xmax": 1455,
+   "ctid": "0,53"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e2af-8a32-7582-9ff5-792fc728d951",
+  "email": "keerthana122@gmail.com",
+  "display_name": "Keerthana",
+  "password_hash": "scrypt$16384$8$1$oLOSCM74MhRqWoIlwsLM7w$I8h84DgtkIDLUq7zyvD9riVLb1zqOEs-i8FncdqOrs4TCKjpmG4zoyKShyrecLe8c4kFfbPJuPxsLQCgaHJLeg",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-16T04:48:37.424000Z",
+  "updated_at": "2026-11-16T04:48:43.067000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 55,
+   "xmin": 1460,
+   "xmax": 1460,
+   "ctid": "0,55"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e2c6-23db-7574-b812-cf150c099a80",
+  "email": "keerthuuuuuuuq@gmail.com",
+  "display_name": "KEerthu",
+  "password_hash": "scrypt$16384$8$1$tBEfpd8c3TNb6vbV5A2GRg$tjZWzxgQBKUgYWN9YlOn52ESBsdEBBUzUvZsQlHWcd49YEjUpnV1CxrUrkj2FLd_vtan2eY1OXPWA0R20LqL5g",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-16T05:13:18.554000Z",
+  "updated_at": "2026-11-16T05:13:25.691000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 57,
+   "xmin": 1465,
+   "xmax": 1465,
+   "ctid": "0,57"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e2d4-9595-7234-8139-1ce3b48bcdf2",
+  "email": "keeeerthana@gmail.com",
+  "display_name": "Keerthana",
+  "password_hash": "scrypt$16384$8$1$l03tF0QvnilGXxsZi1ghFA$NzOIYHJkZxyfZ8fITowmOWNQebVmrEbyziW7aL9D0hKFoUNm4dhnDvC6EkDCiVbFB3mhwGhW0H9GoX9qsht1Zg",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-16T05:29:05.172000Z",
+  "updated_at": "2026-11-16T05:29:12.308000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 59,
+   "xmin": 1470,
+   "xmax": 1571,
+   "ctid": "0,59"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "email": "asha@gmail.com",
+  "display_name": "Asha",
+  "password_hash": "scrypt$16384$8$1$2JeCAaB-unuIhdfHXxUUBQ$KLosmgXXLVX8HsUwFUkFcnOKOhd7BK03e-K8ntkzULOWYy-u87mNAB79D7PiFUzYzo5aiVzyg7YcmlWEZp7ILg",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-16T05:39:21.652000Z",
+  "updated_at": "2026-11-16T05:39:27.432000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 1,
+   "xmin": 1578,
+   "xmax": 1584,
+   "ctid": "1,1"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e320-64e7-7759-8ac6-68ebebbf840e",
+  "email": "ansha@gmail.com",
+  "display_name": "Ansha",
+  "password_hash": "scrypt$16384$8$1$VhQRzIJ42e3iUv9MwePOZw$OMotAwB9JnBc28QrnHU4d4brf7w58iW1iVsQ2x7iYuMYoWBSzi6DjrnOvCVu_gcToKelvYtGYb6bcZQCUCcWOA",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-16T06:51:53.446000Z",
+  "updated_at": "2026-11-16T06:52:00.509000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 3,
+   "xmin": 1590,
+   "xmax": 1590,
+   "ctid": "1,3"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e327-c2e5-75d1-a4ce-bdac08e15a0e",
+  "email": "ansha2@gmail.com",
+  "display_name": "Ansha",
+  "password_hash": "scrypt$16384$8$1$u5QYze5cBGihhDemxTuMjg$RbVAL9NCykFFOqYxBIpjiLussxTzmeSlo5cA5wEtB5jc18Fwnt5MtzL74tcCf_2whG277tdeSR_L4A-rJkNi7A",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-16T06:59:56.258000Z",
+  "updated_at": "2026-11-16T07:00:03.493000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 6,
+   "xmin": 1597,
+   "xmax": 1597,
+   "ctid": "1,6"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e32b-f398-748b-8997-0dbaf6518bb3",
+  "email": "ansha5@gmail.com",
+  "display_name": "Ansha",
+  "password_hash": "scrypt$16384$8$1$ljTrtxBG_K8BGb6fgOlQwQ$fI2vplbsXtGNvpjIjlhEygFg7pKOssIlwCtndGagl1OkmliCKPjfKE9h_hUzBof4sFo2jY0MDoEGLyO9ODo01g",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-16T07:04:30.870000Z",
+  "updated_at": "2026-11-16T07:04:36.027000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 8,
+   "xmin": 1779,
+   "xmax": 1780,
+   "ctid": "1,8"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e511-282d-73f7-8ce1-950ecce0d19c",
+  "email": "testuser4@gmail.com",
+  "display_name": "Keerthana test",
+  "password_hash": "scrypt$16384$8$1$Eu8h4TtgfjsnSFg5PBipPA$cRyOYiDc8H8_zk6M90L5Fwvp0I9D2JrMvy8pgwsU9rIm_VFP867v6-M5m0t-vDvLMBKBcLK_gh8cJrn-8p_sEA",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-16T15:54:29.292000Z",
+  "updated_at": "2026-11-16T15:54:33.923000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 9,
+   "xmin": 1791,
+   "xmax": 1791,
+   "ctid": "1,9"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "email": "keerthana.r2022cse@sece.ac.in",
+  "display_name": "anu",
+  "password_hash": "scrypt$16384$8$1$9fCwzpDlgAG3e5CUEIjbpw$tNDDc0zY-mGPsj9oPBPKxqbkZ8vVvbrpJLe_-a3ZqLu9xKvOjHcfYmMtsaJbXWS9pdLT8gQd7jonM90adoQ_VA",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-16T08:54:44.013000Z",
+  "updated_at": "2026-11-16T16:11:19.124000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 11,
+   "xmin": 2210,
+   "xmax": 2210,
+   "ctid": "1,11"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eedb-4f09-7127-b0f6-157aa76d3384",
+  "email": "mocktest@gmail.com",
+  "display_name": "mock test",
+  "password_hash": "scrypt$16384$8$1$OIRZWMrJrDm0sF1o3n3vyQ$tTTQOMH-Gn70ZaNZnwRvp39d5p2c5hKLX7BTfAsVDaa6mpGNgBryl-AWCcrXSAuLvGnddLF0V9wmRIIL2ylefA",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-18T13:31:52.456000Z",
+  "updated_at": "2026-11-18T13:31:56.548000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 12,
+   "xmin": 1619,
+   "xmax": 1621,
+   "ctid": "1,12"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e32e-d8ae-71e9-a25d-879180bfcc4f",
+  "email": "anhsa@gmail.com",
+  "display_name": "Anhsa",
+  "password_hash": "scrypt$16384$8$1$D0niH-SErl5NDom1rEcSYQ$u8_dr2fxmZmSYzKqpxwZ4deX8gcOwF7Nxe8DJYrFeR36Si66kONWbPHtwHTlGAzHGPnMvjCyJyxM0KXvg3mF0A",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-16T07:07:40.589000Z",
+  "updated_at": "2026-11-16T07:29:05.418000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 14,
+   "xmin": 1626,
+   "xmax": 1626,
+   "ctid": "1,14"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e34e-1a89-7666-93e6-4aed93746026",
+  "email": "keerth12u@gmail.com",
+  "display_name": "Keerthu",
+  "password_hash": "scrypt$16384$8$1$zK3n9E_vGEcFWX-xjP0hDw$g9-v7FzbQZunit-cDx2kMlxaLc_gRzvg91YhAUrLLXbbDdtLYVs5BM9DX-YQe2MEFliDaYiC3pqBQ2CigXuGXw",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-16T07:41:49.065000Z",
+  "updated_at": "2026-11-16T07:41:49.539000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 16,
+   "xmin": 1631,
+   "xmax": 1665,
+   "ctid": "1,16"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e35b-5a0a-7176-b3dd-c048b9e4b1dc",
+  "email": "anhu@gmail.com",
+  "display_name": "Anhu",
+  "password_hash": "scrypt$16384$8$1$C6Q2AkRv3u2lK6tG63rI6Q$RAeTO9ZYMNn3F7GkxCOM6L--n7D0MpuwYRSBjueK3Fg7wKpgzLJod68gnM_TYRkb2D5UDnsCkSBhw-WBxMLSaQ",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-16T07:56:17.289000Z",
+  "updated_at": "2026-11-16T07:56:22.009000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 19,
+   "xmin": 1681,
+   "xmax": 1723,
+   "ctid": "1,19"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e35f-3a75-7167-be29-ff6b2d11c200",
+  "email": "keer111@gmail.com",
+  "display_name": "keer",
+  "password_hash": "scrypt$16384$8$1$cjXuTVpxikjl1pyFqGkbOQ$X_xJJfQJ6rQE9RAkSHQr9IRq0eEx46fy7Eztprl2vMSTMpRHdIXXPePYfOastJkVAOfd03R7TONISW4uT5ogPg",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-16T08:00:31.349000Z",
+  "updated_at": "2026-11-16T08:00:35.740000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 21,
+   "xmin": 1692,
+   "xmax": 1693,
+   "ctid": "1,21"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e368-0cf4-7257-8cc2-bf254bad4273",
+  "email": "kerth@gmail.com",
+  "display_name": "Keerthhh",
+  "password_hash": "scrypt$16384$8$1$oV8mdwcEOVc2Lf8ZQadP7w$UhC_sGNTPKTKIqL615WHdqaa3TGUrORn9wWRHZCfPb9GSpKJRA5QB_Canmer7wISIpEAM87EXBaKLa5_W4Vyiw",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-16T08:10:09.523000Z",
+  "updated_at": "2026-11-16T08:10:13.842000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 23,
+   "xmin": 1810,
+   "xmax": 2126,
+   "ctid": "1,23"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e521-2f6e-755c-bf68-26954afb132e",
+  "email": "keerthutest@gmail.com",
+  "display_name": "Keerthutest",
+  "password_hash": "scrypt$16384$8$1$LiNHBEM06iqGyKvxLkb6ww$D53ktPVgv7ckr2Jy028gCErnBYONlr4ncvb5oqWka6Ui4IHtGKr1vNtXEyYSqxT8HA0jFfA4LAYGbP8AHdt8Vg",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-16T16:11:59.725000Z",
+  "updated_at": "2026-11-17T05:07:45.422000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 25,
+   "xmin": 2100,
+   "xmax": 2100,
+   "ctid": "1,25"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e819-51f3-767f-91b1-68eefbc28479",
+  "email": "testus@gmail.com",
+  "display_name": "test us",
+  "password_hash": "scrypt$16384$8$1$Ubs9PhDHWlptnJVZlkwg9w$K_dMvoyodC6OYI9SXqi35ZiNWelswgmEbBAgykwQeuwJ-ACM6SfU9iBCkyWnrKMkQfkt5eMabIoLimlXt4T4Vw",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-17T06:02:15.922000Z",
+  "updated_at": "2026-11-17T06:02:20.373000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 26,
+   "xmin": 2213,
+   "xmax": 2216,
+   "ctid": "1,42"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ef65-e133-729b-b91f-534656f01ead",
+  "email": "keerth@gmail.com",
+  "display_name": "Keerth",
+  "password_hash": "scrypt$16384$8$1$oCiY62-KuVZpjjWZcJ5mmA$twph-jPriMJJhW_Y4Tx5jmG-A0QiVHRCpWPQiGU579OWhULBBgkhicUrp97Gb0vdS0MaDIJ8XGZ6zrfR0agMCw",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-18T16:03:13.842000Z",
+  "updated_at": "2026-11-18T16:03:13.842000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 28,
+   "xmin": 1768,
+   "xmax": 1770,
+   "ctid": "1,28"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e462-c112-72df-9389-2ff858fa4df8",
+  "email": "testuser1@gmail.com",
+  "display_name": "testuser1",
+  "password_hash": "scrypt$16384$8$1$IpsFlMFbSn3ULwY7mDYPIQ$9c77Z_hl6RV48wrilsuEgyFKSrV-4lkPa7DkyP6cq8iwHk3qw_HWGi3fcdRl52dUNNpZkXqazx3Gk3yN5yMWdw",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-16T12:43:59.633000Z",
+  "updated_at": "2026-11-16T12:44:04.985000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 32,
+   "xmin": 2107,
+   "xmax": 2124,
+   "ctid": "1,32"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e846-b507-70d9-a52c-3807c9a2389d",
+  "email": "const@gmail.com",
+  "display_name": "const",
+  "password_hash": "scrypt$16384$8$1$vTppB0MH0jNO8ibiFbsqyA$U8YTGYagiTO3_UmBW3yWuTpNiN3jJOpXP2EosZj15o_TgHA3kMLKPsrUhW0q_KO7jQgXCXp988CF6dbVrTlUKw",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-17T06:51:50.406000Z",
+  "updated_at": "2026-11-17T06:51:54.937000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 34,
+   "xmin": 2131,
+   "xmax": 2154,
+   "ctid": "1,34"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ecf8-c85f-71be-a7f5-dac6aebe5027",
+  "email": "test7@gmail.com",
+  "display_name": "Test7",
+  "password_hash": "scrypt$16384$8$1$eT38ufGmLIoE6Y2DWi7KLQ$4pguA85mlCnVd6T0C3exWkXcB9NF5OCE3GXvzZg8cL8LInxjeunyxwMmk_YCYISaJzbDpz5ENCjGCMLFVMIN_Q",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-18T04:44:49.631000Z",
+  "updated_at": "2026-11-18T04:44:55.333000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 36,
+   "xmin": 2150,
+   "xmax": 2152,
+   "ctid": "1,36"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ee6b-a372-74e8-a429-a3303578e29d",
+  "email": "keerthanatest@gmail.com",
+  "display_name": "Keerthana test",
+  "password_hash": "scrypt$16384$8$1$283XFeH4pqJnywaZgnFUzw$_MSetbkkhi9WBu-JVCGrF5cnZUYZOPERACLLNqanufDZGgz56qxPOfbleQuUcH_tjCjHXg3F6X9D2LhbAV_4Rg",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-18T11:29:54.033000Z",
+  "updated_at": "2026-11-18T11:29:58.646000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 38,
+   "xmin": 2159,
+   "xmax": 2159,
+   "ctid": "1,38"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eead-27c4-75cf-9238-bcd1ecfc83ca",
+  "email": "kerthhhh@gmail.com",
+  "display_name": "Keerthhhhhhh",
+  "password_hash": "scrypt$16384$8$1$DrUS7irDbubhrOB2ZWNmzA$2usz5XXswQI0sR2T-T_O-q8xYSRWmfIGoqvWfbG3wPkWq4Vtgj2uZzBbZQOYeXzbcxSaqoH50PuxApECv20c0g",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-18T12:41:27.748000Z",
+  "updated_at": "2026-11-18T12:41:35.464000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 40,
+   "xmin": 2205,
+   "xmax": 2205,
+   "ctid": "1,40"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eed0-3c74-700f-b063-e36ae2f0c8af",
+  "email": "keerthumock@gmail.com",
+  "display_name": "Keerthu mock",
+  "password_hash": "scrypt$16384$8$1$NjWMZ-c3l4JV3EHSMl5n3A$j0wK7pyLnIQ6_MhcB6NzYffEuzzR4jmXDKkmCSmEOliojF-GuAdAv3ZcskxNZ2askuZu5LVNHz6iX01pPFUDHg",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-18T13:19:46.803000Z",
+  "updated_at": "2026-11-18T13:19:53.315000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 41,
+   "xmin": 2207,
+   "xmax": 2210,
+   "ctid": "1,11"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eedb-4f09-7127-b0f6-157aa76d3384",
+  "email": "mocktest@gmail.com",
+  "display_name": "mock test",
+  "password_hash": "scrypt$16384$8$1$OIRZWMrJrDm0sF1o3n3vyQ$tTTQOMH-Gn70ZaNZnwRvp39d5p2c5hKLX7BTfAsVDaa6mpGNgBryl-AWCcrXSAuLvGnddLF0V9wmRIIL2ylefA",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-18T13:31:52.456000Z",
+  "updated_at": "2026-11-18T13:31:52.456000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 42,
+   "xmin": 2216,
+   "xmax": 2216,
+   "ctid": "1,42"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ef65-e133-729b-b91f-534656f01ead",
+  "email": "keerth@gmail.com",
+  "display_name": "Keerth",
+  "password_hash": "scrypt$16384$8$1$oCiY62-KuVZpjjWZcJ5mmA$twph-jPriMJJhW_Y4Tx5jmG-A0QiVHRCpWPQiGU579OWhULBBgkhicUrp97Gb0vdS0MaDIJ8XGZ6zrfR0agMCw",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-18T16:03:13.842000Z",
+  "updated_at": "2026-11-18T16:03:19.608000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 43,
+   "xmin": 3671,
+   "xmax": 0,
+   "ctid": "1,43"
+  },
+  "_vis": {
+   "state": "aborted",
+   "conf": "high",
+   "why": "xmin aborted"
+  },
+  "id": "01a1f1b7-db4b-763f-852f-b56e96abaccd",
+  "email": "keerthana@gmail.com",
+  "display_name": "Keerthana mock",
+  "password_hash": "scrypt$16384$8$1$uxyQvjUcj0NLBNtV8UG_jw$g-uaWHgCZuo_RREPc79E7Om0qsF9P9v3ryIu-KFmglqAKQuFS7aO53tTWMZbIKW0BPEiJQpoNWtQPjOxGHD-Jw",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-19T02:52:00.715000Z",
+  "updated_at": "2026-11-19T02:52:00.715000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 44,
+   "xmin": 3673,
+   "xmax": 3676,
+   "ctid": "1,45"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+  "email": "keerthmock@gmail.com",
+  "display_name": "Keerthana mock",
+  "password_hash": "scrypt$16384$8$1$Gqb4b3X-iW12665j-o9B1g$L5DDV6apaIysrqfRbp2omfYsILUDAlYAgpajQrb9Y7stnHd7QJp9qyvJqdKC7eoDvdjsMxPt-fxeOAabmDZV9Q",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-19T02:52:06.689000Z",
+  "updated_at": "2026-11-19T02:52:06.689000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 45,
+   "xmin": 3676,
+   "xmax": 3750,
+   "ctid": "1,45"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+  "email": "keerthmock@gmail.com",
+  "display_name": "Keerthana mock",
+  "password_hash": "scrypt$16384$8$1$Gqb4b3X-iW12665j-o9B1g$L5DDV6apaIysrqfRbp2omfYsILUDAlYAgpajQrb9Y7stnHd7QJp9qyvJqdKC7eoDvdjsMxPt-fxeOAabmDZV9Q",
+  "roles": [
+   "learner"
+  ],
+  "is_active": true,
+  "created_at": "2026-11-19T02:52:06.689000Z",
+  "updated_at": "2026-11-19T02:52:11.023000Z"
+ }
+]

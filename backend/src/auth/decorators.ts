@@ -26,6 +26,6 @@ export const CurrentUser = createParamDecorator(
 export const CurrentActor = createParamDecorator(
   (_: unknown, ctx: ExecutionContext): Actor => {
     const req = ctx.switchToHttp().getRequest<Request>();
-    return { id: req.user!.id, requestId: req.id };
+    return { id: req.user!.id, requestId: req.id, roles: req.user!.roles };
   },
 );

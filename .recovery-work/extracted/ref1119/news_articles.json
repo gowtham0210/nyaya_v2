@@ -1,0 +1,666 @@
+[
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 1,
+   "xmin": 754,
+   "xmax": 0,
+   "ctid": "0,1"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "1fea19cb-9202-4510-a69b-adf5664c2b30",
+  "external_ref": "tn-governor-assent",
+  "status": "published",
+  "category": "supreme_court",
+  "title": "Supreme Court sets timelines for Governors on State Bills",
+  "summary": "In State of Tamil Nadu v. Governor of Tamil Nadu, the Supreme Court held that a Governor cannot sit indefinitely on Bills passed by a State legislature and laid down time limits for acting under Article 200.",
+  "key_points": [
+   "A Governor must act on a Bill within a reasonable time — there is no \"pocket veto\".",
+   "The Court indicated outer time limits for assent, withholding or reserving a Bill.",
+   "Inaction beyond those limits can be challenged before constitutional courts."
+  ],
+  "why_it_matters": "It strengthens federalism by ensuring elected State legislatures are not stalled by delays at Raj Bhavan.",
+  "source": "Supreme Court of India, 8 April 2025",
+  "source_url": null,
+  "event_date": "2025-04-08",
+  "read_minutes": 3,
+  "created_by": null,
+  "updated_by": null,
+  "reviewer_id": null,
+  "approved_at": null,
+  "published_by": null,
+  "published_at": "2026-11-11T05:30:18.830000Z",
+  "retired_at": null,
+  "created_at": "2026-11-11T05:30:18.830000Z",
+  "updated_at": "2026-11-11T05:30:18.830000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 2,
+   "xmin": 754,
+   "xmax": 0,
+   "ctid": "0,2"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "80f90fac-173e-4d27-ad86-45423dbd0e61",
+  "external_ref": "waqf-amendment-2025",
+  "status": "published",
+  "category": "legislation",
+  "title": "Waqf (Amendment) Act, 2025 receives Presidential assent",
+  "summary": "Parliament amended the Waqf Act, 1995, changing how waqf properties are registered, managed and adjudicated. The law received assent in April 2025 and its validity has been challenged before the Supreme Court.",
+  "key_points": [
+   "Renames the law as the Unified Waqf Management, Empowerment, Efficiency and Development Act.",
+   "Changes the composition of the Central Waqf Council and State Waqf Boards.",
+   "Petitions challenging the amendments were taken up by the Supreme Court."
+  ],
+  "why_it_matters": "Waqf boards manage significant land holdings; the changes affect property rights, administration and minority-rights debates.",
+  "source": "Gazette of India, April 2025",
+  "source_url": null,
+  "event_date": "2025-04-05",
+  "read_minutes": 3,
+  "created_by": null,
+  "updated_by": null,
+  "reviewer_id": null,
+  "approved_at": null,
+  "published_by": null,
+  "published_at": "2026-11-11T05:30:18.830000Z",
+  "retired_at": null,
+  "created_at": "2026-11-11T05:30:18.830000Z",
+  "updated_at": "2026-11-11T05:30:18.830000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 3,
+   "xmin": 754,
+   "xmax": 0,
+   "ctid": "0,3"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "6b872b86-9e8d-487a-83f5-6d6e1f1696b3",
+  "external_ref": "pocso-csam",
+  "status": "published",
+  "category": "supreme_court",
+  "title": "Storing or watching child sexual abuse material is an offence",
+  "summary": "In Just Rights for Children Alliance v. S. Harish, the Supreme Court held that viewing, possessing or storing child sexual exploitative material can be an offence under the POCSO Act and the IT Act, overturning a Madras High Court ruling.",
+  "key_points": [
+   "Mere possession with intent to share, or failure to delete/report, attracts POCSO Section 15.",
+   "The Court urged Parliament to use the term \"child sexual exploitative and abuse material\".",
+   "Courts should not use the phrase \"child pornography\"."
+  ],
+  "why_it_matters": "It closes a gap that treated private viewing as harmless and strengthens child protection online.",
+  "source": "Supreme Court of India, 23 September 2024",
+  "source_url": null,
+  "event_date": "2024-09-23",
+  "read_minutes": 3,
+  "created_by": null,
+  "updated_by": null,
+  "reviewer_id": null,
+  "approved_at": null,
+  "published_by": null,
+  "published_at": "2026-11-11T05:30:18.830000Z",
+  "retired_at": null,
+  "created_at": "2026-11-11T05:30:18.830000Z",
+  "updated_at": "2026-11-11T05:30:18.830000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 4,
+   "xmin": 754,
+   "xmax": 0,
+   "ctid": "0,4"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "e80ffa28-3038-4494-a4d5-bd929aceff88",
+  "external_ref": "sc-subclassification",
+  "status": "published",
+  "category": "supreme_court",
+  "title": "States may sub-classify Scheduled Castes for reservation",
+  "summary": "A seven-judge Constitution Bench in State of Punjab v. Davinder Singh held (6:1) that States can sub-classify Scheduled Castes to give more benefits to the most backward groups, overruling E.V. Chinnaiah (2004).",
+  "key_points": [
+   "Sub-classification must be backed by empirical data on backwardness and representation.",
+   "A State cannot reserve 100% of the SC quota for one sub-group.",
+   "Several judges suggested a \"creamy layer\" test for SCs and STs."
+  ],
+  "why_it_matters": "It reshapes how reservation benefits are distributed within Scheduled Castes across States.",
+  "source": "Supreme Court of India, 1 August 2024",
+  "source_url": null,
+  "event_date": "2024-08-01",
+  "read_minutes": 4,
+  "created_by": null,
+  "updated_by": null,
+  "reviewer_id": null,
+  "approved_at": null,
+  "published_by": null,
+  "published_at": "2026-11-11T05:30:18.830000Z",
+  "retired_at": null,
+  "created_at": "2026-11-11T05:30:18.830000Z",
+  "updated_at": "2026-11-11T05:30:18.830000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 5,
+   "xmin": 754,
+   "xmax": 0,
+   "ctid": "0,5"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "dbdf9b0e-bd4d-4fc0-980a-71f40998c92b",
+  "external_ref": "explainer-zero-fir",
+  "status": "published",
+  "category": "explainer",
+  "title": "Explainer: Zero FIR and e-FIR under BNSS",
+  "summary": "You can report a cognizable offence at any police station, regardless of where it happened. The station must register a \"Zero FIR\" and transfer it to the station with jurisdiction.",
+  "key_points": [
+   "Recognised in BNSS Section 173(1).",
+   "Information can be given electronically; it must be signed within three days to be taken on record.",
+   "You are entitled to a free copy of the FIR."
+  ],
+  "why_it_matters": "Victims — especially of crimes against women — no longer get turned away over jurisdiction.",
+  "source": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+  "source_url": null,
+  "event_date": "2024-07-02",
+  "read_minutes": 2,
+  "created_by": null,
+  "updated_by": null,
+  "reviewer_id": null,
+  "approved_at": null,
+  "published_by": null,
+  "published_at": "2026-11-11T05:30:18.830000Z",
+  "retired_at": null,
+  "created_at": "2026-11-11T05:30:18.830000Z",
+  "updated_at": "2026-11-11T05:30:18.830000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 6,
+   "xmin": 754,
+   "xmax": 0,
+   "ctid": "0,6"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "ce3cfae3-925e-4a26-a241-43224ad013d5",
+  "external_ref": "new-criminal-laws",
+  "status": "published",
+  "category": "legislation",
+  "title": "BNS, BNSS and BSA replace IPC, CrPC and Evidence Act",
+  "summary": "From 1 July 2024, the Bharatiya Nyaya Sanhita, Bharatiya Nagarik Suraksha Sanhita and Bharatiya Sakshya Adhiniyam replaced the colonial-era IPC, CrPC and Indian Evidence Act for offences committed on or after that date.",
+  "key_points": [
+   "Zero FIR and e-FIR are now expressly recognised (BNSS Section 173).",
+   "Community service is introduced as a punishment for certain petty offences.",
+   "Electronic records are treated as primary evidence in many cases (BSA)."
+  ],
+  "why_it_matters": "Every citizen, police officer and lawyer now works with new section numbers — older cases still run under the old codes.",
+  "source": "Ministry of Home Affairs notification",
+  "source_url": null,
+  "event_date": "2024-07-01",
+  "read_minutes": 4,
+  "created_by": null,
+  "updated_by": null,
+  "reviewer_id": null,
+  "approved_at": null,
+  "published_by": null,
+  "published_at": "2026-11-11T05:30:18.830000Z",
+  "retired_at": null,
+  "created_at": "2026-11-11T05:30:18.830000Z",
+  "updated_at": "2026-11-11T05:30:18.830000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 7,
+   "xmin": 754,
+   "xmax": 0,
+   "ctid": "0,7"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "95fd4849-bb37-4dc1-8c59-739247db34ab",
+  "external_ref": "explainer-legal-aid",
+  "status": "published",
+  "category": "explainer",
+  "title": "Explainer: Who can get free legal aid?",
+  "summary": "Under Section 12 of the Legal Services Authorities Act, 1987, women, children, SC/ST members, persons in custody, persons with disabilities, victims of disasters and people below the income limit are entitled to free legal services.",
+  "key_points": [
+   "Apply at the District/Taluk Legal Services Authority or online via NALSA.",
+   "Call the national legal aid helpline 15100.",
+   "Free legal aid flows from Article 39A of the Constitution."
+  ],
+  "why_it_matters": "Lack of money should never stop anyone from getting justice.",
+  "source": "Legal Services Authorities Act, 1987",
+  "source_url": null,
+  "event_date": "2024-06-15",
+  "read_minutes": 2,
+  "created_by": null,
+  "updated_by": null,
+  "reviewer_id": null,
+  "approved_at": null,
+  "published_by": null,
+  "published_at": "2026-11-11T05:30:18.830000Z",
+  "retired_at": null,
+  "created_at": "2026-11-11T05:30:18.830000Z",
+  "updated_at": "2026-11-11T05:30:18.830000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 8,
+   "xmin": 754,
+   "xmax": 0,
+   "ctid": "0,8"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "1faf4c11-967f-43eb-9dad-ac4b3ea0ad34",
+  "external_ref": "electoral-bonds",
+  "status": "published",
+  "category": "supreme_court",
+  "title": "Electoral Bonds Scheme struck down as unconstitutional",
+  "summary": "In Association for Democratic Reforms v. Union of India, a five-judge bench unanimously held the Electoral Bonds Scheme violated voters' right to information under Article 19(1)(a).",
+  "key_points": [
+   "Anonymous political funding was held to violate the right to information.",
+   "SBI was directed to stop issuing bonds and disclose details to the Election Commission.",
+   "Related amendments to the Companies Act and RP Act were struck down."
+  ],
+  "why_it_matters": "It strengthens transparency in political funding and voters' informed choice.",
+  "source": "Supreme Court of India, 15 February 2024",
+  "source_url": null,
+  "event_date": "2024-02-15",
+  "read_minutes": 3,
+  "created_by": null,
+  "updated_by": null,
+  "reviewer_id": null,
+  "approved_at": null,
+  "published_by": null,
+  "published_at": "2026-11-11T05:30:18.830000Z",
+  "retired_at": null,
+  "created_at": "2026-11-11T05:30:18.830000Z",
+  "updated_at": "2026-11-11T05:30:18.830000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 9,
+   "xmin": 754,
+   "xmax": 0,
+   "ctid": "0,9"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "39fa31e5-9b93-4fa2-afc5-5523508b5291",
+  "external_ref": "mediation-act",
+  "status": "published",
+  "category": "legislation",
+  "title": "Mediation Act, 2023 makes pre-litigation mediation mainstream",
+  "summary": "The Mediation Act, 2023 creates a framework for institutional, online and community mediation, with mediated settlement agreements enforceable like court decrees.",
+  "key_points": [
+   "Mediation should ordinarily conclude within 120 days, extendable by 60 days.",
+   "Establishes the Mediation Council of India.",
+   "Online mediation is expressly recognised."
+  ],
+  "why_it_matters": "Faster, cheaper resolution of disputes and less burden on courts.",
+  "source": "Act No. 32 of 2023",
+  "source_url": null,
+  "event_date": "2023-09-14",
+  "read_minutes": 3,
+  "created_by": null,
+  "updated_by": null,
+  "reviewer_id": null,
+  "approved_at": null,
+  "published_by": null,
+  "published_at": "2026-11-11T05:30:18.830000Z",
+  "retired_at": null,
+  "created_at": "2026-11-11T05:30:18.830000Z",
+  "updated_at": "2026-11-11T05:30:18.830000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 10,
+   "xmin": 754,
+   "xmax": 0,
+   "ctid": "0,10"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "ac3617ce-55aa-47ab-9fb4-13d8b8a56744",
+  "external_ref": "dpdp-act",
+  "status": "published",
+  "category": "legislation",
+  "title": "Digital Personal Data Protection Act, 2023 — what it means for you",
+  "summary": "India's first comprehensive data protection law gives individuals (\"Data Principals\") rights over their personal data and places duties on companies (\"Data Fiduciaries\"). It is being operationalised in phases through Rules.",
+  "key_points": [
+   "Consent must be free, specific, informed and withdrawable.",
+   "You can seek access, correction and erasure of your personal data.",
+   "A Data Protection Board adjudicates breaches; penalties can reach ₹250 crore."
+  ],
+  "why_it_matters": "Apps and companies must now justify why they collect your data and protect it.",
+  "source": "Act No. 22 of 2023",
+  "source_url": null,
+  "event_date": "2023-08-11",
+  "read_minutes": 4,
+  "created_by": null,
+  "updated_by": null,
+  "reviewer_id": null,
+  "approved_at": null,
+  "published_by": null,
+  "published_at": "2026-11-11T05:30:18.830000Z",
+  "retired_at": null,
+  "created_at": "2026-11-11T05:30:18.830000Z",
+  "updated_at": "2026-11-11T05:30:18.830000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 4,
+   "xmin": 1532,
+   "xmax": 1532,
+   "ctid": "1,4"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e2f0-c5eb-744d-970b-ae45d92d9ce5",
+  "external_ref": null,
+  "status": "published",
+  "category": "high_courts",
+  "title": "Finance companies cannot seize vehicles by force through recovery agents",
+  "summary": "In Sadab Ahmad v. State of U.P. (Writ-C No. 36407 of 2026), a Division Bench of the Allahabad High Court held that a finance company cannot repossess a vehicle through recovery agents who use force, intimidation or firearms, even if the loan agreement allows repossession on default. The truck had been taken from the borrower, whose loan was with HDB Financial Services. The Court ordered the vehicle returned and awarded Rs 10,000 costs.",
+  "key_points": [
+   "\"A repossession clause in a loan agreement does not allow force. A private financier cannot use the State's coercive power to enforce its own contract.\",",
+   "\"The Court did not decide whether the borrower had defaulted. That is for a civil court or the arbitrator.\",",
+   "\"It relied on Supreme Court rulings, including Magma Fincorp Ltd v. Rajesh Kumar Tiwari, that repossession cannot involve violence or intimidation.\",",
+   "\"The vehicle was ordered back to the borrower and the finance company was ordered to pay Rs 10,000 costs.\""
+  ],
+  "why_it_matters": "Borrowers who fall behind on a vehicle loan still have rights. A lender must go to court or arbitration; it cannot send musclemen to take the vehicle.",
+  "source": "Allahabad High Court (Justices J.J. Munir and Indrajeet Shukla); news report by LiveLaw Business, 13 Nov 2026",
+  "source_url": "https://www.livelawbiz.com/recovery-laws/high-court/allahabad-high-court-finance-companies-cannot-repossess-vehicles-gunpoint-through-recovery-agents-hdb-financial-services-558393",
+  "event_date": "2026-11-13",
+  "read_minutes": 3,
+  "created_by": "01a1ce0c-4152-71cb-a89a-4dc3d905b63e",
+  "updated_by": "01a1ce0c-4152-71cb-a89a-4dc3d905b63e",
+  "reviewer_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "approved_at": "2026-11-16T06:00:44.836000Z",
+  "published_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "published_at": "2026-11-16T06:00:46.875000Z",
+  "retired_at": null,
+  "created_at": "2026-11-16T05:59:52.554000Z",
+  "updated_at": "2026-11-16T06:00:46.875000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 11,
+   "xmin": 1549,
+   "xmax": 1558,
+   "ctid": "1,13"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e2f4-4f08-727b-b591-77884b3ecccc",
+  "external_ref": null,
+  "status": "approved",
+  "category": "high_courts",
+  "title": "Gokul Dairy: no stay on ordinance giving State nominees a vote, but ballots kept separate",
+  "summary": "The Kolhapur circuit bench of the Bombay High Court refused an interim stay on a Maharashtra ordinance that lets the State appoint nominated members with voting rights to large federal cooperative societies. The challenge was made in Shashikant Anandrao Patil v. Presiding Officer, Kolhapur Zila Sahakari Dudh Utpadak Sangh & Ors., over the Gokul Dairy polls. The Court directed that votes of elected directors and State nominees for choosing the chairperson be counted from separate ballots.",
+  "key_points": [
+   "The High Court did not stop the ordinance for now. It refused an interim stay.",
+   "Elected directors and State-nominated directors must vote on separate ballots in the chairperson election.",
+   "The petition against the ordinance itself has not been finally decided."
+  ],
+  "why_it_matters": "t shows how courts handle challenges to a government's power to put its own nominees on cooperative boards: they may allow the process to go on while keeping the nominees' votes separate until the case is decided.",
+  "source": "Bombay High Court (Kolhapur circuit bench); news report by Bar & Bench, 10 Nov 2026",
+  "source_url": "https://www.barandbench.com/news/kolhapur-gokul-dairy-polls-bombay-high-court-refuses-to-stay-ordinance-granting-voting-rights-to-state-nominated-directors",
+  "event_date": "2026-11-10",
+  "read_minutes": 3,
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "updated_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "reviewer_id": "01a1ce0c-4153-77e9-b36c-0972910afe58",
+  "approved_at": "2026-11-16T06:08:27.218000Z",
+  "published_by": null,
+  "published_at": null,
+  "retired_at": null,
+  "created_at": "2026-11-16T06:03:44.263000Z",
+  "updated_at": "2026-11-16T06:08:27.218000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 12,
+   "xmin": 1557,
+   "xmax": 1557,
+   "ctid": "1,12"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e2f6-4d8c-770a-a42d-eb3a453c2a5e",
+  "external_ref": null,
+  "status": "published",
+  "category": "high_courts",
+  "title": "60-day discharge window under BNSS applies to POCSO trials",
+  "summary": "In Suvradip Halder v. State of West Bengal (CRR 307 of 2026), the Calcutta High Court (Justice Dr. Ajoy Kumar Mukherjee) held that the 60-day period in Section 250(1) of the BNSS for asking to be discharged also applies to POCSO trials. As the POCSO Act has no commitment procedure, the 60 days run from the day the accused is given the full set of prosecution documents. The Court set aside the order framing charges.",
+  "key_points": [
+   "The accused in a POCSO trial gets the same 60-day window to seek discharge as other accused.",
+   "The 60 days start when the accused receives all the prosecution documents that will be relied on at trial.",
+   "The trial court must supply the missing documents within two weeks, and then decide any discharge application within 60 days."
+  ],
+  "why_it_matters": "The new criminal procedure law gives accused persons a fixed time to seek discharge. This ruling makes clear that child-protection cases are not an exception, so fairness is not traded away for speed.",
+  "source": "Calcutta High Court; news report by LiveLaw, 14 Nov 2026",
+  "source_url": "https://www.livelaw.in/high-court/calcutta-high-court/60-day-discharge-window-under-bnss-applies-to-pocso-trials-calcutta-high-court-clarifies-558482",
+  "event_date": "2026-11-14",
+  "read_minutes": 3,
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "updated_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "reviewer_id": "01a1ce0c-4153-77e9-b36c-0972910afe58",
+  "approved_at": "2026-11-16T06:08:19.364000Z",
+  "published_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "published_at": "2026-11-16T06:08:43.765000Z",
+  "retired_at": null,
+  "created_at": "2026-11-16T06:05:54.955000Z",
+  "updated_at": "2026-11-16T06:08:43.765000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 13,
+   "xmin": 1558,
+   "xmax": 1558,
+   "ctid": "1,13"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e2f4-4f08-727b-b591-77884b3ecccc",
+  "external_ref": null,
+  "status": "published",
+  "category": "high_courts",
+  "title": "Gokul Dairy: no stay on ordinance giving State nominees a vote, but ballots kept separate",
+  "summary": "The Kolhapur circuit bench of the Bombay High Court refused an interim stay on a Maharashtra ordinance that lets the State appoint nominated members with voting rights to large federal cooperative societies. The challenge was made in Shashikant Anandrao Patil v. Presiding Officer, Kolhapur Zila Sahakari Dudh Utpadak Sangh & Ors., over the Gokul Dairy polls. The Court directed that votes of elected directors and State nominees for choosing the chairperson be counted from separate ballots.",
+  "key_points": [
+   "The High Court did not stop the ordinance for now. It refused an interim stay.",
+   "Elected directors and State-nominated directors must vote on separate ballots in the chairperson election.",
+   "The petition against the ordinance itself has not been finally decided."
+  ],
+  "why_it_matters": "t shows how courts handle challenges to a government's power to put its own nominees on cooperative boards: they may allow the process to go on while keeping the nominees' votes separate until the case is decided.",
+  "source": "Bombay High Court (Kolhapur circuit bench); news report by Bar & Bench, 10 Nov 2026",
+  "source_url": "https://www.barandbench.com/news/kolhapur-gokul-dairy-polls-bombay-high-court-refuses-to-stay-ordinance-granting-voting-rights-to-state-nominated-directors",
+  "event_date": "2026-11-10",
+  "read_minutes": 3,
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "updated_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "reviewer_id": "01a1ce0c-4153-77e9-b36c-0972910afe58",
+  "approved_at": "2026-11-16T06:08:27.218000Z",
+  "published_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "published_at": "2026-11-16T06:08:49.023000Z",
+  "retired_at": null,
+  "created_at": "2026-11-16T06:03:44.263000Z",
+  "updated_at": "2026-11-16T06:08:49.023000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 3,
+   "xmin": 1556,
+   "xmax": 1556,
+   "ctid": "2,3"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e2f7-f542-738e-857c-325549e2e7ea",
+  "external_ref": null,
+  "status": "published",
+  "category": "high_courts",
+  "title": "Article 371A does not shield Naga customs that violate fundamental rights",
+  "summary": "The Gauhati High Court (Justice Yarenjungla Longkumer) set aside orders excommunicating 38 petitioners and their families from a village in Nagaland after a dispute within a village union. The orders barred them from entering the village and from marrying villagers. The Court held that these orders violated Articles 14, 19 and 21 and quashed them.",
+  "key_points": [
+   "A writ petition under Article 226 can lie against a private body that performs a public function or whose actions have a public-law element.",
+   "Article 371A protects Naga customary law, but customs are still subject to judicial review and cannot override fundamental rights (Article 13).",
+   "The excommunication also hit wives and children who had no part in the dispute."
+  ],
+  "why_it_matters": "Special constitutional protection for tribal customs does not put them above the Constitution. Individuals can still go to the High Court if a customary body takes away their basic rights.",
+  "source": "Gauhati High Court; news report by LiveLaw, 13 Nov 2026",
+  "source_url": "https://www.livelaw.in/high-court/gauhati-high-court/gauhati-high-court-article371a-shield-naga-customary-bodies-judicial-review-violating-fundamental-rights-558315",
+  "event_date": "2026-11-13",
+  "read_minutes": 3,
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "updated_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "reviewer_id": "01a1ce0c-4153-77e9-b36c-0972910afe58",
+  "approved_at": "2026-11-16T06:08:12.302000Z",
+  "published_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "published_at": "2026-11-16T06:08:37.370000Z",
+  "retired_at": null,
+  "created_at": "2026-11-16T06:07:43.425000Z",
+  "updated_at": "2026-11-16T06:08:37.370000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 5,
+   "xmin": 1564,
+   "xmax": 1565,
+   "ctid": "2,6"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e302-ce88-77d5-b184-2b743739822f",
+  "external_ref": null,
+  "status": "in_review",
+  "category": "high_courts",
+  "title": "Drunk driving: licence can be suspended without waiting for a conviction",
+  "summary": "Deciding a bail application in Geevarghese K.A. v. State of Kerala (B.A. No. 6173 of 2026), the Kerala High Court (Justice Kauser Edappagath) held that the Licensing Authority does not have to wait for criminal proceedings to end before using Section 19(1) of the Motor Vehicles Act to disqualify a person from holding a licence or to revoke it. The Court told the Transport Commissioner to make sure the power is used promptly in drunk-driving cases.",
+  "key_points": [
+   "The Licensing Authority can reach its own view on the material before it. A conviction is not a precondition.",
+   "The Court noted that Section 19 powers are used only sparingly even as drunk-driving incidents rise.",
+   "Cases where an accident appears to be caused by intoxication should be examined without delay"
+  ],
+  "why_it_matters": "A drunk-driving charge can now lead to loss of a licence long before the criminal trial ends.",
+  "source": "Kerala High Court; news report by LiveLaw, 10 Nov 2026",
+  "source_url": "https://www.livelaw.in/high-court/kerala-high-court/kerala-high-court-drunken-driving-suspend-revoke-driving-licence-558029",
+  "event_date": "2026-11-10",
+  "read_minutes": 3,
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "updated_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "reviewer_id": null,
+  "approved_at": null,
+  "published_by": null,
+  "published_at": null,
+  "retired_at": null,
+  "created_at": "2026-11-16T06:19:34.407000Z",
+  "updated_at": "2026-11-16T06:19:36.275000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 6,
+   "xmin": 1565,
+   "xmax": 1565,
+   "ctid": "2,6"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1e302-ce88-77d5-b184-2b743739822f",
+  "external_ref": null,
+  "status": "approved",
+  "category": "high_courts",
+  "title": "Drunk driving: licence can be suspended without waiting for a conviction",
+  "summary": "Deciding a bail application in Geevarghese K.A. v. State of Kerala (B.A. No. 6173 of 2026), the Kerala High Court (Justice Kauser Edappagath) held that the Licensing Authority does not have to wait for criminal proceedings to end before using Section 19(1) of the Motor Vehicles Act to disqualify a person from holding a licence or to revoke it. The Court told the Transport Commissioner to make sure the power is used promptly in drunk-driving cases.",
+  "key_points": [
+   "The Licensing Authority can reach its own view on the material before it. A conviction is not a precondition.",
+   "The Court noted that Section 19 powers are used only sparingly even as drunk-driving incidents rise.",
+   "Cases where an accident appears to be caused by intoxication should be examined without delay"
+  ],
+  "why_it_matters": "A drunk-driving charge can now lead to loss of a licence long before the criminal trial ends.",
+  "source": "Kerala High Court; news report by LiveLaw, 10 Nov 2026",
+  "source_url": "https://www.livelaw.in/high-court/kerala-high-court/kerala-high-court-drunken-driving-suspend-revoke-driving-licence-558029",
+  "event_date": "2026-11-10",
+  "read_minutes": 3,
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "updated_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "reviewer_id": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "approved_at": "2026-11-16T06:19:38.728000Z",
+  "published_by": null,
+  "published_at": null,
+  "retired_at": null,
+  "created_at": "2026-11-16T06:19:34.407000Z",
+  "updated_at": "2026-11-16T06:19:38.728000Z"
+ }
+]

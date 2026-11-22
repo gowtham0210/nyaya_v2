@@ -68,6 +68,7 @@ export interface VersionContent {
   language: string;
   validFrom: string | null;
   validTo: string | null;
+  alternateCorrectOptionIds?: string[];
 }
 
 /** What stops this version going to review; empty when it is complete. */
@@ -98,7 +99,20 @@ export function contentProblems(
       'A single-select question needs exactly one correct answer',
     );
   }
-  if (!v.explanation.trim()) add('explanation', 'An explanation is required');
+  const alternates = v.alternateCorrectOptionIds ?? [];
+  if (alternates.some((id) => !ids.includes(id)))
+    add(
+      'alternate_correct_option_ids',
+      'Alternate answers must be listed options',
+    );
+  if (alternates.some((id) => v.correctOptionIds.includes(id)))
+    add(
+      'alternate_correct_option_ids',
+      'An alternate answer cannot also be a correct answer',
+    );
+  if (new Set(alternates).size !== alternates.length)
+    add('alternate_correct_option_ids', 'Alternate answers must be unique');
+  // The explanation is optional: a question can be reviewed and published without one.
   if (!v.sourceTitle?.trim())
     add('source_title', 'An attributable source is required');
   if (v.sourceUrl && !/^https:\/\/\S+$/.test(v.sourceUrl))

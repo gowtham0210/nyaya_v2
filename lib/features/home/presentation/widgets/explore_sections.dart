@@ -9,6 +9,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/common.dart';
 import '../../../journey/application/journey_controller.dart';
+import '../../../mock_exams/presentation/mock_exams_card.dart';
 import '../../../journey/domain/journey.dart';
 import '../../../journey/presentation/journey_screen.dart';
 import '../../../legal_updates/data/legal_updates_repository.dart';
@@ -163,10 +164,6 @@ class ContinueLearningCard extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Semantics(header: true, child: Text(l.homeStartTitle, style: _serif(context, 26))),
-            const SizedBox(height: 4),
-            Text(l.homeStartBody, style: context.text.bodyMedium?.copyWith(color: context.nyaya.textSecondary)),
-            const SizedBox(height: AppSpacing.md),
             _LearningCard(
               eyebrow: l.homeStartRecommended,
               title: l.lawConstitutionTitle,
@@ -764,6 +761,8 @@ class CoreLawsSection extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: AppSpacing.md),
+        // Mock Exams sits just above the Constitution; takes no space when no exam is open.
+        const MockExamsCard(),
         // The official text of the Constitution on India Code (not the Journey chapter).
         Container(
           clipBehavior: Clip.antiAlias,

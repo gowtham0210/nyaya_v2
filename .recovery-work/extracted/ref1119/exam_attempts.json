@@ -1,0 +1,881 @@
+[
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 1,
+   "xmin": 3707,
+   "xmax": 3711,
+   "ctid": "0,2"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1cc-8cc7-72f8-8760-d75e27a220e5",
+  "user_id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T03:14:36.871000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-19T03:14:36.871000Z",
+  "updated_at": "2026-11-19T03:14:36.871000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 2,
+   "xmin": 3711,
+   "xmax": 3713,
+   "ctid": "0,3"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1cc-8cc7-72f8-8760-d75e27a220e5",
+  "user_id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T03:14:36.871000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-19T03:14:36.871000Z",
+  "updated_at": "2026-11-19T03:14:40.472000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 3,
+   "xmin": 3713,
+   "xmax": 3715,
+   "ctid": "0,4"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1cc-8cc7-72f8-8760-d75e27a220e5",
+  "user_id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T03:14:36.871000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-19T03:14:36.871000Z",
+  "updated_at": "2026-11-19T03:14:42.925000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 4,
+   "xmin": 3715,
+   "xmax": 3717,
+   "ctid": "0,5"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1cc-8cc7-72f8-8760-d75e27a220e5",
+  "user_id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T03:14:36.871000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-19T03:14:36.871000Z",
+  "updated_at": "2026-11-19T03:14:45.081000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 5,
+   "xmin": 3717,
+   "xmax": 3719,
+   "ctid": "0,6"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1cc-8cc7-72f8-8760-d75e27a220e5",
+  "user_id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T03:14:36.871000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-19T03:14:36.871000Z",
+  "updated_at": "2026-11-19T03:14:47.097000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 6,
+   "xmin": 3719,
+   "xmax": 3721,
+   "ctid": "0,7"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1cc-8cc7-72f8-8760-d75e27a220e5",
+  "user_id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T03:14:36.871000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-19T03:14:36.871000Z",
+  "updated_at": "2026-11-19T03:14:49.473000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 7,
+   "xmin": 3721,
+   "xmax": 3722,
+   "ctid": "0,8"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1cc-8cc7-72f8-8760-d75e27a220e5",
+  "user_id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T03:14:36.871000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-19T03:14:36.871000Z",
+  "updated_at": "2026-11-19T03:14:53.639000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 8,
+   "xmin": 3722,
+   "xmax": 3724,
+   "ctid": "0,8"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1cc-8cc7-72f8-8760-d75e27a220e5",
+  "user_id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "submitted",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T03:14:36.871000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": "2026-11-19T03:14:55.512000Z",
+  "finalised_by": "learner",
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": {
+   "pass": {
+    "reason": "The marking rules for this exam are not configured",
+    "general": null,
+    "reserved": null,
+    "available": false,
+    "percentage": null
+   },
+   "overall": {
+    "correct": 2,
+    "incorrect": 4,
+    "max_marks": null,
+    "withdrawn": 0,
+    "percentage": null,
+    "unanswered": 94,
+    "marks_obtained": null,
+    "total_positions": 100,
+    "scorable_positions": 100
+   },
+   "sections": [],
+   "positions": [
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 1
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 2
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 3
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 4
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 5
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 6
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 7
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 8
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 9
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 10
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 11
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 12
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 13
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 14
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 15
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 16
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 17
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 18
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 19
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 20
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 21
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 22
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 23
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 24
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 25
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 26
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 27
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 28
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 29
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 30
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 31
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 32
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 33
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 34
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 35
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 36
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 37
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 38
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 39
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 40
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 41
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 42
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 43
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 44
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 45
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 46
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 47
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 48
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 49
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 50
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 51
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 52
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 53
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 54
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 55
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 56
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 57
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 58
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 59
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 60
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 61
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 62
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 63
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 64
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 65
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 66
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 67
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 68
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 69
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 70
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 71
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 72
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 73
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 74
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 75
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 76
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 77
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 78
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 79
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 80
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 81
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 82
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 83
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 84
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 85
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 86
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 87
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 88
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 89
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 90
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 91
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 92
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 93
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 94
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 95
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 96
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 97
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 98
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 99
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 100
+    }
+   ],
+   "provisional": false,
+   "rules_verified": false,
+   "marks_available": false,
+   "withdrawn_policy": "unscored",
+   "provisional_reasons": []
+  },
+  "created_at": "2026-11-19T03:14:36.871000Z",
+  "updated_at": "2026-11-19T03:14:55.512000Z"
+ }
+]

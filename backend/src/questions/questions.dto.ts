@@ -5,6 +5,7 @@ import {
   ArrayMinSize,
   ArrayUnique,
   IsArray,
+  IsBoolean,
   IsIn,
   IsInt,
   IsISO8601,
@@ -19,8 +20,10 @@ import {
   ValidateNested,
 } from 'class-validator';
 import {
+  LAW_REGIMES,
   QUESTION_TYPES,
   VERSION_STATUSES,
+  type LawRegime,
   type QuestionType,
   type VersionStatus,
 } from '../db/schema.js';
@@ -69,7 +72,7 @@ export class CreateQuestionDto {
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
-  @MaxLength(2000)
+  @MaxLength(7000)
   stem?: string;
 
   @ApiPropertyOptional({ type: [OptionDto] })
@@ -137,9 +140,85 @@ export class CreateQuestionDto {
   @IsOptional()
   @IsISO8601({ strict: true })
   valid_to?: string | null;
+
+  @ApiPropertyOptional({
+    type: String,
+    format: 'uuid',
+    nullable: true,
+    description:
+      'Where the content comes from (attribution only; it never blocks publishing).',
+  })
+  @IsOptional()
+  @IsUUID()
+  content_source_id?: string | null;
+
+  @ApiPropertyOptional({ enum: LAW_REGIMES, default: 'neutral' })
+  @IsOptional()
+  @IsIn(LAW_REGIMES)
+  law_regime?: LawRegime;
+
+  @ApiPropertyOptional({
+    type: String,
+    nullable: true,
+    description:
+      'Questions testing the same concept share a key; a mock uses at most one of them',
+  })
+  @IsOptional()
+  @IsString()
+  @Matches(/^[a-z0-9][a-z0-9._-]{0,118}[a-z0-9]$/)
+  concept_key?: string | null;
+
+  @ApiPropertyOptional({
+    type: [String],
+    description:
+      'Further options an official key also accepts; never one of correct_option_ids',
+  })
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(5)
+  @IsString({ each: true })
+  alternate_correct_option_ids?: string[];
+
+  @ApiPropertyOptional({
+    description: 'Show the options in the stored order, never shuffled',
+  })
+  @IsOptional()
+  @IsBoolean()
+  lock_option_order?: boolean;
+
+  @ApiPropertyOptional({
+    default: false,
+    description:
+      'Exam-only questions are never used by the learning games. Can only be changed before the first publish.',
+  })
+  @IsOptional()
+  @IsBoolean()
+  exam_only?: boolean;
+
+  @ApiPropertyOptional({
+    type: [String],
+    description:
+      'The exams this question may be used in. An exam-only question needs at least one to be published.',
+  })
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(10)
+  @ArrayUnique()
+  @IsUUID('all', { each: true })
+  exam_ids?: string[];
 }
 
 export class UpdateQuestionDto extends PartialType(CreateQuestionDto) {}
+
+/** Exam tags are not part of a version, so they can change at any stage. */
+export class SetExamTagsDto {
+  @ApiProperty({ type: [String], description: 'The full set of exams' })
+  @IsArray()
+  @ArrayMaxSize(10)
+  @ArrayUnique()
+  @IsUUID('all', { each: true })
+  exam_ids: string[];
+}
 
 export class ReasonDto {
   @ApiProperty({ minLength: 3 })
@@ -257,6 +336,12 @@ export class VersionDto {
     string | null;
   @ApiProperty({ type: String, format: 'date', nullable: true }) valid_to:
     string | null;
+  @ApiProperty({ type: String, format: 'uuid', nullable: true })
+  content_source_id: string | null;
+  @ApiProperty({ enum: LAW_REGIMES }) law_regime: LawRegime;
+  @ApiProperty({ type: String, nullable: true }) concept_key: string | null;
+  @ApiProperty({ type: [String] }) alternate_correct_option_ids: string[];
+  @ApiProperty() lock_option_order: boolean;
   @ApiProperty({ type: String, format: 'date-time', nullable: true })
   verified_at: string | null;
   @ApiProperty({ type: String, format: 'uuid', nullable: true }) reviewer_id:
@@ -324,6 +409,8 @@ export class QuestionDetailDto {
   @ApiProperty({ type: String, format: 'date-time', nullable: true })
   retired_at: string | null;
   @ApiProperty({ format: 'date-time' }) created_at: string;
+  @ApiProperty() exam_only: boolean;
+  @ApiProperty({ type: [String] }) exam_ids: string[];
   @ApiProperty({
     type: VersionDto,
     description: 'The newest version, which is the one actions apply to',

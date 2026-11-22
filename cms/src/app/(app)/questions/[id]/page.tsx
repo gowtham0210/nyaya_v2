@@ -107,7 +107,7 @@ async function QuestionDetail({ params }: { params: PageProps<'/questions/[id]'>
             key={`${v.id}:${v.status}:${v.updated_at}`}
             questionId={q.id}
             actions={actions}
-            approveBlocked={v.created_by === me.id || v.updated_by === me.id}
+            approveBlocked={!hasRole(me, 'admin') && (v.created_by === me.id || v.updated_by === me.id)}
           />
         </Card>
         {hasRole(me, ...TRIAGE_ROLES) && <OpenReports questionId={q.id} />}
