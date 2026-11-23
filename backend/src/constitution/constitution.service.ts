@@ -195,11 +195,23 @@ function driftOf(
 ): DriftItemDto {
   const base = { id: e.id, language_name: e.language_name };
   if (!live)
-    return { ...base, state: 'unknown', changed_fields: [], modified_since_review: false, live: null };
+    return {
+      ...base,
+      state: 'unknown',
+      changed_fields: [],
+      modified_since_review: false,
+      live: null,
+    };
   const item = live.get(e.item_uuid);
   const file = item?.original;
   if (!item || !file)
-    return { ...base, state: 'missing', changed_fields: [], modified_since_review: false, live: null };
+    return {
+      ...base,
+      state: 'missing',
+      changed_fields: [],
+      modified_since_review: false,
+      live: null,
+    };
   const r = e.reviewed;
   const changed: string[] = [];
   if (file.uuid !== r.bitstream_uuid) changed.push('bitstream');

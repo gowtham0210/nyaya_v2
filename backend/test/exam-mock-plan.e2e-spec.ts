@@ -42,14 +42,12 @@ describe('randomised mock plans', () => {
 
   const newExam = async (slug: string) => {
     const id = newId();
-    await t.db
-      .insert(exams)
-      .values({
-        id,
-        slug,
-        name: slug.toUpperCase(),
-        shortName: slug.toUpperCase(),
-      });
+    await t.db.insert(exams).values({
+      id,
+      slug,
+      name: slug.toUpperCase(),
+      shortName: slug.toUpperCase(),
+    });
     return id;
   };
 

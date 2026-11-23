@@ -273,7 +273,11 @@ describe('CLAT topics, withdrawn questions and long stems', () => {
         row(42, { correct: 'a, b' }),
         row(43, { correct: 'withdrawn', topic: 'Astrology' }), // other errors still count
       ]).expect(201);
-      expect(res.body.totals).toMatchObject({ created: 0, failed: 4, withdrawn: 0 });
+      expect(res.body.totals).toMatchObject({
+        created: 0,
+        failed: 4,
+        withdrawn: 0,
+      });
       const general = await t
         .http()
         .post('/v1/admin/import-jobs')
@@ -304,14 +308,19 @@ describe('CLAT topics, withdrawn questions and long stems', () => {
   });
 
   describe('duplicate questions', () => {
-    const SAME = 'Which of the following is the author most likely to agree with?';
+    const SAME =
+      'Which of the following is the author most likely to agree with?';
     const T = 'Logical Reasoning'; // one topic, so only the text and options differ
 
     it('treats the same text with different options as different questions, but identical text and options as a duplicate', async () => {
       const res = await examUpload([
         row(60, { topic: T, stem: SAME }),
         row(61, { topic: T, stem: SAME, option_a: 'A different first option' }),
-        row(62, { topic: T, stem: SAME, option_b: 'A different second option' }),
+        row(62, {
+          topic: T,
+          stem: SAME,
+          option_b: 'A different second option',
+        }),
         row(63, { topic: T, stem: SAME }), // identical to row 60 in text and options
       ]).expect(201);
       expect(res.body.rows.map((r: { outcome: string }) => r.outcome)).toEqual([
@@ -320,7 +329,9 @@ describe('CLAT topics, withdrawn questions and long stems', () => {
         'created',
         'failed',
       ]);
-      expect(res.body.rows[3].problems[0].reason).toBe('Same question as row 2');
+      expect(res.body.rows[3].problems[0].reason).toBe(
+        'Same question as row 2',
+      );
     });
 
     it('also holds against questions already in the bank', async () => {
@@ -341,12 +352,10 @@ describe('CLAT topics, withdrawn questions and long stems', () => {
         'second.csv',
         { dry_run: 'false', exam: 'clat', content_source_id: src },
       ).expect(201);
-      expect(
-        next.body.rows.map((r: { outcome: string }) => r.outcome),
-      ).toEqual(['skipped', 'created']);
-      expect(next.body.rows[0].problems[0].reason).toMatch(
-        /text and options/,
+      expect(next.body.rows.map((r: { outcome: string }) => r.outcome)).toEqual(
+        ['skipped', 'created'],
       );
+      expect(next.body.rows[0].problems[0].reason).toMatch(/text and options/);
     });
   });
 
@@ -404,7 +413,11 @@ describe('CLAT topics, withdrawn questions and long stems', () => {
         .get(`/v1/admin/import-jobs/${jobId}/paper-positions`)
         .auth(editor.token, { type: 'bearer' })
         .expect(200);
-      expect(early.body).toMatchObject({ ready: 0, withdrawn: 1, not_ready: 119 });
+      expect(early.body).toMatchObject({
+        ready: 0,
+        withdrawn: 1,
+        not_ready: 119,
+      });
       expect(early.body.positions).toHaveLength(1);
       expect(early.body.positions[0]).toMatchObject({
         position: 100,
@@ -428,7 +441,11 @@ describe('CLAT topics, withdrawn questions and long stems', () => {
         .get(`/v1/admin/import-jobs/${jobId}/paper-positions`)
         .auth(editor.token, { type: 'bearer' })
         .expect(200);
-      expect(full.body).toMatchObject({ ready: 119, withdrawn: 1, not_ready: 0 });
+      expect(full.body).toMatchObject({
+        ready: 119,
+        withdrawn: 1,
+        not_ready: 0,
+      });
       expect(full.body.positions).toHaveLength(120);
       expect(
         full.body.positions.map((p: { position: number }) => p.position),

@@ -60,7 +60,9 @@ export class HttpIndiaCodeClient extends IndiaCodeClient {
       throw new Error('India Code search returned an unexpected shape');
     const total = found._embedded.searchResult.page?.totalElements;
     if (typeof total === 'number' && total > objects.length)
-      throw new Error(`India Code has ${total} items; the first page has ${objects.length}`);
+      throw new Error(
+        `India Code has ${total} items; the first page has ${objects.length}`,
+      );
 
     return mapLimit(objects, CONCURRENCY, async (o: any) => {
       const item = o?._embedded?.indexableObject;

@@ -261,7 +261,11 @@ export async function readRows(
   let headerAt = cells
     .slice(0, HEADER_SEARCH_ROWS)
     .findIndex((r) => recognised(r) >= 3);
-  if (headerAt < 0) headerAt = Math.max(0, cells.findIndex((r) => !blank(r)));
+  if (headerAt < 0)
+    headerAt = Math.max(
+      0,
+      cells.findIndex((r) => !blank(r)),
+    );
   const above = cells.slice(0, headerAt).filter((r) => !blank(r));
   const dataAbove = above.filter((r) => r.filter((c) => c.trim()).length > 1);
   if (dataAbove.length)
@@ -531,8 +535,7 @@ export function checkExamRow(
     if (!id) error('exam', `Unknown exam "${slug}"`);
     else if (!examIds.includes(id)) examIds.push(id);
   }
-  if (slugs.length === 0)
-    error('exam', 'Name at least one exam, e.g. aibe');
+  if (slugs.length === 0) error('exam', 'Name at least one exam, e.g. aibe');
 
   const regime = (get('law_regime') || 'neutral').toLowerCase();
   if (!(LAW_REGIMES as readonly string[]).includes(regime))
@@ -614,4 +617,5 @@ export const contentKey = (
   topicId: string,
   stem: string,
   options: readonly { text: string }[],
-) => `${stemKey(topicId, stem)}|${options.map((o) => squash(o.text)).join('\u00a6')}`;
+) =>
+  `${stemKey(topicId, stem)}|${options.map((o) => squash(o.text)).join('\u00a6')}`;

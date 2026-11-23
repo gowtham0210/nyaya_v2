@@ -13,10 +13,7 @@ import {
   Min,
   MinLength,
 } from 'class-validator';
-import {
-  CONTENT_SOURCE_KINDS,
-  type ContentSourceKind,
-} from '../db/schema.js';
+import { CONTENT_SOURCE_KINDS, type ContentSourceKind } from '../db/schema.js';
 
 const HTTPS = /^https:\/\/\S+$/;
 const DAY = /^\d{4}-\d{2}-\d{2}$/;

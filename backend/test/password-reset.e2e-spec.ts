@@ -87,7 +87,7 @@ describe('password reset', () => {
     await confirm('nobody@test.local', '123456').expect(400);
   });
 
-  it('an unknown email does not use up anyone\'s limit', async () => {
+  it("an unknown email does not use up anyone's limit", async () => {
     for (let i = 0; i < 5; i++) {
       const res = await request('ghost@test.local').expect(404);
       expect(res.body.code).toBe('user_not_found');

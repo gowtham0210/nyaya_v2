@@ -55,14 +55,12 @@ describe('question API: exam metadata', () => {
 
   const source = async (licenseStatus: LicenseStatus) => {
     const id = newId();
-    await t.db
-      .insert(contentSources)
-      .values({
-        id,
-        kind: 'third_party',
-        title: `S ${licenseStatus}`,
-        licenseStatus,
-      });
+    await t.db.insert(contentSources).values({
+      id,
+      kind: 'third_party',
+      title: `S ${licenseStatus}`,
+      licenseStatus,
+    });
     return id;
   };
 
@@ -276,7 +274,11 @@ describe('question API: exam metadata', () => {
 
   describe('publishing rules', () => {
     it('publishes content whatever its source historical licence record says', async () => {
-      for (const status of ['pending', 'blocked', 'permitted_by_terms'] as const) {
+      for (const status of [
+        'pending',
+        'blocked',
+        'permitted_by_terms',
+      ] as const) {
         const q1 = (
           await create({
             ...completeContent,

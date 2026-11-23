@@ -14,7 +14,8 @@ import { auditLog, subjects, topics } from '../db/schema.js';
 export const CLAT_SUBJECT = {
   slug: 'clat-ug',
   name: 'CLAT UG sections',
-  description: 'Section subjects of the CLAT undergraduate paper (exam use only)',
+  description:
+    'Section subjects of the CLAT undergraduate paper (exam use only)',
 } as const;
 
 export const CLAT_TOPICS: readonly { slug: string; name: string }[] = [

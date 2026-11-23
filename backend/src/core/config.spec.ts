@@ -49,7 +49,9 @@ describe('loadConfig', () => {
   it('puts no practical daily limit on Ask AI unless one is set', () => {
     expect(loadConfig({}).chatFreeDailyLimit).toBe(100_000);
     expect(loadConfig({}).chatDailyLimit).toBe(100_000);
-    expect(loadConfig({ CHAT_FREE_DAILY_LIMIT: '5' }).chatFreeDailyLimit).toBe(5);
+    expect(loadConfig({ CHAT_FREE_DAILY_LIMIT: '5' }).chatFreeDailyLimit).toBe(
+      5,
+    );
   });
 
   it('has no minimum app version unless one is set, and rejects a bad one', () => {
@@ -131,12 +133,16 @@ describe('loadConfig', () => {
       loadConfig({ INDIACODE_BASE_URL: 'https://example.gov.in/' })
         .indiaCodeBaseUrl,
     ).toBe('https://example.gov.in');
-    expect(() => loadConfig({ INDIACODE_BASE_URL: 'http://example.gov.in' })).toThrow();
+    expect(() =>
+      loadConfig({ INDIACODE_BASE_URL: 'http://example.gov.in' }),
+    ).toThrow();
   });
 
   it('renews the Constitution metadata every 12 hours unless told otherwise', () => {
     expect(loadConfig({}).constitutionRefreshHours).toBe(12);
-    expect(loadConfig({ CONSTITUTION_REFRESH_HOURS: '6' }).constitutionRefreshHours).toBe(6);
+    expect(
+      loadConfig({ CONSTITUTION_REFRESH_HOURS: '6' }).constitutionRefreshHours,
+    ).toBe(6);
     expect(() => loadConfig({ CONSTITUTION_REFRESH_HOURS: '0' })).toThrow();
   });
 });

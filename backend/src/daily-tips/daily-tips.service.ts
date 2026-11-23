@@ -1,5 +1,15 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { and, desc, eq, gte, ilike, inArray, lt, ne, type SQL } from 'drizzle-orm';
+import {
+  and,
+  desc,
+  eq,
+  gte,
+  ilike,
+  inArray,
+  lt,
+  ne,
+  type SQL,
+} from 'drizzle-orm';
 import { AuditService, type Actor } from '../core/audit.service.js';
 import { DB, type Db, type Tx } from '../core/db.js';
 import { ApiError, isUniqueViolation } from '../core/errors.js';
@@ -71,7 +81,8 @@ function toPatch(dto: UpdateDailyTipDto): TipPatch {
     'legalReference',
     'language',
   ])
-    if (patch[column] === null) patch[column] = column === 'language' ? 'en' : '';
+    if (patch[column] === null)
+      patch[column] = column === 'language' ? 'en' : '';
   if (bad.length)
     throw new ApiError(
       HttpStatus.BAD_REQUEST,
@@ -264,7 +275,11 @@ export class DailyTipsService {
       const verifiedOn = indiaToday(now);
       await tx
         .update(dailyTips)
-        .set({ lastVerifiedOn: verifiedOn, updatedBy: actor.id, updatedAt: new Date() })
+        .set({
+          lastVerifiedOn: verifiedOn,
+          updatedBy: actor.id,
+          updatedAt: new Date(),
+        })
         .where(eq(dailyTips.id, id));
       return {
         verified_on: verifiedOn,
@@ -317,7 +332,9 @@ export class DailyTipsService {
     return this.act(actor, id, 'publish', async (tx, t) => {
       requireComplete(t);
       if (!t.reviewerId || !t.approvedAt)
-        throw ApiError.incomplete([{ reason: 'The tip has no recorded review' }]);
+        throw ApiError.incomplete([
+          { reason: 'The tip has no recorded review' },
+        ]);
       // A day that has gone would never show the tip.
       if (t.publishDate! < indiaToday(now))
         throw ApiError.incomplete([

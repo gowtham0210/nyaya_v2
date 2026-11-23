@@ -1,7 +1,4 @@
-import {
-  allowedRegimes,
-  lawRegimeVerdict,
-} from './exam-eligibility.js';
+import { allowedRegimes, lawRegimeVerdict } from './exam-eligibility.js';
 import { LAW_REGIME_FILTERS } from '../db/schema.js';
 
 describe('lawRegimeVerdict in a randomised mock', () => {

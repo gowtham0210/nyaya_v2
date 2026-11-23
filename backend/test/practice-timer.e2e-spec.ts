@@ -122,7 +122,9 @@ describe('paper practice timer', () => {
       expect(p.practice_timer_seconds).toBeNull();
       const url = `/v1/admin/exam-papers/${p.id}`;
       await as(admin).patch(url, { practice_timer_seconds: 59 }).expect(400);
-      await as(admin).patch(url, { practice_timer_seconds: 86_401 }).expect(400);
+      await as(admin)
+        .patch(url, { practice_timer_seconds: 86_401 })
+        .expect(400);
       const set = await as(admin)
         .patch(url, { practice_timer_seconds: 10_800 })
         .expect(200);
@@ -133,7 +135,9 @@ describe('paper practice timer', () => {
         config_status: 'unverified',
       });
       await as(admin).patch(url, { practice_timer_seconds: null }).expect(200);
-      await as(admin).patch(url, { practice_timer_seconds: 10_800 }).expect(200);
+      await as(admin)
+        .patch(url, { practice_timer_seconds: 10_800 })
+        .expect(200);
       // Only an admin changes it.
       for (const s of [editor, publisher, learner])
         await as(s).patch(url, { practice_timer_seconds: 60 }).expect(403);
@@ -214,9 +218,9 @@ describe('paper practice timer', () => {
 
     it('refuses it on a paper that has none', async () => {
       const p = await paper();
-      const res = await start(await fresh(), p.id, { practice_timer: true }).expect(
-        409,
-      );
+      const res = await start(await fresh(), p.id, {
+        practice_timer: true,
+      }).expect(409);
       expect(res.body.code).toBe('practice_timer_not_available');
     });
   });
@@ -227,7 +231,9 @@ describe('paper practice timer', () => {
         practice_timer_seconds: 10_800,
         duration_seconds: 10_800,
       });
-      const res = await start(await fresh(), p.id, { mode: 'timed' }).expect(409);
+      const res = await start(await fresh(), p.id, { mode: 'timed' }).expect(
+        409,
+      );
       expect(res.body.code).toBe('timed_mode_not_allowed');
       const noDuration = await paper({ practice_timer_seconds: 10_800 });
       const res2 = await start(await fresh(), noDuration.id, {
@@ -238,9 +244,10 @@ describe('paper practice timer', () => {
 
     it('does not let the practice timer be combined with the official timed mode, or used on a random mock', async () => {
       const p = await paper({ practice_timer_seconds: 10_800 });
-      await start(await fresh(), p.id, { mode: 'timed', practice_timer: true }).expect(
-        422,
-      );
+      await start(await fresh(), p.id, {
+        mode: 'timed',
+        practice_timer: true,
+      }).expect(422);
       await as(await fresh())
         .post('/v1/exams/aibe/attempts', {
           kind: 'random_mock',
@@ -255,7 +262,9 @@ describe('paper practice timer', () => {
         practice_timer_seconds: 10_800,
         config_status: 'official_confirmed',
       });
-      const res = await start(await fresh(), p.id, { mode: 'timed' }).expect(201);
+      const res = await start(await fresh(), p.id, { mode: 'timed' }).expect(
+        201,
+      );
       expect(res.body.mode).toBe('timed');
       expect(res.body.remaining_seconds).toBeLessThanOrEqual(3600);
       expect(res.body.remaining_seconds).toBeGreaterThan(3590);

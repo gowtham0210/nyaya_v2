@@ -165,15 +165,13 @@ describe('formal exam attempts', () => {
       t.signInAs('learner'),
     ]);
     aibeId = newId();
-    await t.db
-      .insert(exams)
-      .values({
-        id: aibeId,
-        slug: 'aibe',
-        name: 'AIBE',
-        shortName: 'AIBE',
-        isActive: true,
-      });
+    await t.db.insert(exams).values({
+      id: aibeId,
+      slug: 'aibe',
+      name: 'AIBE',
+      shortName: 'AIBE',
+      isActive: true,
+    });
     topicA = t.topicId;
     topicB = newId();
     const subjectId = newId();

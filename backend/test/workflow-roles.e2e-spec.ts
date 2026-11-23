@@ -166,7 +166,9 @@ describe('CMS roles and approvals', () => {
     it('a reviewer cannot approve content they wrote or edited', async () => {
       const own = await create(editorReviewer, content);
       await as(editorReviewer).post(q(own.id, 'submit')).expect(200);
-      const res = await as(editorReviewer).post(q(own.id, 'approve')).expect(403);
+      const res = await as(editorReviewer)
+        .post(q(own.id, 'approve'))
+        .expect(403);
       expect(res.body.message).toMatch(/cannot approve/);
     });
 
@@ -224,9 +226,7 @@ describe('CMS roles and approvals', () => {
       await as(reviewer).post(q(d.id, 'approve')).expect(200);
       await as(publisher).post(q(d.id, 'publish')).expect(200);
       // Published: frozen.
-      await as(editor)
-        .put(q(d.id, 'exam-tags'), { exam_ids: [] })
-        .expect(403);
+      await as(editor).put(q(d.id, 'exam-tags'), { exam_ids: [] }).expect(403);
     });
 
     it('a publisher or reviewer cannot change tags at all', async () => {
@@ -266,7 +266,9 @@ describe('CMS roles and approvals', () => {
       for (const s of [editor, reviewer, publisher, learner]) {
         await as(s).post('/v1/admin/exam-papers', paper()).expect(403);
         await as(s).post('/v1/admin/exam-blueprints', blueprint()).expect(403);
-        await as(s).patch(`/v1/admin/exams/${examId}`, { is_active: true }).expect(403);
+        await as(s)
+          .patch(`/v1/admin/exams/${examId}`, { is_active: true })
+          .expect(403);
       }
       const source = { kind: 'third_party', title: 'A source' };
       for (const s of [editor, reviewer, publisher])
@@ -284,32 +286,54 @@ describe('CMS roles and approvals', () => {
     });
 
     it('lets an admin manage papers and blueprints directly', async () => {
-      const p = (await as(admin).post('/v1/admin/exam-papers', paper()).expect(201))
-        .body;
-      const bp = (
-        await as(admin).post('/v1/admin/exam-blueprints', blueprint()).expect(201)
+      const p = (
+        await as(admin).post('/v1/admin/exam-papers', paper()).expect(201)
       ).body;
-      await as(admin).patch(`/v1/admin/exam-papers/${p.id}`, { title: 'AIBE XVIII' }).expect(200);
+      const bp = (
+        await as(admin)
+          .post('/v1/admin/exam-blueprints', blueprint())
+          .expect(201)
+      ).body;
+      await as(admin)
+        .patch(`/v1/admin/exam-papers/${p.id}`, { title: 'AIBE XVIII' })
+        .expect(200);
       // An incomplete draft is refused by the readiness rules, not by roles.
       await as(admin).post(`/v1/admin/exam-papers/${p.id}/publish`).expect(422);
-      await as(admin).post(`/v1/admin/exam-blueprints/${bp.id}/publish`).expect(422);
+      await as(admin)
+        .post(`/v1/admin/exam-blueprints/${bp.id}/publish`)
+        .expect(422);
     });
 
     it('lets a publisher publish a prepared paper or blueprint, but not create or change them', async () => {
-      const p = (await as(admin).post('/v1/admin/exam-papers', paper()).expect(201))
-        .body;
+      const p = (
+        await as(admin).post('/v1/admin/exam-papers', paper()).expect(201)
+      ).body;
       const bp = (
-        await as(admin).post('/v1/admin/exam-blueprints', blueprint()).expect(201)
+        await as(admin)
+          .post('/v1/admin/exam-blueprints', blueprint())
+          .expect(201)
       ).body;
       // Past the role check: the incomplete draft is refused on its content.
-      await as(publisher).post(`/v1/admin/exam-papers/${p.id}/publish`).expect(422);
-      await as(publisher).post(`/v1/admin/exam-blueprints/${bp.id}/publish`).expect(422);
+      await as(publisher)
+        .post(`/v1/admin/exam-papers/${p.id}/publish`)
+        .expect(422);
+      await as(publisher)
+        .post(`/v1/admin/exam-blueprints/${bp.id}/publish`)
+        .expect(422);
       // Editing and the rest stay admin-only.
-      await as(publisher).patch(`/v1/admin/exam-papers/${p.id}`, { title: 'Nope nope' }).expect(403);
-      await as(publisher).post(`/v1/admin/exam-blueprints/${bp.id}/retire`, { reason: 'x' }).expect(403);
+      await as(publisher)
+        .patch(`/v1/admin/exam-papers/${p.id}`, { title: 'Nope nope' })
+        .expect(403);
+      await as(publisher)
+        .post(`/v1/admin/exam-blueprints/${bp.id}/retire`, { reason: 'x' })
+        .expect(403);
       // An editor cannot publish either.
-      await as(editor).post(`/v1/admin/exam-papers/${p.id}/publish`).expect(403);
-      await as(editor).post(`/v1/admin/exam-blueprints/${bp.id}/publish`).expect(403);
+      await as(editor)
+        .post(`/v1/admin/exam-papers/${p.id}/publish`)
+        .expect(403);
+      await as(editor)
+        .post(`/v1/admin/exam-blueprints/${bp.id}/publish`)
+        .expect(403);
     });
   });
 });

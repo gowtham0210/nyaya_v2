@@ -28,7 +28,12 @@ import {
 } from '@nestjs/swagger';
 import type { Response } from 'express';
 import type { AuthUser } from '../auth/auth-user.js';
-import { CurrentActor, CurrentUser, Public, Roles } from '../auth/decorators.js';
+import {
+  CurrentActor,
+  CurrentUser,
+  Public,
+  Roles,
+} from '../auth/decorators.js';
 import type { Actor } from '../core/audit.service.js';
 import {
   CreateNewsDto,

@@ -18,7 +18,12 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import type { AuthUser } from '../auth/auth-user.js';
-import { CurrentActor, CurrentUser, Public, Roles } from '../auth/decorators.js';
+import {
+  CurrentActor,
+  CurrentUser,
+  Public,
+  Roles,
+} from '../auth/decorators.js';
 import type { Actor } from '../core/audit.service.js';
 import {
   CreateDailyTipDto,
@@ -50,7 +55,8 @@ export class DailyTipsController {
   // clients and proxies must check again (the ETag still saves the bytes).
   @Header('Cache-Control', 'no-cache')
   @ApiOperation({
-    summary: "Today's published tip (India date); tip is null when there is none",
+    summary:
+      "Today's published tip (India date); tip is null when there is none",
   })
   @ApiOkResponse({ type: TodayTipDto })
   today(@Query() query: TodayTipQuery) {
@@ -111,7 +117,7 @@ export class EditorDailyTipsController {
   @Roles(...TIP_ACTIONS.verify.roles)
   @ApiOperation({
     summary:
-      "Record that you checked the tip against its exact official source today; sets the verification date and nothing else",
+      'Record that you checked the tip against its exact official source today; sets the verification date and nothing else',
   })
   @ApiOkResponse({ type: DailyTipDetailDto })
   verify(

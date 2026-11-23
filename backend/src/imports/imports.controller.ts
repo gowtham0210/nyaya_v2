@@ -112,8 +112,7 @@ export class ImportsController {
         content_source_id: {
           type: 'string',
           format: 'uuid',
-          description:
-            'Optional; recorded for attribution',
+          description: 'Optional; recorded for attribution',
         },
       },
     },

@@ -8,10 +8,7 @@ import {
   questions,
   questionVersions,
 } from '../src/db/schema.js';
-import {
-  EXAM_IMPORT_COLUMNS,
-  IMPORT_COLUMNS,
-} from '../src/imports/format.js';
+import { EXAM_IMPORT_COLUMNS, IMPORT_COLUMNS } from '../src/imports/format.js';
 import { startApp, type TestApp } from './helpers.js';
 
 type Session = Awaited<ReturnType<TestApp['signInAs']>>;
@@ -119,9 +116,12 @@ describe('exam import: templates, chosen exam and paper positions', () => {
       const sheet = await readSheet(general.body as Buffer);
       expect(sheet[0]).toEqual([...IMPORT_COLUMNS]);
       expect(sheet).toHaveLength(2); // header and one sample row
-      const instructions = await readSheet(general.body as Buffer, {
-        sheet: 'Instructions',
-      } as never);
+      const instructions = await readSheet(
+        general.body as Buffer,
+        {
+          sheet: 'Instructions',
+        } as never,
+      );
       expect(JSON.stringify(instructions)).toContain('correct');
 
       const exam = await getTemplate(editor, 'kind=exam&exam=clat').expect(200);
@@ -182,9 +182,10 @@ describe('exam import: templates, chosen exam and paper positions', () => {
         'aibe.csv',
         { dry_run: 'true', exam: 'aibe' },
       ).expect(201);
-      const by = new Map<number, { outcome: string; problems: { field: string; reason: string }[] }>(
-        res.body.rows.map((r: { row: number }) => [r.row, r]),
-      );
+      const by = new Map<
+        number,
+        { outcome: string; problems: { field: string; reason: string }[] }
+      >(res.body.rows.map((r: { row: number }) => [r.row, r]));
       expect(by.get(2)!.outcome).toBe('created');
       expect(by.get(3)!.outcome).toBe('created');
       expect(by.get(4)!.outcome).toBe('failed');
@@ -238,11 +239,16 @@ describe('exam import: templates, chosen exam and paper positions', () => {
       const noStem = await upload(
         editor,
         '/v1/admin/exam-import-jobs',
-        csv([row(13)], plain.filter((c) => c !== 'stem')),
+        csv(
+          [row(13)],
+          plain.filter((c) => c !== 'stem'),
+        ),
         'm.csv',
         { dry_run: 'true', exam: 'aibe' },
       ).expect(422);
-      expect(JSON.stringify(noStem.body.details)).toMatch(/Missing column.*stem/);
+      expect(JSON.stringify(noStem.body.details)).toMatch(
+        /Missing column.*stem/,
+      );
       const bad = await upload(
         editor,
         '/v1/admin/exam-import-jobs',
@@ -284,7 +290,9 @@ describe('exam import: templates, chosen exam and paper positions', () => {
         .from(questions)
         .where(eq(questions.examOnly, true));
       expect(found.length).toBeGreaterThanOrEqual(3);
-      const created = found.filter((q) => q.externalRef?.startsWith('tpl-ref-2'));
+      const created = found.filter((q) =>
+        q.externalRef?.startsWith('tpl-ref-2'),
+      );
       expect(created).toHaveLength(3);
       for (const q of created) expect(q.liveVersionId).toBeNull();
       const versions = await t.db
@@ -342,7 +350,11 @@ describe('exam import: templates, chosen exam and paper positions', () => {
         .get(`/v1/admin/import-jobs/${id}/paper-positions`)
         .auth(editor.token, { type: 'bearer' })
         .expect(200);
-      expect(before.body).toMatchObject({ ready: 0, not_ready: 2, positions: [] });
+      expect(before.body).toMatchObject({
+        ready: 0,
+        not_ready: 2,
+        positions: [],
+      });
       expect(before.body.rows[0].reason).toContain('Not published yet');
       await t
         .http()
@@ -401,7 +413,9 @@ describe('exam import: templates, chosen exam and paper positions', () => {
       const draftQ = await t.db
         .select()
         .from(questionVersions)
-        .where(eq(questionVersions.questionId, before.body.rows[1].question_id));
+        .where(
+          eq(questionVersions.questionId, before.body.rows[1].question_id),
+        );
       await t
         .http()
         .put(`/v1/admin/exam-papers/${paper.body.id}/positions`)

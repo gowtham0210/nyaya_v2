@@ -5,10 +5,7 @@ import {
   LARGE_BYTES,
   SCANNED_TEXT_BYTES,
 } from './constitution.service.js';
-import {
-  IndiaCodeClient,
-  type LiveItem,
-} from './indiacode.client.js';
+import { IndiaCodeClient, type LiveItem } from './indiacode.client.js';
 import { loadManifest, validateManifest, type Manifest } from './manifest.js';
 
 const manifest = loadManifest();
@@ -56,7 +53,8 @@ function setup(m: Manifest = manifest) {
     client,
     service,
     config,
-    advanceHours: (h: number) => (now = new Date(now.getTime() + h * 3_600_000)),
+    advanceHours: (h: number) =>
+      (now = new Date(now.getTime() + h * 3_600_000)),
   };
 }
 const flush = () => new Promise((r) => setTimeout(r, 0));
@@ -117,12 +115,16 @@ describe('the list', () => {
     expect(ta.download_url).toBe(
       `https://indiacode.gov.in/server/api/core/bitstreams/${manifest.editions.find((e) => e.id === 'ta')!.reviewed.bitstream_uuid}/content`,
     );
-    expect(ta.source_page_url).toBe('https://indiacode.gov.in/handle/123456789/618412');
+    expect(ta.source_page_url).toBe(
+      'https://indiacode.gov.in/handle/123456789/618412',
+    );
     expect(ta.file.format).toBe('pdf');
     // Every link points at India Code and nowhere else.
     for (const e of [res.original!, ...res.editions]) {
       expect(new URL(e.download_url).origin).toBe('https://indiacode.gov.in');
-      expect(new URL(e.source_page_url).origin).toBe('https://indiacode.gov.in');
+      expect(new URL(e.source_page_url).origin).toBe(
+        'https://indiacode.gov.in',
+      );
     }
   });
 
@@ -185,10 +187,14 @@ describe('the list', () => {
 
   it('hides an edition India Code no longer lists, instead of showing a dead link', async () => {
     const { service, client } = setup();
-    client.items = client.items.filter((i) => i.itemUuid !== manifest.editions[0].item_uuid);
+    client.items = client.items.filter(
+      (i) => i.itemUuid !== manifest.editions[0].item_uuid,
+    );
     const res = await service.list();
     expect(res.editions).toHaveLength(25);
-    expect(res.editions.map((e) => e.id)).not.toContain(manifest.editions[0].id);
+    expect(res.editions.map((e) => e.id)).not.toContain(
+      manifest.editions[0].id,
+    );
     // The same when the item is there but has lost its PDF.
     const other = manifest.editions[1];
     client.items.find((i) => i.itemUuid === other.item_uuid)!.original = null;
@@ -203,7 +209,12 @@ describe('the list', () => {
       handle: '123456789/999999',
       title: 'The Constitution of India in Klingon',
       lastModified: '2026-11-01T00:00:00Z',
-      original: { uuid: '33333333-3333-4333-8333-333333333333', name: 'k.pdf', sizeBytes: 1, md5: 'b'.repeat(32) },
+      original: {
+        uuid: '33333333-3333-4333-8333-333333333333',
+        name: 'k.pdf',
+        sizeBytes: 1,
+        md5: 'b'.repeat(32),
+      },
       textBytes: 5000,
     });
     const res = await service.list();
@@ -230,7 +241,10 @@ describe('reading India Code', () => {
     const reviewed = manifest.editions.find((e) => e.id === 'ta')!.reviewed;
     expect(ta.file.checksum_md5).toBe(reviewed.md5);
     expect(ta.download_url).toContain(reviewed.bitstream_uuid);
-    expect(res.editions.find((e) => e.id === 'kok')!.flags).toEqual({ large: true, scanned: true });
+    expect(res.editions.find((e) => e.id === 'kok')!.flags).toEqual({
+      large: true,
+      scanned: true,
+    });
   });
 
   it('asks India Code once for requests that arrive together', async () => {
@@ -256,14 +270,23 @@ describe('reading India Code', () => {
   it('serves the old copy at once when it is out of date, and renews it in the background', async () => {
     const { service, client, advanceHours } = setup();
     await service.list();
-    const ta = client.items.find((i) => i.itemUuid === manifest.editions.find((e) => e.id === 'ta')!.item_uuid)!;
+    const ta = client.items.find(
+      (i) =>
+        i.itemUuid === manifest.editions.find((e) => e.id === 'ta')!.item_uuid,
+    )!;
     ta.original!.sizeBytes = 123;
     advanceHours(13);
     // Served from the old copy, not waiting for India Code.
-    expect((await service.list()).editions.find((e) => e.id === 'ta')!.file.size_bytes).not.toBe(123);
+    expect(
+      (await service.list()).editions.find((e) => e.id === 'ta')!.file
+        .size_bytes,
+    ).not.toBe(123);
     await flush();
     expect(client.calls).toBe(2);
-    expect((await service.list()).editions.find((e) => e.id === 'ta')!.file.size_bytes).toBe(123);
+    expect(
+      (await service.list()).editions.find((e) => e.id === 'ta')!.file
+        .size_bytes,
+    ).toBe(123);
     expect(client.calls).toBe(2);
   });
 
@@ -290,9 +313,16 @@ describe('drift', () => {
   it('is all unchanged when India Code matches the review', async () => {
     const { service } = setup();
     const d = await service.drift();
-    expect(d.summary).toEqual({ unchanged: 27, changed: 0, missing: 0, new: 0 });
+    expect(d.summary).toEqual({
+      unchanged: 27,
+      changed: 0,
+      missing: 0,
+      new: 0,
+    });
     expect(d.last_error).toBeNull();
-    expect(d.items.every((i) => i.state === 'unchanged' && i.live !== null)).toBe(true);
+    expect(
+      d.items.every((i) => i.state === 'unchanged' && i.live !== null),
+    ).toBe(true);
   });
 
   it('reports a replaced file by what differs', async () => {
@@ -306,14 +336,17 @@ describe('drift', () => {
     const row = d.items.find((i) => i.id === 'en')!;
     expect(row.state).toBe('changed');
     expect(row.changed_fields).toEqual(['bitstream', 'checksum', 'size']);
-    expect(row.live?.bitstream_uuid).toBe('44444444-4444-4444-8444-444444444444');
+    expect(row.live?.bitstream_uuid).toBe(
+      '44444444-4444-4444-8444-444444444444',
+    );
     expect(d.summary).toMatchObject({ changed: 1, unchanged: 26 });
   });
 
   it('notes an edit to the item without calling an identical file changed', async () => {
     const { service, client } = setup();
     const hi = manifest.editions.find((e) => e.id === 'hi')!;
-    client.items.find((i) => i.itemUuid === hi.item_uuid)!.lastModified = '2026-11-10T00:00:00Z';
+    client.items.find((i) => i.itemUuid === hi.item_uuid)!.lastModified =
+      '2026-11-10T00:00:00Z';
     const row = (await service.drift()).items.find((i) => i.id === 'hi')!;
     expect(row.state).toBe('unchanged');
     expect(row.modified_since_review).toBe(true);
@@ -324,26 +357,48 @@ describe('drift', () => {
     const bn = manifest.editions.find((e) => e.id === 'bn')!;
     client.items.find((i) => i.itemUuid === bn.item_uuid)!.textBytes = 900_000;
     const row = (await service.drift()).items.find((i) => i.id === 'bn')!;
-    expect(row).toMatchObject({ state: 'changed', changed_fields: ['text_layer'] });
+    expect(row).toMatchObject({
+      state: 'changed',
+      changed_fields: ['text_layer'],
+    });
   });
 
   it('reports a missing edition and a new one', async () => {
     const { service, client } = setup();
-    client.items = client.items.filter((i) => i.itemUuid !== manifest.editions[3].item_uuid);
+    client.items = client.items.filter(
+      (i) => i.itemUuid !== manifest.editions[3].item_uuid,
+    );
     client.items.push({
       itemUuid: '55555555-5555-4555-8555-555555555555',
       handle: '123456789/777777',
       title: 'The Constitution of India in Khasi',
       lastModified: '2026-11-15T00:00:00Z',
-      original: { uuid: '66666666-6666-4666-8666-666666666666', name: 'khasi.pdf', sizeBytes: 5_000_000, md5: 'd'.repeat(32) },
+      original: {
+        uuid: '66666666-6666-4666-8666-666666666666',
+        name: 'khasi.pdf',
+        sizeBytes: 5_000_000,
+        md5: 'd'.repeat(32),
+      },
       textBytes: 100_000,
     });
     const d = await service.drift();
-    expect(d.items.find((i) => i.id === manifest.editions[3].id)).toMatchObject({ state: 'missing', live: null });
+    expect(d.items.find((i) => i.id === manifest.editions[3].id)).toMatchObject(
+      { state: 'missing', live: null },
+    );
     expect(d.new_items).toEqual([
-      { item_uuid: '55555555-5555-4555-8555-555555555555', handle: '123456789/777777', title: 'The Constitution of India in Khasi', size_bytes: 5_000_000 },
+      {
+        item_uuid: '55555555-5555-4555-8555-555555555555',
+        handle: '123456789/777777',
+        title: 'The Constitution of India in Khasi',
+        size_bytes: 5_000_000,
+      },
     ]);
-    expect(d.summary).toEqual({ unchanged: 26, changed: 0, missing: 1, new: 1 });
+    expect(d.summary).toEqual({
+      unchanged: 26,
+      changed: 0,
+      missing: 1,
+      new: 1,
+    });
   });
 
   it('says "unknown", not "unchanged", when India Code cannot be read', async () => {

@@ -11,7 +11,8 @@ export interface Actor {
 }
 
 /** Admin is the highest-privilege role; every admin action is still audited. */
-export const isAdmin = (actor: Actor): boolean => actor.roles?.includes('admin') ?? false;
+export const isAdmin = (actor: Actor): boolean =>
+  actor.roles?.includes('admin') ?? false;
 
 export interface AuditEntry {
   action: string;

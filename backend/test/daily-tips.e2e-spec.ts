@@ -3,7 +3,8 @@ import { indiaToday } from '../src/learn/scoring.js';
 import { startApp, type TestApp } from './helpers.js';
 
 const DAY = 86_400_000;
-const dayFrom = (offset: number) => indiaToday(new Date(Date.now() + offset * DAY));
+const dayFrom = (offset: number) =>
+  indiaToday(new Date(Date.now() + offset * DAY));
 const today = () => dayFrom(0);
 
 const complete = () => ({
@@ -43,8 +44,11 @@ describe('daily tips', () => {
   });
 
   const create = async (fields: object = {}) =>
-    (await as(editor.token).post('/v1/editor/daily-tips', { ...complete(), ...fields }).expect(201))
-      .body.id as string;
+    (
+      await as(editor.token)
+        .post('/v1/editor/daily-tips', { ...complete(), ...fields })
+        .expect(201)
+    ).body.id as string;
   const submit = (id: string) =>
     as(editor.token).post(`/v1/editor/daily-tips/${id}/submit`);
   const approve = (id: string) =>
@@ -74,7 +78,10 @@ describe('daily tips', () => {
 
   it('goes from draft to the app only after review and publishing', async () => {
     const draft = await as(editor.token)
-      .post('/v1/editor/daily-tips', { category: 'general', title: 'Draft only' })
+      .post('/v1/editor/daily-tips', {
+        category: 'general',
+        title: 'Draft only',
+      })
       .expect(201);
     expect(draft.body.status).toBe('draft');
     expect(draft.body.created_by).toBe(editor.id);
@@ -94,7 +101,10 @@ describe('daily tips', () => {
     );
 
     await as(editor.token)
-      .patch(`/v1/editor/daily-tips/${id}`, { ...complete(), title: 'Ask for a bill' })
+      .patch(`/v1/editor/daily-tips/${id}`, {
+        ...complete(),
+        title: 'Ask for a bill',
+      })
       .expect(200);
     await submit(id).expect(200);
     // Under review: not in the app, not by id either.
@@ -163,7 +173,9 @@ describe('daily tips', () => {
   it('requires an https official source and valid dates', async () => {
     const id = await create();
     await as(editor.token)
-      .patch(`/v1/editor/daily-tips/${id}`, { source_url: 'http://example.com' })
+      .patch(`/v1/editor/daily-tips/${id}`, {
+        source_url: 'http://example.com',
+      })
       .expect(200);
     const res = await submit(id).expect(422);
     expect(res.body.details).toEqual([
@@ -185,15 +197,21 @@ describe('daily tips', () => {
     const id = await create({ language: 'kn' });
     await submit(id).expect(200);
     await as(reviewer.token)
-      .post(`/v1/editor/daily-tips/${id}/request-changes`, { reason: 'Cite the section' })
+      .post(`/v1/editor/daily-tips/${id}/request-changes`, {
+        reason: 'Cite the section',
+      })
       .expect(200);
-    const back = await as(editor.token).get(`/v1/editor/daily-tips/${id}`).expect(200);
+    const back = await as(editor.token)
+      .get(`/v1/editor/daily-tips/${id}`)
+      .expect(200);
     expect(back.body).toMatchObject({
       status: 'changes_requested',
       changes_reason: 'Cite the section',
     });
     await as(editor.token)
-      .patch(`/v1/editor/daily-tips/${id}`, { legal_reference: 'Section 2(9) of the 2019 Act' })
+      .patch(`/v1/editor/daily-tips/${id}`, {
+        legal_reference: 'Section 2(9) of the 2019 Act',
+      })
       .expect(200);
     await submit(id).expect(200);
   });
@@ -201,15 +219,25 @@ describe('daily tips', () => {
   it('keeps each step to its own role', async () => {
     const id = await create({ language: 'ml' });
     // Learners and reviewers cannot write; editors cannot approve or publish.
-    await as(learner.token).post('/v1/editor/daily-tips', complete()).expect(403);
-    await as(reviewer.token).post('/v1/editor/daily-tips', complete()).expect(403);
+    await as(learner.token)
+      .post('/v1/editor/daily-tips', complete())
+      .expect(403);
+    await as(reviewer.token)
+      .post('/v1/editor/daily-tips', complete())
+      .expect(403);
     await as(learner.token).get('/v1/editor/daily-tips').expect(403);
     await t.http().get('/v1/editor/daily-tips').expect(401);
     await submit(id).expect(200);
-    await as(editor.token).post(`/v1/editor/daily-tips/${id}/approve`).expect(403);
+    await as(editor.token)
+      .post(`/v1/editor/daily-tips/${id}/approve`)
+      .expect(403);
     await approve(id).expect(200);
-    await as(editor.token).post(`/v1/editor/daily-tips/${id}/publish`).expect(403);
-    await as(reviewer.token).post(`/v1/editor/daily-tips/${id}/publish`).expect(403);
+    await as(editor.token)
+      .post(`/v1/editor/daily-tips/${id}/publish`)
+      .expect(403);
+    await as(reviewer.token)
+      .post(`/v1/editor/daily-tips/${id}/publish`)
+      .expect(403);
   });
 
   it('does not let a reviewer approve a tip they wrote, except an admin', async () => {
@@ -217,16 +245,26 @@ describe('daily tips', () => {
     const own = (
       await as(both.token).post('/v1/editor/daily-tips', complete()).expect(201)
     ).body.id;
-    await as(both.token).post(`/v1/editor/daily-tips/${own}/submit`).expect(200);
-    await as(both.token).post(`/v1/editor/daily-tips/${own}/approve`).expect(403);
+    await as(both.token)
+      .post(`/v1/editor/daily-tips/${own}/submit`)
+      .expect(200);
+    await as(both.token)
+      .post(`/v1/editor/daily-tips/${own}/approve`)
+      .expect(403);
 
     const admin = await t.signInAs('admin');
     const id = (
-      await as(admin.token).post('/v1/editor/daily-tips', complete()).expect(201)
+      await as(admin.token)
+        .post('/v1/editor/daily-tips', complete())
+        .expect(201)
     ).body.id;
     // An admin may do every step, including approving their own tip.
-    await as(admin.token).post(`/v1/editor/daily-tips/${id}/submit`).expect(200);
-    await as(admin.token).post(`/v1/editor/daily-tips/${id}/approve`).expect(200);
+    await as(admin.token)
+      .post(`/v1/editor/daily-tips/${id}/submit`)
+      .expect(200);
+    await as(admin.token)
+      .post(`/v1/editor/daily-tips/${id}/approve`)
+      .expect(200);
   });
 
   it('retires a published tip, and revising takes it back to draft', async () => {
@@ -239,7 +277,9 @@ describe('daily tips', () => {
     await t.http().get(`/v1/daily-tips/${id}`).expect(404);
 
     const revised = await as(editor.token)
-      .post(`/v1/editor/daily-tips/${id}/revise`, { reason: 'Update for the amendment' })
+      .post(`/v1/editor/daily-tips/${id}/revise`, {
+        reason: 'Update for the amendment',
+      })
       .expect(200);
     expect(revised.body).toMatchObject({
       status: 'draft',
@@ -255,12 +295,16 @@ describe('daily tips', () => {
       .get('/v1/editor/daily-tips?status=draft')
       .expect(200);
     expect(
-      onlyDrafts.body.items.every((i: { status: string }) => i.status === 'draft'),
+      onlyDrafts.body.items.every(
+        (i: { status: string }) => i.status === 'draft',
+      ),
     ).toBe(true);
     const found = await as(editor.token)
       .get('/v1/editor/daily-tips?q=retire&category=consumer_rights')
       .expect(200);
-    expect(found.body.items.map((i: { title: string }) => i.title)).toContain('Retire me');
+    expect(found.body.items.map((i: { title: string }) => i.title)).toContain(
+      'Retire me',
+    );
     const none = await as(editor.token)
       .get('/v1/editor/daily-tips?category=workplace')
       .expect(200);
@@ -268,8 +312,11 @@ describe('daily tips', () => {
   });
 
   describe('recording a source check', () => {
-    const verify = (token: string, id: string, body: object = { confirmed_against_source: true }) =>
-      as(token).post(`/v1/editor/daily-tips/${id}/verify`, body);
+    const verify = (
+      token: string,
+      id: string,
+      body: object = { confirmed_against_source: true },
+    ) => as(token).post(`/v1/editor/daily-tips/${id}/verify`, body);
 
     it('sets only the verification date, names who checked, and keeps the tip in draft', async () => {
       const id = await create({ last_verified_on: null });
@@ -277,17 +324,26 @@ describe('daily tips', () => {
       expect(res.body.status).toBe('draft');
       expect(res.body.last_verified_on).toBe(today());
       expect(res.body.updated_by).toBe(editor.id);
-      const log = await as(editor.token).get(`/v1/editor/daily-tips/${id}`).expect(200);
+      const log = await as(editor.token)
+        .get(`/v1/editor/daily-tips/${id}`)
+        .expect(200);
       expect(log.body.last_verified_on).toBe(today());
     });
 
     it('needs the editor to confirm, and the exact source link, not a site home page', async () => {
-      const id = await create({ last_verified_on: null, source_url: 'https://www.indiacode.nic.in/' });
+      const id = await create({
+        last_verified_on: null,
+        source_url: 'https://www.indiacode.nic.in/',
+      });
       await verify(editor.token, id, {}).expect(400);
-      await verify(editor.token, id, { confirmed_against_source: false }).expect(400);
+      await verify(editor.token, id, {
+        confirmed_against_source: false,
+      }).expect(400);
       const res = await verify(editor.token, id).expect(422);
       expect(JSON.stringify(res.body)).toContain('source_url');
-      const after = await as(editor.token).get(`/v1/editor/daily-tips/${id}`).expect(200);
+      const after = await as(editor.token)
+        .get(`/v1/editor/daily-tips/${id}`)
+        .expect(200);
       expect(after.body.last_verified_on).toBeNull();
     });
 
@@ -313,7 +369,10 @@ describe('daily tips', () => {
     const id = await publishTip({ language: 'te', title: 'Audited' });
     const { auditLog } = await import('../src/db/schema.js');
     const { eq } = await import('drizzle-orm');
-    const rows = await t.db.select().from(auditLog).where(eq(auditLog.entityId, id));
+    const rows = await t.db
+      .select()
+      .from(auditLog)
+      .where(eq(auditLog.entityId, id));
     expect(rows.map((r) => r.action).sort()).toEqual(
       [
         'daily_tip.approved',
@@ -324,13 +383,26 @@ describe('daily tips', () => {
     );
   });
   describe('the daily change at 00:00 India time', () => {
-    const SERVER_ZONES = ['UTC', 'America/Los_Angeles', 'Pacific/Auckland', 'Asia/Kolkata'];
+    const SERVER_ZONES = [
+      'UTC',
+      'America/Los_Angeles',
+      'Pacific/Auckland',
+      'Asia/Kolkata',
+    ];
     const midnightIst = (day: string) => Date.parse(`${day}T00:00:00+05:30`);
 
     it('hands over to the next tip at 00:00 IST, whatever the server clock zone is', async () => {
       const day = dayFrom(1);
-      const id = await publishTip({ language: 'kn', title: 'Tomorrow', publish_date: day });
-      const next = await publishTip({ language: 'kn', title: 'Day after', publish_date: dayFrom(2) });
+      const id = await publishTip({
+        language: 'kn',
+        title: 'Tomorrow',
+        publish_date: day,
+      });
+      const next = await publishTip({
+        language: 'kn',
+        title: 'Day after',
+        publish_date: dayFrom(2),
+      });
       const service = t.app.get(DailyTipsService);
       const at = (ms: number) => service.today('kn', new Date(ms));
       const zone = process.env.TZ;
@@ -354,26 +426,39 @@ describe('daily tips', () => {
 
     it('never gives a future-dated tip early, by date or by id', async () => {
       const day = dayFrom(3);
-      const id = await publishTip({ language: 'ml', title: 'Not yet', publish_date: day });
+      const id = await publishTip({
+        language: 'ml',
+        title: 'Not yet',
+        publish_date: day,
+      });
       const service = t.app.get(DailyTipsService);
       const m = midnightIst(day);
       // The whole of the days before: no tip today, and not readable by id either.
       for (const ms of [Date.now(), m - 86_400_000, m - 1]) {
         expect((await service.today('ml', new Date(ms))).tip).toBeNull();
-        await expect(service.published(id, new Date(ms))).rejects.toMatchObject({ status: 404 });
+        await expect(service.published(id, new Date(ms))).rejects.toMatchObject(
+          { status: 404 },
+        );
       }
       expect((await service.published(id, new Date(m))).title).toBe('Not yet');
       // Over HTTP too: still not today's tip.
-      expect((await todayTip('ml'))).toBeNull();
+      expect(await todayTip('ml')).toBeNull();
     });
 
     it('can be published ahead for tomorrow without any further step', async () => {
       // Written, reviewed and published today, with tomorrow's date: accepted.
-      const id = await create({ language: 'ta', title: 'Prepared ahead', publish_date: dayFrom(1) });
+      const id = await create({
+        language: 'ta',
+        title: 'Prepared ahead',
+        publish_date: dayFrom(1),
+      });
       await submit(id).expect(200);
       await approve(id).expect(200);
       const live = await publish(id).expect(200);
-      expect(live.body).toMatchObject({ status: 'published', publish_date: dayFrom(1) });
+      expect(live.body).toMatchObject({
+        status: 'published',
+        publish_date: dayFrom(1),
+      });
     });
 
     it('is not cacheable, so yesterday is never served after midnight', async () => {

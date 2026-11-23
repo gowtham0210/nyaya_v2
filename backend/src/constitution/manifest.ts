@@ -74,8 +74,7 @@ export function validateManifest(raw: unknown): Manifest {
   if (!m || m.version !== 1) bad('version must be 1');
   if (!isUuid(m.collection?.uuid)) bad('collection.uuid');
   if (!m.notice?.trim()) bad('notice is required');
-  if (!Array.isArray(m.editions) || m.editions.length === 0)
-    bad('no editions');
+  if (!Array.isArray(m.editions) || m.editions.length === 0) bad('no editions');
   const seen = new Set<string>();
   for (const e of [...m.editions, m.original]) {
     if (!e) bad('original is required');

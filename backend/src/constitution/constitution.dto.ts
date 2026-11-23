@@ -18,7 +18,9 @@ export class ConstitutionFileDto {
 }
 
 export class ConstitutionFlagsDto {
-  @ApiProperty({ description: 'A large download: warn before opening on mobile data' })
+  @ApiProperty({
+    description: 'A large download: warn before opening on mobile data',
+  })
   large: boolean;
   @ApiProperty({
     description:
@@ -28,7 +30,10 @@ export class ConstitutionFlagsDto {
 }
 
 export class ConstitutionEditionDto {
-  @ApiProperty({ example: 'ta', description: 'Stable id; `original` for the 1950 copy' })
+  @ApiProperty({
+    example: 'ta',
+    description: 'Stable id; `original` for the 1950 copy',
+  })
   id: string;
   @ApiProperty({ type: String, nullable: true, example: 'ta' })
   language_code: string | null;
@@ -52,7 +57,8 @@ export class ConstitutionEditionDto {
   })
   authority_note: string | null;
   @ApiProperty({
-    description: 'Official India Code address of the PDF (https, India Code host only)',
+    description:
+      'Official India Code address of the PDF (https, India Code host only)',
   })
   download_url: string;
   @ApiProperty({ description: "The item's page on India Code" })
@@ -110,7 +116,8 @@ export class DriftItemDto {
   @ApiProperty({ enum: DRIFT_STATES }) state: DriftState;
   @ApiProperty({
     type: [String],
-    description: 'What differs from the reviewed values: bitstream, checksum, size, text_layer',
+    description:
+      'What differs from the reviewed values: bitstream, checksum, size, text_layer',
   })
   changed_fields: string[];
   @ApiProperty({
@@ -118,7 +125,8 @@ export class DriftItemDto {
       'The item was edited on India Code after the review, though its file may be the same',
   })
   modified_since_review: boolean;
-  @ApiProperty({ type: DriftLiveDto, nullable: true }) live: DriftLiveDto | null;
+  @ApiProperty({ type: DriftLiveDto, nullable: true })
+  live: DriftLiveDto | null;
 }
 
 export class DriftNewItemDto {
@@ -148,7 +156,8 @@ export class ConstitutionDriftDto {
   @ApiProperty({ type: [DriftItemDto] }) items: DriftItemDto[];
   @ApiProperty({
     type: [DriftNewItemDto],
-    description: 'On India Code but not in the manifest: hidden from the app until curated',
+    description:
+      'On India Code but not in the manifest: hidden from the app until curated',
   })
   new_items: DriftNewItemDto[];
 }

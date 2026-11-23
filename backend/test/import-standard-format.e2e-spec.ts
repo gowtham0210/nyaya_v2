@@ -97,10 +97,9 @@ describe('import: the standard Excel format', () => {
   it('1. reads the exact standard headers', async () => {
     const res = await general([STANDARD, q(1), q(2, { 7: 'D' })]).expect(201);
     expect(res.body.totals).toMatchObject({ created: 2, failed: 0 });
-    expect(res.body.rows.map((r: { external_ref: string }) => r.external_ref)).toEqual([
-      'questions-1',
-      'questions-2',
-    ]);
+    expect(
+      res.body.rows.map((r: { external_ref: string }) => r.external_ref),
+    ).toEqual(['questions-1', 'questions-2']);
   });
 
   it('2. accepts other casing, spacing, underscores and common labels', async () => {
@@ -153,17 +152,19 @@ describe('import: the standard Excel format', () => {
   });
 
   it('3c. refuses a value under a column that has no heading', async () => {
-    const rows = [[...STANDARD, null], [...q(1), 'oops']];
+    const rows = [
+      [...STANDARD, null],
+      [...q(1), 'oops'],
+    ];
     const res = await general(rows).expect(422);
     expect(JSON.stringify(res.body.details)).toMatch(/no heading/);
   });
 
   it('4. says Topic is required when the column is missing, and never invents one', async () => {
     const noTopic = STANDARD.filter((h) => h !== 'Topic');
-    const res = await general([
-      noTopic,
-      q(1).filter((_, i) => i !== 1),
-    ]).expect(422);
+    const res = await general([noTopic, q(1).filter((_, i) => i !== 1)]).expect(
+      422,
+    );
     expect(res.body.code).toBe('invalid_file');
     const text = JSON.stringify(res.body.details);
     expect(text).toMatch(/Missing column: topic/);
@@ -234,7 +235,13 @@ describe('import: the standard Excel format', () => {
       });
 
     it('keeps order, option ids, numbers and set, as drafts tagged for the exam', async () => {
-      const rows = [[title], STANDARD, q(1), q(2, { 7: 'D' }), q(3, { 7: 'a' })];
+      const rows = [
+        [title],
+        STANDARD,
+        q(1),
+        q(2, { 7: 'D' }),
+        q(3, { 7: 'a' }),
+      ];
       const res = await real(rows, 'set-a.xlsx').expect(201);
       expect(res.body.totals).toMatchObject({ created: 3, failed: 0 });
 
@@ -269,11 +276,19 @@ describe('import: the standard Excel format', () => {
         expect(tags).toHaveLength(1);
       }
       // Rows keep their order: file rows 3, 4, 5.
-      expect(res.body.rows.map((r: { row: number }) => r.row)).toEqual([3, 4, 5]);
+      expect(res.body.rows.map((r: { row: number }) => r.row)).toEqual([
+        3, 4, 5,
+      ]);
     });
 
     it('is safe to retry, and a second set does not collide on the same numbers', async () => {
-      const rows = [[title], STANDARD, q(1), q(2, { 7: 'D' }), q(3, { 7: 'a' })];
+      const rows = [
+        [title],
+        STANDARD,
+        q(1),
+        q(2, { 7: 'D' }),
+        q(3, { 7: 'a' }),
+      ];
       const again = await real(rows, 'set-a.xlsx').expect(409);
       expect(again.body.code).toBe('already_imported');
       // Same workbook, renamed and with one more question: old rows are skipped.

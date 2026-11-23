@@ -357,10 +357,7 @@ export class ImportsService {
               })
               .from(questionVersions)
               .where(inArray(questionVersions.topicId, topicIds))
-          ).map((v) => [
-            contentKey(v.topicId, v.stem, v.options),
-            v.questionId,
-          ])
+          ).map((v) => [contentKey(v.topicId, v.stem, v.options), v.questionId])
         : [],
     );
 
@@ -408,9 +405,7 @@ export class ImportsService {
       ];
       const existing =
         (c.externalRef && byRef.get(c.externalRef)) ||
-        byStem.get(
-          contentKey(c.draft.topicId, c.draft.stem, c.draft.options),
-        );
+        byStem.get(contentKey(c.draft.topicId, c.draft.stem, c.draft.options));
       if (existing)
         return {
           ...base,
@@ -683,11 +678,12 @@ export class ImportsService {
           status,
           // A withdrawn row is a complete position: it pins no question.
           ready: withdrawn || !!versionId,
-          reason: withdrawn || versionId
-            ? null
-            : !r.questionId
-              ? 'The row was not imported'
-              : `Not published yet (it is ${(status ?? 'unknown').replace('_', ' ')})`,
+          reason:
+            withdrawn || versionId
+              ? null
+              : !r.questionId
+                ? 'The row was not imported'
+                : `Not published yet (it is ${(status ?? 'unknown').replace('_', ' ')})`,
         },
       };
     });
