@@ -13,8 +13,23 @@ import { startApp, type TestApp } from './helpers.js';
 type Session = Awaited<ReturnType<TestApp['signInAs']>>;
 type Cell = string | number | null;
 
-/** A real .xlsx workbook from rows of cells (every cell text or number). */
-const workbook = (rows: Cell[][]) =>
+/**
+ * A real .xlsx workbook from rows of cells (every cell text or number). The
+ * zip inside stamps the build time, so the same rows built a second apart
+ * would be different bytes; build each set of rows once so "the same file"
+ * really is the same file.
+ */
+const built = new Map<string, Promise<Buffer>>();
+const workbook = (rows: Cell[][]) => {
+  const key = JSON.stringify(rows);
+  let file = built.get(key);
+  if (!file) {
+    file = buildWorkbook(rows);
+    built.set(key, file);
+  }
+  return file;
+};
+const buildWorkbook = (rows: Cell[][]): Promise<Buffer> =>
   writeXlsxFile(
     rows.map((r) =>
       r.map((value) =>
