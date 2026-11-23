@@ -651,10 +651,9 @@ void main() {
     await pumpApp(tester, prefs: {'profile_v1': onboarded});
     await tallScreen(tester);
 
-    expect(find.text('Start your learning journey'), findsOneWidget);
     expect(find.text('RECOMMENDED START'), findsOneWidget);
     expect(find.text('CONTINUE WHERE YOU LEFT OFF'), findsNothing);
-    expect(top(tester, 'Start your learning journey'), lessThan(top(tester, 'Quiz modes')));
+    expect(top(tester, 'RECOMMENDED START'), lessThan(top(tester, 'Quiz modes')));
     expect(top(tester, 'Core Laws'), lessThan(top(tester, 'FEATURED')), reason: 'featured laws come last');
     // Energy in words: Case Path and Duel cost 1, Exam 2, the Daily Docket is free.
     expect(find.text('1 energy'), findsNWidgets(2));
@@ -667,7 +666,7 @@ void main() {
     await pumpApp(tester, prefs: {'profile_v1': onboarded}, server: (s) => s..stars['constitution_1'] = 3);
     await tallScreen(tester);
 
-    expect(find.text('Start your learning journey'), findsNothing);
+    expect(find.text('RECOMMENDED START'), findsNothing);
     expect(top(tester, 'CONTINUE WHERE YOU LEFT OFF'), lessThan(top(tester, 'Quiz modes')));
     expect(top(tester, 'Quiz modes'), lessThan(top(tester, 'FEATURED')), reason: 'no promotion above the learning');
   });

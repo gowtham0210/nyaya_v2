@@ -105,14 +105,14 @@ void main() {
   group('finding Mock Exams', () {
     testWidgets('Home shows no entry while every exam is switched off', (tester) async {
       exam.available.clear();
-      await pumpApp(tester);
+      await pumpApp(tester, viewHeight: 12000);
       expect(find.text('Mock Exams'), findsNothing);
       expect(exam.availabilityCalls, 3, reason: 'each known exam is asked once');
       expect(exam.startCalls, 0);
     });
 
     testWidgets('Home shows the entry once an exam is open, and it leads to that exam only', (tester) async {
-      final c = await pumpApp(tester);
+      final c = await pumpApp(tester, viewHeight: 12000);
       expect(find.text('Mock Exams'), findsOneWidget);
       await tester.tap(find.text('Mock Exams'));
       await settle(tester);
@@ -180,26 +180,26 @@ void main() {
       expect(fadeDelays(tester), hidden);
     });
 
-    testWidgets('is the first thing on Home, above Continue learning', (tester) async {
-      final c = await pumpApp(tester);
+    testWidgets('sits between Core Laws and the Constitution row', (tester) async {
+      final c = await pumpApp(tester, viewHeight: 12000);
       expect(c.read(availableMockExamsProvider).asData?.value, [MockExamSlugs.aibe]);
       final card = tester.getTopLeft(find.text('Mock Exams')).dy;
-      final next = tester.getTopLeft(find.text('Start learning').first).dy;
-      expect(card, lessThan(next));
-      // And it is on the first screen, without scrolling.
-      expect(find.text('Mock Exams'), findsOneWidget);
+      expect(tester.getTopLeft(find.text('Core Laws')).dy, lessThan(card));
+      expect(card, lessThan(tester.getTopLeft(find.text('Constitution of India').last).dy));
     });
 
-    testWidgets('does not shift Home when it is hidden: the first section starts where it did', (tester) async {
+    testWidgets('does not shift Home when it is hidden: the rows above it stay put', (tester) async {
       exam.available.clear();
-      await pumpApp(tester);
-      final withoutCard = tester.getTopLeft(find.text('Start learning').first).dy;
+      await pumpApp(tester, viewHeight: 12000);
+      final first = tester.getTopLeft(find.text('Start learning').first).dy;
+      final below = tester.getTopLeft(find.text('Constitution of India').last).dy;
       exam.available.add(MockExamSlugs.aibe);
       final c = ProviderScope.containerOf(tester.element(find.byType(NyayaApp)));
       c.invalidate(availableMockExamsProvider);
       await settle(tester);
-      final withCard = tester.getTopLeft(find.text('Start learning').first).dy;
-      expect(withCard, greaterThan(withoutCard), reason: 'a visible card pushes the rest down, nothing else changes');
+      expect(tester.getTopLeft(find.text('Start learning').first).dy, first);
+      expect(tester.getTopLeft(find.text('Constitution of India').last).dy, greaterThan(below),
+          reason: 'a visible card pushes the rest down, nothing else changes');
     });
   });
 

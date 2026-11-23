@@ -107,7 +107,7 @@ export interface PublishAllState {
  * day and the one-tip-per-day rule and writes the audit entry. A tip that
  * cannot go out is left approved and reported; the rest are not held up.
  */
-export async function publishAllApprovedTips(_: PublishAllState): Promise<PublishAllState> {
+export async function publishAllApprovedTips(): Promise<PublishAllState> {
   const client = await api();
   const tips: { id: string; title: string; publish_date: string | null }[] = [];
   let cursor: string | undefined;
