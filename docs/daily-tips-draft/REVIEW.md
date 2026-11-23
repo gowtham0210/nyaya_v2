@@ -1,0 +1,1125 @@
+# Nyaya Kural: 100 draft Daily Tips (for legal review)
+
+Status of every tip: **Draft, unverified**. Dates are blank on purpose.
+
+
+## Police and Citizen Rights
+
+### DT-POL-01: Do police have to tell me why they are arresting me?
+
+**Short answer:** Yes. The police must tell you the grounds of your arrest, and for a bailable offence they must also tell you that you are entitled to bail.
+
+The Constitution says nobody can be arrested and kept in custody without being told, as soon as possible, why. Under the new criminal procedure law, the officer making the arrest must communicate the full details of the offence or the other grounds, and for a bailable offence must tell you that you can be released on bail and arrange sureties. Recent Supreme Court judgments have stressed that the grounds must be conveyed in a way you actually understand. What you can do: stay calm, ask politely for the reason, note the officer's name and number, and do not resist physically, because that can create a separate offence.
+
+- **Legal reference:** Constitution of India; Bharatiya Nagarik Suraksha Sanhita, 2023 — Article 22(1); BNSS section 47(1) and (2)
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNSS s.47 numbering and which recent Supreme Court judgments require grounds in writing (they arose under special laws such as PMLA and UAPA).
+
+### DT-POL-02: Can the police keep me in custody for days without showing me to a judge?
+
+**Short answer:** No. A person arrested must be produced before a magistrate within 24 hours, not counting the travel time to the court.
+
+This is a constitutional protection. Article 22(2) says an arrested person must be produced before the nearest magistrate within 24 hours of arrest, excluding the time needed to travel from the place of arrest to the magistrate's court. The same rule is repeated in the criminal procedure law. Only a magistrate can then authorise further police custody, and must record reasons. There are limited exceptions, for example for people arrested under preventive detention laws, which work differently. If a relative has been held for longer without being produced, a lawyer can approach the High Court with a habeas corpus petition, which is meant for exactly this situation.
+
+- **Legal reference:** Constitution of India; Bharatiya Nagarik Suraksha Sanhita, 2023 — Article 22(2); BNSS section 58
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNSS s.58 is the 24-hour rule (formerly CrPC s.57) and the preventive detention exception wording.
+
+### DT-POL-03: What can I do if the police refuse to register my FIR?
+
+**Short answer:** Send your complaint in writing to the Superintendent of Police. If that does not work, a magistrate can order the police to register and investigate.
+
+When you report a cognizable offence (a serious offence where police can act without a warrant), the police are expected to register an FIR. If the officer in charge refuses, the law allows you to send the substance of your information in writing, by post or electronically, to the Superintendent of Police. If the SP is also not satisfied that an offence is made out, you can ask the magistrate to direct an investigation. In some cases the police may first do a short preliminary enquiry, but only for certain offences and within a fixed time. Keep copies of everything you send, and note the date, so a lawyer can use it.
+
+- **Legal reference:** Bharatiya Nagarik Suraksha Sanhita, 2023 — BNSS section 173(3) and (4); section 175(3)
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm subsection numbers of s.173 (preliminary enquiry, SP route) and s.175(3) (magistrate), and the 14-day enquiry limit; check Lalita Kumari v. Govt of UP (2013).
+
+### DT-POL-04: Can I file an FIR at any police station, even if the crime happened elsewhere?
+
+**Short answer:** Yes. A police station can register a 'Zero FIR' even if the offence happened outside its area, and then transfer it to the right station.
+
+People are sometimes sent back from a police station because the incident happened in another area. Under the criminal procedure law, information about a cognizable offence can be recorded by the police at any station, whatever the place of the offence. This is commonly called a Zero FIR. It is then sent to the police station that has jurisdiction for investigation. The law also allows information to be given orally or electronically; an electronic complaint has to be signed by you within three days to proceed. This is especially important in urgent cases such as crimes against women, where delay can cost evidence. Ask for the receipt or number.
+
+- **Legal reference:** Bharatiya Nagarik Suraksha Sanhita, 2023 — BNSS section 173(1)
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm s.173(1) text on 'irrespective of the area', the 3-day signing rule for e-information, and the term 'Zero FIR' as used in official guidance.
+
+### DT-POL-05: Do I have to pay for a copy of my FIR?
+
+**Short answer:** No. The person who gave the information is entitled to a copy of the FIR free of cost.
+
+After the information is recorded, it is read over to you, you sign it, and a copy must be given to you immediately and free of charge. This applies to the informant, so if you are reporting a crime, ask for it before leaving the police station. The copy proves that the report was registered and carries the FIR number, which you need to follow up, to contact the investigating officer, or to claim insurance. If you filed electronically, you will normally be asked to confirm and sign within three days. In many States, FIRs are also uploaded to the police website within a short time, with exceptions for sensitive cases.
+
+- **Legal reference:** Bharatiya Nagarik Suraksha Sanhita, 2023 — BNSS section 173(2)
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm s.173(2) free copy provision; State FIR-upload practice varies and the exception for sensitive cases needs checking against Supreme Court order (Youth Bar Association 2016).
+
+### DT-POL-06: Police stopped my vehicle although my documents are valid. What are my rights?
+
+**Short answer:** A uniformed police officer can ask to see your driving licence and papers. If everything is valid, you should be allowed to go, and you can ask which rule you are suspected of breaking.
+
+The Motor Vehicles Act requires a driver to show the licence when a police officer in uniform asks for it, and other papers such as registration and insurance may also be checked. That is a lawful check, not an accusation. If your documents are valid, there is generally no reason to hold you, and there is no right for anyone to demand money on the spot. You can politely ask the reason for the stop, show your documents, and ask for a proper challan or receipt if a fine is genuinely due. Note the officer's name, the place and the time. Complaints can go to the traffic police control room or the senior officer.
+
+- **Legal reference:** Motor Vehicles Act, 1988 — Section 130 (production of licence and documents)
+- **Official source:** https://parivahan.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm s.130 wording and which officers can demand documents; check State traffic-police rules on spot fines.
+
+### DT-POL-07: Can I show my driving licence and RC on my phone instead of paper?
+
+**Short answer:** Yes, in many cases. Documents shown through DigiLocker or mParivahan are treated as valid, but it is wise to carry a charged phone or copies.
+
+A Central Motor Vehicles Rules amendment recognised electronic copies of driving licence, registration certificate, insurance and similar documents shown through DigiLocker or mParivahan, and police are expected to accept them. You do not need the paper original in those cases. Practical points: the document must be in your own DigiLocker or the official app, a plain photo or screenshot may not be accepted, and a dead phone or no network can cause trouble. Keeping a printed copy is a sensible back-up. If an officer insists on paper despite a valid e-document, you can politely mention the rule and, if needed, complain to a senior officer.
+
+- **Legal reference:** Central Motor Vehicles Rules, 1989 (as amended); Information Technology Act, 2000 — Rule 139 CMVR (electronic documents); IT Act section 4 (legal recognition of electronic records)
+- **Official source:** https://www.digilocker.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm current Rule 139 wording after amendments, and whether screenshots are accepted.
+
+### DT-POL-08: Can the police check or search my phone on the spot?
+
+**Short answer:** It is not settled in one simple rule. Police can seize a phone as evidence in an investigation, but a casual search without any lawful basis raises serious privacy and procedure questions.
+
+Indian law does not have one clear provision for searching a phone at a roadside stop. Police can seize property, including a phone, if it may be evidence of an offence, and must report the seizure to the court. Search and seizure during an investigation is meant to follow the criminal procedure law, including recording reasons and, for searches, audio-video recording. Your phone holds private data, and the Supreme Court has recognised privacy as part of the fundamental right to life. Practically: stay calm, do not hand over passwords under pressure without asking the legal basis, ask for a seizure list, and contact a lawyer. Do not delete anything.
+
+- **Legal reference:** Bharatiya Nagarik Suraksha Sanhita, 2023; Constitution of India — BNSS section 106 (seizure) and section 105 (audio-video recording of search); Article 21
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: the legal position on compelled phone unlocking and on-the-spot phone searches is unsettled; check section numbers and recent High Court and Supreme Court rulings before publishing.
+
+### DT-POL-09: Do I have the right to a lawyer when the police question me?
+
+**Short answer:** Yes. You have the right to consult a lawyer of your choice, and the law lets you meet an advocate during interrogation, though not throughout it.
+
+Article 22(1) gives every arrested person the right to consult and be defended by a lawyer of their choice. The criminal procedure law adds that an arrested person may meet an advocate of their choice during interrogation, though not for the whole of it. If you cannot afford a lawyer, free legal aid is available through the Legal Services Authorities. You can ask the police to allow you to call a lawyer or a relative, and you can ask the magistrate for legal aid when you are produced. A calm request, made early, is more useful than an argument. Remember that this applies when you are arrested or questioned as an accused.
+
+- **Legal reference:** Constitution of India; Bharatiya Nagarik Suraksha Sanhita, 2023 — Article 22(1); BNSS section 38
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNSS s.38 (formerly CrPC s.41D) wording.
+
+### DT-POL-10: Can I stay silent when the police question me?
+
+**Short answer:** If you are accused of an offence, you cannot be forced to be a witness against yourself. But as a witness you must answer questions, except those that could incriminate you.
+
+Article 20(3) says no person accused of an offence can be compelled to be a witness against themselves. This is the right against self-incrimination, often described as the right to remain silent. It protects an accused from being forced to confess. The criminal procedure law also says that a person being questioned by the police must answer truthfully all questions except those whose answers would expose them to a criminal charge. Staying silent is not an admission of guilt, but a confession made under pressure is not meant to be used against you. If you are unsure of your position, say you wish to speak to a lawyer first.
+
+- **Legal reference:** Constitution of India; Bharatiya Nagarik Suraksha Sanhita, 2023 — Article 20(3); BNSS section 180(2)
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNSS s.180 (formerly CrPC s.161) subsection for the self-incrimination exception, and scope of Article 20(3) after Selvi v. State of Karnataka (2010).
+
+### DT-POL-11: Should the police give me any paper when they arrest me?
+
+**Short answer:** Yes. The arresting officer must wear a clear name tag and prepare an arrest memo, signed by you and by a witness, which also records that you can tell a relative.
+
+The criminal procedure law says the officer making an arrest must bear an accurate, visible and clear identification of their name, and must prepare a memorandum of arrest. The memo should be attested by at least one witness, who can be a family member or a respectable person from the locality, and countersigned by the arrested person. It must also inform the person that they have the right to have a relative or friend told about the arrest. These steps follow the guidelines laid down by the Supreme Court in D.K. Basu. If you are arrested, read the memo before signing and ask for a copy.
+
+- **Legal reference:** Bharatiya Nagarik Suraksha Sanhita, 2023 — BNSS section 36; D.K. Basu v. State of West Bengal (1997)
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNSS s.36 (formerly CrPC s.41B) and that arrest memo copy to the arrested person is stated in the Act or in D.K. Basu only.
+
+### DT-POL-12: Can I tell my family when I am arrested?
+
+**Short answer:** Yes. You have the right to have a relative, friend or other person you name told about your arrest and where you are being held.
+
+The criminal procedure law requires the police to immediately give information about the arrest, and the place where the arrested person is being held, to a relative, friend or other person the arrested person nominates. The police must also make an entry about this in a register. The right is meant to prevent people from being picked up and kept without anyone knowing where they are. The magistrate should be told what was done when the person is produced. If you are arrested, say clearly the name and number of the person you want informed, and ask the police to record it.
+
+- **Legal reference:** Bharatiya Nagarik Suraksha Sanhita, 2023 — BNSS section 48
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNSS s.48 (formerly CrPC s.50A) wording on recording the entry.
+
+### DT-POL-13: Can the police arrest me straight away for every offence?
+
+**Short answer:** No. For offences punishable with up to seven years, the police are expected to issue a notice to appear instead of arresting you, unless there are specific reasons recorded.
+
+The Supreme Court in Arnesh Kumar (2014) directed the police not to arrest automatically in offences punishable with up to seven years. The criminal procedure law now builds this in: where arrest is not required, the police issue a notice asking you to attend, and you must comply with it. If you attend and cooperate, you should not be arrested unless the officer records reasons why it is needed. This does not apply to every offence, and it does not mean there will be no action. If you get a notice, do not ignore it. Attend with a lawyer if possible and keep the notice safe.
+
+- **Legal reference:** Bharatiya Nagarik Suraksha Sanhita, 2023 — BNSS section 35(3) to (6); Arnesh Kumar v. State of Bihar (2014)
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNSS s.35 subsection numbers and the 'up to seven years' threshold; confirm how it applies to offences under special laws.
+
+### DT-POL-14: If I am arrested for a minor offence, can I demand bail?
+
+**Short answer:** For a bailable offence, yes. Bail is a matter of right, and the police or the court must release you if you are ready to give bail and sureties.
+
+Offences are classified as bailable or non-bailable. In a bailable offence, the person arrested is entitled to be released on bail, and the police officer or the court has no discretion to refuse once the bail conditions are met. For non-bailable offences bail is decided by a court on the facts. The classification is given in the First Schedule of the criminal procedure law for offences under the criminal code and in the relevant special law for other offences. If you are told you cannot be released from a bailable offence, ask on what basis and contact a lawyer or the legal services authority promptly.
+
+- **Legal reference:** Bharatiya Nagarik Suraksha Sanhita, 2023 — BNSS section 478
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNSS s.478 (formerly CrPC s.436) and the rule on persons unable to furnish sureties.
+
+### DT-POL-15: What is 'default bail' and when does it apply?
+
+**Short answer:** If the police do not file the chargesheet within 60 or 90 days (depending on the offence), the accused has a right to be released on bail.
+
+When a person is in custody, the police investigation must be completed in a fixed time. If the investigation is not completed within 90 days for offences punishable with death, life imprisonment or imprisonment of ten years or more, or 60 days for other offences, the accused becomes entitled to bail if they are ready to furnish it. This is called default or statutory bail. The right must be claimed before the chargesheet is filed. It does not apply automatically; the accused or their lawyer must apply. The period may differ for some special laws, so a lawyer should check the exact time limit.
+
+- **Legal reference:** Bharatiya Nagarik Suraksha Sanhita, 2023 — BNSS section 187(3)
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNSS s.187(3) (formerly CrPC s.167(2)), and how the 15-day police custody limit now counts under BNSS; special-law periods differ.
+
+### DT-POL-16: Can I apply for bail before I am arrested?
+
+**Short answer:** Yes. If you fear arrest for a non-bailable offence, you can apply to the Sessions Court or High Court for anticipatory bail.
+
+Anticipatory bail is a direction that if you are arrested, you will be released on bail. You apply to the Sessions Court or the High Court when you have reason to believe you may be arrested for a non-bailable offence. The court looks at the nature and seriousness of the accusation, your background, and whether you might flee or interfere with witnesses, and can impose conditions such as joining the investigation and surrendering your passport. It is not available for every offence, and some special laws restrict it. It is a legal remedy, not a guarantee. Always apply through a lawyer.
+
+- **Legal reference:** Bharatiya Nagarik Suraksha Sanhita, 2023 — BNSS section 482
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNSS s.482 (formerly CrPC s.438) and exclusions in special laws.
+
+### DT-POL-17: Can I get a free lawyer if I cannot afford one?
+
+**Short answer:** Yes. Free legal services are available to certain groups, including women, children, people with disabilities and people below an income limit set by the State.
+
+Article 39A of the Constitution directs the State to provide free legal aid. The Legal Services Authorities Act lists who is entitled, including members of Scheduled Castes and Scheduled Tribes, women and children, persons with disabilities, victims of trafficking, industrial workmen, people in custody and people whose annual income is below the limit set by their State. You can ask the court or the District Legal Services Authority for a lawyer, and NALSA runs a helpline. Legal aid covers the lawyer's fee and court costs. You can apply at the legal services office in the court complex or online.
+
+- **Legal reference:** Legal Services Authorities Act, 1987; Constitution of India — Section 12; Article 39A
+- **Official source:** https://nalsa.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm the current list in s.12 and the NALSA helpline number before publishing the number.
+
+### DT-POL-18: Can the police search my house without a warrant?
+
+**Short answer:** Usually a search needs a warrant, but in urgent investigation situations the police can search without one if they record their reasons in writing, and the search must be recorded on video.
+
+The general rule is that a search of a home is done under a warrant issued by a magistrate. The law allows an exception during an investigation: where there are reasonable grounds to believe that something necessary for the investigation can be found and cannot be obtained without undue delay, an officer can search after recording the reasons in writing. Searches should be done in the presence of two independent witnesses from the locality, and the search and seizure should be recorded through audio-video means. A list of seized items should be given to you. If you think the search was unlawful, note details and speak to a lawyer.
+
+- **Legal reference:** Bharatiya Nagarik Suraksha Sanhita, 2023 — BNSS section 185 and section 105
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNSS s.185 (formerly CrPC s.165), s.105 audio-video requirement and the independent-witness rule (s.103 / 105).
+
+### DT-POL-19: Can an ordinary person arrest someone?
+
+**Short answer:** Only in limited cases. A private person can arrest someone who commits a non-bailable, cognizable offence in their presence, and must hand that person to the police without delay.
+
+A citizen's arrest is allowed only if the offence is both non-bailable and cognizable and is committed in your presence. After arresting, you must, without unnecessary delay, hand the person over to a police officer or take them to the nearest police station. You cannot detain, beat or punish the person. If the offence does not meet these conditions, or you use unnecessary force, you could face legal trouble yourself. In most situations, the safest course is to call the police and stay at a safe distance. Do not take the law into your hands.
+
+- **Legal reference:** Bharatiya Nagarik Suraksha Sanhita, 2023 — BNSS section 40
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNSS s.40 (formerly CrPC s.43) and the treatment of proclaimed offenders.
+
+### DT-POL-20: What protection do I have against police violence in custody?
+
+**Short answer:** The Supreme Court has laid down guidelines: no torture, an arrest memo, a medical check, and the right to tell a relative. Custodial violence can be reported to a magistrate or the human rights commission.
+
+Custodial torture violates Article 21. In D.K. Basu (1997), the Supreme Court issued binding guidelines, including that police must wear name tags, prepare an arrest memo, inform a relative, and have the arrested person medically examined at regular intervals. The criminal procedure law also lets an arrested person ask to be medically examined. If you are ill-treated, tell the magistrate at the first production and ask for a medical examination to be recorded. Complaints can go to the State Human Rights Commission or the National Human Rights Commission. A family member can also complain on your behalf.
+
+- **Legal reference:** Constitution of India; Bharatiya Nagarik Suraksha Sanhita, 2023 — Article 21; D.K. Basu v. State of West Bengal (1997); BNSS section 54
+- **Official source:** https://www.sci.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNSS s.54 (formerly CrPC s.54, examination at request of arrested person) and the 48-hour medical check in D.K. Basu; confirm complaint routes under the Protection of Human Rights Act, 1993.
+
+
+## Women's Rights
+
+### DT-WOM-01: Can the police arrest a woman after sunset?
+
+**Short answer:** Generally no. A woman cannot be arrested between sunset and sunrise, except in exceptional circumstances with prior written permission of a Judicial Magistrate of the first class.
+
+The criminal procedure law says that a woman should not be arrested after sunset and before sunrise. The exception is where there are exceptional circumstances: a woman police officer must make a written report and obtain the prior permission of the Judicial Magistrate of the first class within whose local jurisdiction the offence was committed or the arrest is to be made. Women should also be arrested by, or in the presence of, woman police personnel where possible. The rule is a safeguard, not a ban on questioning. If it is not followed, the arrest can be challenged before a court through a lawyer. Note the time, place and officers present.
+
+- **Legal reference:** Bharatiya Nagarik Suraksha Sanhita, 2023 — BNSS section 43(5)
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNSS s.43(5) (formerly CrPC s.46(4)) and the wording on woman police officer and magistrate permission.
+
+### DT-WOM-02: Can the police make me come to the police station for questioning?
+
+**Short answer:** A woman can ask to be questioned at her own residence. The police cannot require her to attend a police station for questioning as a witness.
+
+The law protects certain people from being summoned to the police station while the police are investigating. A man under 15 or above 60, a woman, and a person with a mental or physical disability cannot be required to attend at any place other than where they live. The police have to question them at their residence. A woman can choose to go to the station voluntarily, but cannot be forced. This protection is for people who are witnesses or whose presence is needed to give information; it does not stop the police from arresting a woman who is accused where the law allows. Ask for the request in writing.
+
+- **Legal reference:** Bharatiya Nagarik Suraksha Sanhita, 2023 — BNSS section 179
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNSS s.179 (formerly CrPC s.160) and whether the protection extends to accused persons.
+
+### DT-WOM-03: My husband beats me. Is there a law that helps beyond a police case?
+
+**Short answer:** Yes. The Domestic Violence Act lets you ask a magistrate for protection, a place to live, money support and custody orders, without having to file a criminal case.
+
+The Protection of Women from Domestic Violence Act covers physical, sexual, verbal, emotional and economic abuse by a husband, a partner in a relationship like marriage, or relatives. A woman can apply to a Magistrate, either directly or through a Protection Officer, a service provider or an NGO. The court can pass protection orders, residence orders, monetary relief, custody orders and compensation. The Magistrate is expected to fix the first hearing within three days and to try to decide the case within 60 days. You can approach a Protection Officer in your district or call the women's helpline. Keep medical records, photos and messages.
+
+- **Legal reference:** Protection of Women from Domestic Violence Act, 2005 — Sections 12, 18, 19, 20, 21 and 22
+- **Official source:** https://wcd.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm the section numbers for orders, and the three-day first hearing / 60-day disposal timelines (s.12(4), s.12(5)).
+
+### DT-WOM-04: Can my husband or in-laws throw me out of the house I live in?
+
+**Short answer:** You have a right to live in your shared household, even if it is not in your name. You cannot be evicted except by a legal procedure.
+
+Under the Domestic Violence Act, a woman in a domestic relationship has the right to reside in the shared household, whether or not she has any title or right in it. She cannot be evicted or excluded from it except according to the procedure established by law. A Magistrate can pass a residence order stopping the other side from disturbing her possession, removing her, or selling the property. The court may also order alternative accommodation or rent. The Supreme Court has held that the shared household is not limited to a house owned or rented by the husband. If you are being forced out, contact a Protection Officer or a lawyer immediately.
+
+- **Legal reference:** Protection of Women from Domestic Violence Act, 2005 — Section 17 (right to reside) and section 19 (residence orders)
+- **Official source:** https://wcd.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm s.17 and s.19 and the meaning of 'shared household' after Satish Chander Ahuja v. Sneha Ahuja (2020).
+
+### DT-WOM-05: Is it a crime to ask for dowry?
+
+**Short answer:** Yes. Giving, taking or even asking for dowry is an offence, and cruelty to a married woman over dowry demands is punishable under the criminal code.
+
+The Dowry Prohibition Act makes it an offence to give, take or abet giving or taking dowry, and to demand dowry directly or indirectly from the bride, groom or their parents. The punishment includes imprisonment and a fine. Separately, the criminal code punishes cruelty to a married woman by her husband or his relatives, including harassment to force her to meet unlawful demands. The Supreme Court has also asked courts to be careful that these provisions are not misused, so a complaint should be factual. Keep records of the demands. A woman can complain to the police, to a Magistrate, or to the Dowry Prohibition Officer in her State.
+
+- **Legal reference:** Dowry Prohibition Act, 1961; Bharatiya Nyaya Sanhita, 2023 — Dowry Prohibition Act sections 3 and 4; BNS sections 85 and 86
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNS ss.85-86 (formerly IPC 498A) and DPA ss.3-4 penalties; BNS s.80 covers dowry death if the reviewer wants a separate tip.
+
+### DT-WOM-06: My workplace has someone harassing me. Where do I complain?
+
+**Short answer:** Complain to the Internal Committee of your workplace. If there is none or the employer is the one at fault, complain to the Local Committee in your district.
+
+The Sexual Harassment of Women at Workplace Act requires every employer with ten or more employees to set up an Internal Committee headed by a senior woman. For smaller workplaces, or if the complaint is against the employer, a Local Committee in the district handles it. The complaint should be made in writing within three months of the incident (or the last incident), and the committee can extend this by up to three more months for good reasons. Harassment includes unwelcome touching, demands for favours, sexual remarks and showing pornography. The committee can recommend action, and the woman can ask for conciliation or interim relief such as a transfer.
+
+- **Legal reference:** Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013 — Sections 4, 6 and 9
+- **Official source:** https://wcd.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm the three-month and extension limits in s.9, and the 10-employee threshold in s.4; the SHe-Box online portal URL must be verified before it is mentioned.
+
+### DT-WOM-07: Can a woman's complaint of rape be recorded at her home?
+
+**Short answer:** Yes, in certain cases. For specified offences against women, the police should record the information at her residence or a place of her choice, by a woman police officer.
+
+The criminal procedure law says that where information about specified offences against a woman, such as rape and other sexual offences, is given by the woman herself, it should be recorded by a woman police officer. It can be recorded at the woman's residence or at a place of her choice, and in the presence of an interpreter or special educator if she has a mental or physical disability. The statement is also meant to be recorded by audio-video means. The woman does not have to go to the police station if she is not comfortable. The FIR can be registered at any station, and she can ask for a free copy.
+
+- **Legal reference:** Bharatiya Nagarik Suraksha Sanhita, 2023 — BNSS section 173(1) (provisos)
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm the exact provisos in s.173(1) (offences covered, place of recording, audio-video recording and interpreter wording) against the current text.
+
+### DT-WOM-08: Can the name of a sexual assault survivor be published?
+
+**Short answer:** No. Printing or publishing the name or any detail that identifies a survivor of certain sexual offences is a punishable offence, with narrow exceptions.
+
+The criminal code makes it an offence to print or publish the name or any matter that may identify a person against whom certain sexual offences are alleged. This covers newspapers, but also posts on social media. The exceptions are limited, for example publication ordered by the survivor herself or with written authorisation of the next of kin if she is dead or a minor, and by recognised welfare institutions with their authority. Court judgments in such cases should also not reveal identity. If you share such details online, even by forwarding, you could be liable. If your identity has been exposed, tell the police or the court.
+
+- **Legal reference:** Bharatiya Nyaya Sanhita, 2023 — BNS section 72
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm BNS s.72 (formerly IPC 228A) wording, the list of offences covered and the exceptions.
+
+### DT-WOM-09: Can a wife claim maintenance if her husband refuses to support her?
+
+**Short answer:** Yes. A wife who cannot maintain herself can apply to a Magistrate for monthly maintenance, and the same applies to children and parents who cannot support themselves.
+
+The criminal procedure law allows a magistrate to order a person with sufficient means to pay monthly maintenance to his wife, minor children, and parents who are unable to maintain themselves. There is no upper limit on the amount in the current law, and the court looks at the needs of the person and the means of the other. A wife may not be entitled if she lives in adultery, refuses without good reason to live with the husband, or they live separately by mutual consent. Personal laws and other Acts also give maintenance rights. Keep proof of income, expenses and the refusal. An application can be made in the court of the district where either side lives.
+
+- **Legal reference:** Bharatiya Nagarik Suraksha Sanhita, 2023 — BNSS section 144
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNSS s.144 (formerly CrPC s.125), the grounds for disqualification, and that a divorced Muslim woman's rights (Shah Bano; Shamima Farooqui 2025) are described correctly.
+
+### DT-WOM-10: Is following a woman or contacting her again and again a crime?
+
+**Short answer:** Yes. Stalking, including following a woman or repeatedly contacting her online despite clear disinterest, is a criminal offence.
+
+The criminal code defines stalking as a man following a woman and contacting or trying to contact her to foster personal interaction repeatedly, despite a clear indication of disinterest, or monitoring her use of the internet, email or any other form of electronic communication. There are exceptions where it was done to prevent or detect a crime on the State's authority, under a legal order, or where the conduct was reasonable in the circumstances. A first conviction can lead to imprisonment, and a repeat conviction to a heavier sentence. Save messages, screenshots and call logs, note dates, and report to the police or at the cybercrime portal.
+
+- **Legal reference:** Bharatiya Nyaya Sanhita, 2023 — BNS section 78
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNS s.78 (formerly IPC 354D), the punishment for first and repeat offences, and the exceptions.
+
+### DT-WOM-11: What if someone secretly takes or shares private photos of me?
+
+**Short answer:** Watching or capturing a woman in a private act without her consent, or sharing such images, is a crime called voyeurism, and online sharing can add more offences.
+
+The criminal code punishes a man who watches, captures or publishes the image of a woman engaged in a private act in circumstances where she would usually expect not to be observed. If she consented to the image being taken but not to it being shared, sharing it is still an offence. A first conviction can mean imprisonment, and a repeat conviction a longer sentence. The Information Technology Act also punishes capturing or publishing images of a person's private area without consent. Do not delete evidence. Take screenshots with links, report the content to the platform, and file a complaint with the police or at the national cybercrime portal.
+
+- **Legal reference:** Bharatiya Nyaya Sanhita, 2023; Information Technology Act, 2000 — BNS section 77; IT Act section 66E
+- **Official source:** https://cybercrime.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNS s.77 (formerly IPC 354C), IT Act s.66E and the punishments.
+
+### DT-WOM-12: Is maternity leave a legal right, and for how long?
+
+**Short answer:** Yes. A working woman is entitled to paid maternity leave. For most women, it is 26 weeks for the first two children, but the exact rules depend on the law that now applies.
+
+Maternity benefit was set by the Maternity Benefit Act, 1961, which gave 26 weeks of paid leave for the first two children and 12 weeks for a third child, with leave for adoption and a commissioning mother, and a crèche duty for larger employers. The four labour codes came into force from 21 November 2025, and the Code on Social Security, 2020 now deals with maternity benefit. Conditions include working for a minimum number of days with the employer before delivery. Check the exact eligibility and notice requirements with your HR or the labour department. An employer cannot lawfully deny the leave you are entitled to.
+
+- **Legal reference:** Maternity Benefit Act, 1961; Code on Social Security, 2020 — Maternity Benefit Act section 5; Code on Social Security Chapter on maternity benefit
+- **Official source:** https://labour.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm whether and from which date the Maternity Benefit Act, 1961 has been repealed and replaced by the Code on Social Security, 2020, the exact section numbers in the Code, and the eligibility period.
+
+### DT-WOM-13: Can my employer sack me because I am pregnant?
+
+**Short answer:** No. Dismissing a woman or discharging her because she is pregnant or on maternity leave is not allowed, and she cannot lose her benefits for it.
+
+Maternity benefit law protects a woman from being dismissed or discharged on the ground that she is pregnant or is on maternity leave, and does not allow the employer to give notice of dismissal in a way that would end the leave period. Her pay and leave benefits cannot be withheld because of it. She also cannot be asked to do hard work that may harm her health or her pregnancy during certain periods. The rules sit in the Maternity Benefit Act, 1961 or its successor provisions in the Code on Social Security, 2020. If you face this, write to the employer, keep copies, and approach the labour authorities.
+
+- **Legal reference:** Maternity Benefit Act, 1961; Code on Social Security, 2020 — Maternity Benefit Act section 12; corresponding Code on Social Security provision
+- **Official source:** https://labour.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm s.12 of the 1961 Act, its status after the labour codes, and the corresponding section of the Code.
+
+### DT-WOM-14: Do daughters have an equal share in their father's property?
+
+**Short answer:** Yes. Under the Hindu Succession Act, daughters have the same rights as sons in ancestral property, whether the father was alive or not on 9 September 2005.
+
+The 2005 amendment to the Hindu Succession Act made daughters coparceners in a Hindu joint family by birth, with the same rights and liabilities as sons. In Vineeta Sharma (2020), the Supreme Court held that the daughter's right does not depend on whether the father was alive when the amendment came into force. This applies to Hindus, including Buddhists, Jains and Sikhs, and to ancestral property or property held jointly. If the father made a valid will for his self-acquired property, that property goes as the will says. Other communities follow their own personal laws. A lawyer should check the family's property and documents.
+
+- **Legal reference:** Hindu Succession Act, 1956 (as amended in 2005) — Section 6; Vineeta Sharma v. Rakesh Sharma (2020)
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm s.6 as amended and the scope of Vineeta Sharma; note that other personal laws differ.
+
+### DT-WOM-15: Is catcalling or making sexual remarks at a woman in public a crime?
+
+**Short answer:** Yes. Words, sounds, gestures or objects intended to insult a woman's modesty or intrude on her privacy are punishable, and sexual remarks can also be sexual harassment.
+
+The criminal code punishes anyone who, intending to insult the modesty of a woman, utters any word, makes any sound or gesture, or exhibits any object, intending that it be heard or seen by her, or intrudes upon her privacy. It also separately punishes sexual harassment, which includes unwelcome physical contact, a demand for sexual favours, showing pornography against her will, and making sexually coloured remarks. Penalties include imprisonment and a fine. If it happens, note the place and time, ask others to witness, call the police or the women's helpline, and file a complaint. Many States also have women's safety apps.
+
+- **Legal reference:** Bharatiya Nyaya Sanhita, 2023 — BNS sections 75 and 79
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNS ss.75 and 79 (formerly IPC 354A and 509) and punishments; confirm the helpline number before mentioning one.
+
+
+## Cyber and Digital Rights
+
+### DT-CYB-01: I lost money in a UPI fraud. What should I do first?
+
+**Short answer:** Act fast: call the cybercrime helpline 1930 or report on cybercrime.gov.in, and tell your bank immediately. Reporting quickly gives the best chance of freezing the money.
+
+The first hour matters most. Report the fraud on the National Cyber Crime Reporting Portal or through the helpline, so the transaction details can be passed to the bank holding the receiver's account. Inform your own bank right away and ask them to block the transaction or card, and note the complaint number. RBI rules limit a customer's liability for unauthorised electronic transactions, and the limit is zero if the fraud was due to a bank's fault or a third-party breach and you report it within three working days. If you shared your OTP or PIN yourself, liability is harder to settle. Keep screenshots, transaction IDs and messages. Never share OTPs.
+
+- **Legal reference:** Information Technology Act, 2000; RBI circular on customer liability in unauthorised electronic banking transactions (6 July 2017) — RBI circular DBR.No.Leg.BC.78/09.07.005/2017-18; IT Act section 66D
+- **Official source:** https://cybercrime.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm the RBI circular number and date, the three-working-days rule, whether it has been replaced by newer RBI directions, and that 1930 is the current helpline.
+
+### DT-CYB-02: Someone is using my photo on a fake profile. Is that a crime?
+
+**Short answer:** Yes. Creating a fake profile using your photo or identity can amount to identity theft or cheating by impersonation under the IT Act, and you can report it.
+
+The Information Technology Act punishes dishonestly or fraudulently using another person's electronic signature, password or other unique identification feature, and cheating by personation using a computer resource. A fake profile using your photo and name to mislead others can fall under these, and also under offences like defamation or obscenity if the content is harmful. What to do: take screenshots of the profile with its link, report it to the platform using its impersonation form, and file a complaint on the cybercrime portal or with the police. If the profile sends obscene content or is used for money requests, mention that too. Tell friends not to engage.
+
+- **Legal reference:** Information Technology Act, 2000 — Sections 66C and 66D
+- **Official source:** https://cybercrime.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm IT Act ss.66C and 66D wording; a mere photo may not be a 'unique identification feature', so the reviewer should confirm applicability.
+
+### DT-CYB-03: Can someone record my phone call without telling me?
+
+**Short answer:** There is no simple answer. A private person recording a call to which they are a party is not clearly banned, but secret recording can breach privacy, and tapping calls of others is regulated.
+
+India has no single law that says all call recording without consent is illegal. Interception of communications by the State is regulated under the telecom and IT laws and requires authorisation. A person recording their own conversation is generally not treated as interception, and courts have sometimes accepted such recordings as evidence, but they must meet the rules for electronic evidence. Secretly recording someone else's private conversation, or sharing it, can breach the right to privacy and may lead to civil or criminal liability depending on the facts. As a practical step, tell people when you record, and avoid sharing recordings. For harassment cases, a lawyer can advise.
+
+- **Legal reference:** Bharatiya Sakshya Adhiniyam, 2023; Telecommunications Act, 2023; Information Technology Act, 2000 — BSA section 63 (electronic records as evidence); IT Act section 69 (interception by authorised agencies); Article 21
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: the law on private recording is not codified in one place; the reviewer should confirm the position on admissibility and liability, and the correct provisions under the Telecommunications Act, 2023.
+
+### DT-CYB-04: How do I report a cybercrime online?
+
+**Short answer:** Go to cybercrime.gov.in, choose the type of complaint, register with your mobile number and fill in the details. For financial fraud, you can also call 1930.
+
+The National Cyber Crime Reporting Portal is run by the Ministry of Home Affairs. You can report financial fraud and other cybercrimes such as hacking, online harassment and fake profiles. The portal also allows anonymous reporting of child sexual abuse material and content showing rape or gang rape. You will need the details of the incident, dates, amounts, and evidence such as screenshots, URLs, transaction IDs and chat logs. After registering you get an acknowledgement number to track the complaint. The complaint is passed to the State or Union Territory police concerned. You can also report at the nearest police station or cyber police station.
+
+- **Legal reference:** Information Technology Act, 2000; Bharatiya Nagarik Suraksha Sanhita, 2023 — BNSS section 173 (information about cognizable offences, including electronic); IT Act Chapter XI
+- **Official source:** https://cybercrime.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm the portal's current categories and the 1930 helpline, and that anonymous reporting is limited to the categories stated.
+
+### DT-CYB-05: Can I be arrested for a post I made on social media?
+
+**Short answer:** You can be, if the post amounts to a crime such as threats or promoting hatred. But the old Section 66A of the IT Act, which punished 'offensive' posts, was struck down in 2015.
+
+In Shreya Singhal v. Union of India (2015), the Supreme Court struck down section 66A of the Information Technology Act as unconstitutional, because it was vague and restricted free speech. Even so, a post can still lead to a case if it falls under another law, for example criminal intimidation, defamation, promoting enmity between groups, or sharing obscene material. Free speech under Article 19(1)(a) is subject to reasonable restrictions. Think before you post or forward, keep your language factual, and avoid sharing unverified claims. If police act against you for a post, ask for the exact section and speak to a lawyer.
+
+- **Legal reference:** Information Technology Act, 2000; Constitution of India — IT Act section 66A (struck down); Article 19(1)(a); Shreya Singhal v. Union of India (2015)
+- **Official source:** https://www.sci.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm that s.66A remains struck down and the Supreme Court's later directions on its continued use (PUCL v. Union of India, 2021).
+
+### DT-CYB-06: Someone is threatening to leak my private photos unless I pay. What should I do?
+
+**Short answer:** Do not pay. Save the evidence, stop engaging and report it at once. Threatening to leak photos to get money is extortion and is a crime.
+
+Demanding money by threatening to share private images is a form of extortion under the criminal code, and publishing or transmitting such images can also be an offence under the Information Technology Act. Paying rarely ends the threat. Take screenshots of the messages, profile and numbers, but do not delete the chat. Block the person after saving evidence, report the account to the platform, and file a complaint on cybercrime.gov.in or with the police. Tell someone you trust. If the image involves a minor, even more serious laws apply. You can ask the platform to take the content down and use the national portal for intimate-image removal if available.
+
+- **Legal reference:** Bharatiya Nyaya Sanhita, 2023; Information Technology Act, 2000 — BNS section 308 (extortion); IT Act sections 66E and 67A
+- **Official source:** https://cybercrime.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNS s.308 (formerly IPC 383-384) and IT Act ss.66E, 67A; check whether StopNCII or any official takedown route should be mentioned.
+
+### DT-CYB-07: My social media account was hacked. What can I do?
+
+**Short answer:** Report it to the platform to recover the account, change your passwords, and file a complaint. Unauthorised access to someone's account is a crime.
+
+Gaining access to someone's computer or account without permission is an offence under the Information Technology Act, and the offender can face imprisonment and a fine, and may have to pay compensation. Immediately use the platform's recovery process, change passwords on linked accounts, turn on two-step verification, and log out from all devices. Warn your contacts that messages from your account may be fraudulent. Save screenshots of suspicious activity and the email or message notifications you received. Report on cybercrime.gov.in, especially if the hacker is demanding money or posting harmful content. If a bank account is linked, tell the bank.
+
+- **Legal reference:** Information Technology Act, 2000 — Sections 43, 66 and 66C
+- **Official source:** https://cybercrime.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm IT Act ss.43, 66 and 66C wording and penalties.
+
+### DT-CYB-08: I paid on a website that turned out to be fake. Is there a legal remedy?
+
+**Short answer:** Yes. Cheating through a fake website is a crime. Report it quickly, and you may also have a consumer claim if a real seller was involved.
+
+Cheating means deceiving someone to make them hand over money. The criminal code punishes it, and the Information Technology Act punishes cheating by personation using a computer resource. Report the fraud on cybercrime.gov.in or call 1930 with the website address, payment receipt, screenshots and any communication, and inform your bank or card issuer. If the seller is a real, traceable business that failed to deliver, you can also approach the consumer commission. Be cautious of deals that are too good to be true, of sites without contact details, and of requests to pay through personal accounts. Check the web address carefully.
+
+- **Legal reference:** Bharatiya Nyaya Sanhita, 2023; Information Technology Act, 2000 — BNS section 318; IT Act section 66D
+- **Official source:** https://cybercrime.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNS s.318 (formerly IPC 415-420) and IT Act s.66D.
+
+### DT-CYB-09: Is forwarding an obscene video or message on WhatsApp a crime?
+
+**Short answer:** It can be. Publishing or transmitting obscene material electronically is an offence, and sharing sexually explicit content or content involving children is punished more severely.
+
+The Information Technology Act punishes publishing or transmitting obscene material in electronic form, and imposes heavier punishment for material containing sexually explicit acts. Material depicting children in sexually explicit acts is dealt with even more strictly, and even storing it can be an offence under child protection law. Forwarding is not harmless just because you did not create it. If you receive such content, do not forward it; report it to the platform and to the cybercrime portal, which accepts anonymous reports for child sexual abuse material. Group admins and users should also be careful about what is shared in groups.
+
+- **Legal reference:** Information Technology Act, 2000; Protection of Children from Sexual Offences Act, 2012 — IT Act sections 67, 67A and 67B; POCSO Act section 15
+- **Official source:** https://cybercrime.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm IT Act ss.67, 67A, 67B and POCSO s.15 (storage of child sexual material), and the punishments.
+
+### DT-CYB-10: What can I do if someone keeps sending me abusive or threatening messages online?
+
+**Short answer:** Save the evidence, block the person and report it. Threats can be criminal intimidation, and repeated unwanted contact may also be stalking.
+
+Threatening someone with injury to their person, reputation or property, to cause alarm, is criminal intimidation under the criminal code. Where a woman is repeatedly contacted online despite clear disinterest, stalking can apply. Abuse and harassment can also fall under other laws depending on the words used. First, take screenshots with the date, time, username and links, and do not delete anything. Block and report the account on the platform. Then file a complaint at cybercrime.gov.in or the police station. If you feel unsafe, tell someone you trust, and call the police emergency number. Avoid replying in anger, since that can weaken your case.
+
+- **Legal reference:** Bharatiya Nyaya Sanhita, 2023 — BNS section 351 (criminal intimidation); section 78 (stalking)
+- **Official source:** https://cybercrime.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm BNS s.351 (formerly IPC 503-506) and s.78.
+
+### DT-CYB-11: What rights do I have over my personal data under the new data protection law?
+
+**Short answer:** The Digital Personal Data Protection Act gives you rights to information, correction, erasure and grievance redress, but many of these rules start to apply in phases, so check what is in force.
+
+The Digital Personal Data Protection Act, 2023 sets rules for companies and others that process your digital personal data. It gives you rights to get information about the data being processed, to correct or erase it, to have your grievance addressed, and to nominate someone to act for you if you die or become incapable. It generally requires consent in clear language for using your data. The Rules were notified in November 2025, and parts of the law are being brought into force in phases over about 18 months, so some rights may not yet be fully usable. You can complain to the company first, and then to the Data Protection Board.
+
+- **Legal reference:** Digital Personal Data Protection Act, 2023; Digital Personal Data Protection Rules, 2025 — DPDP Act sections 6, 11, 12, 13 and 14; DPDP Rules, 2025
+- **Official source:** https://www.meity.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm the commencement dates of each section and rule (phased), the section numbers of the rights, and whether the Data Protection Board is functioning.
+
+### DT-CYB-12: A loan app is harassing me and calling my contacts. Is that legal?
+
+**Short answer:** No. Threatening or shaming borrowers or contacting their friends to pressure repayment is not allowed. Report it, and check that the app is linked to an RBI-regulated lender.
+
+Harassment by digital lending apps, such as abusive calls, threats, morphed photos and messages to your contacts, can amount to criminal intimidation, extortion or other offences. RBI has issued directions for digital lending: loans should be through regulated entities, and borrowers must be given a key fact statement, and recovery agents must follow conduct rules. Apps are also not supposed to have free access to your contacts and photos. Take screenshots, note the numbers, do not give in to threats, and report to cybercrime.gov.in and the police. You can also complain to the lender, and then to the RBI Ombudsman if it is a regulated entity. Check the app in the RBI's published list.
+
+- **Legal reference:** Bharatiya Nyaya Sanhita, 2023; RBI Digital Lending Directions — BNS sections 308 and 351; RBI digital lending directions (as in force)
+- **Official source:** https://www.rbi.org.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm the current RBI digital lending directions, their date and the exact rules on contact and photo access and recovery agents; confirm the RBI list of digital lending apps.
+
+### DT-CYB-13: I lost my phone. How do I block it and stop misuse?
+
+**Short answer:** Report it on the Sanchar Saathi portal to block the phone, file a police complaint, and ask your operator to block the SIM.
+
+The Department of Telecommunications runs the Sanchar Saathi portal with a Central Equipment Identity Register. You can report a lost or stolen phone with its IMEI number, and the phone is blocked across mobile networks so it cannot easily be used. If it is found, you can unblock it through the same portal. Also file a complaint with the police and keep the acknowledgement, ask your mobile operator to block the SIM and issue a duplicate, change passwords on your apps, and tell your bank so that UPI and banking apps can be blocked. Note your IMEI number, which is on the phone's box or bill, or dial a code on another phone to find it.
+
+- **Legal reference:** Telecommunications Act, 2023 — Telecommunications Act, 2023 and rules under it (CEIR, Sanchar Saathi)
+- **Official source:** https://sancharsaathi.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: there is no clear section for CEIR; confirm the legal basis (Telecommunications Act, 2023 and rules, or a DoT order) and the current portal steps.
+
+### DT-CYB-14: How can I report child sexual abuse material I find online?
+
+**Short answer:** Do not share or download it. Report it on cybercrime.gov.in, which allows anonymous reporting, or to the police or Childline 1098.
+
+Possessing, storing, sharing or transmitting sexual material involving children is a serious offence under the child protection and IT laws. If you come across such material, do not forward it, even to report it; instead, note the website address or account name, and report it on the National Cyber Crime Reporting Portal, which has a category for child sexual abuse material and accepts anonymous complaints. You can also call Childline on 1098 or contact the police. Under the child protection law, there is a legal duty to report knowledge of a sexual offence against a child to the police. Platforms are expected to remove such content when notified.
+
+- **Legal reference:** Protection of Children from Sexual Offences Act, 2012; Information Technology Act, 2000 — POCSO Act sections 15 and 19; IT Act section 67B
+- **Official source:** https://cybercrime.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm POCSO ss.15 and 19 and IT Act s.67B, the duty-to-report wording, and Childline number 1098.
+
+### DT-CYB-15: How do I get a harmful or fake post about me removed from a social media platform?
+
+**Short answer:** Report it to the platform's grievance officer. Platforms must acknowledge a complaint within 24 hours, and intimate images must be removed within 24 hours of a complaint.
+
+The Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021 require large social media platforms and other intermediaries to publish the name and contact details of a Grievance Officer in India. The officer must acknowledge your complaint within 24 hours and dispose of it within 15 days. For content that shows a person's private parts, shows them in a sexual act, or is an impersonation including morphed images, the platform has to remove or disable access within 24 hours of receiving a complaint from the person concerned. Use the in-app report option first, keep the complaint number, and if the platform does not act, escalate to the Grievance Appellate Committee or file a complaint on the cybercrime portal.
+
+- **Legal reference:** Information Technology Act, 2000; IT (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021 — IT Rules 2021, Rule 3(2) (grievance redressal and removal of certain content)
+- **Official source:** https://www.meity.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm Rule 3(2)(a) and (b) timelines (24 hours, 15 days), later amendments to the 2021 Rules, and the Grievance Appellate Committee process.
+
+
+## Consumer Rights
+
+### DT-CON-01: A shop refuses to replace a defective product. What can I do?
+
+**Short answer:** A defective product gives you rights against the seller or manufacturer. You can ask for a replacement, repair or refund, and if that fails, you can file a complaint before the consumer commission.
+
+Under the Consumer Protection Act, a defect means any fault or imperfection in the quality, quantity, potency, purity or standard of goods. If goods are defective, the consumer can ask for removal of the defect, replacement, refund of the price, and compensation. First, write to the seller and manufacturer, keeping the bill, warranty card and photos. Send a written complaint by email or registered post, and note the date. If there is no remedy, you can file a complaint with the District Consumer Commission, including online. A shop's 'no exchange, no refund' note does not remove these rights. Keep all proofs, including the bill and any message exchange.
+
+- **Legal reference:** Consumer Protection Act, 2019 — Sections 2(10) (defect), 2(7) (consumer) and 39 (remedies)
+- **Official source:** https://consumeraffairs.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm s.2(10), 2(7) and 39 numbering and the list of remedies.
+
+### DT-CON-02: Does a 'goods once sold will not be taken back' notice mean I have no rights?
+
+**Short answer:** No. Such a notice cannot take away your rights if the goods are defective or not as promised. It mainly applies to goods that are fine and which you simply changed your mind about.
+
+Shops often display notices saying that goods will not be exchanged or refunded. A consumer's rights under the Consumer Protection Act, such as the right to be protected against defective goods and unfair trade practices, cannot be removed by a notice. If the product is defective, not as described, or the service is deficient, you can still seek a replacement, refund or compensation. If you simply changed your mind about a good product, there is usually no legal right to return it, unless the seller's policy or the contract allows it. Keep the bill, ask for the policy in writing, and complain if the notice is used to deny a genuine claim.
+
+- **Legal reference:** Consumer Protection Act, 2019 — Sections 2(46) (unfair contract), 2(47) (unfair trade practice) and 39
+- **Official source:** https://consumeraffairs.nic.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm that a blanket 'no exchange' notice is an unfair trade practice or unfair contract under ss.2(46)-(47); check any consumer commission rulings.
+
+### DT-CON-03: Can a shop charge more than the MRP?
+
+**Short answer:** No. Selling a packaged product above its printed maximum retail price is not allowed. You can complain to the Legal Metrology department or the consumer helpline.
+
+MRP, the maximum retail price, is the highest price at which a pre-packed product can be sold to a consumer, inclusive of all taxes. Selling above it is an offence under the legal metrology rules, and you can refuse to pay more. Shops can sell at less than MRP. Exceptions exist for some services and for items not pre-packed, and rules on products sold in places like airports and hotels may differ, so check. If you were overcharged, keep the bill or take a photo of the price label, and complain to the State Legal Metrology department, the National Consumer Helpline, or the consumer commission, which can order a refund and compensation.
+
+- **Legal reference:** Legal Metrology Act, 2009; Legal Metrology (Packaged Commodities) Rules, 2011 — Legal Metrology Act, 2009 (offences) and the Packaged Commodities Rules, 2011
+- **Official source:** https://consumerhelpline.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: identify the exact provision that prohibits selling above MRP (Act section and Rule number) and the exceptions for hotels, airports and services.
+
+### DT-CON-04: Where can I file a consumer complaint, and does it cost anything?
+
+**Short answer:** File with the District Consumer Commission, even from your home city. For claims up to ₹5 lakh, there is no fee. You can file online through the e-Daakhil portal.
+
+The Consumer Protection Act, 2019 set up three levels: District, State and National Commissions, according to the value of the goods or services paid for. A complaint can be filed at the District Commission where the opposite party is located, or where you live or work for gain. You can file online through the e-Daakhil portal, and a lawyer is not compulsory. The rules do not charge a fee for complaints where the value does not exceed ₹5 lakh. Higher amounts have a graded fee. Attach the bill, correspondence and a clear statement of what you want. The pecuniary limits of each Commission were changed by rules, so check the current limits.
+
+- **Legal reference:** Consumer Protection Act, 2019; Consumer Protection (Consumer Disputes Redressal Commissions) Rules, 2020 — Act sections 34, 35, 47 and 58; Rules 2020 (fee)
+- **Official source:** https://edaakhil.nic.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm the current pecuniary jurisdiction limits and the nil-fee limit of ₹5 lakh, and any later amendments.
+
+### DT-CON-05: How long do I have to file a consumer complaint?
+
+**Short answer:** Within two years from the date the cause of action arose. A late complaint can be accepted if you show sufficient cause for the delay.
+
+The Consumer Protection Act says a District, State or National Commission will not admit a complaint unless it is filed within two years from the date on which the cause of action arose. If you have a good reason for the delay, such as illness or ongoing correspondence with the company, the Commission can still admit it, but it has to record its reasons in writing. For a continuing problem, the cause of action can continue. So it is best not to wait. Write to the seller early, keep proof of dates, and file well before the two years end. Do not rely on repeated reminders to extend the time.
+
+- **Legal reference:** Consumer Protection Act, 2019 — Section 69
+- **Official source:** https://consumeraffairs.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm s.69 two-year limit and the condonation wording.
+
+### DT-CON-06: A misleading advertisement made me buy something. Is there a remedy?
+
+**Short answer:** Yes. A false or misleading advertisement can be an unfair trade practice, and the Central Consumer Protection Authority can order it to be stopped and impose penalties.
+
+The Consumer Protection Act defines a misleading advertisement as one that falsely describes a product or service, gives a false guarantee, or deliberately hides important information. The Central Consumer Protection Authority can order the discontinuance or modification of such an advertisement and can impose a penalty on the manufacturer or endorser, and in some cases bar an endorser from endorsing for a period. As a consumer you can complain to the National Consumer Helpline, to the CCPA, or to the consumer commission, with a copy or screenshot of the advertisement and your bill. The Advertising Standards Council of India also takes complaints, though it is self-regulatory.
+
+- **Legal reference:** Consumer Protection Act, 2019 — Sections 2(28) (misleading advertisement), 21 (CCPA powers and penalties)
+- **Official source:** https://consumeraffairs.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm s.2(28) and s.21, and the penalty amounts and endorser ban period.
+
+### DT-CON-07: I ordered something online and it never arrived. What are my rights?
+
+**Short answer:** You can ask the e-commerce platform and the seller for delivery or a refund, complain to the National Consumer Helpline, and approach the consumer commission if needed.
+
+E-commerce entities in India have to follow the Consumer Protection (E-Commerce) Rules, 2020. They must display seller details, provide a grievance officer, acknowledge complaints within 48 hours and resolve them within one month, and cannot cancel an order after payment without a good reason. If the item did not arrive, first raise a complaint on the platform and keep the ticket number. Then write to the grievance officer. If unresolved, file a complaint on the National Consumer Helpline, or with the consumer commission. A refund should come back by the same mode of payment. Keep order details, payment proof and screenshots.
+
+- **Legal reference:** Consumer Protection (E-Commerce) Rules, 2020; Consumer Protection Act, 2019 — E-Commerce Rules 2020 (rules on grievance redressal); Act section 2(47)
+- **Official source:** https://consumerhelpline.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm the E-Commerce Rules rule numbers, the 48-hour acknowledgement and one-month resolution periods, and the refund rules.
+
+### DT-CON-08: My insurer rejected my claim. Can I do anything?
+
+**Short answer:** Yes. Ask for the reasons in writing, complain to the insurer's grievance cell, then approach the Insurance Ombudsman, and you can also go to the consumer commission.
+
+A wrongful rejection of an insurance claim can be a deficiency in service. Ask the insurer for the rejection in writing, with the policy clause relied on. Insurers must have a grievance redressal system, and if you are not satisfied, you can approach the Insurance Ombudsman in your region, generally within a year of the insurer's reply, without a court fee. You can also file a case in the Consumer Commission. Courts expect the insurer to prove that a policy exclusion applies, and that non-disclosure was relevant. Read your policy, keep all medical records and bills, and avoid delays in informing the insurer about a claim.
+
+- **Legal reference:** Consumer Protection Act, 2019; Insurance Ombudsman Rules, 2017 — Act section 2(11) (deficiency); Insurance Ombudsman Rules 2017
+- **Official source:** https://irdai.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm the Insurance Ombudsman Rules 2017 are still current (and any 2024-25 changes), the one-year time limit, and any monetary limits.
+
+### DT-CON-09: My new appliance stopped working within the warranty. Who is responsible?
+
+**Short answer:** The manufacturer and seller are responsible for defects covered by the warranty. If they fail to repair or replace it, you can seek a refund or compensation through the consumer commission.
+
+A warranty is a promise that the product will work or be repaired. If the product has a defect during the warranty period, you can ask the service centre to repair or replace it. Keep the invoice, warranty card and service job sheets. A repair that is repeatedly unsuccessful, or very long delays, can be treated as a deficiency in service and as a defective product. You can write to the company, post a complaint on the National Consumer Helpline, and then file with the consumer commission. The Commission can order repair, replacement, refund and compensation. Always read what the warranty excludes, such as damage from misuse.
+
+- **Legal reference:** Consumer Protection Act, 2019 — Sections 2(10), 2(11) and 39
+- **Official source:** https://consumerhelpline.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm sections 2(10), 2(11) and 39.
+
+### DT-CON-10: I found an expired or spoiled food product in a shop. What can I do?
+
+**Short answer:** Selling unsafe or expired food is not allowed. Keep the product and bill, and report to the food safety authority, the consumer helpline, or both.
+
+The Food Safety and Standards Act makes food businesses responsible for the safety of the food they sell, and punishes selling unsafe food. Report the matter to the State Food Safety Commissioner's office or through the FSSAI's complaint channels, with a photo of the product, the batch number, the expiry date and the bill. You can also complain on the National Consumer Helpline and, if you have suffered harm or loss, file a case before the consumer commission to seek compensation. Do not consume the product, and keep it safely so it can be tested if needed. If you have fallen ill, keep medical records too.
+
+- **Legal reference:** Food Safety and Standards Act, 2006 — Sections 26 and 59
+- **Official source:** https://www.fssai.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm s.26 (responsibilities of food business operator) and s.59 (punishment for unsafe food), and the FSSAI's current complaint channel.
+
+### DT-CON-11: A product injured me. Can I claim compensation from the maker?
+
+**Short answer:** Yes. Under product liability rules, a manufacturer, seller or service provider can be made to pay compensation for harm caused by a defective product or service.
+
+The Consumer Protection Act, 2019 has a chapter on product liability. A product manufacturer can be liable if the product has a manufacturing defect, a design defect, does not conform to the express warranty, or lacks adequate warnings or instructions. Sellers and service providers can be liable in some situations. A consumer who has suffered harm, such as injury or property damage, can claim compensation before the consumer commission. There are exceptions, for example where the product was misused or altered. Keep the product, photographs, medical bills and the purchase receipt as evidence, and report the matter in writing to the company.
+
+- **Legal reference:** Consumer Protection Act, 2019 — Chapter VI: sections 82 to 87 (product liability), especially section 84
+- **Official source:** https://consumeraffairs.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm that product liability is in ss.82-87 and the conditions in s.84.
+
+### DT-CON-12: What is the National Consumer Helpline and how do I use it?
+
+**Short answer:** It is a free government service where you can register a complaint against a company, call 1915, or use its website or app. The company is asked to respond before you go to court.
+
+The National Consumer Helpline, run by the Department of Consumer Affairs, lets consumers register complaints against businesses, get information about their rights, and try to settle the dispute through pre-litigation mediation with the company. You can use its website, a mobile app, or the toll-free number, which was announced as 1915. Many large companies are convenor partners and have agreed to respond to complaints. This service does not cost anything. It does not stop you from going to a consumer commission later, so note your docket number. Keep your invoice, payment proof and the correspondence ready.
+
+- **Legal reference:** Consumer Protection Act, 2019 — Consumer Protection Act, 2019 (general); National Consumer Helpline (Department of Consumer Affairs)
+- **Official source:** https://consumerhelpline.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm the toll-free number 1915, the app name, and whether the NCH is established under a specific provision or only by executive scheme.
+
+### DT-CON-13: Can I file a consumer case in my own city instead of where the company is?
+
+**Short answer:** Yes. The Act of 2019 lets you file where you live or work for gain, which can be easier than going to the company's city.
+
+Under the older law, a consumer usually had to file where the opposite party carried on business. The Consumer Protection Act, 2019 added a new option: the complaint can be filed in the District Commission within whose local limits the complainant resides or personally works for gain. This helps people who bought online from a seller in another city or State. You can still file where the seller is, if you prefer. You can also appear and file through the e-Daakhil portal without travelling. Check that the value of your claim fits the District Commission's pecuniary limit. Include your address proof with the complaint.
+
+- **Legal reference:** Consumer Protection Act, 2019 — Section 34(2)(d)
+- **Official source:** https://edaakhil.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm s.34(2)(d).
+
+### DT-CON-14: Can a restaurant add a service charge to my bill automatically?
+
+**Short answer:** No. A service charge cannot be forced on you. Tipping is voluntary, and you can ask for it to be removed from the bill.
+
+In July 2022, the Central Consumer Protection Authority issued guidelines saying hotels and restaurants cannot add service charge automatically or by default, cannot collect it under another name, and cannot make it a condition for entry or service. In March 2025, the Delhi High Court upheld these guidelines. If a service charge is added, you can politely ask for it to be removed. If the restaurant refuses, you can pay the bill without it and note the details, or complain to the National Consumer Helpline or the CCPA. Keep the bill and any photo of the menu terms.
+
+- **Legal reference:** Consumer Protection Act, 2019; CCPA Service Charge Guidelines, 2022 — Section 2(47); CCPA Guidelines, 4 July 2022; NRAI v. Union of India (Delhi HC, 28 March 2025)
+- **Official source:** https://delhihighcourt.nic.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm the exact date and title of the CCPA guidelines, the High Court's holdings (including on takeaway) and whether an appeal is pending.
+
+### DT-CON-15: My flight was cancelled. Am I entitled to a refund?
+
+**Short answer:** Generally yes. Under the DGCA's passenger rules, if an airline cancels your flight, you can choose an alternative flight or a full refund, and in some cases get compensation.
+
+The Directorate General of Civil Aviation has issued a Civil Aviation Requirement on facilities to passengers affected by denied boarding, cancellations and delays. If an airline cancels a flight, the passenger is entitled to an alternate flight or a refund of the ticket. Compensation can also be due, depending on how much notice was given, the length of the flight and the reason for the cancellation; no compensation is due for extraordinary circumstances beyond the airline's control. Refunds on tickets bought online should go back to the original payment method within a set time. Keep your ticket and messages, complain to the airline, then use the AirSewa portal or the consumer commission.
+
+- **Legal reference:** Aircraft Rules, 1937; DGCA Civil Aviation Requirement, Section 3, Series M, Part IV — DGCA CAR Section 3 Series M Part IV (cancellation, delay and denied boarding)
+- **Official source:** https://www.dgca.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm the CAR's current version, compensation amounts and time limits for refunds, and the AirSewa portal.
+
+
+## Property and Rental Rights
+
+### DT-PRO-01: Can my landlord suddenly ask me to leave?
+
+**Short answer:** Not without following the law. A landlord generally has to give proper notice and cannot forcibly throw out a tenant. The exact rules depend on your State's rent law and your agreement.
+
+In most cases, a landlord must follow the notice terms in the rent agreement and the law. Under the Transfer of Property Act, a lease from month to month can be ended by 15 days' notice, and a lease from year to year by six months' notice. Many States have rent control laws that allow eviction only on specified grounds, such as non-payment, and through the Rent Controller or a court. A landlord cannot remove you by force or by locking you out. If you are asked to leave suddenly, ask for the notice in writing, check your agreement and local rent law, keep paying rent, and consult a lawyer. Notice periods differ across States.
+
+- **Legal reference:** Transfer of Property Act, 1882; State Rent Control or Tenancy Acts — Transfer of Property Act section 106; applicable State rent law
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: s.106 notice periods (15 days / six months) as amended; the applicable State rent law differs and must be named by the reviewer, or the tip made State-specific.
+
+### DT-PRO-02: When does my landlord have to return my security deposit?
+
+**Short answer:** It depends on your agreement and State law. A landlord can deduct unpaid rent or damage beyond normal wear, but should refund the rest when you vacate.
+
+A security deposit is held as security for unpaid rent and damage. Nothing in the central law fixes one uniform refund period, so the rent agreement is the first thing to read. The Model Tenancy Act, 2021, which States may adopt, suggests a limit of two months' rent for residential premises and refund when the tenant gives vacant possession. Some State laws have their own rules. Before you leave, take photos of the condition, return all keys against a written receipt, and ask in writing for the refund. If the landlord wrongly withholds it, you can send a legal notice and file a civil suit or approach the Rent Authority where one exists.
+
+- **Legal reference:** Model Tenancy Act, 2021 (model law); State tenancy laws; Transfer of Property Act, 1882 — Model Tenancy Act, 2021, provisions on security deposit; check State law
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: the Model Tenancy Act is not binding unless a State adopts it; identify which States have, the two-month cap and the refund timeline, or limit this tip to a named State.
+
+### DT-PRO-03: Can my landlord cut off my water or electricity?
+
+**Short answer:** Generally no. Cutting essential services to force a tenant out is unlawful in many State laws, and the tenant can complain to the Rent Authority or court.
+
+Water, electricity and similar essential supplies are part of living in a rented home. Many State rent laws and the Model Tenancy Act say a landlord cannot cut off or withhold essential supplies to force a tenant out, and a tenant can ask the Rent Authority to restore them and may claim compensation. The right can be affected if the tenant has not paid the utility bills they agreed to pay. If your supply is cut, take photographs, write to the landlord, inform the electricity or water utility, and approach the Rent Authority or the police if there is harassment. A lawyer can tell you the rule in your State.
+
+- **Legal reference:** State Rent Control or Tenancy Acts; Model Tenancy Act, 2021 — Applicable State rent law; Model Tenancy Act, 2021 provisions on essential supplies
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: identify the exact State provisions or the Model Tenancy Act section, which is a model law only.
+
+### DT-PRO-04: Does my rent agreement have to be registered?
+
+**Short answer:** A lease for more than one year must be registered. Many people use an 11-month agreement, which is usually not compulsory to register, but registration gives stronger proof.
+
+Under the Registration Act, a lease of immovable property from year to year, or for any term exceeding one year, or reserving a yearly rent, must be registered. A lease that is not registered, but needs to be, generally cannot be used as proof of the lease in court, though it may be used for limited purposes. Short leases of 11 months are common because they fall below the registration requirement. Stamp duty rules vary by State. A written agreement, even if short, protects both sides: it should show the rent, deposit, notice period, who pays repairs, and the term. Some States have online registration systems.
+
+- **Legal reference:** Registration Act, 1908; Transfer of Property Act, 1882 — Registration Act section 17(1)(d); Transfer of Property Act section 107
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm s.17(1)(d) of the Registration Act and TPA s.107, and State stamp duty rules.
+
+### DT-PRO-05: How much can a landlord increase the rent?
+
+**Short answer:** It depends on your agreement and State law. A landlord generally cannot raise rent whenever they like in the middle of a fixed term unless the agreement allows it.
+
+A rent agreement normally says how long the rent is fixed and how any increase will be made, for example a fixed percentage each year. During the agreed term, the landlord cannot increase the rent unilaterally unless the contract provides for it. Some State rent control laws cap increases for older tenancies, while new tenancies are often governed by the agreement. The Model Tenancy Act, 2021 suggests that rent revision should follow the agreement and notice of three months. If your landlord demands a sudden hike, ask for it in writing, check your agreement, and keep paying the existing rent. Disputes can go to the Rent Authority or a civil court.
+
+- **Legal reference:** State Rent Control or Tenancy Acts; Model Tenancy Act, 2021 — Applicable State rent law; Model Tenancy Act, 2021 provision on revision of rent
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: identify the State law and the Model Tenancy Act section, and the notice period for revision.
+
+### DT-PRO-06: Can the landlord walk into my rented home whenever they want?
+
+**Short answer:** No. A tenant is entitled to enjoy the premises peacefully. The landlord should give prior notice before entering, except for emergencies.
+
+Once a house is rented, the tenant has the right to quiet possession, and the landlord cannot enter whenever they wish. Under the Transfer of Property Act, the landlord has to let the tenant enjoy the property without disturbance. Some State laws and the Model Tenancy Act require written notice, such as 24 hours, before the landlord enters for inspection or repairs, and entry only at reasonable times. Emergencies like fire or a burst pipe are exceptions. Put house rules in writing in the rent agreement. If the landlord keeps entering without permission, send a written objection, and if it continues, get legal advice.
+
+- **Legal reference:** Transfer of Property Act, 1882; Model Tenancy Act, 2021; State tenancy laws — Transfer of Property Act section 108(l) (lessor's duty to give possession and quiet enjoyment); Model Tenancy Act, 2021 provision on landlord's entry
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm the TPA clause on quiet enjoyment and the Model Tenancy Act section and 24-hour notice wording; State laws differ.
+
+### DT-PRO-07: If I buy a flat or plot, is a sale agreement enough?
+
+**Short answer:** No. A sale of immovable property worth ₹100 or more has to be made by a registered sale deed. An unregistered agreement does not transfer ownership.
+
+Under the Transfer of Property Act, a sale of immovable property of the value of ₹100 and upwards can be made only by a registered instrument. The Registration Act also requires such documents to be registered. The Supreme Court has said that a mere agreement to sell, a power of attorney or a will does not by itself transfer title in immovable property. So the safe way to buy is: verify the seller's title and the chain of documents, check for loans or disputes, pay stamp duty, and register the sale deed at the sub-registrar's office. Then apply for mutation of records. A lawyer's title search before paying is a sensible precaution.
+
+- **Legal reference:** Transfer of Property Act, 1882; Registration Act, 1908 — Transfer of Property Act section 54; Registration Act section 17(1)(a)
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm TPA s.54, Registration Act s.17(1)(a), and the Supreme Court's position in Suraj Lamp & Industries v. State of Haryana (2011).
+
+### DT-PRO-08: Can someone become the owner of my vacant property by occupying it?
+
+**Short answer:** It is possible in law, but only after a long, open and hostile possession for many years, usually 12 years for private land. So leaving property unattended and unchallenged is risky.
+
+The law of adverse possession says that a person who possesses someone else's immovable property openly, continuously and against the true owner's rights for the full limitation period may claim ownership. For private property, the period is 12 years, and for Government property 30 years. The possessor must show that the possession was open and hostile and that it was without permission. The Supreme Court has described the doctrine as harsh and has asked that the law be considered. As an owner, visit your property, keep tax receipts, and take action quickly against trespassers, with a notice or a suit. If you rent the property, a written agreement is important.
+
+- **Legal reference:** Limitation Act, 1963 — Articles 64 and 65 of the Schedule (suits for possession); sections 27
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm Articles 64 and 65 and the 12 and 30 year periods, and the current Supreme Court position (for example, Ravinder Kaur Grewal 2019).
+
+### DT-PRO-09: My builder is delaying the flat I paid for. What are my rights?
+
+**Short answer:** Under RERA, if a builder fails to hand over the flat on the agreed date, you can either withdraw and get a refund with interest, or stay and receive interest for each month of delay.
+
+The Real Estate (Regulation and Development) Act, 2016 protects homebuyers in registered projects. If the promoter fails to complete or hand over possession by the date in the agreement, the allottee can choose to withdraw from the project and claim a refund of the amount paid with interest and compensation, or stay in the project and receive interest for every month of delay until possession. Complaints go to the State Real Estate Regulatory Authority, and many States have online filing. Check that your project is registered with the State RERA and keep your agreement, payment receipts and demand letters. Builders are also expected to register their projects and follow their approved plans.
+
+- **Legal reference:** Real Estate (Regulation and Development) Act, 2016 — Section 18 (return of amount and compensation); section 31 (complaints)
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm s.18 and s.31, which projects are covered, and the interest rate in State rules.
+
+### DT-PRO-10: Does getting the property in my name in the municipal record (mutation) make me the owner?
+
+**Short answer:** No. Mutation updates the tax or revenue records. It does not decide or create ownership, which depends on a valid title such as a registered deed.
+
+Mutation, also called 'dakhil kharij' or change of name in the revenue or municipal record, changes who pays the property tax or land revenue. The Supreme Court has held that mutation entries are made for fiscal purposes and do not by themselves create or extinguish title. So even if the property is mutated in your name, a dispute about ownership will be decided on the title documents. At the same time, it is important to get mutation done after buying a property, because it shows possession and helps in getting loans, utility connections and later sales. Keep your registered deed, mutation order and tax receipts together.
+
+- **Legal reference:** Transfer of Property Act, 1882; State land revenue laws — Supreme Court: Suraj Bhan v. Financial Commissioner (2007); applicable State land revenue code
+- **Official source:** https://www.sci.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm the Supreme Court judgment citation and holding, and add the relevant State mutation law, which varies.
+
+
+## Employment Rights
+
+### DT-EMP-01: Can my employer refuse to pay my salary after I resign?
+
+**Short answer:** No. Wages earned must be paid. Under the Code on Wages, when an employee resigns or is removed, the wages due have to be paid within two working days.
+
+Wages are a legal right, not a favour. The Code on Wages, 2019, which replaced the Payment of Wages Act, 1936 and other wage laws, requires that where an employee is removed, dismissed, retrenched or resigns, the wages payable must be paid within two working days of the date of removal or resignation. An employer cannot hold salary as a penalty for resigning. Different rules may apply to notice pay, bonus or dues under the contract, and a company can have lawful deductions. Ask in writing for the full and final settlement, keep your resignation email and payslips, and if it is not paid, complain to the labour authority, the Inspector-cum-Facilitator in your area.
+
+- **Legal reference:** Code on Wages, 2019 — Section 17 (time limit for payment of wages)
+- **Official source:** https://labour.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm s.17(2) of the Code on Wages and the two-working-day period.
+
+### DT-EMP-02: When am I entitled to gratuity?
+
+**Short answer:** Generally after five years of continuous service with the same employer. It is paid when you leave, retire or resign, and in certain cases, such as death or disablement, earlier.
+
+Gratuity is a lump-sum payment by an employer as a thank-you for long service. Under the Payment of Gratuity Act, 1972, an employee became eligible after five years of continuous service, on retirement, resignation, superannuation, or death or disablement due to accident or disease, when five years was not required. The formula is generally 15 days' wages for each completed year of service, subject to a ceiling. The Code on Social Security, 2020, now in force, deals with gratuity and has a shorter period for fixed-term employees. Ask the employer for a gratuity statement in writing; if it is refused, you can apply to the controlling authority.
+
+- **Legal reference:** Payment of Gratuity Act, 1972; Code on Social Security, 2020 — Payment of Gratuity Act section 4; Code on Social Security Chapter V
+- **Official source:** https://labour.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm the gratuity section in the Code on Social Security, the eligibility for fixed-term employees, the wage ceiling and whether the 1972 Act is repealed.
+
+### DT-EMP-03: Can my employer cut money from my salary as a punishment?
+
+**Short answer:** Only deductions allowed by law can be made, and there is a limit on how much. A company cannot deduct arbitrarily.
+
+Wage laws allow only specific deductions from wages, such as for tax, provident fund, fines approved under the law, absence from duty, damage or loss for which the employee is responsible, and advances or loans. Under the Code on Wages, 2019, the total deductions in a wage period generally should not exceed 50 percent of the wages. Fines and deductions for damage normally need a fair process, including giving the employee an opportunity to explain. If your salary has been cut without a clear reason, ask for a written explanation, compare it with your appointment letter, and keep payslips. You can complain to the labour authority or the Inspector-cum-Facilitator.
+
+- **Legal reference:** Code on Wages, 2019 — Section 18 (deductions) and section 19 (fines)
+- **Official source:** https://labour.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm s.18 and the 50 percent ceiling, and s.19 on fines.
+
+### DT-EMP-04: What is the minimum wage, and what if my employer pays less?
+
+**Short answer:** Your State or the Central Government fixes a minimum wage for different jobs. An employer cannot pay below it, and you can complain if they do.
+
+The Code on Wages, 2019 says that no employer can pay less than the minimum wage fixed for the job and the area. The rate depends on the kind of work, the skill level and the State or area, and it is revised from time to time. The Code also sets a floor wage, which the minimum wages cannot be below. You can find the current rate on the State labour department's website. If you are paid less, keep records of your payslips and attendance, ask the employer in writing, and then approach the labour office. Employers cannot ask you to give up your right to the minimum wage by an agreement.
+
+- **Legal reference:** Code on Wages, 2019 — Section 6 (no payment below the minimum wage) and section 9 (fixing of minimum wages)
+- **Official source:** https://labour.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm ss.6 and 9, the floor wage provision and the current rate for the reader's State.
+
+### DT-EMP-05: Am I entitled to extra pay for working overtime?
+
+**Short answer:** Yes, if you are covered by the law. Hours beyond the normal limit have to be paid at least at twice the normal rate of wages.
+
+The law sets normal working hours, and work beyond them is overtime. Under the Code on Wages, 2019, an employee who works more than the normal hours is entitled to be paid overtime at not less than twice the normal rate of wages. The Occupational Safety, Health and Working Conditions Code, 2020 also limits overtime and requires the worker's consent in many cases. Not everyone is covered; for example, rules differ for managerial roles and for establishments with their own State rules. Keep a record of your hours, check your appointment letter, and ask for the overtime pay in writing. You can approach the labour office if it is refused.
+
+- **Legal reference:** Code on Wages, 2019; Occupational Safety, Health and Working Conditions Code, 2020 — Code on Wages section 14 (overtime); OSH Code provisions on hours of work
+- **Official source:** https://labour.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm Code on Wages s.14, the OSH Code section on overtime limits and consent, and which categories are excluded.
+
+### DT-EMP-06: How many hours a week can my employer make me work?
+
+**Short answer:** The law sets limits on daily and weekly hours, and you should get at least one weekly day of rest. The exact limits depend on the type of establishment and the State rules.
+
+Under the Factories Act, 1948, an adult worker could not be made to work for more than 48 hours in a week and had to get a weekly day of rest. The Occupational Safety, Health and Working Conditions Code, 2020 brings together such rules for factories, mines, shops and other establishments, with limits on hours per day and per week, rest intervals and a weekly day off. State rules and the type of job affect the exact numbers, and certain jobs have exceptions. If your hours are very long, check your appointment letter and the rules in your State, record your hours, raise it with HR, and then, if needed, with the labour department.
+
+- **Legal reference:** Occupational Safety, Health and Working Conditions Code, 2020; Factories Act, 1948 — OSH Code provisions on hours of work and weekly holiday; Factories Act sections 51 and 52
+- **Official source:** https://labour.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Identify the OSH Code sections for daily and weekly limits and weekly holiday, and confirm the Factories Act is repealed.
+
+### DT-EMP-07: Can my company fire me without notice or pay?
+
+**Short answer:** It depends on your contract and your kind of job. For many workers, the law requires notice and compensation, and for larger establishments, government permission may be needed.
+
+An employee's job security depends on the appointment letter, the type of employer and the person's status. Under the Industrial Relations Code, 2020, which replaced the Industrial Disputes Act, 1947, a 'worker' who is retrenched must be given one month's notice or pay in lieu, and retrenchment compensation of 15 days' average pay for every completed year of service. Larger establishments need prior government permission for layoffs, retrenchment or closure. Misconduct dismissals need a fair process. Managerial and many private-sector roles are governed mainly by the contract. If you are dismissed, ask for the reason in writing, keep your contract and records, and take advice or approach the labour office.
+
+- **Legal reference:** Industrial Relations Code, 2020 — Section 70 (conditions for retrenchment)
+- **Official source:** https://labour.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm Industrial Relations Code s.70, the 15-days compensation, the thresholds for government permission, and who counts as a 'worker'.
+
+### DT-EMP-08: Is my provident fund contribution my money, and what if my employer doesn't deposit it?
+
+**Short answer:** Yes. Your PF contribution is your money, and your employer must deposit it. If they don't, you can complain to the EPFO, and the employer can be penalised.
+
+Employees' Provident Fund is a retirement saving. Part of your salary is deducted as the employee's contribution, and the employer pays a matching contribution, which has to be deposited with the EPFO within a fixed time. Not depositing deducted contributions is an offence. You can check your balance and the contributions credited using your UAN on the EPFO member portal and app. If contributions are missing, ask your employer in writing, then file a grievance on the EPFO portal. The Employees' Provident Funds and Miscellaneous Provisions Act, 1952 and now the Code on Social Security, 2020 govern it. Keep payslips showing the deduction.
+
+- **Legal reference:** Employees' Provident Funds and Miscellaneous Provisions Act, 1952; Code on Social Security, 2020 — EPF Act sections 6 and 14; Code on Social Security provisions on provident fund
+- **Official source:** https://www.epfindia.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm the Code on Social Security sections on provident fund and penalties, and the EPFO grievance channel.
+
+### DT-EMP-09: What health benefits does ESI give me?
+
+**Short answer:** If your wages are within the ESI limit, you and your employer contribute, and you get medical care, sickness and maternity cash benefits and more through the ESIC.
+
+The Employees' State Insurance scheme gives insured employees and their families medical treatment, cash benefits during sickness, maternity benefit, disablement and dependants' benefits in case of work injury or death. It covers establishments above a certain size, and employees whose wages do not exceed a ceiling, which was ₹21,000 a month, and the Code on Social Security, 2020 widened the scheme. The employee and employer both contribute a percentage of wages. You can check your ESIC number and benefits on the ESIC portal. If your employer is covered but has not enrolled you, ask in writing and complain to the ESIC office.
+
+- **Legal reference:** Employees' State Insurance Act, 1948; Code on Social Security, 2020 — ESI Act sections 46 to 52A; Code on Social Security provisions on employees' state insurance
+- **Official source:** https://www.esic.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm the current wage ceiling, coverage thresholds and the Code sections on ESI.
+
+### DT-EMP-10: Do I get paid leave, and can the employer refuse it?
+
+**Short answer:** Many employees are entitled to paid annual leave after a qualifying period of work. The exact days depend on your type of establishment and State rules, and the employer must follow them.
+
+Earned leave, or annual leave with wages, is a statutory right for covered workers. Under the Factories Act, 1948, a worker who had worked for 240 days in a year earned leave at the rate of one day for every 20 days worked. The Occupational Safety, Health and Working Conditions Code, 2020 provides annual leave with wages for workers who have worked at least 180 days in a year. Shops and commercial establishments are also covered by State laws. Casual and sick leave depend on your service rules. Check your appointment letter and State rules, ask in writing, and keep your leave records. If leave dues are not paid when you leave, raise it in the full and final settlement.
+
+- **Legal reference:** Occupational Safety, Health and Working Conditions Code, 2020; Factories Act, 1948; State shops and establishments laws — OSH Code provision on annual leave with wages; Factories Act section 79
+- **Official source:** https://labour.gov.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm the OSH Code section on annual leave, the 180-day rule, the accrual rate, and State shops and establishments rules.
+
+
+## Family and Everyday Legal Rights
+
+### DT-FAM-01: Is a handwritten will valid, and do I need witnesses?
+
+**Short answer:** A will can be handwritten, but it must be signed by the person making it and attested by at least two witnesses. Registration is not compulsory.
+
+A will is a legal declaration of how a person wants their property to be distributed after death. Under the Indian Succession Act, the person making the will, called the testator, must sign it or put a mark, or someone else can sign it in their presence and by their direction. The will must be attested by two or more witnesses, each of whom saw the testator sign, and each must sign in the testator's presence. A witness should not be someone who receives property under the will. A will can be handwritten or typed, and it is a good idea to state the date and describe the property clearly. Registration is optional but gives extra proof. Muslims have different rules for wills.
+
+- **Legal reference:** Indian Succession Act, 1925 — Section 63 (execution of unprivileged wills)
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm s.63 conditions and the position for Muslims; Hindus, Christians and others in general follow the Act.
+
+### DT-FAM-02: Does a will have to be registered to be valid?
+
+**Short answer:** No. Registration of a will is not compulsory. An unregistered will can still be valid if it was properly signed and attested, and it can be proved in court.
+
+The Registration Act lists documents that must be registered and also documents whose registration is optional, and a will is in the optional group. A will that is not registered is not invalid for that reason. What matters is that it was properly executed, that the testator was of sound mind and acted freely, and that it can be proved through the attesting witnesses. A registered will can make it easier to prove its genuineness and avoid disputes, as it is deposited with the registrar. A later will cancels an earlier one, and a person can change a will until death. To use a will, the legal heirs may need to apply for probate or letters of administration in some places.
+
+- **Legal reference:** Registration Act, 1908; Indian Succession Act, 1925 — Registration Act section 18 (documents of which registration is optional); Indian Succession Act section 63
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm Registration Act s.18 (wills in the optional list) and where probate is compulsory (certain cities and Wills of Hindus).
+
+### DT-FAM-03: Is registering my marriage compulsory?
+
+**Short answer:** Registration of a marriage is recommended and in many places is compulsory under State rules. A marriage certificate is strong proof for visas, insurance, bank accounts and inheritance.
+
+The Hindu Marriage Act lets State Governments make rules for the registration of Hindu marriages. In Seema v. Ashwani Kumar (2006), the Supreme Court directed that marriages of all persons who are citizens of India should be compulsorily registered in the State where it is solemnised, irrespective of religion. Other communities have their own registration laws, and the Special Marriage Act, 1954 provides for registered marriages. Even where non-registration does not invalidate the marriage, a certificate is helpful. To register, apply at the local registrar with proof of age, address, marriage and photographs, and witnesses. Check your State's process, which is often online.
+
+- **Legal reference:** Hindu Marriage Act, 1955; Special Marriage Act, 1954 — Hindu Marriage Act section 8; Seema v. Ashwani Kumar (2006)
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm HMA s.8, the Seema judgment, and that State rules (not the Act) make registration compulsory; check the position for other personal laws.
+
+### DT-FAM-04: What is the legal age for marriage in India?
+
+**Short answer:** At present, 18 for a woman and 21 for a man. Marriage below those ages is a child marriage under the law, which is voidable at the option of the child.
+
+The Prohibition of Child Marriage Act, 2006 defines a child as a male under 21 or a female under 18. A child marriage is valid until it is annulled, but it is voidable at the option of the person who was a child at the time of marriage, who can ask the court to declare it void. Those who perform, arrange or encourage a child marriage can be punished. The Government has proposed to raise the minimum age for women, so check whether the law has changed. If you know of a child marriage about to happen, you can inform the Child Marriage Prohibition Officer, the police, or Childline 1098.
+
+- **Legal reference:** Prohibition of Child Marriage Act, 2006 — Sections 2(a), 3 and 9 to 11
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: check whether the Prohibition of Child Marriage (Amendment) Bill raising the age of women to 21 has been enacted, and the Supreme Court's 2024 guidelines on the Act.
+
+### DT-FAM-05: Can a couple get a divorce if both agree?
+
+**Short answer:** Yes. Divorce by mutual consent is possible under the Hindu Marriage Act if the couple has lived separately for a year or more. A six-month waiting period applies, which courts can waive in some cases.
+
+Under the Hindu Marriage Act, a husband and wife can jointly file a petition for divorce by mutual consent if they have been living separately for at least one year, have not been able to live together, and have agreed to dissolve the marriage. After the first motion, there is normally a waiting period of six to eighteen months before the second motion. In Amardeep Singh v. Harveen Kaur (2017), the Supreme Court held that the six-month period is not mandatory and can be waived by the court in appropriate cases. The terms of maintenance and custody are usually settled in the petition. Other personal laws and the Special Marriage Act have similar provisions.
+
+- **Legal reference:** Hindu Marriage Act, 1955 — Section 13B; Amardeep Singh v. Harveen Kaur (2017)
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm s.13B and the Amardeep Singh holding, and the position under other personal laws and the Special Marriage Act s.28.
+
+### DT-FAM-06: Can my parents claim money from me if they cannot support themselves?
+
+**Short answer:** Yes. A parent or senior citizen who cannot maintain themselves can claim maintenance from their children or relatives who will inherit, through a tribunal.
+
+The Maintenance and Welfare of Parents and Senior Citizens Act, 2007 makes it a legal duty of children and grandchildren to maintain their parents and grandparents, who are unable to maintain themselves from their own earnings or property. A senior citizen can apply to the Maintenance Tribunal, which can order a monthly allowance. The law also provides for the setting up of old-age homes and punishes abandonment of a senior citizen by anyone responsible for their care. Parents can also claim maintenance under the criminal procedure law. A tribunal usually has to decide within a set number of days. Keep proof of the relationship and the needs, and apply to the tribunal in your district.
+
+- **Legal reference:** Maintenance and Welfare of Parents and Senior Citizens Act, 2007 — Sections 4, 5 and 24
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm ss.4, 5 and 24 (abandonment) and the tribunal's time limits and maximum amount, if any.
+
+### DT-FAM-07: Who gets custody of a child after a separation?
+
+**Short answer:** There is no automatic rule. The court decides based on what is best for the child's welfare. The mother is not always given custody, and the father is not always denied it.
+
+The Guardians and Wards Act, 1890 says that in appointing a guardian, the court must be guided by what appears to be in the welfare of the minor, considering the child's age, sex and religion, the character and capacity of the proposed guardian, and the wishes of the child if old enough to form a preference. Personal laws also have rules, such as the Hindu Minority and Guardianship Act, 1956, which generally gives the custody of a child under five to the mother. Courts can grant joint custody or visiting rights. The Supreme Court has repeatedly said that the child's welfare is the paramount consideration. Keep records of care and expenses, and consult a family lawyer.
+
+- **Legal reference:** Guardians and Wards Act, 1890; Hindu Minority and Guardianship Act, 1956 — Guardians and Wards Act section 17; Hindu Minority and Guardianship Act section 6
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm s.17 factors and HMGA s.6 (mother's preference for a child under five) and recent Supreme Court views on that.
+
+### DT-FAM-08: Are couples in a live-in relationship protected by law?
+
+**Short answer:** There is no separate law on live-in relationships, but the Domestic Violence Act protects women in relationships 'in the nature of marriage', and children born from such relationships are legitimate.
+
+Live-in relationships between adults are not a crime. The Protection of Women from Domestic Violence Act, 2005 covers women in a 'relationship in the nature of marriage' and can give them protection orders, residence and maintenance, if the relationship meets the conditions laid down by the Supreme Court, such as holding themselves out as a couple, voluntary cohabitation and being of legal age. The Court has also held that a child born in a long-term live-in relationship is not illegitimate for the purpose of inheritance of the parents' property, as laid down in its judgments. A live-in relationship does not by itself create the rights of a spouse in inheritance or in certain personal laws.
+
+- **Legal reference:** Protection of Women from Domestic Violence Act, 2005 — Section 2(f) (domestic relationship); D. Velusamy v. D. Patchaiammal (2010); S.P.S. Balasubramanyam v. Suruttayan (1993)
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm s.2(f), the cited judgments and the legitimacy of children (Tulsa v. Durghatiya 2008), and the High Court positions on protection to couples.
+
+### DT-FAM-09: How soon must I register a birth, and what if I miss the deadline?
+
+**Short answer:** Generally within 21 days of the birth. After that, you may still register, but with a late fee and extra steps, depending on how late it is.
+
+The Registration of Births and Deaths Act, 1969 requires births to be reported to the Registrar within 21 days. If you miss that, a delayed registration is possible. After 21 days but within 30 days, the registrar can register the birth on payment of a late fee. After 30 days but within a year, it needs the written permission of the prescribed authority and an affidavit, and after a year an order of a first-class magistrate is needed. A birth certificate is needed for school admission, passport and other documents. Many States offer registration through the Civil Registration System portal. The hospital usually reports the birth, but check that it was done.
+
+- **Legal reference:** Registration of Births and Deaths Act, 1969 — Sections 8, 13 and 23
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm ss.8 and 13, the 21/30-day/one-year steps and late fee, and recent amendments (2023) on digital registration.
+
+### DT-FAM-10: My cheque bounced. What is the legal process to recover the money?
+
+**Short answer:** First send a written demand notice within 30 days of the bounce. If the person does not pay within 15 days of receiving it, you can file a complaint in court within one month after that.
+
+A cheque that is returned unpaid because of insufficient funds can lead to a criminal complaint under the Negotiable Instruments Act, if it was issued for a legally enforceable debt. The steps are: present the cheque within its validity period, which is three months; if it is dishonoured, give a written notice to the drawer within 30 days of receiving the bank's information of the dishonour, demanding payment; if the money is not paid within 15 days of receiving the notice, you can file a complaint in court within one month after those 15 days. The punishment can be imprisonment up to two years or a fine up to twice the cheque amount, or both. Keep the cheque, the bank memo and the notice's postal proof.
+
+- **Legal reference:** Negotiable Instruments Act, 1881 — Sections 138 and 142
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm s.138 time limits (three-month validity, 30-day notice, 15 days, one-month complaint) and punishment, and s.142 for the filing court.
+
+### DT-FAM-11: Can a bank's recovery agent harass or threaten me about a loan?
+
+**Short answer:** No. Lenders and their agents must follow rules on conduct. They cannot threaten, abuse, or call you at odd hours, and they cannot take your property without a legal process.
+
+The RBI has issued directions and a Fair Practices Code for banks and other regulated lenders, which require recovery agents to behave courteously, identify themselves, call only at reasonable hours, and not use threats, abuse or humiliation. The Supreme Court has held that recovery by muscle power is not allowed. For secured loans, a lender can take action under the SARFAESI Act only after following the notice and procedure, and cannot just seize your property. If you are harassed, record the calls and messages, write to the lender's grievance officer, then complain to the RBI Ombudsman, and, for threats, report to the police. Always read the loan agreement and keep payment proofs.
+
+- **Legal reference:** Reserve Bank of India directions and Fair Practices Code; Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest Act, 2002 — RBI Fair Practices Code and recovery agents guidelines; SARFAESI Act section 13
+- **Official source:** https://www.rbi.org.in/
+- **Review status:** NEEDS LEGAL VERIFICATION
+- **Note:** NEEDS LEGAL VERIFICATION: confirm the current RBI instructions on recovery agents and calling hours, the SARFAESI s.13 notice procedure, and the RBI Ombudsman scheme.
+
+### DT-FAM-12: How do I ask a government office for information using RTI?
+
+**Short answer:** Write to the office's Public Information Officer, or apply online at rtionline.gov.in for central bodies, pay the ₹10 fee, and the reply is due within 30 days.
+
+The Right to Information Act, 2005 gives every citizen the right to request information from public authorities. Write a simple application to the Public Information Officer stating the information you want, with the fee, which is ₹10 for central bodies, and your address. You do not have to give a reason. The reply must come within 30 days, or within 48 hours if it concerns a person's life or liberty. Some information is exempt, such as that affecting national security. If you are unhappy with the response, you can file a first appeal with the senior officer in the office, and then a second appeal with the Information Commission. States have their own fee rules and portals.
+
+- **Legal reference:** Right to Information Act, 2005 — Sections 6(1), 7(1), 8 and 19
+- **Official source:** https://rtionline.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm ss.6, 7, 8 and 19, the ₹10 fee for central bodies and the RTI Online portal's coverage; State fees differ.
+
+### DT-FAM-13: My parents gave me property but I later stopped looking after them. Can they take it back?
+
+**Short answer:** Yes, in some cases. If a senior citizen transfers property on the condition that the receiver will look after them, and the condition is not kept, the transfer can be cancelled by a tribunal.
+
+Under the Maintenance and Welfare of Parents and Senior Citizens Act, 2007, if a senior citizen has transferred property by gift or otherwise, subject to the condition that the person receiving it will provide basic amenities and physical needs, and that person refuses or fails to do so, the transfer can be treated as obtained by fraud, coercion or undue influence. The senior citizen can then ask the Maintenance Tribunal to declare the transfer void. The Supreme Court has said that such conditions need to be shown, and in some cases they can be implied. Care for your parents and keep a written record of arrangements; for seniors, keep the deed, evidence of neglect and apply to the tribunal.
+
+- **Legal reference:** Maintenance and Welfare of Parents and Senior Citizens Act, 2007 — Section 23
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm s.23 and the Supreme Court's recent view on whether the condition must be expressly stated (Sudesh Chhikara v. Ramti Devi, 2022; later rulings).
+
+### DT-FAM-14: What is a Lok Adalat, and is its decision final?
+
+**Short answer:** A Lok Adalat is a free, informal forum to settle disputes by agreement. If both sides agree, its award is final and binding, with no appeal, and the court fee is refunded.
+
+Lok Adalats are set up under the Legal Services Authorities Act, 1987 to settle disputes through compromise. They can handle many civil cases, family disputes, motor accident claims, bank recovery matters, and compoundable criminal cases, but not non-compoundable offences. Cases can be referred to a Lok Adalat from a court, or you can apply before filing a case. When the parties agree, the Lok Adalat passes an award, which has the force of a civil court decree, is final and cannot be appealed. If a case in court is settled there, the court fee paid is refunded. Apply at the District Legal Services Authority or the court.
+
+- **Legal reference:** Legal Services Authorities Act, 1987 — Sections 19, 20 and 21
+- **Official source:** https://nalsa.gov.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm ss.19-21 and the scope of cases that can be settled, and that the court fee refund applies in the form described.
+
+### DT-FAM-15: If I sign as a guarantor for someone's loan, can the bank ask me to pay?
+
+**Short answer:** Yes. A guarantor's liability is generally the same as the borrower's, so the bank can ask the guarantor to pay if the borrower does not, unless the contract says otherwise.
+
+Under the Indian Contract Act, a contract of guarantee is one where a person, the surety, promises to perform the promise or discharge the liability of another if that person defaults. The surety's liability is, unless the contract says otherwise, the same as that of the principal borrower. The lender is not required to sue the borrower first, and can proceed against the guarantor directly. There are limits: a guarantor can be released if the loan terms are changed without their consent or if the lender releases the borrower. A guarantor who pays has the right to recover from the borrower. Before signing, read the whole agreement, ask about the amount and period, and keep a copy.
+
+- **Legal reference:** Indian Contract Act, 1872 — Sections 126, 128, 133 and 140
+- **Official source:** https://www.indiacode.nic.in/
+- **Review status:** UNVERIFIED - standard legal review
+- **Note:** Confirm ss.126 (definition), 128 (extent of liability), 133 (discharge by variance) and 140 (rights on payment).
+

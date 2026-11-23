@@ -39,12 +39,19 @@ describe('loadConfig', () => {
   });
 
   it('stops on a daily chat limit that is not a whole number above 0', () => {
-    expect(loadConfig({}).chatDailyLimit).toBe(50);
     expect(loadConfig({ CHAT_DAILY_LIMIT: '5' }).chatDailyLimit).toBe(5);
     for (const bad of ['abc', '0', '-3', '2.5'])
       expect(() => loadConfig({ CHAT_DAILY_LIMIT: bad })).toThrow(
         'CHAT_DAILY_LIMIT',
       );
+  });
+
+  it('puts no practical daily limit on Ask AI unless one is set', () => {
+    expect(loadConfig({}).chatFreeDailyLimit).toBe(100_000);
+    expect(loadConfig({}).chatDailyLimit).toBe(100_000);
+    expect(loadConfig({ CHAT_FREE_DAILY_LIMIT: '5' }).chatFreeDailyLimit).toBe(
+      5,
+    );
   });
 
   it('has no minimum app version unless one is set, and rejects a bad one', () => {
@@ -119,5 +126,23 @@ describe('loadConfig', () => {
       loadConfig({ SMTP_HOST: 'smtp.example.com', MAIL_FROM: 'a@b.c' }).smtp
         ?.port,
     ).toBe(587);
+  });
+  it('reads India Code from its own address unless told otherwise, over https only', () => {
+    expect(loadConfig({}).indiaCodeBaseUrl).toBe('https://indiacode.gov.in');
+    expect(
+      loadConfig({ INDIACODE_BASE_URL: 'https://example.gov.in/' })
+        .indiaCodeBaseUrl,
+    ).toBe('https://example.gov.in');
+    expect(() =>
+      loadConfig({ INDIACODE_BASE_URL: 'http://example.gov.in' }),
+    ).toThrow();
+  });
+
+  it('renews the Constitution metadata every 12 hours unless told otherwise', () => {
+    expect(loadConfig({}).constitutionRefreshHours).toBe(12);
+    expect(
+      loadConfig({ CONSTITUTION_REFRESH_HOURS: '6' }).constitutionRefreshHours,
+    ).toBe(6);
+    expect(() => loadConfig({ CONSTITUTION_REFRESH_HOURS: '0' })).toThrow();
   });
 });

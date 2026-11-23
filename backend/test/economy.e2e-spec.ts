@@ -1,3 +1,4 @@
+import { UNLIMITED_CHAT } from '../src/core/config.js';
 import { and, eq } from 'drizzle-orm';
 import { newId } from '../src/core/ids.js';
 import {
@@ -92,7 +93,7 @@ describe('coins, energy, premium and settings', () => {
       energy: { today: 5, free_daily: 5, unlimited: false },
       premium: false,
       settings: null,
-      chat: { daily_limit: 5, used_today: 0 },
+      chat: { daily_limit: UNLIMITED_CHAT, used_today: 0 },
     });
     // The welcome coins are paid once.
     expect((await progress(s)).coins).toBe(60);
@@ -250,7 +251,7 @@ describe('coins, energy, premium and settings', () => {
     expect(on).toMatchObject({
       premium: true,
       energy: { unlimited: true },
-      chat: { daily_limit: 50 },
+      chat: { daily_limit: UNLIMITED_CHAT },
     });
     // Premium quizzes cost nothing.
     await as(s)
@@ -291,7 +292,7 @@ describe('coins, energy, premium and settings', () => {
       expect(p).toMatchObject({
         premium: false,
         energy: { unlimited: false },
-        chat: { daily_limit: 5 },
+        chat: { daily_limit: UNLIMITED_CHAT },
       });
     } finally {
       await beta.close();

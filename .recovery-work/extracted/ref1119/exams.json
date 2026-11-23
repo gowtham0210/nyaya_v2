@@ -1,0 +1,48 @@
+[
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 1,
+   "xmin": 2168,
+   "xmax": 3704,
+   "ctid": "0,2"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "slug": "aibe",
+  "name": "All India Bar Examination",
+  "short_name": "AIBE",
+  "is_active": false,
+  "sort_order": 1,
+  "instructions": "",
+  "created_at": "2026-11-18T13:16:43.272000Z",
+  "updated_at": "2026-11-18T13:16:43.272000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 2,
+   "xmin": 3704,
+   "xmax": 3738,
+   "ctid": "0,2"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "slug": "aibe",
+  "name": "All India Bar Examination",
+  "short_name": "AIBE",
+  "is_active": true,
+  "sort_order": 1,
+  "instructions": "",
+  "created_at": "2026-11-18T13:16:43.272000Z",
+  "updated_at": "2026-11-19T03:13:48.258000Z"
+ }
+]

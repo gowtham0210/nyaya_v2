@@ -1,0 +1,319 @@
+{
+ "fkChecks": [
+  {
+   "fk": "questions.live_version_id -> question_versions",
+   "checked": 1159,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "questions.created_by -> users",
+   "checked": 1051,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "question_versions.question_id -> questions",
+   "checked": 1159,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "question_versions.topic_id -> topics",
+   "checked": 1159,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "question_versions.created_by -> users",
+   "checked": 1051,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "question_versions.reviewer_id -> users",
+   "checked": 1051,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "question_versions.published_by -> users",
+   "checked": 1051,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "question_versions.content_source_id -> content_sources",
+   "checked": 398,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "review_decisions.version_id -> question_versions",
+   "checked": 1051,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "review_decisions.reviewer_id -> users",
+   "checked": 1051,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "topics.subject_id -> subjects",
+   "checked": 34,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "topics.act_id -> acts",
+   "checked": 3,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "daily_tips.created_by -> users",
+   "checked": 101,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "daily_tips.updated_by -> users",
+   "checked": 101,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "daily_tips.reviewer_id -> users",
+   "checked": 11,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "daily_tips.published_by -> users",
+   "checked": 11,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "news_articles.created_by -> users",
+   "checked": 5,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "news_articles.reviewer_id -> users",
+   "checked": 5,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "import_jobs.created_by -> users",
+   "checked": 9,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "import_jobs.content_source_id -> content_sources",
+   "checked": 4,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "import_job_rows.job_id -> import_jobs",
+   "checked": 1058,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "import_job_rows.question_id -> questions",
+   "checked": 1051,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "import_row_problems.job_id -> import_jobs",
+   "checked": 624,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "quiz_sessions.user_id -> users",
+   "checked": 26,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "quiz_session_questions.session_id -> quiz_sessions",
+   "checked": 163,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "quiz_session_questions.question_version_id -> question_versions",
+   "checked": 163,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "quiz_session_topics.session_id -> quiz_sessions",
+   "checked": 21,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "quiz_session_topics.topic_id -> topics",
+   "checked": 21,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "refresh_tokens.user_id -> users",
+   "checked": 292,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "coin_ledger.user_id -> users",
+   "checked": 68,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "energy_ledger.user_id -> users",
+   "checked": 33,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "learner_settings.user_id -> users",
+   "checked": 52,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "app_opens.user_id -> users",
+   "checked": 58,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "chat_usage.user_id -> users",
+   "checked": 20,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "exam_blueprints.exam_id -> exams",
+   "checked": 2,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "exam_sections.blueprint_id -> exam_blueprints",
+   "checked": 24,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "exam_section_topics.section_id -> exam_sections",
+   "checked": 29,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "exam_section_topics.topic_id -> topics",
+   "checked": 29,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "exam_question_tags.question_id -> questions",
+   "checked": 1051,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "exam_question_tags.exam_id -> exams",
+   "checked": 1051,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "exam_papers.exam_id -> exams",
+   "checked": 11,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "exam_papers.blueprint_id -> exam_blueprints",
+   "checked": 0,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "exam_paper_questions.paper_id -> exam_papers",
+   "checked": 1230,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "exam_paper_questions.question_id -> questions",
+   "checked": 1203,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "exam_paper_questions.question_version_id -> question_versions",
+   "checked": 1203,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "exam_paper_key_history.paper_id -> exam_papers",
+   "checked": 6,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "exam_paper_key_history.paper_question_id -> exam_paper_questions",
+   "checked": 6,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "exam_attempts.user_id -> users",
+   "checked": 17,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "exam_attempts.paper_id -> exam_papers",
+   "checked": 17,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "exam_attempt_questions.attempt_id -> exam_attempts",
+   "checked": 1790,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "exam_attempt_questions.question_version_id -> question_versions",
+   "checked": 1761,
+   "orphans": 0,
+   "examples": []
+  },
+  {
+   "fk": "legal_chunks.document_id -> legal_documents",
+   "checked": 1852,
+   "orphans": 0,
+   "examples": []
+  }
+ ],
+ "fkWithOrphans": 0,
+ "duplicateLiveIds": [],
+ "questionLiveVersionMismatch": 0
+}

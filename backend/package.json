@@ -20,6 +20,8 @@
     "test:debug": "vitest --inspect-brk --no-file-parallelism",
     "test:e2e": "vitest run --config ./vitest.config.e2e.ts",
     "seed": "nest build && node dist/db/seed.js",
+    "seed:exams": "nest build && node dist/db/seed-exams.js",
+    "seed:clat-topics": "nest build && node dist/db/seed-exam-topics.js",
     "openapi": "nest build && node dist/openapi.js",
     "db:generate": "drizzle-kit generate"
   },

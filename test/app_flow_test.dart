@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,7 +13,11 @@ import 'package:nyaya/core/services/sounds.dart';
 import 'package:nyaya/core/storage/local_store.dart';
 import 'package:nyaya/features/auth/application/auth_controller.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
+import 'package:nyaya/features/daily_tip/data/daily_tip_repository.dart';
+import 'package:nyaya/core/theme/app_colors.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
+import 'package:nyaya/core/widgets/chunky_button.dart';
+import 'package:nyaya/core/widgets/common.dart';
 import 'package:nyaya/features/journey/application/journey_controller.dart';
 import 'package:nyaya/features/journey/presentation/journey_screen.dart';
 import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
@@ -24,6 +29,7 @@ import 'package:nyaya/features/leaderboard/data/league_api.dart';
 import 'package:nyaya/features/progress/application/progress_sync.dart';
 import 'package:nyaya/features/progress/data/progress_api.dart';
 import 'package:nyaya/features/progress/domain/server_progress.dart';
+import 'package:nyaya/features/search/presentation/search_screen.dart';
 import 'package:nyaya/features/settings/presentation/settings_screen.dart';
 import 'package:nyaya/features/review/data/review_api.dart';
 import 'package:nyaya/features/quiz/application/quiz_controller.dart';
@@ -47,6 +53,7 @@ void main() {
     Map<String, Object> prefs = const {},
     bool signedIn = true,
     void Function(FakeQuizApi server)? server,
+    LegalUpdatesRepository? updates,
   }) async {
     tester.view.physicalSize = const Size(1170, 2532);
     tester.view.devicePixelRatio = 3;
@@ -63,7 +70,8 @@ void main() {
       progressApiProvider.overrideWithValue(api),
       leagueApiProvider.overrideWithValue(api),
       reviewApiProvider.overrideWithValue(api),
-      legalUpdatesRepositoryProvider.overrideWithValue(FakeLegalUpdates()),
+      legalUpdatesRepositoryProvider.overrideWithValue(updates ?? FakeLegalUpdates()),
+      dailyTipRepositoryProvider.overrideWithValue(FakeDailyTips()),
       reminderNotificationsProvider.overrideWithValue(FakeReminderNotifications()),
       soundPlayerProvider.overrideWithValue(sounds = FakeSounds()),
       authApiProvider.overrideWithValue(authApi = FakeAuthApi(tokens)),
@@ -300,9 +308,11 @@ void main() {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
     await settle(tester);
-    c.read(routerProvider).go(Routes.settings);
+    c.read(routerProvider).go(Routes.profile);
     await settle(tester);
     await tester.scrollUntilVisible(find.text('Delete account'), 300, scrollable: find.byType(Scrollable).first);
+    await tester.ensureVisible(find.text('Delete account'));
+    await settle(tester);
     await tester.tap(find.text('Delete account'));
     await settle(tester);
 
@@ -323,6 +333,15 @@ void main() {
     expect(authApi.deleted, 1);
     expect(find.text('Choose your language'), findsOneWidget, reason: 'back to the start');
     expect(c.read(profileProvider).onboarded, isFalse);
+  });
+
+  testWidgets('right after registering, the profile already has the new name for the avatar', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded}, signedIn: false);
+    await settle(tester);
+    // The listener runs the moment the account is signed in, before the server's settings come back.
+    await c.read(authProvider.notifier).register(name: 'Asha', email: 'asha@test.local', password: 'Passw0rd!');
+    expect(c.read(profileProvider).name, 'Asha');
   });
 
   testWidgets('a signed-out learner must create an account before anything else', (tester) async {
@@ -382,7 +401,8 @@ void main() {
     await c.read(authProvider.notifier).signOut();
     await settle(tester);
     expect(c.read(profileProvider).name, isEmpty);
-    expect(find.text('Create your free account'), findsOneWidget, reason: 'signing out leads to sign-in');
+    expect(c.read(profileProvider).onboarded, isFalse);
+    expect(find.text('Choose your language'), findsOneWidget, reason: 'signing out starts again from the language');
   });
 
   testWidgets('an account saved with the placeholder name gets its sign-up name back', (tester) async {
@@ -428,6 +448,29 @@ void main() {
     await settle(tester);
     expect(c.read(authProvider)?.email, 'asha@test.local');
     expect(c.read(routerProvider).state.matchedLocation, Routes.home, reason: 'signed in, on to Home');
+  });
+
+  testWidgets('Forgot password says so when no account is registered with the email, and stays on the email step', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Asha', 'persona': 'citizen'});
+    await pumpApp(tester, prefs: {'profile_v1': onboarded}, signedIn: false);
+    await settle(tester);
+    authApi.unregistered.add('nobody@test.local');
+
+    await tester.tap(find.text('I already have an account'));
+    await settle(tester);
+    await tester.enterText(find.widgetWithText(TextField, 'Email'), 'nobody@test.local');
+    await tester.tap(find.text('Forgot password?'));
+    await settle(tester);
+    await tester.tap(find.text('SEND CODE'));
+    await settle(tester);
+
+    expect(
+      find.text('No account is registered with this email. Check the address or create an account.'),
+      findsOneWidget,
+    );
+    expect(authApi.resetRequested, isEmpty, reason: 'no code was asked for');
+    expect(find.text('SEND CODE'), findsOneWidget, reason: 'still on the email step');
+    expect(find.textContaining("we've sent it a 6-digit code"), findsNothing);
   });
 
   testWidgets('Journey tab shows the Case Path map and opens a level from its chapter card', (tester) async {
@@ -563,7 +606,7 @@ void main() {
       await settle(tester);
     }
 
-    // The coins sheet leads straight to the store, not the top of Settings.
+    // The coins sheet leads straight to the store on My Profile.
     await tester.tap(find.bySemanticsLabel('60 Coins'));
     await settle(tester);
     await tester.tap(find.text('Open the Store'));
@@ -608,10 +651,9 @@ void main() {
     await pumpApp(tester, prefs: {'profile_v1': onboarded});
     await tallScreen(tester);
 
-    expect(find.text('Start your learning journey'), findsOneWidget);
     expect(find.text('RECOMMENDED START'), findsOneWidget);
     expect(find.text('CONTINUE WHERE YOU LEFT OFF'), findsNothing);
-    expect(top(tester, 'Start your learning journey'), lessThan(top(tester, 'Quiz modes')));
+    expect(top(tester, 'RECOMMENDED START'), lessThan(top(tester, 'Quiz modes')));
     expect(top(tester, 'Core Laws'), lessThan(top(tester, 'FEATURED')), reason: 'featured laws come last');
     // Energy in words: Case Path and Duel cost 1, Exam 2, the Daily Docket is free.
     expect(find.text('1 energy'), findsNWidgets(2));
@@ -624,18 +666,21 @@ void main() {
     await pumpApp(tester, prefs: {'profile_v1': onboarded}, server: (s) => s..stars['constitution_1'] = 3);
     await tallScreen(tester);
 
-    expect(find.text('Start your learning journey'), findsNothing);
+    expect(find.text('RECOMMENDED START'), findsNothing);
     expect(top(tester, 'CONTINUE WHERE YOU LEFT OFF'), lessThan(top(tester, 'Quiz modes')));
     expect(top(tester, 'Quiz modes'), lessThan(top(tester, 'FEATURED')), reason: 'no promotion above the learning');
   });
 
-  testWidgets('Home has a top bar with the app name, and search finds laws, topics and updates', (tester) async {
+  testWidgets('Home has a top bar with the app name on two lines and no search icon; search still finds laws, topics and updates', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
     await settle(tester);
-    expect(find.text('Nyaya Kural'), findsOneWidget);
+    // "Nyaya" over "Kural", with no tagline and no search button in the bar.
+    expect(find.text('Nyaya\nKural'), findsOneWidget);
+    expect(find.text('Learn Indian law, one case a day'), findsNothing);
+    expect(find.byTooltip('Search'), findsNothing);
 
-    await tester.tap(find.byTooltip('Search'));
+    c.read(routerProvider).push(Routes.search);
     await settle(tester);
     await tester.enterText(find.byType(TextField), 'bns');
     await settle(tester);
@@ -656,6 +701,299 @@ void main() {
     // The criminal law chapter is still locked, so its sheet says what to do first.
     expect(find.text('Level 1 · Locked'), findsOneWidget);
     expect(c.read(journeyFocusProvider), isNull, reason: 'the request is used once');
+  });
+
+  group('unified search', () {
+    Future<ProviderContainer> openSearch(WidgetTester tester) async {
+      final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+      final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+      await settle(tester);
+      c.read(routerProvider).push(Routes.search);
+      await settle(tester);
+      return c;
+    }
+
+    Future<void> search(WidgetTester tester, String text) async {
+      await tester.enterText(find.byType(TextField), text);
+      await settle(tester);
+    }
+
+    const governors = 'Supreme Court sets timelines for Governors on State Bills';
+
+    testWidgets('before typing, the updates are listed under the topics', (tester) async {
+      await openSearch(tester);
+      expect(find.text('TOPICS'), findsOneWidget);
+      expect(find.text('Constitution Basics'), findsOneWidget);
+      expect(find.text('UPDATES'), findsOneWidget);
+      expect(find.text('Supreme Court sets timelines for Governors on State Bills'), findsOneWidget);
+      expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsOneWidget);
+      expect(find.text('LAWS'), findsNothing);
+    });
+
+    testWidgets('a quiz-only match shows topics and no updates', (tester) async {
+      await openSearch(tester);
+      await search(tester, 'bns');
+      expect(find.text('TOPICS'), findsOneWidget);
+      expect(find.text('Criminal Law (BNS)'), findsOneWidget);
+      expect(find.text('UPDATES'), findsNothing);
+    });
+
+    testWidgets('a legal-update-only match shows updates and no topics', (tester) async {
+      await openSearch(tester);
+      await search(tester, 'waqf');
+      expect(find.text('UPDATES'), findsOneWidget);
+      expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsOneWidget);
+      expect(find.text('TOPICS'), findsNothing);
+      expect(find.text('LAWS'), findsNothing);
+    });
+
+    testWidgets('updates are found by summary, key points, why it matters and source, not only the title',
+        (tester) async {
+      await openSearch(tester);
+      for (final query in ['indefinitely', 'pocket veto', 'stalled', '8 April 2025', 'Gazette of India']) {
+        await search(tester, query);
+        expect(find.text('UPDATES'), findsOneWidget, reason: query);
+      }
+      await search(tester, 'pocket veto');
+      expect(find.text(governors), findsOneWidget);
+      await tester.tap(find.text(governors));
+      await settle(tester);
+      expect(find.text('Key points'), findsOneWidget, reason: 'opens the update');
+    });
+
+    testWidgets('one search can match both topics and updates, each under its own heading', (tester) async {
+      await openSearch(tester);
+      await search(tester, 'court');
+      expect(find.text('TOPICS'), findsOneWidget);
+      expect(find.text('Constitution Basics'), findsOneWidget, reason: 'its subtitle mentions courts');
+      expect(find.text('UPDATES'), findsOneWidget);
+      expect(find.text(governors), findsOneWidget);
+      expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsNothing);
+    });
+
+    testWidgets('matching ignores case and works on part of a word', (tester) async {
+      await openSearch(tester);
+      await search(tester, 'WAQF');
+      expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsOneWidget);
+      await search(tester, 'gOvErN');
+      expect(find.text(governors), findsOneWidget);
+      await search(tester, 'bNs');
+      expect(find.text('Criminal Law (BNS)'), findsOneWidget);
+    });
+
+    testWidgets('no match says so and offers to ask the AI', (tester) async {
+      await openSearch(tester);
+      await search(tester, 'zzzqx');
+      expect(find.textContaining('Nothing matches'), findsOneWidget);
+      expect(find.text('TOPICS'), findsNothing);
+      expect(find.text('UPDATES'), findsNothing);
+      expect(find.text('Ask AI: “zzzqx”'), findsOneWidget);
+    });
+  });
+
+  test('searchMatches needs every word, ignores case and accepts part of a word', () {
+    expect(searchMatches('governor bills', ['Governors on State Bills']), isTrue);
+    expect(searchMatches('GOV', ['Governors']), isTrue);
+    expect(searchMatches('governor tax', ['Governors on State Bills']), isFalse);
+    expect(searchMatches('  ', ['anything']), isTrue, reason: 'no words: nothing is filtered out');
+  });
+
+  group('High Courts updates (docs/high-court-updates-2026-11.json)', () {
+    // The reviewed drafts, in the shape the portal's create call takes, shown
+    // the way the API would serve them once published.
+    LegalUpdatesRepository drafts() {
+      final raw = jsonDecode(File('docs/high-court-updates-2026-11.json').readAsStringSync()) as List;
+      final items = [
+        for (final (i, a) in raw.cast<Map<String, dynamic>>().indexed)
+          LegalUpdate.fromJson({
+            'id': 'hc-$i',
+            'category': a['category'],
+            'title': a['title'],
+            'summary': a['summary'],
+            'key_points': a['key_points'],
+            'why_it_matters': a['why_it_matters'],
+            'source': a['source'],
+            'source_url': a['source_url'],
+            'date': a['event_date'],
+            'read_minutes': a['read_minutes'],
+          })!,
+      ];
+      return FixedLegalUpdates([...items, ...FakeLegalUpdatesList.items]);
+    }
+
+    Future<void> pumpHome(WidgetTester tester) async {
+      final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+      await pumpApp(tester, prefs: {'profile_v1': onboarded}, updates: drafts());
+      await settle(tester);
+    }
+
+    Future<void> openUpdates(WidgetTester tester) async {
+      await pumpHome(tester);
+      await tester.tap(find.text('Updates').last);
+      await settle(tester);
+    }
+
+    /// The filter row scrolls sideways, so bring a pill into view first.
+    Future<void> pickFilter(WidgetTester tester, String label) async {
+      final row = find.byWidgetPredicate((w) => w is ListView && w.scrollDirection == Axis.horizontal);
+      await tester.scrollUntilVisible(
+        find.text(label),
+        100,
+        scrollable: find.descendant(of: row, matching: find.byType(Scrollable)).first,
+      );
+      await settle(tester);
+      await tester.tap(find.text(label));
+      await settle(tester);
+    }
+
+    testWidgets('the drafts are valid, from nine different courts, each with an https source', (tester) async {
+      final all = await drafts().fetch();
+      final hc = all.where((u) => u.category == UpdateCategory.highCourts).toList();
+      expect(hc, hasLength(9));
+      expect(hc.every((u) => u.sourceUrl!.startsWith('https://')), isTrue);
+      expect({for (final u in hc) u.source.split(';').first.split(' (').first}, hasLength(9));
+    });
+
+    testWidgets('the High Courts filter lists them, the other filters are unchanged', (tester) async {
+      await openUpdates(tester);
+      await pickFilter(tester, 'High Courts');
+      expect(find.textContaining('Finance companies cannot seize vehicles'), findsOneWidget);
+      expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsNothing);
+
+      await pickFilter(tester, 'Legislation');
+      expect(find.text('Waqf (Amendment) Act, 2025 receives Presidential assent'), findsOneWidget);
+      expect(find.textContaining('Finance companies cannot seize vehicles'), findsNothing);
+    });
+
+    testWidgets('one opens its detail page', (tester) async {
+      await openUpdates(tester);
+      await pickFilter(tester, 'High Courts');
+      await tester.tap(find.textContaining('Finance companies cannot seize vehicles'));
+      await settle(tester);
+      expect(find.textContaining('Sadab Ahmad'), findsWidgets, reason: 'the summary names the case');
+      await tester.scrollUntilVisible(find.text('Key points'), 200, scrollable: find.byType(Scrollable).first);
+      expect(find.text('Key points'), findsOneWidget);
+    });
+
+    testWidgets('search finds them by title and by what the article says', (tester) async {
+      await pumpHome(tester);
+      ProviderScope.containerOf(tester.element(find.byType(NyayaApp))).read(routerProvider).push(Routes.search);
+      await settle(tester);
+      for (final (query, title) in [
+        ('unborn', 'Parents can claim compensation for the loss of an unborn child in a road accident'),
+        ('GOKUL', 'Gokul Dairy: no stay on ordinance giving State nominees a vote, but ballots kept separate'),
+        ('371a', 'Article 371A does not shield Naga customs that violate fundamental rights'),
+        ('musclemen', 'Finance companies cannot seize vehicles by force through recovery agents'),
+      ]) {
+        await tester.enterText(find.byType(TextField), query);
+        await settle(tester);
+        expect(find.text(title), findsOneWidget, reason: query);
+      }
+    });
+  });
+
+  group('My Library (saved updates)', () {
+    const governors = 'Supreme Court sets timelines for Governors on State Bills';
+    const waqf = 'Waqf (Amendment) Act, 2025 receives Presidential assent';
+
+    Future<ProviderContainer> openLibrary(WidgetTester tester, {List<String> saved = const ['news-1', 'news-2']}) async {
+      final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+      final c = await pumpApp(tester, prefs: {'profile_v1': onboarded, 'saved_updates_v1': jsonEncode(saved)});
+      await settle(tester);
+      await tester.tap(find.text('Updates').last);
+      await settle(tester);
+      await tester.tap(find.text('Saved'));
+      await settle(tester);
+      return c;
+    }
+
+    /// A collection card (the filter pills above carry the same names).
+    Finder collection(String name) => find.descendant(of: find.byType(Wrap), matching: find.text(name));
+
+    testWidgets('shows the library with counts, collections and the newest saved first', (tester) async {
+      await openLibrary(tester);
+      expect(find.text('My Library'), findsOneWidget);
+      expect(find.text('Your personal legal reading space'), findsOneWidget);
+      expect(find.text('All (2)'), findsOneWidget);
+      expect(find.text('Unread (2)'), findsOneWidget);
+      expect(find.text('Read (0)'), findsOneWidget);
+      expect(find.text('My Collections'), findsOneWidget);
+      expect(find.text('Recently Saved'), findsOneWidget);
+      expect(find.text('1 update'), findsNWidgets(2), reason: 'one collection each for Supreme Court and Legislation');
+      expect(collection('Supreme Court'), findsOneWidget);
+      expect(collection('Legislation'), findsOneWidget);
+      expect(collection('High Courts'), findsNothing, reason: 'nothing saved in it');
+      // news-2 was saved last, so it comes first.
+      expect(tester.getTopLeft(find.text(waqf)).dy, lessThan(tester.getTopLeft(find.text(governors)).dy));
+    });
+
+    testWidgets('opening an update marks it read; Unread and Read follow', (tester) async {
+      final c = await openLibrary(tester);
+      await tester.tap(find.text(governors));
+      await settle(tester);
+      expect(c.read(readUpdatesProvider), {'news-1'});
+      await tester.pageBack();
+      await settle(tester);
+      expect(find.text('Unread (1)'), findsOneWidget);
+      expect(find.text('Read (1)'), findsOneWidget);
+
+      await tester.tap(find.text('Unread (1)'));
+      await settle(tester);
+      expect(find.text(waqf), findsOneWidget);
+      expect(find.text(governors), findsNothing);
+      await tester.tap(find.text('Read (1)'));
+      await settle(tester);
+      expect(find.text(governors), findsOneWidget);
+      expect(find.text(waqf), findsNothing);
+    });
+
+    testWidgets('search and collections narrow the list, and no match says so', (tester) async {
+      await openLibrary(tester);
+      await tester.enterText(find.byType(TextField), 'GOVERNOR');
+      await settle(tester);
+      expect(find.text(governors), findsOneWidget);
+      expect(find.text(waqf), findsNothing);
+
+      await tester.enterText(find.byType(TextField), 'zzzqx');
+      await settle(tester);
+      expect(find.text('No saved updates match.'), findsOneWidget);
+
+      await tester.enterText(find.byType(TextField), '');
+      await tester.tap(collection('Legislation'));
+      await settle(tester);
+      expect(find.text(waqf), findsOneWidget);
+      expect(find.text(governors), findsNothing);
+      await tester.tap(collection('Legislation'));
+      await settle(tester);
+      expect(find.text(governors), findsOneWidget, reason: 'tapping the collection again clears it');
+    });
+
+    testWidgets('the bookmark removes an update, and an empty library keeps the old message', (tester) async {
+      final c = await openLibrary(tester, saved: ['news-1']);
+      await tester.tap(find.descendant(of: find.byType(NyayaCard), matching: find.byIcon(Icons.bookmark_rounded)));
+      await settle(tester);
+      expect(c.read(savedUpdatesProvider), isEmpty);
+      expect(find.text('Nothing saved yet. Tap the bookmark on any update to keep it here.'), findsOneWidget);
+    });
+  });
+
+  testWidgets('Indian-language UIs use slightly smaller text so the script matches English in size', (tester) async {
+    double scaleOf(WidgetTester t) => MediaQuery.textScalerOf(t.element(find.byType(Scaffold).first)).scale(10);
+
+    final english = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen', 'language': 'en'});
+    await pumpApp(tester, prefs: {'profile_v1': english});
+    await settle(tester);
+    expect(scaleOf(tester), closeTo(10, 0.01));
+    await tester.pumpWidget(const SizedBox());
+
+    for (final (code, factor) in [('ta', 8.8), ('te', 8.8), ('kn', 8.8), ('ml', 8.8), ('hi', 9.4)]) {
+      final prefs = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen', 'language': code});
+      await pumpApp(tester, prefs: {'profile_v1': prefs});
+      await settle(tester);
+      expect(scaleOf(tester), closeTo(factor, 0.01), reason: code);
+      await tester.pumpWidget(const SizedBox());
+    }
+    expect(scriptTextScale('en'), 1.0);
   });
 
   testWidgets('Home shows latest updates and opens one', (tester) async {
@@ -725,6 +1063,127 @@ void main() {
     expect(find.text("Play Today's Questions (free)"), findsOneWidget);
     expect(find.text('Ask the AI a legal question'), findsOneWidget);
     expect(find.text('Get unlimited energy'), findsNothing, reason: 'premium is hidden in the beta');
+  });
+
+  testWidgets('Home avatar opens My Profile, the gear opens Settings, and back returns Home', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+
+    await tester.tap(find.byTooltip('My Profile'));
+    await settle(tester);
+    expect(find.text('My Profile'), findsOneWidget);
+    expect(find.text('ravi@test.local'), findsOneWidget);
+    expect(find.text('Learning as'), findsOneWidget);
+    for (final label in ['Total XP', 'Longest streak', 'Quizzes', 'Accuracy', 'Wins', 'Stars']) {
+      expect(find.text(label), findsOneWidget, reason: label);
+    }
+    await tester.pageBack();
+    await settle(tester);
+    expect(find.text('My Profile'), findsNothing);
+
+    await tester.tap(find.byTooltip('Settings'));
+    await settle(tester);
+    expect(find.text('LEARNING PREFERENCES'), findsOneWidget);
+    // Profile things are no longer in Settings.
+    expect(find.text('Sign out'), findsNothing);
+    expect(find.text('Delete account'), findsNothing);
+    expect(find.text('Your stats'), findsNothing);
+    expect(find.text('Streak freeze'), findsNothing);
+    await tester.pageBack();
+    await settle(tester);
+    expect(c.read(routerProvider).state.matchedLocation, Routes.home);
+  });
+
+  testWidgets('the old /settings?section=store link opens the store on My Profile', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    c.read(routerProvider).push('/settings?section=store');
+    await settle(tester);
+    expect(find.text('My Profile'), findsOneWidget);
+    expect(find.text('Streak freeze'), findsOneWidget);
+    expect(find.text('LEARNING PREFERENCES'), findsNothing);
+  });
+
+  testWidgets('a new name shows on My Profile and Home at once and in the sign-in snapshot', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    c.read(routerProvider).push(Routes.profile);
+    await settle(tester);
+    await tester.tap(find.byTooltip('Edit name'));
+    await settle(tester);
+    await tester.enterText(find.descendant(of: find.byType(AlertDialog), matching: find.byType(TextField)), 'Ravi Kumar');
+    await tester.tap(find.text('Done'));
+    await settle(tester);
+    expect(find.text('Ravi Kumar'), findsOneWidget);
+    expect(c.read(profileProvider).name, 'Ravi Kumar');
+    expect(c.read(authProvider)!.displayName, 'Ravi Kumar');
+    expect(c.read(tokenStoreProvider).current!.user['display_name'], 'Ravi Kumar');
+    expect(api.settings?.name, 'Ravi Kumar', reason: 'sent to the server');
+    await tester.pageBack();
+    await settle(tester);
+    expect(tester.widget<InitialsAvatar>(find.byType(InitialsAvatar).first).name, 'Ravi Kumar', reason: 'Home shows it too');
+  });
+
+  testWidgets('Open the Store lands on the Store heading and stays there when the page above it changes', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    tester.view.physicalSize = const Size(1080, 1920);
+    await settle(tester);
+    c.read(routerProvider).push(Routes.store);
+    await tester.pump(const Duration(milliseconds: 100));
+    // Something above the Store changes height after the page opens, as the
+    // sync (premium badge) or a late font does on a real phone.
+    c.read(profileProvider.notifier).activatePremium();
+    await settle(tester);
+    final top = tester.getRect(find.textContaining('STORE')).top;
+    expect(top, inInclusiveRange(70, 90), reason: 'the Store heading sits right under the app bar');
+    expect(find.text('Streak freeze'), findsOneWidget);
+
+    // The Store card glows to show where you landed, then settles.
+    List<BoxShadow> glow() =>
+        ((tester.widget<AnimatedContainer>(find.byKey(const Key('store-card'))).decoration! as BoxDecoration).boxShadow) ??
+        const [];
+    expect(glow(), isNotEmpty, reason: 'highlighted on arrival');
+    await tester.pump(const Duration(seconds: 3));
+    await tester.pump(const Duration(seconds: 1));
+    expect(glow(), isEmpty, reason: 'back to normal after a moment');
+  });
+
+  testWidgets('My Profile opened normally does not highlight the Store', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    c.read(routerProvider).push(Routes.profile);
+    await settle(tester);
+    final card = tester.widget<AnimatedContainer>(find.byKey(const Key('store-card')));
+    expect((card.decoration! as BoxDecoration).boxShadow ?? const [], isEmpty);
+  });
+
+  testWidgets('signing out asks first, and cancelling keeps the session', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    c.read(routerProvider).push(Routes.profile);
+    await settle(tester);
+    await tester.scrollUntilVisible(find.text('Sign out'), 300, scrollable: find.byType(Scrollable).first);
+    await tester.ensureVisible(find.text('Sign out'));
+    await settle(tester);
+    await tester.tap(find.text('Sign out'));
+    await settle(tester);
+    expect(find.text('Sign out?'), findsOneWidget);
+    await tester.tap(find.text('Cancel'));
+    await settle(tester);
+    expect(c.read(authProvider), isNotNull);
+
+    await tester.tap(find.text('Sign out'));
+    await settle(tester);
+    await tester.tap(find.descendant(of: find.byType(AlertDialog), matching: find.text('Sign out')));
+    await settle(tester);
+    expect(c.read(authProvider), isNull);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('Reset this phone brings back onboarding, keeps the name, and does not repeat the league result', (tester) async {
@@ -1030,6 +1489,48 @@ void main() {
     semantics.dispose();
   });
 
+  testWidgets('Previous in a practice quiz shows the earlier question with your answer and the right one, read only', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    await tester.tap(find.text('Start learning').first);
+    await settle(tester);
+    const request = QuizRequest(QuizMode.casePath, levelId: 'constitution_1');
+    QuizState state() => c.read(quizControllerProvider(request));
+
+    expect(find.text('PREVIOUS'), findsNothing, reason: 'nothing before the first question');
+    final first = state().current;
+    await tester.tap(find.text(api.wrongTextFor(first.id)).first);
+    await settle(tester);
+    expect(find.text('PREVIOUS'), findsNothing, reason: 'still the first question');
+    await tester.tap(find.text('NEXT'));
+    await settle(tester);
+
+    // Question 2, not answered yet: Previous sits beside the prompt.
+    expect(state().index, 1);
+    expect(find.text('PREVIOUS'), findsOneWidget);
+    expect(find.text('Tap an answer to check it.'), findsOneWidget);
+    await tester.tap(find.text('PREVIOUS'));
+    await settle(tester);
+    expect(state().viewing, 0);
+    expect(find.text(first.text), findsOneWidget, reason: 'the first question is shown again');
+    expect(find.text('Not quite'), findsOneWidget, reason: 'with its verdict');
+    expect(find.text('PREVIOUS'), findsNothing, reason: 'nothing before it');
+
+    // Tapping an option changes nothing.
+    await tester.tap(find.text(api.correctTextFor(first.id)).first, warnIfMissed: false);
+    await settle(tester);
+    expect(state().answers, hasLength(1));
+    expect(state().viewing, 0);
+
+    // Next goes forward to the question that is still waiting for an answer.
+    await tester.tap(find.text('NEXT'));
+    await settle(tester);
+    expect(state().viewing, isNull);
+    expect(state().index, 1);
+    expect(find.text('Tap an answer to check it.'), findsOneWidget);
+  });
+
   testWidgets('leaving says exactly what happens to the energy', (tester) async {
     final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
     final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
@@ -1115,7 +1616,7 @@ void main() {
     await settle(tester);
     final total = c.read(quizControllerProvider(exam)).questions.length;
     expect(find.text('0 of $total answered'), findsOneWidget);
-    expect(find.text("Pick an answer, then move on. You can't go back to a question."), findsOneWidget);
+    expect(find.text('Pick an answer, then move on. You can go back and change an answer until you submit.'), findsOneWidget);
 
     await tester.tap(find.text('SKIP'));
     await settle(tester);
@@ -1124,6 +1625,52 @@ void main() {
     await tester.tap(find.text(api.correctTextFor(q.id)).first);
     await settle(tester);
     expect(find.text('1 of $total answered'), findsOneWidget);
+    c.read(routerProvider).go(Routes.home);
+    await settle(tester);
+  });
+
+  testWidgets('the exam has a Previous button: go back, see your answer, change it, and nothing is counted twice', (tester) async {
+    final onboarded = jsonEncode({'onboarded': true, 'name': 'Ravi', 'persona': 'citizen'});
+    final c = await pumpApp(tester, prefs: {'profile_v1': onboarded});
+    await settle(tester);
+    const exam = QuizRequest(QuizMode.exam);
+    c.read(routerProvider).push(Routes.quiz, extra: exam);
+    await settle(tester);
+    QuizState state() => c.read(quizControllerProvider(exam));
+    final total = state().questions.length;
+    expect(find.text('PREVIOUS'), findsNothing, reason: 'nothing before the first question');
+
+    final first = state().current;
+    await tester.tap(find.text(api.correctTextFor(first.id)).first);
+    await settle(tester);
+    await tester.tap(find.text('NEXT'));
+    await settle(tester);
+    expect(state().index, 1);
+    expect(find.text('PREVIOUS'), findsOneWidget);
+    // Previous and Next are the same size, and Previous fits on one line.
+    final buttons = find.byType(ChunkyButton);
+    expect(buttons, findsNWidgets(2));
+    expect(tester.getSize(buttons.first), tester.getSize(buttons.last));
+
+    await tester.tap(find.text('PREVIOUS'));
+    await settle(tester);
+    expect(state().index, 0);
+    expect(state().current.id, first.id);
+    expect(state().selected, isNotNull, reason: 'the earlier answer is still chosen');
+    expect(find.text('1 of $total answered'), findsOneWidget);
+    expect(find.text('PREVIOUS'), findsNothing);
+
+    // Change the answer, then move on: it replaces the old one.
+    final other = [for (var i = 0; i < first.options.length; i++) i].firstWhere((i) => i != state().selected);
+    await tester.tap(find.text(first.options[other]).first);
+    await settle(tester);
+    expect(state().selected, other);
+    expect(find.text('1 of $total answered'), findsOneWidget, reason: 'still one answered question');
+    await tester.tap(find.text('NEXT'));
+    await settle(tester);
+    expect(state().index, 1);
+    expect(state().answers.length, 2, reason: 'the first question was replaced, not added again');
+    expect(state().answers.first.selectedIndex, other);
     c.read(routerProvider).go(Routes.home);
     await settle(tester);
   });

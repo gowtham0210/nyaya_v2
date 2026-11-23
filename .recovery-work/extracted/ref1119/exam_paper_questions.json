@@ -1,0 +1,5402 @@
+[
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 1,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,1"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5da4-777c-a351-311c637e3b41",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 1,
+  "question_id": "01a1ef73-02d1-751e-9a30-83ef120bb1d7",
+  "question_version_id": "01a1ef73-02d1-751e-9a30-84f0db0517df",
+  "answer_status": "keyed",
+  "original_ref": "1",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 1",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 2,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,2"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5da6-7447-98d7-7f725e850ffb",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 2,
+  "question_id": "01a1ef73-02db-779c-9a38-dce2c48b7145",
+  "question_version_id": "01a1ef73-02db-779c-9a38-e34ebe5048a3",
+  "answer_status": "keyed",
+  "original_ref": "2",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 2",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 3,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,3"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5da7-74ba-aebe-50e7e5000010",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 3,
+  "question_id": "01a1ef73-02e0-76c4-b39c-f7e918905612",
+  "question_version_id": "01a1ef73-02e0-76c4-b39c-faa00d02589e",
+  "answer_status": "keyed",
+  "original_ref": "3",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 3",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 4,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,4"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5da8-77bd-b420-a6ea2bac01c7",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 4,
+  "question_id": "01a1ef73-02e3-768c-8cd1-3e54eb2b6876",
+  "question_version_id": "01a1ef73-02e3-768c-8cd1-4283ad11e9ce",
+  "answer_status": "keyed",
+  "original_ref": "4",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 4",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 5,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,5"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5da9-7518-8b45-2848f749e9c5",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 5,
+  "question_id": "01a1ef73-02e6-7563-a6b7-8adb69efdc1f",
+  "question_version_id": "01a1ef73-02e6-7563-a6b7-8e06e7c3efff",
+  "answer_status": "keyed",
+  "original_ref": "5",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 5",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 6,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,6"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5daa-716c-ba1c-73651ccf89d3",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 6,
+  "question_id": "01a1ef73-02ea-7141-b37b-988534d5baa1",
+  "question_version_id": "01a1ef73-02ea-7141-b37b-9e497e868f5a",
+  "answer_status": "keyed",
+  "original_ref": "6",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 6",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 7,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,7"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dab-7587-9081-3a08fbca449c",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 7,
+  "question_id": "01a1ef73-02f3-7245-94a8-3c8cdfaa8b41",
+  "question_version_id": "01a1ef73-02f3-7245-94a8-42d81dfc939f",
+  "answer_status": "keyed",
+  "original_ref": "7",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 7",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 8,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,8"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dad-761c-bc01-caad515d38f8",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 8,
+  "question_id": "01a1ef73-02f7-7265-ab7a-d571d579a6a2",
+  "question_version_id": "01a1ef73-02f7-7265-ab7a-da6ab7dd9856",
+  "answer_status": "keyed",
+  "original_ref": "8",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 8",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 9,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,9"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5daf-701f-b9c0-6db851f5240e",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 9,
+  "question_id": "01a1ef73-02fa-7215-92e8-b4886899a2d3",
+  "question_version_id": "01a1ef73-02fa-7215-92e8-b88022c91ca4",
+  "answer_status": "keyed",
+  "original_ref": "9",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 9",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 10,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,10"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5db0-7641-a025-98196a85cdbe",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 10,
+  "question_id": "01a1ef73-02fc-707c-a72b-aaf001294460",
+  "question_version_id": "01a1ef73-02fc-707c-a72b-ae1ea4a72bb1",
+  "answer_status": "keyed",
+  "original_ref": "10",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 10",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 11,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,11"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5db0-7641-a025-9e08ab75bb57",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 11,
+  "question_id": "01a1ef73-02fd-75d1-8304-2ac46bde6ce8",
+  "question_version_id": "01a1ef73-02fd-75d1-8304-2fcb82b9f8b9",
+  "answer_status": "keyed",
+  "original_ref": "11",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 11",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 12,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,12"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5db1-7359-a20f-0d7e4acaff19",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 12,
+  "question_id": "01a1ef73-0301-71c4-823c-e4fead0cc2cd",
+  "question_version_id": "01a1ef73-0301-71c4-823c-eb6917c7dcf8",
+  "answer_status": "keyed",
+  "original_ref": "12",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 12",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 13,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,13"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5db2-76c1-a6c9-001562ba9edc",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 13,
+  "question_id": "01a1ef73-0303-7619-96f5-1adc3ca5f771",
+  "question_version_id": "01a1ef73-0303-7619-96f5-1c38cd77783e",
+  "answer_status": "keyed",
+  "original_ref": "13",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 13",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 14,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,14"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5db2-76c1-a6c9-041bae650207",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 14,
+  "question_id": "01a1ef73-0305-73ad-93b3-fe214eb44189",
+  "question_version_id": "01a1ef73-0305-73ad-93b4-0362da7bf6a2",
+  "answer_status": "keyed",
+  "original_ref": "14",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 14",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 15,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,15"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5db3-70f7-82bd-f4f376df7f10",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 15,
+  "question_id": "01a1ef73-0308-775d-b5fa-5b9dfa040c8e",
+  "question_version_id": "01a1ef73-0308-775d-b5fa-5c62d020370c",
+  "answer_status": "keyed",
+  "original_ref": "15",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 15",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 16,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,16"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5db3-70f7-82bd-fb9cbaad1f26",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 16,
+  "question_id": "01a1ef73-030f-767c-8837-88fd175af702",
+  "question_version_id": "01a1ef73-030f-767c-8837-8e706382ffe1",
+  "answer_status": "keyed",
+  "original_ref": "16",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 16",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 17,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,17"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5db4-7709-872f-44fffe3c75de",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 17,
+  "question_id": "01a1ef73-0311-73fc-8284-77a7598fa465",
+  "question_version_id": "01a1ef73-0311-73fc-8284-78cb89df80c3",
+  "answer_status": "keyed",
+  "original_ref": "17",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 17",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 18,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,18"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5db4-7709-872f-4a461422bd22",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 18,
+  "question_id": "01a1ef73-0313-76e1-8718-da8b798710eb",
+  "question_version_id": "01a1ef73-0313-76e1-8718-dfa69ccce5bc",
+  "answer_status": "keyed",
+  "original_ref": "18",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 18",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 19,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,19"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5db5-7375-b26b-1c67733ac245",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 19,
+  "question_id": "01a1ef73-0315-7247-8307-273230c499e5",
+  "question_version_id": "01a1ef73-0315-7247-8307-2b808e2a610c",
+  "answer_status": "keyed",
+  "original_ref": "19",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 19",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 20,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,20"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5db6-70d2-9ddd-246054d839e1",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 20,
+  "question_id": "01a1ef73-0317-7396-88c7-44da4e2eeb1b",
+  "question_version_id": "01a1ef73-0317-7396-88c7-4a60f5e08622",
+  "answer_status": "keyed",
+  "original_ref": "20",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 20",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 21,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,21"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5db6-70d2-9ddd-293179a63051",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 21,
+  "question_id": "01a1ef73-0319-75b2-a67d-fea13dcdcd16",
+  "question_version_id": "01a1ef73-0319-75b2-a67e-0187891d1935",
+  "answer_status": "keyed",
+  "original_ref": "21",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 21",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 22,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,22"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5db7-756c-86df-aa8680d6f9e5",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 22,
+  "question_id": "01a1ef73-031b-7146-9864-f7cc2318fe63",
+  "question_version_id": "01a1ef73-031b-7146-9864-f86f056ac45a",
+  "answer_status": "keyed",
+  "original_ref": "22",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 22",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 23,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,23"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5db7-756c-86df-affced8f9634",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 23,
+  "question_id": "01a1ef73-031c-77c2-b68d-8264f2cd7008",
+  "question_version_id": "01a1ef73-031c-77c2-b68d-84466838c60f",
+  "answer_status": "keyed",
+  "original_ref": "23",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 23",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 24,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,24"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5db8-76cb-abb6-a455d1f10ee5",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 24,
+  "question_id": "01a1ef73-031f-7211-8b23-d0627504e62d",
+  "question_version_id": "01a1ef73-031f-7211-8b23-d5f4cee8c433",
+  "answer_status": "keyed",
+  "original_ref": "24",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 24",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 25,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,25"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5db8-76cb-abb6-aa129f920d2d",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 25,
+  "question_id": "01a1ef73-0322-754c-80b9-17238a230d71",
+  "question_version_id": "01a1ef73-0322-754c-80b9-19be37eaa456",
+  "answer_status": "keyed",
+  "original_ref": "25",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 25",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 26,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,26"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5db9-7621-afcb-027e1e8c9fd1",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 26,
+  "question_id": "01a1ef73-0324-72fc-a78a-87335c307936",
+  "question_version_id": "01a1ef73-0324-72fc-a78a-89b2e6022aed",
+  "answer_status": "keyed",
+  "original_ref": "26",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 26",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 27,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,27"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dba-7705-a512-b7a8eba11687",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 27,
+  "question_id": "01a1ef73-0326-77cf-99bc-7202324e516d",
+  "question_version_id": "01a1ef73-0326-77cf-99bc-74f3919e1bf9",
+  "answer_status": "keyed",
+  "original_ref": "27",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 27",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 28,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,28"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dbb-723c-b766-ecbb4dda219e",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 28,
+  "question_id": "01a1ef73-0328-77cf-9240-3dc692525def",
+  "question_version_id": "01a1ef73-0328-77cf-9240-439604fc7f84",
+  "answer_status": "keyed",
+  "original_ref": "28",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 28",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 29,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,29"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dbb-723c-b766-f135cfe34da6",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 29,
+  "question_id": "01a1ef73-032a-763d-8799-40945ce9bef0",
+  "question_version_id": "01a1ef73-032a-763d-8799-46777c396141",
+  "answer_status": "keyed",
+  "original_ref": "29",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 29",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 30,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,30"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dbc-759d-9986-1f1bb28f43b1",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 30,
+  "question_id": "01a1ef73-032c-7375-afcd-ef9dc6c062c4",
+  "question_version_id": "01a1ef73-032c-7375-afcd-f1be8a4ee158",
+  "answer_status": "keyed",
+  "original_ref": "30",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 30",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 31,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,31"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dbd-741b-9b76-8a4a9f43b63a",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 31,
+  "question_id": "01a1ef73-032e-75c9-8cff-61447713f2aa",
+  "question_version_id": "01a1ef73-032e-75c9-8cff-64b62b997a75",
+  "answer_status": "keyed",
+  "original_ref": "31",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 31",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 32,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,32"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dbd-741b-9b76-8cf64f5bb960",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 32,
+  "question_id": "01a1ef73-0330-728a-8a4a-3609938efe62",
+  "question_version_id": "01a1ef73-0330-728a-8a4a-39a213cc732f",
+  "answer_status": "keyed",
+  "original_ref": "32",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 32",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 33,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,33"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dbe-76c1-a77f-97d109f32bb3",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 33,
+  "question_id": "01a1ef73-0332-768a-b03f-b0d47dc0fc00",
+  "question_version_id": "01a1ef73-0332-768a-b03f-b6e83e15190c",
+  "answer_status": "keyed",
+  "original_ref": "33",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 33",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 34,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,34"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dbf-7647-a06d-f27c7c7dcae8",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 34,
+  "question_id": "01a1ef73-0333-758b-9134-67ae5813bd10",
+  "question_version_id": "01a1ef73-0333-758b-9134-6be80f900d27",
+  "answer_status": "keyed",
+  "original_ref": "34",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 34",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 35,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,35"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dbf-7647-a06d-f57c1a308c3c",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 35,
+  "question_id": "01a1ef73-0335-700b-b975-2084cd536e50",
+  "question_version_id": "01a1ef73-0335-700b-b975-241623c3776d",
+  "answer_status": "keyed",
+  "original_ref": "35",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 35",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 36,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,36"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dc0-73d9-91d3-44ab8b8cb209",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 36,
+  "question_id": "01a1ef73-0338-7410-a0ea-62c159de1797",
+  "question_version_id": "01a1ef73-0338-7410-a0ea-640eaa68fa25",
+  "answer_status": "keyed",
+  "original_ref": "36",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 36",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 37,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,37"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dc0-73d9-91d3-4befa821859d",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 37,
+  "question_id": "01a1ef73-033a-767b-bdc5-ab4f2029a400",
+  "question_version_id": "01a1ef73-033a-767b-bdc5-acf0d1b793d2",
+  "answer_status": "keyed",
+  "original_ref": "37",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 37",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 38,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,38"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dc1-705f-91cb-88e7c66bb376",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 38,
+  "question_id": "01a1ef73-033c-7380-9f10-1404a55f76c5",
+  "question_version_id": "01a1ef73-033c-7380-9f10-1aadbfacef74",
+  "answer_status": "keyed",
+  "original_ref": "38",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 38",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 39,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,39"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dc3-7762-91ff-10c242bff53e",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 39,
+  "question_id": "01a1ef73-033e-75a7-9f64-30e6897e4c42",
+  "question_version_id": "01a1ef73-033e-75a7-9f64-370eb43652c9",
+  "answer_status": "keyed",
+  "original_ref": "39",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 39",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 40,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,40"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dc4-745e-8a97-d47b5c7b1809",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 40,
+  "question_id": "01a1ef73-0340-7228-865f-4af251f494e7",
+  "question_version_id": "01a1ef73-0340-7228-865f-4f2f50b51779",
+  "answer_status": "keyed",
+  "original_ref": "40",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 40",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 41,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,41"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dc6-700d-9c92-471b4ad68350",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 41,
+  "question_id": "01a1ef73-0342-7612-8d8b-b5d313d9bf03",
+  "question_version_id": "01a1ef73-0342-7612-8d8b-b8d730bf6420",
+  "answer_status": "keyed",
+  "original_ref": "41",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 41",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 42,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,42"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dc6-700d-9c92-491270528438",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 42,
+  "question_id": "01a1ef73-0344-7375-b230-95d606834387",
+  "question_version_id": "01a1ef73-0344-7375-b230-9b9713ae7ded",
+  "answer_status": "keyed",
+  "original_ref": "42",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 42",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 43,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "0,43"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dc7-70c0-a7a8-c3b8ea1b900c",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 43,
+  "question_id": "01a1ef73-0346-74fd-9cb6-fb879ce3f354",
+  "question_version_id": "01a1ef73-0346-74fd-9cb6-fc8c108497e8",
+  "answer_status": "keyed",
+  "original_ref": "43",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 43",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 1,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,1"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dc8-74c3-81d9-090bca93c235",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 44,
+  "question_id": "01a1ef73-0347-7069-8fb2-5e86d00b1ce5",
+  "question_version_id": "01a1ef73-0347-7069-8fb2-61e93816d5e0",
+  "answer_status": "keyed",
+  "original_ref": "44",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 44",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 2,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,2"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dca-7100-bd44-17890ba8cd43",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 45,
+  "question_id": "01a1ef73-0349-75fc-a371-8a8469cbf98c",
+  "question_version_id": "01a1ef73-0349-75fc-a371-8c091fa128e6",
+  "answer_status": "keyed",
+  "original_ref": "45",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 45",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 3,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,3"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dca-7100-bd44-1934398c942f",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 46,
+  "question_id": "01a1ef73-034b-73c2-8f7e-f74dbeb5ed21",
+  "question_version_id": "01a1ef73-034b-73c2-8f7e-f8b62e710c14",
+  "answer_status": "keyed",
+  "original_ref": "46",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 46",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 4,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,4"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dcb-743c-ba9a-d18157df89ed",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 47,
+  "question_id": "01a1ef73-034e-75b5-abe4-dd431500389f",
+  "question_version_id": "01a1ef73-034e-75b5-abe4-e181dd3d7ca6",
+  "answer_status": "keyed",
+  "original_ref": "47",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 47",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 5,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,5"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dcc-7424-a54f-103d182047ea",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 48,
+  "question_id": "01a1ef73-0350-70c6-bf87-96b07baa19c5",
+  "question_version_id": "01a1ef73-0350-70c6-bf87-9af9fdcbecb6",
+  "answer_status": "keyed",
+  "original_ref": "48",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 48",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 6,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,6"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dcc-7424-a54f-1612600c4412",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 49,
+  "question_id": "01a1ef73-0352-765f-99e1-dabbac1004df",
+  "question_version_id": "01a1ef73-0352-765f-99e1-df9d38336b90",
+  "answer_status": "keyed",
+  "original_ref": "49",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 49",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 7,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,7"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dcd-7180-ad65-6debd1d74ffc",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 50,
+  "question_id": "01a1ef73-0354-7180-a7fb-274c0468ecb5",
+  "question_version_id": "01a1ef73-0354-7180-a7fb-281175477deb",
+  "answer_status": "keyed",
+  "original_ref": "50",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 50",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 8,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,8"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dcd-7180-ad65-7386ab51e5a0",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 51,
+  "question_id": "01a1ef73-0357-76f3-9556-4fbf1d761b4f",
+  "question_version_id": "01a1ef73-0357-76f3-9556-52eb1fcefeb1",
+  "answer_status": "keyed",
+  "original_ref": "51",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 51",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 9,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,9"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dce-7246-bc3d-1a74bcf3d88f",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 52,
+  "question_id": "01a1ef73-0359-7472-96a9-9015f3b2e3c2",
+  "question_version_id": "01a1ef73-0359-7472-96a9-941a55260362",
+  "answer_status": "keyed",
+  "original_ref": "52",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 52",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 10,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,10"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dce-7246-bc3d-1efda8d6c7a5",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 53,
+  "question_id": "01a1ef73-035a-76ba-9ffe-304fa98d8297",
+  "question_version_id": "01a1ef73-035a-76ba-9ffe-35f96c5ea7dc",
+  "answer_status": "keyed",
+  "original_ref": "53",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 53",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 11,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,11"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dcf-7465-bd04-3850ab2eb0a3",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 54,
+  "question_id": "01a1ef73-035c-7278-8f7c-549e6f72b5f1",
+  "question_version_id": "01a1ef73-035c-7278-8f7c-5b9387a6f935",
+  "answer_status": "keyed",
+  "original_ref": "54",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 54",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 12,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,12"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dd0-77f2-abdb-79f75652900e",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 55,
+  "question_id": "01a1ef73-035e-700d-bd34-6ac6d31f7c1b",
+  "question_version_id": "01a1ef73-035e-700d-bd34-6d222b2d9fb9",
+  "answer_status": "keyed",
+  "original_ref": "55",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 55",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 13,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,13"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dd0-77f2-abdb-7eea53ee0e38",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 56,
+  "question_id": "01a1ef73-0360-7521-944c-93de17175402",
+  "question_version_id": "01a1ef73-0360-7521-944c-943bb242986c",
+  "answer_status": "keyed",
+  "original_ref": "56",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 56",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 14,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,14"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dd1-730f-9699-3eeb30160e69",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 57,
+  "question_id": "01a1ef73-0362-749e-bdc8-a7fc42e0a1b2",
+  "question_version_id": "01a1ef73-0362-749e-bdc8-ab46d87e64be",
+  "answer_status": "keyed",
+  "original_ref": "57",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 57",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 15,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,15"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dd1-730f-9699-425de02631cc",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 58,
+  "question_id": "01a1ef73-0365-77c4-84d1-93d40de20c70",
+  "question_version_id": "01a1ef73-0365-77c4-84d1-94bc06081904",
+  "answer_status": "keyed",
+  "original_ref": "58",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 58",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 16,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,16"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dd2-7345-b234-bbff571c0ddb",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 59,
+  "question_id": "01a1ef73-0367-776d-9607-6c3730919600",
+  "question_version_id": "01a1ef73-0367-776d-9607-72aa0a21be83",
+  "answer_status": "keyed",
+  "original_ref": "59",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 59",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 17,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,17"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dd3-7580-be0a-72dd985a1316",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 60,
+  "question_id": "01a1ef73-0368-70e4-8168-7209057dc241",
+  "question_version_id": "01a1ef73-0368-70e4-8168-7567b0a7fd27",
+  "answer_status": "keyed",
+  "original_ref": "60",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 60",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 18,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,18"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dd4-7577-b070-2067b2fc7cd5",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 61,
+  "question_id": "01a1ef73-036a-754c-829d-f2b571d2fcf1",
+  "question_version_id": "01a1ef73-036a-754c-829d-f61163b466af",
+  "answer_status": "keyed",
+  "original_ref": "61",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 61",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 19,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,19"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dd5-7200-82aa-42661cb468ae",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 62,
+  "question_id": "01a1ef73-036c-71b1-8017-057577bb8654",
+  "question_version_id": "01a1ef73-036c-71b1-8017-09924a673180",
+  "answer_status": "keyed",
+  "original_ref": "62",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 62",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 20,
+   "xmin": 3693,
+   "xmax": 3695,
+   "ctid": "1,20"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dd5-7200-82aa-44b4a97c9906",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 63,
+  "question_id": "01a1ef73-036e-758e-bd9d-6ed584670994",
+  "question_version_id": "01a1ef73-036e-758e-bd9d-72bc2884c6f9",
+  "answer_status": "keyed",
+  "original_ref": "63",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 63",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 21,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,21"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dd6-71d6-8680-07bea8a28832",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 64,
+  "question_id": "01a1ef73-0370-7550-86ba-c5004c855696",
+  "question_version_id": "01a1ef73-0370-7550-86ba-c9734f14313c",
+  "answer_status": "keyed",
+  "original_ref": "64",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 64",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 22,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,22"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dd7-7673-873b-c43a22f7a06e",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 65,
+  "question_id": "01a1ef73-0372-76b4-ba6b-412fa70c5e5f",
+  "question_version_id": "01a1ef73-0372-76b4-ba6b-47c2b037b4c6",
+  "answer_status": "keyed",
+  "original_ref": "65",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 65",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 23,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,23"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dd8-70a3-9443-ba5334c3cd7f",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 66,
+  "question_id": "01a1ef73-0373-76d8-915c-a138af31285a",
+  "question_version_id": "01a1ef73-0373-76d8-915c-a59949c63b7b",
+  "answer_status": "keyed",
+  "original_ref": "66",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 66",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 24,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,24"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dda-75c0-bd72-59b33fc554e5",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 67,
+  "question_id": "01a1ef73-0375-74f4-beb4-35eeb53439ea",
+  "question_version_id": "01a1ef73-0375-74f4-beb4-3a0ffbc66da2",
+  "answer_status": "keyed",
+  "original_ref": "67",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 67",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 25,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,25"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dda-75c0-bd72-5ff7ce01f7a5",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 68,
+  "question_id": "01a1ef73-0377-71e9-8153-dc0fb2f5244d",
+  "question_version_id": "01a1ef73-0377-71e9-8153-e1143ea1bb4b",
+  "answer_status": "keyed",
+  "original_ref": "68",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 68",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 26,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,26"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5ddb-7524-b653-1ac44be525ac",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 69,
+  "question_id": "01a1ef73-037a-7049-92b9-6f4312565ef3",
+  "question_version_id": "01a1ef73-037a-7049-92b9-734c0f73bdf6",
+  "answer_status": "keyed",
+  "original_ref": "69",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 69",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 27,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,27"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5ddc-71f5-aaa5-e57ff7691b2a",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 70,
+  "question_id": "01a1ef73-037c-715a-889e-76296405d571",
+  "question_version_id": "01a1ef73-037c-715a-889e-79c9359a5690",
+  "answer_status": "keyed",
+  "original_ref": "70",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 70",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 28,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,28"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5ddc-71f5-aaa5-eb9a62744e63",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 71,
+  "question_id": "01a1ef73-037f-7186-a6e8-9a45f6ae9437",
+  "question_version_id": "01a1ef73-037f-7186-a6e8-9cb3c2f57f69",
+  "answer_status": "keyed",
+  "original_ref": "71",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 71",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 29,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,29"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5ddd-7323-9de3-b0b3a8731a06",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 72,
+  "question_id": "01a1ef73-0381-76dc-ae5d-5bed4ef10e52",
+  "question_version_id": "01a1ef73-0381-76dc-ae5d-5c3a3bd05f94",
+  "answer_status": "keyed",
+  "original_ref": "72",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 72",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 30,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,30"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dde-76e0-b0bf-1faccfa52951",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 73,
+  "question_id": "01a1ef73-0382-7405-a4a1-0daaefc9da46",
+  "question_version_id": "01a1ef73-0382-7405-a4a1-1306d1ba1ed9",
+  "answer_status": "keyed",
+  "original_ref": "73",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 73",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 31,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,31"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5ddf-7262-a5a3-812af9f5aea5",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 74,
+  "question_id": "01a1ef73-0384-76d4-a97d-e447a97a6d6b",
+  "question_version_id": "01a1ef73-0384-76d4-a97d-ea96fc096be0",
+  "answer_status": "keyed",
+  "original_ref": "74",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 74",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 32,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,32"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5ddf-7262-a5a3-85a00414809f",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 75,
+  "question_id": "01a1ef73-0386-7073-9903-190e6debad9a",
+  "question_version_id": "01a1ef73-0386-7073-9903-1f06fef6c002",
+  "answer_status": "keyed",
+  "original_ref": "75",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 75",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 33,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,33"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5de0-77cc-a4e7-043692349b70",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 76,
+  "question_id": "01a1ef73-0388-71ce-8078-4535084b748e",
+  "question_version_id": "01a1ef73-0388-71ce-8078-4ba35493a904",
+  "answer_status": "keyed",
+  "original_ref": "76",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 76",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 34,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,34"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5de1-7200-81f3-b87cad035189",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 77,
+  "question_id": "01a1ef73-038a-74e0-b059-3924f132c6f5",
+  "question_version_id": "01a1ef73-038a-74e0-b059-3f903893904c",
+  "answer_status": "keyed",
+  "original_ref": "77",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 77",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 35,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,35"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5de1-7200-81f3-be5f77631c22",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 78,
+  "question_id": "01a1ef73-038c-75b7-879c-2aaf01e60056",
+  "question_version_id": "01a1ef73-038c-75b7-879c-2f46f77d04c5",
+  "answer_status": "keyed",
+  "original_ref": "78",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 78",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 36,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,36"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5de2-748a-858c-531e57df9342",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 79,
+  "question_id": "01a1ef73-038e-7249-a186-3f4a2bd6e6af",
+  "question_version_id": "01a1ef73-038e-7249-a186-40c512dc0748",
+  "answer_status": "keyed",
+  "original_ref": "79",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 79",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 37,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,37"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5de2-748a-858c-54656d21175b",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 80,
+  "question_id": "01a1ef73-0391-74e3-9865-776dbcbe9bf3",
+  "question_version_id": "01a1ef73-0391-74e3-9865-795f50efdaa8",
+  "answer_status": "keyed",
+  "original_ref": "80",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 80",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 38,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,38"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5de3-71e2-8c50-607a9e3c0959",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 81,
+  "question_id": "01a1ef73-0393-71ba-b53e-b56710743427",
+  "question_version_id": "01a1ef73-0393-71ba-b53e-b9b96bd18c4c",
+  "answer_status": "keyed",
+  "original_ref": "81",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 81",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 39,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,39"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5de3-71e2-8c50-67770f0cee3c",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 82,
+  "question_id": "01a1ef73-0395-76ad-b792-86089af99277",
+  "question_version_id": "01a1ef73-0395-76ad-b792-8b204f2dee86",
+  "answer_status": "keyed",
+  "original_ref": "82",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 82",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 40,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,40"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5de4-719c-b8ee-be695d2002cf",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 83,
+  "question_id": "01a1ef73-0396-75d1-bea9-eb7b1a564204",
+  "question_version_id": "01a1ef73-0397-7432-9319-d58040a21133",
+  "answer_status": "keyed",
+  "original_ref": "83",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 83",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 41,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,41"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5de5-7416-86f6-ee3c6e636479",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 84,
+  "question_id": "01a1ef73-0399-7310-8444-ea7ada4f6b41",
+  "question_version_id": "01a1ef73-0399-7310-8444-efb50ec9801c",
+  "answer_status": "keyed",
+  "original_ref": "84",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 84",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 42,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,42"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5de5-7416-86f6-f256e48d4829",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 85,
+  "question_id": "01a1ef73-039b-77a9-b359-2ecfc80a2163",
+  "question_version_id": "01a1ef73-039b-77a9-b359-3115d423cc5f",
+  "answer_status": "keyed",
+  "original_ref": "85",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 85",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 43,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "1,43"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5de6-708b-96aa-50508d643885",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 86,
+  "question_id": "01a1ef73-039d-709f-9eae-ffd9d701e211",
+  "question_version_id": "01a1ef73-039d-709f-9eaf-0126fa1e0a09",
+  "answer_status": "keyed",
+  "original_ref": "86",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 86",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 1,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "2,1"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5de7-77f2-9f15-35909db9589f",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 87,
+  "question_id": "01a1ef73-039e-77f8-a157-6c74f693fa9c",
+  "question_version_id": "01a1ef73-039e-77f8-a157-71347f3c9974",
+  "answer_status": "keyed",
+  "original_ref": "87",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 87",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 2,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "2,2"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5de8-7246-a5a9-97f74dbeddb0",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 88,
+  "question_id": "01a1ef73-03a0-720a-9190-fdfc2fb533f8",
+  "question_version_id": "01a1ef73-03a0-720a-9191-02fedd62f969",
+  "answer_status": "keyed",
+  "original_ref": "88",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 88",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 3,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "2,3"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5de8-7246-a5a9-98ea8319af44",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 89,
+  "question_id": "01a1ef73-03a2-745d-b0d1-a2672548af9d",
+  "question_version_id": "01a1ef73-03a2-745d-b0d1-a5252978002f",
+  "answer_status": "keyed",
+  "original_ref": "89",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 89",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 4,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "2,4"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5de9-74c1-b521-0696d4164d23",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 90,
+  "question_id": "01a1ef73-03a4-74dc-9ab0-28559e852e44",
+  "question_version_id": "01a1ef73-03a4-74dc-9ab0-2fb7ab2a4c9f",
+  "answer_status": "keyed",
+  "original_ref": "90",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 90",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 5,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "2,5"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dea-7442-b3ff-ea0263d5eada",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 91,
+  "question_id": "01a1ef73-03a7-709a-975c-d74c9ae5ed2e",
+  "question_version_id": "01a1ef73-03a7-709a-975c-d8fcba49a097",
+  "answer_status": "keyed",
+  "original_ref": "91",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 91",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 6,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "2,6"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dea-7442-b3ff-ee20983ae951",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 92,
+  "question_id": "01a1ef73-03a9-7349-bbfa-3dfb582bf451",
+  "question_version_id": "01a1ef73-03a9-7349-bbfa-4307350bb1d9",
+  "answer_status": "keyed",
+  "original_ref": "92",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 92",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 7,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "2,7"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5deb-775b-b739-6d8909963fef",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 93,
+  "question_id": "01a1ef73-03ab-71bb-a00e-ad54bbc8ea5d",
+  "question_version_id": "01a1ef73-03ab-71bb-a00e-b237a981f0de",
+  "answer_status": "keyed",
+  "original_ref": "93",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 93",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 8,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "2,8"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dec-7126-8508-bf43b10f79dc",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 94,
+  "question_id": "01a1ef73-03ad-7239-9249-278701943e81",
+  "question_version_id": "01a1ef73-03ad-7239-9249-2a95c4cc4b59",
+  "answer_status": "keyed",
+  "original_ref": "94",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 94",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 9,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "2,9"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dec-7126-8508-c1120101c0d0",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 95,
+  "question_id": "01a1ef73-03af-7679-ad17-1cadbc3b249a",
+  "question_version_id": "01a1ef73-03af-7679-ad17-232c6806f27c",
+  "answer_status": "keyed",
+  "original_ref": "95",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 95",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 10,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "2,10"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5ded-72db-9e0d-fcdf02c54a4e",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 96,
+  "question_id": "01a1ef73-03b1-77f3-9107-e7a8b1a6462b",
+  "question_version_id": "01a1ef73-03b1-77f3-9107-e80a73bc06cf",
+  "answer_status": "keyed",
+  "original_ref": "96",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 96",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 11,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "2,11"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5ded-72db-9e0e-00bd729f8e26",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 97,
+  "question_id": "01a1ef73-03b3-7428-bf15-13e0753fe5da",
+  "question_version_id": "01a1ef73-03b3-7428-bf15-155512afc7c8",
+  "answer_status": "keyed",
+  "original_ref": "97",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 97",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 12,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "2,12"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5dee-7485-95a7-55c5fe6bbe40",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 98,
+  "question_id": "01a1ef73-03b5-714e-873b-d8cfeefbfd9b",
+  "question_version_id": "01a1ef73-03b5-714e-873b-dc8f31511c36",
+  "answer_status": "keyed",
+  "original_ref": "98",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 98",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 13,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "2,13"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5def-774d-89aa-eb7c4e693e13",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 99,
+  "question_id": "01a1ef73-03b8-73fa-9609-bb2c6a1ca89b",
+  "question_version_id": "01a1ef73-03b8-73fa-9609-bcd9f4592b29",
+  "answer_status": "keyed",
+  "original_ref": "99",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 99",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 14,
+   "xmin": 3693,
+   "xmax": 0,
+   "ctid": "2,14"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1c0-5df0-71db-a3f4-30f785643e2d",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "position": 100,
+  "question_id": "01a1ef73-03ba-7261-a05d-e970629e949c",
+  "question_version_id": "01a1ef73-03ba-7261-a05d-edef9b99a563",
+  "answer_status": "keyed",
+  "original_ref": "100",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 100",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:01:18.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 15,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,15"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71b2-72e4-a703-d1d0098a0955",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 1,
+  "question_id": "01a1ef73-02d1-751e-9a30-83ef120bb1d7",
+  "question_version_id": "01a1ef73-02d1-751e-9a30-84f0db0517df",
+  "answer_status": "keyed",
+  "original_ref": "1",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 1",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 16,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,16"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71b4-7442-8154-1ac2da558433",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 2,
+  "question_id": "01a1ef73-02db-779c-9a38-dce2c48b7145",
+  "question_version_id": "01a1ef73-02db-779c-9a38-e34ebe5048a3",
+  "answer_status": "keyed",
+  "original_ref": "2",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 2",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 17,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,17"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71b6-709c-aeb2-7a1fb79394ea",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 3,
+  "question_id": "01a1ef73-02e0-76c4-b39c-f7e918905612",
+  "question_version_id": "01a1ef73-02e0-76c4-b39c-faa00d02589e",
+  "answer_status": "keyed",
+  "original_ref": "3",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 3",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 18,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,18"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71b7-776c-b0f0-11c2997fdc4b",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 4,
+  "question_id": "01a1ef73-02e3-768c-8cd1-3e54eb2b6876",
+  "question_version_id": "01a1ef73-02e3-768c-8cd1-4283ad11e9ce",
+  "answer_status": "keyed",
+  "original_ref": "4",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 4",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 19,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,19"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71b9-749e-808a-1e98b35d8ba7",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 5,
+  "question_id": "01a1ef73-02e6-7563-a6b7-8adb69efdc1f",
+  "question_version_id": "01a1ef73-02e6-7563-a6b7-8e06e7c3efff",
+  "answer_status": "keyed",
+  "original_ref": "5",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 5",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 20,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,20"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71bb-707a-b6d6-8bb917397f48",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 6,
+  "question_id": "01a1ef73-02ea-7141-b37b-988534d5baa1",
+  "question_version_id": "01a1ef73-02ea-7141-b37b-9e497e868f5a",
+  "answer_status": "keyed",
+  "original_ref": "6",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 6",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 21,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,21"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71bc-7631-88dc-b4304ee70d13",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 7,
+  "question_id": "01a1ef73-02f3-7245-94a8-3c8cdfaa8b41",
+  "question_version_id": "01a1ef73-02f3-7245-94a8-42d81dfc939f",
+  "answer_status": "keyed",
+  "original_ref": "7",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 7",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 22,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,22"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71bf-7651-a268-b467cd9e0627",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 8,
+  "question_id": "01a1ef73-02f7-7265-ab7a-d571d579a6a2",
+  "question_version_id": "01a1ef73-02f7-7265-ab7a-da6ab7dd9856",
+  "answer_status": "keyed",
+  "original_ref": "8",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 8",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 23,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,23"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71c1-7531-be55-a9c7a935931a",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 9,
+  "question_id": "01a1ef73-02fa-7215-92e8-b4886899a2d3",
+  "question_version_id": "01a1ef73-02fa-7215-92e8-b88022c91ca4",
+  "answer_status": "keyed",
+  "original_ref": "9",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 9",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 24,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,24"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71c3-745a-8619-4d1690351e14",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 10,
+  "question_id": "01a1ef73-02fc-707c-a72b-aaf001294460",
+  "question_version_id": "01a1ef73-02fc-707c-a72b-ae1ea4a72bb1",
+  "answer_status": "keyed",
+  "original_ref": "10",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 10",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 25,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,25"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71c5-70f4-b263-521fa743abed",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 11,
+  "question_id": "01a1ef73-02fd-75d1-8304-2ac46bde6ce8",
+  "question_version_id": "01a1ef73-02fd-75d1-8304-2fcb82b9f8b9",
+  "answer_status": "keyed",
+  "original_ref": "11",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 11",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 26,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,26"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71c7-70dc-8707-f5a08b2bbf0b",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 12,
+  "question_id": "01a1ef73-0301-71c4-823c-e4fead0cc2cd",
+  "question_version_id": "01a1ef73-0301-71c4-823c-eb6917c7dcf8",
+  "answer_status": "keyed",
+  "original_ref": "12",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 12",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 27,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,27"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71ca-724f-85e8-3026a0e62cca",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 13,
+  "question_id": "01a1ef73-0303-7619-96f5-1adc3ca5f771",
+  "question_version_id": "01a1ef73-0303-7619-96f5-1c38cd77783e",
+  "answer_status": "keyed",
+  "original_ref": "13",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 13",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 28,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,28"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71cb-716f-bda9-fdad89a1d86d",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 14,
+  "question_id": "01a1ef73-0305-73ad-93b3-fe214eb44189",
+  "question_version_id": "01a1ef73-0305-73ad-93b4-0362da7bf6a2",
+  "answer_status": "keyed",
+  "original_ref": "14",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 14",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 29,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,29"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71cf-7605-82a9-f1b1bab20690",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 15,
+  "question_id": "01a1ef73-0308-775d-b5fa-5b9dfa040c8e",
+  "question_version_id": "01a1ef73-0308-775d-b5fa-5c62d020370c",
+  "answer_status": "keyed",
+  "original_ref": "15",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 15",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 30,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,30"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71d1-728c-b40d-bb1f49cc62ea",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 16,
+  "question_id": "01a1ef73-030f-767c-8837-88fd175af702",
+  "question_version_id": "01a1ef73-030f-767c-8837-8e706382ffe1",
+  "answer_status": "keyed",
+  "original_ref": "16",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 16",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 31,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,31"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71d3-751b-a404-8877d8db44b3",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 17,
+  "question_id": "01a1ef73-0311-73fc-8284-77a7598fa465",
+  "question_version_id": "01a1ef73-0311-73fc-8284-78cb89df80c3",
+  "answer_status": "keyed",
+  "original_ref": "17",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 17",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 32,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,32"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71d6-7592-8238-801ecf4994dc",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 18,
+  "question_id": "01a1ef73-0313-76e1-8718-da8b798710eb",
+  "question_version_id": "01a1ef73-0313-76e1-8718-dfa69ccce5bc",
+  "answer_status": "keyed",
+  "original_ref": "18",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 18",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 33,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,33"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71d8-76a1-be40-115e7a4335d8",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 19,
+  "question_id": "01a1ef73-0315-7247-8307-273230c499e5",
+  "question_version_id": "01a1ef73-0315-7247-8307-2b808e2a610c",
+  "answer_status": "keyed",
+  "original_ref": "19",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 19",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 34,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,34"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71dc-736a-9c95-67caf0c1116a",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 20,
+  "question_id": "01a1ef73-0317-7396-88c7-44da4e2eeb1b",
+  "question_version_id": "01a1ef73-0317-7396-88c7-4a60f5e08622",
+  "answer_status": "keyed",
+  "original_ref": "20",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 20",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 35,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,35"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71de-7523-9e5d-378f43b58f49",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 21,
+  "question_id": "01a1ef73-0319-75b2-a67d-fea13dcdcd16",
+  "question_version_id": "01a1ef73-0319-75b2-a67e-0187891d1935",
+  "answer_status": "keyed",
+  "original_ref": "21",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 21",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 36,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,36"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71e0-76b8-86c4-7e6606b982b0",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 22,
+  "question_id": "01a1ef73-031b-7146-9864-f7cc2318fe63",
+  "question_version_id": "01a1ef73-031b-7146-9864-f86f056ac45a",
+  "answer_status": "keyed",
+  "original_ref": "22",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 22",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 37,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,37"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71e1-7764-9600-ee86359f574d",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 23,
+  "question_id": "01a1ef73-031c-77c2-b68d-8264f2cd7008",
+  "question_version_id": "01a1ef73-031c-77c2-b68d-84466838c60f",
+  "answer_status": "keyed",
+  "original_ref": "23",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 23",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 38,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,38"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71e3-7795-ba38-1a4e213d3cd8",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 24,
+  "question_id": "01a1ef73-031f-7211-8b23-d0627504e62d",
+  "question_version_id": "01a1ef73-031f-7211-8b23-d5f4cee8c433",
+  "answer_status": "keyed",
+  "original_ref": "24",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 24",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 39,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,39"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71e5-7066-9067-094d7485014a",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 25,
+  "question_id": "01a1ef73-0322-754c-80b9-17238a230d71",
+  "question_version_id": "01a1ef73-0322-754c-80b9-19be37eaa456",
+  "answer_status": "keyed",
+  "original_ref": "25",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 25",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 40,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,40"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71e6-739a-b233-bf9a7d1d03d1",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 26,
+  "question_id": "01a1ef73-0324-72fc-a78a-87335c307936",
+  "question_version_id": "01a1ef73-0324-72fc-a78a-89b2e6022aed",
+  "answer_status": "keyed",
+  "original_ref": "26",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 26",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 41,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,41"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71e9-7533-8cee-e2091b5650e5",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 27,
+  "question_id": "01a1ef73-0326-77cf-99bc-7202324e516d",
+  "question_version_id": "01a1ef73-0326-77cf-99bc-74f3919e1bf9",
+  "answer_status": "keyed",
+  "original_ref": "27",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 27",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 42,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,42"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71eb-75b5-b123-270c7264001a",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 28,
+  "question_id": "01a1ef73-0328-77cf-9240-3dc692525def",
+  "question_version_id": "01a1ef73-0328-77cf-9240-439604fc7f84",
+  "answer_status": "keyed",
+  "original_ref": "28",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 28",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 43,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "2,43"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71ed-7780-84e1-75a6b61cafd5",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 29,
+  "question_id": "01a1ef73-032a-763d-8799-40945ce9bef0",
+  "question_version_id": "01a1ef73-032a-763d-8799-46777c396141",
+  "answer_status": "keyed",
+  "original_ref": "29",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 29",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 1,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,1"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71ef-774d-bcdf-8e510993932e",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 30,
+  "question_id": "01a1ef73-032c-7375-afcd-ef9dc6c062c4",
+  "question_version_id": "01a1ef73-032c-7375-afcd-f1be8a4ee158",
+  "answer_status": "keyed",
+  "original_ref": "30",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 30",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 2,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,2"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71f2-76bb-897c-44ecf966f884",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 31,
+  "question_id": "01a1ef73-032e-75c9-8cff-61447713f2aa",
+  "question_version_id": "01a1ef73-032e-75c9-8cff-64b62b997a75",
+  "answer_status": "keyed",
+  "original_ref": "31",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 31",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 3,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,3"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71f4-749e-bc04-0b7042e228fa",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 32,
+  "question_id": "01a1ef73-0330-728a-8a4a-3609938efe62",
+  "question_version_id": "01a1ef73-0330-728a-8a4a-39a213cc732f",
+  "answer_status": "keyed",
+  "original_ref": "32",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 32",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 4,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,4"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71f6-7033-b891-618ffeca5754",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 33,
+  "question_id": "01a1ef73-0332-768a-b03f-b0d47dc0fc00",
+  "question_version_id": "01a1ef73-0332-768a-b03f-b6e83e15190c",
+  "answer_status": "keyed",
+  "original_ref": "33",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 33",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 5,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,5"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71f8-71fa-be35-89a4d1889b90",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 34,
+  "question_id": "01a1ef73-0333-758b-9134-67ae5813bd10",
+  "question_version_id": "01a1ef73-0333-758b-9134-6be80f900d27",
+  "answer_status": "keyed",
+  "original_ref": "34",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 34",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 6,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,6"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71fb-7417-87eb-12862a6b200c",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 35,
+  "question_id": "01a1ef73-0335-700b-b975-2084cd536e50",
+  "question_version_id": "01a1ef73-0335-700b-b975-241623c3776d",
+  "answer_status": "keyed",
+  "original_ref": "35",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 35",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 7,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,7"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71fd-727d-b112-5c3e7421a24e",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 36,
+  "question_id": "01a1ef73-0338-7410-a0ea-62c159de1797",
+  "question_version_id": "01a1ef73-0338-7410-a0ea-640eaa68fa25",
+  "answer_status": "keyed",
+  "original_ref": "36",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 36",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 8,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,8"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-71fe-7188-bd96-e57ef853fc7d",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 37,
+  "question_id": "01a1ef73-033a-767b-bdc5-ab4f2029a400",
+  "question_version_id": "01a1ef73-033a-767b-bdc5-acf0d1b793d2",
+  "answer_status": "keyed",
+  "original_ref": "37",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 37",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 9,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,9"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7202-77ee-b1d5-172a73d55917",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 38,
+  "question_id": "01a1ef73-033c-7380-9f10-1404a55f76c5",
+  "question_version_id": "01a1ef73-033c-7380-9f10-1aadbfacef74",
+  "answer_status": "keyed",
+  "original_ref": "38",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 38",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 10,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,10"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7203-708f-9173-2495824a508c",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 39,
+  "question_id": "01a1ef73-033e-75a7-9f64-30e6897e4c42",
+  "question_version_id": "01a1ef73-033e-75a7-9f64-370eb43652c9",
+  "answer_status": "keyed",
+  "original_ref": "39",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 39",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 11,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,11"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7205-7108-9db7-ebba780bf27d",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 40,
+  "question_id": "01a1ef73-0340-7228-865f-4af251f494e7",
+  "question_version_id": "01a1ef73-0340-7228-865f-4f2f50b51779",
+  "answer_status": "keyed",
+  "original_ref": "40",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 40",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 12,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,12"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7206-733a-91ab-29f3e29d8e6f",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 41,
+  "question_id": "01a1ef73-0342-7612-8d8b-b5d313d9bf03",
+  "question_version_id": "01a1ef73-0342-7612-8d8b-b8d730bf6420",
+  "answer_status": "keyed",
+  "original_ref": "41",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 41",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 13,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,13"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7208-7350-ae27-ec57db23dccb",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 42,
+  "question_id": "01a1ef73-0344-7375-b230-95d606834387",
+  "question_version_id": "01a1ef73-0344-7375-b230-9b9713ae7ded",
+  "answer_status": "keyed",
+  "original_ref": "42",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 42",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 14,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,14"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-720a-7019-aa0b-c692b118631f",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 43,
+  "question_id": "01a1ef73-0346-74fd-9cb6-fb879ce3f354",
+  "question_version_id": "01a1ef73-0346-74fd-9cb6-fc8c108497e8",
+  "answer_status": "keyed",
+  "original_ref": "43",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 43",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 15,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,15"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-720c-71ae-8492-434fef0a9e4f",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 44,
+  "question_id": "01a1ef73-0347-7069-8fb2-5e86d00b1ce5",
+  "question_version_id": "01a1ef73-0347-7069-8fb2-61e93816d5e0",
+  "answer_status": "keyed",
+  "original_ref": "44",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 44",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 16,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,16"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-720d-74a4-8ca3-304d5a6d2550",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 45,
+  "question_id": "01a1ef73-0349-75fc-a371-8a8469cbf98c",
+  "question_version_id": "01a1ef73-0349-75fc-a371-8c091fa128e6",
+  "answer_status": "keyed",
+  "original_ref": "45",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 45",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 17,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,17"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7210-7315-af96-f55ead751316",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 46,
+  "question_id": "01a1ef73-034b-73c2-8f7e-f74dbeb5ed21",
+  "question_version_id": "01a1ef73-034b-73c2-8f7e-f8b62e710c14",
+  "answer_status": "keyed",
+  "original_ref": "46",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 46",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 18,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,18"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7212-76a6-b8eb-eb3bbe538dac",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 47,
+  "question_id": "01a1ef73-034e-75b5-abe4-dd431500389f",
+  "question_version_id": "01a1ef73-034e-75b5-abe4-e181dd3d7ca6",
+  "answer_status": "keyed",
+  "original_ref": "47",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 47",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 19,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,19"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7213-71b3-b959-0734eb1e5336",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 48,
+  "question_id": "01a1ef73-0350-70c6-bf87-96b07baa19c5",
+  "question_version_id": "01a1ef73-0350-70c6-bf87-9af9fdcbecb6",
+  "answer_status": "keyed",
+  "original_ref": "48",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 48",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 20,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,20"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7215-728f-bc25-71fed87ed5d3",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 49,
+  "question_id": "01a1ef73-0352-765f-99e1-dabbac1004df",
+  "question_version_id": "01a1ef73-0352-765f-99e1-df9d38336b90",
+  "answer_status": "keyed",
+  "original_ref": "49",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 49",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 21,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,21"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-721a-7240-b841-01271e6e9412",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 50,
+  "question_id": "01a1ef73-0354-7180-a7fb-274c0468ecb5",
+  "question_version_id": "01a1ef73-0354-7180-a7fb-281175477deb",
+  "answer_status": "keyed",
+  "original_ref": "50",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 50",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 22,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,22"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-721e-7049-bda2-8ecb3373f658",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 51,
+  "question_id": "01a1ef73-0357-76f3-9556-4fbf1d761b4f",
+  "question_version_id": "01a1ef73-0357-76f3-9556-52eb1fcefeb1",
+  "answer_status": "keyed",
+  "original_ref": "51",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 51",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 23,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,23"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7220-77d4-8cb3-ef238a9841d1",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 52,
+  "question_id": "01a1ef73-0359-7472-96a9-9015f3b2e3c2",
+  "question_version_id": "01a1ef73-0359-7472-96a9-941a55260362",
+  "answer_status": "keyed",
+  "original_ref": "52",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 52",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 24,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,24"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7223-77f7-b650-ff63c8946ba2",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 53,
+  "question_id": "01a1ef73-035a-76ba-9ffe-304fa98d8297",
+  "question_version_id": "01a1ef73-035a-76ba-9ffe-35f96c5ea7dc",
+  "answer_status": "keyed",
+  "original_ref": "53",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 53",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 25,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,25"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7225-7273-ad58-ca0cf89a12b3",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 54,
+  "question_id": "01a1ef73-035c-7278-8f7c-549e6f72b5f1",
+  "question_version_id": "01a1ef73-035c-7278-8f7c-5b9387a6f935",
+  "answer_status": "keyed",
+  "original_ref": "54",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 54",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 26,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,26"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7227-718d-bea9-57e975b13cb6",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 55,
+  "question_id": "01a1ef73-035e-700d-bd34-6ac6d31f7c1b",
+  "question_version_id": "01a1ef73-035e-700d-bd34-6d222b2d9fb9",
+  "answer_status": "keyed",
+  "original_ref": "55",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 55",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 27,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,27"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7229-76ba-b5ea-62f9c3032010",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 56,
+  "question_id": "01a1ef73-0360-7521-944c-93de17175402",
+  "question_version_id": "01a1ef73-0360-7521-944c-943bb242986c",
+  "answer_status": "keyed",
+  "original_ref": "56",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 56",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 28,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,28"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-722d-7041-99bc-3d940007ea85",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 57,
+  "question_id": "01a1ef73-0362-749e-bdc8-a7fc42e0a1b2",
+  "question_version_id": "01a1ef73-0362-749e-bdc8-ab46d87e64be",
+  "answer_status": "keyed",
+  "original_ref": "57",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 57",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 29,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,29"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7230-7666-960a-a019b01b453f",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 58,
+  "question_id": "01a1ef73-0365-77c4-84d1-93d40de20c70",
+  "question_version_id": "01a1ef73-0365-77c4-84d1-94bc06081904",
+  "answer_status": "keyed",
+  "original_ref": "58",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 58",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 30,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,30"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7233-7336-be74-261ef2a22eda",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 59,
+  "question_id": "01a1ef73-0367-776d-9607-6c3730919600",
+  "question_version_id": "01a1ef73-0367-776d-9607-72aa0a21be83",
+  "answer_status": "keyed",
+  "original_ref": "59",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 59",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 31,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,31"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7235-72e9-b791-27cbba3d754d",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 60,
+  "question_id": "01a1ef73-0368-70e4-8168-7209057dc241",
+  "question_version_id": "01a1ef73-0368-70e4-8168-7567b0a7fd27",
+  "answer_status": "keyed",
+  "original_ref": "60",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 60",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 32,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,32"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7239-73bc-a18b-72e0957e3a55",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 61,
+  "question_id": "01a1ef73-036a-754c-829d-f2b571d2fcf1",
+  "question_version_id": "01a1ef73-036a-754c-829d-f61163b466af",
+  "answer_status": "keyed",
+  "original_ref": "61",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 61",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 33,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,33"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-723b-71fa-ae2b-d6c90857edee",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 62,
+  "question_id": "01a1ef73-036c-71b1-8017-057577bb8654",
+  "question_version_id": "01a1ef73-036c-71b1-8017-09924a673180",
+  "answer_status": "keyed",
+  "original_ref": "62",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 62",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 34,
+   "xmin": 3738,
+   "xmax": 3738,
+   "ctid": "3,34"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-723d-7797-b82e-e82da1d8eadf",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 63,
+  "question_id": "01a1ef73-036e-758e-bd9d-6ed584670994",
+  "question_version_id": "01a1ef73-036e-758e-bd9d-72bc2884c6f9",
+  "answer_status": "keyed",
+  "original_ref": "63",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 63",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 35,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,35"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-723f-776d-9227-fcdd9d91f22e",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 64,
+  "question_id": "01a1ef73-0370-7550-86ba-c5004c855696",
+  "question_version_id": "01a1ef73-0370-7550-86ba-c9734f14313c",
+  "answer_status": "keyed",
+  "original_ref": "64",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 64",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 36,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,36"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7241-76e2-b14b-06eb5d6c5f57",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 65,
+  "question_id": "01a1ef73-0372-76b4-ba6b-412fa70c5e5f",
+  "question_version_id": "01a1ef73-0372-76b4-ba6b-47c2b037b4c6",
+  "answer_status": "keyed",
+  "original_ref": "65",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 65",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 37,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,37"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7244-75e5-a39d-b0c8a8ea69f9",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 66,
+  "question_id": "01a1ef73-0373-76d8-915c-a138af31285a",
+  "question_version_id": "01a1ef73-0373-76d8-915c-a59949c63b7b",
+  "answer_status": "keyed",
+  "original_ref": "66",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 66",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 38,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,38"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7246-7153-acb1-6b1675f9e538",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 67,
+  "question_id": "01a1ef73-0375-74f4-beb4-35eeb53439ea",
+  "question_version_id": "01a1ef73-0375-74f4-beb4-3a0ffbc66da2",
+  "answer_status": "keyed",
+  "original_ref": "67",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 67",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 39,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,39"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7248-70c4-a829-e705b5aced7f",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 68,
+  "question_id": "01a1ef73-0377-71e9-8153-dc0fb2f5244d",
+  "question_version_id": "01a1ef73-0377-71e9-8153-e1143ea1bb4b",
+  "answer_status": "keyed",
+  "original_ref": "68",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 68",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 40,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,40"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-724a-7006-a56c-9203f7a99ea3",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 69,
+  "question_id": "01a1ef73-037a-7049-92b9-6f4312565ef3",
+  "question_version_id": "01a1ef73-037a-7049-92b9-734c0f73bdf6",
+  "answer_status": "keyed",
+  "original_ref": "69",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 69",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 41,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,41"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-724c-7507-8e86-b2988f355e97",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 70,
+  "question_id": "01a1ef73-037c-715a-889e-76296405d571",
+  "question_version_id": "01a1ef73-037c-715a-889e-79c9359a5690",
+  "answer_status": "keyed",
+  "original_ref": "70",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 70",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 42,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,42"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-724e-75e5-8a46-1d5876560ead",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 71,
+  "question_id": "01a1ef73-037f-7186-a6e8-9a45f6ae9437",
+  "question_version_id": "01a1ef73-037f-7186-a6e8-9cb3c2f57f69",
+  "answer_status": "keyed",
+  "original_ref": "71",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 71",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 3,
+   "off": 43,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "3,43"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-724f-7351-a1e6-e3e098df57fc",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 72,
+  "question_id": "01a1ef73-0381-76dc-ae5d-5bed4ef10e52",
+  "question_version_id": "01a1ef73-0381-76dc-ae5d-5c3a3bd05f94",
+  "answer_status": "keyed",
+  "original_ref": "72",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 72",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 1,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,1"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7251-738d-96e8-b54c3d3e945c",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 73,
+  "question_id": "01a1ef73-0382-7405-a4a1-0daaefc9da46",
+  "question_version_id": "01a1ef73-0382-7405-a4a1-1306d1ba1ed9",
+  "answer_status": "keyed",
+  "original_ref": "73",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 73",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 2,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,2"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7253-75e0-8c27-31afc728af8b",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 74,
+  "question_id": "01a1ef73-0384-76d4-a97d-e447a97a6d6b",
+  "question_version_id": "01a1ef73-0384-76d4-a97d-ea96fc096be0",
+  "answer_status": "keyed",
+  "original_ref": "74",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 74",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 3,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,3"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7255-7715-b55a-1f451bf2b453",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 75,
+  "question_id": "01a1ef73-0386-7073-9903-190e6debad9a",
+  "question_version_id": "01a1ef73-0386-7073-9903-1f06fef6c002",
+  "answer_status": "keyed",
+  "original_ref": "75",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 75",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 4,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,4"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7257-72c8-a05f-2b93fe907bf6",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 76,
+  "question_id": "01a1ef73-0388-71ce-8078-4535084b748e",
+  "question_version_id": "01a1ef73-0388-71ce-8078-4ba35493a904",
+  "answer_status": "keyed",
+  "original_ref": "76",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 76",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 5,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,5"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7259-732f-a715-47fccf20fd10",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 77,
+  "question_id": "01a1ef73-038a-74e0-b059-3924f132c6f5",
+  "question_version_id": "01a1ef73-038a-74e0-b059-3f903893904c",
+  "answer_status": "keyed",
+  "original_ref": "77",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 77",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 6,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,6"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-725c-7428-a93c-3c2b9435981a",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 78,
+  "question_id": "01a1ef73-038c-75b7-879c-2aaf01e60056",
+  "question_version_id": "01a1ef73-038c-75b7-879c-2f46f77d04c5",
+  "answer_status": "keyed",
+  "original_ref": "78",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 78",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 7,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,7"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-725d-7494-bed2-ad948ef662e2",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 79,
+  "question_id": "01a1ef73-038e-7249-a186-3f4a2bd6e6af",
+  "question_version_id": "01a1ef73-038e-7249-a186-40c512dc0748",
+  "answer_status": "keyed",
+  "original_ref": "79",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 79",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 8,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,8"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-725f-77a5-a599-1005020de331",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 80,
+  "question_id": "01a1ef73-0391-74e3-9865-776dbcbe9bf3",
+  "question_version_id": "01a1ef73-0391-74e3-9865-795f50efdaa8",
+  "answer_status": "keyed",
+  "original_ref": "80",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 80",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 9,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,9"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7261-7285-a065-edeede5da0af",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 81,
+  "question_id": "01a1ef73-0393-71ba-b53e-b56710743427",
+  "question_version_id": "01a1ef73-0393-71ba-b53e-b9b96bd18c4c",
+  "answer_status": "keyed",
+  "original_ref": "81",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 81",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 10,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,10"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7262-70fc-b66d-140be22ee91a",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 82,
+  "question_id": "01a1ef73-0395-76ad-b792-86089af99277",
+  "question_version_id": "01a1ef73-0395-76ad-b792-8b204f2dee86",
+  "answer_status": "keyed",
+  "original_ref": "82",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: A",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 82",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 11,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,11"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7265-737f-a80d-4721070d3188",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 83,
+  "question_id": "01a1ef73-0396-75d1-bea9-eb7b1a564204",
+  "question_version_id": "01a1ef73-0397-7432-9319-d58040a21133",
+  "answer_status": "keyed",
+  "original_ref": "83",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 83",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 12,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,12"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7267-70e7-95e6-0166993c4e69",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 84,
+  "question_id": "01a1ef73-0399-7310-8444-ea7ada4f6b41",
+  "question_version_id": "01a1ef73-0399-7310-8444-efb50ec9801c",
+  "answer_status": "keyed",
+  "original_ref": "84",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 84",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 13,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,13"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7269-7731-aec2-47b9d61664f2",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 85,
+  "question_id": "01a1ef73-039b-77a9-b359-2ecfc80a2163",
+  "question_version_id": "01a1ef73-039b-77a9-b359-3115d423cc5f",
+  "answer_status": "keyed",
+  "original_ref": "85",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: D",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 85",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 14,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,14"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-726a-757f-a384-a3fd8ec65877",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 86,
+  "question_id": "01a1ef73-039d-709f-9eae-ffd9d701e211",
+  "question_version_id": "01a1ef73-039d-709f-9eaf-0126fa1e0a09",
+  "answer_status": "keyed",
+  "original_ref": "86",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 86",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 15,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,15"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-726c-71a2-a39c-0d6deb253508",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 87,
+  "question_id": "01a1ef73-039e-77f8-a157-6c74f693fa9c",
+  "question_version_id": "01a1ef73-039e-77f8-a157-71347f3c9974",
+  "answer_status": "keyed",
+  "original_ref": "87",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 87",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 16,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,16"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-726d-7456-bd9f-f27478a2fbcf",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 88,
+  "question_id": "01a1ef73-03a0-720a-9190-fdfc2fb533f8",
+  "question_version_id": "01a1ef73-03a0-720a-9191-02fedd62f969",
+  "answer_status": "keyed",
+  "original_ref": "88",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 88",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 17,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,17"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-726f-771f-88bd-8b476f18ddf1",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 89,
+  "question_id": "01a1ef73-03a2-745d-b0d1-a2672548af9d",
+  "question_version_id": "01a1ef73-03a2-745d-b0d1-a5252978002f",
+  "answer_status": "keyed",
+  "original_ref": "89",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 89",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 18,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,18"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7271-7127-8c44-72d5e91e5bae",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 90,
+  "question_id": "01a1ef73-03a4-74dc-9ab0-28559e852e44",
+  "question_version_id": "01a1ef73-03a4-74dc-9ab0-2fb7ab2a4c9f",
+  "answer_status": "keyed",
+  "original_ref": "90",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 90",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 19,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,19"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7274-73e4-b7ed-fc4248c707a7",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 91,
+  "question_id": "01a1ef73-03a7-709a-975c-d74c9ae5ed2e",
+  "question_version_id": "01a1ef73-03a7-709a-975c-d8fcba49a097",
+  "answer_status": "keyed",
+  "original_ref": "91",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 91",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 20,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,20"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7276-71d0-81fe-803effbf0206",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 92,
+  "question_id": "01a1ef73-03a9-7349-bbfa-3dfb582bf451",
+  "question_version_id": "01a1ef73-03a9-7349-bbfa-4307350bb1d9",
+  "answer_status": "keyed",
+  "original_ref": "92",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 92",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 21,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,21"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7277-7461-8847-fff72dc94275",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 93,
+  "question_id": "01a1ef73-03ab-71bb-a00e-ad54bbc8ea5d",
+  "question_version_id": "01a1ef73-03ab-71bb-a00e-b237a981f0de",
+  "answer_status": "keyed",
+  "original_ref": "93",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 93",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 22,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,22"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-727a-7414-9eba-6dfbacccffd2",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 94,
+  "question_id": "01a1ef73-03ad-7239-9249-278701943e81",
+  "question_version_id": "01a1ef73-03ad-7239-9249-2a95c4cc4b59",
+  "answer_status": "keyed",
+  "original_ref": "94",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 94",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 23,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,23"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-727c-70ef-8e6f-7e93035add92",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 95,
+  "question_id": "01a1ef73-03af-7679-ad17-1cadbc3b249a",
+  "question_version_id": "01a1ef73-03af-7679-ad17-232c6806f27c",
+  "answer_status": "keyed",
+  "original_ref": "95",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 95",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 24,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,24"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-727e-73a6-b0f1-f96251e84612",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 96,
+  "question_id": "01a1ef73-03b1-77f3-9107-e7a8b1a6462b",
+  "question_version_id": "01a1ef73-03b1-77f3-9107-e80a73bc06cf",
+  "answer_status": "keyed",
+  "original_ref": "96",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 96",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 25,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,25"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7280-73d8-a557-694c5224f9d9",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 97,
+  "question_id": "01a1ef73-03b3-7428-bf15-13e0753fe5da",
+  "question_version_id": "01a1ef73-03b3-7428-bf15-155512afc7c8",
+  "answer_status": "keyed",
+  "original_ref": "97",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 97",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 26,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,26"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7282-75ff-937e-3b25a5035501",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 98,
+  "question_id": "01a1ef73-03b5-714e-873b-d8cfeefbfd9b",
+  "question_version_id": "01a1ef73-03b5-714e-873b-dc8f31511c36",
+  "answer_status": "keyed",
+  "original_ref": "98",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 98",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 27,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,27"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7283-7032-a60c-98b35e8cee6e",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 99,
+  "question_id": "01a1ef73-03b8-73fa-9609-bb2c6a1ca89b",
+  "question_version_id": "01a1ef73-03b8-73fa-9609-bcd9f4592b29",
+  "answer_status": "keyed",
+  "original_ref": "99",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: C",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 99",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ },
+ {
+  "_loc": {
+   "blk": 4,
+   "off": 28,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "4,28"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1d1-7286-7601-a0ad-ae14633ddd0f",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "position": 100,
+  "question_id": "01a1ef73-03ba-7261-a05d-e970629e949c",
+  "question_version_id": "01a1ef73-03ba-7261-a05d-edef9b99a563",
+  "answer_status": "keyed",
+  "original_ref": "100",
+  "option_order": null,
+  "original_label_scheme": null,
+  "official_key_text": "Official key: B",
+  "source_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 100",
+  "withdrawn_note": null,
+  "created_at": "2026-11-19T03:19:57.594000Z"
+ }
+]

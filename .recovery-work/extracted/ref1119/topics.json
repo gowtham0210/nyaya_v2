@@ -1,0 +1,698 @@
+[
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 1,
+   "xmin": 815,
+   "xmax": 2108,
+   "ctid": "0,1"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ce0c-3ea2-72af-892e-9ba203092051",
+  "subject_id": "01a1ce0c-3e96-74a9-8f3b-0d77f49ca263",
+  "act_id": "01a1ce0c-3e78-7469-8534-922fad0212bd",
+  "slug": "constitution-basics",
+  "name": "Preamble, Parliament, courts, amendments",
+  "description": null,
+  "sort_order": 0,
+  "is_active": true,
+  "created_at": "2026-11-12T04:37:51.394000Z",
+  "updated_at": "2026-11-12T04:37:51.394000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 2,
+   "xmin": 817,
+   "xmax": 1665,
+   "ctid": "0,2"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ce0c-3eaf-732e-968d-681c65aee8a0",
+  "subject_id": "01a1ce0c-3eac-7105-9d1b-c46518930eee",
+  "act_id": "01a1ce0c-3e78-7469-8534-922fad0212bd",
+  "slug": "rights-basics",
+  "name": "Fundamental Rights, DPSP and writs",
+  "description": null,
+  "sort_order": 0,
+  "is_active": true,
+  "created_at": "2026-11-12T04:37:51.408000Z",
+  "updated_at": "2026-11-12T04:37:51.408000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 3,
+   "xmin": 819,
+   "xmax": 879,
+   "ctid": "0,3"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ce0c-3eb4-73cd-be60-cc77997ebfcb",
+  "subject_id": "01a1ce0c-3eb2-71f2-90b9-aecde16f7894",
+  "act_id": "01a1ce0c-3e87-7603-b956-58650705ead4",
+  "slug": "criminal-basics",
+  "name": "Offences under the new Sanhita",
+  "description": null,
+  "sort_order": 0,
+  "is_active": true,
+  "created_at": "2026-11-12T04:37:51.412000Z",
+  "updated_at": "2026-11-12T04:37:51.412000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 4,
+   "xmin": 821,
+   "xmax": 897,
+   "ctid": "0,4"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ce0c-3eb8-704c-b709-19c6822964cf",
+  "subject_id": "01a1ce0c-3eb6-7303-b891-10f82619a0ab",
+  "act_id": null,
+  "slug": "procedure-basics",
+  "name": "BNSS, BSA, FIR, arrest, bail",
+  "description": null,
+  "sort_order": 0,
+  "is_active": true,
+  "created_at": "2026-11-12T04:37:51.416000Z",
+  "updated_at": "2026-11-12T04:37:51.416000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 5,
+   "xmin": 823,
+   "xmax": 915,
+   "ctid": "0,5"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ce0c-3ebb-737a-afd5-ef94391bbced",
+  "subject_id": "01a1ce0c-3eba-75e0-ab5e-2d6b4a95fb10",
+  "act_id": null,
+  "slug": "civil-basics",
+  "name": "Contracts, consumer rights, remedies",
+  "description": null,
+  "sort_order": 0,
+  "is_active": true,
+  "created_at": "2026-11-12T04:37:51.419000Z",
+  "updated_at": "2026-11-12T04:37:51.419000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 6,
+   "xmin": 825,
+   "xmax": 933,
+   "ctid": "0,6"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ce0c-3ec2-74d1-9f9e-dc71cd03cad6",
+  "subject_id": "01a1ce0c-3ebe-71b4-8d6d-74986364af04",
+  "act_id": null,
+  "slug": "everyday-basics",
+  "name": "Law for daily life",
+  "description": null,
+  "sort_order": 0,
+  "is_active": true,
+  "created_at": "2026-11-12T04:37:51.426000Z",
+  "updated_at": "2026-11-12T04:37:51.426000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 7,
+   "xmin": 2171,
+   "xmax": 3702,
+   "ctid": "0,7"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-6fb5-7206-a1c1-66e3afd78a13",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-constitutional-law",
+  "name": "Constitutional law",
+  "description": null,
+  "sort_order": 1,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.317000Z",
+  "updated_at": "2026-11-18T13:16:43.317000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 8,
+   "xmin": 2172,
+   "xmax": 3702,
+   "ctid": "0,8"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-6fc4-72f3-9d34-d8c374503476",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-criminal-law-substantive",
+  "name": "Criminal law: substantive",
+  "description": null,
+  "sort_order": 2,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.332000Z",
+  "updated_at": "2026-11-18T13:16:43.332000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 9,
+   "xmin": 2173,
+   "xmax": 3702,
+   "ctid": "0,9"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-6fd1-708a-8d39-9a396e02adb4",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-criminal-procedure",
+  "name": "Criminal procedure",
+  "description": null,
+  "sort_order": 3,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.345000Z",
+  "updated_at": "2026-11-18T13:16:43.345000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 10,
+   "xmin": 2174,
+   "xmax": 3702,
+   "ctid": "0,10"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-6fe0-7592-92e1-6c84e686a5cf",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-civil-procedure-and-limitation",
+  "name": "Civil procedure and limitation",
+  "description": null,
+  "sort_order": 4,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.360000Z",
+  "updated_at": "2026-11-18T13:16:43.360000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 11,
+   "xmin": 2175,
+   "xmax": 3702,
+   "ctid": "0,11"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-6fec-7799-87bc-caee24c13878",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-evidence",
+  "name": "Evidence",
+  "description": null,
+  "sort_order": 5,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.373000Z",
+  "updated_at": "2026-11-18T13:16:43.373000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 12,
+   "xmin": 2176,
+   "xmax": 3702,
+   "ctid": "0,12"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-6ffb-702f-91f5-887bdb145bc0",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-alternative-dispute-resolution",
+  "name": "Alternative dispute resolution",
+  "description": null,
+  "sort_order": 6,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.387000Z",
+  "updated_at": "2026-11-18T13:16:43.387000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 13,
+   "xmin": 2177,
+   "xmax": 3702,
+   "ctid": "0,13"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-700a-7492-a3ed-c60b5d156f14",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-family-law",
+  "name": "Family law",
+  "description": null,
+  "sort_order": 7,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.402000Z",
+  "updated_at": "2026-11-18T13:16:43.402000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 14,
+   "xmin": 2178,
+   "xmax": 3702,
+   "ctid": "0,14"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-7017-75d6-964b-2cdbf3df10b5",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-public-interest-litigation",
+  "name": "Public interest litigation",
+  "description": null,
+  "sort_order": 8,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.415000Z",
+  "updated_at": "2026-11-18T13:16:43.415000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 15,
+   "xmin": 2179,
+   "xmax": 3702,
+   "ctid": "0,15"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-7023-734a-bb18-2c2fb84829d6",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-administrative-law",
+  "name": "Administrative law",
+  "description": null,
+  "sort_order": 9,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.428000Z",
+  "updated_at": "2026-11-18T13:16:43.428000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 16,
+   "xmin": 2180,
+   "xmax": 3702,
+   "ctid": "0,16"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-7030-75d1-85f5-796dc880856d",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-professional-ethics-and-advocates-act",
+  "name": "Professional ethics and Advocates Act",
+  "description": null,
+  "sort_order": 10,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.440000Z",
+  "updated_at": "2026-11-18T13:16:43.440000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 17,
+   "xmin": 2181,
+   "xmax": 3702,
+   "ctid": "0,17"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-703d-7520-9730-61e48794c9a1",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-company-law",
+  "name": "Company law",
+  "description": null,
+  "sort_order": 11,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.454000Z",
+  "updated_at": "2026-11-18T13:16:43.454000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 18,
+   "xmin": 2182,
+   "xmax": 3702,
+   "ctid": "0,18"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-704a-7143-b82c-65e0a9767914",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-environmental-law",
+  "name": "Environmental law",
+  "description": null,
+  "sort_order": 12,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.466000Z",
+  "updated_at": "2026-11-18T13:16:43.466000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 19,
+   "xmin": 2183,
+   "xmax": 3702,
+   "ctid": "0,19"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-7057-72d4-9d24-c8da4bc6e8fa",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-cyber-law",
+  "name": "Cyber law",
+  "description": null,
+  "sort_order": 13,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.479000Z",
+  "updated_at": "2026-11-18T13:16:43.479000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 20,
+   "xmin": 2184,
+   "xmax": 3702,
+   "ctid": "0,20"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-706c-7318-9048-b8dd0a8ccaca",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-labour-and-industrial-law",
+  "name": "Labour and industrial law",
+  "description": null,
+  "sort_order": 14,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.500000Z",
+  "updated_at": "2026-11-18T13:16:43.500000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 21,
+   "xmin": 2185,
+   "xmax": 3702,
+   "ctid": "0,21"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-7078-7245-a005-b5611896c014",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-torts",
+  "name": "Torts",
+  "description": null,
+  "sort_order": 15,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.512000Z",
+  "updated_at": "2026-11-18T13:16:43.512000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 22,
+   "xmin": 2186,
+   "xmax": 3702,
+   "ctid": "0,22"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-7084-7572-9bb0-447dd3ada138",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-motor-vehicles",
+  "name": "Motor vehicles",
+  "description": null,
+  "sort_order": 16,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.524000Z",
+  "updated_at": "2026-11-18T13:16:43.524000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 23,
+   "xmin": 2187,
+   "xmax": 3702,
+   "ctid": "0,23"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-7091-7122-a1e8-eb833bb8e689",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-consumer-protection",
+  "name": "Consumer protection",
+  "description": null,
+  "sort_order": 17,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.537000Z",
+  "updated_at": "2026-11-18T13:16:43.537000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 24,
+   "xmin": 2188,
+   "xmax": 3702,
+   "ctid": "0,24"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-709d-7530-9af2-71f31aa16e61",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-taxation",
+  "name": "Taxation",
+  "description": null,
+  "sort_order": 18,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.549000Z",
+  "updated_at": "2026-11-18T13:16:43.549000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 25,
+   "xmin": 2189,
+   "xmax": 3702,
+   "ctid": "0,25"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-70aa-7551-8aad-d3b02729a93e",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-contract-law",
+  "name": "Contract law",
+  "description": null,
+  "sort_order": 19,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.562000Z",
+  "updated_at": "2026-11-18T13:16:43.562000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 26,
+   "xmin": 2190,
+   "xmax": 3702,
+   "ctid": "0,26"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-70b8-735f-932d-c7ed5b615506",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-specific-relief",
+  "name": "Specific relief",
+  "description": null,
+  "sort_order": 20,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.576000Z",
+  "updated_at": "2026-11-18T13:16:43.576000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 27,
+   "xmin": 2191,
+   "xmax": 3702,
+   "ctid": "0,27"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-70c8-7367-b951-f9b82ec82864",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-property-law",
+  "name": "Property law",
+  "description": null,
+  "sort_order": 21,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.592000Z",
+  "updated_at": "2026-11-18T13:16:43.592000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 28,
+   "xmin": 2192,
+   "xmax": 3702,
+   "ctid": "0,28"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-70d6-740c-9afa-a0b3eec981ee",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-negotiable-instruments",
+  "name": "Negotiable instruments",
+  "description": null,
+  "sort_order": 22,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.606000Z",
+  "updated_at": "2026-11-18T13:16:43.606000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 29,
+   "xmin": 2193,
+   "xmax": 3702,
+   "ctid": "0,29"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1eecd-70e0-77c7-9978-9ef594ef7d28",
+  "subject_id": "01a1eecd-6f92-7143-b94e-2590ae29bf8b",
+  "act_id": null,
+  "slug": "aibe-intellectual-property",
+  "name": "Intellectual property",
+  "description": null,
+  "sort_order": 23,
+  "is_active": true,
+  "created_at": "2026-11-18T13:16:43.616000Z",
+  "updated_at": "2026-11-18T13:16:43.616000Z"
+ }
+]

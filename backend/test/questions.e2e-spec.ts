@@ -63,14 +63,14 @@ describe('question lifecycle', () => {
     // Incomplete drafts cannot go to review; the response lists what is missing.
     const missing = await as(editor).post(q(draft.id, 'submit')).expect(422);
     expect(missing.body.code).toBe('content_incomplete');
-    expect(missing.body.details.map((d: { field: string }) => d.field)).toEqual(
-      expect.arrayContaining([
-        'options',
-        'explanation',
-        'source_title',
-        'valid_from',
-      ]),
+    const missingFields = missing.body.details.map(
+      (d: { field: string }) => d.field,
     );
+    expect(missingFields).toEqual(
+      expect.arrayContaining(['options', 'source_title', 'valid_from']),
+    );
+    // The explanation is optional, so its absence never blocks review.
+    expect(missingFields).not.toContain('explanation');
 
     await as(editor).patch(q(draft.id), completeContent).expect(200);
     const inReview = await as(editor).post(q(draft.id, 'submit')).expect(200);

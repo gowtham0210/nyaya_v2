@@ -35,6 +35,21 @@ class AuthController extends Notifier<Account?> {
         .resetPassword(email: email.trim(), code: code.trim(), newPassword: newPassword);
   }
 
+  /// Keeps the stored sign-in snapshot in step with a name the learner just
+  /// changed, so nothing reading it later shows the old one.
+  Future<void> updateDisplayName(String name) async {
+    final current = state;
+    final store = ref.read(tokenStoreProvider);
+    final session = store.current;
+    if (current == null || session == null) return;
+    state = Account(id: current.id, email: current.email, displayName: name);
+    await store.save(StoredSession(
+      accessToken: session.accessToken,
+      refreshToken: session.refreshToken,
+      user: {...session.user, 'display_name': name},
+    ));
+  }
+
   Future<void> signOut() async {
     await ref.read(authApiProvider).signOut();
     state = null;

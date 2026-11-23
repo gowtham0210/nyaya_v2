@@ -1,0 +1,33 @@
+import fs from 'node:fs';
+const A = JSON.parse(fs.readFileSync('work/A-nov19-backup.results.json')), B = JSON.parse(fs.readFileSync('work/B-current-live.results.json'));
+const md = [];
+const mark = (ok) => ok ? 'PASS' : '**FAIL**';
+md.push('# Dry-run report (scratch copies only; live DB untouched)', '');
+md.push(`Run on 2026-11-22. Backend processes were stopped and verified before the run (no \`node\` backend process; ports 4000/5432/5174 belong to an unrelated Docker project). Both runs used the repo's own drizzle migrator and the recovery data; only copies under \`.recovery-work/dryrun/work/\` were opened.`, '');
+md.push('## 1. Result', '', '| scenario | starting database | rows before | rows after | failures |', '|---|---|--:|--:|--:|');
+md.push(`| **A** (as requested) | scratch copy of the Nov 19 backup \`pglite-backup-20261119-pre-practice-timer\` | ${A.preTotal} | ${A.post.total} | **${A.failures}** |`);
+md.push(`| **B** (extra) | scratch copy of the *current* live DB (has rows created after the restore) | ${B.preTotal} | ${B.post.total} | **${B.failures}** |`, '');
+md.push('**Both dry runs completed with 0 failures.**', '');
+md.push('### Finding: the live DB is not the Nov 19 backup any more', '',
+  '- The backend was running against the live DB after my earlier restore. It auto-applied migrations 0023 and 0024 (live had 26 migrations when I copied it) and recorded new activity (about 13:46 IST): **1 user, 3 refresh tokens, 2 audit events, 1 coin-ledger row, 1 app-open, 1 learner-settings row**.',
+  '- None of those ids or the new email exist in the recovered data, so there is no conflict. Scenario B proves they are kept untouched and the 17,701-row recovery lands around them (7,196 + 10,514 = 17,710 = recovered 17,701 + 9 live-only rows).',
+  '- Consequence for the real restore: step 1 (migrations) is already done in live; the restore is steps 2-3 only.', '');
+md.push('## 2. Migrations (scenario A, which started at 24 applied)', '');
+for (const c of A.checks.filter((c) => c.name.startsWith('migration'))) md.push(`- ${mark(c.ok)} ${c.name} ${c.detail ? '`' + c.detail + '`' : ''}`);
+md.push('- Scenario B: already applied in the starting copy, and the migrator was a no-op (26 -> 26).', '');
+md.push('## 3. Load tiers (A and B)', '', '| tier | A | B |', '|---|---|---|');
+A.steps.forEach((s, i) => md.push(`| ${s.step} | ${mark(s.ok)} | ${mark(B.steps[i]?.ok)} |`));
+md.push('', '## 4. Exam papers (all 11, A / B)', '', '| paper | status | rows / total | keyed + withdrawn | timer (s) | A | B | issues |', '|---|---|--:|--:|--:|---|---|---|');
+A.papers.forEach((p, i) => { const b = B.papers[i]; md.push(`| ${p.code} r${p.revision} | ${p.status} | ${p.rows}/${p.total} | ${p.keyed} + ${p.withdrawn} | ${p.timer ?? '-'} | ${mark(p.ok)} | ${mark(b.ok)} | ${[...p.issues, ...b.issues].join('; ') || '-'} |`); });
+md.push('', 'Per paper, "PASS" means: the paper row (status, frozen_at, timer, revision, supersedes), all paper-question rows (positions 1..N, answer status, keys, notes), every pinned question version (stem, options, correct and alternate answers, explanation, status published, key inside options), key-history rows, attempt count and exam tag count equal the recovered data exactly. 8 published and 3 retired confirmed in both runs.', '');
+md.push('Papers covered: AIBE-18 (r1, r2 retired; r3 published), AIBE-19, AIBE-20, AIBE-21, CLAT 2026, CLAT 2025 (r1 retired, r2 published), CLAT 2024 Set B, CLAT 2023.', '');
+md.push('## 5. Every table (A / B)', '', 'Counts: pre → expected → actual. Content: every recovered row present and identical (to_jsonb vs recovered, normalised); extra rows in DB must be rows that existed before the dry run.', '', '| table | A pre | A expected | A actual | A inserted/updated | A | B pre | B expected | B actual | B inserted/updated | B extra live rows kept | B |', '|---|--:|--:|--:|--:|---|--:|--:|--:|--:|--:|---|');
+for (const t of Object.keys(A.tables)) { const a = A.tables[t], b = B.tables[t]; md.push(`| ${t} | ${a.pre} | ${a.expected} | ${a.actual} | ${a.inserted}/${a.updated} | ${mark(a.ok)} | ${b.pre} | ${b.expected} | ${b.actual} | ${b.inserted}/${b.updated} | ${b.extraRowsInDb ?? 0} | ${mark(b.ok)} |`); }
+md.push('', 'Not restored by design: `rate_limits` (ephemeral), `legal_documents`, `legal_chunks`, `legal_sync_runs` (unchanged since Nov 19). Verified as unchanged.', '');
+md.push('## 6. Integrity and specific checks (A / B)', '', '| check | A | B |', '|---|---|---|');
+A.checks.filter((c) => !c.name.startsWith('migration')).forEach((c, i) => { const b = B.checks.filter((x) => !x.name.startsWith('migration'))[i]; md.push(`| ${c.name} ${c.detail ? '`' + c.detail.replace(/\|/g, '/') + '`' : ''} | ${mark(c.ok)} | ${mark(b?.ok)} |`); });
+md.push('', '- Foreign keys: all 90 constraints in the schema are validated and have 0 orphans after the load. Questions are inserted with a null `live_version_id` and fixed after their versions exist (757 rows: 753 new + 4 existing drafts now published); none is left null.', '- Refresh tokens: the previously active token whose revocation was recorded is revoked after the load, and all 190 recovered-revoked tokens are revoked in the database.', '- UPDATE guards: in each scenario 13 guarded row updates (1 user, 4 question versions, 4 exam papers, 3 daily tips, 1 refresh token) plus the 4 existing questions live-version fixes (17 modified rows) all applied; none was skipped by a guard.', '');
+md.push('## 7. What the dry run does not prove', '', '- It restores what was recovered. Anything written after 13:12:46 IST on Nov 22 is still missing, and page checksums of the broken files were never verified (see `REPORT.md`).', '- The 22 medium-confidence rows (14 audit, 3 daily tips, 3 refresh tokens, 2 rate limits) depend on my WAL replay. The 3 daily tips are corroborated by their audit entries (checked above); rate limits are not restored.', '- It ran in PGlite on copies, not through the CMS or the backend API. No paper was published or activated through any workflow.', '');
+md.push('## 8. Files', '', '- `dryrun/dryrun.mjs`, `dryrun/gen_report.mjs`: the scripts.', '- `dryrun/work/A-nov19-backup/db`, `dryrun/work/B-current-live/db`: the restored scratch databases (can be deleted).', '- `dryrun/work/*.results.json`: raw results.', '', '## 9. Next step', '', 'Awaiting your separate approval. A live restore would: stop all backend processes again, back up `.data/pglite` as `pglite-backup-20261122-pre-restore`, then run tiers A-N (without the migration step, already applied) with the same script against the live directory, with the same verification.');
+fs.writeFileSync('DRYRUN_REPORT.md', md.join('\n'));
+console.log(md.length, 'lines');

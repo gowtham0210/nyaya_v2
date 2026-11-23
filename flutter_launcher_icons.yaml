@@ -1,5 +1,5 @@
 # App icon for iOS and Android: `dart run flutter_launcher_icons`.
-# Sources are in assets/icon (made from the ChatGPT design, 2026-11-02).
+# Sources are in assets/icon (from the Nyaya Kural Justice Emblem, 2026-11-16).
 flutter_launcher_icons:
   image_path: "assets/icon/app_icon.png"
   ios: true
@@ -7,8 +7,8 @@ flutter_launcher_icons:
   remove_alpha_ios: true
   android: "ic_launcher"
   min_sdk_android: 26
-  # Android shapes the icon itself (circle, squircle…): the symbol on the brand terracotta.
-  adaptive_icon_background: "#873F2B"
+  # Android shapes the icon itself (circle, squircle…): the emblem on its own maroon.
+  adaptive_icon_background: "#580403"
   adaptive_icon_foreground: "assets/icon/app_icon_foreground.png"
-  # The foreground PNG already keeps the symbol inside the always-visible circle.
+  # The foreground PNG already keeps the emblem inside the always-visible circle.
   adaptive_icon_foreground_inset: 0

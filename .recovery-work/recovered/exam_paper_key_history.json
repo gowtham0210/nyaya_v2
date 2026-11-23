@@ -1,0 +1,152 @@
+[
+ {
+  "id": "01a1f1c0-5e09-7350-9247-763c0bbc3e7b",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "paper_question_id": "01a1f1c0-5dd5-7200-82aa-44b4a97c9906",
+  "kind": "provisional",
+  "accepted_option_ids": [
+   "b"
+  ],
+  "content_source_id": null,
+  "source_document_ref": "Key printed in the compiled PDF (not an official key)",
+  "retrieved_on": null,
+  "source_sha256": null,
+  "note": "Replaced by the official key",
+  "recorded_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "created_at": "2026-11-19T03:01:18.467000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 1,
+   "xmin": 3694,
+   "xmax": 0,
+   "ctid": "0,1"
+  }
+ },
+ {
+  "id": "01a1f1c0-5e16-742b-b518-80948239b9ee",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "paper_question_id": "01a1f1c0-5dd5-7200-82aa-44b4a97c9906",
+  "kind": "final",
+  "accepted_option_ids": [
+   "a"
+  ],
+  "content_source_id": null,
+  "source_document_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 63",
+  "retrieved_on": null,
+  "source_sha256": "4a3f151853145234b8950e54a0bfafd31ce76c9e48a4af17b8a47dee2b90942c",
+  "note": null,
+  "recorded_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "created_at": "2026-11-19T03:01:18.482000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 2,
+   "xmin": 3695,
+   "xmax": 0,
+   "ctid": "0,2"
+  }
+ },
+ {
+  "id": "01a1f1d1-728b-7166-bf2c-86c6f38fbb89",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "paper_question_id": "01a1f1d1-723d-7797-b82e-e82da1d8eadf",
+  "kind": "provisional",
+  "accepted_option_ids": [
+   "b"
+  ],
+  "content_source_id": null,
+  "source_document_ref": "Key printed in the compiled PDF (not an official key)",
+  "retrieved_on": null,
+  "source_sha256": null,
+  "note": "Replaced by the official key",
+  "recorded_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "created_at": "2026-11-19T03:01:18.467000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 3,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "0,3"
+  }
+ },
+ {
+  "id": "01a1f1d1-728d-7661-9f86-f0f0bc41d52b",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "paper_question_id": "01a1f1d1-723d-7797-b82e-e82da1d8eadf",
+  "kind": "final",
+  "accepted_option_ids": [
+   "a"
+  ],
+  "content_source_id": null,
+  "source_document_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 63",
+  "retrieved_on": null,
+  "source_sha256": "4a3f151853145234b8950e54a0bfafd31ce76c9e48a4af17b8a47dee2b90942c",
+  "note": null,
+  "recorded_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "created_at": "2026-11-19T03:01:18.482000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 4,
+   "xmin": 3738,
+   "xmax": 0,
+   "ctid": "0,4"
+  }
+ },
+ {
+  "id": "01a1f220-8e09-717b-a852-164d760f2c05",
+  "paper_id": "01a1f220-8d9a-7251-8f6a-f28a3c87ef2f",
+  "paper_question_id": "01a1f220-8ddf-74f2-bc37-7194bb38162c",
+  "kind": "provisional",
+  "accepted_option_ids": [
+   "b"
+  ],
+  "content_source_id": null,
+  "source_document_ref": "Key printed in the compiled PDF (not an official key)",
+  "retrieved_on": null,
+  "source_sha256": null,
+  "note": "Replaced by the official key",
+  "recorded_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "created_at": "2026-11-19T03:01:18.467000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 5,
+   "xmin": 3809,
+   "xmax": 0,
+   "ctid": "0,5"
+  }
+ },
+ {
+  "id": "01a1f220-8e0c-72eb-bd23-daa648559e18",
+  "paper_id": "01a1f220-8d9a-7251-8f6a-f28a3c87ef2f",
+  "paper_question_id": "01a1f220-8ddf-74f2-bc37-7194bb38162c",
+  "kind": "final",
+  "accepted_option_ids": [
+   "a"
+  ],
+  "content_source_id": null,
+  "source_document_ref": "BCI AIBE-XVIII Answer Key (Set Code A), question 63",
+  "retrieved_on": null,
+  "source_sha256": "4a3f151853145234b8950e54a0bfafd31ce76c9e48a4af17b8a47dee2b90942c",
+  "note": null,
+  "recorded_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "created_at": "2026-11-19T03:01:18.482000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 6,
+   "xmin": 3809,
+   "xmax": 0,
+   "ctid": "0,6"
+  }
+ }
+]

@@ -162,4 +162,17 @@ extension NyayaThemeX on BuildContext {
   /// Extra letter spacing for small label text. Indian scripts join their
   /// letters, so spacing pulls words apart: only English gets it.
   double tracking(double value) => Localizations.localeOf(this).languageCode == 'en' ? value : 0;
+
+  /// True in the five Indian-language UIs (English is the only Latin one).
+  bool get isIndicScript => Localizations.localeOf(this).languageCode != 'en';
 }
+
+/// How much to shrink text in a language so its script looks as big as English
+/// at the same size. Tamil, Telugu, Kannada and Malayalam letters are much
+/// taller and wider than Latin ones, and Devanagari a little; at the same
+/// point size they crowd, wrap mid-word and get cut off.
+double scriptTextScale(String languageCode) => switch (languageCode) {
+  'ta' || 'te' || 'kn' || 'ml' => 0.88,
+  'hi' => 0.94,
+  _ => 1.0,
+};

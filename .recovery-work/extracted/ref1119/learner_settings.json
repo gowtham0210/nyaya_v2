@@ -1,0 +1,1062 @@
+[
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 1,
+   "xmin": 759,
+   "xmax": 768,
+   "ctid": "0,2"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1c91a-bbb9-70e3-843c-56fd42a3c2f7",
+  "persona": "citizen",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-11T05:36:19.438000Z",
+  "updated_at": "2026-11-11T05:36:19.438000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 2,
+   "xmin": 768,
+   "xmax": 769,
+   "ctid": "0,3"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1c91a-bbb9-70e3-843c-56fd42a3c2f7",
+  "persona": "citizen",
+  "language": "en",
+  "daily_goal": 5,
+  "onboarded_at": "2026-11-11T05:36:19.438000Z",
+  "updated_at": "2026-11-11T05:44:53.650000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 3,
+   "xmin": 769,
+   "xmax": 769,
+   "ctid": "0,3"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1c91a-bbb9-70e3-843c-56fd42a3c2f7",
+  "persona": "citizen",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-11T05:36:19.438000Z",
+  "updated_at": "2026-11-11T05:44:56.876000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 4,
+   "xmin": 780,
+   "xmax": 0,
+   "ctid": "0,4"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1c926-960a-7315-b573-43c729eeb791",
+  "persona": "citizen",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-11T05:48:31.980000Z",
+  "updated_at": "2026-11-11T05:48:31.980000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 5,
+   "xmin": 788,
+   "xmax": 0,
+   "ctid": "0,5"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1c93e-72a4-70c3-8bd4-adfb57cbe6cb",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-11T06:14:42.308000Z",
+  "updated_at": "2026-11-11T06:14:42.308000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 6,
+   "xmin": 1168,
+   "xmax": 0,
+   "ctid": "0,6"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1d493-0ecb-7185-a17c-05c60b4d8ce8",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-13T11:02:50.080000Z",
+  "updated_at": "2026-11-13T11:02:50.080000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 7,
+   "xmin": 1185,
+   "xmax": 0,
+   "ctid": "0,7"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1d498-a4c3-73f4-a96a-4e7af482d2d5",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-13T11:08:56.100000Z",
+  "updated_at": "2026-11-13T11:08:56.100000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 8,
+   "xmin": 1207,
+   "xmax": 0,
+   "ctid": "0,8"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1d4c5-4e86-72b3-9abd-60c430e8fa4e",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-13T11:57:43.169000Z",
+  "updated_at": "2026-11-13T11:57:43.169000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 9,
+   "xmin": 1221,
+   "xmax": 0,
+   "ctid": "0,9"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1d4c8-5932-76c4-a5ce-03135f7cb64b",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-13T12:01:02.500000Z",
+  "updated_at": "2026-11-13T12:01:02.500000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 10,
+   "xmin": 1237,
+   "xmax": 0,
+   "ctid": "0,10"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1d86e-e9bd-7741-8771-3eddb0ca4301",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-14T05:01:50.433000Z",
+  "updated_at": "2026-11-14T05:01:50.433000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 11,
+   "xmin": 1247,
+   "xmax": 0,
+   "ctid": "0,11"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1d8a5-1053-7009-bba4-d79174b99305",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-14T06:00:59.187000Z",
+  "updated_at": "2026-11-14T06:00:59.187000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 12,
+   "xmin": 1257,
+   "xmax": 0,
+   "ctid": "0,12"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1d8df-6dad-7222-a063-e03f8e7ce761",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-14T07:04:44.192000Z",
+  "updated_at": "2026-11-14T07:04:44.192000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 13,
+   "xmin": 1269,
+   "xmax": 0,
+   "ctid": "0,13"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1d8e3-b09c-757e-b3ae-3e396281229e",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-14T07:09:23.283000Z",
+  "updated_at": "2026-11-14T07:09:23.283000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 14,
+   "xmin": 1289,
+   "xmax": 0,
+   "ctid": "0,14"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1d95d-6e72-73db-8c59-b32e78541bc9",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-14T09:22:21.672000Z",
+  "updated_at": "2026-11-14T09:22:21.672000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 15,
+   "xmin": 1305,
+   "xmax": 0,
+   "ctid": "0,15"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1d99d-4d33-73c1-824a-9edbf6582c47",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-14T10:32:07.531000Z",
+  "updated_at": "2026-11-14T10:32:07.531000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 16,
+   "xmin": 1329,
+   "xmax": 0,
+   "ctid": "0,16"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1d9b8-2996-702a-b550-c5ff2209d65c",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-14T11:01:28.052000Z",
+  "updated_at": "2026-11-14T11:01:28.052000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 17,
+   "xmin": 1367,
+   "xmax": 0,
+   "ctid": "0,17"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1d9d2-062c-7021-b3ae-4be114c7c97c",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-14T11:29:42.945000Z",
+  "updated_at": "2026-11-14T11:29:42.945000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 18,
+   "xmin": 1376,
+   "xmax": 0,
+   "ctid": "0,18"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1d9da-2968-7156-829a-4d73ef2c0416",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-14T11:38:36.178000Z",
+  "updated_at": "2026-11-14T11:38:36.178000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 19,
+   "xmin": 1382,
+   "xmax": 0,
+   "ctid": "0,19"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1d9e4-057f-743a-ac0c-aac16aab89ab",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-14T11:49:30.423000Z",
+  "updated_at": "2026-11-14T11:49:30.423000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 20,
+   "xmin": 1399,
+   "xmax": 0,
+   "ctid": "0,20"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1d9f7-7122-754e-a800-eb909ecbdd30",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-14T12:10:35.049000Z",
+  "updated_at": "2026-11-14T12:10:35.049000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 21,
+   "xmin": 1409,
+   "xmax": 0,
+   "ctid": "0,21"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1da00-368f-726e-99c9-3d46de0bf6e1",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-14T12:20:09.884000Z",
+  "updated_at": "2026-11-14T12:20:09.884000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 22,
+   "xmin": 1428,
+   "xmax": 0,
+   "ctid": "0,22"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1da11-01d3-74ce-a946-e6b706d1a26e",
+  "persona": "aspirant",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-14T12:38:37.735000Z",
+  "updated_at": "2026-11-14T12:38:37.735000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 23,
+   "xmin": 1440,
+   "xmax": 0,
+   "ctid": "0,23"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1da23-c517-7784-834b-a1369848fd5f",
+  "persona": "aspirant",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-14T12:58:59.985000Z",
+  "updated_at": "2026-11-14T12:58:59.985000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 24,
+   "xmin": 1455,
+   "xmax": 0,
+   "ctid": "0,24"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e2af-8a32-7582-9ff5-792fc728d951",
+  "persona": "citizen",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T04:48:43.061000Z",
+  "updated_at": "2026-11-16T04:48:43.061000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 25,
+   "xmin": 1460,
+   "xmax": 0,
+   "ctid": "0,25"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e2c6-23db-7574-b812-cf150c099a80",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T05:13:25.687000Z",
+  "updated_at": "2026-11-16T05:13:25.687000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 26,
+   "xmin": 1465,
+   "xmax": 0,
+   "ctid": "0,26"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e2d4-9595-7234-8139-1ce3b48bcdf2",
+  "persona": "aspirant",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T05:29:12.305000Z",
+  "updated_at": "2026-11-16T05:29:12.305000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 27,
+   "xmin": 1470,
+   "xmax": 0,
+   "ctid": "0,27"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "persona": "citizen",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T05:39:27.431000Z",
+  "updated_at": "2026-11-16T05:39:27.431000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 28,
+   "xmin": 1578,
+   "xmax": 0,
+   "ctid": "0,28"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e320-64e7-7759-8ac6-68ebebbf840e",
+  "persona": "citizen",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T06:52:00.505000Z",
+  "updated_at": "2026-11-16T06:52:00.505000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 29,
+   "xmin": 1590,
+   "xmax": 0,
+   "ctid": "0,29"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e327-c2e5-75d1-a4ce-bdac08e15a0e",
+  "persona": "citizen",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T07:00:03.484000Z",
+  "updated_at": "2026-11-16T07:00:03.484000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 30,
+   "xmin": 1597,
+   "xmax": 0,
+   "ctid": "0,30"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e32b-f398-748b-8997-0dbaf6518bb3",
+  "persona": "citizen",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T07:04:36.003000Z",
+  "updated_at": "2026-11-16T07:04:36.003000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 31,
+   "xmin": 1604,
+   "xmax": 1614,
+   "ctid": "0,32"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e32e-d8ae-71e9-a25d-879180bfcc4f",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T07:10:15.541000Z",
+  "updated_at": "2026-11-16T07:10:15.541000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 32,
+   "xmin": 1614,
+   "xmax": 1615,
+   "ctid": "0,33"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e32e-d8ae-71e9-a25d-879180bfcc4f",
+  "persona": "citizen",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": null,
+  "updated_at": "2026-11-16T07:18:48.380000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 33,
+   "xmin": 1615,
+   "xmax": 1618,
+   "ctid": "0,34"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e32e-d8ae-71e9-a25d-879180bfcc4f",
+  "persona": "advocate",
+  "language": "ta",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T07:18:59.319000Z",
+  "updated_at": "2026-11-16T07:18:59.319000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 34,
+   "xmin": 1618,
+   "xmax": 1619,
+   "ctid": "0,35"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e32e-d8ae-71e9-a25d-879180bfcc4f",
+  "persona": "citizen",
+  "language": "ta",
+  "daily_goal": 3,
+  "onboarded_at": null,
+  "updated_at": "2026-11-16T07:28:57.222000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 35,
+   "xmin": 1619,
+   "xmax": 1619,
+   "ctid": "0,35"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e32e-d8ae-71e9-a25d-879180bfcc4f",
+  "persona": "aspirant",
+  "language": "ta",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T07:29:05.417000Z",
+  "updated_at": "2026-11-16T07:29:05.417000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 36,
+   "xmin": 1626,
+   "xmax": 0,
+   "ctid": "0,36"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e34e-1a89-7666-93e6-4aed93746026",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T07:41:49.537000Z",
+  "updated_at": "2026-11-16T07:41:49.537000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 37,
+   "xmin": 1631,
+   "xmax": 0,
+   "ctid": "0,37"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e35b-5a0a-7176-b3dd-c048b9e4b1dc",
+  "persona": "citizen",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T07:56:22.008000Z",
+  "updated_at": "2026-11-16T07:56:22.008000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 38,
+   "xmin": 1681,
+   "xmax": 0,
+   "ctid": "0,38"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e35f-3a75-7167-be29-ff6b2d11c200",
+  "persona": "citizen",
+  "language": "ta",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T08:00:35.739000Z",
+  "updated_at": "2026-11-16T08:00:35.739000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 39,
+   "xmin": 1692,
+   "xmax": 0,
+   "ctid": "0,39"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e368-0cf4-7257-8cc2-bf254bad4273",
+  "persona": "aspirant",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T08:10:13.839000Z",
+  "updated_at": "2026-11-16T08:10:13.839000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 40,
+   "xmin": 1715,
+   "xmax": 0,
+   "ctid": "0,40"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "persona": "aspirant",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T08:54:52.540000Z",
+  "updated_at": "2026-11-16T08:54:52.540000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 41,
+   "xmin": 1768,
+   "xmax": 0,
+   "ctid": "0,41"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e462-c112-72df-9389-2ff858fa4df8",
+  "persona": "aspirant",
+  "language": "ta",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T12:44:04.983000Z",
+  "updated_at": "2026-11-16T12:44:04.983000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 42,
+   "xmin": 1779,
+   "xmax": 0,
+   "ctid": "0,42"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e511-282d-73f7-8ce1-950ecce0d19c",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T15:54:33.920000Z",
+  "updated_at": "2026-11-16T15:54:33.920000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 43,
+   "xmin": 1798,
+   "xmax": 1810,
+   "ctid": "0,44"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e521-2f6e-755c-bf68-26954afb132e",
+  "persona": "advocate",
+  "language": "ta",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T16:12:03.658000Z",
+  "updated_at": "2026-11-16T16:12:03.658000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 44,
+   "xmin": 1810,
+   "xmax": 1810,
+   "ctid": "0,44"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e521-2f6e-755c-bf68-26954afb132e",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-16T16:12:03.658000Z",
+  "updated_at": "2026-11-17T05:07:45.420000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 45,
+   "xmin": 2100,
+   "xmax": 0,
+   "ctid": "0,45"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e819-51f3-767f-91b1-68eefbc28479",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-17T06:02:20.368000Z",
+  "updated_at": "2026-11-17T06:02:20.368000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 46,
+   "xmin": 2107,
+   "xmax": 0,
+   "ctid": "0,46"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1e846-b507-70d9-a52c-3807c9a2389d",
+  "persona": "citizen",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-17T06:51:54.927000Z",
+  "updated_at": "2026-11-17T06:51:54.927000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 47,
+   "xmin": 2131,
+   "xmax": 0,
+   "ctid": "0,47"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1ecf8-c85f-71be-a7f5-dac6aebe5027",
+  "persona": "aspirant",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-18T04:44:55.328000Z",
+  "updated_at": "2026-11-18T04:44:55.328000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 48,
+   "xmin": 2150,
+   "xmax": 0,
+   "ctid": "0,48"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1ee6b-a372-74e8-a429-a3303578e29d",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-18T11:29:58.642000Z",
+  "updated_at": "2026-11-18T11:29:58.642000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 49,
+   "xmin": 2159,
+   "xmax": 0,
+   "ctid": "0,49"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1eead-27c4-75cf-9238-bcd1ecfc83ca",
+  "persona": "aspirant",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-18T12:41:35.452000Z",
+  "updated_at": "2026-11-18T12:41:35.452000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 50,
+   "xmin": 2205,
+   "xmax": 0,
+   "ctid": "0,50"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1eed0-3c74-700f-b063-e36ae2f0c8af",
+  "persona": "aspirant",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-18T13:19:53.313000Z",
+  "updated_at": "2026-11-18T13:19:53.313000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 51,
+   "xmin": 2210,
+   "xmax": 0,
+   "ctid": "0,51"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1eedb-4f09-7127-b0f6-157aa76d3384",
+  "persona": "aspirant",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-18T13:31:56.546000Z",
+  "updated_at": "2026-11-18T13:31:56.546000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 52,
+   "xmin": 2216,
+   "xmax": 0,
+   "ctid": "0,52"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1ef65-e133-729b-b91f-534656f01ead",
+  "persona": "aspirant",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-18T16:03:19.603000Z",
+  "updated_at": "2026-11-18T16:03:19.603000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 53,
+   "xmin": 3676,
+   "xmax": 0,
+   "ctid": "0,53"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "user_id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+  "persona": "advocate",
+  "language": "en",
+  "daily_goal": 3,
+  "onboarded_at": "2026-11-19T02:52:11.019000Z",
+  "updated_at": "2026-11-19T02:52:11.019000Z"
+ }
+]

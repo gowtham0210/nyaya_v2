@@ -1,0 +1,8882 @@
+[
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 3,
+   "xmin": 4602,
+   "xmax": 4605,
+   "ctid": "0,3"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f431-11d9-7023-9e05-ce21f0c05213",
+  "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "submitted",
+  "paper_id": "01a1f280-bb7d-7641-b91e-c1bb4d9d1810",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T14:23:38.969000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": "2026-11-19T14:24:10.603000Z",
+  "finalised_by": "learner",
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": {
+   "pass": {
+    "reason": "The marking rules for this exam are not configured",
+    "general": null,
+    "reserved": null,
+    "available": false,
+    "percentage": null
+   },
+   "overall": {
+    "correct": 4,
+    "incorrect": 8,
+    "max_marks": null,
+    "withdrawn": 0,
+    "percentage": null,
+    "unanswered": 88,
+    "marks_obtained": null,
+    "total_positions": 100,
+    "scorable_positions": 100
+   },
+   "sections": [],
+   "positions": [
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 1
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 2
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 3
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 4
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 5
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 6
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 7
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 8
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 9
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 10
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 11
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 12
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 13
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 14
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 15
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 16
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 17
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 18
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 19
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 20
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 21
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 22
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 23
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 24
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 25
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 26
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 27
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 28
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 29
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 30
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 31
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 32
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 33
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 34
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 35
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 36
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 37
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 38
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 39
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 40
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 41
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 42
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 43
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 44
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 45
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 46
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 47
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 48
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 49
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 50
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 51
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 52
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 53
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 54
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 55
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 56
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 57
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 58
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 59
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 60
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 61
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 62
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 63
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 64
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 65
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 66
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 67
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 68
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 69
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 70
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 71
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 72
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 73
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 74
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 75
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 76
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 77
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 78
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 79
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 80
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 81
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 82
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 83
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 84
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 85
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 86
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 87
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 88
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 89
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 90
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 91
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 92
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 93
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 94
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 95
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 96
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 97
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 98
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 99
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 100
+    }
+   ],
+   "provisional": false,
+   "rules_verified": false,
+   "marks_available": false,
+   "withdrawn_policy": "unscored",
+   "provisional_reasons": []
+  },
+  "created_at": "2026-11-19T14:23:38.970000Z",
+  "updated_at": "2026-11-19T14:24:10.603000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 8,
+   "xmin": 3722,
+   "xmax": 3724,
+   "ctid": "0,8"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1cc-8cc7-72f8-8760-d75e27a220e5",
+  "user_id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "submitted",
+  "paper_id": "01a1f18d-2a51-730f-b859-9a6fc028a86d",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T03:14:36.871000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": "2026-11-19T03:14:55.512000Z",
+  "finalised_by": "learner",
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": {
+   "pass": {
+    "reason": "The marking rules for this exam are not configured",
+    "general": null,
+    "reserved": null,
+    "available": false,
+    "percentage": null
+   },
+   "overall": {
+    "correct": 2,
+    "incorrect": 4,
+    "max_marks": null,
+    "withdrawn": 0,
+    "percentage": null,
+    "unanswered": 94,
+    "marks_obtained": null,
+    "total_positions": 100,
+    "scorable_positions": 100
+   },
+   "sections": [],
+   "positions": [
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 1
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 2
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 3
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 4
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 5
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 6
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 7
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 8
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 9
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 10
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 11
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 12
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 13
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 14
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 15
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 16
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 17
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 18
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 19
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 20
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 21
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 22
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 23
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 24
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 25
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 26
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 27
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 28
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 29
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 30
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 31
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 32
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 33
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 34
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 35
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 36
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 37
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 38
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 39
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 40
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 41
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 42
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 43
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 44
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 45
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 46
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 47
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 48
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 49
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 50
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 51
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 52
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 53
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 54
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 55
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 56
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 57
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 58
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 59
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 60
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 61
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 62
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 63
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 64
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 65
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 66
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 67
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 68
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 69
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 70
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 71
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 72
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 73
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 74
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 75
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 76
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 77
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 78
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 79
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 80
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 81
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 82
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 83
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 84
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 85
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 86
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 87
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 88
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 89
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 90
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 91
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 92
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 93
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 94
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 95
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 96
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 97
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 98
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 99
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 100
+    }
+   ],
+   "provisional": false,
+   "rules_verified": false,
+   "marks_available": false,
+   "withdrawn_policy": "unscored",
+   "provisional_reasons": []
+  },
+  "created_at": "2026-11-19T03:14:36.871000Z",
+  "updated_at": "2026-11-19T03:14:55.512000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 9,
+   "xmin": 3765,
+   "xmax": 3826,
+   "ctid": "0,9"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1fe-5d91-7480-89df-3c8a560c7d81",
+  "user_id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f1d1-71a5-7108-a7fd-5096793bd8a2",
+  "paper_revision": 2,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T04:09:01.585000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-19T04:09:01.585000Z",
+  "updated_at": "2026-11-19T04:09:01.585000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 11,
+   "xmin": 4548,
+   "xmax": 4548,
+   "ctid": "0,11"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f230-d34c-72e3-88e4-1a107cd9d327",
+  "user_id": "01a1f230-9148-76e8-b267-6c9783a18a17",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "expired",
+  "paper_id": "01a1f220-8d9a-7251-8f6a-f28a3c87ef2f",
+  "paper_revision": 3,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T05:04:08.524000Z",
+  "deadline_at": "2026-11-19T08:04:08.524000Z",
+  "duration_seconds": 10800,
+  "submitted_at": "2026-11-19T08:04:08.524000Z",
+  "finalised_by": "sweep",
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": {
+   "pass": {
+    "reason": "The marking rules for this exam are not configured",
+    "general": null,
+    "reserved": null,
+    "available": false,
+    "percentage": null
+   },
+   "overall": {
+    "correct": 0,
+    "incorrect": 0,
+    "max_marks": null,
+    "withdrawn": 0,
+    "percentage": null,
+    "unanswered": 100,
+    "marks_obtained": null,
+    "total_positions": 100,
+    "scorable_positions": 100
+   },
+   "sections": [],
+   "positions": [
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 1
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 2
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 3
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 4
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 5
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 6
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 7
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 8
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 9
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 10
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 11
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 12
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 13
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 14
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 15
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 16
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 17
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 18
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 19
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 20
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 21
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 22
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 23
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 24
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 25
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 26
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 27
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 28
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 29
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 30
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 31
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 32
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 33
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 34
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 35
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 36
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 37
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 38
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 39
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 40
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 41
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 42
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 43
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 44
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 45
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 46
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 47
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 48
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 49
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 50
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 51
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 52
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 53
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 54
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 55
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 56
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 57
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 58
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 59
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 60
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 61
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 62
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 63
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 64
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 65
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 66
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 67
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 68
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 69
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 70
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 71
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 72
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 73
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 74
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 75
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 76
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 77
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 78
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 79
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 80
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 81
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 82
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 83
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 84
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 85
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 86
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 87
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 88
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 89
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 90
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 91
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 92
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 93
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 94
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 95
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 96
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 97
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 98
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 99
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 100
+    }
+   ],
+   "provisional": false,
+   "rules_verified": false,
+   "marks_available": false,
+   "withdrawn_policy": "unscored",
+   "provisional_reasons": []
+  },
+  "created_at": "2026-11-19T05:04:08.524000Z",
+  "updated_at": "2026-11-19T12:24:34.852000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 13,
+   "xmin": 4655,
+   "xmax": 4656,
+   "ctid": "0,13"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f466-319e-778f-aba7-52fdc7bf2647",
+  "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "submitted",
+  "paper_id": "01a1f18d-5728-704e-bdfe-65307de3b08e",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T15:21:40.510000Z",
+  "deadline_at": "2026-11-19T18:21:40.510000Z",
+  "duration_seconds": 10800,
+  "submitted_at": "2026-11-19T15:21:54.328000Z",
+  "finalised_by": "learner",
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": {
+   "pass": {
+    "reason": "The marking rules for this exam are not configured",
+    "general": null,
+    "reserved": null,
+    "available": false,
+    "percentage": null
+   },
+   "overall": {
+    "correct": 1,
+    "incorrect": 2,
+    "max_marks": null,
+    "withdrawn": 11,
+    "percentage": null,
+    "unanswered": 86,
+    "marks_obtained": null,
+    "total_positions": 100,
+    "scorable_positions": 89
+   },
+   "sections": [],
+   "positions": [
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 1
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 2
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 3
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 4
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 5
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 6
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 7
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 8
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 9
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 10
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 11
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 12
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 13
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 14
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 15
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 16
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 17
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 18
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 19
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 20
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 21
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 22
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 23
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 24
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 25
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 26
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 27
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 28
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 29
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 30
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 31
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 32
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 33
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 34
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 35
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 36
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 37
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 38
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 39
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 40
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 41
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 42
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 43
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 44
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 45
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 46
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 47
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 48
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 49
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 50
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 51
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 52
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 53
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 54
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 55
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 56
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 57
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 58
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 59
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 60
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 61
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 62
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 63
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 64
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 65
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 66
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 67
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 68
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 69
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 70
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 71
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 72
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 73
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 74
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 75
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 76
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 77
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 78
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 79
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 80
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 81
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 82
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 83
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 84
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 85
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 86
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 87
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 88
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 89
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 90
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 91
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 92
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 93
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 94
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 95
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 96
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 97
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 98
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 99
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 100
+    }
+   ],
+   "provisional": true,
+   "rules_verified": false,
+   "marks_available": false,
+   "withdrawn_policy": "unscored",
+   "provisional_reasons": [
+    "Withdrawn questions are left out of the marks until the exam body’s rule is confirmed"
+   ]
+  },
+  "created_at": "2026-11-19T15:21:40.510000Z",
+  "updated_at": "2026-11-19T15:21:54.328000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 16,
+   "xmin": 4558,
+   "xmax": 4560,
+   "ctid": "0,16"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f3ca-3e48-76fd-a1b3-c2cc3decd806",
+  "user_id": "01a1f3c3-3ffe-74e0-8a54-b4bd45d71d83",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "submitted",
+  "paper_id": "01a1f280-bb7d-7641-b91e-c1bb4d9d1810",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T12:31:20.136000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": "2026-11-19T12:31:37.452000Z",
+  "finalised_by": "learner",
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": {
+   "pass": {
+    "reason": "The marking rules for this exam are not configured",
+    "general": null,
+    "reserved": null,
+    "available": false,
+    "percentage": null
+   },
+   "overall": {
+    "correct": 1,
+    "incorrect": 2,
+    "max_marks": null,
+    "withdrawn": 0,
+    "percentage": null,
+    "unanswered": 97,
+    "marks_obtained": null,
+    "total_positions": 100,
+    "scorable_positions": 100
+   },
+   "sections": [],
+   "positions": [
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 1
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 2
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 3
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 4
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 5
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 6
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 7
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 8
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 9
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 10
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 11
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 12
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 13
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 14
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 15
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 16
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 17
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 18
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 19
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 20
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 21
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 22
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 23
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 24
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 25
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 26
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 27
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 28
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 29
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 30
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 31
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 32
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 33
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 34
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 35
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 36
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 37
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 38
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 39
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 40
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 41
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 42
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 43
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 44
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 45
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 46
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 47
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 48
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 49
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 50
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 51
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 52
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 53
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 54
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 55
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 56
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 57
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 58
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 59
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 60
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 61
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 62
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 63
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 64
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 65
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 66
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 67
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 68
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 69
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 70
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 71
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 72
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 73
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 74
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 75
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 76
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 77
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 78
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 79
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 80
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 81
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 82
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 83
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 84
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 85
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 86
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 87
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 88
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 89
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 90
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 91
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 92
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 93
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 94
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 95
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 96
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 97
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 98
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 99
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 100
+    }
+   ],
+   "provisional": false,
+   "rules_verified": false,
+   "marks_available": false,
+   "withdrawn_policy": "unscored",
+   "provisional_reasons": []
+  },
+  "created_at": "2026-11-19T12:31:20.137000Z",
+  "updated_at": "2026-11-19T12:31:37.452000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 21,
+   "xmin": 4643,
+   "xmax": 4645,
+   "ctid": "0,21"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f432-1f3c-72d5-955b-09604297f94f",
+  "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "submitted",
+  "paper_id": "01a1f18d-574f-746e-947d-ea0fac5ea48a",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T14:24:47.932000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": "2026-11-19T15:20:45.417000Z",
+  "finalised_by": "learner",
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": {
+   "pass": {
+    "reason": "The marking rules for this exam are not configured",
+    "general": null,
+    "reserved": null,
+    "available": false,
+    "percentage": null
+   },
+   "overall": {
+    "correct": 2,
+    "incorrect": 7,
+    "max_marks": null,
+    "withdrawn": 6,
+    "percentage": null,
+    "unanswered": 85,
+    "marks_obtained": null,
+    "total_positions": 100,
+    "scorable_positions": 94
+   },
+   "sections": [],
+   "positions": [
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 1
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 2
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 3
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 4
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 5
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 6
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 7
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 8
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 9
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 10
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 11
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 12
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 13
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 14
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 15
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 16
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 17
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 18
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 19
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 20
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 21
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 22
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 23
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 24
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 25
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 26
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 27
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 28
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 29
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 30
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 31
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 32
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 33
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 34
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 35
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 36
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 37
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 38
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 39
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 40
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 41
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 42
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 43
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 44
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 45
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 46
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 47
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 48
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 49
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 50
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 51
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 52
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 53
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 54
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 55
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 56
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 57
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 58
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 59
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 60
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 61
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 62
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 63
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 64
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 65
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 66
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 67
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 68
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 69
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 70
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 71
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 72
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 73
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 74
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 75
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 76
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 77
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 78
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 79
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 80
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 81
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 82
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 83
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 84
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 85
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 86
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 87
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 88
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 89
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 90
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 91
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 92
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 93
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 94
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 95
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 96
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 97
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 98
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 99
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 100
+    }
+   ],
+   "provisional": true,
+   "rules_verified": false,
+   "marks_available": false,
+   "withdrawn_policy": "unscored",
+   "provisional_reasons": [
+    "Withdrawn questions are left out of the marks until the exam body’s rule is confirmed"
+   ]
+  },
+  "created_at": "2026-11-19T14:24:47.933000Z",
+  "updated_at": "2026-11-19T15:20:45.417000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 1,
+   "xmin": 4681,
+   "xmax": 4682,
+   "ctid": "1,1"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f466-80db-7281-88e6-9d9492f642fd",
+  "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "submitted",
+  "paper_id": "01a1f220-8d9a-7251-8f6a-f28a3c87ef2f",
+  "paper_revision": 3,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T15:22:00.795000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": "2026-11-19T15:22:38.935000Z",
+  "finalised_by": "learner",
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": {
+   "pass": {
+    "reason": "The marking rules for this exam are not configured",
+    "general": null,
+    "reserved": null,
+    "available": false,
+    "percentage": null
+   },
+   "overall": {
+    "correct": 3,
+    "incorrect": 7,
+    "max_marks": null,
+    "withdrawn": 0,
+    "percentage": null,
+    "unanswered": 90,
+    "marks_obtained": null,
+    "total_positions": 100,
+    "scorable_positions": 100
+   },
+   "sections": [],
+   "positions": [
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 1
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 2
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 3
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 4
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 5
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 6
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 7
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 8
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 9
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 10
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 11
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 12
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 13
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 14
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 15
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 16
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 17
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 18
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 19
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 20
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 21
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 22
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 23
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 24
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 25
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 26
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 27
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 28
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 29
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 30
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 31
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 32
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 33
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 34
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 35
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 36
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 37
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 38
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 39
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 40
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 41
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 42
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 43
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 44
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 45
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 46
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 47
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 48
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 49
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 50
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 51
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 52
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 53
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 54
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 55
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 56
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 57
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 58
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 59
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 60
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 61
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 62
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 63
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 64
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 65
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 66
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 67
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 68
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 69
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 70
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 71
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 72
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 73
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 74
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 75
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 76
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 77
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 78
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 79
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 80
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 81
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 82
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 83
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 84
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 85
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 86
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 87
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 88
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 89
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 90
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 91
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 92
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 93
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 94
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 95
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 96
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 97
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 98
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 99
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 100
+    }
+   ],
+   "provisional": false,
+   "rules_verified": false,
+   "marks_available": false,
+   "withdrawn_policy": "unscored",
+   "provisional_reasons": []
+  },
+  "created_at": "2026-11-19T15:22:00.796000Z",
+  "updated_at": "2026-11-19T15:22:38.935000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 4,
+   "xmin": 5183,
+   "xmax": 5185,
+   "ctid": "1,4"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f837-2539-72fb-91d6-c2ac8a798a36",
+  "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+  "exam_id": "01a1f78d-cae9-7450-b18c-7cfb907ae322",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "submitted",
+  "paper_id": "01a1f81b-c133-73cf-9425-a255e26da7e7",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-20T09:08:46.009000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": "2026-11-20T09:09:23.077000Z",
+  "finalised_by": "learner",
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": {
+   "pass": {
+    "reason": "The marking rules for this exam are not configured",
+    "general": null,
+    "reserved": null,
+    "available": false,
+    "percentage": null
+   },
+   "overall": {
+    "correct": 2,
+    "incorrect": 6,
+    "max_marks": null,
+    "withdrawn": 1,
+    "percentage": null,
+    "unanswered": 111,
+    "marks_obtained": null,
+    "total_positions": 120,
+    "scorable_positions": 119
+   },
+   "sections": [],
+   "positions": [
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 1
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 2
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 3
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 4
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 5
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 6
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 7
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 8
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 9
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 10
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 11
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 12
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 13
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 14
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 15
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 16
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 17
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 18
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 19
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 20
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 21
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 22
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 23
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 24
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 25
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 26
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 27
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 28
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 29
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 30
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 31
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 32
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 33
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 34
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 35
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 36
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 37
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 38
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 39
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 40
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 41
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 42
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 43
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 44
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 45
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 46
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 47
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 48
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 49
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 50
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 51
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 52
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 53
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 54
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 55
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 56
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 57
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 58
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 59
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 60
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 61
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 62
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 63
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 64
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 65
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 66
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 67
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 68
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 69
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 70
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 71
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 72
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 73
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 74
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 75
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 76
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 77
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 78
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 79
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 80
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 81
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 82
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 83
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 84
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 85
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 86
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 87
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 88
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 89
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 90
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 91
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 92
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 93
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 94
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 95
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 96
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 97
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 98
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 99
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 100
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 101
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 102
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 103
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 104
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 105
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 106
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 107
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 108
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 109
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 110
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 111
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 112
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 113
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 114
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 115
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 116
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 117
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 118
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 119
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 120
+    }
+   ],
+   "provisional": true,
+   "rules_verified": false,
+   "marks_available": false,
+   "withdrawn_policy": "unscored",
+   "provisional_reasons": [
+    "Withdrawn questions are left out of the marks until the exam body’s rule is confirmed"
+   ]
+  },
+  "created_at": "2026-11-20T09:08:46.009000Z",
+  "updated_at": "2026-11-20T09:09:23.077000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 6,
+   "xmin": 4698,
+   "xmax": 4700,
+   "ctid": "1,6"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f472-64c5-77bb-a3aa-fe4971a70813",
+  "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "submitted",
+  "paper_id": "01a1f220-8d9a-7251-8f6a-f28a3c87ef2f",
+  "paper_revision": 3,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T15:35:00.037000Z",
+  "deadline_at": "2026-11-19T18:35:00.037000Z",
+  "duration_seconds": 10800,
+  "submitted_at": "2026-11-19T15:35:49.722000Z",
+  "finalised_by": "learner",
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": {
+   "pass": {
+    "reason": "The marking rules for this exam are not configured",
+    "general": null,
+    "reserved": null,
+    "available": false,
+    "percentage": null
+   },
+   "overall": {
+    "correct": 0,
+    "incorrect": 3,
+    "max_marks": null,
+    "withdrawn": 0,
+    "percentage": null,
+    "unanswered": 97,
+    "marks_obtained": null,
+    "total_positions": 100,
+    "scorable_positions": 100
+   },
+   "sections": [],
+   "positions": [
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 1
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 2
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 3
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 4
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 5
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 6
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 7
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 8
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 9
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 10
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 11
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 12
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 13
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 14
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 15
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 16
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 17
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 18
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 19
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 20
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 21
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 22
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 23
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 24
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 25
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 26
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 27
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 28
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 29
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 30
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 31
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 32
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 33
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 34
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 35
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 36
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 37
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 38
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 39
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 40
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 41
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 42
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 43
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 44
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 45
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 46
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 47
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 48
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 49
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 50
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 51
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 52
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 53
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 54
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 55
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 56
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 57
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 58
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 59
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 60
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 61
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 62
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 63
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 64
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 65
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 66
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 67
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 68
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 69
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 70
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 71
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 72
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 73
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 74
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 75
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 76
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 77
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 78
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 79
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 80
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 81
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 82
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 83
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 84
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 85
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 86
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 87
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 88
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 89
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 90
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 91
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 92
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 93
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 94
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 95
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 96
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 97
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 98
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 99
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 100
+    }
+   ],
+   "provisional": false,
+   "rules_verified": false,
+   "marks_available": false,
+   "withdrawn_policy": "unscored",
+   "provisional_reasons": []
+  },
+  "created_at": "2026-11-19T15:35:00.038000Z",
+  "updated_at": "2026-11-19T15:35:49.722000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 8,
+   "xmin": 6888,
+   "xmax": 6894,
+   "ctid": "1,8"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a201a4-204e-7076-ad44-0ee2e6d8579b",
+  "user_id": "01a201a3-890d-773b-baf6-45f85695758d",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "submitted",
+  "paper_id": "01a1f280-bb7d-7641-b91e-c1bb4d9d1810",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-22T05:04:23.118000Z",
+  "deadline_at": "2026-11-22T08:04:23.118000Z",
+  "duration_seconds": 10800,
+  "submitted_at": "2026-11-22T05:04:55.219000Z",
+  "finalised_by": "learner",
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": {
+   "pass": {
+    "reason": "The marking rules for this exam are not configured",
+    "general": null,
+    "reserved": null,
+    "available": false,
+    "percentage": null
+   },
+   "overall": {
+    "correct": 4,
+    "incorrect": 7,
+    "max_marks": null,
+    "withdrawn": 0,
+    "percentage": null,
+    "unanswered": 89,
+    "marks_obtained": null,
+    "total_positions": 100,
+    "scorable_positions": 100
+   },
+   "sections": [],
+   "positions": [
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 1
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 2
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 3
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 4
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 5
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 6
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 7
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 8
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 9
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 10
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 11
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 12
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 13
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 14
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 15
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 16
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 17
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 18
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 19
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 20
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 21
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 22
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 23
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 24
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 25
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 26
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 27
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 28
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 29
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 30
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 31
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 32
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 33
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 34
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 35
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 36
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 37
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 38
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 39
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 40
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 41
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 42
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 43
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 44
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 45
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 46
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 47
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 48
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 49
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 50
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 51
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 52
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 53
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 54
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 55
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 56
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 57
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 58
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 59
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 60
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 61
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 62
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 63
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 64
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 65
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 66
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 67
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 68
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 69
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 70
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 71
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 72
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 73
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 74
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 75
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 76
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 77
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 78
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 79
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 80
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 81
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 82
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 83
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 84
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 85
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 86
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 87
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 88
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 89
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 90
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 91
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 92
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 93
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 94
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 95
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 96
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 97
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 98
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 99
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 100
+    }
+   ],
+   "provisional": false,
+   "rules_verified": false,
+   "marks_available": false,
+   "withdrawn_policy": "unscored",
+   "provisional_reasons": []
+  },
+  "created_at": "2026-11-22T05:04:23.118000Z",
+  "updated_at": "2026-11-22T05:04:55.219000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 9,
+   "xmin": 6811,
+   "xmax": 6812,
+   "ctid": "1,9"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f85a-f6fc-76ad-a3da-858d89b50b81",
+  "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+  "exam_id": "01a1f78d-cae9-7450-b18c-7cfb907ae322",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "submitted",
+  "paper_id": "01a1f858-ce4b-7054-ae25-bb4c63291119",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-20T09:47:53.468000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": "2026-11-20T09:53:42.127000Z",
+  "finalised_by": "learner",
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": {
+   "pass": {
+    "reason": "The marking rules for this exam are not configured",
+    "general": null,
+    "reserved": null,
+    "available": false,
+    "percentage": null
+   },
+   "overall": {
+    "correct": 0,
+    "incorrect": 1,
+    "max_marks": null,
+    "withdrawn": 1,
+    "percentage": null,
+    "unanswered": 148,
+    "marks_obtained": null,
+    "total_positions": 150,
+    "scorable_positions": 149
+   },
+   "sections": [],
+   "positions": [
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 1
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 2
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 3
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 4
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 5
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 6
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 7
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 8
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 9
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 10
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 11
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 12
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 13
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 14
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 15
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 16
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 17
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 18
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 19
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 20
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 21
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 22
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 23
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 24
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 25
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 26
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 27
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 28
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 29
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 30
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 31
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 32
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 33
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 34
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 35
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 36
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 37
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 38
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 39
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 40
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 41
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 42
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 43
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 44
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 45
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 46
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 47
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 48
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 49
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 50
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 51
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 52
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 53
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 54
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 55
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 56
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 57
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 58
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 59
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 60
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 61
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 62
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 63
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 64
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 65
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 66
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 67
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 68
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 69
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 70
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 71
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 72
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 73
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 74
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 75
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 76
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 77
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 78
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 79
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 80
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 81
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 82
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 83
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 84
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 85
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 86
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 87
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 88
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 89
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 90
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 91
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 92
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 93
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 94
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 95
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 96
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 97
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 98
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 99
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 100
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 101
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 102
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 103
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 104
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 105
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 106
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 107
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 108
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 109
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 110
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 111
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 112
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 113
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 114
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 115
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 116
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 117
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 118
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 119
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 120
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 121
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 122
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 123
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 124
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 125
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 126
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 127
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 128
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 129
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 130
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 131
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 132
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 133
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 134
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 135
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 136
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 137
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 138
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 139
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 140
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 141
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 142
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 143
+    },
+    {
+     "marks": null,
+     "outcome": "withdrawn_unscored",
+     "position": 144
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 145
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 146
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 147
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 148
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 149
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 150
+    }
+   ],
+   "provisional": true,
+   "rules_verified": false,
+   "marks_available": false,
+   "withdrawn_policy": "unscored",
+   "provisional_reasons": [
+    "Withdrawn questions are left out of the marks until the exam body’s rule is confirmed"
+   ]
+  },
+  "created_at": "2026-11-20T09:47:53.469000Z",
+  "updated_at": "2026-11-20T09:53:42.127000Z"
+ },
+ {
+  "_loc": {
+   "blk": 1,
+   "off": 20,
+   "xmin": 4728,
+   "xmax": 4730,
+   "ctid": "1,20"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f477-c75b-773b-9e96-30ce3eedd57a",
+  "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "submitted",
+  "paper_id": "01a1f220-8d9a-7251-8f6a-f28a3c87ef2f",
+  "paper_revision": 3,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-19T15:40:52.955000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": "2026-11-19T15:41:27.438000Z",
+  "finalised_by": "learner",
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": {
+   "pass": {
+    "reason": "The marking rules for this exam are not configured",
+    "general": null,
+    "reserved": null,
+    "available": false,
+    "percentage": null
+   },
+   "overall": {
+    "correct": 1,
+    "incorrect": 11,
+    "max_marks": null,
+    "withdrawn": 0,
+    "percentage": null,
+    "unanswered": 88,
+    "marks_obtained": null,
+    "total_positions": 100,
+    "scorable_positions": 100
+   },
+   "sections": [],
+   "positions": [
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 1
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 2
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 3
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 4
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 5
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 6
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 7
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 8
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 9
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 10
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 11
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 12
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 13
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 14
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 15
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 16
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 17
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 18
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 19
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 20
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 21
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 22
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 23
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 24
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 25
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 26
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 27
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 28
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 29
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 30
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 31
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 32
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 33
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 34
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 35
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 36
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 37
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 38
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 39
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 40
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 41
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 42
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 43
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 44
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 45
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 46
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 47
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 48
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 49
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 50
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 51
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 52
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 53
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 54
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 55
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 56
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 57
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 58
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 59
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 60
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 61
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 62
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 63
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 64
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 65
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 66
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 67
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 68
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 69
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 70
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 71
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 72
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 73
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 74
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 75
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 76
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 77
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 78
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 79
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 80
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 81
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 82
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 83
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 84
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 85
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 86
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 87
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 88
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 89
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 90
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 91
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 92
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 93
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 94
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 95
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 96
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 97
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 98
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 99
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 100
+    }
+   ],
+   "provisional": false,
+   "rules_verified": false,
+   "marks_available": false,
+   "withdrawn_policy": "unscored",
+   "provisional_reasons": []
+  },
+  "created_at": "2026-11-19T15:40:52.956000Z",
+  "updated_at": "2026-11-19T15:41:27.438000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 1,
+   "xmin": 7045,
+   "xmax": 7046,
+   "ctid": "2,1"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a201f8-1f21-732b-b7e0-429c2d912420",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "submitted",
+  "paper_id": "01a1f280-bb7d-7641-b91e-c1bb4d9d1810",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-22T06:36:07.841000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": "2026-11-22T06:36:27.883000Z",
+  "finalised_by": "learner",
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": {
+   "pass": {
+    "reason": "The marking rules for this exam are not configured",
+    "general": null,
+    "reserved": null,
+    "available": false,
+    "percentage": null
+   },
+   "overall": {
+    "correct": 2,
+    "incorrect": 5,
+    "max_marks": null,
+    "withdrawn": 0,
+    "percentage": null,
+    "unanswered": 93,
+    "marks_obtained": null,
+    "total_positions": 100,
+    "scorable_positions": 100
+   },
+   "sections": [],
+   "positions": [
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 1
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 2
+    },
+    {
+     "marks": null,
+     "outcome": "correct",
+     "position": 3
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 4
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 5
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 6
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 7
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 8
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 9
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 10
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 11
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 12
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 13
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 14
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 15
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 16
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 17
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 18
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 19
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 20
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 21
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 22
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 23
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 24
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 25
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 26
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 27
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 28
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 29
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 30
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 31
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 32
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 33
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 34
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 35
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 36
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 37
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 38
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 39
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 40
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 41
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 42
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 43
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 44
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 45
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 46
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 47
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 48
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 49
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 50
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 51
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 52
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 53
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 54
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 55
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 56
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 57
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 58
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 59
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 60
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 61
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 62
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 63
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 64
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 65
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 66
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 67
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 68
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 69
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 70
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 71
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 72
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 73
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 74
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 75
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 76
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 77
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 78
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 79
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 80
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 81
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 82
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 83
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 84
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 85
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 86
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 87
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 88
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 89
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 90
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 91
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 92
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 93
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 94
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 95
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 96
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 97
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 98
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 99
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 100
+    }
+   ],
+   "provisional": false,
+   "rules_verified": false,
+   "marks_available": false,
+   "withdrawn_policy": "unscored",
+   "provisional_reasons": []
+  },
+  "created_at": "2026-11-22T06:36:07.841000Z",
+  "updated_at": "2026-11-22T06:36:27.883000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 2,
+   "xmin": 7047,
+   "xmax": 7051,
+   "ctid": "2,3"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a201f8-863b-70e5-bb04-1091619c023d",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f220-8d9a-7251-8f6a-f28a3c87ef2f",
+  "paper_revision": 3,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-22T06:36:34.235000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-22T06:36:34.236000Z",
+  "updated_at": "2026-11-22T06:36:34.236000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 3,
+   "xmin": 7051,
+   "xmax": 7053,
+   "ctid": "2,4"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a201f8-863b-70e5-bb04-1091619c023d",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f220-8d9a-7251-8f6a-f28a3c87ef2f",
+  "paper_revision": 3,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-22T06:36:34.235000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-22T06:36:34.236000Z",
+  "updated_at": "2026-11-22T06:36:35.860000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 4,
+   "xmin": 7053,
+   "xmax": 7055,
+   "ctid": "2,5"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a201f8-863b-70e5-bb04-1091619c023d",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f220-8d9a-7251-8f6a-f28a3c87ef2f",
+  "paper_revision": 3,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-22T06:36:34.235000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-22T06:36:34.236000Z",
+  "updated_at": "2026-11-22T06:36:37.807000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 5,
+   "xmin": 7055,
+   "xmax": 7057,
+   "ctid": "2,6"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a201f8-863b-70e5-bb04-1091619c023d",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f220-8d9a-7251-8f6a-f28a3c87ef2f",
+  "paper_revision": 3,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-22T06:36:34.235000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-22T06:36:34.236000Z",
+  "updated_at": "2026-11-22T06:36:39.737000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 6,
+   "xmin": 7057,
+   "xmax": 7059,
+   "ctid": "2,7"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a201f8-863b-70e5-bb04-1091619c023d",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f220-8d9a-7251-8f6a-f28a3c87ef2f",
+  "paper_revision": 3,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-22T06:36:34.235000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-22T06:36:34.236000Z",
+  "updated_at": "2026-11-22T06:36:42.761000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 7,
+   "xmin": 7059,
+   "xmax": 7061,
+   "ctid": "2,8"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a201f8-863b-70e5-bb04-1091619c023d",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f220-8d9a-7251-8f6a-f28a3c87ef2f",
+  "paper_revision": 3,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-22T06:36:34.235000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-22T06:36:34.236000Z",
+  "updated_at": "2026-11-22T06:36:44.675000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 8,
+   "xmin": 7061,
+   "xmax": 7062,
+   "ctid": "2,9"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a201f8-863b-70e5-bb04-1091619c023d",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f220-8d9a-7251-8f6a-f28a3c87ef2f",
+  "paper_revision": 3,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-22T06:36:34.235000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-22T06:36:34.236000Z",
+  "updated_at": "2026-11-22T06:36:46.678000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 9,
+   "xmin": 7062,
+   "xmax": 7063,
+   "ctid": "2,9"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a201f8-863b-70e5-bb04-1091619c023d",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "submitted",
+  "paper_id": "01a1f220-8d9a-7251-8f6a-f28a3c87ef2f",
+  "paper_revision": 3,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-22T06:36:34.235000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": "2026-11-22T06:36:48.822000Z",
+  "finalised_by": "learner",
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": {
+   "pass": {
+    "reason": "The marking rules for this exam are not configured",
+    "general": null,
+    "reserved": null,
+    "available": false,
+    "percentage": null
+   },
+   "overall": {
+    "correct": 0,
+    "incorrect": 6,
+    "max_marks": null,
+    "withdrawn": 0,
+    "percentage": null,
+    "unanswered": 94,
+    "marks_obtained": null,
+    "total_positions": 100,
+    "scorable_positions": 100
+   },
+   "sections": [],
+   "positions": [
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 1
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 2
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 3
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 4
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 5
+    },
+    {
+     "marks": null,
+     "outcome": "incorrect",
+     "position": 6
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 7
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 8
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 9
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 10
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 11
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 12
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 13
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 14
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 15
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 16
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 17
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 18
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 19
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 20
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 21
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 22
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 23
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 24
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 25
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 26
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 27
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 28
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 29
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 30
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 31
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 32
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 33
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 34
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 35
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 36
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 37
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 38
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 39
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 40
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 41
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 42
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 43
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 44
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 45
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 46
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 47
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 48
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 49
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 50
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 51
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 52
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 53
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 54
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 55
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 56
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 57
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 58
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 59
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 60
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 61
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 62
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 63
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 64
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 65
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 66
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 67
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 68
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 69
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 70
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 71
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 72
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 73
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 74
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 75
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 76
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 77
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 78
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 79
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 80
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 81
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 82
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 83
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 84
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 85
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 86
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 87
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 88
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 89
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 90
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 91
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 92
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 93
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 94
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 95
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 96
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 97
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 98
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 99
+    },
+    {
+     "marks": null,
+     "outcome": "unanswered",
+     "position": 100
+    }
+   ],
+   "provisional": false,
+   "rules_verified": false,
+   "marks_available": false,
+   "withdrawn_policy": "unscored",
+   "provisional_reasons": []
+  },
+  "created_at": "2026-11-22T06:36:34.236000Z",
+  "updated_at": "2026-11-22T06:36:48.822000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 10,
+   "xmin": 7064,
+   "xmax": 7068,
+   "ctid": "2,11"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a201f8-d207-7600-834f-3602fcbe5300",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f18d-574f-746e-947d-ea0fac5ea48a",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-22T06:36:53.639000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-22T06:36:53.639000Z",
+  "updated_at": "2026-11-22T06:36:53.639000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 11,
+   "xmin": 7068,
+   "xmax": 7070,
+   "ctid": "2,12"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a201f8-d207-7600-834f-3602fcbe5300",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f18d-574f-746e-947d-ea0fac5ea48a",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-22T06:36:53.639000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-22T06:36:53.639000Z",
+  "updated_at": "2026-11-22T06:36:55.082000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 12,
+   "xmin": 7070,
+   "xmax": 7077,
+   "ctid": "2,12"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a201f8-d207-7600-834f-3602fcbe5300",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "exam_id": "01a1eecd-6f89-71b3-aff2-a96cf054e521",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f18d-574f-746e-947d-ea0fac5ea48a",
+  "paper_revision": 1,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-22T06:36:53.639000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-22T06:36:53.639000Z",
+  "updated_at": "2026-11-22T06:36:56.829000Z"
+ },
+ {
+  "_loc": {
+   "blk": 2,
+   "off": 13,
+   "xmin": 7140,
+   "xmax": 7143,
+   "ctid": "2,13"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a2021f-0b5e-7591-9b38-143d94972fd9",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "exam_id": "01a1f78d-cae9-7450-b18c-7cfb907ae322",
+  "kind": "fixed_paper",
+  "mode": "practice",
+  "status": "in_progress",
+  "paper_id": "01a1f865-d535-72b1-ba7b-fbce8c9445fa",
+  "paper_revision": 2,
+  "blueprint_id": null,
+  "language": "en",
+  "seed": null,
+  "algorithm_version": null,
+  "started_at": "2026-11-22T07:18:38.686000Z",
+  "deadline_at": null,
+  "duration_seconds": null,
+  "submitted_at": null,
+  "finalised_by": null,
+  "current_section_position": null,
+  "section_navigation": "free",
+  "marks_correct": null,
+  "negative_marks": null,
+  "marks_unanswered": null,
+  "withdrawn_policy": "unscored",
+  "withdrawn_policy_confirmed": false,
+  "rules_verified": false,
+  "pass_percent_general": null,
+  "pass_percent_reserved": null,
+  "result": null,
+  "created_at": "2026-11-22T07:18:38.687000Z",
+  "updated_at": "2026-11-22T07:18:38.687000Z"
+ }
+]

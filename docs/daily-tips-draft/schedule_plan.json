@@ -1,0 +1,602 @@
+[
+  {
+    "external_id": "DT-POL-01",
+    "cms_id": "01a1e805-66d4-72e1-9b39-7fa6d98f830c",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2026-11-18"
+  },
+  {
+    "external_id": "DT-CON-01",
+    "cms_id": "01a1e805-682b-7166-8275-3e5978c6008c",
+    "topic_group": "Consumer Rights",
+    "show_on": "2026-11-19"
+  },
+  {
+    "external_id": "DT-CYB-01",
+    "cms_id": "01a1e805-67de-7202-97ed-f4b78f114c97",
+    "topic_group": "Cyber and Digital Rights",
+    "show_on": "2026-11-20"
+  },
+  {
+    "external_id": "DT-FAM-01",
+    "cms_id": "01a1e805-6903-72a3-a3f1-94ac01374ba3",
+    "topic_group": "Family and Everyday Legal Rights",
+    "show_on": "2026-11-21"
+  },
+  {
+    "external_id": "DT-WOM-01",
+    "cms_id": "01a1e805-6778-722b-b4a5-8b09f6d7efd2",
+    "topic_group": "Women's Rights",
+    "show_on": "2026-11-22"
+  },
+  {
+    "external_id": "DT-EMP-01",
+    "cms_id": "01a1e805-68c7-707a-aa25-1a5ef41c7e5d",
+    "topic_group": "Employment Rights",
+    "show_on": "2026-11-23"
+  },
+  {
+    "external_id": "DT-PRO-01",
+    "cms_id": "01a1e805-6888-77ac-be79-7f78e3d76442",
+    "topic_group": "Property and Rental Rights",
+    "show_on": "2026-11-24"
+  },
+  {
+    "external_id": "DT-POL-02",
+    "cms_id": "01a1e805-66dc-77d5-b4e2-f7859e0611e7",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2026-11-25"
+  },
+  {
+    "external_id": "DT-CON-02",
+    "cms_id": "01a1e805-6830-73fb-a8b0-ee1a691f2023",
+    "topic_group": "Consumer Rights",
+    "show_on": "2026-11-26"
+  },
+  {
+    "external_id": "DT-CYB-02",
+    "cms_id": "01a1e805-67e3-7653-9d8e-4bea34497797",
+    "topic_group": "Cyber and Digital Rights",
+    "show_on": "2026-11-27"
+  },
+  {
+    "external_id": "DT-FAM-02",
+    "cms_id": "01a1e805-6909-721a-b3c3-871d4d646c84",
+    "topic_group": "Family and Everyday Legal Rights",
+    "show_on": "2026-11-28"
+  },
+  {
+    "external_id": "DT-WOM-02",
+    "cms_id": "01a1e805-6780-751a-a91c-c2cb510f9560",
+    "topic_group": "Women's Rights",
+    "show_on": "2026-11-29"
+  },
+  {
+    "external_id": "DT-POL-03",
+    "cms_id": "01a1e805-66e3-7718-8359-9cab4b52e8b0",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2026-11-30"
+  },
+  {
+    "external_id": "DT-EMP-02",
+    "cms_id": "01a1e805-68cc-7708-a230-d27a1f4b6048",
+    "topic_group": "Employment Rights",
+    "show_on": "2026-12-01"
+  },
+  {
+    "external_id": "DT-PRO-02",
+    "cms_id": "01a1e805-6890-7729-94b8-60e225397166",
+    "topic_group": "Property and Rental Rights",
+    "show_on": "2026-12-02"
+  },
+  {
+    "external_id": "DT-CON-03",
+    "cms_id": "01a1e805-6839-7606-959e-6ca522b6a287",
+    "topic_group": "Consumer Rights",
+    "show_on": "2026-12-03"
+  },
+  {
+    "external_id": "DT-CYB-03",
+    "cms_id": "01a1e805-67e8-730b-85ac-ad516efbf063",
+    "topic_group": "Cyber and Digital Rights",
+    "show_on": "2026-12-04"
+  },
+  {
+    "external_id": "DT-FAM-03",
+    "cms_id": "01a1e805-690e-715d-a7b3-bfe2f162ad58",
+    "topic_group": "Family and Everyday Legal Rights",
+    "show_on": "2026-12-05"
+  },
+  {
+    "external_id": "DT-WOM-03",
+    "cms_id": "01a1e805-6787-7599-b449-7b9b829c0ac1",
+    "topic_group": "Women's Rights",
+    "show_on": "2026-12-06"
+  },
+  {
+    "external_id": "DT-POL-04",
+    "cms_id": "01a1e805-66eb-7193-9689-effaa8e74418",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2026-12-07"
+  },
+  {
+    "external_id": "DT-CON-04",
+    "cms_id": "01a1e805-683d-72aa-9ff5-64566fd041e2",
+    "topic_group": "Consumer Rights",
+    "show_on": "2026-12-08"
+  },
+  {
+    "external_id": "DT-POL-05",
+    "cms_id": "01a1e805-66f2-71eb-8b34-63213f3f5190",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2026-12-09"
+  },
+  {
+    "external_id": "DT-CYB-04",
+    "cms_id": "01a1e805-67ed-70e8-95c8-36b598929c31",
+    "topic_group": "Cyber and Digital Rights",
+    "show_on": "2026-12-10"
+  },
+  {
+    "external_id": "DT-FAM-04",
+    "cms_id": "01a1e805-6913-7134-9b40-67b731b9e90d",
+    "topic_group": "Family and Everyday Legal Rights",
+    "show_on": "2026-12-11"
+  },
+  {
+    "external_id": "DT-WOM-04",
+    "cms_id": "01a1e805-678e-7430-96ee-8eb15f15d2cd",
+    "topic_group": "Women's Rights",
+    "show_on": "2026-12-12"
+  },
+  {
+    "external_id": "DT-EMP-03",
+    "cms_id": "01a1e805-68d2-76ff-b28e-9847c479aaed",
+    "topic_group": "Employment Rights",
+    "show_on": "2026-12-13"
+  },
+  {
+    "external_id": "DT-PRO-03",
+    "cms_id": "01a1e805-6896-7373-93e5-43a1584196c9",
+    "topic_group": "Property and Rental Rights",
+    "show_on": "2026-12-14"
+  },
+  {
+    "external_id": "DT-POL-06",
+    "cms_id": "01a1e805-66fa-7513-bc0a-8e939be08176",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2026-12-15"
+  },
+  {
+    "external_id": "DT-CON-05",
+    "cms_id": "01a1e805-6842-702e-9802-a8da161f802c",
+    "topic_group": "Consumer Rights",
+    "show_on": "2026-12-16"
+  },
+  {
+    "external_id": "DT-CYB-05",
+    "cms_id": "01a1e805-67f2-71a2-8297-8be451ef7538",
+    "topic_group": "Cyber and Digital Rights",
+    "show_on": "2026-12-17"
+  },
+  {
+    "external_id": "DT-FAM-05",
+    "cms_id": "01a1e805-6917-7606-999f-363cde51fa62",
+    "topic_group": "Family and Everyday Legal Rights",
+    "show_on": "2026-12-18"
+  },
+  {
+    "external_id": "DT-WOM-05",
+    "cms_id": "01a1e805-6795-7649-ad17-b9e5894f5e9a",
+    "topic_group": "Women's Rights",
+    "show_on": "2026-12-19"
+  },
+  {
+    "external_id": "DT-POL-07",
+    "cms_id": "01a1e805-6703-7124-ae2f-b2be9298ae9b",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2026-12-20"
+  },
+  {
+    "external_id": "DT-EMP-04",
+    "cms_id": "01a1e805-68d7-7418-8e84-c7472722065d",
+    "topic_group": "Employment Rights",
+    "show_on": "2026-12-21"
+  },
+  {
+    "external_id": "DT-PRO-04",
+    "cms_id": "01a1e805-689d-755c-a93f-a8e8ec1b4925",
+    "topic_group": "Property and Rental Rights",
+    "show_on": "2026-12-22"
+  },
+  {
+    "external_id": "DT-CON-06",
+    "cms_id": "01a1e805-6847-7555-b5a3-0e968a02abc3",
+    "topic_group": "Consumer Rights",
+    "show_on": "2026-12-23"
+  },
+  {
+    "external_id": "DT-CYB-06",
+    "cms_id": "01a1e805-67f7-7616-ba03-9149dbf5bfd6",
+    "topic_group": "Cyber and Digital Rights",
+    "show_on": "2026-12-24"
+  },
+  {
+    "external_id": "DT-FAM-06",
+    "cms_id": "01a1e805-691c-75b2-837c-a6ebad3bf690",
+    "topic_group": "Family and Everyday Legal Rights",
+    "show_on": "2026-12-25"
+  },
+  {
+    "external_id": "DT-WOM-06",
+    "cms_id": "01a1e805-679b-762e-8f96-8bec3b2b7dc7",
+    "topic_group": "Women's Rights",
+    "show_on": "2026-12-26"
+  },
+  {
+    "external_id": "DT-POL-08",
+    "cms_id": "01a1e805-670f-74cf-afba-7e5d3fc23d26",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2026-12-27"
+  },
+  {
+    "external_id": "DT-CON-07",
+    "cms_id": "01a1e805-684c-7603-b848-fc90fc0a85b7",
+    "topic_group": "Consumer Rights",
+    "show_on": "2026-12-28"
+  },
+  {
+    "external_id": "DT-POL-09",
+    "cms_id": "01a1e805-6719-7423-ba6b-bb63f1f4f1a7",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2026-12-29"
+  },
+  {
+    "external_id": "DT-CYB-07",
+    "cms_id": "01a1e805-67fb-74f3-a2f3-c787aa76f8c2",
+    "topic_group": "Cyber and Digital Rights",
+    "show_on": "2026-12-30"
+  },
+  {
+    "external_id": "DT-FAM-07",
+    "cms_id": "01a1e805-6921-764b-a739-06272a73d14e",
+    "topic_group": "Family and Everyday Legal Rights",
+    "show_on": "2026-12-31"
+  },
+  {
+    "external_id": "DT-WOM-07",
+    "cms_id": "01a1e805-67a1-734e-9a79-1b72f88c6e9e",
+    "topic_group": "Women's Rights",
+    "show_on": "2027-01-01"
+  },
+  {
+    "external_id": "DT-EMP-05",
+    "cms_id": "01a1e805-68dd-7077-bf85-6e77a7187945",
+    "topic_group": "Employment Rights",
+    "show_on": "2027-01-02"
+  },
+  {
+    "external_id": "DT-PRO-05",
+    "cms_id": "01a1e805-68a3-75a6-b067-9d5e0a0ccbd5",
+    "topic_group": "Property and Rental Rights",
+    "show_on": "2027-01-03"
+  },
+  {
+    "external_id": "DT-POL-10",
+    "cms_id": "01a1e805-6721-7560-872f-353dc0a9a4a3",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2027-01-04"
+  },
+  {
+    "external_id": "DT-CON-08",
+    "cms_id": "01a1e805-6852-75c6-a94f-84bc37dd6671",
+    "topic_group": "Consumer Rights",
+    "show_on": "2027-01-05"
+  },
+  {
+    "external_id": "DT-CYB-08",
+    "cms_id": "01a1e805-6801-746e-a2d4-9c835da11aaa",
+    "topic_group": "Cyber and Digital Rights",
+    "show_on": "2027-01-06"
+  },
+  {
+    "external_id": "DT-FAM-08",
+    "cms_id": "01a1e805-6926-7191-ab01-bc4481662f71",
+    "topic_group": "Family and Everyday Legal Rights",
+    "show_on": "2027-01-07"
+  },
+  {
+    "external_id": "DT-WOM-08",
+    "cms_id": "01a1e805-67a7-7176-bfc4-d60da22a07a6",
+    "topic_group": "Women's Rights",
+    "show_on": "2027-01-08"
+  },
+  {
+    "external_id": "DT-POL-11",
+    "cms_id": "01a1e805-6727-74b6-9215-ba42fddcdedb",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2027-01-09"
+  },
+  {
+    "external_id": "DT-EMP-06",
+    "cms_id": "01a1e805-68e4-746f-ab37-6d25173572ee",
+    "topic_group": "Employment Rights",
+    "show_on": "2027-01-10"
+  },
+  {
+    "external_id": "DT-PRO-06",
+    "cms_id": "01a1e805-68a9-77b9-889a-f321d7f7a65e",
+    "topic_group": "Property and Rental Rights",
+    "show_on": "2027-01-11"
+  },
+  {
+    "external_id": "DT-CON-09",
+    "cms_id": "01a1e805-6859-7587-a802-74cc1ca178e7",
+    "topic_group": "Consumer Rights",
+    "show_on": "2027-01-12"
+  },
+  {
+    "external_id": "DT-CYB-09",
+    "cms_id": "01a1e805-6806-71d6-8b6b-6a342c228f49",
+    "topic_group": "Cyber and Digital Rights",
+    "show_on": "2027-01-13"
+  },
+  {
+    "external_id": "DT-FAM-09",
+    "cms_id": "01a1e805-692a-70a3-9346-8184cd734710",
+    "topic_group": "Family and Everyday Legal Rights",
+    "show_on": "2027-01-14"
+  },
+  {
+    "external_id": "DT-WOM-09",
+    "cms_id": "01a1e805-67ad-7725-b2a2-933c684690dd",
+    "topic_group": "Women's Rights",
+    "show_on": "2027-01-15"
+  },
+  {
+    "external_id": "DT-POL-12",
+    "cms_id": "01a1e805-6733-7195-93a7-f66466472928",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2027-01-16"
+  },
+  {
+    "external_id": "DT-CON-10",
+    "cms_id": "01a1e805-685f-7487-8a51-d27e778890e7",
+    "topic_group": "Consumer Rights",
+    "show_on": "2027-01-17"
+  },
+  {
+    "external_id": "DT-POL-13",
+    "cms_id": "01a1e805-673c-725e-a15d-73826f5a4144",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2027-01-18"
+  },
+  {
+    "external_id": "DT-CYB-10",
+    "cms_id": "01a1e805-680b-73d0-ac64-72c8e7155c0b",
+    "topic_group": "Cyber and Digital Rights",
+    "show_on": "2027-01-19"
+  },
+  {
+    "external_id": "DT-FAM-10",
+    "cms_id": "01a1e805-692f-7116-987d-24672fc4de9f",
+    "topic_group": "Family and Everyday Legal Rights",
+    "show_on": "2027-01-20"
+  },
+  {
+    "external_id": "DT-WOM-10",
+    "cms_id": "01a1e805-67b5-744b-b0dc-1842741e0cf9",
+    "topic_group": "Women's Rights",
+    "show_on": "2027-01-21"
+  },
+  {
+    "external_id": "DT-EMP-07",
+    "cms_id": "01a1e805-68eb-7753-94bd-70fa08ca817b",
+    "topic_group": "Employment Rights",
+    "show_on": "2027-01-22"
+  },
+  {
+    "external_id": "DT-PRO-07",
+    "cms_id": "01a1e805-68b1-74ee-8d07-46f62b8cc7eb",
+    "topic_group": "Property and Rental Rights",
+    "show_on": "2027-01-23"
+  },
+  {
+    "external_id": "DT-POL-14",
+    "cms_id": "01a1e805-6744-7009-b431-7ab65b65646f",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2027-01-24"
+  },
+  {
+    "external_id": "DT-CON-11",
+    "cms_id": "01a1e805-6865-708d-86a6-bce014bb3f2f",
+    "topic_group": "Consumer Rights",
+    "show_on": "2027-01-25"
+  },
+  {
+    "external_id": "DT-CYB-11",
+    "cms_id": "01a1e805-6810-72f4-87df-11c6b3bedabe",
+    "topic_group": "Cyber and Digital Rights",
+    "show_on": "2027-01-26"
+  },
+  {
+    "external_id": "DT-FAM-11",
+    "cms_id": "01a1e805-6933-7332-a6d4-5fc69863ed4a",
+    "topic_group": "Family and Everyday Legal Rights",
+    "show_on": "2027-01-27"
+  },
+  {
+    "external_id": "DT-WOM-11",
+    "cms_id": "01a1e805-67be-7255-9b89-bb79a47cf886",
+    "topic_group": "Women's Rights",
+    "show_on": "2027-01-28"
+  },
+  {
+    "external_id": "DT-POL-15",
+    "cms_id": "01a1e805-674b-74f9-b7d3-98939e343735",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2027-01-29"
+  },
+  {
+    "external_id": "DT-EMP-08",
+    "cms_id": "01a1e805-68f0-700f-9456-c3dcdaa1cbdc",
+    "topic_group": "Employment Rights",
+    "show_on": "2027-01-30"
+  },
+  {
+    "external_id": "DT-PRO-08",
+    "cms_id": "01a1e805-68b6-73ab-86aa-d7ce40e3f744",
+    "topic_group": "Property and Rental Rights",
+    "show_on": "2027-01-31"
+  },
+  {
+    "external_id": "DT-CON-12",
+    "cms_id": "01a1e805-686c-746a-993d-df78263541d0",
+    "topic_group": "Consumer Rights",
+    "show_on": "2027-02-01"
+  },
+  {
+    "external_id": "DT-CYB-12",
+    "cms_id": "01a1e805-6815-75ca-b8b5-189a975ec5a8",
+    "topic_group": "Cyber and Digital Rights",
+    "show_on": "2027-02-02"
+  },
+  {
+    "external_id": "DT-FAM-12",
+    "cms_id": "01a1e805-6938-7578-95c6-9d2160197bd6",
+    "topic_group": "Family and Everyday Legal Rights",
+    "show_on": "2027-02-03"
+  },
+  {
+    "external_id": "DT-WOM-12",
+    "cms_id": "01a1e805-67c7-74a4-bb70-0a51bb1f473b",
+    "topic_group": "Women's Rights",
+    "show_on": "2027-02-04"
+  },
+  {
+    "external_id": "DT-POL-16",
+    "cms_id": "01a1e805-6755-7001-9ea3-cc1c1491996c",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2027-02-05"
+  },
+  {
+    "external_id": "DT-CON-13",
+    "cms_id": "01a1e805-6872-76b7-b80d-631284cea451",
+    "topic_group": "Consumer Rights",
+    "show_on": "2027-02-06"
+  },
+  {
+    "external_id": "DT-POL-17",
+    "cms_id": "01a1e805-675b-719b-b7ff-073e35851c2b",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2027-02-07"
+  },
+  {
+    "external_id": "DT-CYB-13",
+    "cms_id": "01a1e805-681b-728e-b4bb-81f9b115a7ac",
+    "topic_group": "Cyber and Digital Rights",
+    "show_on": "2027-02-08"
+  },
+  {
+    "external_id": "DT-FAM-13",
+    "cms_id": "01a1e805-693d-75c1-99db-c30f981b389e",
+    "topic_group": "Family and Everyday Legal Rights",
+    "show_on": "2027-02-09"
+  },
+  {
+    "external_id": "DT-WOM-13",
+    "cms_id": "01a1e805-67ce-73ff-b7a0-e6b04bbc640e",
+    "topic_group": "Women's Rights",
+    "show_on": "2027-02-10"
+  },
+  {
+    "external_id": "DT-EMP-09",
+    "cms_id": "01a1e805-68f7-755e-88a7-aa7a79a8062b",
+    "topic_group": "Employment Rights",
+    "show_on": "2027-02-11"
+  },
+  {
+    "external_id": "DT-PRO-09",
+    "cms_id": "01a1e805-68bc-727d-891c-d0f1e4b15f05",
+    "topic_group": "Property and Rental Rights",
+    "show_on": "2027-02-12"
+  },
+  {
+    "external_id": "DT-POL-18",
+    "cms_id": "01a1e805-6764-72f5-b2fd-dbf4247452ac",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2027-02-13"
+  },
+  {
+    "external_id": "DT-CON-14",
+    "cms_id": "01a1e805-687a-72bc-8e94-b0dcbe04f47a",
+    "topic_group": "Consumer Rights",
+    "show_on": "2027-02-14"
+  },
+  {
+    "external_id": "DT-CYB-14",
+    "cms_id": "01a1e805-6820-734d-8dc1-d4efb41b6e55",
+    "topic_group": "Cyber and Digital Rights",
+    "show_on": "2027-02-15"
+  },
+  {
+    "external_id": "DT-FAM-14",
+    "cms_id": "01a1e805-6942-76a2-98b3-3d8edbe7d057",
+    "topic_group": "Family and Everyday Legal Rights",
+    "show_on": "2027-02-16"
+  },
+  {
+    "external_id": "DT-WOM-14",
+    "cms_id": "01a1e805-67d4-7194-9ca2-9d287d4299ac",
+    "topic_group": "Women's Rights",
+    "show_on": "2027-02-17"
+  },
+  {
+    "external_id": "DT-POL-19",
+    "cms_id": "01a1e805-676a-7546-b47a-d18ce6677b1d",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2027-02-18"
+  },
+  {
+    "external_id": "DT-EMP-10",
+    "cms_id": "01a1e805-68ff-707c-a2fb-18e2fd70fb43",
+    "topic_group": "Employment Rights",
+    "show_on": "2027-02-19"
+  },
+  {
+    "external_id": "DT-PRO-10",
+    "cms_id": "01a1e805-68c1-7569-8fe6-5124bb1c0f25",
+    "topic_group": "Property and Rental Rights",
+    "show_on": "2027-02-20"
+  },
+  {
+    "external_id": "DT-CON-15",
+    "cms_id": "01a1e805-6881-7644-b3d7-9d05996b3107",
+    "topic_group": "Consumer Rights",
+    "show_on": "2027-02-21"
+  },
+  {
+    "external_id": "DT-CYB-15",
+    "cms_id": "01a1e805-6826-705f-a4eb-173b84caf089",
+    "topic_group": "Cyber and Digital Rights",
+    "show_on": "2027-02-22"
+  },
+  {
+    "external_id": "DT-FAM-15",
+    "cms_id": "01a1e805-6946-7465-b357-e749fc885030",
+    "topic_group": "Family and Everyday Legal Rights",
+    "show_on": "2027-02-23"
+  },
+  {
+    "external_id": "DT-WOM-15",
+    "cms_id": "01a1e805-67d9-7766-9727-84a50c17652e",
+    "topic_group": "Women's Rights",
+    "show_on": "2027-02-24"
+  },
+  {
+    "external_id": "DT-POL-20",
+    "cms_id": "01a1e805-6771-7766-a9c5-05c496e1e523",
+    "topic_group": "Police and Citizen Rights",
+    "show_on": "2027-02-25"
+  }
+]

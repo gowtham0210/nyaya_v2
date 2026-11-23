@@ -170,9 +170,11 @@ export class AuthService {
   }
 
   /**
-   * Emails a learner a code to choose a new password. Nothing tells the
-   * caller whether the email has an account: unknown emails, staff accounts
-   * (an admin resets those) and too many requests all end the same way.
+   * Emails a learner a code to choose a new password. An email with no
+   * learner account is told so (404 user_not_found), as sign-up already tells
+   * an address that is taken; staff accounts (an admin resets those) count as
+   * not registered here. At most three codes per address in 15 minutes
+   * (429), and a code is only reported as sent once the mail server took it.
    */
   async requestPasswordReset(email: string): Promise<void> {
     if (!this.mailer.available)
@@ -182,17 +184,29 @@ export class AuthService {
         'Password reset is not available right now',
       );
     const normalized = email.trim().toLowerCase();
-    const { hits } = await this.limits.hit(
-      `reset-mail:${normalized}`,
-      RESET_CODE_TTL_MS,
-    );
-    if (hits > RESET_MAILS_PER_WINDOW) return;
     const [user] = await this.db
       .select()
       .from(users)
       .where(eq(users.email, normalized))
       .limit(1);
-    if (!user || !isLearner(user)) return;
+    if (!user || !isLearner(user))
+      throw new ApiError(
+        HttpStatus.NOT_FOUND,
+        'user_not_found',
+        'No account is registered with this email',
+      );
+    const { hits, msLeft } = await this.limits.hit(
+      `reset-mail:${normalized}`,
+      RESET_CODE_TTL_MS,
+    );
+    if (hits > RESET_MAILS_PER_WINDOW) {
+      const minutes = Math.max(1, Math.ceil(msLeft / 60_000));
+      throw new ApiError(
+        HttpStatus.TOO_MANY_REQUESTS,
+        'rate_limited',
+        `Too many codes were asked for this email. Try again in ${minutes} ${minutes === 1 ? 'minute' : 'minutes'}.`,
+      );
+    }
     const code = randomInt(0, 1_000_000).toString().padStart(6, '0');
     const row = {
       codeHash: resetCodeHash(user.id, code),
@@ -203,21 +217,27 @@ export class AuthService {
       .insert(passwordResetCodes)
       .values({ userId: user.id, ...row })
       .onConflictDoUpdate({ target: passwordResetCodes.userId, set: row });
-    // Not awaited: waiting for the mail server would make a real account's
-    // answer slower than an unknown email's, and so give it away. A failure
-    // is logged, not shown, for the same reason.
-    void this.mailer
-      .send({
+    try {
+      await this.mailer.send({
         to: user.email,
         subject: 'Your Nyaya password reset code',
         text:
           `Your code is ${code}. It works for 15 minutes.\n\n` +
           "If you didn't ask to reset your Nyaya password, ignore this email. " +
           'Your password stays the same.',
-      })
-      .catch((e: unknown) =>
-        this.logger.error(`Reset mail failed: ${(e as Error).message}`),
+      });
+    } catch (e) {
+      // The mail server refused it: say so, and drop the code nobody got.
+      this.logger.error(`Reset mail failed: ${(e as Error).message}`);
+      await this.db
+        .delete(passwordResetCodes)
+        .where(eq(passwordResetCodes.userId, user.id));
+      throw new ApiError(
+        HttpStatus.SERVICE_UNAVAILABLE,
+        'password_reset_unavailable',
+        'The email could not be sent right now. Please try again later.',
       );
+    }
   }
 
   /**

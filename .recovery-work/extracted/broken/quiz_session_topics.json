@@ -1,0 +1,418 @@
+[
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 1,
+   "xmin": 1115,
+   "xmax": 1116,
+   "ctid": "0,1"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1ce74-735c-73b2-9c16-32d2f3ad32de",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 2,
+   "xmin": 1123,
+   "xmax": 0,
+   "ctid": "0,2"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1cf0b-2fab-75d6-a087-ea99fec1f32f",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 3,
+   "xmin": 1129,
+   "xmax": 1130,
+   "ctid": "0,3"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1cf1d-bc4c-73c7-ba42-3168361dc9fe",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 4,
+   "xmin": 1473,
+   "xmax": 0,
+   "ctid": "0,4"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e2e1-998a-76b0-82a6-dc49c985d4df",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 5,
+   "xmin": 1481,
+   "xmax": 0,
+   "ctid": "0,5"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e2e2-3351-758a-b519-17b5228ce4ad",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 6,
+   "xmin": 1489,
+   "xmax": 0,
+   "ctid": "0,6"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e2e2-b9ba-7587-9aeb-b0632244768e",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 7,
+   "xmin": 1497,
+   "xmax": 0,
+   "ctid": "0,7"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e2e3-4803-732a-b2df-2bc34fb84582",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 8,
+   "xmin": 1506,
+   "xmax": 0,
+   "ctid": "0,8"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e2e4-5fda-71d1-af8b-8db42d98b3a5",
+  "topic_id": "01a1ce0c-3eaf-732e-968d-681c65aee8a0"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 9,
+   "xmin": 1571,
+   "xmax": 0,
+   "ctid": "0,9"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e318-9559-7126-bfee-d1f587a959a8",
+  "topic_id": "01a1ce0c-3eaf-732e-968d-681c65aee8a0"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 10,
+   "xmin": 1579,
+   "xmax": 0,
+   "ctid": "0,10"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e322-19aa-7043-9be8-b8051dba28ea",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 11,
+   "xmin": 1583,
+   "xmax": 1584,
+   "ctid": "0,11"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e322-e181-76bc-b5ff-2549b0c86a18",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 12,
+   "xmin": 1605,
+   "xmax": 0,
+   "ctid": "0,12"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e332-1c7b-7185-ba11-75bfdbb41142",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 13,
+   "xmin": 1611,
+   "xmax": 0,
+   "ctid": "0,13"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e338-851f-7352-9da8-e145675d7e40",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 14,
+   "xmin": 1632,
+   "xmax": 0,
+   "ctid": "0,14"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e35b-77f4-73e7-b1fb-863cac49a395",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 15,
+   "xmin": 1640,
+   "xmax": 0,
+   "ctid": "0,15"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e35c-2db0-7564-87df-fbf2a8c258f2",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 16,
+   "xmin": 1648,
+   "xmax": 0,
+   "ctid": "0,16"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e35c-9581-760a-b450-dd5990eb1295",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 17,
+   "xmin": 1657,
+   "xmax": 0,
+   "ctid": "0,17"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e35d-7a53-7475-a498-60f7b04f88fb",
+  "topic_id": "01a1ce0c-3eaf-732e-968d-681c65aee8a0"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 18,
+   "xmin": 1665,
+   "xmax": 0,
+   "ctid": "0,18"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e35d-e163-71d3-bb43-d21a67d8cb24",
+  "topic_id": "01a1ce0c-3eaf-732e-968d-681c65aee8a0"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 19,
+   "xmin": 1682,
+   "xmax": 0,
+   "ctid": "0,19"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e361-7f21-7249-806f-aabbdf4f04f1",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 20,
+   "xmin": 1693,
+   "xmax": 0,
+   "ctid": "0,20"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e368-4296-7088-8540-c0e4b21f5216",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 21,
+   "xmin": 1750,
+   "xmax": 0,
+   "ctid": "0,21"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e45e-0d3a-74e1-9770-2497e7957b5f",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 22,
+   "xmin": 1780,
+   "xmax": 0,
+   "ctid": "0,22"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e51d-e3a2-779c-8dfe-351cfb1f20fa",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 23,
+   "xmin": 2108,
+   "xmax": 2109,
+   "ctid": "0,23"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1e847-2352-77d1-8c80-207d85a2926e",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 24,
+   "xmin": 6843,
+   "xmax": 6844,
+   "ctid": "0,24"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a1f9a5-fd13-72f8-8470-b78da6b21874",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 25,
+   "xmin": 7083,
+   "xmax": 0,
+   "ctid": "0,25"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a201fb-f17d-73b7-a8b1-7d6ab7777aad",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 26,
+   "xmin": 7113,
+   "xmax": 0,
+   "ctid": "0,26"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "session_id": "01a201fd-a612-7300-bfd0-366ae82c7bfa",
+  "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051"
+ }
+]

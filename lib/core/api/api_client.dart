@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io' show HttpDate;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -9,17 +10,50 @@ import 'token_store.dart';
 
 /// An error from the API (its `{ code, message }` body) or from the network.
 class ApiException implements Exception {
-  const ApiException(this.status, this.code, this.message);
+  const ApiException(this.status, this.code, this.message, {this.retryAfter});
 
   /// HTTP status, or 0 when the server could not be reached.
   final int status;
   final String code;
   final String message;
 
+  /// How long the server asked us to wait (a valid Retry-After header on a 429
+  /// or 5xx answer), kept within [retryAfterMin] and [retryAfterMax]; null when
+  /// it sent none, or one that cannot be used.
+  final Duration? retryAfter;
+
   bool get isNetwork => status == 0;
 
   @override
   String toString() => 'ApiException($status $code: $message)';
+}
+
+/// The shortest and longest wait a Retry-After header may ask for. Zero would
+/// invite a tight loop, and an hour would outlast most exams.
+const retryAfterMin = Duration(seconds: 1);
+const retryAfterMax = Duration(seconds: 120);
+
+/// Reads a Retry-After header: whole seconds ("5") or an HTTP date in the
+/// future. Anything else (missing, empty, negative, fractional, text, a date
+/// already past) is not usable and gives null. A usable value is held within
+/// [retryAfterMin] and [retryAfterMax].
+Duration? parseRetryAfter(String? raw, {DateTime? now}) {
+  final v = raw?.trim();
+  if (v == null || v.isEmpty) return null;
+  Duration wait;
+  if (RegExp(r'^\d{1,9}$').hasMatch(v)) {
+    wait = Duration(seconds: int.parse(v));
+  } else {
+    try {
+      wait = HttpDate.parse(v).difference((now ?? DateTime.now()).toUtc());
+    } catch (_) {
+      return null;
+    }
+    if (wait <= Duration.zero) return null;
+  }
+  if (wait < retryAfterMin) return retryAfterMin;
+  if (wait > retryAfterMax) return retryAfterMax;
+  return wait;
 }
 
 final apiClientProvider = Provider<ApiClient>((ref) {
@@ -77,6 +111,7 @@ class ApiClient {
         res.statusCode,
         err['code'] as String? ?? 'error',
         err['message'] as String? ?? 'Request failed (${res.statusCode})',
+        retryAfter: res.statusCode == 429 || res.statusCode >= 500 ? parseRetryAfter(res.headers['retry-after']) : null,
       );
     }
     return decoded;

@@ -1,0 +1,30 @@
+[
+ {
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "subject_id": "01a1ce0c-3e96-74a9-8f3b-0d77f49ca263",
+  "opened_at": "2026-11-16T05:45:55.967000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 1,
+   "xmin": 1505,
+   "xmax": 0,
+   "ctid": "0,1"
+  }
+ },
+ {
+  "user_id": "01a1e35b-5a0a-7176-b3dd-c048b9e4b1dc",
+  "subject_id": "01a1ce0c-3e96-74a9-8f3b-0d77f49ca263",
+  "opened_at": "2026-11-16T07:58:29.295000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 2,
+   "xmin": 1656,
+   "xmax": 0,
+   "ctid": "0,2"
+  }
+ }
+]

@@ -1,0 +1,130 @@
+# Tips needing specific legal verification (42 of 100)
+
+All 100 tips need a legal reviewer. These carry a specific doubt.
+
+- **DT-POL-07** · Can I show my driving licence and RC on my phone instead of paper?
+  - Reference: Central Motor Vehicles Rules, 1989 (as amended); Information Technology Act, 2000 — Rule 139 CMVR (electronic documents); IT Act section 4 (legal recognition of electronic records)
+  - Check: NEEDS LEGAL VERIFICATION: confirm current Rule 139 wording after amendments, and whether screenshots are accepted.
+- **DT-POL-08** · Can the police check or search my phone on the spot?
+  - Reference: Bharatiya Nagarik Suraksha Sanhita, 2023; Constitution of India — BNSS section 106 (seizure) and section 105 (audio-video recording of search); Article 21
+  - Check: NEEDS LEGAL VERIFICATION: the legal position on compelled phone unlocking and on-the-spot phone searches is unsettled; check section numbers and recent High Court and Supreme Court rulings before publishing.
+- **DT-WOM-07** · Can a woman's complaint of rape be recorded at her home?
+  - Reference: Bharatiya Nagarik Suraksha Sanhita, 2023 — BNSS section 173(1) (provisos)
+  - Check: NEEDS LEGAL VERIFICATION: confirm the exact provisos in s.173(1) (offences covered, place of recording, audio-video recording and interpreter wording) against the current text.
+- **DT-WOM-08** · Can the name of a sexual assault survivor be published?
+  - Reference: Bharatiya Nyaya Sanhita, 2023 — BNS section 72
+  - Check: NEEDS LEGAL VERIFICATION: confirm BNS s.72 (formerly IPC 228A) wording, the list of offences covered and the exceptions.
+- **DT-WOM-12** · Is maternity leave a legal right, and for how long?
+  - Reference: Maternity Benefit Act, 1961; Code on Social Security, 2020 — Maternity Benefit Act section 5; Code on Social Security Chapter on maternity benefit
+  - Check: NEEDS LEGAL VERIFICATION: confirm whether and from which date the Maternity Benefit Act, 1961 has been repealed and replaced by the Code on Social Security, 2020, the exact section numbers in the Code, and the eligibility period.
+- **DT-WOM-13** · Can my employer sack me because I am pregnant?
+  - Reference: Maternity Benefit Act, 1961; Code on Social Security, 2020 — Maternity Benefit Act section 12; corresponding Code on Social Security provision
+  - Check: NEEDS LEGAL VERIFICATION: confirm s.12 of the 1961 Act, its status after the labour codes, and the corresponding section of the Code.
+- **DT-CYB-01** · I lost money in a UPI fraud. What should I do first?
+  - Reference: Information Technology Act, 2000; RBI circular on customer liability in unauthorised electronic banking transactions (6 July 2017) — RBI circular DBR.No.Leg.BC.78/09.07.005/2017-18; IT Act section 66D
+  - Check: NEEDS LEGAL VERIFICATION: confirm the RBI circular number and date, the three-working-days rule, whether it has been replaced by newer RBI directions, and that 1930 is the current helpline.
+- **DT-CYB-03** · Can someone record my phone call without telling me?
+  - Reference: Bharatiya Sakshya Adhiniyam, 2023; Telecommunications Act, 2023; Information Technology Act, 2000 — BSA section 63 (electronic records as evidence); IT Act section 69 (interception by authorised agencies); Article 21
+  - Check: NEEDS LEGAL VERIFICATION: the law on private recording is not codified in one place; the reviewer should confirm the position on admissibility and liability, and the correct provisions under the Telecommunications Act, 2023.
+- **DT-CYB-11** · What rights do I have over my personal data under the new data protection law?
+  - Reference: Digital Personal Data Protection Act, 2023; Digital Personal Data Protection Rules, 2025 — DPDP Act sections 6, 11, 12, 13 and 14; DPDP Rules, 2025
+  - Check: NEEDS LEGAL VERIFICATION: confirm the commencement dates of each section and rule (phased), the section numbers of the rights, and whether the Data Protection Board is functioning.
+- **DT-CYB-12** · A loan app is harassing me and calling my contacts. Is that legal?
+  - Reference: Bharatiya Nyaya Sanhita, 2023; RBI Digital Lending Directions — BNS sections 308 and 351; RBI digital lending directions (as in force)
+  - Check: NEEDS LEGAL VERIFICATION: confirm the current RBI digital lending directions, their date and the exact rules on contact and photo access and recovery agents; confirm the RBI list of digital lending apps.
+- **DT-CYB-13** · I lost my phone. How do I block it and stop misuse?
+  - Reference: Telecommunications Act, 2023 — Telecommunications Act, 2023 and rules under it (CEIR, Sanchar Saathi)
+  - Check: NEEDS LEGAL VERIFICATION: there is no clear section for CEIR; confirm the legal basis (Telecommunications Act, 2023 and rules, or a DoT order) and the current portal steps.
+- **DT-CYB-15** · How do I get a harmful or fake post about me removed from a social media platform?
+  - Reference: Information Technology Act, 2000; IT (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021 — IT Rules 2021, Rule 3(2) (grievance redressal and removal of certain content)
+  - Check: NEEDS LEGAL VERIFICATION: confirm Rule 3(2)(a) and (b) timelines (24 hours, 15 days), later amendments to the 2021 Rules, and the Grievance Appellate Committee process.
+- **DT-CON-02** · Does a 'goods once sold will not be taken back' notice mean I have no rights?
+  - Reference: Consumer Protection Act, 2019 — Sections 2(46) (unfair contract), 2(47) (unfair trade practice) and 39
+  - Check: NEEDS LEGAL VERIFICATION: confirm that a blanket 'no exchange' notice is an unfair trade practice or unfair contract under ss.2(46)-(47); check any consumer commission rulings.
+- **DT-CON-03** · Can a shop charge more than the MRP?
+  - Reference: Legal Metrology Act, 2009; Legal Metrology (Packaged Commodities) Rules, 2011 — Legal Metrology Act, 2009 (offences) and the Packaged Commodities Rules, 2011
+  - Check: NEEDS LEGAL VERIFICATION: identify the exact provision that prohibits selling above MRP (Act section and Rule number) and the exceptions for hotels, airports and services.
+- **DT-CON-04** · Where can I file a consumer complaint, and does it cost anything?
+  - Reference: Consumer Protection Act, 2019; Consumer Protection (Consumer Disputes Redressal Commissions) Rules, 2020 — Act sections 34, 35, 47 and 58; Rules 2020 (fee)
+  - Check: NEEDS LEGAL VERIFICATION: confirm the current pecuniary jurisdiction limits and the nil-fee limit of ₹5 lakh, and any later amendments.
+- **DT-CON-07** · I ordered something online and it never arrived. What are my rights?
+  - Reference: Consumer Protection (E-Commerce) Rules, 2020; Consumer Protection Act, 2019 — E-Commerce Rules 2020 (rules on grievance redressal); Act section 2(47)
+  - Check: NEEDS LEGAL VERIFICATION: confirm the E-Commerce Rules rule numbers, the 48-hour acknowledgement and one-month resolution periods, and the refund rules.
+- **DT-CON-08** · My insurer rejected my claim. Can I do anything?
+  - Reference: Consumer Protection Act, 2019; Insurance Ombudsman Rules, 2017 — Act section 2(11) (deficiency); Insurance Ombudsman Rules 2017
+  - Check: NEEDS LEGAL VERIFICATION: confirm the Insurance Ombudsman Rules 2017 are still current (and any 2024-25 changes), the one-year time limit, and any monetary limits.
+- **DT-CON-10** · I found an expired or spoiled food product in a shop. What can I do?
+  - Reference: Food Safety and Standards Act, 2006 — Sections 26 and 59
+  - Check: NEEDS LEGAL VERIFICATION: confirm s.26 (responsibilities of food business operator) and s.59 (punishment for unsafe food), and the FSSAI's current complaint channel.
+- **DT-CON-12** · What is the National Consumer Helpline and how do I use it?
+  - Reference: Consumer Protection Act, 2019 — Consumer Protection Act, 2019 (general); National Consumer Helpline (Department of Consumer Affairs)
+  - Check: NEEDS LEGAL VERIFICATION: confirm the toll-free number 1915, the app name, and whether the NCH is established under a specific provision or only by executive scheme.
+- **DT-CON-14** · Can a restaurant add a service charge to my bill automatically?
+  - Reference: Consumer Protection Act, 2019; CCPA Service Charge Guidelines, 2022 — Section 2(47); CCPA Guidelines, 4 July 2022; NRAI v. Union of India (Delhi HC, 28 March 2025)
+  - Check: NEEDS LEGAL VERIFICATION: confirm the exact date and title of the CCPA guidelines, the High Court's holdings (including on takeaway) and whether an appeal is pending.
+- **DT-CON-15** · My flight was cancelled. Am I entitled to a refund?
+  - Reference: Aircraft Rules, 1937; DGCA Civil Aviation Requirement, Section 3, Series M, Part IV — DGCA CAR Section 3 Series M Part IV (cancellation, delay and denied boarding)
+  - Check: NEEDS LEGAL VERIFICATION: confirm the CAR's current version, compensation amounts and time limits for refunds, and the AirSewa portal.
+- **DT-PRO-01** · Can my landlord suddenly ask me to leave?
+  - Reference: Transfer of Property Act, 1882; State Rent Control or Tenancy Acts — Transfer of Property Act section 106; applicable State rent law
+  - Check: NEEDS LEGAL VERIFICATION: s.106 notice periods (15 days / six months) as amended; the applicable State rent law differs and must be named by the reviewer, or the tip made State-specific.
+- **DT-PRO-02** · When does my landlord have to return my security deposit?
+  - Reference: Model Tenancy Act, 2021 (model law); State tenancy laws; Transfer of Property Act, 1882 — Model Tenancy Act, 2021, provisions on security deposit; check State law
+  - Check: NEEDS LEGAL VERIFICATION: the Model Tenancy Act is not binding unless a State adopts it; identify which States have, the two-month cap and the refund timeline, or limit this tip to a named State.
+- **DT-PRO-03** · Can my landlord cut off my water or electricity?
+  - Reference: State Rent Control or Tenancy Acts; Model Tenancy Act, 2021 — Applicable State rent law; Model Tenancy Act, 2021 provisions on essential supplies
+  - Check: NEEDS LEGAL VERIFICATION: identify the exact State provisions or the Model Tenancy Act section, which is a model law only.
+- **DT-PRO-05** · How much can a landlord increase the rent?
+  - Reference: State Rent Control or Tenancy Acts; Model Tenancy Act, 2021 — Applicable State rent law; Model Tenancy Act, 2021 provision on revision of rent
+  - Check: NEEDS LEGAL VERIFICATION: identify the State law and the Model Tenancy Act section, and the notice period for revision.
+- **DT-PRO-06** · Can the landlord walk into my rented home whenever they want?
+  - Reference: Transfer of Property Act, 1882; Model Tenancy Act, 2021; State tenancy laws — Transfer of Property Act section 108(l) (lessor's duty to give possession and quiet enjoyment); Model Tenancy Act, 2021 provision on landlord's entry
+  - Check: NEEDS LEGAL VERIFICATION: confirm the TPA clause on quiet enjoyment and the Model Tenancy Act section and 24-hour notice wording; State laws differ.
+- **DT-PRO-08** · Can someone become the owner of my vacant property by occupying it?
+  - Reference: Limitation Act, 1963 — Articles 64 and 65 of the Schedule (suits for possession); sections 27
+  - Check: NEEDS LEGAL VERIFICATION: confirm Articles 64 and 65 and the 12 and 30 year periods, and the current Supreme Court position (for example, Ravinder Kaur Grewal 2019).
+- **DT-PRO-10** · Does getting the property in my name in the municipal record (mutation) make me the owner?
+  - Reference: Transfer of Property Act, 1882; State land revenue laws — Supreme Court: Suraj Bhan v. Financial Commissioner (2007); applicable State land revenue code
+  - Check: NEEDS LEGAL VERIFICATION: confirm the Supreme Court judgment citation and holding, and add the relevant State mutation law, which varies.
+- **DT-EMP-01** · Can my employer refuse to pay my salary after I resign?
+  - Reference: Code on Wages, 2019 — Section 17 (time limit for payment of wages)
+  - Check: NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm s.17(2) of the Code on Wages and the two-working-day period.
+- **DT-EMP-02** · When am I entitled to gratuity?
+  - Reference: Payment of Gratuity Act, 1972; Code on Social Security, 2020 — Payment of Gratuity Act section 4; Code on Social Security Chapter V
+  - Check: NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm the gratuity section in the Code on Social Security, the eligibility for fixed-term employees, the wage ceiling and whether the 1972 Act is repealed.
+- **DT-EMP-03** · Can my employer cut money from my salary as a punishment?
+  - Reference: Code on Wages, 2019 — Section 18 (deductions) and section 19 (fines)
+  - Check: NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm s.18 and the 50 percent ceiling, and s.19 on fines.
+- **DT-EMP-04** · What is the minimum wage, and what if my employer pays less?
+  - Reference: Code on Wages, 2019 — Section 6 (no payment below the minimum wage) and section 9 (fixing of minimum wages)
+  - Check: NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm ss.6 and 9, the floor wage provision and the current rate for the reader's State.
+- **DT-EMP-05** · Am I entitled to extra pay for working overtime?
+  - Reference: Code on Wages, 2019; Occupational Safety, Health and Working Conditions Code, 2020 — Code on Wages section 14 (overtime); OSH Code provisions on hours of work
+  - Check: NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm Code on Wages s.14, the OSH Code section on overtime limits and consent, and which categories are excluded.
+- **DT-EMP-06** · How many hours a week can my employer make me work?
+  - Reference: Occupational Safety, Health and Working Conditions Code, 2020; Factories Act, 1948 — OSH Code provisions on hours of work and weekly holiday; Factories Act sections 51 and 52
+  - Check: NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Identify the OSH Code sections for daily and weekly limits and weekly holiday, and confirm the Factories Act is repealed.
+- **DT-EMP-07** · Can my company fire me without notice or pay?
+  - Reference: Industrial Relations Code, 2020 — Section 70 (conditions for retrenchment)
+  - Check: NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm Industrial Relations Code s.70, the 15-days compensation, the thresholds for government permission, and who counts as a 'worker'.
+- **DT-EMP-08** · Is my provident fund contribution my money, and what if my employer doesn't deposit it?
+  - Reference: Employees' Provident Funds and Miscellaneous Provisions Act, 1952; Code on Social Security, 2020 — EPF Act sections 6 and 14; Code on Social Security provisions on provident fund
+  - Check: NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm the Code on Social Security sections on provident fund and penalties, and the EPFO grievance channel.
+- **DT-EMP-09** · What health benefits does ESI give me?
+  - Reference: Employees' State Insurance Act, 1948; Code on Social Security, 2020 — ESI Act sections 46 to 52A; Code on Social Security provisions on employees' state insurance
+  - Check: NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm the current wage ceiling, coverage thresholds and the Code sections on ESI.
+- **DT-EMP-10** · Do I get paid leave, and can the employer refuse it?
+  - Reference: Occupational Safety, Health and Working Conditions Code, 2020; Factories Act, 1948; State shops and establishments laws — OSH Code provision on annual leave with wages; Factories Act section 79
+  - Check: NEEDS LEGAL VERIFICATION: the four labour codes came into force on 21 November 2025 and are being operationalised with rules; confirm which old Act is repealed, the exact Code section, the rules in force in the reader's State, and who is covered. Confirm the OSH Code section on annual leave, the 180-day rule, the accrual rate, and State shops and establishments rules.
+- **DT-FAM-04** · What is the legal age for marriage in India?
+  - Reference: Prohibition of Child Marriage Act, 2006 — Sections 2(a), 3 and 9 to 11
+  - Check: NEEDS LEGAL VERIFICATION: check whether the Prohibition of Child Marriage (Amendment) Bill raising the age of women to 21 has been enacted, and the Supreme Court's 2024 guidelines on the Act.
+- **DT-FAM-08** · Are couples in a live-in relationship protected by law?
+  - Reference: Protection of Women from Domestic Violence Act, 2005 — Section 2(f) (domestic relationship); D. Velusamy v. D. Patchaiammal (2010); S.P.S. Balasubramanyam v. Suruttayan (1993)
+  - Check: NEEDS LEGAL VERIFICATION: confirm s.2(f), the cited judgments and the legitimacy of children (Tulsa v. Durghatiya 2008), and the High Court positions on protection to couples.
+- **DT-FAM-09** · How soon must I register a birth, and what if I miss the deadline?
+  - Reference: Registration of Births and Deaths Act, 1969 — Sections 8, 13 and 23
+  - Check: NEEDS LEGAL VERIFICATION: confirm ss.8 and 13, the 21/30-day/one-year steps and late fee, and recent amendments (2023) on digital registration.
+- **DT-FAM-11** · Can a bank's recovery agent harass or threaten me about a loan?
+  - Reference: Reserve Bank of India directions and Fair Practices Code; Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest Act, 2002 — RBI Fair Practices Code and recovery agents guidelines; SARFAESI Act section 13
+  - Check: NEEDS LEGAL VERIFICATION: confirm the current RBI instructions on recovery agents and calling hours, the SARFAESI s.13 notice procedure, and the RBI Ombudsman scheme.

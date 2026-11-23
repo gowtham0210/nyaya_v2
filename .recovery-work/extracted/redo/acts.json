@@ -1,0 +1,152 @@
+[
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 1,
+   "xmin": 808,
+   "xmax": 817,
+   "ctid": "0,1"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ce0c-3e78-7469-8534-922fad0212bd",
+  "slug": "constitution-of-india",
+  "name": "Constitution of India",
+  "short_name": "Constitution",
+  "year": 1950,
+  "jurisdiction": "IN",
+  "is_active": true,
+  "created_at": "2026-11-12T04:37:51.353000Z",
+  "updated_at": "2026-11-12T04:37:51.353000Z",
+  "repealed_on": null,
+  "replaced_by_act_id": null
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 2,
+   "xmin": 809,
+   "xmax": 819,
+   "ctid": "0,2"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ce0c-3e87-7603-b956-58650705ead4",
+  "slug": "bns-2023",
+  "name": "Bharatiya Nyaya Sanhita, 2023",
+  "short_name": "BNS",
+  "year": 2023,
+  "jurisdiction": "IN",
+  "is_active": true,
+  "created_at": "2026-11-12T04:37:51.367000Z",
+  "updated_at": "2026-11-12T04:37:51.367000Z",
+  "repealed_on": null,
+  "replaced_by_act_id": null
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 3,
+   "xmin": 810,
+   "xmax": 0,
+   "ctid": "0,3"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ce0c-3e89-7609-b5c9-d610d8cde1d8",
+  "slug": "bnss-2023",
+  "name": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+  "short_name": "BNSS",
+  "year": 2023,
+  "jurisdiction": "IN",
+  "is_active": true,
+  "created_at": "2026-11-12T04:37:51.370000Z",
+  "updated_at": "2026-11-12T04:37:51.370000Z",
+  "repealed_on": null,
+  "replaced_by_act_id": null
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 4,
+   "xmin": 811,
+   "xmax": 0,
+   "ctid": "0,4"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ce0c-3e8c-7636-949e-4438929057c7",
+  "slug": "bsa-2023",
+  "name": "Bharatiya Sakshya Adhiniyam, 2023",
+  "short_name": "BSA",
+  "year": 2023,
+  "jurisdiction": "IN",
+  "is_active": true,
+  "created_at": "2026-11-12T04:37:51.372000Z",
+  "updated_at": "2026-11-12T04:37:51.372000Z",
+  "repealed_on": null,
+  "replaced_by_act_id": null
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 5,
+   "xmin": 812,
+   "xmax": 0,
+   "ctid": "0,5"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ce0c-3e8d-773f-92ad-38234a691aae",
+  "slug": "indian-contract-act-1872",
+  "name": "Indian Contract Act, 1872",
+  "short_name": "Contract Act",
+  "year": 1872,
+  "jurisdiction": "IN",
+  "is_active": true,
+  "created_at": "2026-11-12T04:37:51.373000Z",
+  "updated_at": "2026-11-12T04:37:51.373000Z",
+  "repealed_on": null,
+  "replaced_by_act_id": null
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 6,
+   "xmin": 813,
+   "xmax": 0,
+   "ctid": "0,6"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1ce0c-3e8e-70e2-9daf-47107ac11f5b",
+  "slug": "consumer-protection-act-2019",
+  "name": "Consumer Protection Act, 2019",
+  "short_name": "CPA",
+  "year": 2019,
+  "jurisdiction": "IN",
+  "is_active": true,
+  "created_at": "2026-11-12T04:37:51.375000Z",
+  "updated_at": "2026-11-12T04:37:51.375000Z",
+  "repealed_on": null,
+  "replaced_by_act_id": null
+ }
+]

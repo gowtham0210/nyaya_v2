@@ -27,7 +27,13 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import type { Response } from 'express';
-import { CurrentActor, Public, Roles } from '../auth/decorators.js';
+import type { AuthUser } from '../auth/auth-user.js';
+import {
+  CurrentActor,
+  CurrentUser,
+  Public,
+  Roles,
+} from '../auth/decorators.js';
 import type { Actor } from '../core/audit.service.js';
 import {
   CreateNewsDto,
@@ -195,10 +201,17 @@ export class EditorNewsController {
   @Post(':id/approve')
   @HttpCode(200)
   @Roles(...NEWS_ACTIONS.approve.roles)
-  @ApiOperation({ summary: 'Approve the article under review (not your own)' })
+  @ApiOperation({
+    summary:
+      'Approve the article under review (not your own, unless you are an admin)',
+  })
   @ApiOkResponse({ type: NewsDetailDto })
-  approve(@CurrentActor() actor: Actor, @Id() id: string) {
-    return this.news.approve(actor, id);
+  approve(
+    @CurrentActor() actor: Actor,
+    @CurrentUser() user: AuthUser,
+    @Id() id: string,
+  ) {
+    return this.news.approve(actor, id, user.roles.includes('admin'));
   }
 
   @Post(':id/publish')

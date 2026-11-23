@@ -76,13 +76,40 @@ describe('password reset', () => {
     expect(again.body.code).toBe('invalid_reset_code');
   });
 
-  it('answers the same for unknown emails and staff, and sends nothing', async () => {
+  it('says no account is registered for unknown emails and staff, and sends nothing', async () => {
     const staff = await t.signInAs('content_editor');
     const before = mailer.outbox.length;
-    await request('nobody@test.local').expect(204);
-    await request(staff.email).expect(204);
+    const unknown = await request('nobody@test.local').expect(404);
+    expect(unknown.body.code).toBe('user_not_found');
+    const asStaff = await request(staff.email).expect(404);
+    expect(asStaff.body.code).toBe('user_not_found');
     expect(mailer.outbox.length).toBe(before);
     await confirm('nobody@test.local', '123456').expect(400);
+  });
+
+  it("an unknown email does not use up anyone's limit", async () => {
+    for (let i = 0; i < 5; i++) {
+      const res = await request('ghost@test.local').expect(404);
+      expect(res.body.code).toBe('user_not_found');
+    }
+  });
+
+  it('says so when the mail server refuses the mail, and leaves no code behind', async () => {
+    const s = await t.signInAs('learner');
+    const send = mailer.send.bind(mailer);
+    mailer.send = () => Promise.reject(new Error('smtp down'));
+    try {
+      const res = await request(s.email).expect(503);
+      expect(res.body.code).toBe('password_reset_unavailable');
+    } finally {
+      mailer.send = send;
+    }
+    const rows = await t.db
+      .select()
+      .from(passwordResetCodes)
+      .where(eq(passwordResetCodes.userId, s.id));
+    expect(rows).toHaveLength(0);
+    expect(sentTo(s.email)).toBe(0);
   });
 
   it('stops a code after five wrong tries', async () => {
@@ -133,9 +160,12 @@ describe('password reset', () => {
     await confirm(s.email, second).expect(200);
   });
 
-  it('sends at most three mails per address in 15 minutes', async () => {
+  it('sends at most three mails per address in 15 minutes, and says when to retry', async () => {
     const s = await t.signInAs('learner');
-    for (let i = 0; i < 4; i++) await request(s.email).expect(204);
+    for (let i = 0; i < 3; i++) await request(s.email).expect(204);
+    const fourth = await request(s.email).expect(429);
+    expect(fourth.body.code).toBe('rate_limited');
+    expect(fourth.body.message).toMatch(/Try again in \d+ minute/);
     expect(sentTo(s.email)).toBe(3);
   });
 

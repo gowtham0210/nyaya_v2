@@ -25,7 +25,7 @@ describe('contentProblems', () => {
     expect(contentProblems(complete, true)).toEqual([]);
   });
 
-  it('requires text, explanation, source and validity date', () => {
+  it('requires text, source and validity date, but not an explanation', () => {
     expect(
       fields({
         stem: ' ',
@@ -33,7 +33,9 @@ describe('contentProblems', () => {
         sourceTitle: null,
         validFrom: null,
       }),
-    ).toEqual(['stem', 'explanation', 'source_title', 'valid_from']);
+    ).toEqual(['stem', 'source_title', 'valid_from']);
+    expect(fields({ explanation: '' })).toEqual([]);
+    expect(fields({ explanation: '   ' })).toEqual([]);
   });
 
   it('checks options and the answer key', () => {

@@ -1,0 +1,282 @@
+[
+ {
+  "user_id": "01a1c93e-72a4-70c3-8bd4-adfb57cbe6cb",
+  "day": "2026-11-13",
+  "answers": 0,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 4,
+   "xmin": 1150,
+   "xmax": 0,
+   "ctid": "0,4"
+  }
+ },
+ {
+  "user_id": "01a1d493-0ecb-7185-a17c-05c60b4d8ce8",
+  "day": "2026-11-13",
+  "answers": 4,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 12,
+   "xmin": 1176,
+   "xmax": 1176,
+   "ctid": "0,12"
+  }
+ },
+ {
+  "user_id": "01a1d498-a4c3-73f4-a96a-4e7af482d2d5",
+  "day": "2026-11-13",
+  "answers": 5,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 21,
+   "xmin": 1194,
+   "xmax": 1194,
+   "ctid": "0,21"
+  }
+ },
+ {
+  "user_id": "01a1d4c5-4e86-72b3-9abd-60c430e8fa4e",
+  "day": "2026-11-13",
+  "answers": 5,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 26,
+   "xmin": 1212,
+   "xmax": 1212,
+   "ctid": "0,26"
+  }
+ },
+ {
+  "user_id": "01a1d4c8-5932-76c4-a5ce-03135f7cb64b",
+  "day": "2026-11-13",
+  "answers": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 27,
+   "xmin": 1222,
+   "xmax": 0,
+   "ctid": "0,27"
+  }
+ },
+ {
+  "user_id": "01a1d86e-e9bd-7741-8771-3eddb0ca4301",
+  "day": "2026-11-14",
+  "answers": 3,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 30,
+   "xmin": 1240,
+   "xmax": 1240,
+   "ctid": "0,30"
+  }
+ },
+ {
+  "user_id": "01a1d8a5-1053-7009-bba4-d79174b99305",
+  "day": "2026-11-14",
+  "answers": 3,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 33,
+   "xmin": 1252,
+   "xmax": 1252,
+   "ctid": "0,33"
+  }
+ },
+ {
+  "user_id": "01a1d8df-6dad-7222-a063-e03f8e7ce761",
+  "day": "2026-11-14",
+  "answers": 5,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 38,
+   "xmin": 1262,
+   "xmax": 1262,
+   "ctid": "0,38"
+  }
+ },
+ {
+  "user_id": "01a1d8e3-b09c-757e-b3ae-3e396281229e",
+  "day": "2026-11-14",
+  "answers": 5,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 43,
+   "xmin": 1282,
+   "xmax": 1282,
+   "ctid": "0,43"
+  }
+ },
+ {
+  "user_id": "01a1d95d-6e72-73db-8c59-b32e78541bc9",
+  "day": "2026-11-14",
+  "answers": 5,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 48,
+   "xmin": 1300,
+   "xmax": 1300,
+   "ctid": "0,48"
+  }
+ },
+ {
+  "user_id": "01a1d99d-4d33-73c1-824a-9edbf6582c47",
+  "day": "2026-11-14",
+  "answers": 5,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 63,
+   "xmin": 1324,
+   "xmax": 1324,
+   "ctid": "0,63"
+  }
+ },
+ {
+  "user_id": "01a1d9b8-2996-702a-b550-c5ff2209d65c",
+  "day": "2026-11-14",
+  "answers": 3,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 66,
+   "xmin": 1332,
+   "xmax": 1332,
+   "ctid": "0,66"
+  }
+ },
+ {
+  "user_id": "01a1d9d2-062c-7021-b3ae-4be114c7c97c",
+  "day": "2026-11-14",
+  "answers": 4,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 70,
+   "xmin": 1371,
+   "xmax": 1371,
+   "ctid": "0,70"
+  }
+ },
+ {
+  "user_id": "01a1d9da-2968-7156-829a-4d73ef2c0416",
+  "day": "2026-11-14",
+  "answers": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 71,
+   "xmin": 1377,
+   "xmax": 0,
+   "ctid": "0,71"
+  }
+ },
+ {
+  "user_id": "01a1d9e4-057f-743a-ac0c-aac16aab89ab",
+  "day": "2026-11-14",
+  "answers": 5,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 76,
+   "xmin": 1391,
+   "xmax": 1391,
+   "ctid": "0,76"
+  }
+ },
+ {
+  "user_id": "01a1d9f7-7122-754e-a800-eb909ecbdd30",
+  "day": "2026-11-14",
+  "answers": 3,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 79,
+   "xmin": 1402,
+   "xmax": 1402,
+   "ctid": "0,79"
+  }
+ },
+ {
+  "user_id": "01a1da00-368f-726e-99c9-3d46de0bf6e1",
+  "day": "2026-11-14",
+  "answers": 4,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 83,
+   "xmin": 1423,
+   "xmax": 1423,
+   "ctid": "0,83"
+  }
+ },
+ {
+  "user_id": "01a1da11-01d3-74ce-a946-e6b706d1a26e",
+  "day": "2026-11-14",
+  "answers": 3,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 86,
+   "xmin": 1431,
+   "xmax": 1431,
+   "ctid": "0,86"
+  }
+ },
+ {
+  "user_id": "01a1e846-b507-70d9-a52c-3807c9a2389d",
+  "day": "2026-11-17",
+  "answers": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 87,
+   "xmin": 2110,
+   "xmax": 0,
+   "ctid": "0,87"
+  }
+ },
+ {
+  "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+  "day": "2026-11-22",
+  "answers": 1,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 88,
+   "xmin": 6851,
+   "xmax": 0,
+   "ctid": "0,88"
+  }
+ }
+]

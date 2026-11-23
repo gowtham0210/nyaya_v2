@@ -13,6 +13,8 @@ import 'package:nyaya/core/storage/local_store.dart';
 import 'package:nyaya/core/theme/app_theme.dart';
 import 'package:nyaya/core/widgets/pressable.dart';
 import 'package:nyaya/features/auth/data/auth_api.dart';
+import 'package:nyaya/features/constitution/data/constitution_repository.dart';
+import 'package:nyaya/features/daily_tip/data/daily_tip_repository.dart';
 import 'package:nyaya/features/leaderboard/data/league_api.dart';
 import 'package:nyaya/features/legal_updates/data/legal_updates_repository.dart';
 import 'package:nyaya/features/onboarding/presentation/intro_slides.dart';
@@ -68,6 +70,10 @@ void main() {
       leagueApiProvider.overrideWithValue(api),
       reviewApiProvider.overrideWithValue(api),
       legalUpdatesRepositoryProvider.overrideWithValue(FakeLegalUpdates()),
+      // A tip is published, so Home's accessibility checks cover its card.
+      dailyTipRepositoryProvider.overrideWithValue(FakeDailyTips(tip: sampleTip())),
+      // The Constitution editions come from a fake, never from the network.
+      constitutionRepositoryProvider.overrideWithValue(FakeConstitution()),
       reminderNotificationsProvider.overrideWithValue(FakeReminderNotifications()),
       soundPlayerProvider.overrideWithValue(FakeSounds()),
       authApiProvider.overrideWithValue(FakeAuthApi(tokens)),
@@ -107,6 +113,8 @@ void main() {
     Routes.leaderboard,
     Routes.review,
     Routes.settings,
+    Routes.profile,
+    Routes.constitution,
   ];
 
   for (final theme in ['light', 'dark']) {
@@ -406,7 +414,7 @@ void main() {
     });
   }
 
-  for (final route in [Routes.home, Routes.settings]) {
+  for (final route in [Routes.home, Routes.settings, Routes.profile]) {
     testWidgets('$route lays out at the smallest text size', (tester) async {
       final c = await pumpApp(tester, theme: 'light', textScale: 0.8);
       c.read(routerProvider).go(route);

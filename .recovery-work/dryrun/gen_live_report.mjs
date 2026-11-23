@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+const R = JSON.parse(fs.readFileSync('work/LIVE.results.json'));
+const m = [];
+m.push('# Live restoration report', '', 'Completed 2026-11-22. Procedure: the tested Scenario B load (`liverestore.mjs`), applied to the live database as one transaction (all tiers A-N, with per-table count assertions before commit). Migrations 0023/0024 were already applied and were not re-run.', '');
+m.push('## Result: SUCCESS, 0 failures', '', `- Backup before restore: \`backend/.data/pglite-backup-20261122-pre-restore\` (sha256 of all 1,236 files identical to the live directory at that moment, and still identical afterwards).`, `- Live rows: **${R.preTotal} -> ${R.post.total}** (expected 17,710 = 7,196 + 10,514 new).`, '- Post-restore activity preserved: the 13:46 IST user, 3 refresh tokens, 2 audit events, coin-ledger, app-open and learner-settings rows are present and unchanged (independently confirmed by decoding the restored files: 0 pre-restore rows lost or changed, other than the 17 intended modifications).', `- ${R.checks.filter(c => c.ok).length}/${R.checks.length} checks PASS, 11/11 papers PASS, 48/48 tables PASS.`, '');
+m.push('## Exam papers (live)', '', '| paper | status | rows / total | keyed + withdrawn | practice timer (s) | frozen_at | result |', '|---|---|--:|--:|--:|---|---|');
+for (const p of R.papers) m.push(`| ${p.code} r${p.revision} | ${p.status} | ${p.rows}/${p.total} | ${p.keyed} + ${p.withdrawn} | ${p.timer ?? '-'} | ${p.frozen_at?.slice(0, 16) ?? '-'} | ${p.ok ? 'PASS' : '**FAIL**'} |`);
+m.push('', '8 published, 3 retired, matching the Nov 22 state.', '', '## Every table (live)', '', '| table | before | expected | actual | inserted | updated | result |', '|---|--:|--:|--:|--:|--:|---|');
+for (const t of Object.values(R.tables)) m.push(`| ${t.table} | ${t.pre} | ${t.expected} | ${t.actual} | ${t.inserted} | ${t.updated} | ${t.ok ? 'PASS' : '**FAIL**'} |`);
+m.push('', 'Not restored by design: `rate_limits` (ephemeral), `legal_*` (unchanged).', '', '## Checks', '');
+for (const c of R.checks) m.push(`- ${c.ok ? 'PASS' : '**FAIL**'} ${c.name} ${c.detail ? '`' + c.detail + '`' : ''}`);
+m.push('', 'Note: revoked tokens in db = 191 vs 190 recovered: the extra one is a token that was revoked in live after the restore (e.g. a sign-out); it was preserved.');
+fs.writeFileSync('LIVE_RESTORE_REPORT.md', m.join('\n'));

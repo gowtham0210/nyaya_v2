@@ -46,7 +46,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Email a learner a 6-digit code to choose a new password. The answer is the same whether or not the email has an account. */
+        /** Email a learner a 6-digit code to choose a new password. 404 user_not_found when no learner account has this email; 429 after three codes in 15 minutes. */
         post: operations["AuthController_requestPasswordReset"];
         delete?: never;
         options?: never;
@@ -300,6 +300,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/exam-import-jobs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Check a file of exam questions (row by row) and, unless dry_run, import the valid new rows as exam-only drafts. A content source can be named for attribution. */
+        post: operations["ImportsController_createExam"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/import-jobs/{id}": {
         parameters: {
             query?: never;
@@ -308,6 +325,40 @@ export interface paths {
             cookie?: never;
         };
         get: operations["ImportsController_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/import-jobs/{id}/paper-positions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Which rows of an import can be pinned in a fixed paper now (read only). Papers still accept only published questions. */
+        get: operations["ImportsController_paperPositions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/import-templates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** A blank import file (.xlsx with instructions and topic list, or .csv) for the general or the exam import */
+        get: operations["ImportsController_template"];
         put?: never;
         post?: never;
         delete?: never;
@@ -467,6 +518,23 @@ export interface paths {
         head?: never;
         /** Edit the latest version while it is a draft or has changes requested */
         patch: operations["QuestionsController_update"];
+        trace?: never;
+    };
+    "/v1/editor/questions/{id}/exam-tags": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Set the exams a question may be used in. An editor can do this only while the question is an unpublished draft; an admin can at any stage (audited) */
+        put: operations["QuestionsController_setExamTags"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
         trace?: never;
     };
     "/v1/editor/questions/bulk": {
@@ -1111,7 +1179,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Approve the article under review (not your own) */
+        /** Approve the article under review (not your own, unless you are an admin) */
         post: operations["EditorNewsController_approve"];
         delete?: never;
         options?: never;
@@ -1164,6 +1232,850 @@ export interface paths {
         put?: never;
         /** Take a published article off the app */
         post: operations["EditorNewsController_retire"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/daily-tips/today": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Today's published tip (India date); tip is null when there is none */
+        get: operations["DailyTipsController_today"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/daily-tips/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** One published tip whose day has come */
+        get: operations["DailyTipsController_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/daily-tips": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EditorDailyTipsController_list"];
+        put?: never;
+        /** Start a daily tip as a draft */
+        post: operations["EditorDailyTipsController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/daily-tips/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EditorDailyTipsController_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Edit a draft, or one with changes requested */
+        patch: operations["EditorDailyTipsController_update"];
+        trace?: never;
+    };
+    "/v1/editor/daily-tips/{id}/verify": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Record that you checked the tip against its exact official source today; sets the verification date and nothing else */
+        post: operations["EditorDailyTipsController_verify"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/daily-tips/{id}/submit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Send the tip for legal review */
+        post: operations["EditorDailyTipsController_submit"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/daily-tips/{id}/request-changes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["EditorDailyTipsController_requestChanges"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/daily-tips/{id}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Approve the tip under review (not your own, unless you are an admin) */
+        post: operations["EditorDailyTipsController_approve"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/daily-tips/{id}/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Publish the approved tip; the app shows it on its publish date */
+        post: operations["EditorDailyTipsController_publish"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/daily-tips/{id}/revise": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Take a published or retired tip back to draft to correct it; it leaves the app until published again */
+        post: operations["EditorDailyTipsController_revise"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/editor/daily-tips/{id}/retire": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Take a published tip off the app */
+        post: operations["EditorDailyTipsController_retire"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/constitution": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The Constitution of India's editions on India Code: official PDF links with size and warnings. No document is served by this API. */
+        get: operations["ConstitutionController_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/constitution/drift": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Compare India Code with the reviewed manifest: changed, missing and new editions */
+        get: operations["AdminConstitutionController_drift"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exams": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["ExamsController_list"];
+        put?: never;
+        /** Create an exam (AIBE, CLAT or AILET), switched off */
+        post: operations["ExamsController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exams/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["ExamsController_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Edit an exam; switching it on needs a published blueprint */
+        patch: operations["ExamsController_update"];
+        trace?: never;
+    };
+    "/v1/admin/exams/{examId}/questions/{questionId}/eligibility": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Whether a question could be drawn for a randomised mock of this exam, and every reason it could not */
+        get: operations["ExamsController_eligible"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-blueprints/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["ExamsController_blueprint"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Edit a draft blueprint */
+        patch: operations["ExamsController_updateBlueprint"];
+        trace?: never;
+    };
+    "/v1/admin/exam-blueprints": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create the first version of a blueprint, as a draft */
+        post: operations["ExamsController_createBlueprint"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-blueprints/{id}/sections": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Replace a draft blueprint's sections and topic quotas */
+        put: operations["ExamsController_sections"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-blueprints/{id}/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Publish a draft. It becomes read-only. Only an official-confirmed blueprint can be used for timed mocks. */
+        post: operations["ExamsController_publish"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-blueprints/{id}/retire": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["ExamsController_retire"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-blueprints/{id}/make-current": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Make a published blueprint the one randomised mocks of its exam use, replacing the previous one. Audited. */
+        post: operations["ExamsController_makeCurrent"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-blueprints/{id}/clear-current": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Take the current mark off a blueprint. The exam then has no current blueprint and randomised mocks are refused. Audited. */
+        post: operations["ExamsController_clearCurrent"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-blueprints/{id}/new-version": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Copy a published or retired blueprint into a new draft version */
+        post: operations["ExamsController_newVersion"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/content-sources": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Where content came from (attribution) */
+        get: operations["ContentSourcesController_list"];
+        put?: never;
+        /** Record where content came from (attribution only) */
+        post: operations["ContentSourcesController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/content-sources/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["ContentSourcesController_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Change a source's details */
+        patch: operations["ContentSourcesController_update"];
+        trace?: never;
+    };
+    "/v1/admin/exam-papers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["PapersAdminController_list"];
+        put?: never;
+        post: operations["PapersAdminController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-papers/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** A paper with every position, its effective key and key history (staff only) */
+        get: operations["PapersAdminController_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Edit a draft paper; a frozen paper is refused (409 paper_frozen) */
+        patch: operations["PapersAdminController_update"];
+        trace?: never;
+    };
+    "/v1/admin/exam-papers/{id}/readiness": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** What would stop this draft being published */
+        get: operations["PapersAdminController_readiness"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-papers/{id}/positions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Set the positions of a draft: pin exact question versions, or leave a withdrawn placeholder */
+        put: operations["PapersAdminController_positions"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-papers/{id}/positions/{position}/key-history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Record what the official key said for a position, with its source (draft papers only) */
+        post: operations["PapersAdminController_key"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-papers/{id}/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Freeze a complete draft; it can then only be superseded by a revision */
+        post: operations["PapersAdminController_publish"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-papers/{id}/retire": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["PapersAdminController_retire"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-papers/{id}/revise": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start a new draft revision of a frozen paper */
+        post: operations["PapersAdminController_revise"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exams/{examId}/mock-readiness": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Whether a randomised mock could be built from the exam's current blueprint now, with per-topic pool sizes */
+        get: operations["PapersAdminController_readinessOfMock"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exams/{examId}/mock-plans": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Build (and return, without saving) a randomised mock plan. Question ids and option orders only; repeat with the returned seed to get the same plan. */
+        post: operations["PapersAdminController_plan"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/exams/{slug}/papers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["PapersLearnerController_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/exams/{slug}/papers/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** A published paper in its original order. No answer keys or explanations; withdrawn positions are placeholders. */
+        get: operations["PapersLearnerController_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/exams/{slug}/attempts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start a fixed-paper or random-mock attempt. The server fixes the questions, option order and (timed) deadline. */
+        post: operations["AttemptsController_start"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/exams/{slug}/attempts/active": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The unfinished attempt for this exam, to resume it */
+        get: operations["AttemptsController_active"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/exam-attempts/stats": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["AttemptsController_stats"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/exam-attempts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Attempt history, newest first */
+        get: operations["AttemptsController_history"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/exam-attempts/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["AttemptsController_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/exam-attempts/{id}/answers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Save several answers at once (autosave). Each carries a counter; an older one never overwrites a newer one. Refused after submission or expiry. */
+        put: operations["AttemptsController_saveMany"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/exam-attempts/{id}/answers/{position}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Save one answer */
+        put: operations["AttemptsController_saveOne"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/exam-attempts/{id}/advance-section": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Locked-order exams only: close the current section and open the next */
+        post: operations["AttemptsController_advance"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/exam-attempts/{id}/submit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Submit the attempt. Repeating the request returns the same result. */
+        post: operations["AttemptsController_submit"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/exam-attempts/{id}/result": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["AttemptsController_result"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/exam-attempts/{id}/review": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Every question with the accepted answers and explanation. Only after the attempt is submitted or expired. */
+        get: operations["AttemptsController_review"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-attempts/sweep": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Finish every unfinished attempt whose deadline has passed */
+        post: operations["AttemptsAdminController_sweep"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1391,6 +2303,8 @@ export interface components {
             created: number;
             skipped: number;
             failed: number;
+            /** @description Exam import only: rows the exam body withdrew. No question is made; each becomes a withdrawn paper position */
+            withdrawn: number;
             /** @description Created rows that still need something before review */
             with_warnings: number;
         };
@@ -1406,10 +2320,10 @@ export interface components {
             row: number;
             external_ref: string | null;
             /**
-             * @description created: a new draft (or would be, in a test run); skipped: already in the bank; failed: has errors
+             * @description created: a new draft (or would be, in a test run); skipped: already in the bank; failed: has errors; withdrawn: key says WITHDRAWN, so no question is made (exam import)
              * @enum {string}
              */
-            outcome: "created" | "skipped" | "failed";
+            outcome: "created" | "skipped" | "failed" | "withdrawn";
             /**
              * Format: uuid
              * @description The new draft, or the existing question it duplicates
@@ -1432,6 +2346,27 @@ export interface components {
             totals: components["schemas"]["ImportTotalsDto"];
             rows: components["schemas"]["ImportRowDto"][];
         };
+        ExamImportSourceDto: {
+            /** Format: uuid */
+            id: string;
+            title: string;
+        };
+        ExamImportReportDto: {
+            /**
+             * Format: uuid
+             * @description Null for a test run, which is not saved
+             */
+            id: string | null;
+            dry_run: boolean;
+            file_name: string;
+            /** @enum {string} */
+            format: "csv" | "xlsx";
+            /** Format: date-time */
+            created_at: string | null;
+            totals: components["schemas"]["ImportTotalsDto"];
+            rows: components["schemas"]["ImportRowDto"][];
+            content_source: components["schemas"]["ExamImportSourceDto"] | null;
+        };
         ImportJobSummaryDto: {
             /** Format: uuid */
             id: string;
@@ -1446,6 +2381,47 @@ export interface components {
         ImportJobListDto: {
             /** @description Newest first, at most 50 */
             items: components["schemas"]["ImportJobSummaryDto"][];
+        };
+        PaperCandidateDto: {
+            /** @description Row number in the imported file */
+            row: number;
+            /** @description The position this row would take (file order) */
+            position: number;
+            external_ref: string | null;
+            /** @enum {string} */
+            outcome: "created" | "skipped" | "failed" | "withdrawn";
+            /** Format: uuid */
+            question_id: string | null;
+            /** @description The question's latest version status */
+            status: string | null;
+            /** @description True when the question has a published version to pin */
+            ready: boolean;
+            reason: string | null;
+        };
+        PaperPositionDraftDto: {
+            position: number;
+            /**
+             * Format: uuid
+             * @description Null for a withdrawn position, which pins no question
+             */
+            question_version_id: string | null;
+            /** @description The row's external_ref, if it had one */
+            original_ref?: string;
+            /** @description Set for a withdrawn position */
+            withdrawn_note?: string;
+        };
+        PaperPositionsDto: {
+            /** Format: uuid */
+            job_id: string;
+            rows: components["schemas"]["PaperCandidateDto"][];
+            /** @description Rows with a published version to pin */
+            ready: number;
+            /** @description Rows kept as withdrawn positions */
+            withdrawn: number;
+            /** @description Rows still waiting on review or publishing */
+            not_ready: number;
+            /** @description Positions for the rows that are ready, in the format of PUT /admin/exam-papers/{id}/positions. Read-only: nothing is saved. */
+            positions: components["schemas"]["PaperPositionDraftDto"][];
         };
         StaffSetupDto: {
             /** Format: date-time */
@@ -1633,6 +2609,13 @@ export interface components {
             valid_from: string | null;
             /** Format: date */
             valid_to: string | null;
+            /** Format: uuid */
+            content_source_id: string | null;
+            /** @enum {string} */
+            law_regime: "old_codes" | "new_codes" | "both" | "neutral";
+            concept_key: string | null;
+            alternate_correct_option_ids: string[];
+            lock_option_order: boolean;
             /** Format: date-time */
             verified_at: string | null;
             /** Format: uuid */
@@ -1688,6 +2671,8 @@ export interface components {
             retired_at: string | null;
             /** Format: date-time */
             created_at: string;
+            exam_only: boolean;
+            exam_ids: string[];
             /** @description The newest version, which is the one actions apply to */
             latest: components["schemas"]["VersionDto"];
             versions: components["schemas"]["VersionSummaryDto"][];
@@ -1722,6 +2707,29 @@ export interface components {
             valid_from?: string | null;
             /** Format: date */
             valid_to?: string | null;
+            /**
+             * Format: uuid
+             * @description Where the content comes from (attribution only; it never blocks publishing).
+             */
+            content_source_id?: string | null;
+            /**
+             * @default neutral
+             * @enum {string}
+             */
+            law_regime?: "old_codes" | "new_codes" | "both" | "neutral";
+            /** @description Questions testing the same concept share a key; a mock uses at most one of them */
+            concept_key?: string | null;
+            /** @description Further options an official key also accepts; never one of correct_option_ids */
+            alternate_correct_option_ids?: string[];
+            /** @description Show the options in the stored order, never shuffled */
+            lock_option_order?: boolean;
+            /**
+             * @description Exam-only questions are never used by the learning games. Can only be changed before the first publish.
+             * @default false
+             */
+            exam_only?: boolean;
+            /** @description The exams this question may be used in. An exam-only question needs at least one to be published. */
+            exam_ids?: string[];
         };
         UpdateQuestionDto: {
             /** Format: uuid */
@@ -1752,6 +2760,33 @@ export interface components {
             valid_from?: string | null;
             /** Format: date */
             valid_to?: string | null;
+            /**
+             * Format: uuid
+             * @description Where the content comes from (attribution only; it never blocks publishing).
+             */
+            content_source_id?: string | null;
+            /**
+             * @default neutral
+             * @enum {string}
+             */
+            law_regime?: "old_codes" | "new_codes" | "both" | "neutral";
+            /** @description Questions testing the same concept share a key; a mock uses at most one of them */
+            concept_key?: string | null;
+            /** @description Further options an official key also accepts; never one of correct_option_ids */
+            alternate_correct_option_ids?: string[];
+            /** @description Show the options in the stored order, never shuffled */
+            lock_option_order?: boolean;
+            /**
+             * @description Exam-only questions are never used by the learning games. Can only be changed before the first publish.
+             * @default false
+             */
+            exam_only?: boolean;
+            /** @description The exams this question may be used in. An exam-only question needs at least one to be published. */
+            exam_ids?: string[];
+        };
+        SetExamTagsDto: {
+            /** @description The full set of exams */
+            exam_ids: string[];
         };
         BulkActionDto: {
             /** @enum {string} */
@@ -1989,22 +3024,35 @@ export interface components {
             duel: components["schemas"]["ResultDuelDto"] | null;
         };
         AttemptDto: {
-            /** Format: uuid */
-            session_id: string;
+            id: string;
             /** @enum {string} */
-            mode: "case_path" | "daily_docket" | "duel" | "exam" | "mistake_review";
-            topic_ids: string[];
-            score: number;
-            total: number;
-            xp: number;
-            scoring_version: string;
+            kind: "fixed_paper" | "random_mock";
             /** @enum {string} */
-            feedback_mode: "immediate" | "end";
-            /** Format: date-time */
-            submitted_at: string;
+            mode: "practice" | "timed";
+            /** @enum {string} */
+            status: "in_progress" | "submitted" | "expired";
+            exam: string;
+            paper: Record<string, never> | null;
+            language: string;
+            started_at: string;
+            /** @description Set by the server; the app only displays it */
+            deadline_at: string | null;
+            /** @description The server clock, to correct for device skew */
+            server_now: string;
+            remaining_seconds: number | null;
+            /** @enum {string} */
+            section_navigation: "free" | "locked_order";
+            current_section_position: number | null;
+            sections: Record<string, never>[];
+            total_questions: number;
+            answered_count: number;
+            submitted_at: string | null;
+            /** @description True once finalised: results can now be fetched */
+            result_available: boolean;
+            questions: components["schemas"]["AttemptQuestionDto"][];
         };
         AttemptPageDto: {
-            items: components["schemas"]["AttemptDto"][];
+            items: components["schemas"]["AttemptSummaryDto"][];
             next_cursor: string | null;
         };
         EnergyDto: {
@@ -2399,6 +3447,811 @@ export interface components {
         };
         NewsReasonDto: {
             reason: string;
+        };
+        PublicDailyTipDto: {
+            /** Format: uuid */
+            id: string;
+            /** @enum {string} */
+            category: "citizen_rights" | "criminal_law" | "consumer_rights" | "family_law" | "property" | "workplace" | "general";
+            language: string;
+            title: string;
+            summary: string;
+            explanation: string;
+            legal_reference: string;
+            source_url: string;
+            /** Format: date */
+            publish_date: string;
+            /** Format: date */
+            last_verified_on: string;
+        };
+        TodayTipDto: {
+            tip: components["schemas"]["PublicDailyTipDto"] | null;
+        };
+        DailyTipListItemDto: {
+            /** Format: uuid */
+            id: string;
+            /** @enum {string} */
+            status: "draft" | "in_review" | "changes_requested" | "approved" | "published" | "retired";
+            /** @enum {string} */
+            category: "citizen_rights" | "criminal_law" | "consumer_rights" | "family_law" | "property" | "workplace" | "general";
+            language: string;
+            title: string;
+            /** Format: date */
+            publish_date: string | null;
+            /** Format: date-time */
+            updated_at: string;
+            legal_reference: string;
+            source_url: string | null;
+            /** Format: date */
+            last_verified_on: string | null;
+        };
+        DailyTipPageDto: {
+            items: components["schemas"]["DailyTipListItemDto"][];
+            next_cursor: string | null;
+        };
+        DailyTipDetailDto: {
+            /** Format: uuid */
+            id: string;
+            /** @enum {string} */
+            status: "draft" | "in_review" | "changes_requested" | "approved" | "published" | "retired";
+            /** @enum {string} */
+            category: "citizen_rights" | "criminal_law" | "consumer_rights" | "family_law" | "property" | "workplace" | "general";
+            language: string;
+            title: string;
+            /** Format: date */
+            publish_date: string | null;
+            /** Format: date-time */
+            updated_at: string;
+            legal_reference: string;
+            source_url: string | null;
+            /** Format: date */
+            last_verified_on: string | null;
+            summary: string;
+            explanation: string;
+            /** Format: uuid */
+            created_by: string | null;
+            /** Format: uuid */
+            updated_by: string | null;
+            /** Format: uuid */
+            reviewer_id: string | null;
+            /** Format: date-time */
+            approved_at: string | null;
+            /** Format: date-time */
+            published_at: string | null;
+            /** Format: date-time */
+            retired_at: string | null;
+            /** Format: date-time */
+            created_at: string;
+            /** @description Why changes were last requested, while they still are */
+            changes_reason: string | null;
+        };
+        CreateDailyTipDto: {
+            /** @enum {string} */
+            category: "citizen_rights" | "criminal_law" | "consumer_rights" | "family_law" | "property" | "workplace" | "general";
+            /**
+             * @default en
+             * @enum {string}
+             */
+            language?: "en" | "hi" | "ta" | "te" | "kn" | "ml";
+            title?: string;
+            /** @description Shown on the Home card */
+            summary?: string;
+            explanation?: string;
+            /** @example Consumer Protection Act, 2019, Section 35 */
+            legal_reference?: string;
+            source_url?: string | null;
+            /**
+             * Format: date
+             * @description The India day the tip is shown on Home
+             */
+            publish_date?: string | null;
+            /** Format: date */
+            last_verified_on?: string | null;
+        };
+        UpdateDailyTipDto: {
+            /** @enum {string} */
+            category?: "citizen_rights" | "criminal_law" | "consumer_rights" | "family_law" | "property" | "workplace" | "general";
+            /**
+             * @default en
+             * @enum {string}
+             */
+            language?: "en" | "hi" | "ta" | "te" | "kn" | "ml";
+            title?: string;
+            /** @description Shown on the Home card */
+            summary?: string;
+            explanation?: string;
+            /** @example Consumer Protection Act, 2019, Section 35 */
+            legal_reference?: string;
+            source_url?: string | null;
+            /**
+             * Format: date
+             * @description The India day the tip is shown on Home
+             */
+            publish_date?: string | null;
+            /** Format: date */
+            last_verified_on?: string | null;
+        };
+        VerifyTipDto: {
+            /**
+             * @description Must be true: the editor opened the exact official source link and confirmed the tip matches it
+             * @enum {boolean}
+             */
+            confirmed_against_source: true;
+        };
+        TipReasonDto: {
+            reason: string;
+        };
+        ConstitutionSourceDto: {
+            name: string;
+            /** @description The collection page on India Code */
+            collection_url: string;
+            /**
+             * Format: date-time
+             * @description When India Code was last read; null if it never was
+             */
+            fetched_at: string | null;
+            /** @description True when India Code could not be reached and reviewed values are shown */
+            stale: boolean;
+        };
+        ConstitutionFileDto: {
+            /** @example pdf */
+            format: string;
+            /** @description As India Code reports it; treat as approximate (the served file can differ) */
+            size_bytes: number;
+            /** @description MD5 as India Code reports it */
+            checksum_md5: string;
+            /**
+             * Format: date
+             * @description The day the item last changed on India Code
+             */
+            source_modified_at: string;
+        };
+        ConstitutionFlagsDto: {
+            /** @description A large download: warn before opening on mobile data */
+            large: boolean;
+            /** @description Scanned pages with no text layer: cannot be searched or read aloud */
+            scanned: boolean;
+        };
+        ConstitutionEditionDto: {
+            /**
+             * @description Stable id; `original` for the 1950 copy
+             * @example ta
+             */
+            id: string;
+            /** @example ta */
+            language_code: string | null;
+            /** @example Tamil */
+            language_name: string;
+            /** @example தமிழ் */
+            native_name: string | null;
+            script: string | null;
+            /** @example The Constitution of India in Tamil */
+            title: string;
+            /** @description India Code's own title for the item, kept for attribution (it can contain typos) */
+            source_title: string | null;
+            /** @description Reviewed wording about this edition’s legal standing; null until approved. Do not infer authority when null. */
+            authority_note: string | null;
+            /** @description Official India Code address of the PDF (https, India Code host only) */
+            download_url: string;
+            /** @description The item's page on India Code */
+            source_page_url: string;
+            file: components["schemas"]["ConstitutionFileDto"];
+            flags: components["schemas"]["ConstitutionFlagsDto"];
+        };
+        ConstitutionDto: {
+            source: components["schemas"]["ConstitutionSourceDto"];
+            /** @description Neutral attribution to show with the list */
+            notice: string;
+            original: components["schemas"]["ConstitutionEditionDto"] | null;
+            editions: components["schemas"]["ConstitutionEditionDto"][];
+        };
+        DriftSummaryDto: {
+            unchanged: number;
+            changed: number;
+            missing: number;
+            new: number;
+        };
+        DriftLiveDto: {
+            /** Format: uuid */
+            bitstream_uuid: string;
+            md5: string;
+            size_bytes: number;
+            /** Format: date */
+            item_modified: string;
+        };
+        DriftItemDto: {
+            id: string;
+            language_name: string;
+            /** @enum {string} */
+            state: "unchanged" | "changed" | "missing" | "unknown";
+            /** @description What differs from the reviewed values: bitstream, checksum, size, text_layer */
+            changed_fields: string[];
+            /** @description The item was edited on India Code after the review, though its file may be the same */
+            modified_since_review: boolean;
+            live: components["schemas"]["DriftLiveDto"] | null;
+        };
+        DriftNewItemDto: {
+            /** Format: uuid */
+            item_uuid: string;
+            handle: string;
+            title: string;
+            size_bytes: number | null;
+        };
+        ConstitutionDriftDto: {
+            /** Format: date-time */
+            fetched_at: string | null;
+            /** @description Why the last read of India Code failed, if it did */
+            last_error: string | null;
+            summary: components["schemas"]["DriftSummaryDto"];
+            items: components["schemas"]["DriftItemDto"][];
+            /** @description On India Code but not in the manifest: hidden from the app until curated */
+            new_items: components["schemas"]["DriftNewItemDto"][];
+        };
+        ExamDto: {
+            id: string;
+            /** @enum {string} */
+            slug: "aibe" | "clat" | "ailet";
+            name: string;
+            short_name: string;
+            is_active: boolean;
+            sort_order: number;
+            instructions: string;
+            created_at: string;
+            updated_at: string;
+        };
+        ExamListDto: {
+            items: components["schemas"]["ExamDto"][];
+        };
+        SectionTopicOutDto: {
+            topic_id: string;
+            min_count: number;
+            max_count: number | null;
+            weight: number;
+        };
+        SectionOutDto: {
+            id: string;
+            code: string;
+            name: string;
+            position: number;
+            question_count: number;
+            duration_seconds: number | null;
+            marks_correct: number | null;
+            topics: components["schemas"]["SectionTopicOutDto"][];
+        };
+        BlueprintDto: {
+            id: string;
+            exam_id: string;
+            code: string;
+            version: number;
+            /** @enum {string} */
+            status: "draft" | "published" | "retired";
+            /** @description True for the one blueprint randomised mocks of this exam use. At most one per exam, and only a published one; it is set on purpose, never by publishing. */
+            is_current: boolean;
+            duration_seconds: number;
+            total_questions: number;
+            marks_correct: number;
+            negative_marks: number;
+            marks_unanswered: number;
+            pass_percent_general: number | null;
+            pass_percent_reserved: number | null;
+            /** @enum {string} */
+            section_navigation: "free" | "locked_order";
+            /** @enum {string} */
+            law_regime_filter: "any" | "exclude_old" | "prefer_new" | "include_all";
+            /** @enum {string} */
+            config_status: "official_confirmed" | "inferred" | "unverified";
+            config_source: string | null;
+            /** Format: date */
+            config_checked_on: string | null;
+            /** @description Whether this blueprint may be used for timed mocks. False unless it is published and official-confirmed. */
+            timed_allowed: boolean;
+            timed_blocked_reason: string | null;
+            sections: components["schemas"]["SectionOutDto"][];
+            created_at: string;
+            updated_at: string;
+        };
+        ExamDetailDto: {
+            id: string;
+            /** @enum {string} */
+            slug: "aibe" | "clat" | "ailet";
+            name: string;
+            short_name: string;
+            is_active: boolean;
+            sort_order: number;
+            instructions: string;
+            created_at: string;
+            updated_at: string;
+            current_blueprint_id: string | null;
+            blueprints: components["schemas"]["BlueprintDto"][];
+        };
+        CreateExamDto: {
+            /** @enum {string} */
+            slug: "aibe" | "clat" | "ailet";
+            name: string;
+            short_name: string;
+            instructions?: string;
+            sort_order?: number;
+        };
+        UpdateExamDto: {
+            name?: string;
+            short_name?: string;
+            instructions?: string;
+            sort_order?: number;
+            /** @description Turning an exam on needs at least one published blueprint. New exams start off. */
+            is_active?: boolean;
+        };
+        ExamEligibilityReasonDto: {
+            code: string;
+            message: string;
+        };
+        ExamEligibilityDto: {
+            eligible: boolean;
+            exam_only: boolean | null;
+            law_regime: string | null;
+            /** @enum {string} */
+            law_regime_filter: "any" | "exclude_old" | "prefer_new" | "include_all";
+            /** @description The blueprint whose rule was applied, if any */
+            blueprint_id: string | null;
+            reasons: components["schemas"]["ExamEligibilityReasonDto"][];
+        };
+        CreateBlueprintDto: {
+            duration_seconds: number;
+            total_questions: number;
+            marks_correct: number;
+            /** @description Marks taken off a wrong answer, as a positive number */
+            negative_marks?: number;
+            marks_unanswered?: number;
+            pass_percent_general?: Record<string, never> | null;
+            pass_percent_reserved?: Record<string, never> | null;
+            /**
+             * @default free
+             * @enum {string}
+             */
+            section_navigation?: "free" | "locked_order";
+            /**
+             * @description How randomised mocks treat questions only about the old codes (IPC, CrPC, Evidence Act). Random mocks test current law, so any (the default), exclude_old and prefer_new all leave them out; only include_all lets them in. Fixed historical papers are never filtered.
+             * @default any
+             * @enum {string}
+             */
+            law_regime_filter?: "any" | "exclude_old" | "prefer_new" | "include_all";
+            /**
+             * @default unverified
+             * @enum {string}
+             */
+            config_status?: "official_confirmed" | "inferred" | "unverified";
+            /** @description The official document the rules come from */
+            config_source?: Record<string, never> | null;
+            /** @example 2026-11-18 */
+            config_checked_on?: Record<string, never> | null;
+            exam_id: string;
+            /** @example aibe-xx */
+            code: string;
+        };
+        UpdateBlueprintDto: {
+            duration_seconds?: number;
+            total_questions?: number;
+            marks_correct?: number;
+            /** @description Marks taken off a wrong answer, as a positive number */
+            negative_marks?: number;
+            marks_unanswered?: number;
+            pass_percent_general?: Record<string, never> | null;
+            pass_percent_reserved?: Record<string, never> | null;
+            /**
+             * @default free
+             * @enum {string}
+             */
+            section_navigation?: "free" | "locked_order";
+            /**
+             * @description How randomised mocks treat questions only about the old codes (IPC, CrPC, Evidence Act). Random mocks test current law, so any (the default), exclude_old and prefer_new all leave them out; only include_all lets them in. Fixed historical papers are never filtered.
+             * @default any
+             * @enum {string}
+             */
+            law_regime_filter?: "any" | "exclude_old" | "prefer_new" | "include_all";
+            /**
+             * @default unverified
+             * @enum {string}
+             */
+            config_status?: "official_confirmed" | "inferred" | "unverified";
+            /** @description The official document the rules come from */
+            config_source?: Record<string, never> | null;
+            /** @example 2026-11-18 */
+            config_checked_on?: Record<string, never> | null;
+        };
+        SectionTopicDto: {
+            topic_id: string;
+            /** @default 0 */
+            min_count?: number;
+            max_count?: Record<string, never> | null;
+            /** @default 1 */
+            weight?: number;
+        };
+        SectionDto: {
+            /** @example cpc */
+            code: string;
+            name: string;
+            position: number;
+            question_count: number;
+            /** @description Only for a section with its own timer */
+            duration_seconds?: Record<string, never> | null;
+            marks_correct?: Record<string, never> | null;
+            topics: components["schemas"]["SectionTopicDto"][];
+        };
+        ReplaceSectionsDto: {
+            sections: components["schemas"]["SectionDto"][];
+        };
+        ContentSourceDto: {
+            id: string;
+            /** @enum {string} */
+            kind: "official_bci" | "third_party" | "original";
+            title: string;
+            publisher: string | null;
+            url: string | null;
+            /** Format: date */
+            retrieved_on: string | null;
+            sha256: string | null;
+            allowed_uses: string[];
+            created_by: string | null;
+            created_at: string;
+            updated_at: string;
+        };
+        ContentSourcePageDto: {
+            items: components["schemas"]["ContentSourceDto"][];
+            next_cursor: string | null;
+        };
+        CreateContentSourceDto: {
+            /** @enum {string} */
+            kind: "official_bci" | "third_party" | "original";
+            title: string;
+            publisher?: Record<string, never> | null;
+            /** @description An https address */
+            url?: Record<string, never> | null;
+            /** @example 2026-11-18 */
+            retrieved_on?: Record<string, never> | null;
+            /** @description SHA-256 of the source document, lower-case hex */
+            sha256?: Record<string, never> | null;
+            /** @description What the source may be used for, e.g. "practice questions" */
+            allowed_uses?: string[];
+        };
+        UpdateContentSourceDto: {
+            title?: string;
+            publisher?: Record<string, never> | null;
+            url?: Record<string, never> | null;
+            retrieved_on?: Record<string, never> | null;
+            sha256?: Record<string, never> | null;
+            allowed_uses?: string[];
+        };
+        PaperDto: {
+            id: string;
+            exam_id: string;
+            code: string;
+            revision: number;
+            supersedes_id: string | null;
+            title: string;
+            edition: string | null;
+            year: number | null;
+            set_label: string | null;
+            /** @enum {string} */
+            status: "draft" | "published" | "retired";
+            frozen_at: string | null;
+            blueprint_id: string | null;
+            total_questions: number;
+            duration_seconds: number | null;
+            practice_timer_seconds: number | null;
+            marks_correct: number | null;
+            negative_marks: number | null;
+            marks_unanswered: number | null;
+            /** @enum {string} */
+            withdrawn_policy: "unscored" | "award_all";
+            withdrawn_policy_confirmed: boolean;
+            /** @enum {string} */
+            config_status: "official_confirmed" | "inferred" | "unverified";
+            source_note: string | null;
+            created_at: string;
+            updated_at: string;
+        };
+        PaperPageDto: {
+            items: components["schemas"]["PaperDto"][];
+            next_cursor: string | null;
+        };
+        KeyHistoryEntryDto: {
+            id: string;
+            /** @enum {string} */
+            kind: "provisional" | "final" | "revised" | "withdrawn";
+            accepted_option_ids: string[];
+            content_source_id: string | null;
+            source_document_ref: string | null;
+            retrieved_on: string | null;
+            source_sha256: string | null;
+            note: string | null;
+            recorded_by: string | null;
+            created_at: string;
+        };
+        StaffPositionDto: {
+            id: string;
+            position: number;
+            /** @enum {string} */
+            answer_status: "keyed" | "multi_accepted" | "withdrawn";
+            question_id: string | null;
+            question_version_id: string | null;
+            original_ref: string | null;
+            option_order: string[] | null;
+            original_label_scheme: string | null;
+            official_key_text: string | null;
+            source_ref: string | null;
+            withdrawn_note: string | null;
+            /** @description The effective key (staff only) */
+            accepted_option_ids: string[];
+            key_history: components["schemas"]["KeyHistoryEntryDto"][];
+        };
+        PaperDetailDto: {
+            id: string;
+            exam_id: string;
+            code: string;
+            revision: number;
+            supersedes_id: string | null;
+            title: string;
+            edition: string | null;
+            year: number | null;
+            set_label: string | null;
+            /** @enum {string} */
+            status: "draft" | "published" | "retired";
+            frozen_at: string | null;
+            blueprint_id: string | null;
+            total_questions: number;
+            duration_seconds: number | null;
+            practice_timer_seconds: number | null;
+            marks_correct: number | null;
+            negative_marks: number | null;
+            marks_unanswered: number | null;
+            /** @enum {string} */
+            withdrawn_policy: "unscored" | "award_all";
+            withdrawn_policy_confirmed: boolean;
+            /** @enum {string} */
+            config_status: "official_confirmed" | "inferred" | "unverified";
+            source_note: string | null;
+            created_at: string;
+            updated_at: string;
+            positions: components["schemas"]["StaffPositionDto"][];
+        };
+        PaperReadinessDto: {
+            ready: boolean;
+            problems: Record<string, never>[];
+        };
+        CreatePaperDto: {
+            /** Format: uuid */
+            exam_id: string;
+            /** @example aibe-xviii-set-a */
+            code: string;
+            title: string;
+            /** @example XVIII */
+            edition?: string;
+            year?: number;
+            /** @example A */
+            set_label?: string;
+            /** Format: uuid */
+            blueprint_id?: string;
+            total_questions: number;
+            duration_seconds?: number;
+            /** @description Optional practice clock in seconds (60 to 86400), shown to learners as practice timing that BCI has not confirmed. It does not enable the official timed mode. Null removes it. */
+            practice_timer_seconds?: Record<string, never> | null;
+            marks_correct?: number;
+            negative_marks?: number;
+            marks_unanswered?: number;
+            /**
+             * @description Interim rule for withdrawn questions: unscored leaves them out of the marks
+             * @default unscored
+             * @enum {string}
+             */
+            withdrawn_policy?: "unscored" | "award_all";
+            /** @description True only when the rule has been confirmed from the exam body. award_all needs it. */
+            withdrawn_policy_confirmed?: boolean;
+            /**
+             * @default unverified
+             * @enum {string}
+             */
+            config_status?: "official_confirmed" | "inferred" | "unverified";
+            source_note?: string | null;
+        };
+        UpdatePaperDto: {
+            title?: string;
+            edition?: string;
+            year?: number;
+            set_label?: string;
+            /** Format: uuid */
+            blueprint_id?: string;
+            total_questions?: number;
+            duration_seconds?: number;
+            /** @description Optional practice clock in seconds (60 to 86400), shown to learners as practice timing that BCI has not confirmed. It does not enable the official timed mode. Null removes it. */
+            practice_timer_seconds?: Record<string, never> | null;
+            marks_correct?: number;
+            negative_marks?: number;
+            marks_unanswered?: number;
+            /** @enum {string} */
+            withdrawn_policy?: "unscored" | "award_all";
+            withdrawn_policy_confirmed?: boolean;
+            /** @enum {string} */
+            config_status?: "official_confirmed" | "inferred" | "unverified";
+            source_note?: string | null;
+        };
+        PositionInputDto: {
+            position: number;
+            /**
+             * Format: uuid
+             * @description The exact question version to pin. Omit (or null) for a withdrawn question, which is kept as a placeholder.
+             */
+            question_version_id?: string | null;
+            /** @description The number in the original paper */
+            original_ref?: string;
+            /** @description Option ids in the order shown; leave out to use the version's own order */
+            option_order?: string[];
+            /** @example A-D */
+            original_label_scheme?: string;
+            /** @description The key as the exam body printed it */
+            official_key_text?: string;
+            /** @description Where this position came from */
+            source_ref?: string;
+            /** @description Why a withdrawn question was withdrawn */
+            withdrawn_note?: string;
+        };
+        ReplacePositionsDto: {
+            positions: components["schemas"]["PositionInputDto"][];
+        };
+        AddKeyHistoryDto: {
+            /** @enum {string} */
+            kind: "provisional" | "final" | "revised" | "withdrawn";
+            /** @description Every option the body accepted; empty for a withdrawn question */
+            accepted_option_ids: string[];
+            /** Format: uuid */
+            content_source_id?: string;
+            /** @description Document title, notice number, page */
+            source_document_ref?: string;
+            /** Format: date */
+            retrieved_on?: string;
+            /** @description SHA-256 of the document, lowercase hex */
+            source_sha256?: string;
+            note?: string;
+        };
+        MockPlanRequestDto: {
+            /** @description Reuse a seed to get the same plan again. Without it the server picks one and returns it. */
+            seed?: string;
+            /** @default en */
+            language?: string;
+            /** @description Question ids the learner has already met; unseen ones are preferred */
+            seen_question_ids?: string[];
+        };
+        LearnerPaperDto: {
+            id: string;
+            code: string;
+            revision: number;
+            title: string;
+            edition: string | null;
+            year: number | null;
+            set_label: string | null;
+            total_questions: number;
+            duration_seconds: number | null;
+            practice_timer_seconds: number | null;
+            /** @enum {string} */
+            config_status: "official_confirmed" | "inferred" | "unverified";
+        };
+        LearnerPaperPageDto: {
+            items: components["schemas"]["LearnerPaperDto"][];
+            next_cursor: string | null;
+        };
+        LearnerOptionDto: {
+            id: string;
+            text: string;
+        };
+        LearnerPositionDto: {
+            position: number;
+            original_ref: string | null;
+            /** @description withdrawn positions are placeholders with no question text; they are not questions */
+            withdrawn: boolean;
+            question_version_id: string | null;
+            stem: string | null;
+            options: components["schemas"]["LearnerOptionDto"][] | null;
+        };
+        LearnerPaperDetailDto: {
+            id: string;
+            code: string;
+            revision: number;
+            title: string;
+            edition: string | null;
+            year: number | null;
+            set_label: string | null;
+            total_questions: number;
+            duration_seconds: number | null;
+            practice_timer_seconds: number | null;
+            /** @enum {string} */
+            config_status: "official_confirmed" | "inferred" | "unverified";
+            positions: components["schemas"]["LearnerPositionDto"][];
+        };
+        StartAttemptDto: {
+            /** @enum {string} */
+            kind: "fixed_paper" | "random_mock";
+            /**
+             * Format: uuid
+             * @description Required for fixed_paper: a published paper of this exam
+             */
+            paper_id?: string;
+            /**
+             * @description practice has no deadline. timed gets a server deadline and is only allowed when the rules are officially confirmed.
+             * @default practice
+             * @enum {string}
+             */
+            mode?: "practice" | "timed";
+            /**
+             * @description fixed_paper in practice mode only: run the paper's practice timer (a server deadline). It is practice timing, not the official timed mode, and needs no confirmed rules.
+             * @default false
+             */
+            practice_timer?: boolean;
+            /**
+             * @description random_mock only
+             * @default en
+             */
+            language?: string;
+        };
+        AttemptQuestionDto: {
+            position: number;
+            section_code: string | null;
+            original_ref: string | null;
+            /** @description A withdrawn position is a placeholder, not a question */
+            withdrawn: boolean;
+            question_version_id: string | null;
+            stem: string | null;
+            options: Record<string, never>[] | null;
+            selected_option_ids: string[] | null;
+            answer_seq: number;
+        };
+        AttemptStatsDto: {
+            exams: Record<string, never>[];
+        };
+        AttemptSummaryDto: {
+            id: string;
+            /** @enum {string} */
+            kind: "fixed_paper" | "random_mock";
+            /** @enum {string} */
+            mode: "practice" | "timed";
+            /** @enum {string} */
+            status: "in_progress" | "submitted" | "expired";
+            exam: string;
+            paper_title: string | null;
+            started_at: string;
+            submitted_at: string | null;
+            marks_obtained: number | null;
+            max_marks: number | null;
+            percentage: number | null;
+            provisional: boolean | null;
+        };
+        AnswerInputDto: {
+            position: number;
+            /** @description The chosen option ids; empty clears the answer */
+            selected_option_ids: string[];
+            /** @description A counter the client raises with every change to this answer. The server keeps the answer with the highest counter, so a late or repeated request never overwrites a newer one. */
+            seq: number;
+        };
+        SaveAnswersDto: {
+            answers: components["schemas"]["AnswerInputDto"][];
+        };
+        SaveAnswersResultDto: {
+            attempt_id: string;
+            server_now: string;
+            deadline_at: string | null;
+            remaining_seconds: number | null;
+            /** @description Per answer: applied, or why it was ignored (stale, duplicate, conflict), with what the server holds */
+            results: Record<string, never>[];
+        };
+        SaveOneAnswerDto: {
+            selected_option_ids: string[];
+            seq: number;
+        };
+        AttemptResultDto: {
+            attempt_id: string;
+            /** @enum {string} */
+            status: "submitted" | "expired";
+            /** @enum {string} */
+            finalised_by: "learner" | "expiry" | "sweep";
+            submitted_at: string;
+            result: Record<string, never>;
         };
     };
     responses: never;
@@ -2837,6 +4690,47 @@ export interface operations {
             };
         };
     };
+    ImportsController_createExam: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    /**
+                     * Format: binary
+                     * @description .csv (UTF-8) or .xlsx with the usual question columns plus exam, exam_only, law_regime, concept_key, alternate_correct, lock_option_order
+                     */
+                    file: string;
+                    /** @default true */
+                    dry_run?: boolean;
+                    /**
+                     * @description Exam slug for the whole file; fills blank exam cells and rejects rows naming another exam
+                     * @example aibe
+                     */
+                    exam?: string;
+                    /**
+                     * Format: uuid
+                     * @description Optional; recorded for attribution
+                     */
+                    content_source_id?: string;
+                };
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExamImportReportDto"];
+                };
+            };
+        };
+    };
     ImportsController_get: {
         parameters: {
             query?: never;
@@ -2854,6 +4748,53 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ImportReportDto"];
+                };
+            };
+        };
+    };
+    ImportsController_paperPositions: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaperPositionsDto"];
+                };
+            };
+        };
+    };
+    ImportsController_template: {
+        parameters: {
+            query: {
+                /** @description general: the ordinary import; exam: adds the exam columns */
+                kind: "general" | "exam";
+                format?: "xlsx" | "csv";
+                /** @description Exam template only: fills the exam column of the sample row */
+                exam?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": string;
+                    "text/csv": string;
                 };
             };
         };
@@ -3114,6 +5055,31 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": components["schemas"]["UpdateQuestionDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["QuestionDetailDto"];
+                };
+            };
+        };
+    };
+    QuestionsController_setExamTags: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetExamTagsDto"];
             };
         };
         responses: {
@@ -4180,6 +6146,1336 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["NewsDetailDto"];
+                };
+            };
+        };
+    };
+    DailyTipsController_today: {
+        parameters: {
+            query?: {
+                language?: "en" | "hi" | "ta" | "te" | "kn" | "ml";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TodayTipDto"];
+                };
+            };
+        };
+    };
+    DailyTipsController_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PublicDailyTipDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_list: {
+        parameters: {
+            query?: {
+                status?: "draft" | "in_review" | "changes_requested" | "approved" | "published" | "retired";
+                category?: "citizen_rights" | "criminal_law" | "consumer_rights" | "family_law" | "property" | "workplace" | "general";
+                /** @description Searches titles */
+                q?: string;
+                cursor?: string;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipPageDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateDailyTipDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateDailyTipDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_verify: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["VerifyTipDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_submit: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_requestChanges: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TipReasonDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_approve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_publish: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_revise: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TipReasonDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    EditorDailyTipsController_retire: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TipReasonDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DailyTipDetailDto"];
+                };
+            };
+        };
+    };
+    ConstitutionController_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConstitutionDto"];
+                };
+            };
+        };
+    };
+    AdminConstitutionController_drift: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConstitutionDriftDto"];
+                };
+            };
+        };
+    };
+    ExamsController_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExamListDto"];
+                };
+            };
+        };
+    };
+    ExamsController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateExamDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExamDto"];
+                };
+            };
+        };
+    };
+    ExamsController_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExamDetailDto"];
+                };
+            };
+        };
+    };
+    ExamsController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateExamDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExamDto"];
+                };
+            };
+        };
+    };
+    ExamsController_eligible: {
+        parameters: {
+            query?: {
+                /** @description A blueprint of this exam, whose law-regime rule is applied. Without it the exam's current blueprint is used, and with no current blueprint the rule is 'any'. */
+                blueprint_id?: string;
+                language?: string;
+            };
+            header?: never;
+            path: {
+                examId: string;
+                questionId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExamEligibilityDto"];
+                };
+            };
+        };
+    };
+    ExamsController_blueprint: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BlueprintDto"];
+                };
+            };
+        };
+    };
+    ExamsController_updateBlueprint: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateBlueprintDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BlueprintDto"];
+                };
+            };
+        };
+    };
+    ExamsController_createBlueprint: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateBlueprintDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BlueprintDto"];
+                };
+            };
+        };
+    };
+    ExamsController_sections: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReplaceSectionsDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BlueprintDto"];
+                };
+            };
+        };
+    };
+    ExamsController_publish: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BlueprintDto"];
+                };
+            };
+        };
+    };
+    ExamsController_retire: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BlueprintDto"];
+                };
+            };
+        };
+    };
+    ExamsController_makeCurrent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BlueprintDto"];
+                };
+            };
+        };
+    };
+    ExamsController_clearCurrent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BlueprintDto"];
+                };
+            };
+        };
+    };
+    ExamsController_newVersion: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BlueprintDto"];
+                };
+            };
+        };
+    };
+    ContentSourcesController_list: {
+        parameters: {
+            query?: {
+                kind?: "official_bci" | "third_party" | "original";
+                limit?: number;
+                cursor?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContentSourcePageDto"];
+                };
+            };
+        };
+    };
+    ContentSourcesController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateContentSourceDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContentSourceDto"];
+                };
+            };
+        };
+    };
+    ContentSourcesController_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContentSourceDto"];
+                };
+            };
+        };
+    };
+    ContentSourcesController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateContentSourceDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContentSourceDto"];
+                };
+            };
+        };
+    };
+    PapersAdminController_list: {
+        parameters: {
+            query?: {
+                status?: "draft" | "published" | "retired";
+                exam_id?: string;
+                limit?: number;
+                cursor?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaperPageDto"];
+                };
+            };
+        };
+    };
+    PapersAdminController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreatePaperDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaperDto"];
+                };
+            };
+        };
+    };
+    PapersAdminController_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaperDetailDto"];
+                };
+            };
+        };
+    };
+    PapersAdminController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdatePaperDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaperDto"];
+                };
+            };
+        };
+    };
+    PapersAdminController_readiness: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaperReadinessDto"];
+                };
+            };
+        };
+    };
+    PapersAdminController_positions: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReplacePositionsDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaperDetailDto"];
+                };
+            };
+        };
+    };
+    PapersAdminController_key: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+                position: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AddKeyHistoryDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KeyHistoryEntryDto"];
+                };
+            };
+        };
+    };
+    PapersAdminController_publish: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaperDto"];
+                };
+            };
+        };
+    };
+    PapersAdminController_retire: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaperDto"];
+                };
+            };
+        };
+    };
+    PapersAdminController_revise: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaperDetailDto"];
+                };
+            };
+        };
+    };
+    PapersAdminController_readinessOfMock: {
+        parameters: {
+            query: {
+                language: string;
+            };
+            header?: never;
+            path: {
+                examId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": Record<string, never>;
+                };
+            };
+        };
+    };
+    PapersAdminController_plan: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                examId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MockPlanRequestDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": Record<string, never>;
+                };
+            };
+        };
+    };
+    PapersLearnerController_list: {
+        parameters: {
+            query?: {
+                limit?: number;
+                cursor?: string;
+            };
+            header?: never;
+            path: {
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LearnerPaperPageDto"];
+                };
+            };
+        };
+    };
+    PapersLearnerController_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                slug: string;
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LearnerPaperDetailDto"];
+                };
+            };
+        };
+    };
+    AttemptsController_start: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["StartAttemptDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AttemptDto"];
+                };
+            };
+        };
+    };
+    AttemptsController_active: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AttemptDto"];
+                };
+            };
+        };
+    };
+    AttemptsController_stats: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AttemptStatsDto"];
+                };
+            };
+        };
+    };
+    AttemptsController_history: {
+        parameters: {
+            query?: {
+                /** @description Exam slug, e.g. aibe */
+                exam?: string;
+                status?: "in_progress" | "submitted" | "expired";
+                limit?: number;
+                cursor?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AttemptPageDto"];
+                };
+            };
+        };
+    };
+    AttemptsController_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AttemptDto"];
+                };
+            };
+        };
+    };
+    AttemptsController_saveMany: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveAnswersDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SaveAnswersResultDto"];
+                };
+            };
+        };
+    };
+    AttemptsController_saveOne: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+                position: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveOneAnswerDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SaveAnswersResultDto"];
+                };
+            };
+        };
+    };
+    AttemptsController_advance: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AttemptDto"];
+                };
+            };
+        };
+    };
+    AttemptsController_submit: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AttemptResultDto"];
+                };
+            };
+        };
+    };
+    AttemptsController_result: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AttemptResultDto"];
+                };
+            };
+        };
+    };
+    AttemptsController_review: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": Record<string, never>;
+                };
+            };
+        };
+    };
+    AttemptsAdminController_sweep: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": Record<string, never>;
                 };
             };
         };

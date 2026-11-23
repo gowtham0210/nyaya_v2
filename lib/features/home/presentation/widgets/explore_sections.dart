@@ -9,10 +9,12 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/common.dart';
 import '../../../journey/application/journey_controller.dart';
+import '../../../mock_exams/presentation/mock_exams_card.dart';
 import '../../../journey/domain/journey.dart';
 import '../../../journey/presentation/journey_screen.dart';
 import '../../../legal_updates/data/legal_updates_repository.dart';
 import '../../../legal_updates/presentation/updates_screen.dart';
+import '../../../profile/application/profile_controller.dart';
 import '../../../quiz/domain/quiz_models.dart';
 import '../../../quiz/presentation/quiz_launcher.dart';
 import 'law_illustration.dart';
@@ -49,8 +51,8 @@ void _exploreChapter(BuildContext context, WidgetRef ref, String chapterId) {
   }
 }
 
-/// Home's top bar: the app's logo and name, with search, the league and
-/// settings. Stays pinned while Home scrolls.
+/// Home's top bar: the app's logo and name (one word per line), with the
+/// league, settings and profile. Stays pinned while Home scrolls.
 class HomeTopBar extends StatelessWidget {
   const HomeTopBar({super.key});
 
@@ -60,7 +62,7 @@ class HomeTopBar extends StatelessWidget {
     return SliverAppBar(
       pinned: true,
       primary: false,
-      toolbarHeight: 64,
+      toolbarHeight: 72,
       titleSpacing: AppSpacing.page,
       backgroundColor: context.colors.surfaceContainerLowest,
       surfaceTintColor: Colors.transparent,
@@ -79,22 +81,21 @@ class HomeTopBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
+                // "Nyaya" on the first line, "Kural" on the second. Read out as one name.
                 Semantics(
                   header: true,
-                  child: Text(
-                    l.appName,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTheme.serif(
-                      TextStyle(fontSize: 22, height: 1.1, color: context.colors.primary),
+                  label: l.appName,
+                  excludeSemantics: true,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      l.appName.split(' ').join('\n'),
+                      style: AppTheme.serif(
+                        TextStyle(fontSize: 22, height: 1.1, color: context.colors.primary),
+                      ),
                     ),
                   ),
-                ),
-                Text(
-                  l.appTagline,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: context.text.bodySmall?.copyWith(color: context.nyaya.textSecondary),
                 ),
               ],
             ),
@@ -102,11 +103,6 @@ class HomeTopBar extends StatelessWidget {
         ],
       ),
       actions: [
-        IconButton(
-          tooltip: l.searchTitle,
-          onPressed: () => context.push(Routes.search),
-          icon: const Icon(Icons.search_rounded, size: 26),
-        ),
         IconButton(
           tooltip: l.leaderboardTitle,
           onPressed: () => context.push(Routes.leaderboard),
@@ -116,6 +112,14 @@ class HomeTopBar extends StatelessWidget {
           tooltip: l.settingsTitle,
           onPressed: () => context.push(Routes.settings),
           icon: const Icon(Icons.settings_outlined, size: 24),
+        ),
+        // My Profile: the learner's own initials.
+        Consumer(
+          builder: (context, ref, _) => IconButton(
+            tooltip: l.profileTitle,
+            onPressed: () => context.push(Routes.profile),
+            icon: InitialsAvatar(name: ref.watch(profileProvider).name, size: 30),
+          ),
         ),
         const SizedBox(width: AppSpacing.xs),
       ],
@@ -160,10 +164,6 @@ class ContinueLearningCard extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Semantics(header: true, child: Text(l.homeStartTitle, style: _serif(context, 26))),
-            const SizedBox(height: 4),
-            Text(l.homeStartBody, style: context.text.bodyMedium?.copyWith(color: context.nyaya.textSecondary)),
-            const SizedBox(height: AppSpacing.md),
             _LearningCard(
               eyebrow: l.homeStartRecommended,
               title: l.lawConstitutionTitle,
@@ -285,7 +285,8 @@ class _LearningCard extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 FractionallySizedBox(
-                  widthFactor: 0.66,
+                  // A little wider in the Indian scripts, whose long words broke mid-word.
+                  widthFactor: context.isIndicScript ? 0.76 : 0.66,
                   alignment: Alignment.centerLeft,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -502,7 +503,7 @@ class _FeaturedCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(AppSpacing.page, AppSpacing.page, 0, AppSpacing.page),
             child: FractionallySizedBox(
-              widthFactor: 0.56,
+              widthFactor: context.isIndicScript ? 0.68 : 0.56,
               alignment: Alignment.centerLeft,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -522,7 +523,8 @@ class _FeaturedCard extends StatelessWidget {
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     textScaler: MediaQuery.textScalerOf(context).clamp(maxScaleFactor: 1.2),
-                    style: _serif(context, 30),
+                    // Tamil, Telugu, Kannada and Malayalam words are long: a smaller size keeps them whole.
+                    style: _serif(context, context.isIndicScript ? 25 : 30),
                   ),
                   const SizedBox(height: AppSpacing.sm),
                   Expanded(
@@ -755,6 +757,27 @@ class CoreLawsSection extends ConsumerWidget {
                   ),
                 ],
               ],
+            ),
+          ),
+        ),
+        const SizedBox(height: AppSpacing.md),
+        // Mock Exams sits just above the Constitution; takes no space when no exam is open.
+        const MockExamsCard(),
+        // The official text of the Constitution on India Code (not the Journey chapter).
+        Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            color: context.colors.surface,
+            borderRadius: BorderRadius.circular(AppRadius.md),
+            border: Border.all(color: context.nyaya.cardBorder),
+          ),
+          child: Material(
+            type: MaterialType.transparency,
+            child: _LawRow(
+              icon: Icons.menu_book_outlined,
+              title: l.constitutionTitle,
+              desc: l.constitutionHomeDesc,
+              onTap: () => context.push(Routes.constitution),
             ),
           ),
         ),

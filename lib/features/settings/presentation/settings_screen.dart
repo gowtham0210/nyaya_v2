@@ -6,189 +6,41 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../app/router.dart';
-import '../../../core/config/features.dart';
-import '../../../core/config/game_rules.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/monitoring/monitoring.dart';
-import '../../../core/services/feedback.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
-import '../../../core/widgets/common.dart';
+import '../../../core/widgets/section_widgets.dart';
 import '../../chat/application/chat_controller.dart';
-import '../../auth/application/auth_controller.dart';
 import '../../journey/application/journey_controller.dart';
 import '../../profile/application/profile_controller.dart';
 import '../../progress/application/progress_sync.dart';
 import '../../reminders/application/reminder_sync.dart';
 import '../../profile/domain/user_profile.dart';
-import 'delete_account_dialog.dart';
-import 'edit_name_dialog.dart';
 
 class SettingsScreen extends ConsumerWidget {
-  const SettingsScreen({super.key, this.openStore = false});
-
-  /// Opened from "Open the Store": scrolls straight to the store section.
-  final bool openStore;
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
     final p = ref.watch(profileProvider);
     final ctl = ref.read(profileProvider.notifier);
-    final stars = ref.watch(journeyProvider).totalStars;
-    final account = ref.watch(authProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text(l.settingsTitle)),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(AppSpacing.page, 0, AppSpacing.page, AppSpacing.xl),
         children: [
-          // ── Profile card ──────────────────────────────────────────────────
-          NyayaCard(
-            color: context.nyaya.hero,
-            bordered: false,
-            child: Row(
-              children: [
-                InitialsAvatar(name: p.name, size: 60, ring: AppPalette.ochre),
-                const SizedBox(width: 14),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(p.name.isEmpty ? l.onbNameHint : p.name,
-                          style: context.text.titleLarge?.copyWith(color: Colors.white)),
-                      Text(l.personaName(p.persona), style: context.text.bodyMedium?.copyWith(color: Colors.white70)),
-                      if (p.isPremium)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4),
-                          child: Row(
-                            children: [
-                              const Icon(Icons.workspace_premium_rounded, size: 16, color: AppPalette.ochre),
-                              const SizedBox(width: 4),
-                              Text(l.settingsPremiumActive,
-                                  style: context.text.labelMedium?.copyWith(color: AppPalette.ochreSoft)),
-                            ],
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-                IconButton(
-                  tooltip: l.settingsEditName,
-                  onPressed: () => _editName(context, ref, p.name),
-                  icon: const Icon(Icons.edit_rounded, color: Colors.white),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: AppSpacing.md),
-
-          // ── Stats ─────────────────────────────────────────────────────────
-          _Header(l.settingsStats),
-          GridView.count(
-            crossAxisCount: 3,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            // Taller tiles when the phone uses larger text.
-            childAspectRatio: 1.15 / MediaQuery.textScalerOf(context).scale(1).clamp(1.0, double.infinity),
-            children: [
-              _Stat(Icons.diamond_rounded, '${p.totalXp}', l.settingsTotalXp, context.colors.primary),
-              _Stat(Icons.local_fire_department_rounded, '${p.longestStreak}', l.settingsLongestStreak, context.nyaya.streak),
-              _Stat(Icons.star_rounded, '$stars', l.statStars, AppPalette.ochre),
-              _Stat(Icons.task_alt_rounded, '${p.quizzesCompleted}', l.settingsQuizzes, context.nyaya.success),
-              _Stat(Icons.track_changes_rounded, '${(p.accuracy * 100).round()}%', l.settingsAccuracy, AppPalette.slate),
-              _Stat(Icons.sports_kabaddi_rounded, '${p.duelsWon}/${p.duelsPlayed}', l.settingsDuelRecord, AppPalette.umber),
-            ],
-          ),
-
-          // ── Account ───────────────────────────────────────────────────────
-          _Header(l.settingsAccount),
-          _Group(children: [
-            if (account == null)
-              ListTile(
-                leading: const Icon(Icons.login_rounded),
-                title: Text(l.settingsSignIn),
-                trailing: const Icon(Icons.chevron_right_rounded),
-                onTap: () => context.push(Routes.signIn),
-              )
-            else ...[
-              ListTile(
-                leading: const Icon(Icons.account_circle_rounded),
-                title: Text(account.displayName),
-                subtitle: Text(l.settingsSignedInAs(account.email)),
-              ),
-              ListTile(
-                leading: const Icon(Icons.logout_rounded),
-                title: Text(l.settingsSignOut),
-                onTap: () => ref.read(authProvider.notifier).signOut(),
-              ),
-              ListTile(
-                leading: Icon(Icons.person_off_rounded, color: context.nyaya.error),
-                title: Text(l.settingsDeleteAccount, style: TextStyle(color: context.nyaya.error)),
-                onTap: () => _deleteAccount(context, ref),
-              ),
-            ],
-          ]),
-
-          // ── Premium & store ───────────────────────────────────────────────
-          _ScrollIntoView(
-            enabled: openStore,
-            child: _Header('${l.settingsStore} · ${p.coins} ${l.statCoins}'),
-          ),
-          _Group(children: [
-            if (Features.premium)
-              ListTile(
-                leading: const Icon(Icons.workspace_premium_rounded, color: AppPalette.ochreText),
-                title: Text(l.settingsPremium),
-                subtitle: Text(p.isPremium ? l.settingsPremiumActive : l.settingsPremiumUpgrade),
-                trailing: const Icon(Icons.chevron_right_rounded),
-                onTap: () => context.push(Routes.premium),
-              ),
-            ListTile(
-              leading: const Icon(Icons.ac_unit_rounded, color: AppPalette.frost),
-              title: Text(l.settingsStreakFreeze),
-              subtitle: Text(l.settingsStreakFreezeSub(p.streakFreezes, GameRules.maxStreakFreezes)),
-              trailing: FilledButton.tonal(
-                onPressed: () async {
-                  final messenger = ScaffoldMessenger.of(context);
-                  ref.read(feedbackProvider).play(Haptic.tap);
-                  if (p.streakFreezes >= GameRules.maxStreakFreezes) {
-                    messenger.showSnackBar(SnackBar(content: Text(l.settingsFreezeFull)));
-                    return;
-                  }
-                  final failed = await ref.read(progressSyncProvider.notifier).buyStreakFreeze();
-                  messenger.showSnackBar(SnackBar(
-                    content: Text(switch (failed) {
-                      null => l.settingsFreezeBought,
-                      'not_enough_coins' => l.energyNotEnoughCoins,
-                      'freezes_full' => l.settingsFreezeFull,
-                      _ => l.commonSomethingWrong,
-                    }),
-                  ));
-                },
-                child: const Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.monetization_on_rounded, size: 16, color: AppPalette.ochreText),
-                    SizedBox(width: 4),
-                    Text('${GameRules.streakFreezeCoinCost}'),
-                  ],
-                ),
-              ),
-            ),
-          ]),
-
-          // ── Learning ──────────────────────────────────────────────────────
-          _Header(l.settingsProfile),
-          _Group(children: [
+          // ── Learning preferences ──────────────────────────────────────────
+          ListHeader(l.settingsLearningPrefs),
+          SectionGroup(children: [
             ListTile(
               leading: const Icon(Icons.translate_rounded),
               title: Text(l.settingsLanguage),
               subtitle: Text(p.language.nativeName),
               trailing: const Icon(Icons.chevron_right_rounded),
-              onTap: () => _pick<AppLanguage>(
+              onTap: () => showPickerSheet<AppLanguage>(
                 context,
                 title: l.settingsLanguage,
                 values: AppLanguage.values,
@@ -201,28 +53,11 @@ class SettingsScreen extends ConsumerWidget {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.badge_rounded),
-              title: Text(l.settingsLearningAs),
-              subtitle: Text(l.personaName(p.persona)),
-              trailing: const Icon(Icons.chevron_right_rounded),
-              onTap: () => _pick<Persona>(
-                context,
-                title: l.settingsLearningAs,
-                values: Persona.values,
-                selected: p.persona,
-                label: l.personaName,
-                onSelected: (v) {
-                  ctl.setPersona(v);
-                  unawaited(ref.read(progressSyncProvider.notifier).pushSettings());
-                },
-              ),
-            ),
-            ListTile(
               leading: const Icon(Icons.flag_rounded),
               title: Text(l.settingsDailyGoal),
               subtitle: Text(l.goalQuizzesPerDay(p.dailyGoal)),
               trailing: const Icon(Icons.chevron_right_rounded),
-              onTap: () => _pick<int>(
+              onTap: () => showPickerSheet<int>(
                 context,
                 title: l.settingsDailyGoal,
                 values: const [1, 3, 5],
@@ -236,9 +71,9 @@ class SettingsScreen extends ConsumerWidget {
             ),
           ]),
 
-          // ── App ───────────────────────────────────────────────────────────
-          _Header(l.settingsAppearance),
-          _Group(children: [
+          // ── Appearance ────────────────────────────────────────────────────
+          ListHeader(l.settingsAppearance),
+          SectionGroup(children: [
             Padding(
               padding: const EdgeInsets.all(12),
               child: SegmentedButton<ThemeMode>(
@@ -263,6 +98,11 @@ class SettingsScreen extends ConsumerWidget {
               value: p.soundOn,
               onChanged: ctl.setSound,
             ),
+          ]),
+
+          // ── Notifications ─────────────────────────────────────────────────
+          ListHeader(l.settingsNotifications),
+          SectionGroup(children: [
             SwitchListTile(
               secondary: const Icon(Icons.notifications_active_rounded),
               title: Text(l.settingsReminders),
@@ -295,9 +135,19 @@ class SettingsScreen extends ConsumerWidget {
               ),
           ]),
 
-          // ── About ─────────────────────────────────────────────────────────
-          _Header(l.settingsAbout),
-          _Group(children: [
+          // ── Data management ───────────────────────────────────────────────
+          ListHeader(l.settingsData),
+          SectionGroup(children: [
+            ListTile(
+              leading: Icon(Icons.restart_alt_rounded, color: context.nyaya.error),
+              title: Text(l.settingsReset, style: TextStyle(color: context.nyaya.error)),
+              onTap: () => _reset(context, ref),
+            ),
+          ]),
+
+          // ── About and support ─────────────────────────────────────────────
+          ListHeader(l.settingsAboutSupport),
+          SectionGroup(children: [
             ListTile(
               leading: const Icon(Icons.gavel_rounded),
               title: Text(l.settingsDisclaimer),
@@ -320,11 +170,6 @@ class SettingsScreen extends ConsumerWidget {
                   }
                 },
               ),
-            ListTile(
-              leading: Icon(Icons.restart_alt_rounded, color: context.nyaya.error),
-              title: Text(l.settingsReset, style: TextStyle(color: context.nyaya.error)),
-              onTap: () => _reset(context, ref),
-            ),
           ]),
           const SizedBox(height: AppSpacing.md),
           Center(
@@ -338,48 +183,6 @@ class SettingsScreen extends ConsumerWidget {
     );
   }
 
-  Future<void> _editName(BuildContext context, WidgetRef ref, String current) async {
-    final name = await showDialog<String>(context: context, builder: (_) => EditNameDialog(current: current));
-    if (name != null && name.trim().isNotEmpty) {
-      ref.read(profileProvider.notifier).setName(name);
-      unawaited(ref.read(progressSyncProvider.notifier).pushSettings());
-    }
-  }
-
-  Future<void> _pick<T>(
-    BuildContext context, {
-    required String title,
-    required List<T> values,
-    required T selected,
-    required String Function(T) label,
-    required ValueChanged<T> onSelected,
-  }) {
-    return showModalBottomSheet(
-      context: context,
-      builder: (context) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(title, style: context.text.titleMedium),
-            const SizedBox(height: 8),
-            RadioGroup<T>(
-              groupValue: selected,
-              onChanged: (v) {
-                if (v != null) onSelected(v);
-                Navigator.pop(context);
-              },
-              child: Column(
-                children: [
-                  for (final v in values) RadioListTile<T>(value: v, title: Text(label(v))),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   void _info(BuildContext context, String title, String body) {
     showDialog<void>(
       context: context,
@@ -389,16 +192,6 @@ class SettingsScreen extends ConsumerWidget {
         actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text(context.l10n.commonOk))],
       ),
     );
-  }
-
-  Future<void> _deleteAccount(BuildContext context, WidgetRef ref) async {
-    final gone = await showDialog<bool>(context: context, builder: (_) => const DeleteAccountDialog());
-    if (gone != true || !context.mounted) return;
-    // The server holds no data any more; clear what the phone kept and start over.
-    await ref.read(profileProvider.notifier).resetAll();
-    ref.read(journeyProvider.notifier).reset();
-    ref.read(chatControllerProvider.notifier).clear();
-    if (context.mounted) context.go(Routes.onboarding);
   }
 
   Future<void> _reset(BuildContext context, WidgetRef ref) async {
@@ -429,108 +222,5 @@ class SettingsScreen extends ConsumerWidget {
     // XP, stars and streaks belong to the account, so they come back.
     unawaited(sync.refresh());
     if (context.mounted) context.go(Routes.onboarding);
-  }
-}
-
-/// Scrolls its child to the top of the screen once, after the first frame.
-class _ScrollIntoView extends StatefulWidget {
-  const _ScrollIntoView({required this.enabled, required this.child});
-
-  final bool enabled;
-  final Widget child;
-
-  @override
-  State<_ScrollIntoView> createState() => _ScrollIntoViewState();
-}
-
-class _ScrollIntoViewState extends State<_ScrollIntoView> {
-  @override
-  void initState() {
-    super.initState();
-    if (!widget.enabled) return;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-      Scrollable.ensureVisible(context, duration: const Duration(milliseconds: 350), curve: Curves.easeOutCubic);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) => widget.child;
-}
-
-class _Header extends StatelessWidget {
-  const _Header(this.text);
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(4, AppSpacing.lg, 4, AppSpacing.sm),
-      child: Semantics(
-        header: true,
-        child: Text(
-          text.toUpperCase(),
-          style: context.text.labelMedium?.copyWith(color: context.nyaya.textSecondary, letterSpacing: context.tracking(1.1)),
-        ),
-      ),
-    );
-  }
-}
-
-class _Group extends StatelessWidget {
-  const _Group({required this.children});
-
-  final List<Widget> children;
-
-  @override
-  Widget build(BuildContext context) {
-    // Material (not a DecoratedBox) so ListTile ink and backgrounds render.
-    return Material(
-      color: context.colors.surface,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppRadius.lg),
-        side: BorderSide(color: context.nyaya.cardBorder),
-      ),
-      child: Column(
-        children: [
-          for (var i = 0; i < children.length; i++) ...[
-            if (i > 0) const Divider(height: 1, indent: 56),
-            children[i],
-          ],
-        ],
-      ),
-    );
-  }
-}
-
-class _Stat extends StatelessWidget {
-  const _Stat(this.icon, this.value, this.label, this.color);
-
-  final IconData icon;
-  final String value;
-  final String label;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return NyayaCard(
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: color),
-          const SizedBox(height: 4),
-          Text(value, style: context.text.titleMedium, maxLines: 1),
-          Text(
-            label,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: context.text.labelSmall?.copyWith(color: context.nyaya.textSecondary),
-          ),
-        ],
-      ),
-    );
   }
 }

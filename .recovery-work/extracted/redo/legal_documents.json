@@ -1,0 +1,302 @@
+[
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 1,
+   "xmin": 1151,
+   "xmax": 1151,
+   "ctid": "0,1"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1cfc8-ceca-778f-a9d3-cde2df34bf8b",
+  "source": "sci",
+  "source_id": "2026 INSC 222",
+  "kind": "judgment_summary",
+  "title": "HARISH RANA V. UNION OF INDIA (2026 INSC 222)",
+  "jurisdiction": null,
+  "year": 2026,
+  "status": "current",
+  "enforcement_date": "2026-03-11",
+  "source_url": "https://www.sci.gov.in/view-pdf/?diary_no=609802025&type=j&order_date=2026-03-11&from=latest_judgements_order",
+  "content_hash": "86fe3521aa3b98fce01285eec78bb4bcd723fcf91b059de6c531fc237f7ac5bc",
+  "source_modified_at": null,
+  "version": 2,
+  "fetched_at": "2026-11-12T12:46:00.180000Z",
+  "created_at": "2026-11-12T12:43:26.282000Z",
+  "updated_at": "2026-11-12T12:45:10.866000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 2,
+   "xmin": 1152,
+   "xmax": 1152,
+   "ctid": "0,2"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1cfc8-d1a1-7579-b748-70ad783f0a4e",
+  "source": "sci",
+  "source_id": "2026 INSC 165",
+  "kind": "judgment_summary",
+  "title": "IN RE: ORDER DATED 17.03.2025 PASSED BY THE HIGH COURT OF JUDICATURE AT ALLAHABAD IN CRIMINAL REVISION NO. 1449/2024 AND ANCILLARY ISSUES V. (2026 INSC 165)",
+  "jurisdiction": null,
+  "year": 2026,
+  "status": "current",
+  "enforcement_date": "2026-02-10",
+  "source_url": "https://www.sci.gov.in/view-pdf/?diary_no=156812025&type=j&order_date=2026-02-10&from=latest_judgements_order",
+  "content_hash": "448e42b75162cbe33f78bd222f4eaaa4c987cb091ac3f7f6f983e31be1ead9d6",
+  "source_modified_at": null,
+  "version": 2,
+  "fetched_at": "2026-11-12T12:46:00.186000Z",
+  "created_at": "2026-11-12T12:43:27.009000Z",
+  "updated_at": "2026-11-12T12:45:11.334000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 3,
+   "xmin": 1153,
+   "xmax": 1153,
+   "ctid": "0,3"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1cfc8-d383-762f-9d69-affc3ecb2006",
+  "source": "sci",
+  "source_id": "2026 INSC 138",
+  "kind": "judgment_summary",
+  "title": "THE DEPUTY COMMISSIONER AND SPECIAL LAND ACQUISITION OFFICER V. M/S S.V. GLOBAL MILL LIMITED (2026 INSC 138)",
+  "jurisdiction": null,
+  "year": 2026,
+  "status": "current",
+  "enforcement_date": "2026-02-09",
+  "source_url": "https://www.sci.gov.in/view-pdf/?diary_no=366642022&type=j&order_date=2026-02-09&from=latest_judgements_order",
+  "content_hash": "62aedf8e26b80ebcb95e0f0dbbd47a322d5bdc13f9051e9b7c5352542a11f35b",
+  "source_modified_at": null,
+  "version": 2,
+  "fetched_at": "2026-11-12T12:46:00.195000Z",
+  "created_at": "2026-11-12T12:43:27.491000Z",
+  "updated_at": "2026-11-12T12:45:11.817000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 4,
+   "xmin": 1154,
+   "xmax": 1154,
+   "ctid": "0,4"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1cfc8-a188-71e8-b366-ada6575ff9c5",
+  "source": "indiacode",
+  "source_id": "544213ec-4072-44b2-a6fc-69fb84df2001",
+  "kind": "constitution",
+  "title": "The Constitution of India",
+  "jurisdiction": "CENTRAL",
+  "year": 1950,
+  "status": "current",
+  "enforcement_date": "1950-01-26",
+  "source_url": "https://indiacode.gov.in/pdf-viewer/544213ec-4072-44b2-a6fc-69fb84df2001/2bd776ff-891e-444c-9344-f63df7b299fc",
+  "content_hash": "5b01d81e54063bfac20c3e7c2f571a9343031ae21e6eeae5fe8250306e62e0db",
+  "source_modified_at": null,
+  "version": 3,
+  "fetched_at": "2026-11-12T12:53:08.687000Z",
+  "created_at": "2026-11-12T12:43:14.696000Z",
+  "updated_at": "2026-11-12T12:53:08.687000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 5,
+   "xmin": 1155,
+   "xmax": 1155,
+   "ctid": "0,5"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1cfc6-4c89-735f-8574-3e1e6463cdb0",
+  "source": "indiacode",
+  "source_id": "4bb3e636-ed67-4731-8fb1-7ebfd83e1584",
+  "kind": "act",
+  "title": "The Bharatiya Nyaya Sanhita, 2023",
+  "jurisdiction": "CENTRAL",
+  "year": 2023,
+  "status": "current",
+  "enforcement_date": "1-7-2024",
+  "source_url": "https://indiacode.gov.in/pdf-viewer/4bb3e636-ed67-4731-8fb1-7ebfd83e1584/8007a80e-259b-429d-9ca4-1a2f474b5000",
+  "content_hash": "04231ce4b510567aa432ce460478d5bc3d225550901a16643f1344a9c2e61488",
+  "source_modified_at": "2025-11-07",
+  "version": 1,
+  "fetched_at": "2026-11-12T12:45:38.587000Z",
+  "created_at": "2026-11-12T12:40:41.866000Z",
+  "updated_at": "2026-11-12T12:40:41.867000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 6,
+   "xmin": 1156,
+   "xmax": 1156,
+   "ctid": "0,6"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1cfc6-f3e0-723d-8193-08bdfdd60acd",
+  "source": "indiacode",
+  "source_id": "72592ac7-d084-4545-95d3-0c98dc49fac3",
+  "kind": "act",
+  "title": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+  "jurisdiction": "CENTRAL",
+  "year": 2023,
+  "status": "current",
+  "enforcement_date": "01-07-2024",
+  "source_url": "https://indiacode.gov.in/pdf-viewer/72592ac7-d084-4545-95d3-0c98dc49fac3/db9d80cb-c213-4f84-8282-b798fdf530e6",
+  "content_hash": "1a065f057ffed60e5f126dd7d52a663bc96943dcc60abfb293c109582b89a7c4",
+  "source_modified_at": "2024-07-01",
+  "version": 2,
+  "fetched_at": "2026-11-12T12:45:50.450000Z",
+  "created_at": "2026-11-12T12:41:24.704000Z",
+  "updated_at": "2026-11-12T12:44:40.856000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 7,
+   "xmin": 1157,
+   "xmax": 1157,
+   "ctid": "0,7"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1cfc7-e123-7341-a071-420b4d5b1ce1",
+  "source": "indiacode",
+  "source_id": "9e461245-2c13-4171-9d9d-267425c01e1d",
+  "kind": "act",
+  "title": "The Bharatiya Sakshya Adhiniyam, 2023",
+  "jurisdiction": "CENTRAL",
+  "year": 2023,
+  "status": "current",
+  "enforcement_date": "1-7-2024",
+  "source_url": "https://indiacode.gov.in/pdf-viewer/9e461245-2c13-4171-9d9d-267425c01e1d/fa0f7526-d871-41f2-a644-2a42952211f5",
+  "content_hash": "32b12820a8a1dde37a8f57c38f62d55defb7f4084a8a587503624e995caee24c",
+  "source_modified_at": null,
+  "version": 1,
+  "fetched_at": "2026-11-12T12:45:55.367000Z",
+  "created_at": "2026-11-12T12:42:25.444000Z",
+  "updated_at": "2026-11-12T12:42:25.471000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 8,
+   "xmin": 1158,
+   "xmax": 1158,
+   "ctid": "0,8"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1cfc8-bd60-768b-9b28-70f75e3ecd7c",
+  "source": "sci",
+  "source_id": "2026 INSC 957",
+  "kind": "judgment_summary",
+  "title": "SANOFI INDIA LTD. V. CENTRAL BUREAU OF INVESTIGATION (2026 INSC 957)",
+  "jurisdiction": null,
+  "year": 2026,
+  "status": "current",
+  "enforcement_date": "2026-09-07",
+  "source_url": "https://www.sci.gov.in/view-pdf/?diary_no=133492019&type=j&order_date=2026-09-07&from=latest_judgements_order",
+  "content_hash": "1fc906e738e742fe66528c15ff22172e731ec85ec7594ed8a5fb7afef76e8f3f",
+  "source_modified_at": null,
+  "version": 2,
+  "fetched_at": "2026-11-12T12:46:00.021000Z",
+  "created_at": "2026-11-12T12:43:21.824000Z",
+  "updated_at": "2026-11-12T12:45:08.625000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 9,
+   "xmin": 1159,
+   "xmax": 1159,
+   "ctid": "0,9"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1cfc8-c598-74c2-a557-cd3e7f946220",
+  "source": "sci",
+  "source_id": "2026 INSC 668",
+  "kind": "judgment_summary",
+  "title": "POOJA RAMESH SINGH V. JAMMU AND KASHMIR BANK LTD (2026 INSC 668)",
+  "jurisdiction": null,
+  "year": 2026,
+  "status": "current",
+  "enforcement_date": "2026-07-02",
+  "source_url": "https://www.sci.gov.in/view-pdf/?diary_no=523382025&type=j&order_date=2026-07-02&from=latest_judgements_order",
+  "content_hash": "959b56a6eaead6e90590bd2541bd68e93160b69e8cd3256c8509f01f0e25e791",
+  "source_modified_at": null,
+  "version": 2,
+  "fetched_at": "2026-11-12T12:46:00.132000Z",
+  "created_at": "2026-11-12T12:43:23.928000Z",
+  "updated_at": "2026-11-12T12:45:09.255000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 10,
+   "xmin": 1160,
+   "xmax": 1160,
+   "ctid": "0,10"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1cfc8-c828-736e-beb4-2ce971afdad3",
+  "source": "sci",
+  "source_id": "2026 INSC 564",
+  "kind": "judgment_summary",
+  "title": "ASSOCIATION FOR DEMOCRATIC REFORMS V. ELECTION COMMISSION OF INDIA (2026 INSC 564)",
+  "jurisdiction": null,
+  "year": 2026,
+  "status": "current",
+  "enforcement_date": "2026-05-27",
+  "source_url": "https://www.sci.gov.in/view-pdf/?diary_no=357852025&type=j&order_date=2026-05-27&from=latest_judgements_order",
+  "content_hash": "ad6d5b842e9a20d0489c2239e3f756978b8e3b656a962dfcf97e8c735665b383",
+  "source_modified_at": null,
+  "version": 2,
+  "fetched_at": "2026-11-12T12:46:00.156000Z",
+  "created_at": "2026-11-12T12:43:24.584000Z",
+  "updated_at": "2026-11-12T12:45:09.990000Z"
+ }
+]

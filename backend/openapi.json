@@ -83,7 +83,7 @@
             "description": ""
           }
         },
-        "summary": "Email a learner a 6-digit code to choose a new password. The answer is the same whether or not the email has an account.",
+        "summary": "Email a learner a 6-digit code to choose a new password. 404 user_not_found when no learner account has this email; 429 after three codes in 15 minutes.",
         "tags": [
           "auth"
         ]
@@ -622,6 +622,67 @@
         ]
       }
     },
+    "/v1/admin/exam-import-jobs": {
+      "post": {
+        "operationId": "ImportsController_createExam",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": ".csv (UTF-8) or .xlsx with the usual question columns plus exam, exam_only, law_regime, concept_key, alternate_correct, lock_option_order"
+                  },
+                  "dry_run": {
+                    "type": "boolean",
+                    "default": true
+                  },
+                  "exam": {
+                    "type": "string",
+                    "example": "aibe",
+                    "description": "Exam slug for the whole file; fills blank exam cells and rejects rows naming another exam"
+                  },
+                  "content_source_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Optional; recorded for attribution"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamImportReportDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Check a file of exam questions (row by row) and, unless dry_run, import the valid new rows as exam-only drafts. A content source can be named for attribution.",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
     "/v1/admin/import-jobs/{id}": {
       "get": {
         "operationId": "ImportsController_get",
@@ -652,6 +713,113 @@
             "bearer": []
           }
         ],
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/import-jobs/{id}/paper-positions": {
+      "get": {
+        "operationId": "ImportsController_paperPositions",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperPositionsDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Which rows of an import can be pinned in a fixed paper now (read only). Papers still accept only published questions.",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/import-templates": {
+      "get": {
+        "operationId": "ImportsController_template",
+        "parameters": [
+          {
+            "name": "kind",
+            "required": true,
+            "in": "query",
+            "description": "general: the ordinary import; exam: adds the exam columns",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "general",
+                "exam"
+              ]
+            }
+          },
+          {
+            "name": "format",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "xlsx",
+              "type": "string",
+              "enum": [
+                "xlsx",
+                "csv"
+              ]
+            }
+          },
+          {
+            "name": "exam",
+            "required": false,
+            "in": "query",
+            "description": "Exam template only: fills the exam column of the sample row",
+            "schema": {
+              "example": "aibe",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "A blank import file (.xlsx with instructions and topic list, or .csv) for the general or the exam import",
         "tags": [
           "admin"
         ]
@@ -1154,6 +1322,52 @@
           }
         ],
         "summary": "Edit the latest version while it is a draft or has changes requested",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/questions/{id}/exam-tags": {
+      "put": {
+        "operationId": "QuestionsController_setExamTags",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetExamTagsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Set the exams a question may be used in. An editor can do this only while the question is an unpublished draft; an admin can at any stage (audited)",
         "tags": [
           "editor"
         ]
@@ -2826,7 +3040,7 @@
             "bearer": []
           }
         ],
-        "summary": "Approve the article under review (not your own)",
+        "summary": "Approve the article under review (not your own, unless you are an admin)",
         "tags": [
           "editor"
         ]
@@ -2957,6 +3171,2431 @@
         "summary": "Take a published article off the app",
         "tags": [
           "editor"
+        ]
+      }
+    },
+    "/v1/daily-tips/today": {
+      "get": {
+        "operationId": "DailyTipsController_today",
+        "parameters": [
+          {
+            "name": "language",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "en",
+              "type": "string",
+              "enum": [
+                "en",
+                "hi",
+                "ta",
+                "te",
+                "kn",
+                "ml"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TodayTipDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Today's published tip (India date); tip is null when there is none",
+        "tags": [
+          "daily-tips"
+        ]
+      }
+    },
+    "/v1/daily-tips/{id}": {
+      "get": {
+        "operationId": "DailyTipsController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicDailyTipDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "One published tip whose day has come",
+        "tags": [
+          "daily-tips"
+        ]
+      }
+    },
+    "/v1/editor/daily-tips": {
+      "get": {
+        "operationId": "EditorDailyTipsController_list",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "in_review",
+                "changes_requested",
+                "approved",
+                "published",
+                "retired"
+              ]
+            }
+          },
+          {
+            "name": "category",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "citizen_rights",
+                "criminal_law",
+                "consumer_rights",
+                "family_law",
+                "property",
+                "workplace",
+                "general"
+              ]
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "description": "Searches titles",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipPageDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "editor"
+        ]
+      },
+      "post": {
+        "operationId": "EditorDailyTipsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDailyTipDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Start a daily tip as a draft",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/daily-tips/{id}": {
+      "get": {
+        "operationId": "EditorDailyTipsController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "editor"
+        ]
+      },
+      "patch": {
+        "operationId": "EditorDailyTipsController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDailyTipDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Edit a draft, or one with changes requested",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/daily-tips/{id}/verify": {
+      "post": {
+        "operationId": "EditorDailyTipsController_verify",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyTipDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Record that you checked the tip against its exact official source today; sets the verification date and nothing else",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/daily-tips/{id}/submit": {
+      "post": {
+        "operationId": "EditorDailyTipsController_submit",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Send the tip for legal review",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/daily-tips/{id}/request-changes": {
+      "post": {
+        "operationId": "EditorDailyTipsController_requestChanges",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipReasonDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/daily-tips/{id}/approve": {
+      "post": {
+        "operationId": "EditorDailyTipsController_approve",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Approve the tip under review (not your own, unless you are an admin)",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/daily-tips/{id}/publish": {
+      "post": {
+        "operationId": "EditorDailyTipsController_publish",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Publish the approved tip; the app shows it on its publish date",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/daily-tips/{id}/revise": {
+      "post": {
+        "operationId": "EditorDailyTipsController_revise",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipReasonDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Take a published or retired tip back to draft to correct it; it leaves the app until published again",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/editor/daily-tips/{id}/retire": {
+      "post": {
+        "operationId": "EditorDailyTipsController_retire",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipReasonDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyTipDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Take a published tip off the app",
+        "tags": [
+          "editor"
+        ]
+      }
+    },
+    "/v1/constitution": {
+      "get": {
+        "operationId": "ConstitutionController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConstitutionDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "The Constitution of India's editions on India Code: official PDF links with size and warnings. No document is served by this API.",
+        "tags": [
+          "constitution"
+        ]
+      }
+    },
+    "/v1/admin/constitution/drift": {
+      "get": {
+        "operationId": "AdminConstitutionController_drift",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConstitutionDriftDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Compare India Code with the reviewed manifest: changed, missing and new editions",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exams": {
+      "get": {
+        "operationId": "ExamsController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamListDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      },
+      "post": {
+        "operationId": "ExamsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateExamDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create an exam (AIBE, CLAT or AILET), switched off",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exams/{id}": {
+      "get": {
+        "operationId": "ExamsController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      },
+      "patch": {
+        "operationId": "ExamsController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateExamDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Edit an exam; switching it on needs a published blueprint",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exams/{examId}/questions/{questionId}/eligibility": {
+      "get": {
+        "operationId": "ExamsController_eligible",
+        "parameters": [
+          {
+            "name": "examId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "questionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "blueprint_id",
+            "required": false,
+            "in": "query",
+            "description": "A blueprint of this exam, whose law-regime rule is applied. Without it the exam's current blueprint is used, and with no current blueprint the rule is 'any'.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "language",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "en",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamEligibilityDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Whether a question could be drawn for a randomised mock of this exam, and every reason it could not",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exam-blueprints/{id}": {
+      "get": {
+        "operationId": "ExamsController_blueprint",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlueprintDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      },
+      "patch": {
+        "operationId": "ExamsController_updateBlueprint",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBlueprintDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlueprintDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Edit a draft blueprint",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exam-blueprints": {
+      "post": {
+        "operationId": "ExamsController_createBlueprint",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBlueprintDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlueprintDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create the first version of a blueprint, as a draft",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exam-blueprints/{id}/sections": {
+      "put": {
+        "operationId": "ExamsController_sections",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReplaceSectionsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlueprintDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Replace a draft blueprint's sections and topic quotas",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exam-blueprints/{id}/publish": {
+      "post": {
+        "operationId": "ExamsController_publish",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlueprintDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Publish a draft. It becomes read-only. Only an official-confirmed blueprint can be used for timed mocks.",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exam-blueprints/{id}/retire": {
+      "post": {
+        "operationId": "ExamsController_retire",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlueprintDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exam-blueprints/{id}/make-current": {
+      "post": {
+        "operationId": "ExamsController_makeCurrent",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlueprintDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Make a published blueprint the one randomised mocks of its exam use, replacing the previous one. Audited.",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exam-blueprints/{id}/clear-current": {
+      "post": {
+        "operationId": "ExamsController_clearCurrent",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlueprintDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Take the current mark off a blueprint. The exam then has no current blueprint and randomised mocks are refused. Audited.",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exam-blueprints/{id}/new-version": {
+      "post": {
+        "operationId": "ExamsController_newVersion",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlueprintDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Copy a published or retired blueprint into a new draft version",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/content-sources": {
+      "get": {
+        "operationId": "ContentSourcesController_list",
+        "parameters": [
+          {
+            "name": "kind",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "official_bci",
+                "third_party",
+                "original"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50,
+              "type": "number"
+            }
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentSourcePageDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Where content came from (attribution)",
+        "tags": [
+          "admin"
+        ]
+      },
+      "post": {
+        "operationId": "ContentSourcesController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateContentSourceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentSourceDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Record where content came from (attribution only)",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/content-sources/{id}": {
+      "get": {
+        "operationId": "ContentSourcesController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentSourceDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      },
+      "patch": {
+        "operationId": "ContentSourcesController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateContentSourceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentSourceDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Change a source's details",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exam-papers": {
+      "get": {
+        "operationId": "PapersAdminController_list",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "published",
+                "retired"
+              ]
+            }
+          },
+          {
+            "name": "exam_id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50,
+              "type": "number"
+            }
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperPageDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      },
+      "post": {
+        "operationId": "PapersAdminController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePaperDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exam-papers/{id}": {
+      "get": {
+        "operationId": "PapersAdminController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "A paper with every position, its effective key and key history (staff only)",
+        "tags": [
+          "admin"
+        ]
+      },
+      "patch": {
+        "operationId": "PapersAdminController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePaperDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Edit a draft paper; a frozen paper is refused (409 paper_frozen)",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exam-papers/{id}/readiness": {
+      "get": {
+        "operationId": "PapersAdminController_readiness",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperReadinessDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "What would stop this draft being published",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exam-papers/{id}/positions": {
+      "put": {
+        "operationId": "PapersAdminController_positions",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReplacePositionsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Set the positions of a draft: pin exact question versions, or leave a withdrawn placeholder",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exam-papers/{id}/positions/{position}/key-history": {
+      "post": {
+        "operationId": "PapersAdminController_key",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "position",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddKeyHistoryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KeyHistoryEntryDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Record what the official key said for a position, with its source (draft papers only)",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exam-papers/{id}/publish": {
+      "post": {
+        "operationId": "PapersAdminController_publish",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Freeze a complete draft; it can then only be superseded by a revision",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exam-papers/{id}/retire": {
+      "post": {
+        "operationId": "PapersAdminController_retire",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exam-papers/{id}/revise": {
+      "post": {
+        "operationId": "PapersAdminController_revise",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Start a new draft revision of a frozen paper",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exams/{examId}/mock-readiness": {
+      "get": {
+        "operationId": "PapersAdminController_readinessOfMock",
+        "parameters": [
+          {
+            "name": "examId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "language",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Whether a randomised mock could be built from the exam's current blueprint now, with per-topic pool sizes",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/exams/{examId}/mock-plans": {
+      "post": {
+        "operationId": "PapersAdminController_plan",
+        "parameters": [
+          {
+            "name": "examId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MockPlanRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Build (and return, without saving) a randomised mock plan. Question ids and option orders only; repeat with the returned seed to get the same plan.",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/v1/exams/{slug}/papers": {
+      "get": {
+        "operationId": "PapersLearnerController_list",
+        "parameters": [
+          {
+            "name": "slug",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50,
+              "type": "number"
+            }
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearnerPaperPageDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "exams"
+        ]
+      }
+    },
+    "/v1/exams/{slug}/papers/{id}": {
+      "get": {
+        "operationId": "PapersLearnerController_get",
+        "parameters": [
+          {
+            "name": "slug",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearnerPaperDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "A published paper in its original order. No answer keys or explanations; withdrawn positions are placeholders.",
+        "tags": [
+          "exams"
+        ]
+      }
+    },
+    "/v1/exams/{slug}/attempts": {
+      "post": {
+        "operationId": "AttemptsController_start",
+        "parameters": [
+          {
+            "name": "slug",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartAttemptDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttemptDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Start a fixed-paper or random-mock attempt. The server fixes the questions, option order and (timed) deadline.",
+        "tags": [
+          "exam-attempts"
+        ]
+      }
+    },
+    "/v1/exams/{slug}/attempts/active": {
+      "get": {
+        "operationId": "AttemptsController_active",
+        "parameters": [
+          {
+            "name": "slug",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttemptDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "The unfinished attempt for this exam, to resume it",
+        "tags": [
+          "exam-attempts"
+        ]
+      }
+    },
+    "/v1/me/exam-attempts/stats": {
+      "get": {
+        "operationId": "AttemptsController_stats",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttemptStatsDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "exam-attempts"
+        ]
+      }
+    },
+    "/v1/me/exam-attempts": {
+      "get": {
+        "operationId": "AttemptsController_history",
+        "parameters": [
+          {
+            "name": "exam",
+            "required": false,
+            "in": "query",
+            "description": "Exam slug, e.g. aibe",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "in_progress",
+                "submitted",
+                "expired"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 50,
+              "default": 20,
+              "type": "number"
+            }
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttemptPageDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Attempt history, newest first",
+        "tags": [
+          "exam-attempts"
+        ]
+      }
+    },
+    "/v1/me/exam-attempts/{id}": {
+      "get": {
+        "operationId": "AttemptsController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttemptDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "exam-attempts"
+        ]
+      }
+    },
+    "/v1/me/exam-attempts/{id}/answers": {
+      "put": {
+        "operationId": "AttemptsController_saveMany",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveAnswersDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SaveAnswersResultDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Save several answers at once (autosave). Each carries a counter; an older one never overwrites a newer one. Refused after submission or expiry.",
+        "tags": [
+          "exam-attempts"
+        ]
+      }
+    },
+    "/v1/me/exam-attempts/{id}/answers/{position}": {
+      "put": {
+        "operationId": "AttemptsController_saveOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "position",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveOneAnswerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SaveAnswersResultDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Save one answer",
+        "tags": [
+          "exam-attempts"
+        ]
+      }
+    },
+    "/v1/me/exam-attempts/{id}/advance-section": {
+      "post": {
+        "operationId": "AttemptsController_advance",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttemptDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Locked-order exams only: close the current section and open the next",
+        "tags": [
+          "exam-attempts"
+        ]
+      }
+    },
+    "/v1/me/exam-attempts/{id}/submit": {
+      "post": {
+        "operationId": "AttemptsController_submit",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttemptResultDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Submit the attempt. Repeating the request returns the same result.",
+        "tags": [
+          "exam-attempts"
+        ]
+      }
+    },
+    "/v1/me/exam-attempts/{id}/result": {
+      "get": {
+        "operationId": "AttemptsController_result",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttemptResultDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "exam-attempts"
+        ]
+      }
+    },
+    "/v1/me/exam-attempts/{id}/review": {
+      "get": {
+        "operationId": "AttemptsController_review",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Every question with the accepted answers and explanation. Only after the attempt is submitted or expired.",
+        "tags": [
+          "exam-attempts"
+        ]
+      }
+    },
+    "/v1/admin/exam-attempts/sweep": {
+      "post": {
+        "operationId": "AttemptsAdminController_sweep",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Finish every unfinished attempt whose deadline has passed",
+        "tags": [
+          "admin"
         ]
       }
     }
@@ -3693,6 +6332,10 @@
           "failed": {
             "type": "number"
           },
+          "withdrawn": {
+            "type": "number",
+            "description": "Exam import only: rows the exam body withdrew. No question is made; each becomes a withdrawn paper position"
+          },
           "with_warnings": {
             "type": "number",
             "description": "Created rows that still need something before review"
@@ -3702,6 +6345,7 @@
           "created",
           "skipped",
           "failed",
+          "withdrawn",
           "with_warnings"
         ]
       },
@@ -3746,9 +6390,10 @@
             "enum": [
               "created",
               "skipped",
-              "failed"
+              "failed",
+              "withdrawn"
             ],
-            "description": "created: a new draft (or would be, in a test run); skipped: already in the bank; failed: has errors"
+            "description": "created: a new draft (or would be, in a test run); skipped: already in the bank; failed: has errors; withdrawn: key says WITHDRAWN, so no question is made (exam import)"
           },
           "question_id": {
             "type": "string",
@@ -3818,6 +6463,79 @@
           "rows"
         ]
       },
+      "ExamImportSourceDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title"
+        ]
+      },
+      "ExamImportReportDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true,
+            "description": "Null for a test run, which is not saved"
+          },
+          "dry_run": {
+            "type": "boolean"
+          },
+          "file_name": {
+            "type": "string"
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "csv",
+              "xlsx"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "totals": {
+            "$ref": "#/components/schemas/ImportTotalsDto"
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportRowDto"
+            }
+          },
+          "content_source": {
+            "nullable": true,
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExamImportSourceDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "dry_run",
+          "file_name",
+          "format",
+          "created_at",
+          "totals",
+          "rows",
+          "content_source"
+        ]
+      },
       "ImportJobSummaryDto": {
         "type": "object",
         "properties": {
@@ -3868,6 +6586,129 @@
         },
         "required": [
           "items"
+        ]
+      },
+      "PaperCandidateDto": {
+        "type": "object",
+        "properties": {
+          "row": {
+            "type": "number",
+            "description": "Row number in the imported file"
+          },
+          "position": {
+            "type": "number",
+            "description": "The position this row would take (file order)"
+          },
+          "external_ref": {
+            "type": "string",
+            "nullable": true
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "created",
+              "skipped",
+              "failed",
+              "withdrawn"
+            ]
+          },
+          "question_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true,
+            "description": "The question's latest version status"
+          },
+          "ready": {
+            "type": "boolean",
+            "description": "True when the question has a published version to pin"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "row",
+          "position",
+          "external_ref",
+          "outcome",
+          "question_id",
+          "status",
+          "ready",
+          "reason"
+        ]
+      },
+      "PaperPositionDraftDto": {
+        "type": "object",
+        "properties": {
+          "position": {
+            "type": "number",
+            "minimum": 1
+          },
+          "question_version_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true,
+            "description": "Null for a withdrawn position, which pins no question"
+          },
+          "original_ref": {
+            "type": "string",
+            "description": "The row's external_ref, if it had one"
+          },
+          "withdrawn_note": {
+            "type": "string",
+            "description": "Set for a withdrawn position"
+          }
+        },
+        "required": [
+          "position",
+          "question_version_id"
+        ]
+      },
+      "PaperPositionsDto": {
+        "type": "object",
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaperCandidateDto"
+            }
+          },
+          "ready": {
+            "type": "number",
+            "description": "Rows with a published version to pin"
+          },
+          "withdrawn": {
+            "type": "number",
+            "description": "Rows kept as withdrawn positions"
+          },
+          "not_ready": {
+            "type": "number",
+            "description": "Rows still waiting on review or publishing"
+          },
+          "positions": {
+            "description": "Positions for the rows that are ready, in the format of PUT /admin/exam-papers/{id}/positions. Read-only: nothing is saved.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaperPositionDraftDto"
+            }
+          }
+        },
+        "required": [
+          "job_id",
+          "rows",
+          "ready",
+          "withdrawn",
+          "not_ready",
+          "positions"
         ]
       },
       "StaffSetupDto": {
@@ -4505,6 +7346,33 @@
             "format": "date",
             "nullable": true
           },
+          "content_source_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "law_regime": {
+            "type": "string",
+            "enum": [
+              "old_codes",
+              "new_codes",
+              "both",
+              "neutral"
+            ]
+          },
+          "concept_key": {
+            "type": "string",
+            "nullable": true
+          },
+          "alternate_correct_option_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "lock_option_order": {
+            "type": "boolean"
+          },
           "verified_at": {
             "type": "string",
             "format": "date-time",
@@ -4582,6 +7450,11 @@
           "provision_reference",
           "valid_from",
           "valid_to",
+          "content_source_id",
+          "law_regime",
+          "concept_key",
+          "alternate_correct_option_ids",
+          "lock_option_order",
           "verified_at",
           "reviewer_id",
           "change_note",
@@ -4695,6 +7568,15 @@
             "type": "string",
             "format": "date-time"
           },
+          "exam_only": {
+            "type": "boolean"
+          },
+          "exam_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
           "latest": {
             "description": "The newest version, which is the one actions apply to",
             "allOf": [
@@ -4722,6 +7604,8 @@
           "live_version_id",
           "retired_at",
           "created_at",
+          "exam_only",
+          "exam_ids",
           "latest",
           "versions",
           "reviews"
@@ -4801,6 +7685,50 @@
             "type": "string",
             "format": "date",
             "nullable": true
+          },
+          "content_source_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true,
+            "description": "Where the content comes from (attribution only; it never blocks publishing)."
+          },
+          "law_regime": {
+            "type": "string",
+            "enum": [
+              "old_codes",
+              "new_codes",
+              "both",
+              "neutral"
+            ],
+            "default": "neutral"
+          },
+          "concept_key": {
+            "type": "string",
+            "nullable": true,
+            "description": "Questions testing the same concept share a key; a mock uses at most one of them"
+          },
+          "alternate_correct_option_ids": {
+            "description": "Further options an official key also accepts; never one of correct_option_ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "lock_option_order": {
+            "type": "boolean",
+            "description": "Show the options in the stored order, never shuffled"
+          },
+          "exam_only": {
+            "type": "boolean",
+            "default": false,
+            "description": "Exam-only questions are never used by the learning games. Can only be changed before the first publish."
+          },
+          "exam_ids": {
+            "description": "The exams this question may be used in. An exam-only question needs at least one to be published.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
@@ -4881,8 +7809,67 @@
             "type": "string",
             "format": "date",
             "nullable": true
+          },
+          "content_source_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true,
+            "description": "Where the content comes from (attribution only; it never blocks publishing)."
+          },
+          "law_regime": {
+            "type": "string",
+            "enum": [
+              "old_codes",
+              "new_codes",
+              "both",
+              "neutral"
+            ],
+            "default": "neutral"
+          },
+          "concept_key": {
+            "type": "string",
+            "nullable": true,
+            "description": "Questions testing the same concept share a key; a mock uses at most one of them"
+          },
+          "alternate_correct_option_ids": {
+            "description": "Further options an official key also accepts; never one of correct_option_ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "lock_option_order": {
+            "type": "boolean",
+            "description": "Show the options in the stored order, never shuffled"
+          },
+          "exam_only": {
+            "type": "boolean",
+            "default": false,
+            "description": "Exam-only questions are never used by the learning games. Can only be changed before the first publish."
+          },
+          "exam_ids": {
+            "description": "The exams this question may be used in. An exam-only question needs at least one to be published.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
+      },
+      "SetExamTagsDto": {
+        "type": "object",
+        "properties": {
+          "exam_ids": {
+            "description": "The full set of exams",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "exam_ids"
+        ]
       },
       "BulkActionDto": {
         "type": "object",
@@ -5658,60 +8645,115 @@
       "AttemptDto": {
         "type": "object",
         "properties": {
-          "session_id": {
+          "id": {
+            "type": "string"
+          },
+          "kind": {
             "type": "string",
-            "format": "uuid"
+            "enum": [
+              "fixed_paper",
+              "random_mock"
+            ]
           },
           "mode": {
             "type": "string",
             "enum": [
-              "case_path",
-              "daily_docket",
-              "duel",
-              "exam",
-              "mistake_review"
+              "practice",
+              "timed"
             ]
           },
-          "topic_ids": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "score": {
-            "type": "number"
-          },
-          "total": {
-            "type": "number"
-          },
-          "xp": {
-            "type": "number"
-          },
-          "scoring_version": {
-            "type": "string"
-          },
-          "feedback_mode": {
+          "status": {
             "type": "string",
             "enum": [
-              "immediate",
-              "end"
+              "in_progress",
+              "submitted",
+              "expired"
             ]
+          },
+          "exam": {
+            "type": "string"
+          },
+          "paper": {
+            "type": "object",
+            "nullable": true
+          },
+          "language": {
+            "type": "string"
+          },
+          "started_at": {
+            "type": "string"
+          },
+          "deadline_at": {
+            "type": "string",
+            "nullable": true,
+            "description": "Set by the server; the app only displays it"
+          },
+          "server_now": {
+            "type": "string",
+            "description": "The server clock, to correct for device skew"
+          },
+          "remaining_seconds": {
+            "type": "number",
+            "nullable": true
+          },
+          "section_navigation": {
+            "type": "string",
+            "enum": [
+              "free",
+              "locked_order"
+            ]
+          },
+          "current_section_position": {
+            "type": "number",
+            "nullable": true
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "total_questions": {
+            "type": "number"
+          },
+          "answered_count": {
+            "type": "number"
           },
           "submitted_at": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
+          },
+          "result_available": {
+            "type": "boolean",
+            "description": "True once finalised: results can now be fetched"
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttemptQuestionDto"
+            }
           }
         },
         "required": [
-          "session_id",
+          "id",
+          "kind",
           "mode",
-          "topic_ids",
-          "score",
-          "total",
-          "xp",
-          "scoring_version",
-          "feedback_mode",
-          "submitted_at"
+          "status",
+          "exam",
+          "paper",
+          "language",
+          "started_at",
+          "deadline_at",
+          "server_now",
+          "remaining_seconds",
+          "section_navigation",
+          "current_section_position",
+          "sections",
+          "total_questions",
+          "answered_count",
+          "submitted_at",
+          "result_available",
+          "questions"
         ]
       },
       "AttemptPageDto": {
@@ -5720,7 +8762,7 @@
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/AttemptDto"
+              "$ref": "#/components/schemas/AttemptSummaryDto"
             }
           },
           "next_cursor": {
@@ -7065,6 +10107,2874 @@
         },
         "required": [
           "reason"
+        ]
+      },
+      "PublicDailyTipDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "citizen_rights",
+              "criminal_law",
+              "consumer_rights",
+              "family_law",
+              "property",
+              "workplace",
+              "general"
+            ]
+          },
+          "language": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "legal_reference": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string"
+          },
+          "publish_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "last_verified_on": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "required": [
+          "id",
+          "category",
+          "language",
+          "title",
+          "summary",
+          "explanation",
+          "legal_reference",
+          "source_url",
+          "publish_date",
+          "last_verified_on"
+        ]
+      },
+      "TodayTipDto": {
+        "type": "object",
+        "properties": {
+          "tip": {
+            "nullable": true,
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PublicDailyTipDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "tip"
+        ]
+      },
+      "DailyTipListItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "in_review",
+              "changes_requested",
+              "approved",
+              "published",
+              "retired"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "citizen_rights",
+              "criminal_law",
+              "consumer_rights",
+              "family_law",
+              "property",
+              "workplace",
+              "general"
+            ]
+          },
+          "language": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "publish_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "legal_reference": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "last_verified_on": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "category",
+          "language",
+          "title",
+          "publish_date",
+          "updated_at",
+          "legal_reference",
+          "source_url",
+          "last_verified_on"
+        ]
+      },
+      "DailyTipPageDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DailyTipListItemDto"
+            }
+          },
+          "next_cursor": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ]
+      },
+      "DailyTipDetailDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "in_review",
+              "changes_requested",
+              "approved",
+              "published",
+              "retired"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "citizen_rights",
+              "criminal_law",
+              "consumer_rights",
+              "family_law",
+              "property",
+              "workplace",
+              "general"
+            ]
+          },
+          "language": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "publish_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "legal_reference": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "last_verified_on": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "summary": {
+            "type": "string"
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "created_by": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "updated_by": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "reviewer_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "approved_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "retired_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "changes_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "Why changes were last requested, while they still are"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "category",
+          "language",
+          "title",
+          "publish_date",
+          "updated_at",
+          "legal_reference",
+          "source_url",
+          "last_verified_on",
+          "summary",
+          "explanation",
+          "created_by",
+          "updated_by",
+          "reviewer_id",
+          "approved_at",
+          "published_at",
+          "retired_at",
+          "created_at",
+          "changes_reason"
+        ]
+      },
+      "CreateDailyTipDto": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "citizen_rights",
+              "criminal_law",
+              "consumer_rights",
+              "family_law",
+              "property",
+              "workplace",
+              "general"
+            ]
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "en",
+              "hi",
+              "ta",
+              "te",
+              "kn",
+              "ml"
+            ],
+            "default": "en"
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Shown on the Home card"
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "legal_reference": {
+            "type": "string",
+            "example": "Consumer Protection Act, 2019, Section 35"
+          },
+          "source_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "publish_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "description": "The India day the tip is shown on Home"
+          },
+          "last_verified_on": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          }
+        },
+        "required": [
+          "category"
+        ]
+      },
+      "UpdateDailyTipDto": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "citizen_rights",
+              "criminal_law",
+              "consumer_rights",
+              "family_law",
+              "property",
+              "workplace",
+              "general"
+            ]
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "en",
+              "hi",
+              "ta",
+              "te",
+              "kn",
+              "ml"
+            ],
+            "default": "en"
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Shown on the Home card"
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "legal_reference": {
+            "type": "string",
+            "example": "Consumer Protection Act, 2019, Section 35"
+          },
+          "source_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "publish_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "description": "The India day the tip is shown on Home"
+          },
+          "last_verified_on": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          }
+        }
+      },
+      "VerifyTipDto": {
+        "type": "object",
+        "properties": {
+          "confirmed_against_source": {
+            "type": "boolean",
+            "enum": [
+              true
+            ],
+            "description": "Must be true: the editor opened the exact official source link and confirmed the tip matches it"
+          }
+        },
+        "required": [
+          "confirmed_against_source"
+        ]
+      },
+      "TipReasonDto": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "minLength": 3
+          }
+        },
+        "required": [
+          "reason"
+        ]
+      },
+      "ConstitutionSourceDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "collection_url": {
+            "type": "string",
+            "description": "The collection page on India Code"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "When India Code was last read; null if it never was"
+          },
+          "stale": {
+            "type": "boolean",
+            "description": "True when India Code could not be reached and reviewed values are shown"
+          }
+        },
+        "required": [
+          "name",
+          "collection_url",
+          "fetched_at",
+          "stale"
+        ]
+      },
+      "ConstitutionFileDto": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "example": "pdf"
+          },
+          "size_bytes": {
+            "type": "number",
+            "description": "As India Code reports it; treat as approximate (the served file can differ)"
+          },
+          "checksum_md5": {
+            "type": "string",
+            "description": "MD5 as India Code reports it"
+          },
+          "source_modified_at": {
+            "type": "string",
+            "format": "date",
+            "description": "The day the item last changed on India Code"
+          }
+        },
+        "required": [
+          "format",
+          "size_bytes",
+          "checksum_md5",
+          "source_modified_at"
+        ]
+      },
+      "ConstitutionFlagsDto": {
+        "type": "object",
+        "properties": {
+          "large": {
+            "type": "boolean",
+            "description": "A large download: warn before opening on mobile data"
+          },
+          "scanned": {
+            "type": "boolean",
+            "description": "Scanned pages with no text layer: cannot be searched or read aloud"
+          }
+        },
+        "required": [
+          "large",
+          "scanned"
+        ]
+      },
+      "ConstitutionEditionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "ta",
+            "description": "Stable id; `original` for the 1950 copy"
+          },
+          "language_code": {
+            "type": "string",
+            "nullable": true,
+            "example": "ta"
+          },
+          "language_name": {
+            "type": "string",
+            "example": "Tamil"
+          },
+          "native_name": {
+            "type": "string",
+            "nullable": true,
+            "example": "தமிழ்"
+          },
+          "script": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "example": "The Constitution of India in Tamil"
+          },
+          "source_title": {
+            "type": "string",
+            "nullable": true,
+            "description": "India Code's own title for the item, kept for attribution (it can contain typos)"
+          },
+          "authority_note": {
+            "type": "string",
+            "nullable": true,
+            "description": "Reviewed wording about this edition’s legal standing; null until approved. Do not infer authority when null."
+          },
+          "download_url": {
+            "type": "string",
+            "description": "Official India Code address of the PDF (https, India Code host only)"
+          },
+          "source_page_url": {
+            "type": "string",
+            "description": "The item's page on India Code"
+          },
+          "file": {
+            "$ref": "#/components/schemas/ConstitutionFileDto"
+          },
+          "flags": {
+            "$ref": "#/components/schemas/ConstitutionFlagsDto"
+          }
+        },
+        "required": [
+          "id",
+          "language_code",
+          "language_name",
+          "native_name",
+          "script",
+          "title",
+          "source_title",
+          "authority_note",
+          "download_url",
+          "source_page_url",
+          "file",
+          "flags"
+        ]
+      },
+      "ConstitutionDto": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/ConstitutionSourceDto"
+          },
+          "notice": {
+            "type": "string",
+            "description": "Neutral attribution to show with the list"
+          },
+          "original": {
+            "nullable": true,
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConstitutionEditionDto"
+              }
+            ]
+          },
+          "editions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConstitutionEditionDto"
+            }
+          }
+        },
+        "required": [
+          "source",
+          "notice",
+          "original",
+          "editions"
+        ]
+      },
+      "DriftSummaryDto": {
+        "type": "object",
+        "properties": {
+          "unchanged": {
+            "type": "number"
+          },
+          "changed": {
+            "type": "number"
+          },
+          "missing": {
+            "type": "number"
+          },
+          "new": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "unchanged",
+          "changed",
+          "missing",
+          "new"
+        ]
+      },
+      "DriftLiveDto": {
+        "type": "object",
+        "properties": {
+          "bitstream_uuid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "md5": {
+            "type": "string"
+          },
+          "size_bytes": {
+            "type": "number"
+          },
+          "item_modified": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "required": [
+          "bitstream_uuid",
+          "md5",
+          "size_bytes",
+          "item_modified"
+        ]
+      },
+      "DriftItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "language_name": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "unchanged",
+              "changed",
+              "missing",
+              "unknown"
+            ]
+          },
+          "changed_fields": {
+            "description": "What differs from the reviewed values: bitstream, checksum, size, text_layer",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "modified_since_review": {
+            "type": "boolean",
+            "description": "The item was edited on India Code after the review, though its file may be the same"
+          },
+          "live": {
+            "nullable": true,
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DriftLiveDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "language_name",
+          "state",
+          "changed_fields",
+          "modified_since_review",
+          "live"
+        ]
+      },
+      "DriftNewItemDto": {
+        "type": "object",
+        "properties": {
+          "item_uuid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "handle": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "size_bytes": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "item_uuid",
+          "handle",
+          "title",
+          "size_bytes"
+        ]
+      },
+      "ConstitutionDriftDto": {
+        "type": "object",
+        "properties": {
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "last_error": {
+            "type": "string",
+            "nullable": true,
+            "description": "Why the last read of India Code failed, if it did"
+          },
+          "summary": {
+            "$ref": "#/components/schemas/DriftSummaryDto"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DriftItemDto"
+            }
+          },
+          "new_items": {
+            "description": "On India Code but not in the manifest: hidden from the app until curated",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DriftNewItemDto"
+            }
+          }
+        },
+        "required": [
+          "fetched_at",
+          "last_error",
+          "summary",
+          "items",
+          "new_items"
+        ]
+      },
+      "ExamDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string",
+            "enum": [
+              "aibe",
+              "clat",
+              "ailet"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "short_name": {
+            "type": "string"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "sort_order": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "slug",
+          "name",
+          "short_name",
+          "is_active",
+          "sort_order",
+          "instructions",
+          "created_at",
+          "updated_at"
+        ]
+      },
+      "ExamListDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExamDto"
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "SectionTopicOutDto": {
+        "type": "object",
+        "properties": {
+          "topic_id": {
+            "type": "string"
+          },
+          "min_count": {
+            "type": "number"
+          },
+          "max_count": {
+            "type": "number",
+            "nullable": true
+          },
+          "weight": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "topic_id",
+          "min_count",
+          "max_count",
+          "weight"
+        ]
+      },
+      "SectionOutDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "position": {
+            "type": "number"
+          },
+          "question_count": {
+            "type": "number"
+          },
+          "duration_seconds": {
+            "type": "number",
+            "nullable": true
+          },
+          "marks_correct": {
+            "type": "number",
+            "nullable": true
+          },
+          "topics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SectionTopicOutDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "code",
+          "name",
+          "position",
+          "question_count",
+          "duration_seconds",
+          "marks_correct",
+          "topics"
+        ]
+      },
+      "BlueprintDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "exam_id": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "version": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "published",
+              "retired"
+            ]
+          },
+          "is_current": {
+            "type": "boolean",
+            "description": "True for the one blueprint randomised mocks of this exam use. At most one per exam, and only a published one; it is set on purpose, never by publishing."
+          },
+          "duration_seconds": {
+            "type": "number"
+          },
+          "total_questions": {
+            "type": "number"
+          },
+          "marks_correct": {
+            "type": "number"
+          },
+          "negative_marks": {
+            "type": "number"
+          },
+          "marks_unanswered": {
+            "type": "number"
+          },
+          "pass_percent_general": {
+            "type": "number",
+            "nullable": true
+          },
+          "pass_percent_reserved": {
+            "type": "number",
+            "nullable": true
+          },
+          "section_navigation": {
+            "type": "string",
+            "enum": [
+              "free",
+              "locked_order"
+            ]
+          },
+          "law_regime_filter": {
+            "type": "string",
+            "enum": [
+              "any",
+              "exclude_old",
+              "prefer_new",
+              "include_all"
+            ]
+          },
+          "config_status": {
+            "type": "string",
+            "enum": [
+              "official_confirmed",
+              "inferred",
+              "unverified"
+            ]
+          },
+          "config_source": {
+            "type": "string",
+            "nullable": true
+          },
+          "config_checked_on": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "timed_allowed": {
+            "type": "boolean",
+            "description": "Whether this blueprint may be used for timed mocks. False unless it is published and official-confirmed."
+          },
+          "timed_blocked_reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SectionOutDto"
+            }
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "exam_id",
+          "code",
+          "version",
+          "status",
+          "is_current",
+          "duration_seconds",
+          "total_questions",
+          "marks_correct",
+          "negative_marks",
+          "marks_unanswered",
+          "pass_percent_general",
+          "pass_percent_reserved",
+          "section_navigation",
+          "law_regime_filter",
+          "config_status",
+          "config_source",
+          "config_checked_on",
+          "timed_allowed",
+          "timed_blocked_reason",
+          "sections",
+          "created_at",
+          "updated_at"
+        ]
+      },
+      "ExamDetailDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string",
+            "enum": [
+              "aibe",
+              "clat",
+              "ailet"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "short_name": {
+            "type": "string"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "sort_order": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "current_blueprint_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "blueprints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BlueprintDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "slug",
+          "name",
+          "short_name",
+          "is_active",
+          "sort_order",
+          "instructions",
+          "created_at",
+          "updated_at",
+          "current_blueprint_id",
+          "blueprints"
+        ]
+      },
+      "CreateExamDto": {
+        "type": "object",
+        "properties": {
+          "slug": {
+            "type": "string",
+            "enum": [
+              "aibe",
+              "clat",
+              "ailet"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "short_name": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "instructions": {
+            "type": "string",
+            "maxLength": 10000
+          },
+          "sort_order": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1000
+          }
+        },
+        "required": [
+          "slug",
+          "name",
+          "short_name"
+        ]
+      },
+      "UpdateExamDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "short_name": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "instructions": {
+            "type": "string",
+            "maxLength": 10000
+          },
+          "sort_order": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1000
+          },
+          "is_active": {
+            "type": "boolean",
+            "description": "Turning an exam on needs at least one published blueprint. New exams start off."
+          }
+        }
+      },
+      "ExamEligibilityReasonDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      },
+      "ExamEligibilityDto": {
+        "type": "object",
+        "properties": {
+          "eligible": {
+            "type": "boolean"
+          },
+          "exam_only": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "law_regime": {
+            "type": "string",
+            "nullable": true
+          },
+          "law_regime_filter": {
+            "type": "string",
+            "enum": [
+              "any",
+              "exclude_old",
+              "prefer_new",
+              "include_all"
+            ]
+          },
+          "blueprint_id": {
+            "type": "string",
+            "nullable": true,
+            "description": "The blueprint whose rule was applied, if any"
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExamEligibilityReasonDto"
+            }
+          }
+        },
+        "required": [
+          "eligible",
+          "exam_only",
+          "law_regime",
+          "law_regime_filter",
+          "blueprint_id",
+          "reasons"
+        ]
+      },
+      "CreateBlueprintDto": {
+        "type": "object",
+        "properties": {
+          "duration_seconds": {
+            "type": "number",
+            "minimum": 60,
+            "maximum": 86400
+          },
+          "total_questions": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          "marks_correct": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 999.99
+          },
+          "negative_marks": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Marks taken off a wrong answer, as a positive number"
+          },
+          "marks_unanswered": {
+            "type": "number",
+            "minimum": 0
+          },
+          "pass_percent_general": {
+            "type": "object",
+            "nullable": true,
+            "minimum": 0,
+            "maximum": 100
+          },
+          "pass_percent_reserved": {
+            "type": "object",
+            "nullable": true,
+            "minimum": 0,
+            "maximum": 100
+          },
+          "section_navigation": {
+            "type": "string",
+            "enum": [
+              "free",
+              "locked_order"
+            ],
+            "default": "free"
+          },
+          "law_regime_filter": {
+            "type": "string",
+            "enum": [
+              "any",
+              "exclude_old",
+              "prefer_new",
+              "include_all"
+            ],
+            "default": "any",
+            "description": "How randomised mocks treat questions only about the old codes (IPC, CrPC, Evidence Act). Random mocks test current law, so any (the default), exclude_old and prefer_new all leave them out; only include_all lets them in. Fixed historical papers are never filtered."
+          },
+          "config_status": {
+            "type": "string",
+            "enum": [
+              "official_confirmed",
+              "inferred",
+              "unverified"
+            ],
+            "default": "unverified"
+          },
+          "config_source": {
+            "type": "object",
+            "nullable": true,
+            "description": "The official document the rules come from"
+          },
+          "config_checked_on": {
+            "type": "object",
+            "nullable": true,
+            "example": "2026-11-18"
+          },
+          "exam_id": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string",
+            "example": "aibe-xx"
+          }
+        },
+        "required": [
+          "duration_seconds",
+          "total_questions",
+          "marks_correct",
+          "exam_id",
+          "code"
+        ]
+      },
+      "UpdateBlueprintDto": {
+        "type": "object",
+        "properties": {
+          "duration_seconds": {
+            "type": "number",
+            "minimum": 60,
+            "maximum": 86400
+          },
+          "total_questions": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          "marks_correct": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 999.99
+          },
+          "negative_marks": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Marks taken off a wrong answer, as a positive number"
+          },
+          "marks_unanswered": {
+            "type": "number",
+            "minimum": 0
+          },
+          "pass_percent_general": {
+            "type": "object",
+            "nullable": true,
+            "minimum": 0,
+            "maximum": 100
+          },
+          "pass_percent_reserved": {
+            "type": "object",
+            "nullable": true,
+            "minimum": 0,
+            "maximum": 100
+          },
+          "section_navigation": {
+            "type": "string",
+            "enum": [
+              "free",
+              "locked_order"
+            ],
+            "default": "free"
+          },
+          "law_regime_filter": {
+            "type": "string",
+            "enum": [
+              "any",
+              "exclude_old",
+              "prefer_new",
+              "include_all"
+            ],
+            "default": "any",
+            "description": "How randomised mocks treat questions only about the old codes (IPC, CrPC, Evidence Act). Random mocks test current law, so any (the default), exclude_old and prefer_new all leave them out; only include_all lets them in. Fixed historical papers are never filtered."
+          },
+          "config_status": {
+            "type": "string",
+            "enum": [
+              "official_confirmed",
+              "inferred",
+              "unverified"
+            ],
+            "default": "unverified"
+          },
+          "config_source": {
+            "type": "object",
+            "nullable": true,
+            "description": "The official document the rules come from"
+          },
+          "config_checked_on": {
+            "type": "object",
+            "nullable": true,
+            "example": "2026-11-18"
+          }
+        }
+      },
+      "SectionTopicDto": {
+        "type": "object",
+        "properties": {
+          "topic_id": {
+            "type": "string"
+          },
+          "min_count": {
+            "type": "number",
+            "minimum": 0,
+            "default": 0
+          },
+          "max_count": {
+            "type": "object",
+            "nullable": true,
+            "minimum": 0
+          },
+          "weight": {
+            "type": "number",
+            "minimum": 1,
+            "default": 1
+          }
+        },
+        "required": [
+          "topic_id"
+        ]
+      },
+      "SectionDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "example": "cpc"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "position": {
+            "type": "number",
+            "minimum": 1
+          },
+          "question_count": {
+            "type": "number",
+            "minimum": 1
+          },
+          "duration_seconds": {
+            "type": "object",
+            "nullable": true,
+            "description": "Only for a section with its own timer"
+          },
+          "marks_correct": {
+            "type": "object",
+            "nullable": true
+          },
+          "topics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SectionTopicDto"
+            }
+          }
+        },
+        "required": [
+          "code",
+          "name",
+          "position",
+          "question_count",
+          "topics"
+        ]
+      },
+      "ReplaceSectionsDto": {
+        "type": "object",
+        "properties": {
+          "sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SectionDto"
+            }
+          }
+        },
+        "required": [
+          "sections"
+        ]
+      },
+      "ContentSourceDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "official_bci",
+              "third_party",
+              "original"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "publisher": {
+            "type": "string",
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "retrieved_on": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "sha256": {
+            "type": "string",
+            "nullable": true
+          },
+          "allowed_uses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "created_by": {
+            "type": "string",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "title",
+          "publisher",
+          "url",
+          "retrieved_on",
+          "sha256",
+          "allowed_uses",
+          "created_by",
+          "created_at",
+          "updated_at"
+        ]
+      },
+      "ContentSourcePageDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentSourceDto"
+            }
+          },
+          "next_cursor": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ]
+      },
+      "CreateContentSourceDto": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "official_bci",
+              "third_party",
+              "original"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "publisher": {
+            "type": "object",
+            "nullable": true,
+            "maxLength": 300
+          },
+          "url": {
+            "type": "object",
+            "nullable": true,
+            "description": "An https address"
+          },
+          "retrieved_on": {
+            "type": "object",
+            "nullable": true,
+            "example": "2026-11-18"
+          },
+          "sha256": {
+            "type": "object",
+            "nullable": true,
+            "description": "SHA-256 of the source document, lower-case hex"
+          },
+          "allowed_uses": {
+            "description": "What the source may be used for, e.g. \"practice questions\"",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "title"
+        ]
+      },
+      "UpdateContentSourceDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "publisher": {
+            "type": "object",
+            "nullable": true,
+            "maxLength": 300
+          },
+          "url": {
+            "type": "object",
+            "nullable": true
+          },
+          "retrieved_on": {
+            "type": "object",
+            "nullable": true
+          },
+          "sha256": {
+            "type": "object",
+            "nullable": true
+          },
+          "allowed_uses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "PaperDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "exam_id": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "number"
+          },
+          "supersedes_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string"
+          },
+          "edition": {
+            "type": "string",
+            "nullable": true
+          },
+          "year": {
+            "type": "number",
+            "nullable": true
+          },
+          "set_label": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "published",
+              "retired"
+            ]
+          },
+          "frozen_at": {
+            "type": "string",
+            "nullable": true
+          },
+          "blueprint_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "total_questions": {
+            "type": "number"
+          },
+          "duration_seconds": {
+            "type": "number",
+            "nullable": true
+          },
+          "practice_timer_seconds": {
+            "type": "number",
+            "nullable": true
+          },
+          "marks_correct": {
+            "type": "number",
+            "nullable": true
+          },
+          "negative_marks": {
+            "type": "number",
+            "nullable": true
+          },
+          "marks_unanswered": {
+            "type": "number",
+            "nullable": true
+          },
+          "withdrawn_policy": {
+            "type": "string",
+            "enum": [
+              "unscored",
+              "award_all"
+            ]
+          },
+          "withdrawn_policy_confirmed": {
+            "type": "boolean"
+          },
+          "config_status": {
+            "type": "string",
+            "enum": [
+              "official_confirmed",
+              "inferred",
+              "unverified"
+            ]
+          },
+          "source_note": {
+            "type": "string",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "exam_id",
+          "code",
+          "revision",
+          "supersedes_id",
+          "title",
+          "edition",
+          "year",
+          "set_label",
+          "status",
+          "frozen_at",
+          "blueprint_id",
+          "total_questions",
+          "duration_seconds",
+          "practice_timer_seconds",
+          "marks_correct",
+          "negative_marks",
+          "marks_unanswered",
+          "withdrawn_policy",
+          "withdrawn_policy_confirmed",
+          "config_status",
+          "source_note",
+          "created_at",
+          "updated_at"
+        ]
+      },
+      "PaperPageDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaperDto"
+            }
+          },
+          "next_cursor": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ]
+      },
+      "KeyHistoryEntryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "provisional",
+              "final",
+              "revised",
+              "withdrawn"
+            ]
+          },
+          "accepted_option_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "content_source_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "source_document_ref": {
+            "type": "string",
+            "nullable": true
+          },
+          "retrieved_on": {
+            "type": "string",
+            "nullable": true
+          },
+          "source_sha256": {
+            "type": "string",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "recorded_by": {
+            "type": "string",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "accepted_option_ids",
+          "content_source_id",
+          "source_document_ref",
+          "retrieved_on",
+          "source_sha256",
+          "note",
+          "recorded_by",
+          "created_at"
+        ]
+      },
+      "StaffPositionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "position": {
+            "type": "number"
+          },
+          "answer_status": {
+            "type": "string",
+            "enum": [
+              "keyed",
+              "multi_accepted",
+              "withdrawn"
+            ]
+          },
+          "question_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "question_version_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "original_ref": {
+            "type": "string",
+            "nullable": true
+          },
+          "option_order": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "original_label_scheme": {
+            "type": "string",
+            "nullable": true
+          },
+          "official_key_text": {
+            "type": "string",
+            "nullable": true
+          },
+          "source_ref": {
+            "type": "string",
+            "nullable": true
+          },
+          "withdrawn_note": {
+            "type": "string",
+            "nullable": true
+          },
+          "accepted_option_ids": {
+            "description": "The effective key (staff only)",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "key_history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KeyHistoryEntryDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "position",
+          "answer_status",
+          "question_id",
+          "question_version_id",
+          "original_ref",
+          "option_order",
+          "original_label_scheme",
+          "official_key_text",
+          "source_ref",
+          "withdrawn_note",
+          "accepted_option_ids",
+          "key_history"
+        ]
+      },
+      "PaperDetailDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "exam_id": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "number"
+          },
+          "supersedes_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string"
+          },
+          "edition": {
+            "type": "string",
+            "nullable": true
+          },
+          "year": {
+            "type": "number",
+            "nullable": true
+          },
+          "set_label": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "published",
+              "retired"
+            ]
+          },
+          "frozen_at": {
+            "type": "string",
+            "nullable": true
+          },
+          "blueprint_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "total_questions": {
+            "type": "number"
+          },
+          "duration_seconds": {
+            "type": "number",
+            "nullable": true
+          },
+          "practice_timer_seconds": {
+            "type": "number",
+            "nullable": true
+          },
+          "marks_correct": {
+            "type": "number",
+            "nullable": true
+          },
+          "negative_marks": {
+            "type": "number",
+            "nullable": true
+          },
+          "marks_unanswered": {
+            "type": "number",
+            "nullable": true
+          },
+          "withdrawn_policy": {
+            "type": "string",
+            "enum": [
+              "unscored",
+              "award_all"
+            ]
+          },
+          "withdrawn_policy_confirmed": {
+            "type": "boolean"
+          },
+          "config_status": {
+            "type": "string",
+            "enum": [
+              "official_confirmed",
+              "inferred",
+              "unverified"
+            ]
+          },
+          "source_note": {
+            "type": "string",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "positions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StaffPositionDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "exam_id",
+          "code",
+          "revision",
+          "supersedes_id",
+          "title",
+          "edition",
+          "year",
+          "set_label",
+          "status",
+          "frozen_at",
+          "blueprint_id",
+          "total_questions",
+          "duration_seconds",
+          "practice_timer_seconds",
+          "marks_correct",
+          "negative_marks",
+          "marks_unanswered",
+          "withdrawn_policy",
+          "withdrawn_policy_confirmed",
+          "config_status",
+          "source_note",
+          "created_at",
+          "updated_at",
+          "positions"
+        ]
+      },
+      "PaperReadinessDto": {
+        "type": "object",
+        "properties": {
+          "ready": {
+            "type": "boolean"
+          },
+          "problems": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "ready",
+          "problems"
+        ]
+      },
+      "CreatePaperDto": {
+        "type": "object",
+        "properties": {
+          "exam_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "code": {
+            "type": "string",
+            "example": "aibe-xviii-set-a"
+          },
+          "title": {
+            "type": "string"
+          },
+          "edition": {
+            "type": "string",
+            "example": "XVIII"
+          },
+          "year": {
+            "type": "number"
+          },
+          "set_label": {
+            "type": "string",
+            "example": "A"
+          },
+          "blueprint_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "total_questions": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 500
+          },
+          "duration_seconds": {
+            "type": "number"
+          },
+          "practice_timer_seconds": {
+            "type": "object",
+            "nullable": true,
+            "description": "Optional practice clock in seconds (60 to 86400), shown to learners as practice timing that BCI has not confirmed. It does not enable the official timed mode. Null removes it."
+          },
+          "marks_correct": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 999
+          },
+          "negative_marks": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 999
+          },
+          "marks_unanswered": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 999
+          },
+          "withdrawn_policy": {
+            "type": "string",
+            "enum": [
+              "unscored",
+              "award_all"
+            ],
+            "default": "unscored",
+            "description": "Interim rule for withdrawn questions: unscored leaves them out of the marks"
+          },
+          "withdrawn_policy_confirmed": {
+            "type": "boolean",
+            "description": "True only when the rule has been confirmed from the exam body. award_all needs it."
+          },
+          "config_status": {
+            "type": "string",
+            "enum": [
+              "official_confirmed",
+              "inferred",
+              "unverified"
+            ],
+            "default": "unverified"
+          },
+          "source_note": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "exam_id",
+          "code",
+          "title",
+          "total_questions"
+        ]
+      },
+      "UpdatePaperDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "edition": {
+            "type": "string"
+          },
+          "year": {
+            "type": "number"
+          },
+          "set_label": {
+            "type": "string"
+          },
+          "blueprint_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "total_questions": {
+            "type": "number"
+          },
+          "duration_seconds": {
+            "type": "number"
+          },
+          "practice_timer_seconds": {
+            "type": "object",
+            "nullable": true,
+            "description": "Optional practice clock in seconds (60 to 86400), shown to learners as practice timing that BCI has not confirmed. It does not enable the official timed mode. Null removes it."
+          },
+          "marks_correct": {
+            "type": "number"
+          },
+          "negative_marks": {
+            "type": "number"
+          },
+          "marks_unanswered": {
+            "type": "number"
+          },
+          "withdrawn_policy": {
+            "type": "string",
+            "enum": [
+              "unscored",
+              "award_all"
+            ]
+          },
+          "withdrawn_policy_confirmed": {
+            "type": "boolean"
+          },
+          "config_status": {
+            "type": "string",
+            "enum": [
+              "official_confirmed",
+              "inferred",
+              "unverified"
+            ]
+          },
+          "source_note": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "PositionInputDto": {
+        "type": "object",
+        "properties": {
+          "position": {
+            "type": "number",
+            "minimum": 1
+          },
+          "question_version_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true,
+            "description": "The exact question version to pin. Omit (or null) for a withdrawn question, which is kept as a placeholder."
+          },
+          "original_ref": {
+            "type": "string",
+            "description": "The number in the original paper"
+          },
+          "option_order": {
+            "description": "Option ids in the order shown; leave out to use the version's own order",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "original_label_scheme": {
+            "type": "string",
+            "example": "A-D"
+          },
+          "official_key_text": {
+            "type": "string",
+            "description": "The key as the exam body printed it"
+          },
+          "source_ref": {
+            "type": "string",
+            "description": "Where this position came from"
+          },
+          "withdrawn_note": {
+            "type": "string",
+            "description": "Why a withdrawn question was withdrawn"
+          }
+        },
+        "required": [
+          "position"
+        ]
+      },
+      "ReplacePositionsDto": {
+        "type": "object",
+        "properties": {
+          "positions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PositionInputDto"
+            }
+          }
+        },
+        "required": [
+          "positions"
+        ]
+      },
+      "AddKeyHistoryDto": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "provisional",
+              "final",
+              "revised",
+              "withdrawn"
+            ]
+          },
+          "accepted_option_ids": {
+            "description": "Every option the body accepted; empty for a withdrawn question",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "content_source_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "source_document_ref": {
+            "type": "string",
+            "description": "Document title, notice number, page"
+          },
+          "retrieved_on": {
+            "type": "string",
+            "format": "date"
+          },
+          "source_sha256": {
+            "type": "string",
+            "description": "SHA-256 of the document, lowercase hex"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "accepted_option_ids"
+        ]
+      },
+      "MockPlanRequestDto": {
+        "type": "object",
+        "properties": {
+          "seed": {
+            "type": "string",
+            "description": "Reuse a seed to get the same plan again. Without it the server picks one and returns it."
+          },
+          "language": {
+            "type": "string",
+            "default": "en"
+          },
+          "seen_question_ids": {
+            "description": "Question ids the learner has already met; unseen ones are preferred",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "LearnerPaperDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "edition": {
+            "type": "string",
+            "nullable": true
+          },
+          "year": {
+            "type": "number",
+            "nullable": true
+          },
+          "set_label": {
+            "type": "string",
+            "nullable": true
+          },
+          "total_questions": {
+            "type": "number"
+          },
+          "duration_seconds": {
+            "type": "number",
+            "nullable": true
+          },
+          "practice_timer_seconds": {
+            "type": "number",
+            "nullable": true
+          },
+          "config_status": {
+            "type": "string",
+            "enum": [
+              "official_confirmed",
+              "inferred",
+              "unverified"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "code",
+          "revision",
+          "title",
+          "edition",
+          "year",
+          "set_label",
+          "total_questions",
+          "duration_seconds",
+          "practice_timer_seconds",
+          "config_status"
+        ]
+      },
+      "LearnerPaperPageDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LearnerPaperDto"
+            }
+          },
+          "next_cursor": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ]
+      },
+      "LearnerOptionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "text"
+        ]
+      },
+      "LearnerPositionDto": {
+        "type": "object",
+        "properties": {
+          "position": {
+            "type": "number"
+          },
+          "original_ref": {
+            "type": "string",
+            "nullable": true
+          },
+          "withdrawn": {
+            "type": "boolean",
+            "description": "withdrawn positions are placeholders with no question text; they are not questions"
+          },
+          "question_version_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "stem": {
+            "type": "string",
+            "nullable": true
+          },
+          "options": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LearnerOptionDto"
+            }
+          }
+        },
+        "required": [
+          "position",
+          "original_ref",
+          "withdrawn",
+          "question_version_id",
+          "stem",
+          "options"
+        ]
+      },
+      "LearnerPaperDetailDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "edition": {
+            "type": "string",
+            "nullable": true
+          },
+          "year": {
+            "type": "number",
+            "nullable": true
+          },
+          "set_label": {
+            "type": "string",
+            "nullable": true
+          },
+          "total_questions": {
+            "type": "number"
+          },
+          "duration_seconds": {
+            "type": "number",
+            "nullable": true
+          },
+          "practice_timer_seconds": {
+            "type": "number",
+            "nullable": true
+          },
+          "config_status": {
+            "type": "string",
+            "enum": [
+              "official_confirmed",
+              "inferred",
+              "unverified"
+            ]
+          },
+          "positions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LearnerPositionDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "code",
+          "revision",
+          "title",
+          "edition",
+          "year",
+          "set_label",
+          "total_questions",
+          "duration_seconds",
+          "practice_timer_seconds",
+          "config_status",
+          "positions"
+        ]
+      },
+      "StartAttemptDto": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "fixed_paper",
+              "random_mock"
+            ]
+          },
+          "paper_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Required for fixed_paper: a published paper of this exam"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "practice",
+              "timed"
+            ],
+            "default": "practice",
+            "description": "practice has no deadline. timed gets a server deadline and is only allowed when the rules are officially confirmed."
+          },
+          "practice_timer": {
+            "type": "boolean",
+            "default": false,
+            "description": "fixed_paper in practice mode only: run the paper's practice timer (a server deadline). It is practice timing, not the official timed mode, and needs no confirmed rules."
+          },
+          "language": {
+            "type": "string",
+            "default": "en",
+            "description": "random_mock only"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "AttemptQuestionDto": {
+        "type": "object",
+        "properties": {
+          "position": {
+            "type": "number"
+          },
+          "section_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "original_ref": {
+            "type": "string",
+            "nullable": true
+          },
+          "withdrawn": {
+            "type": "boolean",
+            "description": "A withdrawn position is a placeholder, not a question"
+          },
+          "question_version_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "stem": {
+            "type": "string",
+            "nullable": true
+          },
+          "options": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "selected_option_ids": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "answer_seq": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "position",
+          "section_code",
+          "original_ref",
+          "withdrawn",
+          "question_version_id",
+          "stem",
+          "options",
+          "selected_option_ids",
+          "answer_seq"
+        ]
+      },
+      "AttemptStatsDto": {
+        "type": "object",
+        "properties": {
+          "exams": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "exams"
+        ]
+      },
+      "AttemptSummaryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "fixed_paper",
+              "random_mock"
+            ]
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "practice",
+              "timed"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "submitted",
+              "expired"
+            ]
+          },
+          "exam": {
+            "type": "string"
+          },
+          "paper_title": {
+            "type": "string",
+            "nullable": true
+          },
+          "started_at": {
+            "type": "string"
+          },
+          "submitted_at": {
+            "type": "string",
+            "nullable": true
+          },
+          "marks_obtained": {
+            "type": "number",
+            "nullable": true
+          },
+          "max_marks": {
+            "type": "number",
+            "nullable": true
+          },
+          "percentage": {
+            "type": "number",
+            "nullable": true
+          },
+          "provisional": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "mode",
+          "status",
+          "exam",
+          "paper_title",
+          "started_at",
+          "submitted_at",
+          "marks_obtained",
+          "max_marks",
+          "percentage",
+          "provisional"
+        ]
+      },
+      "AnswerInputDto": {
+        "type": "object",
+        "properties": {
+          "position": {
+            "type": "number",
+            "minimum": 1
+          },
+          "selected_option_ids": {
+            "description": "The chosen option ids; empty clears the answer",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "seq": {
+            "type": "number",
+            "minimum": 1,
+            "description": "A counter the client raises with every change to this answer. The server keeps the answer with the highest counter, so a late or repeated request never overwrites a newer one."
+          }
+        },
+        "required": [
+          "position",
+          "selected_option_ids",
+          "seq"
+        ]
+      },
+      "SaveAnswersDto": {
+        "type": "object",
+        "properties": {
+          "answers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnswerInputDto"
+            }
+          }
+        },
+        "required": [
+          "answers"
+        ]
+      },
+      "SaveAnswersResultDto": {
+        "type": "object",
+        "properties": {
+          "attempt_id": {
+            "type": "string"
+          },
+          "server_now": {
+            "type": "string"
+          },
+          "deadline_at": {
+            "type": "string",
+            "nullable": true
+          },
+          "remaining_seconds": {
+            "type": "number",
+            "nullable": true
+          },
+          "results": {
+            "description": "Per answer: applied, or why it was ignored (stale, duplicate, conflict), with what the server holds",
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "attempt_id",
+          "server_now",
+          "deadline_at",
+          "remaining_seconds",
+          "results"
+        ]
+      },
+      "SaveOneAnswerDto": {
+        "type": "object",
+        "properties": {
+          "selected_option_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "seq": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "selected_option_ids",
+          "seq"
+        ]
+      },
+      "AttemptResultDto": {
+        "type": "object",
+        "properties": {
+          "attempt_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "submitted",
+              "expired"
+            ]
+          },
+          "finalised_by": {
+            "type": "string",
+            "enum": [
+              "learner",
+              "expiry",
+              "sweep"
+            ]
+          },
+          "submitted_at": {
+            "type": "string"
+          },
+          "result": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "attempt_id",
+          "status",
+          "finalised_by",
+          "submitted_at",
+          "result"
         ]
       }
     }

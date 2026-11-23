@@ -31,6 +31,11 @@ class UpdateDetailScreen extends ConsumerWidget {
       );
     }
 
+    // Opening an update counts as reading it (after this build, not during it).
+    if (!ref.read(readUpdatesProvider).contains(update.id)) {
+      Future.microtask(() => ref.read(readUpdatesProvider.notifier).markRead(update.id));
+    }
+
     final c = update.category;
     final date = DateFormat.yMMMMd(Localizations.localeOf(context).languageCode).format(update.date);
     final isEnglishUi = Localizations.localeOf(context).languageCode == 'en';

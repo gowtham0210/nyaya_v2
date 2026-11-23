@@ -1,0 +1,1294 @@
+[
+ {
+  "id": "01a1c91a-bc4b-729a-ba24-877b4676ae3d",
+  "user_id": "01a1c91a-bbb9-70e3-843c-56fd42a3c2f7",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-11T05:35:34.988000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 1,
+   "xmin": 757,
+   "xmax": 0,
+   "ctid": "0,1"
+  }
+ },
+ {
+  "id": "01a1c926-9697-7017-8c91-5ddcea506c01",
+  "user_id": "01a1c926-960a-7315-b573-43c729eeb791",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-11T05:48:31.768000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 2,
+   "xmin": 778,
+   "xmax": 0,
+   "ctid": "0,2"
+  }
+ },
+ {
+  "id": "01a1c93e-73b2-7101-95df-7bba01d7015b",
+  "user_id": "01a1c93e-72a4-70c3-8bd4-adfb57cbe6cb",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-11T06:14:35.699000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 3,
+   "xmin": 787,
+   "xmax": 0,
+   "ctid": "0,3"
+  }
+ },
+ {
+  "id": "01a1d493-0f44-7100-bd01-dc0b7aa36835",
+  "user_id": "01a1d493-0ecb-7185-a17c-05c60b4d8ce8",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-13T11:02:49.924000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 4,
+   "xmin": 1166,
+   "xmax": 0,
+   "ctid": "0,4"
+  }
+ },
+ {
+  "id": "01a1d498-a509-776c-8c54-c66844567a88",
+  "user_id": "01a1d498-a4c3-73f4-a96a-4e7af482d2d5",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-13T11:08:55.946000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 5,
+   "xmin": 1183,
+   "xmax": 0,
+   "ctid": "0,5"
+  }
+ },
+ {
+  "id": "01a1d4c5-4ed2-7675-85a1-4f82cd70a80e",
+  "user_id": "01a1d4c5-4e86-72b3-9abd-60c430e8fa4e",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-13T11:57:42.994000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 6,
+   "xmin": 1206,
+   "xmax": 0,
+   "ctid": "0,6"
+  }
+ },
+ {
+  "id": "01a1d4c8-5963-70f6-ac74-a0eb6409ad03",
+  "user_id": "01a1d4c8-5932-76c4-a5ce-03135f7cb64b",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-13T12:01:02.308000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 7,
+   "xmin": 1220,
+   "xmax": 0,
+   "ctid": "0,7"
+  }
+ },
+ {
+  "id": "01a1d86e-ea9b-7472-9fde-9740df82dcb2",
+  "user_id": "01a1d86e-e9bd-7741-8771-3eddb0ca4301",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-14T05:01:50.107000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 8,
+   "xmin": 1236,
+   "xmax": 0,
+   "ctid": "0,8"
+  }
+ },
+ {
+  "id": "01a1d8a5-10c1-749f-9fbd-98f7a86ca3df",
+  "user_id": "01a1d8a5-1053-7009-bba4-d79174b99305",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-14T06:00:58.817000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 9,
+   "xmin": 1245,
+   "xmax": 0,
+   "ctid": "0,9"
+  }
+ },
+ {
+  "id": "01a1d8df-6e3c-77e4-b492-b9474991ec5a",
+  "user_id": "01a1d8df-6dad-7222-a063-e03f8e7ce761",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-14T07:04:43.836000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 10,
+   "xmin": 1255,
+   "xmax": 0,
+   "ctid": "0,10"
+  }
+ },
+ {
+  "id": "01a1d8e3-b0f8-761a-92e6-9f4305235ad5",
+  "user_id": "01a1d8e3-b09c-757e-b3ae-3e396281229e",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-14T07:09:23.064000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 11,
+   "xmin": 1267,
+   "xmax": 0,
+   "ctid": "0,11"
+  }
+ },
+ {
+  "id": "01a1d95d-6eab-75b3-adf8-7484839d7105",
+  "user_id": "01a1d95d-6e72-73db-8c59-b32e78541bc9",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-14T09:22:21.484000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 12,
+   "xmin": 1287,
+   "xmax": 0,
+   "ctid": "0,12"
+  }
+ },
+ {
+  "id": "01a1d99d-4dc6-73f8-aedd-d05d2cf6835a",
+  "user_id": "01a1d99d-4d33-73c1-824a-9edbf6582c47",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-14T10:32:07.367000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 13,
+   "xmin": 1304,
+   "xmax": 0,
+   "ctid": "0,13"
+  }
+ },
+ {
+  "id": "01a1d9b8-2a27-705f-b533-ca9be607a53e",
+  "user_id": "01a1d9b8-2996-702a-b550-c5ff2209d65c",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-14T11:01:27.719000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 14,
+   "xmin": 1328,
+   "xmax": 0,
+   "ctid": "0,14"
+  }
+ },
+ {
+  "id": "01a1d9d2-06ef-74fa-9e28-15c552eb029f",
+  "user_id": "01a1d9d2-062c-7021-b3ae-4be114c7c97c",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-14T11:29:42.640000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 15,
+   "xmin": 1365,
+   "xmax": 0,
+   "ctid": "0,15"
+  }
+ },
+ {
+  "id": "01a1d9da-2a07-7156-8788-034800f974e8",
+  "user_id": "01a1d9da-2968-7156-829a-4d73ef2c0416",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-14T11:38:35.912000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 16,
+   "xmin": 1375,
+   "xmax": 0,
+   "ctid": "0,16"
+  }
+ },
+ {
+  "id": "01a1d9e4-063e-70eb-95be-bcecff41f767",
+  "user_id": "01a1d9e4-057f-743a-ac0c-aac16aab89ab",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-14T11:49:22.110000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 17,
+   "xmin": 1381,
+   "xmax": 0,
+   "ctid": "0,17"
+  }
+ },
+ {
+  "id": "01a1d9f7-71fd-7609-b83a-6f07da2c46d2",
+  "user_id": "01a1d9f7-7122-754e-a800-eb909ecbdd30",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-14T12:10:34.879000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 18,
+   "xmin": 1397,
+   "xmax": 0,
+   "ctid": "0,18"
+  }
+ },
+ {
+  "id": "01a1da00-36f1-718a-9569-c1bf24dcb4a7",
+  "user_id": "01a1da00-368f-726e-99c9-3d46de0bf6e1",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-14T12:20:09.586000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 19,
+   "xmin": 1407,
+   "xmax": 0,
+   "ctid": "0,19"
+  }
+ },
+ {
+  "id": "01a1da11-0208-72f9-8c8a-e193649f1115",
+  "user_id": "01a1da11-01d3-74ce-a946-e6b706d1a26e",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-14T12:38:30.152000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 20,
+   "xmin": 1426,
+   "xmax": 0,
+   "ctid": "0,20"
+  }
+ },
+ {
+  "id": "01a1da23-c552-7405-a1dd-0e76e8bc937f",
+  "user_id": "01a1da23-c517-7784-834b-a1369848fd5f",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-14T12:58:59.794000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 21,
+   "xmin": 1439,
+   "xmax": 0,
+   "ctid": "0,21"
+  }
+ },
+ {
+  "id": "01a1e2af-8b6e-73d4-8d26-4b1deef1b718",
+  "user_id": "01a1e2af-8a32-7582-9ff5-792fc728d951",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T04:48:37.744000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 22,
+   "xmin": 1454,
+   "xmax": 0,
+   "ctid": "0,22"
+  }
+ },
+ {
+  "id": "01a1e2c6-2435-7260-ab18-66236edd0de4",
+  "user_id": "01a1e2c6-23db-7574-b812-cf150c099a80",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T05:13:18.646000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 23,
+   "xmin": 1458,
+   "xmax": 0,
+   "ctid": "0,23"
+  }
+ },
+ {
+  "id": "01a1e2d4-95dc-773b-875a-f6dbe5b42208",
+  "user_id": "01a1e2d4-9595-7234-8139-1ce3b48bcdf2",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T05:29:05.244000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 24,
+   "xmin": 1463,
+   "xmax": 0,
+   "ctid": "0,24"
+  }
+ },
+ {
+  "id": "01a1e2dd-fdf0-772c-aec7-fa0532a48c2c",
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T05:39:21.712000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 25,
+   "xmin": 1468,
+   "xmax": 0,
+   "ctid": "0,25"
+  }
+ },
+ {
+  "id": "01a1e2e2-0104-726a-a700-126b7811d19b",
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "amount": 5,
+  "reason": "new_stars",
+  "session_id": "01a1e2e1-998a-76b0-82a6-dc49c985d4df",
+  "subject_id": null,
+  "created_at": "2026-11-16T05:43:44.613000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 26,
+   "xmin": 1480,
+   "xmax": 0,
+   "ctid": "0,26"
+  }
+ },
+ {
+  "id": "01a1e2e2-8ea1-765c-ad43-9bd59d1277ff",
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "amount": 5,
+  "reason": "new_stars",
+  "session_id": "01a1e2e2-3351-758a-b519-17b5228ce4ad",
+  "subject_id": null,
+  "created_at": "2026-11-16T05:44:20.858000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 27,
+   "xmin": 1488,
+   "xmax": 0,
+   "ctid": "0,27"
+  }
+ },
+ {
+  "id": "01a1e2e3-3f28-7180-b10a-e05ce429744d",
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "amount": 15,
+  "reason": "daily_goal",
+  "session_id": "01a1e2e2-b9ba-7587-9aeb-b0632244768e",
+  "subject_id": null,
+  "created_at": "2026-11-16T05:45:06.055000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 28,
+   "xmin": 1496,
+   "xmax": 0,
+   "ctid": "0,28"
+  }
+ },
+ {
+  "id": "01a1e2e3-b8c6-7505-838e-b7f96a483409",
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "amount": 10,
+  "reason": "new_stars",
+  "session_id": "01a1e2e3-4803-732a-b2df-2bc34fb84582",
+  "subject_id": null,
+  "created_at": "2026-11-16T05:45:37.179000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 29,
+   "xmin": 1504,
+   "xmax": 0,
+   "ctid": "0,29"
+  }
+ },
+ {
+  "id": "01a1e2e4-0203-7062-866c-6a7e8d7bce0a",
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "amount": 30,
+  "reason": "chest",
+  "session_id": null,
+  "subject_id": "01a1ce0c-3e96-74a9-8f3b-0d77f49ca263",
+  "created_at": "2026-11-16T05:45:55.955000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 30,
+   "xmin": 1505,
+   "xmax": 0,
+   "ctid": "0,30"
+  }
+ },
+ {
+  "id": "01a1e2e4-cf8f-7741-b899-841d8c1a6b8e",
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "amount": 5,
+  "reason": "new_stars",
+  "session_id": "01a1e2e4-5fda-71d1-af8b-8db42d98b3a5",
+  "subject_id": null,
+  "created_at": "2026-11-16T05:46:48.543000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 31,
+   "xmin": 1513,
+   "xmax": 0,
+   "ctid": "0,31"
+  }
+ },
+ {
+  "id": "01a1e2e5-47e5-731e-85b5-12e096db050c",
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "amount": -100,
+  "reason": "streak_freeze",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T05:47:19.380000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 32,
+   "xmin": 1514,
+   "xmax": 0,
+   "ctid": "0,32"
+  }
+ },
+ {
+  "id": "01a1e318-85b2-7201-96aa-09e5be5b46c0",
+  "user_id": "01a1e2dd-fdb4-7771-acef-b2aeddb2e2f3",
+  "amount": -30,
+  "reason": "energy_refill",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T06:43:17.510000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 33,
+   "xmin": 1570,
+   "xmax": 0,
+   "ctid": "0,33"
+  }
+ },
+ {
+  "id": "01a1e320-6532-77ce-ad1f-25effb548d3c",
+  "user_id": "01a1e320-64e7-7759-8ac6-68ebebbf840e",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T06:51:53.522000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 34,
+   "xmin": 1576,
+   "xmax": 0,
+   "ctid": "0,34"
+  }
+ },
+ {
+  "id": "01a1e327-c339-775b-948d-e08f6c425b93",
+  "user_id": "01a1e327-c2e5-75d1-a4ce-bdac08e15a0e",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T06:59:56.345000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 35,
+   "xmin": 1588,
+   "xmax": 0,
+   "ctid": "0,35"
+  }
+ },
+ {
+  "id": "01a1e32b-f407-76ee-9c58-6dfe52439f32",
+  "user_id": "01a1e32b-f398-748b-8997-0dbaf6518bb3",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T07:04:30.983000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 36,
+   "xmin": 1595,
+   "xmax": 0,
+   "ctid": "0,36"
+  }
+ },
+ {
+  "id": "01a1e32e-d919-7052-8b88-35e8c0f573dc",
+  "user_id": "01a1e32e-d8ae-71e9-a25d-879180bfcc4f",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T07:07:40.697000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 37,
+   "xmin": 1602,
+   "xmax": 0,
+   "ctid": "0,37"
+  }
+ },
+ {
+  "id": "01a1e34e-1b0a-74e1-8e05-0fc6091f7e37",
+  "user_id": "01a1e34e-1a89-7666-93e6-4aed93746026",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T07:41:49.194000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 38,
+   "xmin": 1624,
+   "xmax": 0,
+   "ctid": "0,38"
+  }
+ },
+ {
+  "id": "01a1e35b-5abd-7289-997a-fedccc5f5e35",
+  "user_id": "01a1e35b-5a0a-7176-b3dd-c048b9e4b1dc",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T07:56:17.471000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 39,
+   "xmin": 1629,
+   "xmax": 0,
+   "ctid": "0,39"
+  }
+ },
+ {
+  "id": "01a1e35c-17aa-7461-b976-f2ac7e840477",
+  "user_id": "01a1e35b-5a0a-7176-b3dd-c048b9e4b1dc",
+  "amount": 5,
+  "reason": "new_stars",
+  "session_id": "01a1e35b-77f4-73e7-b1fb-863cac49a395",
+  "subject_id": null,
+  "created_at": "2026-11-16T07:57:05.822000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 40,
+   "xmin": 1639,
+   "xmax": 0,
+   "ctid": "0,40"
+  }
+ },
+ {
+  "id": "01a1e35c-8432-778b-989c-93ce928c74ed",
+  "user_id": "01a1e35b-5a0a-7176-b3dd-c048b9e4b1dc",
+  "amount": 5,
+  "reason": "new_stars",
+  "session_id": "01a1e35c-2db0-7564-87df-fbf2a8c258f2",
+  "subject_id": null,
+  "created_at": "2026-11-16T07:57:33.609000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 41,
+   "xmin": 1647,
+   "xmax": 0,
+   "ctid": "0,41"
+  }
+ },
+ {
+  "id": "01a1e35c-f159-738b-a01b-27e418d36c38",
+  "user_id": "01a1e35b-5a0a-7176-b3dd-c048b9e4b1dc",
+  "amount": 10,
+  "reason": "new_stars",
+  "session_id": "01a1e35c-9581-760a-b450-dd5990eb1295",
+  "subject_id": null,
+  "created_at": "2026-11-16T07:58:01.552000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 42,
+   "xmin": 1655,
+   "xmax": 0,
+   "ctid": "0,42"
+  }
+ },
+ {
+  "id": "01a1e35c-f15b-7789-8f78-4da1878bd7b6",
+  "user_id": "01a1e35b-5a0a-7176-b3dd-c048b9e4b1dc",
+  "amount": 15,
+  "reason": "daily_goal",
+  "session_id": "01a1e35c-9581-760a-b450-dd5990eb1295",
+  "subject_id": null,
+  "created_at": "2026-11-16T07:58:01.552000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 43,
+   "xmin": 1655,
+   "xmax": 0,
+   "ctid": "0,43"
+  }
+ },
+ {
+  "id": "01a1e35d-5db9-7371-9738-1b227be700e1",
+  "user_id": "01a1e35b-5a0a-7176-b3dd-c048b9e4b1dc",
+  "amount": 30,
+  "reason": "chest",
+  "session_id": null,
+  "subject_id": "01a1ce0c-3e96-74a9-8f3b-0d77f49ca263",
+  "created_at": "2026-11-16T07:58:29.292000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 44,
+   "xmin": 1656,
+   "xmax": 0,
+   "ctid": "0,44"
+  }
+ },
+ {
+  "id": "01a1e35f-3ad4-774d-9979-92260bdc7463",
+  "user_id": "01a1e35f-3a75-7167-be29-ff6b2d11c200",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T08:00:31.445000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 45,
+   "xmin": 1680,
+   "xmax": 0,
+   "ctid": "0,45"
+  }
+ },
+ {
+  "id": "01a1e368-0d2c-7187-adb1-f5464905ba47",
+  "user_id": "01a1e368-0cf4-7257-8cc2-bf254bad4273",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T08:10:09.581000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 46,
+   "xmin": 1690,
+   "xmax": 0,
+   "ctid": "0,46"
+  }
+ },
+ {
+  "id": "01a1e390-dd20-74ed-84b5-7ea4da30ff92",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T08:54:44.295000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 47,
+   "xmin": 1714,
+   "xmax": 0,
+   "ctid": "0,47"
+  }
+ },
+ {
+  "id": "01a1e462-c164-763c-a01f-2b2bebf24363",
+  "user_id": "01a1e462-c112-72df-9389-2ff858fa4df8",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T12:43:59.717000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 48,
+   "xmin": 1767,
+   "xmax": 0,
+   "ctid": "0,48"
+  }
+ },
+ {
+  "id": "01a1e511-28a4-77a9-b21a-b6827a146e5c",
+  "user_id": "01a1e511-282d-73f7-8ce1-950ecce0d19c",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T15:54:29.413000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 49,
+   "xmin": 1778,
+   "xmax": 0,
+   "ctid": "0,49"
+  }
+ },
+ {
+  "id": "01a1e521-2fc1-770d-8d34-cd8fa297c70a",
+  "user_id": "01a1e521-2f6e-755c-bf68-26954afb132e",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-16T16:11:59.810000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 50,
+   "xmin": 1796,
+   "xmax": 0,
+   "ctid": "0,50"
+  }
+ },
+ {
+  "id": "01a1e808-1cdc-70b2-b1fc-2e835d662b58",
+  "user_id": "01a1e521-2f6e-755c-bf68-26954afb132e",
+  "amount": 10,
+  "reason": "daily_docket",
+  "session_id": "01a1e807-d678-74c3-a60d-27bccae22103",
+  "subject_id": null,
+  "created_at": "2026-11-17T05:43:28.183000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 51,
+   "xmin": 1939,
+   "xmax": 0,
+   "ctid": "0,51"
+  }
+ },
+ {
+  "id": "01a1e819-522f-765f-a16a-daa032119017",
+  "user_id": "01a1e819-51f3-767f-91b1-68eefbc28479",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-17T06:02:15.983000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 52,
+   "xmin": 2098,
+   "xmax": 0,
+   "ctid": "0,52"
+  }
+ },
+ {
+  "id": "01a1e846-b5d5-77ba-8504-eaf59992d478",
+  "user_id": "01a1e846-b507-70d9-a52c-3807c9a2389d",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-17T06:51:50.614000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 53,
+   "xmin": 2106,
+   "xmax": 0,
+   "ctid": "0,53"
+  }
+ },
+ {
+  "id": "01a1ecf8-c8fd-77b2-95b4-12897d659152",
+  "user_id": "01a1ecf8-c85f-71be-a7f5-dac6aebe5027",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-18T04:44:49.790000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 54,
+   "xmin": 2129,
+   "xmax": 0,
+   "ctid": "0,54"
+  }
+ },
+ {
+  "id": "01a1ee6b-a3c9-726f-b90f-0be086b9062c",
+  "user_id": "01a1ee6b-a372-74e8-a429-a3303578e29d",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-18T11:29:54.121000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 55,
+   "xmin": 2149,
+   "xmax": 0,
+   "ctid": "0,55"
+  }
+ },
+ {
+  "id": "01a1eead-2837-7773-af8e-f9f212985142",
+  "user_id": "01a1eead-27c4-75cf-9238-bcd1ecfc83ca",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-18T12:41:27.864000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 56,
+   "xmin": 2157,
+   "xmax": 0,
+   "ctid": "0,56"
+  }
+ },
+ {
+  "id": "01a1eed0-3ce8-7527-ab10-3fe31b0d59eb",
+  "user_id": "01a1eed0-3c74-700f-b063-e36ae2f0c8af",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-18T13:19:46.921000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 57,
+   "xmin": 2204,
+   "xmax": 0,
+   "ctid": "0,57"
+  }
+ },
+ {
+  "id": "01a1eedb-4f46-74c5-a849-f7d6ce964ef6",
+  "user_id": "01a1eedb-4f09-7127-b0f6-157aa76d3384",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-18T13:31:52.519000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 58,
+   "xmin": 2208,
+   "xmax": 0,
+   "ctid": "0,58"
+  }
+ },
+ {
+  "id": "01a1ef65-e1ec-7311-8fe8-04fff030249b",
+  "user_id": "01a1ef65-e133-729b-b91f-534656f01ead",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-18T16:03:14.030000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 59,
+   "xmin": 2214,
+   "xmax": 0,
+   "ctid": "0,59"
+  }
+ },
+ {
+  "id": "01a1f1b7-f2e2-754f-8642-83efa3130e85",
+  "user_id": "01a1f1b7-f2a2-72d1-b46e-39adc4895c7c",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-19T02:52:06.755000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 60,
+   "xmin": 3674,
+   "xmax": 0,
+   "ctid": "0,60"
+  }
+ },
+ {
+  "id": "01a1f230-924f-7314-a599-cbb0b106bd13",
+  "user_id": "01a1f230-9148-76e8-b267-6c9783a18a17",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-19T05:03:51.888000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 61,
+   "xmin": 3835,
+   "xmax": 0,
+   "ctid": "0,61"
+  }
+ },
+ {
+  "id": "01a1f3c3-406f-778f-b211-5ddeaac663e0",
+  "user_id": "01a1f3c3-3ffe-74e0-8a54-b4bd45d71d83",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-19T12:23:41.936000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 62,
+   "xmin": 4545,
+   "xmax": 0,
+   "ctid": "0,62"
+  }
+ },
+ {
+  "id": "01a1f42f-4d38-7353-bf46-d25b69bcd261",
+  "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-19T14:21:43.097000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 63,
+   "xmin": 4573,
+   "xmax": 0,
+   "ctid": "0,63"
+  }
+ },
+ {
+  "id": "01a201a3-896a-747a-bfcc-2b304df48623",
+  "user_id": "01a201a3-890d-773b-baf6-45f85695758d",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-22T05:03:44.490000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 64,
+   "xmin": 6860,
+   "xmax": 0,
+   "ctid": "0,64"
+  }
+ },
+ {
+  "id": "01a201ab-bb3b-746e-acbb-4f4ceea2fbde",
+  "user_id": "01a201ab-bae8-7359-abff-3bbf32cd8595",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-22T05:12:41.531000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 65,
+   "xmin": 6908,
+   "xmax": 0,
+   "ctid": "0,65"
+  }
+ },
+ {
+  "id": "01a201fd-6d17-70e3-b4aa-f4ba2d41a9bc",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "amount": 15,
+  "reason": "daily_goal",
+  "session_id": "01a201fc-cb66-733a-9d50-2ec7380be422",
+  "subject_id": null,
+  "created_at": "2026-11-22T06:41:55.456000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 66,
+   "xmin": 7112,
+   "xmax": 0,
+   "ctid": "0,66"
+  }
+ },
+ {
+  "id": "01a201fe-4774-773a-a24b-35ac9996af9c",
+  "user_id": "01a1e390-dc2e-764f-aca0-e91ea969292a",
+  "amount": 10,
+  "reason": "daily_docket",
+  "session_id": "01a201fe-1a2d-705e-a81b-91b0c7c69d67",
+  "subject_id": null,
+  "created_at": "2026-11-22T06:42:51.361000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 67,
+   "xmin": 7128,
+   "xmax": 0,
+   "ctid": "0,67"
+  }
+ },
+ {
+  "id": "01a20229-40b9-7634-b577-673470831d0a",
+  "user_id": "01a20229-402e-75ac-90f3-bcc484bcdc8c",
+  "amount": 60,
+  "reason": "welcome",
+  "session_id": null,
+  "subject_id": null,
+  "created_at": "2026-11-22T07:29:47.709000Z",
+  "cohort_id": null,
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 68,
+   "xmin": 7154,
+   "xmax": 0,
+   "ctid": "0,68"
+  }
+ }
+]

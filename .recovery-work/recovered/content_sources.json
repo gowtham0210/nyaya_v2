@@ -1,0 +1,110 @@
+[
+ {
+  "id": "01a1eecd-70ed-7095-9e64-de0e4802b3d5",
+  "kind": "third_party",
+  "title": "AIBE 18 Question Paper (Set A)",
+  "publisher": null,
+  "url": null,
+  "retrieved_on": null,
+  "sha256": "1a17c6e28e921799775baaeeb42f797753dd1a9d2a9533ef31e7b43aca567943",
+  "license_status": "permission_granted",
+  "license_note": "Written permission granted by John Mathew, Content Licensing Manager, Legal Education Publications (licensing@example.com), dated 12 November 2026. Evidence: email \"AIBE Question Bank Reuse Permission\". Coverage: AIBE 18 Question Paper (Set A) (the permission covers AIBE 18, AIBE 19 and AIBE 20 Set A). Scope: reuse of question text, MCQ options and answer keys. Usage: educational mock examination platform. Restrictions: no copied explanations or Quick Tips. Details recorded as stated by the account holder; the email itself was not inspected by the assistant.",
+  "allowed_uses": [
+   "question text",
+   "answer keys"
+  ],
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "created_at": "2026-11-18T13:16:43.628000Z",
+  "updated_at": "2026-11-18T16:17:34.349000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 4,
+   "xmin": 2233,
+   "xmax": 2236,
+   "ctid": "0,4"
+  }
+ },
+ {
+  "id": "01a1eecd-70fe-7093-90b7-8b761cbe6f1f",
+  "kind": "third_party",
+  "title": "AIBE 19 Question Paper (Set A)",
+  "publisher": null,
+  "url": null,
+  "retrieved_on": null,
+  "sha256": "bbb9499abdba931c65d48262502ed3b28c0aca7e5445c80f46d6b8301d160d40",
+  "license_status": "permission_granted",
+  "license_note": "Written permission granted by John Mathew, Content Licensing Manager, Legal Education Publications (licensing@example.com), dated 12 November 2026. Evidence: email \"AIBE Question Bank Reuse Permission\". Coverage: AIBE 19 Question Paper (Set A) (the permission covers AIBE 18, AIBE 19 and AIBE 20 Set A). Scope: reuse of question text, MCQ options and answer keys. Usage: educational mock examination platform. Restrictions: no copied explanations or Quick Tips. Details recorded as stated by the account holder; the email itself was not inspected by the assistant.",
+  "allowed_uses": [
+   "question text",
+   "answer keys"
+  ],
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "created_at": "2026-11-18T13:16:43.646000Z",
+  "updated_at": "2026-11-18T16:17:34.371000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 5,
+   "xmin": 2234,
+   "xmax": 2237,
+   "ctid": "0,5"
+  }
+ },
+ {
+  "id": "01a1eecd-7105-7227-a09a-822511f92458",
+  "kind": "third_party",
+  "title": "AIBE 20 Question Paper (Set A)",
+  "publisher": null,
+  "url": null,
+  "retrieved_on": null,
+  "sha256": "6cac55a3e371fd472b3de575b1c6ab3ed29b069366b0466867e1506d5c59c69e",
+  "license_status": "permission_granted",
+  "license_note": "Written permission granted by John Mathew, Content Licensing Manager, Legal Education Publications (licensing@example.com), dated 12 November 2026. Evidence: email \"AIBE Question Bank Reuse Permission\". Coverage: AIBE 20 Question Paper (Set A) (the permission covers AIBE 18, AIBE 19 and AIBE 20 Set A). Scope: reuse of question text, MCQ options and answer keys. Usage: educational mock examination platform. Restrictions: no copied explanations or Quick Tips. Details recorded as stated by the account holder; the email itself was not inspected by the assistant.",
+  "allowed_uses": [
+   "question text",
+   "answer keys"
+  ],
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "created_at": "2026-11-18T13:16:43.653000Z",
+  "updated_at": "2026-11-18T16:17:34.382000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 6,
+   "xmin": 2235,
+   "xmax": 2238,
+   "ctid": "0,6"
+  }
+ },
+ {
+  "id": "01a1f276-fae8-714b-aed4-95ad76efe43d",
+  "kind": "third_party",
+  "title": "AIBE 21 Question Paper (Set A)",
+  "publisher": null,
+  "url": null,
+  "retrieved_on": null,
+  "sha256": "625dfd74ea4429da390c966b430b8495f07dfc4ab9120f41586a34364e2d7cbb",
+  "license_status": "permission_granted",
+  "license_note": "Permission granted by John Mathew, Content Licensing Manager, Legal Education Publications (rights holder), as stated by the account holder. Coverage: AIBE 21 Question Paper (Set A) (AIBE XXI, exam of 07 June 2026, Set A, English) with its Set Code A provisional answer key. Scope: question text, MCQ options and answer keys. No explanations. Written evidence not inspected by the assistant; details recorded as stated.",
+  "allowed_uses": [
+   "question text",
+   "answer keys"
+  ],
+  "created_by": "01a1ce0c-4150-77c2-b620-ab8f14540452",
+  "created_at": "2026-11-19T06:20:46.184000Z",
+  "updated_at": "2026-11-19T06:20:46.219000Z",
+  "_confidence": "high",
+  "_source": "heap-file",
+  "_loc": {
+   "blk": 0,
+   "off": 8,
+   "xmin": 3854,
+   "xmax": 3859,
+   "ctid": "0,8"
+  }
+ }
+]

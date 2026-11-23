@@ -7,7 +7,10 @@ import { AuthModule } from './auth/auth.module.js';
 import { ChatModule } from './chat/chat.module.js';
 import { ImportsModule } from './imports/imports.module.js';
 import type { AppConfig } from './core/config.js';
+import { ConstitutionModule } from './constitution/constitution.module.js';
 import { CoreModule } from './core/core.module.js';
+import { DailyTipsModule } from './daily-tips/daily-tips.module.js';
+import { ExamsModule } from './exams/exams.module.js';
 import { LearnModule } from './learn/learn.module.js';
 import { NewsModule } from './news/news.module.js';
 import { RateLimitStore, SharedThrottlerStorage } from './core/rate-limits.js';
@@ -52,6 +55,9 @@ export class AppModule {
         ChatModule,
         ReportsModule,
         NewsModule,
+        DailyTipsModule,
+        ConstitutionModule,
+        ExamsModule,
       ],
     };
   }

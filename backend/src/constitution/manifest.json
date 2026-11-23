@@ -1,0 +1,524 @@
+{
+  "version": 1,
+  "collection": {
+    "uuid": "d5475e8d-1998-4ac8-8694-82f941074bb7",
+    "handle": "123456789/618379",
+    "name": "Constitution of India"
+  },
+  "notice": "Published on India Code by the Legislative Department, Ministry of Law and Justice. Each edition is shown as published there. For legal or official use, refer to the official source.",
+  "editions": [
+    {
+      "id": "as",
+      "language_code": "as",
+      "language_name": "Assamese",
+      "native_name": "অসমীয়া",
+      "script": "Bengali-Assamese",
+      "title": "The Constitution of India in Assamese",
+      "authority_note": null,
+      "item_uuid": "9c432588-d1b7-4580-ab51-439d999e6f47",
+      "handle": "123456789/618391",
+      "reviewed": {
+        "bitstream_uuid": "18e0eca5-4d51-4abe-9db4-4e715f9d21d4",
+        "md5": "37c8a54a9c977300ddc4d0dfd46c488b",
+        "size_bytes": 9829545,
+        "text_bytes": 1975916,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 1
+    },
+    {
+      "id": "bn",
+      "language_code": "bn",
+      "language_name": "Bengali",
+      "native_name": "বাংলা",
+      "script": "Bengali",
+      "title": "The Constitution of India in Bengali",
+      "authority_note": null,
+      "item_uuid": "3086a88d-fac8-4d2b-a137-51089bc69129",
+      "handle": "123456789/619292",
+      "reviewed": {
+        "bitstream_uuid": "c5d6f995-2d47-48de-90fd-164e8d8c6112",
+        "md5": "5461e98e721afeff9062930491528a6b",
+        "size_bytes": 24393522,
+        "text_bytes": 790,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 2
+    },
+    {
+      "id": "brx",
+      "language_code": "brx",
+      "language_name": "Bodo",
+      "native_name": "बड़ो",
+      "script": "Devanagari",
+      "title": "The Constitution of India in Bodo",
+      "authority_note": null,
+      "item_uuid": "b20d451a-8919-4d76-98cf-eeb8f54bbdc2",
+      "handle": "123456789/618392",
+      "reviewed": {
+        "bitstream_uuid": "acb19390-2fd4-4d00-9e8e-5b28b93b84d0",
+        "md5": "65c1e0dfd3bf0ebfb8d0807402a91d01",
+        "size_bytes": 7117330,
+        "text_bytes": 2109538,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 3
+    },
+    {
+      "id": "doi",
+      "language_code": "doi",
+      "language_name": "Dogri",
+      "native_name": "डोगरी",
+      "script": "Devanagari",
+      "title": "The Constitution of India in Dogri",
+      "authority_note": null,
+      "item_uuid": "69b92480-aa4d-420f-9714-c4f1e5b3dbb6",
+      "handle": "123456789/618393",
+      "reviewed": {
+        "bitstream_uuid": "732605e8-9892-4032-959c-20f6cb8c3782",
+        "md5": "63d404bb4cfe698cc4472bb91e562cc1",
+        "size_bytes": 8504245,
+        "text_bytes": 995458,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 4
+    },
+    {
+      "id": "en",
+      "language_code": "en",
+      "language_name": "English",
+      "native_name": "English",
+      "script": "Latin",
+      "title": "The Constitution of India in English",
+      "authority_note": null,
+      "item_uuid": "544213ec-4072-44b2-a6fc-69fb84df2001",
+      "handle": "123456789/618394",
+      "reviewed": {
+        "bitstream_uuid": "2bd776ff-891e-444c-9344-f63df7b299fc",
+        "md5": "c5ab984a172c617d7ace5d31052022de",
+        "size_bytes": 3376465,
+        "text_bytes": 878553,
+        "item_modified": "2026-10-19"
+      },
+      "sort": 5
+    },
+    {
+      "id": "gu",
+      "language_code": "gu",
+      "language_name": "Gujarati",
+      "native_name": "ગુજરાતી",
+      "script": "Gujarati",
+      "title": "The Constitution of India in Gujarati",
+      "authority_note": null,
+      "item_uuid": "7f339be7-3fac-470b-8abb-d00722f61381",
+      "handle": "123456789/618395",
+      "reviewed": {
+        "bitstream_uuid": "68ffa2c4-b263-4ba4-91cd-64e00bfd936b",
+        "md5": "877de6d57ee1bf783f2d2aaa52311ddb",
+        "size_bytes": 7164228,
+        "text_bytes": 1963616,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 6
+    },
+    {
+      "id": "hi",
+      "language_code": "hi",
+      "language_name": "Hindi",
+      "native_name": "हिन्दी",
+      "script": "Devanagari",
+      "title": "The Constitution of India in Hindi",
+      "authority_note": null,
+      "item_uuid": "128e52c5-7b9d-4b63-95d6-0bc680f85389",
+      "handle": "123456789/618396",
+      "reviewed": {
+        "bitstream_uuid": "c83e9912-5843-450f-8d17-200ad52425cb",
+        "md5": "f3c6eea1531ee9c8c8a22e089f0d9de0",
+        "size_bytes": 3125957,
+        "text_bytes": 343124,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 7
+    },
+    {
+      "id": "kn",
+      "language_code": "kn",
+      "language_name": "Kannada",
+      "native_name": "ಕನ್ನಡ",
+      "script": "Kannada",
+      "title": "The Constitution of India in Kannada",
+      "authority_note": null,
+      "item_uuid": "b48cd116-c827-4d1a-9752-1f67ee4bcbc2",
+      "handle": "123456789/618397",
+      "reviewed": {
+        "bitstream_uuid": "24ce4415-8541-4529-9d64-12b4db2c8e87",
+        "md5": "2cc327162afb101086a341224c998aa2",
+        "size_bytes": 6655162,
+        "text_bytes": 2594466,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 8
+    },
+    {
+      "id": "ks",
+      "language_code": "ks",
+      "language_name": "Kashmiri",
+      "native_name": "کٲشُر",
+      "script": "Perso-Arabic",
+      "title": "The Constitution of India in Kashmiri",
+      "authority_note": null,
+      "item_uuid": "ee3c7587-6b8e-463b-bbb6-9da04ebfde5c",
+      "handle": "123456789/618398",
+      "reviewed": {
+        "bitstream_uuid": "310aa8cb-0c59-4dc5-801f-80ca69c0c8ba",
+        "md5": "2a66fca2a192c26e570c415c0530c2ae",
+        "size_bytes": 9573311,
+        "text_bytes": 1624743,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 9
+    },
+    {
+      "id": "kok",
+      "language_code": "kok",
+      "language_name": "Konkani",
+      "native_name": "कोंकणी",
+      "script": "Devanagari",
+      "title": "The Constitution of India in Konkani",
+      "authority_note": null,
+      "item_uuid": "f7f366a4-5a61-4974-bb75-865e1c405b91",
+      "handle": "123456789/618389",
+      "reviewed": {
+        "bitstream_uuid": "a0c4a74b-cdf9-4d04-a621-ef60504c7734",
+        "md5": "a4ec9f059e39d7c452673a1443cc1ae8",
+        "size_bytes": 137026766,
+        "text_bytes": 1452,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 10
+    },
+    {
+      "id": "mai",
+      "language_code": "mai",
+      "language_name": "Maithili",
+      "native_name": "मैथिली",
+      "script": "Devanagari",
+      "title": "The Constitution of India in Maithili",
+      "authority_note": null,
+      "item_uuid": "58e289d9-d2a4-4c69-b863-b789ad8c1957",
+      "handle": "123456789/618399",
+      "reviewed": {
+        "bitstream_uuid": "292c4d3d-fd25-4a47-9ec6-876188b52e29",
+        "md5": "b67dd4eff0a285fd41b7dabaea3d5fc2",
+        "size_bytes": 5268834,
+        "text_bytes": 1872993,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 11
+    },
+    {
+      "id": "ml",
+      "language_code": "ml",
+      "language_name": "Malayalam",
+      "native_name": "മലയാളം",
+      "script": "Malayalam",
+      "title": "The Constitution of India in Malayalam",
+      "authority_note": null,
+      "item_uuid": "3c585f25-5703-4979-a673-dfd8f91012eb",
+      "handle": "123456789/618400",
+      "reviewed": {
+        "bitstream_uuid": "79670f6a-9b5d-42e8-be02-67e2c460530e",
+        "md5": "4728d3aa5332fd677925dbed9bcc37c3",
+        "size_bytes": 2404584,
+        "text_bytes": 1896711,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 12
+    },
+    {
+      "id": "mni-Beng",
+      "language_code": "mni-Beng",
+      "language_name": "Manipuri (Bengali script)",
+      "native_name": "মৈতৈলোন্",
+      "script": "Bengali-Assamese",
+      "title": "The Constitution of India in Manipuri (Bengali script)",
+      "authority_note": null,
+      "item_uuid": "dba8b3af-fabf-4ab6-a2af-48b0f8f6a65d",
+      "handle": "123456789/618401",
+      "reviewed": {
+        "bitstream_uuid": "cf66c1bc-3a19-4cbd-8c6d-8405ff1126b7",
+        "md5": "945d1c7ef9b628193f8a72b381516e6d",
+        "size_bytes": 30214317,
+        "text_bytes": 1088,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 13
+    },
+    {
+      "id": "mni-Mtei",
+      "language_code": "mni-Mtei",
+      "language_name": "Manipuri (Meitei Mayek script)",
+      "native_name": "ꯃꯩꯇꯩꯂꯣꯟ",
+      "script": "Meitei Mayek",
+      "title": "The Constitution of India in Manipuri (Meitei Mayek script)",
+      "authority_note": null,
+      "item_uuid": "0d746c00-d94c-40c1-b300-fbe02a9703ba",
+      "handle": "123456789/618402",
+      "reviewed": {
+        "bitstream_uuid": "05b03c43-4b40-4740-9bd2-72054d23eea8",
+        "md5": "86980522bf46b519f230ab548bce6ea8",
+        "size_bytes": 10179217,
+        "text_bytes": 1328423,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 14
+    },
+    {
+      "id": "mr",
+      "language_code": "mr",
+      "language_name": "Marathi",
+      "native_name": "मराठी",
+      "script": "Devanagari",
+      "title": "The Constitution of India in Marathi",
+      "authority_note": null,
+      "item_uuid": "00ec2125-c493-4545-b2ad-f8c173c60a74",
+      "handle": "123456789/618403",
+      "reviewed": {
+        "bitstream_uuid": "4e307882-e9f6-4141-99ba-5b53705263ca",
+        "md5": "1e342a404b03dcb24ab4e42a28c602d2",
+        "size_bytes": 6510505,
+        "text_bytes": 2735587,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 15
+    },
+    {
+      "id": "ne",
+      "language_code": "ne",
+      "language_name": "Nepali",
+      "native_name": "नेपाली",
+      "script": "Devanagari",
+      "title": "The Constitution of India in Nepali",
+      "authority_note": null,
+      "item_uuid": "4a0826a2-1ac4-46ae-b635-e7732ecd4d11",
+      "handle": "123456789/618404",
+      "reviewed": {
+        "bitstream_uuid": "8e0eeeec-e99d-457b-8bcc-568a79d7fb57",
+        "md5": "3a0695db556d28f685435b60277519d9",
+        "size_bytes": 6502918,
+        "text_bytes": 2024391,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 16
+    },
+    {
+      "id": "or",
+      "language_code": "or",
+      "language_name": "Odia",
+      "native_name": "ଓଡ଼ିଆ",
+      "script": "Odia",
+      "title": "The Constitution of India in Odia",
+      "authority_note": null,
+      "item_uuid": "e4f01b7e-d05e-47eb-b0af-aeb90019dada",
+      "handle": "123456789/618405",
+      "reviewed": {
+        "bitstream_uuid": "bfc710b9-64c9-4950-ab23-c2b1e03cdbfc",
+        "md5": "29a773cccea4b24bf384cf7b3173eeca",
+        "size_bytes": 13396956,
+        "text_bytes": 1991656,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 17
+    },
+    {
+      "id": "pa",
+      "language_code": "pa",
+      "language_name": "Punjabi",
+      "native_name": "ਪੰਜਾਬੀ",
+      "script": "Gurmukhi",
+      "title": "The Constitution of India in Punjabi",
+      "authority_note": null,
+      "item_uuid": "bbff8ebe-2ca6-4d0c-8f5c-c3ea535a7317",
+      "handle": "123456789/618406",
+      "reviewed": {
+        "bitstream_uuid": "57ef630c-d373-4d55-8149-c43bcf808792",
+        "md5": "c5a21fee1541b44c704cb71da39e2528",
+        "size_bytes": 9707795,
+        "text_bytes": 1754570,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 18
+    },
+    {
+      "id": "sa",
+      "language_code": "sa",
+      "language_name": "Sanskrit",
+      "native_name": "संस्कृतम्",
+      "script": "Devanagari",
+      "title": "The Constitution of India in Sanskrit",
+      "authority_note": null,
+      "item_uuid": "9972b5dc-892c-477b-a40b-d800561a020d",
+      "handle": "123456789/618407",
+      "reviewed": {
+        "bitstream_uuid": "dabd69c1-724f-4481-854b-1b9ddf5e5abf",
+        "md5": "e703813bb6a78c338236b900c602ce09",
+        "size_bytes": 6274287,
+        "text_bytes": 2240786,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 19
+    },
+    {
+      "id": "sat-Deva",
+      "language_code": "sat-Deva",
+      "language_name": "Santhali (Devanagari script)",
+      "native_name": "संताली",
+      "script": "Devanagari",
+      "title": "The Constitution of India in Santhali (Devanagari script)",
+      "authority_note": null,
+      "item_uuid": "858eb4e1-27b8-47f6-8f7b-9f24e07c38dc",
+      "handle": "123456789/618408",
+      "reviewed": {
+        "bitstream_uuid": "62b08871-7f48-4263-b07f-768617e92dd9",
+        "md5": "486540362b839b8f960a1f4e7ab4d47c",
+        "size_bytes": 6851160,
+        "text_bytes": 2270572,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 20
+    },
+    {
+      "id": "sat-Olck",
+      "language_code": "sat-Olck",
+      "language_name": "Santhali (Ol Chiki script)",
+      "native_name": "ᱥᱟᱱᱛᱟᱲᱤ",
+      "script": "Ol Chiki",
+      "title": "The Constitution of India in Santhali (Ol Chiki script)",
+      "authority_note": null,
+      "item_uuid": "77904e50-c002-4a3f-a011-8e732589fb76",
+      "handle": "123456789/618409",
+      "reviewed": {
+        "bitstream_uuid": "342d2386-183b-4dbd-ade9-4351ed3c7a1d",
+        "md5": "39323ab199b80a42397c6d0c4e2ded7a",
+        "size_bytes": 5159939,
+        "text_bytes": 2305543,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 21
+    },
+    {
+      "id": "sd-Arab",
+      "language_code": "sd-Arab",
+      "language_name": "Sindhi (Arabic script)",
+      "native_name": "سنڌي",
+      "script": "Perso-Arabic",
+      "title": "The Constitution of India in Sindhi (Arabic script)",
+      "authority_note": null,
+      "item_uuid": "52461935-3bbf-4ea0-bfc3-2022e8330588",
+      "handle": "123456789/618410",
+      "reviewed": {
+        "bitstream_uuid": "3cd02e79-9ac3-47c8-b23d-611bd567a3ac",
+        "md5": "2d7f8c9b5cb3becf22663a49eee7e2a5",
+        "size_bytes": 13599208,
+        "text_bytes": 1438,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 22
+    },
+    {
+      "id": "sd-Deva",
+      "language_code": "sd-Deva",
+      "language_name": "Sindhi (Devanagari script)",
+      "native_name": "सिन्धी",
+      "script": "Devanagari",
+      "title": "The Constitution of India in Sindhi (Devanagari script)",
+      "authority_note": null,
+      "item_uuid": "75e3816c-d9bb-494d-84c5-3b85ac33a912",
+      "handle": "123456789/618411",
+      "reviewed": {
+        "bitstream_uuid": "a6fdf445-1d16-4c91-91e4-b51ee85b3fc6",
+        "md5": "b0204d708a2836db19b8217d8fb69189",
+        "size_bytes": 6567584,
+        "text_bytes": 1788999,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 23
+    },
+    {
+      "id": "ta",
+      "language_code": "ta",
+      "language_name": "Tamil",
+      "native_name": "தமிழ்",
+      "script": "Tamil",
+      "title": "The Constitution of India in Tamil",
+      "authority_note": null,
+      "item_uuid": "325421cb-a9a8-49be-994a-218d57e4a280",
+      "handle": "123456789/618412",
+      "reviewed": {
+        "bitstream_uuid": "679ed9e0-c1dc-4b16-8733-46c9f6003ba9",
+        "md5": "a3e689c2c1543a640db7906536b80a30",
+        "size_bytes": 10479267,
+        "text_bytes": 1821132,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 24
+    },
+    {
+      "id": "te",
+      "language_code": "te",
+      "language_name": "Telugu",
+      "native_name": "తెలుగు",
+      "script": "Telugu",
+      "title": "The Constitution of India in Telugu",
+      "authority_note": null,
+      "item_uuid": "097c43a3-79b3-460f-8ffc-876df8052802",
+      "handle": "123456789/618413",
+      "reviewed": {
+        "bitstream_uuid": "33b28670-5a9f-4858-8b51-17465177b3eb",
+        "md5": "9d1c79632f56447faf1cd4ade0b6ba37",
+        "size_bytes": 6685693,
+        "text_bytes": 2800164,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 25
+    },
+    {
+      "id": "ur",
+      "language_code": "ur",
+      "language_name": "Urdu",
+      "native_name": "اردو",
+      "script": "Perso-Arabic",
+      "title": "The Constitution of India in Urdu",
+      "authority_note": null,
+      "item_uuid": "83137c18-d3e7-4671-af16-ef4c53bf8d41",
+      "handle": "123456789/618414",
+      "reviewed": {
+        "bitstream_uuid": "a8d5329c-d4c7-4e5a-8736-f0420f8012bf",
+        "md5": "8cc6030382af45abade9769970c861e6",
+        "size_bytes": 5785380,
+        "text_bytes": 861979,
+        "item_modified": "2026-08-12"
+      },
+      "sort": 26
+    }
+  ],
+  "original": {
+    "id": "original",
+    "language_code": null,
+    "language_name": "Original (1950) copy",
+    "native_name": null,
+    "script": null,
+    "title": "Copy of the Original Constitution of India",
+    "authority_note": null,
+    "sort": 0,
+    "item_uuid": "6d37d94f-edcd-4aae-9947-b55246a882a0",
+    "handle": "123456789/618415",
+    "reviewed": {
+      "bitstream_uuid": "89650f12-c019-46ff-b1f1-6779e59d3936",
+      "md5": "d5f54b5a2655b76a7231ee12f5d253a5",
+      "size_bytes": 78814676,
+      "text_bytes": 468,
+      "item_modified": "2026-08-12"
+    }
+  }
+}

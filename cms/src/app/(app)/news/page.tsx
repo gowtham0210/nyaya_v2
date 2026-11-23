@@ -1,3 +1,4 @@
+import { FilterForm } from '@/components/filter-form';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -65,7 +66,7 @@ async function NewsList({ searchParams }: { searchParams: PageProps<'/news'>['se
         )}
       </div>
 
-      <form method="get" action="/news" className="grid gap-3 sm:grid-cols-[1fr_14rem_auto]" role="search">
+      <FilterForm method="get" action="/news" className="grid gap-3 sm:grid-cols-[1fr_14rem_auto]" role="search">
         <label className="sr-only" htmlFor="q">Search</label>
         <input id="q" name="q" defaultValue={q} placeholder="Search titles" className={inputClass} />
         <label className="sr-only" htmlFor="status">Status</label>
@@ -76,7 +77,7 @@ async function NewsList({ searchParams }: { searchParams: PageProps<'/news'>['se
           ))}
         </select>
         <button type="submit" className={buttonClass('secondary')}>Filter</button>
-      </form>
+      </FilterForm>
 
       {page.items.length === 0 ? (
         <div className="rounded-xl border border-dashed border-border px-6 py-16 text-center text-muted">No articles match these filters.</div>

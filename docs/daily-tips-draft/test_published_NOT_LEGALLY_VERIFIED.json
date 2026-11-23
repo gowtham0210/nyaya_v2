@@ -1,0 +1,54 @@
+{
+  "note": "Published on the LOCAL database for testing only. Last-verified date 2026-11-17 is a placeholder; no legal reviewer verified these tips. Retire or revise before any real use.",
+  "tips": [
+    {
+      "external_id": "DT-POL-01",
+      "show_on": "2026-11-18",
+      "topic_group": "Police and Citizen Rights",
+      "status": "published",
+      "error": null
+    },
+    {
+      "external_id": "DT-CON-01",
+      "show_on": "2026-11-19",
+      "topic_group": "Consumer Rights",
+      "status": "published",
+      "error": null
+    },
+    {
+      "external_id": "DT-CYB-01",
+      "show_on": "2026-11-20",
+      "topic_group": "Cyber and Digital Rights",
+      "status": "published",
+      "error": null
+    },
+    {
+      "external_id": "DT-FAM-01",
+      "show_on": "2026-11-21",
+      "topic_group": "Family and Everyday Legal Rights",
+      "status": "published",
+      "error": null
+    },
+    {
+      "external_id": "DT-WOM-01",
+      "show_on": "2026-11-22",
+      "topic_group": "Women's Rights",
+      "status": "published",
+      "error": null
+    },
+    {
+      "external_id": "DT-EMP-01",
+      "show_on": "2026-11-23",
+      "topic_group": "Employment Rights",
+      "status": "published",
+      "error": null
+    },
+    {
+      "external_id": "DT-PRO-01",
+      "show_on": "2026-11-24",
+      "topic_group": "Property and Rental Rights",
+      "status": "published",
+      "error": null
+    }
+  ]
+}

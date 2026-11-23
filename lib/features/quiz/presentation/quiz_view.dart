@@ -82,7 +82,7 @@ class _QuizViewState extends ConsumerState<QuizView> {
     final provider = quizControllerProvider(request);
     final s = ref.watch(provider);
     final ctl = ref.read(provider.notifier);
-    final q = s.current;
+    final q = s.shown;
     final mode = request.mode;
     final chapter = JourneyCatalog.chapter(q.chapterId);
     final chapterTitle = l.chapterTitle(chapter.id);
@@ -114,7 +114,7 @@ class _QuizViewState extends ConsumerState<QuizView> {
       }
     });
 
-    final last = s.revealed ? s.lastAnswer : null;
+    final last = s.shownAnswer;
 
     return Scaffold(
       body: SafeArea(
@@ -129,7 +129,7 @@ class _QuizViewState extends ConsumerState<QuizView> {
                   // "Question 2 of 6" is written under the bar; the bar says it to screen readers.
                   Expanded(
                     child: Semantics(
-                      label: l.quizQuestionOf(s.index + 1, s.questions.length),
+                      label: l.quizQuestionOf(s.shownIndex + 1, s.questions.length),
                       child: GlossyProgressBar(value: s.progress),
                     ),
                   ),
@@ -195,7 +195,7 @@ class _QuizViewState extends ConsumerState<QuizView> {
                               ),
                             ),
                         Text(
-                          l.quizQuestionOf(s.index + 1, s.questions.length),
+                          l.quizQuestionOf(s.shownIndex + 1, s.questions.length),
                           style: context.text.labelMedium?.copyWith(color: context.nyaya.textSecondary),
                         ),
                       ],
@@ -240,6 +240,12 @@ class _QuizViewState extends ConsumerState<QuizView> {
                 ref.read(feedbackProvider).play(Haptic.tap);
                 ctl.next();
               },
+              onPrevious: s.canGoBack
+                  ? () {
+                      ref.read(feedbackProvider).play(Haptic.tap);
+                      ctl.previous();
+                    }
+                  : null,
               onRetry: ctl.retrySubmit,
             ),
           ],
@@ -249,6 +255,14 @@ class _QuizViewState extends ConsumerState<QuizView> {
   }
 
   OptionState _optionState(QuizState s, int i) {
+    if (s.isReviewing) {
+      // An earlier question: your answer and the right one, nothing to tap.
+      final answer = s.shownAnswer!;
+      final correct = answer.reveal?.correctIndex;
+      if (i == correct) return OptionState.correct;
+      if (i == answer.selectedIndex) return correct == null ? OptionState.locked : OptionState.wrong;
+      return OptionState.dimmed;
+    }
     if (s.sending) return s.selected == i ? OptionState.checking : OptionState.locked;
     if (!s.request.mode.instantFeedback) {
       return s.selected == i ? OptionState.selected : OptionState.idle;
@@ -430,11 +444,20 @@ class _Explanation extends StatelessWidget {
 }
 
 class _BottomBar extends StatelessWidget {
-  const _BottomBar({required this.state, required this.answered, required this.onNext, required this.onRetry});
+  const _BottomBar({
+    required this.state,
+    required this.answered,
+    required this.onNext,
+    required this.onPrevious,
+    required this.onRetry,
+  });
 
   final QuizState state;
   final int answered;
   final VoidCallback onNext;
+
+  /// Exam only: back to the question before; null when there is none.
+  final VoidCallback? onPrevious;
   final VoidCallback onRetry;
 
   @override
@@ -442,7 +465,7 @@ class _BottomBar extends StatelessWidget {
     final l = context.l10n;
     final n = context.nyaya;
     final mode = state.request.mode;
-    final last = state.revealed ? state.lastAnswer : null;
+    final last = state.shownAnswer;
     final Color? tint;
     final String? title;
     final IconData? icon;
@@ -485,7 +508,9 @@ class _BottomBar extends StatelessWidget {
     }
 
     final String label;
-    if (mode == QuizMode.exam) {
+    if (state.isReviewing) {
+      label = l.commonNext;
+    } else if (mode == QuizMode.exam) {
       label = state.isLast ? l.quizSubmit : (state.selected == null ? l.quizSkipQuestion : l.commonNext);
     } else {
       label = state.isLast && state.revealed ? l.quizFinish : l.commonNext;
@@ -538,16 +563,60 @@ class _BottomBar extends StatelessWidget {
           ],
           // Before an answer there is nothing to press: say what to do instead
           // of showing a dead button.
-          if (mode.instantFeedback && !state.revealed)
-            _AnswerPrompt(checking: state.sending, mode: mode)
+          if (mode.instantFeedback && !state.revealed && !state.isReviewing)
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _AnswerPrompt(checking: state.sending, mode: mode),
+                if (onPrevious != null) ...[
+                  const SizedBox(height: 8),
+                  _PreviousButton(onPressed: onPrevious!),
+                ],
+              ],
+            )
+          else if (onPrevious != null)
+            Row(
+              children: [
+                Expanded(child: _PreviousButton(onPressed: onPrevious!)),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ChunkyButton(
+                    label: label,
+                    color: tint ?? context.colors.primary,
+                    onPressed: state.isReviewing || state.canAdvance ? onNext : null,
+                  ),
+                ),
+              ],
+            )
           else
             ChunkyButton(
               label: label,
               color: tint ?? context.colors.primary,
-              onPressed: state.canAdvance ? onNext : null,
+              onPressed: state.isReviewing || state.canAdvance ? onNext : null,
             ),
         ],
       ),
+    );
+  }
+}
+
+/// Back to the question before, the same in every mode.
+class _PreviousButton extends StatelessWidget {
+  const _PreviousButton({required this.onPressed});
+
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    // The same button as Next (height, lip, lettering), in a solid neutral
+    // brown so it stands out from the bar but does not compete with Next.
+    return ChunkyButton(
+      label: context.l10n.quizPrevious,
+      icon: Icons.arrow_back_rounded,
+      color: context.colors.onSurfaceVariant,
+      foreground: context.colors.surface,
+      onPressed: onPressed,
     );
   }
 }

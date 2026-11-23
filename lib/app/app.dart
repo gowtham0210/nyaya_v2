@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../core/l10n/l10n.dart';
 import '../core/services/sounds.dart';
+import '../core/theme/app_colors.dart';
 import '../core/theme/app_theme.dart';
 import '../features/profile/application/profile_controller.dart';
 import '../features/progress/application/progress_sync.dart';
@@ -78,9 +79,20 @@ class _NyayaAppState extends ConsumerState<NyayaApp> {
       builder: (context, child) {
         final app = MediaQuery.withClampedTextScaling(
           maxScaleFactor: maxTextScale,
-          child: update != null
-              ? UpdateRequiredScreen(updateUrl: update.updateUrl)
-              : child!,
+          // Indian scripts look bigger than English at the same size: scale
+          // them down a little, on top of the phone's own text size.
+          child: Builder(
+            builder: (context) {
+              final media = MediaQuery.of(context);
+              final factor = scriptTextScale(Localizations.localeOf(context).languageCode);
+              return MediaQuery(
+                data: factor == 1.0
+                    ? media
+                    : media.copyWith(textScaler: TextScaler.linear(media.textScaler.scale(1) * factor)),
+                child: update != null ? UpdateRequiredScreen(updateUrl: update.updateUrl) : child!,
+              );
+            },
+          ),
         );
         if (!_showSplash) return app;
         return Stack(

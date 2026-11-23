@@ -50,6 +50,7 @@ class QuizState {
     this.failure,
     this.questions = const [],
     this.index = 0,
+    this.viewing,
     this.selected,
     this.sending = false,
     this.revealed = false,
@@ -71,6 +72,10 @@ class QuizState {
   final QuizFailure? failure;
   final List<Question> questions;
   final int index;
+
+  /// An earlier, already answered question being looked at (read-only, in the
+  /// modes that lock each answer); null when the current question is shown.
+  final int? viewing;
   final int? selected;
 
   /// An answer is on its way to the server.
@@ -106,8 +111,28 @@ class QuizState {
   bool get hasStarted => answers.isNotEmpty || selected != null;
 
   /// Questions with an answer chosen (skipped and timed-out ones don't count).
-  int get answeredCount =>
-      answers.where((a) => !a.isSkipped).length + (request.mode == QuizMode.exam && selected != null ? 1 : 0);
+  int get answeredCount {
+    if (request.mode != QuizMode.exam) return answers.where((a) => !a.isSkipped).length;
+    // The exam keeps the question on screen out of [answers] until the learner moves on.
+    final others = answers.indexed.where((e) => e.$1 != index && !e.$2.isSkipped).length;
+    return others + (selected != null ? 1 : 0);
+  }
+
+  /// The exam lets the learner return to an earlier question and change the
+  /// answer until the quiz is submitted. The other modes lock each answer.
+  bool get canGoBack {
+    if (phase != QuizPhase.active || sending || shownIndex == 0) return false;
+    // A duel is a race against a recorded opponent: no looking back.
+    return request.mode != QuizMode.duel;
+  }
+
+  /// The question on screen: the one being looked at, or the current one.
+  int get shownIndex => viewing ?? index;
+  Question get shown => questions[shownIndex];
+  bool get isReviewing => viewing != null;
+
+  /// The answer on screen: the viewed question's, or the current one's once it is locked.
+  AnswerRecord? get shownAnswer => isReviewing ? answers[viewing!] : (revealed ? lastAnswer : null);
 
   /// Whether the Next button is enabled.
   bool get canAdvance =>
@@ -118,6 +143,8 @@ class QuizState {
     QuizFailure? failure,
     List<Question>? questions,
     int? index,
+    int? viewing,
+    bool clearViewing = false,
     int? selected,
     bool clearSelected = false,
     bool? sending,
@@ -140,6 +167,7 @@ class QuizState {
       failure: failure ?? this.failure,
       questions: questions ?? this.questions,
       index: index ?? this.index,
+      viewing: clearViewing ? null : (viewing ?? this.viewing),
       selected: clearSelected ? null : (selected ?? this.selected),
       sending: sending ?? this.sending,
       revealed: revealed ?? this.revealed,
@@ -318,7 +346,7 @@ class QuizController extends Notifier<QuizState> {
   /// User taps an option.
   Future<void> select(int option) async {
     final s = state;
-    if (s.phase != QuizPhase.active || s.revealed || s.sending) return;
+    if (s.phase != QuizPhase.active || s.revealed || s.sending || s.isReviewing) return;
     if (!s.request.mode.instantFeedback) {
       state = s.copyWith(selected: option);
       return;
@@ -362,6 +390,7 @@ class QuizController extends Notifier<QuizState> {
       opp += XpCalculator.duelPoints(correct: o.correct, elapsedMs: o.elapsedMs, limitSeconds: GameRules.duelSeconds);
     }
     state = s.copyWith(
+      clearViewing: true,
       selected: option,
       clearSelected: option == null,
       sending: false,
@@ -381,20 +410,61 @@ class QuizController extends Notifier<QuizState> {
       .answer(_sessionId!, position: index + 1, question: state.questions[index], option: option)
       .then((_) => true, onError: (Object _) => false);
 
+  /// The exam's answers with the question on screen recorded: added when it
+  /// is seen for the first time, replaced when the learner came back to it.
+  /// The answer is sent to the server, which keeps the latest until submit.
+  List<AnswerRecord> _examAnswersWithCurrent(QuizState s) {
+    final record = AnswerRecord(question: s.current, selectedIndex: s.selected, elapsedMs: _elapsedMs, correct: false);
+    if (s.selected != null) _saveExamAnswer(s.index, s.selected!);
+    final answers = [...s.answers];
+    if (s.index < answers.length) {
+      answers[s.index] = record;
+    } else {
+      answers.add(record);
+    }
+    return answers;
+  }
+
+  /// Shows the exam question at [index], with the answer already given to it.
+  void _showExamQuestion(QuizState s, int index, List<AnswerRecord> answers) {
+    final chosen = index < answers.length ? answers[index].selectedIndex : null;
+    _questionStart = _now();
+    state = s.copyWith(index: index, answers: answers, selected: chosen, clearSelected: chosen == null);
+  }
+
+  /// Previous button. In the exam it goes back to a question you can still
+  /// change; elsewhere it shows the earlier question with your answer and the
+  /// right one, to read only. The clock keeps running.
+  void previous() {
+    final s = state;
+    if (!s.canGoBack) return;
+    if (s.request.mode == QuizMode.exam) {
+      _showExamQuestion(s, s.index - 1, _examAnswersWithCurrent(s));
+    } else {
+      state = s.copyWith(viewing: s.shownIndex - 1);
+    }
+  }
+
+  /// Next while looking at an earlier question: one step towards the current one.
+  void viewNext() {
+    final s = state;
+    final viewing = s.viewing;
+    if (viewing == null) return;
+    state = viewing + 1 >= s.index ? s.copyWith(clearViewing: true) : s.copyWith(viewing: viewing + 1);
+  }
+
   /// Next button.
   void next() {
     final s = state;
+    if (s.isReviewing) return viewNext();
     if (!s.canAdvance) return;
     if (s.request.mode == QuizMode.exam) {
-      final record = AnswerRecord(question: s.current, selectedIndex: s.selected, elapsedMs: _elapsedMs, correct: false);
-      if (s.selected != null) _saveExamAnswer(s.index, s.selected!);
-      final answers = [...s.answers, record];
+      final answers = _examAnswersWithCurrent(s);
       if (s.isLast) {
         state = s.copyWith(answers: answers);
         _finishExam();
       } else {
-        _questionStart = _now();
-        state = s.copyWith(index: s.index + 1, answers: answers, clearSelected: true);
+        _showExamQuestion(s, s.index + 1, answers);
       }
       return;
     }

@@ -1,0 +1,106 @@
+{
+ "new": [
+  {
+   "id": "01a1f823-67a4-76b3-bbec-faaa4ab8cf6e",
+   "blueprint_id": "01a1f81a-34eb-75bc-80fe-6fa772e49166",
+   "code": "english",
+   "name": "English Language",
+   "position": 1,
+   "question_count": 24,
+   "duration_seconds": null,
+   "marks_correct": null,
+   "created_at": "2026-11-20T08:47:12.285000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 39,
+    "xmin": 5139,
+    "xmax": 5139,
+    "ctid": "0,39"
+   }
+  },
+  {
+   "id": "01a1f823-67ac-7277-8244-28935335a3d5",
+   "blueprint_id": "01a1f81a-34eb-75bc-80fe-6fa772e49166",
+   "code": "current-affairs-gk",
+   "name": "Current Affairs including General Knowledge",
+   "position": 2,
+   "question_count": 28,
+   "duration_seconds": null,
+   "marks_correct": null,
+   "created_at": "2026-11-20T08:47:12.285000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 40,
+    "xmin": 5139,
+    "xmax": 5139,
+    "ctid": "0,40"
+   }
+  },
+  {
+   "id": "01a1f823-67b0-720b-9af3-9dce2fc4f47a",
+   "blueprint_id": "01a1f81a-34eb-75bc-80fe-6fa772e49166",
+   "code": "legal-reasoning",
+   "name": "Legal Reasoning",
+   "position": 3,
+   "question_count": 30,
+   "duration_seconds": null,
+   "marks_correct": null,
+   "created_at": "2026-11-20T08:47:12.285000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 41,
+    "xmin": 5139,
+    "xmax": 5139,
+    "ctid": "0,41"
+   }
+  },
+  {
+   "id": "01a1f823-67b7-766d-9969-eab06a386bea",
+   "blueprint_id": "01a1f81a-34eb-75bc-80fe-6fa772e49166",
+   "code": "logical-reasoning",
+   "name": "Logical Reasoning",
+   "position": 4,
+   "question_count": 26,
+   "duration_seconds": null,
+   "marks_correct": null,
+   "created_at": "2026-11-20T08:47:12.285000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 42,
+    "xmin": 5139,
+    "xmax": 5139,
+    "ctid": "0,42"
+   }
+  },
+  {
+   "id": "01a1f823-67ba-7521-a6a1-dfae913fa4fd",
+   "blueprint_id": "01a1f81a-34eb-75bc-80fe-6fa772e49166",
+   "code": "quantitative-aptitude",
+   "name": "Quantitative Aptitude",
+   "position": 5,
+   "question_count": 12,
+   "duration_seconds": null,
+   "marks_correct": null,
+   "created_at": "2026-11-20T08:47:12.285000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 43,
+    "xmin": 5139,
+    "xmax": 5139,
+    "ctid": "0,43"
+   }
+  }
+ ],
+ "modified": [],
+ "removedSinceNov19": []
+}

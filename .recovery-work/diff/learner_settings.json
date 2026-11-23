@@ -1,0 +1,108 @@
+{
+ "new": [
+  {
+   "user_id": "01a1f230-9148-76e8-b267-6c9783a18a17",
+   "persona": "aspirant",
+   "language": "en",
+   "daily_goal": 3,
+   "onboarded_at": "2026-11-19T05:03:56.013000Z",
+   "updated_at": "2026-11-19T05:03:56.013000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 54,
+    "xmin": 3836,
+    "xmax": 0,
+    "ctid": "0,54"
+   }
+  },
+  {
+   "user_id": "01a1f3c3-3ffe-74e0-8a54-b4bd45d71d83",
+   "persona": "aspirant",
+   "language": "en",
+   "daily_goal": 3,
+   "onboarded_at": "2026-11-19T12:23:46.314000Z",
+   "updated_at": "2026-11-19T12:23:46.314000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 55,
+    "xmin": 4547,
+    "xmax": 0,
+    "ctid": "0,55"
+   }
+  },
+  {
+   "user_id": "01a1f42f-4cdd-74c1-8f14-b768464d393c",
+   "persona": "advocate",
+   "language": "en",
+   "daily_goal": 3,
+   "onboarded_at": "2026-11-19T14:23:06.458000Z",
+   "updated_at": "2026-11-20T15:50:16.418000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 58,
+    "xmin": 6845,
+    "xmax": 6845,
+    "ctid": "0,58"
+   }
+  },
+  {
+   "user_id": "01a201a3-890d-773b-baf6-45f85695758d",
+   "persona": "aspirant",
+   "language": "en",
+   "daily_goal": 3,
+   "onboarded_at": "2026-11-22T05:03:53.256000Z",
+   "updated_at": "2026-11-22T05:03:53.256000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 59,
+    "xmin": 6862,
+    "xmax": 0,
+    "ctid": "0,59"
+   }
+  },
+  {
+   "user_id": "01a201ab-bae8-7359-abff-3bbf32cd8595",
+   "persona": "aspirant",
+   "language": "en",
+   "daily_goal": 3,
+   "onboarded_at": "2026-11-22T05:12:50.506000Z",
+   "updated_at": "2026-11-22T05:12:50.506000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 60,
+    "xmin": 6910,
+    "xmax": 0,
+    "ctid": "0,60"
+   }
+  },
+  {
+   "user_id": "01a20229-402e-75ac-90f3-bcc484bcdc8c",
+   "persona": "aspirant",
+   "language": "en",
+   "daily_goal": 3,
+   "onboarded_at": "2026-11-22T07:29:52.322000Z",
+   "updated_at": "2026-11-22T07:29:52.322000Z",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 61,
+    "xmin": 7156,
+    "xmax": 0,
+    "ctid": "0,61"
+   }
+  }
+ ],
+ "modified": [],
+ "removedSinceNov19": []
+}

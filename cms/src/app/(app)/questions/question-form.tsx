@@ -124,7 +124,7 @@ export function QuestionForm({
           )}
         </fieldset>
 
-        <Field label="Explanation" htmlFor="explanation" hint="Why the answer is right, in plain language, citing the provision." errors={errs('explanation')}>
+        <Field label="Explanation" htmlFor="explanation" hint="Optional. Why the answer is right, in plain language, citing the provision." errors={errs('explanation')}>
           <textarea id="explanation" rows={4} value={values.explanation} onChange={(e) => set('explanation', e.target.value)} aria-invalid={!!errs('explanation')} className={inputClass} />
         </Field>
       </Card>

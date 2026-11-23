@@ -44,6 +44,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
       ApiException(isNetwork: true) => l.authErrorNetwork,
       ApiException(code: 'invalid_reset_code') => l.authResetErrorCode,
       ApiException(code: 'password_reset_unavailable') => l.authResetUnavailable,
+      ApiException(code: 'user_not_found') => l.authResetNoAccount,
       ApiException(code: 'rate_limited') => l.authErrorRateLimited,
       ApiException(code: 'validation_failed') => _codeSent ? l.authResetErrorInvalid : l.authErrorInvalid,
       _ => l.commonSomethingWrong,

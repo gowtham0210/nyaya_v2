@@ -127,6 +127,55 @@
       "when": 1793606038535,
       "tag": "0017_news_images",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1794889901866,
+      "tag": "0018_daily_tips",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1794979607777,
+      "tag": "0019_exam_foundation",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1794982863697,
+      "tag": "0020_exam_current_blueprint",
+      "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1794983897607,
+      "tag": "0021_exam_papers",
+      "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1794985118209,
+      "tag": "0022_exam_attempts",
+      "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1795059276971,
+      "tag": "0023_paper_practice_timer",
+      "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1795154874090,
+      "tag": "0024_import_withdrawn_outcome",
+      "breakpoints": true
     }
   ]
 }

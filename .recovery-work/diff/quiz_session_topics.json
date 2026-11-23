@@ -1,0 +1,32 @@
+{
+ "new": [
+  {
+   "session_id": "01a201fb-f17d-73b7-a8b1-7d6ab7777aad",
+   "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 25,
+    "xmin": 7083,
+    "xmax": 0,
+    "ctid": "0,25"
+   }
+  },
+  {
+   "session_id": "01a201fd-a612-7300-bfd0-366ae82c7bfa",
+   "topic_id": "01a1ce0c-3ea2-72af-892e-9ba203092051",
+   "_confidence": "high",
+   "_source": "heap-file",
+   "_loc": {
+    "blk": 0,
+    "off": 26,
+    "xmin": 7113,
+    "xmax": 0,
+    "ctid": "0,26"
+   }
+  }
+ ],
+ "modified": [],
+ "removedSinceNov19": []
+}

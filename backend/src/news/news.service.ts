@@ -310,12 +310,18 @@ export class NewsService {
     });
   }
 
-  approve(actor: Actor, id: string) {
+  /**
+   * Approves the article under review. Nobody approves what they wrote or
+   * edited, except an admin, who may do every step. The admin is still
+   * recorded as the approver, so the trail shows it.
+   */
+  approve(actor: Actor, id: string, isAdmin = false) {
     return this.act(actor, id, 'approve', async (tx, a) => {
       if (
-        a.createdBy === actor.id ||
-        a.updatedBy === actor.id ||
-        (await this.hasEdited(tx, actor, id))
+        !isAdmin &&
+        (a.createdBy === actor.id ||
+          a.updatedBy === actor.id ||
+          (await this.hasEdited(tx, actor, id)))
       )
         throw ApiError.forbidden(
           'A reviewer cannot approve an article they wrote or edited',

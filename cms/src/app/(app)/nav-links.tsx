@@ -8,9 +8,11 @@ const LINKS = [
   { label: 'Review queue', href: '/questions?status=in_review', status: 'in_review' },
   { label: 'Ready to publish', href: '/questions?status=approved', status: 'approved' },
   { label: 'News', href: '/news', status: null, path: '/news' },
+  { label: 'Daily tips', href: '/daily-tips', status: null, path: '/daily-tips' },
   { label: 'Reports', href: '/reports', status: null, path: '/reports' },
   { label: 'Topics', href: '/topics', status: null, path: '/topics' },
   { label: 'Imports', href: '/imports', status: null, path: '/imports' },
+  { label: 'Exams', href: '/exams', status: null, path: '/exams' },
 ];
 
 export function NavLinks() {

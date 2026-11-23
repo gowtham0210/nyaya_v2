@@ -742,18 +742,6 @@ abstract class AppLocalizations {
   /// **'Continue where you left off'**
   String get homeContinueLeftOff;
 
-  /// No description provided for @homeStartTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Start your learning journey'**
-  String get homeStartTitle;
-
-  /// No description provided for @homeStartBody.
-  ///
-  /// In en, this message translates to:
-  /// **'Build your understanding of Indian law, one concept at a time.'**
-  String get homeStartBody;
-
   /// No description provided for @homeStartRecommended.
   ///
   /// In en, this message translates to:
@@ -1519,8 +1507,14 @@ abstract class AppLocalizations {
   /// No description provided for @quizExamHint.
   ///
   /// In en, this message translates to:
-  /// **'Pick an answer, then move on. You can\'t go back to a question.'**
+  /// **'Pick an answer, then move on. You can go back and change an answer until you submit.'**
   String get quizExamHint;
+
+  /// No description provided for @quizPrevious.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous'**
+  String get quizPrevious;
 
   /// No description provided for @quizSecondsLeft.
   ///
@@ -2235,6 +2229,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Nothing saved yet. Tap the bookmark on any update to keep it here.'**
   String get updatesSavedEmpty;
+
+  /// No description provided for @libraryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Library'**
+  String get libraryTitle;
+
+  /// No description provided for @librarySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your personal legal reading space'**
+  String get librarySubtitle;
+
+  /// No description provided for @librarySearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search saved updates…'**
+  String get librarySearchHint;
+
+  /// No description provided for @libraryAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All ({count})'**
+  String libraryAll(int count);
+
+  /// No description provided for @libraryUnread.
+  ///
+  /// In en, this message translates to:
+  /// **'Unread ({count})'**
+  String libraryUnread(int count);
+
+  /// No description provided for @libraryRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Read ({count})'**
+  String libraryRead(int count);
+
+  /// No description provided for @libraryCollections.
+  ///
+  /// In en, this message translates to:
+  /// **'My Collections'**
+  String get libraryCollections;
+
+  /// No description provided for @libraryRecent.
+  ///
+  /// In en, this message translates to:
+  /// **'Recently Saved'**
+  String get libraryRecent;
+
+  /// No description provided for @libraryUnreadBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Unread'**
+  String get libraryUnreadBadge;
+
+  /// No description provided for @libraryReadBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Read'**
+  String get libraryReadBadge;
+
+  /// No description provided for @libraryUpdateCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 update} other{{count} updates}}'**
+  String libraryUpdateCount(int count);
+
+  /// No description provided for @libraryNoMatches.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved updates match.'**
+  String get libraryNoMatches;
 
   /// No description provided for @updatesEmpty.
   ///
@@ -2953,7 +3019,7 @@ abstract class AppLocalizations {
   /// No description provided for @authCreateSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Questions come from Nyaya Kural\'s reviewed library, and your results are saved to your account.'**
+  /// **'Enter your name, email and a password to get started.'**
   String get authCreateSubtitle;
 
   /// No description provided for @authSignInTitle.
@@ -3124,6 +3190,12 @@ abstract class AppLocalizations {
   /// **'Password reset isn\'t available right now. Please try again later.'**
   String get authResetUnavailable;
 
+  /// No description provided for @authResetNoAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'No account is registered with this email. Check the address or create an account.'**
+  String get authResetNoAccount;
+
   /// No description provided for @authResetErrorInvalid.
   ///
   /// In en, this message translates to:
@@ -3159,6 +3231,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign out'**
   String get settingsSignOut;
+
+  /// No description provided for @profileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Profile'**
+  String get profileTitle;
+
+  /// No description provided for @profileIdentity.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning identity'**
+  String get profileIdentity;
+
+  /// No description provided for @profileProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Your progress'**
+  String get profileProgress;
+
+  /// No description provided for @profileSettingsSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Language, theme, reminders and more'**
+  String get profileSettingsSub;
+
+  /// No description provided for @profileSignOutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out?'**
+  String get profileSignOutTitle;
+
+  /// No description provided for @profileSignOutBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You can sign back in any time with your email and password. Your progress stays saved on your account.'**
+  String get profileSignOutBody;
+
+  /// No description provided for @profileDangerZone.
+  ///
+  /// In en, this message translates to:
+  /// **'Danger zone'**
+  String get profileDangerZone;
+
+  /// No description provided for @profileDangerBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Deleting your account permanently removes your progress, coins and saved questions. This cannot be undone.'**
+  String get profileDangerBody;
+
+  /// No description provided for @settingsLearningPrefs.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning preferences'**
+  String get settingsLearningPrefs;
+
+  /// No description provided for @settingsNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get settingsNotifications;
+
+  /// No description provided for @settingsData.
+  ///
+  /// In en, this message translates to:
+  /// **'Data management'**
+  String get settingsData;
+
+  /// No description provided for @settingsAboutSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'About and support'**
+  String get settingsAboutSupport;
 
   /// No description provided for @updateRequiredTitle.
   ///
@@ -3249,6 +3393,912 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your session ended. Sign in again to play.'**
   String get quizSignedOut;
+
+  /// No description provided for @dailyTipLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily tip'**
+  String get dailyTipLabel;
+
+  /// No description provided for @dailyTipReadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Read more'**
+  String get dailyTipReadMore;
+
+  /// No description provided for @dailyTipLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load today\'s tip.'**
+  String get dailyTipLoadFailed;
+
+  /// No description provided for @dailyTipUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'This tip isn\'t available any more.'**
+  String get dailyTipUnavailable;
+
+  /// No description provided for @dailyTipLegalReference.
+  ///
+  /// In en, this message translates to:
+  /// **'Legal reference'**
+  String get dailyTipLegalReference;
+
+  /// No description provided for @dailyTipLastVerified.
+  ///
+  /// In en, this message translates to:
+  /// **'Last verified on {date}'**
+  String dailyTipLastVerified(String date);
+
+  /// No description provided for @constitutionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Constitution of India'**
+  String get constitutionTitle;
+
+  /// No description provided for @constitutionHomeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Read the official text on India Code, in many languages'**
+  String get constitutionHomeDesc;
+
+  /// No description provided for @constitutionAttribution.
+  ///
+  /// In en, this message translates to:
+  /// **'Published on India Code by the Legislative Department, Ministry of Law and Justice.'**
+  String get constitutionAttribution;
+
+  /// No description provided for @constitutionNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Each edition is shown as published there. For legal or official use, please refer to the official source.'**
+  String get constitutionNotice;
+
+  /// No description provided for @constitutionOpensExternally.
+  ///
+  /// In en, this message translates to:
+  /// **'PDFs open in your browser or PDF app.'**
+  String get constitutionOpensExternally;
+
+  /// No description provided for @constitutionStale.
+  ///
+  /// In en, this message translates to:
+  /// **'These details may be out of date.'**
+  String get constitutionStale;
+
+  /// No description provided for @constitutionLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load the Constitution editions.'**
+  String get constitutionLoadFailed;
+
+  /// No description provided for @constitutionEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No editions are available right now.'**
+  String get constitutionEmpty;
+
+  /// No description provided for @constitutionYourLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'In your language'**
+  String get constitutionYourLanguage;
+
+  /// No description provided for @constitutionFallbackEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'No edition in {language} is listed, so the English edition is shown.'**
+  String constitutionFallbackEnglish(String language);
+
+  /// No description provided for @constitutionAllEditions.
+  ///
+  /// In en, this message translates to:
+  /// **'All languages'**
+  String get constitutionAllEditions;
+
+  /// No description provided for @constitutionOriginalSection.
+  ///
+  /// In en, this message translates to:
+  /// **'The original copy'**
+  String get constitutionOriginalSection;
+
+  /// No description provided for @constitutionLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'Large file'**
+  String get constitutionLarge;
+
+  /// No description provided for @constitutionScanned.
+  ///
+  /// In en, this message translates to:
+  /// **'Scanned'**
+  String get constitutionScanned;
+
+  /// No description provided for @constitutionSize.
+  ///
+  /// In en, this message translates to:
+  /// **'About {size}'**
+  String constitutionSize(String size);
+
+  /// No description provided for @constitutionUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated {date}'**
+  String constitutionUpdated(String date);
+
+  /// No description provided for @constitutionWarnTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Before you open this PDF'**
+  String get constitutionWarnTitle;
+
+  /// No description provided for @constitutionLargeWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'This file is about {size}. It may use a lot of mobile data, so Wi-Fi is better.'**
+  String constitutionLargeWarning(String size);
+
+  /// No description provided for @constitutionScannedWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a scanned copy. Its text can\'t be searched, and screen readers may not be able to read it.'**
+  String get constitutionScannedWarning;
+
+  /// No description provided for @constitutionOpenAnyway.
+  ///
+  /// In en, this message translates to:
+  /// **'Open PDF'**
+  String get constitutionOpenAnyway;
+
+  /// No description provided for @constitutionOpenFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t open the PDF.'**
+  String get constitutionOpenFailed;
+
+  /// No description provided for @constitutionOpenSourcePage.
+  ///
+  /// In en, this message translates to:
+  /// **'Open on India Code'**
+  String get constitutionOpenSourcePage;
+
+  /// No description provided for @constitutionSourceLink.
+  ///
+  /// In en, this message translates to:
+  /// **'See the collection on India Code'**
+  String get constitutionSourceLink;
+
+  /// No description provided for @mockExamsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock Exams'**
+  String get mockExamsTitle;
+
+  /// No description provided for @mockExamsIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Practise with previous-year papers and random mocks.'**
+  String get mockExamsIntro;
+
+  /// No description provided for @mockHomeCardBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous-year papers and random mocks'**
+  String get mockHomeCardBody;
+
+  /// No description provided for @mockExamsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No mock exams are open yet.'**
+  String get mockExamsEmpty;
+
+  /// No description provided for @mockExamsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Check back soon.'**
+  String get mockExamsEmptyBody;
+
+  /// No description provided for @mockLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn’t load Mock Exams. Check your connection and try again.'**
+  String get mockLoadError;
+
+  /// No description provided for @mockRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get mockRetry;
+
+  /// No description provided for @mockHistoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Attempt history'**
+  String get mockHistoryTitle;
+
+  /// No description provided for @mockHistoryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'You haven’t taken a mock exam yet.'**
+  String get mockHistoryEmpty;
+
+  /// No description provided for @mockStatsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your statistics'**
+  String get mockStatsTitle;
+
+  /// No description provided for @mockStatsLine.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} finished · best {best} · average {average}'**
+  String mockStatsLine(String count, String best, String average);
+
+  /// No description provided for @mockStatsNoMarks.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} finished · no scored attempts yet'**
+  String mockStatsNoMarks(String count);
+
+  /// No description provided for @mockInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'In progress'**
+  String get mockInProgress;
+
+  /// No description provided for @mockResumeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue your attempt'**
+  String get mockResumeTitle;
+
+  /// No description provided for @mockResumeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You have an unfinished mock exam.'**
+  String get mockResumeBody;
+
+  /// No description provided for @mockResume.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get mockResume;
+
+  /// No description provided for @mockPapersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous-year papers'**
+  String get mockPapersTitle;
+
+  /// No description provided for @mockNoPapers.
+  ///
+  /// In en, this message translates to:
+  /// **'No previous-year papers are published yet.'**
+  String get mockNoPapers;
+
+  /// No description provided for @mockPaperQuestions.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} questions'**
+  String mockPaperQuestions(String count);
+
+  /// No description provided for @mockPaperMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min'**
+  String mockPaperMinutes(String minutes);
+
+  /// No description provided for @mockUnverifiedChip.
+  ///
+  /// In en, this message translates to:
+  /// **'Unverified'**
+  String get mockUnverifiedChip;
+
+  /// No description provided for @mockUnverifiedNote.
+  ///
+  /// In en, this message translates to:
+  /// **'The marking rules for this paper aren’t officially confirmed yet.'**
+  String get mockUnverifiedNote;
+
+  /// No description provided for @mockRandomTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Random mock'**
+  String get mockRandomTitle;
+
+  /// No description provided for @mockRandomBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A fresh set of questions built from the exam format.'**
+  String get mockRandomBody;
+
+  /// No description provided for @mockModePractice.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice'**
+  String get mockModePractice;
+
+  /// No description provided for @mockModeTimed.
+  ///
+  /// In en, this message translates to:
+  /// **'Timed'**
+  String get mockModeTimed;
+
+  /// No description provided for @mockStartPractice.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Practice'**
+  String get mockStartPractice;
+
+  /// No description provided for @mockStartTimed.
+  ///
+  /// In en, this message translates to:
+  /// **'Start timed'**
+  String get mockStartTimed;
+
+  /// No description provided for @mockPracticeNote.
+  ///
+  /// In en, this message translates to:
+  /// **'No time limit. Your answers are saved as you go.'**
+  String get mockPracticeNote;
+
+  /// No description provided for @mockTimedNote.
+  ///
+  /// In en, this message translates to:
+  /// **'The timer runs on our server. Closing the app doesn’t pause it.'**
+  String get mockTimedNote;
+
+  /// No description provided for @mockTimedUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Timed mode is unavailable'**
+  String get mockTimedUnavailable;
+
+  /// No description provided for @mockTimedUnavailableRandom.
+  ///
+  /// In en, this message translates to:
+  /// **'Timed mode opens once an official exam format is confirmed.'**
+  String get mockTimedUnavailableRandom;
+
+  /// No description provided for @mockTimedUnavailablePaper.
+  ///
+  /// In en, this message translates to:
+  /// **'Timed mode opens once this paper’s duration and rules are officially confirmed.'**
+  String get mockTimedUnavailablePaper;
+
+  /// No description provided for @mockStartNoBlueprint.
+  ///
+  /// In en, this message translates to:
+  /// **'Random mocks aren’t set up for this exam yet.'**
+  String get mockStartNoBlueprint;
+
+  /// No description provided for @mockStartPoolShort.
+  ///
+  /// In en, this message translates to:
+  /// **'There aren’t enough questions to build a random mock yet.'**
+  String get mockStartPoolShort;
+
+  /// No description provided for @mockStartInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'You already have an unfinished attempt. Resume it first.'**
+  String get mockStartInProgress;
+
+  /// No description provided for @mockStartTimedRefused.
+  ///
+  /// In en, this message translates to:
+  /// **'Timed mode isn’t available for this one.'**
+  String get mockStartTimedRefused;
+
+  /// No description provided for @mockStartFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn’t start. Please try again.'**
+  String get mockStartFailed;
+
+  /// No description provided for @mockNetworkError.
+  ///
+  /// In en, this message translates to:
+  /// **'No connection. Check your internet and try again.'**
+  String get mockNetworkError;
+
+  /// No description provided for @mockQuestionOf.
+  ///
+  /// In en, this message translates to:
+  /// **'Question {n} of {total}'**
+  String mockQuestionOf(String n, String total);
+
+  /// No description provided for @mockSectionName.
+  ///
+  /// In en, this message translates to:
+  /// **'Section {name}'**
+  String mockSectionName(String name);
+
+  /// No description provided for @mockTimeLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{time} left'**
+  String mockTimeLeft(String time);
+
+  /// No description provided for @mockTimeLeftSemantic.
+  ///
+  /// In en, this message translates to:
+  /// **'Time left: {time}'**
+  String mockTimeLeftSemantic(String time);
+
+  /// No description provided for @mockPracticeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice · no time limit'**
+  String get mockPracticeLabel;
+
+  /// No description provided for @mockSaving.
+  ///
+  /// In en, this message translates to:
+  /// **'Saving…'**
+  String get mockSaving;
+
+  /// No description provided for @mockSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get mockSaved;
+
+  /// No description provided for @mockOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline. Answers will be saved when you’re back online.'**
+  String get mockOffline;
+
+  /// No description provided for @mockServerIssue.
+  ///
+  /// In en, this message translates to:
+  /// **'Server issue. Your answers are saved and will retry automatically.'**
+  String get mockServerIssue;
+
+  /// No description provided for @mockOfflineEstimate.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline: the time left is an estimate until you reconnect.'**
+  String get mockOfflineEstimate;
+
+  /// No description provided for @mockPrevious.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous'**
+  String get mockPrevious;
+
+  /// No description provided for @mockNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get mockNext;
+
+  /// No description provided for @mockPalette.
+  ///
+  /// In en, this message translates to:
+  /// **'Questions'**
+  String get mockPalette;
+
+  /// No description provided for @mockPaletteAnswered.
+  ///
+  /// In en, this message translates to:
+  /// **'Answered'**
+  String get mockPaletteAnswered;
+
+  /// No description provided for @mockPaletteUnanswered.
+  ///
+  /// In en, this message translates to:
+  /// **'Not answered'**
+  String get mockPaletteUnanswered;
+
+  /// No description provided for @mockPaletteWithdrawn.
+  ///
+  /// In en, this message translates to:
+  /// **'Withdrawn'**
+  String get mockPaletteWithdrawn;
+
+  /// No description provided for @mockPaletteItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Question {n}, {state}'**
+  String mockPaletteItem(String n, String state);
+
+  /// No description provided for @mockAnsweredCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{answered} of {total} answered'**
+  String mockAnsweredCount(String answered, String total);
+
+  /// No description provided for @mockSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get mockSubmit;
+
+  /// No description provided for @mockSubmitTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit this mock exam?'**
+  String get mockSubmitTitle;
+
+  /// No description provided for @mockSubmitBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You have answered {answered} of {total}. You can’t change your answers after submitting.'**
+  String mockSubmitBody(String answered, String total);
+
+  /// No description provided for @mockSubmitUnanswered.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} not answered.'**
+  String mockSubmitUnanswered(String count);
+
+  /// No description provided for @mockKeepGoing.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep going'**
+  String get mockKeepGoing;
+
+  /// No description provided for @mockSubmitFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn’t submit. Your answers are saved; try again when you’re online.'**
+  String get mockSubmitFailed;
+
+  /// No description provided for @mockWithdrawnTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This question was withdrawn'**
+  String get mockWithdrawnTitle;
+
+  /// No description provided for @mockWithdrawnBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The exam body withdrew it, so it can’t be answered.'**
+  String get mockWithdrawnBody;
+
+  /// No description provided for @mockAdvanceSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish this section'**
+  String get mockAdvanceSection;
+
+  /// No description provided for @mockAdvanceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Move to the next section?'**
+  String get mockAdvanceTitle;
+
+  /// No description provided for @mockAdvanceBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You won’t be able to come back to this section.'**
+  String get mockAdvanceBody;
+
+  /// No description provided for @mockSectionClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'This section is closed.'**
+  String get mockSectionClosed;
+
+  /// No description provided for @mockTimeUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Time is up'**
+  String get mockTimeUp;
+
+  /// No description provided for @mockTimeUpBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your attempt has ended. Opening your result.'**
+  String get mockTimeUpBody;
+
+  /// No description provided for @mockEndedOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Time is up. We’ll show your result as soon as we can reach the server.'**
+  String get mockEndedOffline;
+
+  /// No description provided for @mockAttemptNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'This attempt couldn’t be found.'**
+  String get mockAttemptNotFound;
+
+  /// No description provided for @mockSignedOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Please sign in again to continue.'**
+  String get mockSignedOut;
+
+  /// No description provided for @mockSelectedSemantic.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected'**
+  String get mockSelectedSemantic;
+
+  /// No description provided for @mockResultTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Result'**
+  String get mockResultTitle;
+
+  /// No description provided for @mockMarks.
+  ///
+  /// In en, this message translates to:
+  /// **'{obtained} / {max}'**
+  String mockMarks(String obtained, String max);
+
+  /// No description provided for @mockPercent.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}%'**
+  String mockPercent(String percent);
+
+  /// No description provided for @mockMarksUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Marks aren’t shown because this exam’s marking rules aren’t configured.'**
+  String get mockMarksUnavailable;
+
+  /// No description provided for @mockResultPass.
+  ///
+  /// In en, this message translates to:
+  /// **'PASS'**
+  String get mockResultPass;
+
+  /// No description provided for @mockResultFail.
+  ///
+  /// In en, this message translates to:
+  /// **'FAIL'**
+  String get mockResultFail;
+
+  /// No description provided for @mockCorrect.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct'**
+  String get mockCorrect;
+
+  /// No description provided for @mockIncorrect.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect'**
+  String get mockIncorrect;
+
+  /// No description provided for @mockUnanswered.
+  ///
+  /// In en, this message translates to:
+  /// **'Unanswered'**
+  String get mockUnanswered;
+
+  /// No description provided for @mockWithdrawnCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Withdrawn'**
+  String get mockWithdrawnCount;
+
+  /// No description provided for @mockProvisionalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Provisional result'**
+  String get mockProvisionalTitle;
+
+  /// No description provided for @mockProvisionalBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This result is provisional because some scoring rules aren’t confirmed yet.'**
+  String get mockProvisionalBody;
+
+  /// No description provided for @mockSectionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sections'**
+  String get mockSectionsTitle;
+
+  /// No description provided for @mockPassTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pass criteria'**
+  String get mockPassTitle;
+
+  /// No description provided for @mockPassLine.
+  ///
+  /// In en, this message translates to:
+  /// **'{category}: {threshold}% needed · {outcome}'**
+  String mockPassLine(String category, String threshold, String outcome);
+
+  /// No description provided for @mockPassGeneral.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get mockPassGeneral;
+
+  /// No description provided for @mockPassReserved.
+  ///
+  /// In en, this message translates to:
+  /// **'Reserved'**
+  String get mockPassReserved;
+
+  /// No description provided for @mockPassReached.
+  ///
+  /// In en, this message translates to:
+  /// **'reached'**
+  String get mockPassReached;
+
+  /// No description provided for @mockPassNotReached.
+  ///
+  /// In en, this message translates to:
+  /// **'not reached'**
+  String get mockPassNotReached;
+
+  /// No description provided for @mockPassUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Pass criteria aren’t available for this exam, so no pass or fail is shown.'**
+  String get mockPassUnavailable;
+
+  /// No description provided for @mockExpiredNote.
+  ///
+  /// In en, this message translates to:
+  /// **'This attempt ended when the time ran out.'**
+  String get mockExpiredNote;
+
+  /// No description provided for @mockViewReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Review answers'**
+  String get mockViewReview;
+
+  /// No description provided for @mockBackToMockExams.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to Mock Exams'**
+  String get mockBackToMockExams;
+
+  /// No description provided for @mockReviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Answer review'**
+  String get mockReviewTitle;
+
+  /// No description provided for @mockYourAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Your answer'**
+  String get mockYourAnswer;
+
+  /// No description provided for @mockAcceptedAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted answer'**
+  String get mockAcceptedAnswer;
+
+  /// No description provided for @mockNotAnswered.
+  ///
+  /// In en, this message translates to:
+  /// **'Not answered'**
+  String get mockNotAnswered;
+
+  /// No description provided for @mockExplanation.
+  ///
+  /// In en, this message translates to:
+  /// **'Explanation'**
+  String get mockExplanation;
+
+  /// No description provided for @mockOutcomeWithdrawn.
+  ///
+  /// In en, this message translates to:
+  /// **'Withdrawn, not scored'**
+  String get mockOutcomeWithdrawn;
+
+  /// No description provided for @mockPracticeTimerLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice timing — not officially confirmed by BCI'**
+  String get mockPracticeTimerLabel;
+
+  /// No description provided for @mockPracticeTimerNote.
+  ///
+  /// In en, this message translates to:
+  /// **'A clock runs on our server and ends the attempt when time is up. This is practice timing, not the official exam time.'**
+  String get mockPracticeTimerNote;
+
+  /// No description provided for @mockStartPracticeTimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Timed Practice ({minutes} minutes)'**
+  String mockStartPracticeTimer(String minutes);
+
+  /// No description provided for @mockInstrPracticeTimer.
+  ///
+  /// In en, this message translates to:
+  /// **'This paper has a practice timer. It is practice timing, not officially confirmed by BCI. The clock runs on our server, closing the app does not pause it, and the attempt ends when time is up.'**
+  String get mockInstrPracticeTimer;
+
+  /// No description provided for @mockMarkForReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark for review'**
+  String get mockMarkForReview;
+
+  /// No description provided for @mockMarkedForReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Marked for review'**
+  String get mockMarkedForReview;
+
+  /// No description provided for @mockPaletteMarked.
+  ///
+  /// In en, this message translates to:
+  /// **'Marked'**
+  String get mockPaletteMarked;
+
+  /// No description provided for @mockSubmitMarked.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} marked for review.'**
+  String mockSubmitMarked(String count);
+
+  /// No description provided for @mockDetailsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Exam details'**
+  String get mockDetailsTitle;
+
+  /// No description provided for @mockInstructionsHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Before you start'**
+  String get mockInstructionsHeading;
+
+  /// No description provided for @mockInstrAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap an option to answer. You can change your answer until you submit.'**
+  String get mockInstrAnswer;
+
+  /// No description provided for @mockInstrNavigate.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Previous and Next, or the question grid, to move around.'**
+  String get mockInstrNavigate;
+
+  /// No description provided for @mockInstrMark.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark for review is a reminder on this device only. It does not change your answer and is not sent to the server.'**
+  String get mockInstrMark;
+
+  /// No description provided for @mockInstrSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Your answers are saved as you go. If you lose your connection, they are sent when it returns.'**
+  String get mockInstrSave;
+
+  /// No description provided for @mockInstrResume.
+  ///
+  /// In en, this message translates to:
+  /// **'You can leave and come back to an unfinished attempt.'**
+  String get mockInstrResume;
+
+  /// No description provided for @mockInstrReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct answers and explanations are shown only after you submit.'**
+  String get mockInstrReview;
+
+  /// No description provided for @mockInstrProvisional.
+  ///
+  /// In en, this message translates to:
+  /// **'Results may be marked provisional when the marking rules for a paper are not officially confirmed.'**
+  String get mockInstrProvisional;
+
+  /// No description provided for @mockInstrTimed.
+  ///
+  /// In en, this message translates to:
+  /// **'In timed mode the server keeps the clock. Closing the app does not pause it, and the attempt ends when time is up.'**
+  String get mockInstrTimed;
 }
 
 class _AppLocalizationsDelegate

@@ -1,0 +1,876 @@
+[
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 1,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,1"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e1c9-751a-b1fe-01b84a30a3d9",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "constitutional-law",
+  "name": "Constitutional law",
+  "position": 1,
+  "question_count": 10,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 2,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,2"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e1d2-730e-9b50-7438e4a4c8a7",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "ipc-bns",
+  "name": "IPC and Bharatiya Nyaya Sanhita",
+  "position": 2,
+  "question_count": 8,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 3,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,3"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e1d7-74ca-8f11-c81654c667e0",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "crpc-bnss",
+  "name": "CrPC and Bharatiya Nagarik Suraksha Sanhita",
+  "position": 3,
+  "question_count": 10,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 4,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,4"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e1da-70e8-b3e2-d79fbc61be57",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "cpc",
+  "name": "Code of Civil Procedure",
+  "position": 4,
+  "question_count": 10,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 5,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,5"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e1df-7349-90e2-d9a96b613af4",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "evidence-bsa",
+  "name": "Evidence Act and Bharatiya Sakshya Adhiniyam",
+  "position": 5,
+  "question_count": 8,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 6,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,6"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e1e2-7711-98e2-87922e201edf",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "adr",
+  "name": "Alternative Dispute Redressal including Arbitration Act",
+  "position": 6,
+  "question_count": 4,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 7,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,7"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e1e6-72fe-9b37-318db298acb3",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "family-law",
+  "name": "Family Law",
+  "position": 7,
+  "question_count": 8,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 8,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,8"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e1e9-7240-813b-c75f4785a937",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "pil",
+  "name": "Public Interest Litigation",
+  "position": 8,
+  "question_count": 4,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 9,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,9"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e1ed-757e-89c6-b23ff25fc399",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "administrative-law",
+  "name": "Administration Law",
+  "position": 9,
+  "question_count": 3,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 10,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,10"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e1f0-705d-9cb5-95b35362628d",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "professional-ethics",
+  "name": "Professional Ethics and professional misconduct under BCI Rules",
+  "position": 10,
+  "question_count": 4,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 11,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,11"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e1f2-7287-87f8-97fda96e11e2",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "company-law",
+  "name": "Company Law",
+  "position": 11,
+  "question_count": 2,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 12,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,12"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e1f5-7770-a7cc-3fb3109c8354",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "environmental-law",
+  "name": "Environmental Law",
+  "position": 12,
+  "question_count": 2,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 13,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,13"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e1f8-71b3-8cb6-77a8c4fcc3d3",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "cyber-law",
+  "name": "Cyber Law",
+  "position": 13,
+  "question_count": 2,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 14,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,14"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e1fb-76e3-88fc-9258c3d24521",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "labour-law",
+  "name": "Labour and Industrial Law",
+  "position": 14,
+  "question_count": 4,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 15,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,15"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e1fd-74ee-be82-90a2ddf927b0",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "tort-mv-consumer",
+  "name": "Law of Tort incl. Motor Vehicles Act and Consumer Protection Law",
+  "position": 15,
+  "question_count": 5,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 16,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,16"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e201-74eb-a332-10bbccf199ee",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "taxation",
+  "name": "Law related to Taxation",
+  "position": 16,
+  "question_count": 4,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 17,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,17"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e203-76d2-b723-c7cee0d5519b",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "contract-property-ni",
+  "name": "Contract, Specific Relief, Property Laws, Negotiable Instruments Act",
+  "position": 17,
+  "question_count": 8,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 18,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,18"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e206-75a4-ab05-f34681d5a534",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "land-acquisition",
+  "name": "Land Acquisition Act",
+  "position": 18,
+  "question_count": 2,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 19,
+   "xmin": 3701,
+   "xmax": 3702,
+   "ctid": "0,19"
+  },
+  "_vis": {
+   "state": "dead",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-e209-7469-b2b0-34c4ae1b69c2",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "intellectual-property",
+  "name": "Intellectual Property Laws",
+  "position": 19,
+  "question_count": 2,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:47.551000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 20,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,20"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f566-74d2-9547-c387109576ff",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "constitutional-law",
+  "name": "Constitutional law",
+  "position": 1,
+  "question_count": 10,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 21,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,21"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f569-70cb-920c-3e94cbee8724",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "ipc-bns",
+  "name": "IPC and Bharatiya Nyaya Sanhita",
+  "position": 2,
+  "question_count": 8,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 22,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,22"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f56b-72e6-8330-0a38e7f7a257",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "crpc-bnss",
+  "name": "CrPC and Bharatiya Nagarik Suraksha Sanhita",
+  "position": 3,
+  "question_count": 10,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 23,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,23"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f56e-773b-8a07-2d4b0f5dce3e",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "cpc",
+  "name": "Code of Civil Procedure",
+  "position": 4,
+  "question_count": 10,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 24,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,24"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f571-7538-b27f-bd27a208e40a",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "evidence-bsa",
+  "name": "Evidence Act and Bharatiya Sakshya Adhiniyam",
+  "position": 5,
+  "question_count": 8,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 25,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,25"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f573-70c5-bfdb-71fb068c2b48",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "adr",
+  "name": "Alternative Dispute Redressal including Arbitration Act",
+  "position": 6,
+  "question_count": 4,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 26,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,26"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f575-7654-9ee4-788a4bdf4369",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "family-law",
+  "name": "Family Law",
+  "position": 7,
+  "question_count": 8,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 27,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,27"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f577-748d-84d4-0b0b42fd883c",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "pil",
+  "name": "Public Interest Litigation",
+  "position": 8,
+  "question_count": 4,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 28,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,28"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f579-70e5-addf-b99946ce9957",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "administrative-law",
+  "name": "Administration Law",
+  "position": 9,
+  "question_count": 3,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 29,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,29"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f57c-7184-9f51-1e04e906e2fa",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "professional-ethics",
+  "name": "Professional Ethics and professional misconduct under BCI Rules",
+  "position": 10,
+  "question_count": 4,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 30,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,30"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f57e-7403-af55-63f61859fdd7",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "company-law",
+  "name": "Company Law",
+  "position": 11,
+  "question_count": 2,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 31,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,31"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f580-7272-b696-be66d1cf5446",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "environmental-law",
+  "name": "Environmental Law",
+  "position": 12,
+  "question_count": 2,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 32,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,32"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f582-728b-8907-c3fb1fb444d1",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "cyber-law",
+  "name": "Cyber Law",
+  "position": 13,
+  "question_count": 2,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 33,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,33"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f584-77d2-99db-867ed515e30a",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "labour-law",
+  "name": "Labour and Industrial Law",
+  "position": 14,
+  "question_count": 4,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 34,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,34"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f587-70b7-a3c3-75939e741b33",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "tort-mv-consumer",
+  "name": "Law of Tort incl. Motor Vehicles Act and Consumer Protection Law",
+  "position": 15,
+  "question_count": 5,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 35,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,35"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f589-739e-ac43-f16ced40d61f",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "taxation",
+  "name": "Law related to Taxation",
+  "position": 16,
+  "question_count": 4,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 36,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,36"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f58c-7021-a3c2-c6052a10dcb1",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "contract-property-ni",
+  "name": "Contract, Specific Relief, Property Laws, Negotiable Instruments Act",
+  "position": 17,
+  "question_count": 8,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 37,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,37"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f58e-7092-9f67-049dc78b5bf1",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "land-acquisition",
+  "name": "Land Acquisition Act",
+  "position": 18,
+  "question_count": 2,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ },
+ {
+  "_loc": {
+   "blk": 0,
+   "off": 38,
+   "xmin": 3702,
+   "xmax": 3702,
+   "ctid": "0,38"
+  },
+  "_vis": {
+   "state": "live",
+   "conf": "high",
+   "why": ""
+  },
+  "id": "01a1f1ca-f590-77c6-9d43-fb6cdf74b769",
+  "blueprint_id": "01a1f1c7-8eda-74c2-a356-5e59ba426cc6",
+  "code": "intellectual-property",
+  "name": "Intellectual Property Laws",
+  "position": 19,
+  "question_count": 2,
+  "duration_seconds": null,
+  "marks_correct": null,
+  "created_at": "2026-11-19T03:12:52.560000Z"
+ }
+]

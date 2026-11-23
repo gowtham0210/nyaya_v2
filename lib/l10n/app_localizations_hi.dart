@@ -372,12 +372,6 @@ class AppLocalizationsHi extends AppLocalizations {
   String get homeContinueLeftOff => 'जहाँ छोड़ा था, वहीं से शुरू करें';
 
   @override
-  String get homeStartTitle => 'अपनी सीखने की यात्रा शुरू करें';
-
-  @override
-  String get homeStartBody => 'भारतीय कानून को एक-एक अवधारणा के साथ समझें।';
-
-  @override
   String get homeStartRecommended => 'शुरुआत के लिए सुझाव';
 
   @override
@@ -852,7 +846,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get quizExamHint =>
-      'एक उत्तर चुनें, फिर आगे बढ़ें। आप किसी प्रश्न पर वापस नहीं जा सकते।';
+      'एक उत्तर चुनें, फिर आगे बढ़ें। जमा करने से पहले आप वापस जाकर उत्तर बदल सकते हैं।';
+
+  @override
+  String get quizPrevious => 'पिछला';
 
   @override
   String quizSecondsLeft(int seconds) {
@@ -1300,6 +1297,56 @@ class AppLocalizationsHi extends AppLocalizations {
       'अभी कुछ सहेजा नहीं गया। किसी भी अपडेट पर बुकमार्क दबाएँ, वह यहाँ रहेगा।';
 
   @override
+  String get libraryTitle => 'मेरी लाइब्रेरी';
+
+  @override
+  String get librarySubtitle => 'आपकी अपनी क़ानूनी पढ़ने की जगह';
+
+  @override
+  String get librarySearchHint => 'सहेजे गए अपडेट खोजें…';
+
+  @override
+  String libraryAll(int count) {
+    return 'सभी ($count)';
+  }
+
+  @override
+  String libraryUnread(int count) {
+    return 'अपठित ($count)';
+  }
+
+  @override
+  String libraryRead(int count) {
+    return 'पढ़े ($count)';
+  }
+
+  @override
+  String get libraryCollections => 'मेरे संग्रह';
+
+  @override
+  String get libraryRecent => 'हाल में सहेजे';
+
+  @override
+  String get libraryUnreadBadge => 'अपठित';
+
+  @override
+  String get libraryReadBadge => 'पढ़ा';
+
+  @override
+  String libraryUpdateCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count अपडेट',
+      one: '1 अपडेट',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get libraryNoMatches => 'कोई सहेजा हुआ अपडेट नहीं मिला।';
+
+  @override
   String get updatesEmpty => 'इस श्रेणी में अभी कोई अपडेट नहीं है।';
 
   @override
@@ -1695,7 +1742,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get authCreateSubtitle =>
-      'सवाल Nyaya Kural की जाँची हुई लाइब्रेरी से आते हैं, और आपके नतीजे आपके खाते में सहेजे जाते हैं।';
+      'शुरू करने के लिए अपना नाम, ईमेल और पासवर्ड दर्ज करें।';
 
   @override
   String get authSignInTitle => 'फिर से स्वागत है';
@@ -1792,6 +1839,10 @@ class AppLocalizationsHi extends AppLocalizations {
       'पासवर्ड बदलना अभी उपलब्ध नहीं है। कृपया बाद में कोशिश करें।';
 
   @override
+  String get authResetNoAccount =>
+      'इस ईमेल से कोई खाता पंजीकृत नहीं है। पता जाँचें या नया खाता बनाएँ।';
+
+  @override
   String get authResetErrorInvalid =>
       '6 अंकों का कोड और कम से कम 8 अक्षरों का नया पासवर्ड डालें।';
 
@@ -1811,6 +1862,44 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get settingsSignOut => 'साइन आउट करें';
+
+  @override
+  String get profileTitle => 'मेरी प्रोफ़ाइल';
+
+  @override
+  String get profileIdentity => 'सीखने की पहचान';
+
+  @override
+  String get profileProgress => 'आपकी प्रगति';
+
+  @override
+  String get profileSettingsSub => 'भाषा, थीम, रिमाइंडर और बहुत कुछ';
+
+  @override
+  String get profileSignOutTitle => 'साइन आउट करें?';
+
+  @override
+  String get profileSignOutBody =>
+      'आप अपने ईमेल और पासवर्ड से कभी भी दोबारा साइन इन कर सकते हैं। आपकी प्रगति आपके खाते में सुरक्षित रहती है।';
+
+  @override
+  String get profileDangerZone => 'जोखिम क्षेत्र';
+
+  @override
+  String get profileDangerBody =>
+      'खाता हटाने पर आपकी प्रगति, सिक्के और सहेजे गए प्रश्न हमेशा के लिए मिट जाते हैं। इसे वापस नहीं किया जा सकता।';
+
+  @override
+  String get settingsLearningPrefs => 'सीखने की पसंद';
+
+  @override
+  String get settingsNotifications => 'सूचनाएँ';
+
+  @override
+  String get settingsData => 'डेटा प्रबंधन';
+
+  @override
+  String get settingsAboutSupport => 'जानकारी और सहायता';
 
   @override
   String get updateRequiredTitle => 'कृपया Nyaya Kural अपडेट करें';
@@ -1863,4 +1952,540 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get quizSignedOut =>
       'आपका सत्र खत्म हो गया। खेलने के लिए फिर से साइन इन करें।';
+
+  @override
+  String get dailyTipLabel => 'आज की टिप';
+
+  @override
+  String get dailyTipReadMore => 'और पढ़ें';
+
+  @override
+  String get dailyTipLoadFailed => 'आज की टिप लोड नहीं हो सकी।';
+
+  @override
+  String get dailyTipUnavailable => 'यह टिप अब उपलब्ध नहीं है।';
+
+  @override
+  String get dailyTipLegalReference => 'कानूनी संदर्भ';
+
+  @override
+  String dailyTipLastVerified(String date) {
+    return 'अंतिम सत्यापन: $date';
+  }
+
+  @override
+  String get constitutionTitle => 'भारत का संविधान';
+
+  @override
+  String get constitutionHomeDesc =>
+      'India Code पर आधिकारिक पाठ पढ़ें, कई भाषाओं में';
+
+  @override
+  String get constitutionAttribution =>
+      'India Code पर विधायी विभाग, विधि और न्याय मंत्रालय द्वारा प्रकाशित।';
+
+  @override
+  String get constitutionNotice =>
+      'हर संस्करण वैसा ही दिखाया गया है जैसा वहाँ प्रकाशित है। कानूनी या आधिकारिक उपयोग के लिए कृपया आधिकारिक स्रोत देखें।';
+
+  @override
+  String get constitutionOpensExternally =>
+      'PDF आपके ब्राउज़र या PDF ऐप में खुलते हैं।';
+
+  @override
+  String get constitutionStale => 'ये विवरण पुराने हो सकते हैं।';
+
+  @override
+  String get constitutionLoadFailed => 'संविधान के संस्करण लोड नहीं हो सके।';
+
+  @override
+  String get constitutionEmpty => 'अभी कोई संस्करण उपलब्ध नहीं है।';
+
+  @override
+  String get constitutionYourLanguage => 'आपकी भाषा में';
+
+  @override
+  String constitutionFallbackEnglish(String language) {
+    return '$language में कोई संस्करण सूचीबद्ध नहीं है, इसलिए अंग्रेज़ी संस्करण दिखाया गया है।';
+  }
+
+  @override
+  String get constitutionAllEditions => 'सभी भाषाएँ';
+
+  @override
+  String get constitutionOriginalSection => 'मूल प्रति';
+
+  @override
+  String get constitutionLarge => 'बड़ी फ़ाइल';
+
+  @override
+  String get constitutionScanned => 'स्कैन की गई';
+
+  @override
+  String constitutionSize(String size) {
+    return 'लगभग $size';
+  }
+
+  @override
+  String constitutionUpdated(String date) {
+    return 'अपडेट: $date';
+  }
+
+  @override
+  String get constitutionWarnTitle => 'यह PDF खोलने से पहले';
+
+  @override
+  String constitutionLargeWarning(String size) {
+    return 'यह फ़ाइल लगभग $size की है। इसमें काफ़ी मोबाइल डेटा लग सकता है, इसलिए वाई-फ़ाई बेहतर है।';
+  }
+
+  @override
+  String get constitutionScannedWarning =>
+      'यह स्कैन की गई प्रति है। इसके टेक्स्ट में खोज नहीं हो सकती, और स्क्रीन रीडर इसे पढ़ न पाएँ।';
+
+  @override
+  String get constitutionOpenAnyway => 'PDF खोलें';
+
+  @override
+  String get constitutionOpenFailed => 'PDF नहीं खुल सका।';
+
+  @override
+  String get constitutionOpenSourcePage => 'India Code पर खोलें';
+
+  @override
+  String get constitutionSourceLink => 'India Code पर संग्रह देखें';
+
+  @override
+  String get mockExamsTitle => 'Mock Exams';
+
+  @override
+  String get mockExamsIntro =>
+      'Practise with previous-year papers and random mocks.';
+
+  @override
+  String get mockHomeCardBody => 'Previous-year papers and random mocks';
+
+  @override
+  String get mockExamsEmpty => 'No mock exams are open yet.';
+
+  @override
+  String get mockExamsEmptyBody => 'Check back soon.';
+
+  @override
+  String get mockLoadError =>
+      'Couldn’t load Mock Exams. Check your connection and try again.';
+
+  @override
+  String get mockRetry => 'Try again';
+
+  @override
+  String get mockHistoryTitle => 'Attempt history';
+
+  @override
+  String get mockHistoryEmpty => 'You haven’t taken a mock exam yet.';
+
+  @override
+  String get mockStatsTitle => 'Your statistics';
+
+  @override
+  String mockStatsLine(String count, String best, String average) {
+    return '$count finished · best $best · average $average';
+  }
+
+  @override
+  String mockStatsNoMarks(String count) {
+    return '$count finished · no scored attempts yet';
+  }
+
+  @override
+  String get mockInProgress => 'In progress';
+
+  @override
+  String get mockResumeTitle => 'Continue your attempt';
+
+  @override
+  String get mockResumeBody => 'You have an unfinished mock exam.';
+
+  @override
+  String get mockResume => 'Resume';
+
+  @override
+  String get mockPapersTitle => 'Previous-year papers';
+
+  @override
+  String get mockNoPapers => 'No previous-year papers are published yet.';
+
+  @override
+  String mockPaperQuestions(String count) {
+    return '$count questions';
+  }
+
+  @override
+  String mockPaperMinutes(String minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String get mockUnverifiedChip => 'Unverified';
+
+  @override
+  String get mockUnverifiedNote =>
+      'The marking rules for this paper aren’t officially confirmed yet.';
+
+  @override
+  String get mockRandomTitle => 'Random mock';
+
+  @override
+  String get mockRandomBody =>
+      'A fresh set of questions built from the exam format.';
+
+  @override
+  String get mockModePractice => 'Practice';
+
+  @override
+  String get mockModeTimed => 'Timed';
+
+  @override
+  String get mockStartPractice => 'Start Practice';
+
+  @override
+  String get mockStartTimed => 'Start timed';
+
+  @override
+  String get mockPracticeNote =>
+      'No time limit. Your answers are saved as you go.';
+
+  @override
+  String get mockTimedNote =>
+      'The timer runs on our server. Closing the app doesn’t pause it.';
+
+  @override
+  String get mockTimedUnavailable => 'Timed mode is unavailable';
+
+  @override
+  String get mockTimedUnavailableRandom =>
+      'Timed mode opens once an official exam format is confirmed.';
+
+  @override
+  String get mockTimedUnavailablePaper =>
+      'Timed mode opens once this paper’s duration and rules are officially confirmed.';
+
+  @override
+  String get mockStartNoBlueprint =>
+      'Random mocks aren’t set up for this exam yet.';
+
+  @override
+  String get mockStartPoolShort =>
+      'There aren’t enough questions to build a random mock yet.';
+
+  @override
+  String get mockStartInProgress =>
+      'You already have an unfinished attempt. Resume it first.';
+
+  @override
+  String get mockStartTimedRefused =>
+      'Timed mode isn’t available for this one.';
+
+  @override
+  String get mockStartFailed => 'Couldn’t start. Please try again.';
+
+  @override
+  String get mockNetworkError =>
+      'No connection. Check your internet and try again.';
+
+  @override
+  String mockQuestionOf(String n, String total) {
+    return 'Question $n of $total';
+  }
+
+  @override
+  String mockSectionName(String name) {
+    return 'Section $name';
+  }
+
+  @override
+  String mockTimeLeft(String time) {
+    return '$time left';
+  }
+
+  @override
+  String mockTimeLeftSemantic(String time) {
+    return 'Time left: $time';
+  }
+
+  @override
+  String get mockPracticeLabel => 'Practice · no time limit';
+
+  @override
+  String get mockSaving => 'Saving…';
+
+  @override
+  String get mockSaved => 'Saved';
+
+  @override
+  String get mockOffline =>
+      'Offline. Answers will be saved when you’re back online.';
+
+  @override
+  String get mockServerIssue =>
+      'Server issue. Your answers are saved and will retry automatically.';
+
+  @override
+  String get mockOfflineEstimate =>
+      'Offline: the time left is an estimate until you reconnect.';
+
+  @override
+  String get mockPrevious => 'Previous';
+
+  @override
+  String get mockNext => 'Next';
+
+  @override
+  String get mockPalette => 'Questions';
+
+  @override
+  String get mockPaletteAnswered => 'Answered';
+
+  @override
+  String get mockPaletteUnanswered => 'Not answered';
+
+  @override
+  String get mockPaletteWithdrawn => 'Withdrawn';
+
+  @override
+  String mockPaletteItem(String n, String state) {
+    return 'Question $n, $state';
+  }
+
+  @override
+  String mockAnsweredCount(String answered, String total) {
+    return '$answered of $total answered';
+  }
+
+  @override
+  String get mockSubmit => 'Submit';
+
+  @override
+  String get mockSubmitTitle => 'Submit this mock exam?';
+
+  @override
+  String mockSubmitBody(String answered, String total) {
+    return 'You have answered $answered of $total. You can’t change your answers after submitting.';
+  }
+
+  @override
+  String mockSubmitUnanswered(String count) {
+    return '$count not answered.';
+  }
+
+  @override
+  String get mockKeepGoing => 'Keep going';
+
+  @override
+  String get mockSubmitFailed =>
+      'Couldn’t submit. Your answers are saved; try again when you’re online.';
+
+  @override
+  String get mockWithdrawnTitle => 'This question was withdrawn';
+
+  @override
+  String get mockWithdrawnBody =>
+      'The exam body withdrew it, so it can’t be answered.';
+
+  @override
+  String get mockAdvanceSection => 'Finish this section';
+
+  @override
+  String get mockAdvanceTitle => 'Move to the next section?';
+
+  @override
+  String get mockAdvanceBody =>
+      'You won’t be able to come back to this section.';
+
+  @override
+  String get mockSectionClosed => 'This section is closed.';
+
+  @override
+  String get mockTimeUp => 'Time is up';
+
+  @override
+  String get mockTimeUpBody => 'Your attempt has ended. Opening your result.';
+
+  @override
+  String get mockEndedOffline =>
+      'Time is up. We’ll show your result as soon as we can reach the server.';
+
+  @override
+  String get mockAttemptNotFound => 'This attempt couldn’t be found.';
+
+  @override
+  String get mockSignedOut => 'Please sign in again to continue.';
+
+  @override
+  String get mockSelectedSemantic => 'Selected';
+
+  @override
+  String get mockResultTitle => 'Result';
+
+  @override
+  String mockMarks(String obtained, String max) {
+    return '$obtained / $max';
+  }
+
+  @override
+  String mockPercent(String percent) {
+    return '$percent%';
+  }
+
+  @override
+  String get mockMarksUnavailable =>
+      'Marks aren’t shown because this exam’s marking rules aren’t configured.';
+
+  @override
+  String get mockResultPass => 'PASS';
+
+  @override
+  String get mockResultFail => 'FAIL';
+
+  @override
+  String get mockCorrect => 'Correct';
+
+  @override
+  String get mockIncorrect => 'Incorrect';
+
+  @override
+  String get mockUnanswered => 'Unanswered';
+
+  @override
+  String get mockWithdrawnCount => 'Withdrawn';
+
+  @override
+  String get mockProvisionalTitle => 'Provisional result';
+
+  @override
+  String get mockProvisionalBody =>
+      'This result is provisional because some scoring rules aren’t confirmed yet.';
+
+  @override
+  String get mockSectionsTitle => 'Sections';
+
+  @override
+  String get mockPassTitle => 'Pass criteria';
+
+  @override
+  String mockPassLine(String category, String threshold, String outcome) {
+    return '$category: $threshold% needed · $outcome';
+  }
+
+  @override
+  String get mockPassGeneral => 'General';
+
+  @override
+  String get mockPassReserved => 'Reserved';
+
+  @override
+  String get mockPassReached => 'reached';
+
+  @override
+  String get mockPassNotReached => 'not reached';
+
+  @override
+  String get mockPassUnavailable =>
+      'Pass criteria aren’t available for this exam, so no pass or fail is shown.';
+
+  @override
+  String get mockExpiredNote => 'This attempt ended when the time ran out.';
+
+  @override
+  String get mockViewReview => 'Review answers';
+
+  @override
+  String get mockBackToMockExams => 'Back to Mock Exams';
+
+  @override
+  String get mockReviewTitle => 'Answer review';
+
+  @override
+  String get mockYourAnswer => 'Your answer';
+
+  @override
+  String get mockAcceptedAnswer => 'Accepted answer';
+
+  @override
+  String get mockNotAnswered => 'Not answered';
+
+  @override
+  String get mockExplanation => 'Explanation';
+
+  @override
+  String get mockOutcomeWithdrawn => 'Withdrawn, not scored';
+
+  @override
+  String get mockPracticeTimerLabel =>
+      'Practice timing — not officially confirmed by BCI';
+
+  @override
+  String get mockPracticeTimerNote =>
+      'A clock runs on our server and ends the attempt when time is up. This is practice timing, not the official exam time.';
+
+  @override
+  String mockStartPracticeTimer(String minutes) {
+    return 'Start Timed Practice ($minutes minutes)';
+  }
+
+  @override
+  String get mockInstrPracticeTimer =>
+      'This paper has a practice timer. It is practice timing, not officially confirmed by BCI. The clock runs on our server, closing the app does not pause it, and the attempt ends when time is up.';
+
+  @override
+  String get mockMarkForReview => 'Mark for review';
+
+  @override
+  String get mockMarkedForReview => 'Marked for review';
+
+  @override
+  String get mockPaletteMarked => 'Marked';
+
+  @override
+  String mockSubmitMarked(String count) {
+    return '$count marked for review.';
+  }
+
+  @override
+  String get mockDetailsTitle => 'Exam details';
+
+  @override
+  String get mockInstructionsHeading => 'Before you start';
+
+  @override
+  String get mockInstrAnswer =>
+      'Tap an option to answer. You can change your answer until you submit.';
+
+  @override
+  String get mockInstrNavigate =>
+      'Use Previous and Next, or the question grid, to move around.';
+
+  @override
+  String get mockInstrMark =>
+      'Mark for review is a reminder on this device only. It does not change your answer and is not sent to the server.';
+
+  @override
+  String get mockInstrSave =>
+      'Your answers are saved as you go. If you lose your connection, they are sent when it returns.';
+
+  @override
+  String get mockInstrResume =>
+      'You can leave and come back to an unfinished attempt.';
+
+  @override
+  String get mockInstrReview =>
+      'Correct answers and explanations are shown only after you submit.';
+
+  @override
+  String get mockInstrProvisional =>
+      'Results may be marked provisional when the marking rules for a paper are not officially confirmed.';
+
+  @override
+  String get mockInstrTimed =>
+      'In timed mode the server keeps the clock. Closing the app does not pause it, and the attempt ends when time is up.';
 }

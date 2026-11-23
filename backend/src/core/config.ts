@@ -28,9 +28,12 @@ export interface AppConfig {
   trustProxyHops: number;
   /** Azure OpenAI chat for Ask AI; chat is unavailable when endpoint or key is missing. */
   azureOpenAi?: { endpoint: string; apiKey: string; chatDeployment: string };
-  /** AI answers a premium learner may get per India date (also the abuse cap). */
+  /**
+   * AI answers a premium learner may get per India date. Practically
+   * unlimited by default (see [UNLIMITED_CHAT]); it still caps a runaway client.
+   */
   chatDailyLimit: number;
-  /** AI answers a free learner may get per India date. */
+  /** AI answers a free learner may get per India date. Practically unlimited by default. */
   chatFreeDailyLimit: number;
   /**
    * DEMO_PREMIUM=true lets the app turn premium on for testing. Off (the
@@ -43,6 +46,13 @@ export interface AppConfig {
   appUpdateUrl?: string;
   /** Sentry project key for crash reports (errors only). Unset: nothing is reported. */
   sentryDsn?: string;
+  /**
+   * Where the Constitution editions' metadata is read from (India Code's open
+   * API). Only metadata is read; no document is ever downloaded by the API.
+   */
+  indiaCodeBaseUrl: string;
+  /** How long India Code metadata is kept before it is read again. */
+  constitutionRefreshHours: number;
   /**
    * Outgoing mail (password reset codes). Unset: in development the mail is
    * written to the log; in production password reset is unavailable.
@@ -58,6 +68,14 @@ export interface SmtpConfig {
   /** The sender, like `Nyaya <no-reply@example.com>`. */
   from: string;
 }
+
+/**
+ * Ask AI has no daily limit in this version: the default is a number no
+ * learner reaches (only a runaway client would). To bring a limit back, set
+ * CHAT_FREE_DAILY_LIMIT (it used to be 5) and CHAT_DAILY_LIMIT (it used to be
+ * 50) in the API's environment; no code change is needed.
+ */
+export const UNLIMITED_CHAT = 100_000;
 
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
   const isProduction = env.NODE_ENV === 'production';
@@ -98,16 +116,29 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
             chatDeployment: env.AZURE_OPENAI_CHAT_DEPLOYMENT || 'gpt-5.4-mini',
           }
         : undefined,
-    chatDailyLimit: positiveInt(env.CHAT_DAILY_LIMIT, 'CHAT_DAILY_LIMIT', 50),
+    chatDailyLimit: positiveInt(
+      env.CHAT_DAILY_LIMIT,
+      'CHAT_DAILY_LIMIT',
+      UNLIMITED_CHAT,
+    ),
     chatFreeDailyLimit: positiveInt(
       env.CHAT_FREE_DAILY_LIMIT,
       'CHAT_FREE_DAILY_LIMIT',
-      5,
+      UNLIMITED_CHAT,
     ),
     demoPremium: env.DEMO_PREMIUM === 'true',
     minAppVersion: appVersion(env.MIN_APP_VERSION),
     appUpdateUrl: httpsUrl(env.APP_UPDATE_URL, 'APP_UPDATE_URL'),
     sentryDsn: httpsUrl(env.SENTRY_DSN, 'SENTRY_DSN'),
+    indiaCodeBaseUrl: (
+      httpsUrl(env.INDIACODE_BASE_URL, 'INDIACODE_BASE_URL') ??
+      'https://indiacode.gov.in'
+    ).replace(/\/+$/, ''),
+    constitutionRefreshHours: positiveInt(
+      env.CONSTITUTION_REFRESH_HOURS,
+      'CONSTITUTION_REFRESH_HOURS',
+      12,
+    ),
     smtp: smtp(env),
   };
 }

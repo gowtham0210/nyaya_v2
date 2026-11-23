@@ -26,6 +26,12 @@ class ProgressSync extends Notifier<void> {
         _openedOn = null;
         _clear();
       } else if (before?.id != after.id) {
+        // The server's settings take a moment to arrive; until then the avatar
+        // would show "?". The account already knows the name.
+        final name = after.displayName.trim();
+        if (name.isNotEmpty && ref.read(profileProvider).name.trim().isEmpty) {
+          ref.read(profileProvider.notifier).setName(name);
+        }
         refresh();
         noteOpen();
       }

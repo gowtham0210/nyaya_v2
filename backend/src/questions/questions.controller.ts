@@ -7,6 +7,7 @@ import {
   ParseUUIDPipe,
   Patch,
   Post,
+  Put,
   Query,
 } from '@nestjs/common';
 import {
@@ -31,6 +32,7 @@ import {
   QuestionPageDto,
   ReasonDto,
   ReviseDto,
+  SetExamTagsDto,
   UpdateQuestionDto,
 } from './questions.dto.js';
 import { QuestionsService } from './questions.service.js';
@@ -79,6 +81,21 @@ export class QuestionsController {
     @Body() body: UpdateQuestionDto,
   ) {
     return this.questions.update(actor, id, body);
+  }
+
+  @Put(':id/exam-tags')
+  @Roles('content_editor', 'admin')
+  @ApiOperation({
+    summary:
+      'Set the exams a question may be used in. An editor can do this only while the question is an unpublished draft; an admin can at any stage (audited)',
+  })
+  @ApiOkResponse({ type: QuestionDetailDto })
+  setExamTags(
+    @CurrentActor() actor: Actor,
+    @Id() id: string,
+    @Body() body: SetExamTagsDto,
+  ) {
+    return this.questions.setExamTags(actor, id, body.exam_ids);
   }
 
   @Post('bulk')
